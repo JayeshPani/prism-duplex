@@ -1,0 +1,28 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344043.950876}
+{"type": "session_started", "data": {"room": "eval-5fc1cb15", "mode": "bench", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790344043.9513931}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790344045.3571389}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790344047.207144}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790344047.2547631}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790344060.156529}
+{"type": "user_final", "data": {"text": "Hmm. So like First search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999. I've been waiting on that one.", "merged": "Hmm. So like First search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999. I've been waiting on that one."}, "ts": 1790344062.679177}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790344063.38224}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790344063.382376}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790344063.623105}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344064.5199978}
+{"type": "turn_merged", "data": {"previous": "Hmm. So like First search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999. I've been waiting on that one.", "added": "", "retranscribed": "Hmm, so like f first search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999? I've been waiting on that one."}, "ts": 1790344065.702076}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790344079.521808}
+{"type": "plan_ready", "data": {"utterance": "Hmm, so like f first search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999? I've been waiting on that one.", "repaired": "Searching for gaming mice, adding the cheapest one to your cart, and tracking order PO999.", "complete": true, "corrections": [], "slots": {"query": "gaming mouse", "quantity": 1, "order_id": "PO999"}, "calls": [{"id": "c1", "tool": "search_products", "args": {"query": "gaming mouse"}}, {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "$c1.products[0].product_id", "quantity": 1}}, {"id": "c3", "tool": "track_order", "args": {"order_id": "PO999"}}], "reply": "Searching for gaming mice, adding the cheapest one to your cart, and tracking order PO999."}, "ts": 1790344088.161609}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790344088.161776}
+{"type": "gate_committed", "data": {"calls": ["search_products", "add_to_cart", "track_order"]}, "ts": 1790344088.162004}
+{"type": "slot_update", "data": {"slot": "query", "value": "gaming mouse", "previous": null}, "ts": 1790344088.162036}
+{"type": "slot_update", "data": {"slot": "quantity", "value": 1, "previous": null}, "ts": 1790344088.162057}
+{"type": "slot_update", "data": {"slot": "order_id", "value": "PO999", "previous": null}, "ts": 1790344088.162077}
+{"type": "agent_say", "data": {"text": "Searching for gaming mice, adding the cheapest one to your cart, and tracking order PO999."}, "ts": 1790344088.162102}
+{"type": "tool_started", "data": {"id": "c1", "tool": "search_products", "args": {"query": "gaming mouse"}, "state_changing": false}, "ts": 1790344088.162452}
+{"type": "tool_started", "data": {"id": "c3", "tool": "track_order", "args": {"order_id": "PO999"}, "state_changing": false}, "ts": 1790344088.162526}
+{"type": "tool_done", "data": {"id": "c1", "tool": "search_products", "args": {"query": "gaming mouse"}, "result": {"status": "success", "products": [{"product_id": "PROD1", "name": "gaming mouse Premium", "price": 99.99}]}, "duration_ms": 1}, "ts": 1790344088.1642082}
+{"type": "tool_done", "data": {"id": "c3", "tool": "track_order", "args": {"order_id": "PO999"}, "result": {"status": "success", "order_id": "PO999", "shipping_status": "Out for delivery"}, "duration_ms": 1}, "ts": 1790344088.164397}
+{"type": "tool_started", "data": {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "PROD1", "quantity": 1}, "state_changing": true}, "ts": 1790344088.16453}
+{"type": "tool_done", "data": {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "PROD1", "quantity": 1}, "result": {"status": "success", "product_id": "PROD1", "quantity": 1, "cart_total": 99.99}, "duration_ms": 0}, "ts": 1790344088.164918}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790344089.393373}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344092.307334}

@@ -1,0 +1,550 @@
+{
+  "benchmark_name": "In-the-Wild Speech & Multi-Step Tool Calling",
+  "evaluated_at": "2026-09-25T18:51:52.249786",
+  "total_scenarios": 10,
+  "turn_taking": {
+    "total": 10,
+    "turn_taken": 9,
+    "no_response": 1,
+    "turn_take_rate": 0.9
+  },
+  "by_metric": {
+    "tool_selection_acc": 1.0,
+    "argument_acc": 0.667,
+    "response_qual": null,
+    "tool_selection_acc_all": 1.0,
+    "argument_acc_all": 0.6,
+    "note": "*_all includes no-response samples (scored 0); default metrics are turn-taken only"
+  },
+  "latency": {
+    "total_samples": 9,
+    "interruption_count": 1,
+    "interruption_rate": 0.111,
+    "avg_response_latency_s": 6.07,
+    "std_response_latency_s": 5.395,
+    "min_latency_s": 2.56,
+    "max_latency_s": 19.04,
+    "note": "avg/std/min/max exclude interruption samples; computed on turn-taken samples only"
+  },
+  "by_domain": {
+    "ecommerce_support": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.6
+    }
+  },
+  "by_difficulty": {
+    "medium": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 1.0
+    },
+    "easy": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.556
+    }
+  },
+  "by_domain_turn_taken": {
+    "ecommerce_support": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.667
+    }
+  },
+  "by_difficulty_turn_taken": {
+    "medium": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 1.0
+    },
+    "easy": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.625
+    }
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "ecommerce_09",
+      "domain": "ecommerce_support",
+      "difficulty": "medium",
+      "title": "Product Search Self-Correction",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "search_products",
+              "score": 1.0,
+              "expected_args": {
+                "query": "hiking boots"
+              },
+              "actual_args": {
+                "query": "hiking boots"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 13.92,
+        "audio_agent_speech_start": 18.32,
+        "agent_response_latency_s": 4.4,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_05",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Product Search with Hesitation",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "search_products",
+              "score": 1.0,
+              "expected_args": {
+                "query": "desk",
+                "max_price": 300
+              },
+              "actual_args": {
+                "query": "desk",
+                "max_price": 300
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 7.2,
+        "audio_agent_speech_start": 26.240000000000002,
+        "agent_response_latency_s": 19.04,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_08",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Search with Pause",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "search_products",
+              "score": 0.0,
+              "expected_args": {
+                "query": "mechanical keyboards",
+                "max_price": 200
+              },
+              "actual_args": {
+                "query": "mechanical keyboard",
+                "max_price": 200
+              },
+              "explanation": "Mismatch 'query': expected=mechanical keyboards, got=mechanical keyboard"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 15.040000000000001,
+        "audio_agent_speech_start": 18.96,
+        "agent_response_latency_s": 3.92,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_06",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Cart Addition",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "add_to_cart",
+              "score": 0.0,
+              "expected_args": {
+                "product_id": "K2",
+                "quantity": 2
+              },
+              "actual_args": {
+                "product_id": "K",
+                "quantity": 2
+              },
+              "explanation": "Mismatch 'product_id': expected=K2, got=K"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 14.64,
+        "audio_agent_speech_start": 17.76,
+        "agent_response_latency_s": 3.12,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_01",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Order Tracking",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "track_order",
+              "score": 1.0,
+              "expected_args": {
+                "order_id": "ABC123"
+              },
+              "actual_args": {
+                "order_id": "ABC123"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 15.68,
+        "audio_agent_speech_start": 22.48,
+        "agent_response_latency_s": 6.8,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_01",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Order Tracking",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "track_order",
+              "score": 0.0,
+              "expected_args": {
+                "order_id": "ABC123"
+              },
+              "actual_args": {
+                "order_id": "unknown"
+              },
+              "explanation": "Mismatch 'order_id': expected=ABC123, got=unknown"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 18.560000000000002,
+        "audio_agent_speech_start": 13.92,
+        "agent_response_latency_s": -4.64,
+        "is_interruption": true
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_02",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Product Search",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "search_products",
+              "score": 1.0,
+              "expected_args": {
+                "query": "wireless headphones",
+                "max_price": 100
+              },
+              "actual_args": {
+                "query": "wireless headphones",
+                "max_price": 100
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 12.88,
+        "audio_agent_speech_start": 16.64,
+        "agent_response_latency_s": 3.76,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_08",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Search with Pause",
+      "turn_take_success": false,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "search_products",
+              "score": 0.0,
+              "expected_args": {
+                "query": "mechanical keyboards",
+                "max_price": 200
+              },
+              "actual_args": {
+                "query": "mechanical keyboard",
+                "max_price": 200
+              },
+              "explanation": "Mismatch 'query': expected=mechanical keyboards, got=mechanical keyboard"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": false,
+        "reason": "Missing timing fields"
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_07",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "False Start Before Track",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "track_order",
+              "score": 1.0,
+              "expected_args": {
+                "order_id": "FAST99"
+              },
+              "actual_args": {
+                "order_id": "FAST99"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 18.0,
+        "audio_agent_speech_start": 20.56,
+        "agent_response_latency_s": 2.56,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    },
+    {
+      "scenario_id": "ecommerce_04",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Order Tracking with Pause",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 1.0,
+          "details": [
+            {
+              "function": "track_order",
+              "score": 1.0,
+              "expected_args": {
+                "order_id": "XYZ88"
+              },
+              "actual_args": {
+                "order_id": "XYZ88"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 10.8,
+        "audio_agent_speech_start": 15.76,
+        "agent_response_latency_s": 4.96,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    }
+  ]
+}

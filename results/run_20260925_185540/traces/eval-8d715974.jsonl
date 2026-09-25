@@ -1,0 +1,28 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345664.614114}
+{"type": "session_started", "data": {"room": "eval-8d715974", "mode": "bench", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790345664.614363}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790345667.367171}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790345687.868271}
+{"type": "user_final", "data": {"text": "Um so alright, so first um I need to know how much thousand US dollars would be in Euros. Then I want to change my credit card or to pay so it pulls from the savings instead. And finally, can you tell me what kind of benefits the premium card has?", "merged": "Um so alright, so first um I need to know how much thousand US dollars would be in Euros. Then I want to change my credit card or to pay so it pulls from the savings instead. And finally, can you tell me what kind of benefits the premium card has?"}, "ts": 1790345691.126285}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790345691.831703}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790345691.831934}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345692.0418591}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345692.937122}
+{"type": "plan_ready", "data": {"utterance": "Um so alright, so first um I need to know how much thousand US dollars would be in Euros. Then I want to change my credit card or to pay so it pulls from the savings instead. And finally, can you tell me what kind of benefits the premium card has?", "repaired": "Converting 1000 USD to Euros, updating autopay to use savings, and checking premium card benefits.", "complete": true, "corrections": [], "slots": {"amount": 1000, "from_currency": "USD", "to_currency": "EUR", "bill_type": "credit_card", "source_account": "savings", "card_type": "premium"}, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 1000, "from_currency": "USD", "to_currency": "EUR"}}, {"id": "c2", "tool": "modify_autopay", "args": {"bill_type": "credit_card", "source_account": "savings"}}, {"id": "c3", "tool": "get_card_benefits", "args": {"card_type": "premium"}}], "reply": "Converting 1000 USD to Euros, updating autopay to use savings, and checking premium card benefits."}, "ts": 1790345695.614414}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790345695.614721}
+{"type": "gate_committed", "data": {"calls": ["get_exchange_rate", "modify_autopay", "get_card_benefits"]}, "ts": 1790345695.615433}
+{"type": "slot_update", "data": {"slot": "amount", "value": 1000, "previous": null}, "ts": 1790345695.615548}
+{"type": "slot_update", "data": {"slot": "from_currency", "value": "USD", "previous": null}, "ts": 1790345695.615613}
+{"type": "slot_update", "data": {"slot": "to_currency", "value": "EUR", "previous": null}, "ts": 1790345695.615668}
+{"type": "slot_update", "data": {"slot": "bill_type", "value": "credit_card", "previous": null}, "ts": 1790345695.615721}
+{"type": "slot_update", "data": {"slot": "source_account", "value": "savings", "previous": null}, "ts": 1790345695.61577}
+{"type": "slot_update", "data": {"slot": "card_type", "value": "premium", "previous": null}, "ts": 1790345695.615822}
+{"type": "agent_say", "data": {"text": "Converting 1000 USD to Euros, updating autopay to use savings, and checking premium card benefits."}, "ts": 1790345695.6158788}
+{"type": "tool_started", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 1000, "from_currency": "USD", "to_currency": "EUR"}, "state_changing": false}, "ts": 1790345695.617663}
+{"type": "tool_started", "data": {"id": "c2", "tool": "modify_autopay", "args": {"bill_type": "credit_card", "source_account": "savings"}, "state_changing": true}, "ts": 1790345695.617861}
+{"type": "tool_started", "data": {"id": "c3", "tool": "get_card_benefits", "args": {"card_type": "premium"}, "state_changing": false}, "ts": 1790345695.618069}
+{"type": "tool_done", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 1000, "from_currency": "USD", "to_currency": "EUR"}, "result": {"status": "success", "converted_amount": 900.0, "rate": 0.9}, "duration_ms": 2}, "ts": 1790345695.6204128}
+{"type": "tool_done", "data": {"id": "c2", "tool": "modify_autopay", "args": {"bill_type": "credit_card", "source_account": "savings"}, "result": {"status": "success", "autopay_enabled": true, "bill": "credit_card", "source": "savings"}, "duration_ms": 3}, "ts": 1790345695.6207309}
+{"type": "tool_done", "data": {"id": "c3", "tool": "get_card_benefits", "args": {"card_type": "premium"}, "result": {"status": "success", "card_type": "premium", "benefits": ["2% Cashback", "No Foreign Transaction Fee"]}, "duration_ms": 3}, "ts": 1790345695.6211252}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345696.892807}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345703.591964}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790345718.5925171}

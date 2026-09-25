@@ -1,0 +1,68 @@
+
+=== evaluate_tool_calls (judge=none) ===
+📖 Loading benchmark data from /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/bench/Full-Duplex-Bench/v3/benchmark_data_v2.json...
+📁 Scanning /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/bench/data/subset_10 for provider 'prism'...
+🔍 Found 10 valid result files matching benchmark scenarios.
+
+📊 EVALUATION REPORT
+========================================================
+  Scenarios evaluated : 10
+  Turn-Take Success   : 10/10 (100.0%)
+
+  By Metric (turn-taken only, N=10):
+    Tool Selection Acc : 96.7%
+    Argument Acc       : 60.0%
+    Response Qual      : (LLM judge disabled, use --use-llm)
+
+  Latency (N=10, turn-taken only):
+    Avg latency        : 6.25s ± 4.50s  (excl. interruptions)
+    Min / Max          : 2.48s / 17.52s
+    Interruptions      : 1 / 10  (10.0%)
+
+  By Domain (all samples):
+    ecommerce_support: tool_selection_acc=96.7%, argument_acc=60.0%
+
+  By Difficulty (all samples):
+    medium: tool_selection_acc=100.0%, argument_acc=100.0%
+    easy: tool_selection_acc=96.3%, argument_acc=55.6%
+
+  📄 Full report saved: /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/results/run_20260925_182843/prism_evaluation_report.json
+
+=== evaluate_pass_rate (judge=none) ===
+📖 Loading benchmark data from /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/bench/Full-Duplex-Bench/v3/benchmark_data_v2.json...
+📁 Scanning /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/bench/data/subset_10 for provider 'prism'...
+🔍 Found 10 valid result files matching benchmark scenarios.
+
+📊 PASS RATE REPORT — PRISM
+========================================================
+  Total Scenarios : 10
+  ✅ Passed       : 5
+  ❌ Failed       : 5
+  📈 Pass Rate    : 50.0%
+
+  Failure Breakdown:
+    Wrong Tools     : 1
+    Wrong Arguments : 4
+
+  By Domain:
+    ecommerce_support: 50.0%
+
+  By Difficulty:
+    medium: 100.0%
+    easy: 44.4%
+
+  By Num Tool Calls:
+    1 tools: 50.0%
+
+  By Disfluency Feature:
+    SELF_CORRECTION: 100.0%
+    FILLER: 0.0%
+    HESITATION: 0.0%
+    PAUSE: 33.3%
+    FALSE_START: 100.0%
+
+  State Rollback:
+    With rollback:    100.0%
+    Without rollback: 44.4%
+
+  📄 Report saved: /Users/jayeshpani/Desktop/Samsung Prism/prism-duplex/results/run_20260925_182843/prism_pass_rate_report.json

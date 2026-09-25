@@ -1,0 +1,41 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344175.675028}
+{"type": "session_started", "data": {"room": "eval-ee35f12a", "mode": "bench", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790344175.6758752}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790344177.576725}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790344179.425133}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790344179.723642}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790344180.8729851}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790344181.5723782}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790344201.675054}
+{"type": "user_final", "data": {"text": "So, um, you know, I I Um", "merged": "So, um, you know, I I Um"}, "ts": 1790344201.694981}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790344202.3964732}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790344202.39662}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790344202.6368651}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344203.131265}
+{"type": "gate_cancelled", "data": {"reason": "user kept talking; re-planning with the new words"}, "ts": 1790344203.1321092}
+{"type": "turn_merged", "data": {"previous": "So, um, you know, I I Um", "added": "So search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead."}, "ts": 1790344203.132206}
+{"type": "user_final", "data": {"text": "So search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead.", "merged": "So, um, you know, I I Um So search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead."}, "ts": 1790344203.132236}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790344203.8334668}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790344203.83361}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790344204.0342422}
+{"type": "turn_merged", "data": {"previous": "So, um, you know, I I Um So search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead.", "added": "", "retranscribed": "So, um, you know, I um so search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead."}, "ts": 1790344204.28212}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344204.930658}
+{"type": "plan_ready", "data": {"utterance": "So, um, you know, I um so search for a coffee maker first. If if you find one that's under fifty dollars, go ahead and add two um to the cart because they make great gifts. But if everything's over fifty, I just forget the coffee maker and track order www for me instead.", "repaired": "Searching for a coffee maker under fifty dollars and adding two to the cart. Tracking order www.", "complete": true, "corrections": [{"slot": "action", "from": "search for a coffee maker", "to": "search for a coffee maker"}, {"slot": "price", "from": "fifty dollars", "to": "50"}, {"slot": "quantity", "from": "two", "to": "2"}, {"slot": "action", "from": "track order www", "to": "track order"}], "slots": {"query": "coffee maker", "max_price": 50, "quantity": 2, "order_id": "www"}, "calls": [{"id": "c1", "tool": "search_products", "args": {"query": "coffee maker", "max_price": 50}}, {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "$c1.products[0].product_id", "quantity": 2}}, {"id": "c3", "tool": "track_order", "args": {"order_id": "www"}}], "reply": "Searching for a coffee maker under fifty dollars and adding two to the cart. Tracking order www."}, "ts": 1790344216.372094}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790344216.372982}
+{"type": "gate_committed", "data": {"calls": ["search_products", "add_to_cart", "track_order"]}, "ts": 1790344216.373486}
+{"type": "slot_update", "data": {"slot": "query", "value": "coffee maker", "previous": null}, "ts": 1790344216.3735502}
+{"type": "slot_update", "data": {"slot": "max_price", "value": 50, "previous": null}, "ts": 1790344216.3736022}
+{"type": "slot_update", "data": {"slot": "quantity", "value": 2, "previous": null}, "ts": 1790344216.373651}
+{"type": "slot_update", "data": {"slot": "order_id", "value": "www", "previous": null}, "ts": 1790344216.373696}
+{"type": "slot_update", "data": {"slot": "action", "value": "search for a coffee maker", "previous": "search for a coffee maker", "correction": true}, "ts": 1790344216.373744}
+{"type": "slot_update", "data": {"slot": "price", "value": "50", "previous": "fifty dollars", "correction": true}, "ts": 1790344216.373794}
+{"type": "slot_update", "data": {"slot": "quantity", "value": "2", "previous": "two", "correction": true}, "ts": 1790344216.3738408}
+{"type": "slot_update", "data": {"slot": "action", "value": "track order", "previous": "track order www", "correction": true}, "ts": 1790344216.373888}
+{"type": "agent_say", "data": {"text": "Searching for a coffee maker under fifty dollars and adding two to the cart. Tracking order www."}, "ts": 1790344216.3739462}
+{"type": "tool_started", "data": {"id": "c1", "tool": "search_products", "args": {"query": "coffee maker", "max_price": 50}, "state_changing": false}, "ts": 1790344216.37671}
+{"type": "tool_started", "data": {"id": "c3", "tool": "track_order", "args": {"order_id": "www"}, "state_changing": false}, "ts": 1790344216.376891}
+{"type": "tool_done", "data": {"id": "c1", "tool": "search_products", "args": {"query": "coffee maker", "max_price": 50}, "result": {"status": "success", "products": [{"product_id": "PROD1", "name": "coffee maker Premium", "price": 40}]}, "duration_ms": 2}, "ts": 1790344216.379744}
+{"type": "tool_done", "data": {"id": "c3", "tool": "track_order", "args": {"order_id": "www"}, "result": {"status": "success", "order_id": "www", "shipping_status": "Out for delivery"}, "duration_ms": 3}, "ts": 1790344216.380036}
+{"type": "tool_started", "data": {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "PROD1", "quantity": 2}, "state_changing": true}, "ts": 1790344216.380532}
+{"type": "tool_done", "data": {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "PROD1", "quantity": 2}, "result": {"status": "success", "product_id": "PROD1", "quantity": 2, "cart_total": 199.98}, "duration_ms": 1}, "ts": 1790344216.38165}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790344216.9580212}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790344222.878102}

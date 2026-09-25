@@ -1,0 +1,175 @@
+# Our OWN dev set of disfluent requests (written for this project; not derived
+# from FDB-v3 items). Each turn is a list of transcript segments; a segment
+# boundary simulates a pause long enough for the endpointer to fire.
+# `gap_ms` = silence between segments. Expected calls are checked like the
+# benchmark: exact multiset of tools + argument match ("*" = any value).
+
+- id: syn_travel_01
+  turns:
+    - [["Hello there, I was hoping you could help me with some travel stuff."]]
+    - [["So um, I want flights to Lisbon on the, uh, twelfth of June."]]
+  expected: [{tool: search_flights, args: {destination: Lisbon, date: June 12}}]
+
+- id: syn_travel_02
+  turns:
+    - [["Hi."]]
+    - [["Find flights to Toronto on March 3rd -", "no wait, March 5th, sorry."]]
+  gap_ms: 900
+  expected: [{tool: search_flights, args: {destination: Toronto, date: March 5}}]
+
+- id: syn_travel_03
+  turns:
+    - [["Hey, I need to sort out a trip."]]
+    - [["Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair."]]
+  expected:
+    - {tool: search_flights, args: {destination: Madrid, date: July 2}}
+    - {tool: book_flight, args: {passenger_name: Priya Nair}}
+
+- id: syn_travel_04
+  turns:
+    - [["Good morning."]]
+    - [["I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2."]]
+  expected: [{tool: update_identity_doc, args: {doc_type: driver_license, doc_number: K449012}}]
+
+- id: syn_travel_05
+  turns:
+    - [["Hi, quick thing."]]
+    - [["Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker."]]
+  expected:
+    - {tool: search_flights, args: {destination: Stockholm, date: May 9}}
+    - {tool: book_flight, args: {passenger_name: Tom Becker}}
+
+- id: syn_travel_06
+  turns:
+    - [["Hello."]]
+    - [["Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0."]]
+  expected: [{tool: update_identity_doc, args: {doc_type: passport, doc_number: P778120}}]
+
+- id: syn_fin_01
+  turns:
+    - [["Hi, I have a money question."]]
+    - [["How much is, um, two hundred and fifty euros in US dollars?"]]
+  expected: [{tool: get_exchange_rate, args: {amount: 250, from_currency: EUR, to_currency: USD}}]
+
+- id: syn_fin_02
+  turns:
+    - [["Hey."]]
+    - [["Convert 80 pounds to yen -", "wait no, to Swiss francs."]]
+  gap_ms: 800
+  expected: [{tool: get_exchange_rate, args: {amount: 80, from_currency: GBP, to_currency: CHF}}]
+
+- id: syn_fin_03
+  turns:
+    - [["Hello there."]]
+    - [["What perks do I get with the, um, the titanium card?"]]
+  expected: [{tool: get_card_benefits, args: {card_type: titanium}}]
+
+- id: syn_fin_04
+  turns:
+    - [["Hi, billing stuff today."]]
+    - [["Set up autopay for my water bill from my savings, uh, no, from my checking account."]]
+  expected: [{tool: modify_autopay, args: {bill_type: water, source_account: checking}}]
+
+- id: syn_fin_05
+  turns:
+    - [["Hi."]]
+    - [["Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account."]]
+  expected:
+    - {tool: get_card_benefits, args: {card_type: silver}}
+    - {tool: modify_autopay, args: {bill_type: phone, source_account: savings}}
+
+- id: syn_fin_06
+  turns:
+    - [["Hey there."]]
+    - [["How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?"]]
+  expected:
+    - {tool: get_exchange_rate, args: {amount: 1200, from_currency: CAD, to_currency: INR}}
+    - {tool: get_card_benefits, args: {card_type: black}}
+
+- id: syn_house_01
+  turns:
+    - [["Hi, I'm apartment hunting."]]
+    - [["Find me a two bedroom in Denver, uh, under 2000 a month."]]
+  expected: [{tool: search_apartments, args: {city: Denver, bedrooms: 2, max_price: 2000}}]
+
+- id: syn_house_02
+  turns:
+    - [["Hello."]]
+    - [["Search for three bedroom places in Austin under 2500 -", "actually, make it two bedrooms."]]
+  gap_ms: 900
+  expected: [{tool: search_apartments, args: {city: Austin, bedrooms: 2, max_price: 2500}}]
+
+- id: syn_house_03
+  turns:
+    - [["Hi there."]]
+    - [["How long is the commute from 12 Pine Street to the central library by bike?"]]
+  expected: [{tool: calculate_commute, args: {origin_address: 12 Pine Street, destination_address: central library, mode: cycling}}]
+
+- id: syn_house_04
+  turns:
+    - [["Hey."]]
+    - [["Change my max rent filter to, um, 1800. No sorry, 1750."]]
+  expected: [{tool: update_search_filter, args: {filter_name: max_price, value: 1750}}]
+
+- id: syn_house_05
+  turns:
+    - [["Hi, I need help finding a place."]]
+    - [["Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station."]]
+  expected:
+    - {tool: search_apartments, args: {city: Portland, bedrooms: 1, max_price: 1600}}
+    - {tool: calculate_commute, args: {origin_address: "*", destination_address: Union Station, mode: transit}}
+
+- id: syn_shop_01
+  turns:
+    - [["Hi."]]
+    - [["Where's my order, um, the number is Z Q 5 5 1 8."]]
+  expected: [{tool: track_order, args: {order_id: ZQ5518}}]
+
+- id: syn_shop_02
+  turns:
+    - [["Hello."]]
+    - [["Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart."]]
+  expected:
+    - {tool: search_products, args: {query: yoga mat, max_price: 30}}
+    - {tool: add_to_cart, args: {product_id: "*", quantity: 2}}
+
+- id: syn_shop_03
+  turns:
+    - [["Hey there."]]
+    - [["Search for a, a coffee grinder and put three -", "no, just one in the cart."]]
+  gap_ms: 900
+  expected:
+    - {tool: search_products, args: {query: coffee grinder}}
+    - {tool: add_to_cart, args: {product_id: "*", quantity: 1}}
+
+- id: syn_shop_04
+  turns:
+    - [["Hi."]]
+    - [["Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60."]]
+  expected:
+    - {tool: track_order, args: {order_id: M402}}
+    - {tool: search_products, args: {query: wireless earbuds, max_price: 60}}
+
+- id: syn_shop_05
+  turns:
+    - [["Hello, I want to do some shopping."]]
+    - [["Um... I want to look for... uh...", "hiking boots, I think, under a hundred and twenty."]]
+  gap_ms: 1200
+  expected: [{tool: search_products, args: {query: hiking boots, max_price: 120}}]
+
+- id: syn_multi_01
+  turns:
+    - [["Hi, a couple of things."]]
+    - [["Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1."]]
+  expected:
+    - {tool: search_flights, args: {destination: Dublin, date: October 4}}
+    - {tool: book_flight, args: {passenger_name: Maya Chen}}
+    - {tool: update_identity_doc, args: {doc_type: passport, doc_number: R330981}}
+
+- id: syn_multi_02
+  turns:
+    - [["Hey."]]
+    - [["Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park."]]
+  expected:
+    - {tool: search_apartments, args: {city: Chicago, bedrooms: 2, max_price: 2200, pets_allowed: true}}
+    - {tool: update_search_filter, args: {filter_name: neighborhood, value: Lincoln Park}}

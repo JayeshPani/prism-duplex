@@ -1,0 +1,31 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345722.310833}
+{"type": "session_started", "data": {"room": "eval-a2dc2664", "mode": "bench", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790345722.311414}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790345724.8570728}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790345733.958059}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790345734.060508}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790345739.21359}
+{"type": "user_final", "data": {"text": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered. I need British pounds. Not yen.", "merged": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered. I need British pounds. Not yen."}, "ts": 1790345739.216778}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790345739.919015}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790345739.91913}
+{"type": "gate_cancelled", "data": {"reason": "user kept talking; re-planning with the new words"}, "ts": 1790345740.4284952}
+{"type": "turn_merged", "data": {"previous": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered. I need British pounds. Not yen.", "added": "And actually, let me change the amount to make it 300 euros instead of 200."}, "ts": 1790345740.4285781}
+{"type": "user_final", "data": {"text": "And actually, let me change the amount to make it 300 euros instead of 200.", "merged": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered. I need British pounds. Not yen. And actually, let me change the amount to make it 300 euros instead of 200."}, "ts": 1790345740.428603}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790345741.129117}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790345741.129198}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345741.311323}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345742.206553}
+{"type": "turn_merged", "data": {"previous": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered. I need British pounds. Not yen. And actually, let me change the amount to make it 300 euros instead of 200.", "added": "", "retranscribed": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered I need British pounds, not yen. And actually, let me change the amount to make it 300 Euros instead of 200."}, "ts": 1790345743.30177}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790345757.2070348}
+{"type": "plan_ready", "data": {"utterance": "Okay, so uh I need to convert 200 Euros to yen. No, no, wait, I just remembered I need British pounds, not yen. And actually, let me change the amount to make it 300 Euros instead of 200.", "repaired": "Converting 300 Euros to British pounds.", "complete": true, "corrections": [{"slot": "from_currency", "from": "yen", "to": "GBP"}, {"slot": "amount", "from": "200", "to": "300"}], "slots": {"amount": 300, "from_currency": "EUR", "to_currency": "GBP"}, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 300, "from_currency": "EUR", "to_currency": "GBP"}}], "reply": "Converting 300 Euros to British pounds."}, "ts": 1790345760.074673}
+{"type": "gate_open", "data": {"hold_ms": 350, "remaining_ms": 0, "state_changing": false, "complete": true}, "ts": 1790345760.0749}
+{"type": "gate_committed", "data": {"calls": ["get_exchange_rate"]}, "ts": 1790345760.0752552}
+{"type": "slot_update", "data": {"slot": "amount", "value": 300, "previous": null}, "ts": 1790345760.0753028}
+{"type": "slot_update", "data": {"slot": "from_currency", "value": "EUR", "previous": null}, "ts": 1790345760.075341}
+{"type": "slot_update", "data": {"slot": "to_currency", "value": "GBP", "previous": null}, "ts": 1790345760.075377}
+{"type": "slot_update", "data": {"slot": "from_currency", "value": "GBP", "previous": "yen", "correction": true}, "ts": 1790345760.0754151}
+{"type": "slot_update", "data": {"slot": "amount", "value": "300", "previous": "200", "correction": true}, "ts": 1790345760.075455}
+{"type": "agent_say", "data": {"text": "Converting 300 Euros to British pounds."}, "ts": 1790345760.075556}
+{"type": "tool_started", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 300, "from_currency": "EUR", "to_currency": "GBP"}, "state_changing": false}, "ts": 1790345760.077353}
+{"type": "tool_done", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 300, "from_currency": "EUR", "to_currency": "GBP"}, "result": {"status": "success", "converted_amount": 330.0, "rate": 1.1}, "duration_ms": 1}, "ts": 1790345760.0797708}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345760.569154}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345763.130234}

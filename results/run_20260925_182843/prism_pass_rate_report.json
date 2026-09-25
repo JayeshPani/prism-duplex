@@ -1,0 +1,443 @@
+{
+  "benchmark_name": "In-the-Wild Speech & Multi-Step Tool Calling",
+  "evaluated_at": "2026-09-25T18:38:23.997085",
+  "total_scenarios": 10,
+  "overall_pass_rate": 0.5,
+  "passed": 5,
+  "failed": 5,
+  "failure_breakdown": {
+    "wrong_tools": 1,
+    "wrong_arguments": 4
+  },
+  "by_domain": {
+    "ecommerce_support": 0.5
+  },
+  "by_difficulty": {
+    "medium": 1.0,
+    "easy": 0.444
+  },
+  "by_num_tools": {
+    "1": 0.5
+  },
+  "by_disfluency_feature": {
+    "SELF_CORRECTION": 1.0,
+    "FILLER": 0.0,
+    "HESITATION": 0.0,
+    "PAUSE": 0.333,
+    "FALSE_START": 1.0
+  },
+  "by_state_rollback": {
+    "with_rollback": 1.0,
+    "without_rollback": 0.444
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "ecommerce_09",
+      "domain": "ecommerce_support",
+      "difficulty": "medium",
+      "title": "Product Search Self-Correction",
+      "num_tools": 1,
+      "disfluency": [
+        "SELF_CORRECTION"
+      ],
+      "state_rollback": true,
+      "passed": true,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "search_products"
+          ],
+          "actual": [
+            "search_products"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": true,
+          "details": [
+            {
+              "function": "search_products",
+              "passed": true,
+              "expected_args": {
+                "query": "hiking boots"
+              },
+              "actual_args": {
+                "query": "hiking boots"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        }
+      },
+      "failure_reason": ""
+    },
+    {
+      "scenario_id": "ecommerce_05",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Product Search with Hesitation",
+      "num_tools": 1,
+      "disfluency": [
+        "FILLER",
+        "HESITATION"
+      ],
+      "state_rollback": false,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": false,
+          "expected": [
+            "search_products"
+          ],
+          "actual": [
+            "search_products",
+            "search_products"
+          ],
+          "missing": [],
+          "unexpected": [
+            "search_products"
+          ]
+        }
+      },
+      "failure_reason": "Unexpected tools: ['search_products']"
+    },
+    {
+      "scenario_id": "ecommerce_08",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Search with Pause",
+      "num_tools": 1,
+      "disfluency": [
+        "PAUSE"
+      ],
+      "state_rollback": false,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "search_products"
+          ],
+          "actual": [
+            "search_products"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": false,
+          "details": [
+            {
+              "function": "search_products",
+              "passed": false,
+              "expected_args": {
+                "query": "mechanical keyboards",
+                "max_price": 200
+              },
+              "actual_args": {
+                "query": "mechanical keyboard",
+                "max_price": 200
+              },
+              "explanation": "Mismatch 'query': expected=mechanical keyboards, got=mechanical keyboard"
+            }
+          ]
+        }
+      },
+      "failure_reason": "Wrong arguments for: ['search_products']"
+    },
+    {
+      "scenario_id": "ecommerce_06",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Cart Addition",
+      "num_tools": 1,
+      "disfluency": [],
+      "state_rollback": false,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "add_to_cart"
+          ],
+          "actual": [
+            "add_to_cart"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": false,
+          "details": [
+            {
+              "function": "add_to_cart",
+              "passed": false,
+              "expected_args": {
+                "product_id": "K2",
+                "quantity": 2
+              },
+              "actual_args": {
+                "product_id": "Of",
+                "quantity": 2
+              },
+              "explanation": "Mismatch 'product_id': expected=K2, got=Of"
+            }
+          ]
+        }
+      },
+      "failure_reason": "Wrong arguments for: ['add_to_cart']"
+    },
+    {
+      "scenario_id": "ecommerce_01",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Order Tracking",
+      "num_tools": 1,
+      "disfluency": [],
+      "state_rollback": false,
+      "passed": true,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "track_order"
+          ],
+          "actual": [
+            "track_order"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": true,
+          "details": [
+            {
+              "function": "track_order",
+              "passed": true,
+              "expected_args": {
+                "order_id": "ABC123"
+              },
+              "actual_args": {
+                "order_id": "ABC123"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        }
+      },
+      "failure_reason": ""
+    },
+    {
+      "scenario_id": "ecommerce_01",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Order Tracking",
+      "num_tools": 1,
+      "disfluency": [],
+      "state_rollback": false,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "track_order"
+          ],
+          "actual": [
+            "track_order"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": false,
+          "details": [
+            {
+              "function": "track_order",
+              "passed": false,
+              "expected_args": {
+                "order_id": "ABC123"
+              },
+              "actual_args": {
+                "order_id": "ABCTWO"
+              },
+              "explanation": "Mismatch 'order_id': expected=ABC123, got=ABCTWO"
+            }
+          ]
+        }
+      },
+      "failure_reason": "Wrong arguments for: ['track_order']"
+    },
+    {
+      "scenario_id": "ecommerce_02",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Simple Product Search",
+      "num_tools": 1,
+      "disfluency": [],
+      "state_rollback": false,
+      "passed": true,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "search_products"
+          ],
+          "actual": [
+            "search_products"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": true,
+          "details": [
+            {
+              "function": "search_products",
+              "passed": true,
+              "expected_args": {
+                "query": "wireless headphones",
+                "max_price": 100
+              },
+              "actual_args": {
+                "query": "wireless headphones",
+                "max_price": 100
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        }
+      },
+      "failure_reason": ""
+    },
+    {
+      "scenario_id": "ecommerce_08",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Search with Pause",
+      "num_tools": 1,
+      "disfluency": [
+        "PAUSE"
+      ],
+      "state_rollback": false,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "search_products"
+          ],
+          "actual": [
+            "search_products"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": false,
+          "details": [
+            {
+              "function": "search_products",
+              "passed": false,
+              "expected_args": {
+                "query": "mechanical keyboards",
+                "max_price": 200
+              },
+              "actual_args": {
+                "query": "mechanical keyboard",
+                "max_price": 200
+              },
+              "explanation": "Mismatch 'query': expected=mechanical keyboards, got=mechanical keyboard"
+            }
+          ]
+        }
+      },
+      "failure_reason": "Wrong arguments for: ['search_products']"
+    },
+    {
+      "scenario_id": "ecommerce_07",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "False Start Before Track",
+      "num_tools": 1,
+      "disfluency": [
+        "FALSE_START"
+      ],
+      "state_rollback": false,
+      "passed": true,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "track_order"
+          ],
+          "actual": [
+            "track_order"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": true,
+          "details": [
+            {
+              "function": "track_order",
+              "passed": true,
+              "expected_args": {
+                "order_id": "FAST99"
+              },
+              "actual_args": {
+                "order_id": "FAST99"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        }
+      },
+      "failure_reason": ""
+    },
+    {
+      "scenario_id": "ecommerce_04",
+      "domain": "ecommerce_support",
+      "difficulty": "easy",
+      "title": "Order Tracking with Pause",
+      "num_tools": 1,
+      "disfluency": [
+        "PAUSE"
+      ],
+      "state_rollback": false,
+      "passed": true,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "track_order"
+          ],
+          "actual": [
+            "track_order"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": true,
+          "details": [
+            {
+              "function": "track_order",
+              "passed": true,
+              "expected_args": {
+                "order_id": "XYZ88"
+              },
+              "actual_args": {
+                "order_id": "XYZ88"
+              },
+              "explanation": "All arguments match"
+            }
+          ]
+        }
+      },
+      "failure_reason": ""
+    }
+  ]
+}

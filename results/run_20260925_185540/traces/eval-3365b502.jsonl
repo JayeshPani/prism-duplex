@@ -1,0 +1,22 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345312.421389}
+{"type": "session_started", "data": {"room": "eval-3365b502", "mode": "bench", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790345312.421619}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790345314.8733199}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790345328.1756449}
+{"type": "user_final", "data": {"text": "Well, I want to calculate how much a hundred Euros would be in US dollars. Oh wait, I was looking at the wrong invoice. It's actually a hundred and fifty Euros, not a hundred. So a hundred and fifty Euros to US dollars.", "merged": "Well, I want to calculate how much a hundred Euros would be in US dollars. Oh wait, I was looking at the wrong invoice. It's actually a hundred and fifty Euros, not a hundred. So a hundred and fifty Euros to US dollars."}, "ts": 1790345331.162522}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790345331.865205}
+{"type": "agent_say", "data": {"text": "One moment."}, "ts": 1790345331.865298}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345332.1096919}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345333.0061178}
+{"type": "plan_ready", "data": {"utterance": "Well, I want to calculate how much a hundred Euros would be in US dollars. Oh wait, I was looking at the wrong invoice. It's actually a hundred and fifty Euros, not a hundred. So a hundred and fifty Euros to US dollars.", "repaired": "Converting 150 Euros to US dollars.", "complete": true, "corrections": [{"slot": "amount", "from": "a hundred", "to": "a hundred and fifty"}], "slots": {"amount": 150, "from_currency": "EUR", "to_currency": "USD"}, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 150, "from_currency": "EUR", "to_currency": "USD"}}], "reply": "Converting 150 Euros to US dollars."}, "ts": 1790345334.575511}
+{"type": "gate_open", "data": {"hold_ms": 350, "remaining_ms": 0, "state_changing": false, "complete": true}, "ts": 1790345334.575754}
+{"type": "gate_committed", "data": {"calls": ["get_exchange_rate"]}, "ts": 1790345334.576353}
+{"type": "slot_update", "data": {"slot": "amount", "value": 150, "previous": null}, "ts": 1790345334.576393}
+{"type": "slot_update", "data": {"slot": "from_currency", "value": "EUR", "previous": null}, "ts": 1790345334.576419}
+{"type": "slot_update", "data": {"slot": "to_currency", "value": "USD", "previous": null}, "ts": 1790345334.57644}
+{"type": "slot_update", "data": {"slot": "amount", "value": "a hundred and fifty", "previous": "a hundred", "correction": true}, "ts": 1790345334.5764632}
+{"type": "agent_say", "data": {"text": "Converting 150 Euros to US dollars."}, "ts": 1790345334.57649}
+{"type": "tool_started", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 150, "from_currency": "EUR", "to_currency": "USD"}, "state_changing": false}, "ts": 1790345334.576908}
+{"type": "tool_done", "data": {"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 150, "from_currency": "EUR", "to_currency": "USD"}, "result": {"status": "success", "converted_amount": 165.0, "rate": 1.1}, "duration_ms": 0}, "ts": 1790345334.578014}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790345335.112703}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790345337.929732}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790345352.9309492}
