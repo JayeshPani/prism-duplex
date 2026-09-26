@@ -1,0 +1,673 @@
+..............................................................F......... [ 43%]
+...............................................F...F.F....F....FF....... [ 86%]
+......................                                                   [100%]
+=================================== FAILURES ===================================
+_____ test_integer_arguments_preserve_exact_values_without_float_roundtrip _____
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...: '["write_options", {"quantity": 9007199254740993}]'}, reads={}), [('write_options', {'quantity': 9007199254740993})])
+
+    @pytest.mark.asyncio
+    async def test_integer_arguments_preserve_exact_values_without_float_roundtrip(setup):
+        manifest, executor, _, _, effects = setup
+        quantity = 9007199254740993
+        resolution = IntentResolver(None, manifest)._to_resolution({"calls": [
+            {"id": "integer", "tool": "write_options", "args": {"quantity": quantity}},
+            {"id": "string", "tool": "write_options", "args": {"quantity": str(quantity)}}]})
+        execution = await executor.run(resolution.calls)
+>       assert all(outcome.status == "done" for outcome in execution.outcomes.values())
+E       assert False
+E        +  where False = all(<generator object test_integer_arguments_preserve_exact_values_without_float_roundtrip.<locals>.<genexpr> at 0x103db4a00>)
+
+tests/unit/test_argument_validation.py:209: AssertionError
+________________ test_error_result_cannot_feed_dependent_write _________________
+
+    @pytest.mark.asyncio
+    async def test_error_result_cannot_feed_dependent_write():
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"status": "error", "id": "unusable"}
+    
+        engine, logged = executor(act)
+        result = await engine.run([PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"id": "$c1.id"})])
+>       assert effects == [{}]
+E       assert [] == [{}]
+E         
+E         Right contains one more item: {}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:90: AssertionError
+_____________ test_cancel_reaches_all_executions_and_logs_attempts _____________
+
+fut = <Task cancelled name='Task-260' coro=<Queue.get() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/queues.py:149>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Queue at 0x103f00610 maxsize=0>
+
+    async def get(self):
+        """Remove and return an item from the queue.
+    
+        If queue is empty, wait until an item is available.
+        """
+        while self.empty():
+            getter = self._get_loop().create_future()
+            self._getters.append(getter)
+            try:
+>               await getter
+E               asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/queues.py:158: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.mark.asyncio
+    async def test_cancel_reaches_all_executions_and_logs_attempts():
+        started = asyncio.Queue()
+        release = asyncio.Event()
+    
+        async def act(**args):
+            await started.put(args)
+            await release.wait()
+            return {"status": "success"}
+    
+        engine, logged = executor(act, state=False)
+        runs = [asyncio.create_task(engine.run([PlannedCall("c1", "act", {"id": i})])) for i in range(2)]
+        try:
+            for _ in runs:
+>               await asyncio.wait_for(started.get(), 0.2)
+
+tests/unit/test_executor_reliability.py:156: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-260' coro=<Queue.get() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/queues.py:149>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+______ test_started_write_finishes_but_its_stale_dependent_does_not_start ______
+
+fut = <Task cancelled name='Task-269' coro=<Event.wait() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:200>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x103e32990 [unset]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:213: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.mark.asyncio
+    async def test_started_write_finishes_but_its_stale_dependent_does_not_start():
+        started, release = asyncio.Event(), asyncio.Event()
+        effects = []
+        current = True
+    
+        async def act(**args):
+            effects.append(args)
+            started.set()
+            await release.wait()
+            return {"status": "success", "id": "value"}
+    
+        engine, logged = executor(act)
+        run = asyncio.create_task(engine.run([
+            PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"id": "$c1.id"}),
+        ], is_current=lambda: current))
+        try:
+>           await asyncio.wait_for(started.wait(), 0.2)
+
+tests/unit/test_executor_reliability.py:198: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-269' coro=<Event.wait() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:200>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+___________ test_new_write_waits_for_dispatched_old_write_to_finish ____________
+
+fut = <Task cancelled name='Task-298' coro=<Event.wait() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:200>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x103f10450 [unset]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:213: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.mark.asyncio
+    async def test_new_write_waits_for_dispatched_old_write_to_finish():
+        started, release = asyncio.Event(), asyncio.Event()
+        effects = []
+    
+        async def act(destination):
+            if destination == "airport":
+                started.set()
+                await release.wait()
+            effects.append(destination)
+            return {"status": "success"}
+    
+        engine, logged = executor(act)
+        old = asyncio.create_task(engine.run([PlannedCall("c1", "act", {"destination": "airport"})]))
+>       await asyncio.wait_for(started.wait(), 0.2)
+
+tests/unit/test_executor_reliability.py:306: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-298' coro=<Event.wait() done, defined at /Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:200>>
+timeout = 0.2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+_________ test_operation_retry_cannot_change_write_arguments[success] __________
+
+first_status = 'success'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("first_status", ["success", "error"])
+    async def test_operation_retry_cannot_change_write_arguments(first_status):
+        effects = []
+        options = iter(["original-id", "replacement-id"])
+    
+        async def lookup():
+            return {"id": next(options)}
+    
+        async def act(id):
+            effects.append(id)
+            return {"status": first_status}
+    
+        engine, logged = executor(act)
+        engine.manifest.add(ToolSpec("lookup", "", {}, [], False, lookup))
+        calls = [PlannedCall("c1", "lookup", {}), PlannedCall("c2", "act", {"id": "$c1.id"})]
+        await engine.run(calls, operation_id="same-intention")
+        retry = await engine.run(calls, operation_id="same-intention")
+>       assert effects == ["original-id"]
+E       AssertionError: assert [] == ['original-id']
+E         
+E         Right contains one more item: 'original-id'
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:416: AssertionError
+__________ test_operation_retry_cannot_change_write_arguments[error] ___________
+
+first_status = 'error'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("first_status", ["success", "error"])
+    async def test_operation_retry_cannot_change_write_arguments(first_status):
+        effects = []
+        options = iter(["original-id", "replacement-id"])
+    
+        async def lookup():
+            return {"id": next(options)}
+    
+        async def act(id):
+            effects.append(id)
+            return {"status": first_status}
+    
+        engine, logged = executor(act)
+        engine.manifest.add(ToolSpec("lookup", "", {}, [], False, lookup))
+        calls = [PlannedCall("c1", "lookup", {}), PlannedCall("c2", "act", {"id": "$c1.id"})]
+        await engine.run(calls, operation_id="same-intention")
+        retry = await engine.run(calls, operation_id="same-intention")
+>       assert effects == ["original-id"]
+E       AssertionError: assert [] == ['original-id']
+E         
+E         Right contains one more item: 'original-id'
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:416: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_argument_validation.py::test_integer_arguments_preserve_exact_values_without_float_roundtrip
+FAILED tests/unit/test_executor_reliability.py::test_error_result_cannot_feed_dependent_write
+FAILED tests/unit/test_executor_reliability.py::test_cancel_reaches_all_executions_and_logs_attempts
+FAILED tests/unit/test_executor_reliability.py::test_started_write_finishes_but_its_stale_dependent_does_not_start
+FAILED tests/unit/test_executor_reliability.py::test_new_write_waits_for_dispatched_old_write_to_finish
+FAILED tests/unit/test_executor_reliability.py::test_operation_retry_cannot_change_write_arguments[success]
+FAILED tests/unit/test_executor_reliability.py::test_operation_retry_cannot_change_write_arguments[error]
+7 failed, 159 passed in 1.92s

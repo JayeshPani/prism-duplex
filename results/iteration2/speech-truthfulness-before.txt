@@ -1,0 +1,273 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_ test_tool_plan_reply_waits_for_grounded_result_without_replacement[False-Your purchase is complete.] _
+
+reply = 'Your purchase is complete.', speak_results = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reply", ["Your purchase is complete.", "Buying the first item."])
+    @pytest.mark.parametrize("speak_results", [False, True])
+    async def test_tool_plan_reply_waits_for_grounded_result_without_replacement(reply, speak_results):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": reply}
+        cfg = CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000, speak_results=speak_results)
+        coord, bus, logged, said, _ = build({"first": plan}, cfg=cfg)
+    
+        async def buy(**args):
+            entered.set()
+            await release.wait()
+            return {"ok": True, **args}
+    
+        class GroundedResponder:
+            async def summarize(self, request, execution):
+                assert execution.outcomes["c1"].status == "done"
+                return "The first item was purchased."
+    
+        coord.executor.manifest.tools["buy"].fn = buy
+        coord.responder = GroundedResponder()
+        coord.on_user_turn("Buy the first item.")
+        try:
+            await asyncio.wait_for(entered.wait(), 1)
+>           assert said == []
+E           AssertionError: assert ['Your purchase is complete.'] == []
+E             
+E             Left contains one more item: 'Your purchase is complete.'
+E             Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:36: AssertionError
+_ test_tool_plan_reply_waits_for_grounded_result_without_replacement[False-Buying the first item.] _
+
+reply = 'Buying the first item.', speak_results = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reply", ["Your purchase is complete.", "Buying the first item."])
+    @pytest.mark.parametrize("speak_results", [False, True])
+    async def test_tool_plan_reply_waits_for_grounded_result_without_replacement(reply, speak_results):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": reply}
+        cfg = CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000, speak_results=speak_results)
+        coord, bus, logged, said, _ = build({"first": plan}, cfg=cfg)
+    
+        async def buy(**args):
+            entered.set()
+            await release.wait()
+            return {"ok": True, **args}
+    
+        class GroundedResponder:
+            async def summarize(self, request, execution):
+                assert execution.outcomes["c1"].status == "done"
+                return "The first item was purchased."
+    
+        coord.executor.manifest.tools["buy"].fn = buy
+        coord.responder = GroundedResponder()
+        coord.on_user_turn("Buy the first item.")
+        try:
+            await asyncio.wait_for(entered.wait(), 1)
+>           assert said == []
+E           AssertionError: assert ['Buying the first item.'] == []
+E             
+E             Left contains one more item: 'Buying the first item.'
+E             Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:36: AssertionError
+_ test_tool_plan_reply_waits_for_grounded_result_without_replacement[True-Your purchase is complete.] _
+
+reply = 'Your purchase is complete.', speak_results = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reply", ["Your purchase is complete.", "Buying the first item."])
+    @pytest.mark.parametrize("speak_results", [False, True])
+    async def test_tool_plan_reply_waits_for_grounded_result_without_replacement(reply, speak_results):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": reply}
+        cfg = CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000, speak_results=speak_results)
+        coord, bus, logged, said, _ = build({"first": plan}, cfg=cfg)
+    
+        async def buy(**args):
+            entered.set()
+            await release.wait()
+            return {"ok": True, **args}
+    
+        class GroundedResponder:
+            async def summarize(self, request, execution):
+                assert execution.outcomes["c1"].status == "done"
+                return "The first item was purchased."
+    
+        coord.executor.manifest.tools["buy"].fn = buy
+        coord.responder = GroundedResponder()
+        coord.on_user_turn("Buy the first item.")
+        try:
+            await asyncio.wait_for(entered.wait(), 1)
+>           assert said == []
+E           AssertionError: assert ['Your purchase is complete.'] == []
+E             
+E             Left contains one more item: 'Your purchase is complete.'
+E             Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:36: AssertionError
+_ test_tool_plan_reply_waits_for_grounded_result_without_replacement[True-Buying the first item.] _
+
+reply = 'Buying the first item.', speak_results = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reply", ["Your purchase is complete.", "Buying the first item."])
+    @pytest.mark.parametrize("speak_results", [False, True])
+    async def test_tool_plan_reply_waits_for_grounded_result_without_replacement(reply, speak_results):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": reply}
+        cfg = CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000, speak_results=speak_results)
+        coord, bus, logged, said, _ = build({"first": plan}, cfg=cfg)
+    
+        async def buy(**args):
+            entered.set()
+            await release.wait()
+            return {"ok": True, **args}
+    
+        class GroundedResponder:
+            async def summarize(self, request, execution):
+                assert execution.outcomes["c1"].status == "done"
+                return "The first item was purchased."
+    
+        coord.executor.manifest.tools["buy"].fn = buy
+        coord.responder = GroundedResponder()
+        coord.on_user_turn("Buy the first item.")
+        try:
+            await asyncio.wait_for(entered.wait(), 1)
+>           assert said == []
+E           AssertionError: assert ['Buying the first item.'] == []
+E             
+E             Left contains one more item: 'Buying the first item.'
+E             Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:36: AssertionError
+_______ test_summary_receives_request_instead_of_planner_narration[None] _______
+
+repaired = None
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [None, "", "Buy the first item."])
+    async def test_summary_receives_request_instead_of_planner_narration(repaired):
+        utterance = "Please buy the, uh, first item."
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}],
+                "reply": "Buying the first item."}
+        if repaired is not None:
+            plan["repaired"] = repaired
+        coord, bus, _, said, _ = build({"first": plan}, cfg=CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000))
+        requests = []
+    
+        class CapturingResponder:
+            async def summarize(self, request, execution):
+                requests.append(request)
+                return "The first item was purchased."
+    
+        coord.responder = CapturingResponder()
+        coord.on_user_turn(utterance)
+        await coord.drain()
+        await coord.aclose()
+>       assert requests == [repaired or utterance]
+E       AssertionError: assert ['Buying the first item.'] == ['Please buy ... first item.']
+E         
+E         At index 0 diff: 'Buying the first item.' != 'Please buy the, uh, first item.'
+E         Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:69: AssertionError
+_________ test_summary_receives_request_instead_of_planner_narration[] _________
+
+repaired = ''
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [None, "", "Buy the first item."])
+    async def test_summary_receives_request_instead_of_planner_narration(repaired):
+        utterance = "Please buy the, uh, first item."
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}],
+                "reply": "Buying the first item."}
+        if repaired is not None:
+            plan["repaired"] = repaired
+        coord, bus, _, said, _ = build({"first": plan}, cfg=CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000))
+        requests = []
+    
+        class CapturingResponder:
+            async def summarize(self, request, execution):
+                requests.append(request)
+                return "The first item was purchased."
+    
+        coord.responder = CapturingResponder()
+        coord.on_user_turn(utterance)
+        await coord.drain()
+        await coord.aclose()
+>       assert requests == [repaired or utterance]
+E       AssertionError: assert ['Buying the first item.'] == ['Please buy ... first item.']
+E         
+E         At index 0 diff: 'Buying the first item.' != 'Please buy the, uh, first item.'
+E         Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:69: AssertionError
+_ test_summary_receives_request_instead_of_planner_narration[Buy the first item.] _
+
+repaired = 'Buy the first item.'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [None, "", "Buy the first item."])
+    async def test_summary_receives_request_instead_of_planner_narration(repaired):
+        utterance = "Please buy the, uh, first item."
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}],
+                "reply": "Buying the first item."}
+        if repaired is not None:
+            plan["repaired"] = repaired
+        coord, bus, _, said, _ = build({"first": plan}, cfg=CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000))
+        requests = []
+    
+        class CapturingResponder:
+            async def summarize(self, request, execution):
+                requests.append(request)
+                return "The first item was purchased."
+    
+        coord.responder = CapturingResponder()
+        coord.on_user_turn(utterance)
+        await coord.drain()
+        await coord.aclose()
+        assert requests == [repaired or utterance]
+        assert bus.of_type(E.PLAN_READY)[0].data["repaired"] == (repaired or "")
+>       assert said == ["The first item was purchased."]
+E       AssertionError: assert ['Buying the ...s purchased.'] == ['The first i...s purchased.']
+E         
+E         At index 0 diff: 'Buying the first item.' != 'The first item was purchased.'
+E         Left contains one more item: 'The first item was purchased.'
+E         Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:71: AssertionError
+______ test_slow_tool_plan_still_gets_acknowledgment_and_grounded_result _______
+
+    @pytest.mark.asyncio
+    async def test_slow_tool_plan_still_gets_acknowledgment_and_grounded_result():
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}],
+                "reply": "Your purchase is complete."}
+        cfg = CoordinatorConfig(hold_state_ms=0, ack_after_ms=1)
+        coord, bus, logged, said, _ = build({"first": plan}, llm_delay=.03, cfg=cfg)
+    
+        class GroundedResponder:
+            async def summarize(self, request, execution):
+                return "The first item was purchased."
+    
+        coord.responder = GroundedResponder()
+        coord.on_user_turn("Buy the first item.")
+        await coord.drain()
+        await coord.aclose()
+>       assert said == [cfg.ack_phrases[0], "The first item was purchased."]
+E       AssertionError: assert ['One moment....s purchased.'] == ['One moment....s purchased.']
+E         
+E         At index 1 diff: 'Your purchase is complete.' != 'The first item was purchased.'
+E         Left contains one more item: 'The first item was purchased.'
+E         Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:89: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_speech_truthfulness.py::test_tool_plan_reply_waits_for_grounded_result_without_replacement[False-Your purchase is complete.]
+FAILED tests/unit/test_speech_truthfulness.py::test_tool_plan_reply_waits_for_grounded_result_without_replacement[False-Buying the first item.]
+FAILED tests/unit/test_speech_truthfulness.py::test_tool_plan_reply_waits_for_grounded_result_without_replacement[True-Your purchase is complete.]
+FAILED tests/unit/test_speech_truthfulness.py::test_tool_plan_reply_waits_for_grounded_result_without_replacement[True-Buying the first item.]
+FAILED tests/unit/test_speech_truthfulness.py::test_summary_receives_request_instead_of_planner_narration[None]
+FAILED tests/unit/test_speech_truthfulness.py::test_summary_receives_request_instead_of_planner_narration[]
+FAILED tests/unit/test_speech_truthfulness.py::test_summary_receives_request_instead_of_planner_narration[Buy the first item.]
+FAILED tests/unit/test_speech_truthfulness.py::test_slow_tool_plan_still_gets_acknowledgment_and_grounded_result
+8 failed in 0.45s

@@ -1,0 +1,336 @@
+{
+  "declared_at_utc": "2026-09-26T13:00:39.008153+00:00",
+  "status": "prepared_before_production_change_and_new_render_not_yet_frozen",
+  "purpose": "Require a grounded route read for distance/driving-time questions, preserving navigation state and existing action/ambiguity behavior. Responder synthesis and ASR remain unchanged.",
+  "cases": [
+    {
+      "id": "ambiguous_then_hospital_distance",
+      "category": [
+        "exposed_failure_replay",
+        "route_information"
+      ],
+      "inputs": [
+        {
+          "asset": "airport_road.wav",
+          "text": "Navigate to Airport Road.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place on Airport Road the user means; no navigation activation claim"
+        ],
+        "effects": [],
+        "required_read": {
+          "tool": "compute_route",
+          "destination_id": "P_HOSP",
+          "distance_km": 2.2
+        },
+        "final_speech": [
+          "hospital driving distance is 2.2 kilometres from the current car position",
+          "do not claim navigation started"
+        ],
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint",
+          "cancel_navigation"
+        ]
+      },
+      "recognition_delivery_delay_seconds": 0
+    },
+    {
+      "id": "airport_distance",
+      "category": [
+        "new_wording",
+        "route_information"
+      ],
+      "inputs": [
+        {
+          "asset": "airport_distance.wav",
+          "text": "How far is the airport from here?",
+          "trigger": "session_ready"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "effects": [],
+        "required_read": {
+          "tool": "compute_route",
+          "destination_id": "P_AIRPORT",
+          "distance_km": 35.4
+        },
+        "final_speech": [
+          "airport driving distance is 35.4 kilometres from the current car position",
+          "do not claim navigation started"
+        ],
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint",
+          "cancel_navigation"
+        ]
+      },
+      "recognition_delivery_delay_seconds": 0
+    },
+    {
+      "id": "office_drive_time",
+      "category": [
+        "new_wording",
+        "route_information"
+      ],
+      "inputs": [
+        {
+          "asset": "office_drive_time.wav",
+          "text": "How long does it take to drive to the office?",
+          "trigger": "session_ready"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "effects": [],
+        "required_read": {
+          "tool": "compute_route",
+          "destination_id": "P_OFFICE",
+          "eta_min": 29
+        },
+        "final_speech": [
+          "estimated driving time to the office is twenty-nine minutes",
+          "do not claim navigation started"
+        ],
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint",
+          "cancel_navigation"
+        ]
+      },
+      "recognition_delivery_delay_seconds": 0
+    },
+    {
+      "id": "active_airport_then_hospital_distance",
+      "category": [
+        "active_route_boundary",
+        "route_information"
+      ],
+      "inputs": [
+        {
+          "asset": "navigate_airport.wav",
+          "text": "Navigate to the airport.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "initial_speech": [
+          "airport navigation starts with an eighty-eight-minute estimate"
+        ],
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_AIRPORT",
+            "eta_min": 88,
+            "distance_km": 35.4
+          }
+        ],
+        "required_read": {
+          "tool": "compute_route",
+          "destination_id": "P_HOSP",
+          "distance_km": 2.2
+        },
+        "final_speech": [
+          "hospital driving distance is 2.2 kilometres",
+          "do not claim the active airport navigation changed to hospital or stopped"
+        ],
+        "no_navigation_attempt_after_final_query": true,
+        "final_active_navigation": "airport remains active based on prior returned snapshot plus no subsequent navigation mutation; no direct final snapshot is claimed"
+      },
+      "recognition_delivery_delay_seconds": 0
+    },
+    {
+      "id": "ambiguous_distance",
+      "category": [
+        "ambiguity_boundary"
+      ],
+      "inputs": [
+        {
+          "asset": "ambiguous_distance.wav",
+          "text": "How far is Airport Road?",
+          "trigger": "session_ready"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "effects": [],
+        "final_speech": [
+          "ask which named place on Airport Road the user means",
+          "do not invent a distance or activate navigation"
+        ],
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint",
+          "cancel_navigation"
+        ],
+        "route_information_contract_expected": "unexercised because destination ambiguity is unresolved"
+      },
+      "recognition_delivery_delay_seconds": 0
+    },
+    {
+      "id": "explicit_hospital_navigation",
+      "category": [
+        "navigation_boundary"
+      ],
+      "inputs": [
+        {
+          "asset": "navigate_hospital.wav",
+          "text": "Please navigate to the hospital.",
+          "trigger": "session_ready"
+        }
+      ],
+      "final_response_kind": "result",
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_HOSP",
+            "eta_min": 5,
+            "distance_km": 2.2
+          }
+        ],
+        "final_speech": [
+          "hospital navigation started",
+          "five-minute estimate"
+        ],
+        "route_information_contract_expected": "unexercised because this is an action command"
+      },
+      "recognition_delivery_delay_seconds": 0
+    }
+  ],
+  "arms": [
+    {
+      "id": "baseline",
+      "cases": [
+        "ambiguous_then_hospital_distance",
+        "airport_distance",
+        "office_drive_time",
+        "active_airport_then_hospital_distance",
+        "ambiguous_distance",
+        "explicit_hospital_navigation"
+      ]
+    },
+    {
+      "id": "candidate",
+      "cases": [
+        "ambiguous_then_hospital_distance",
+        "airport_distance",
+        "office_drive_time",
+        "active_airport_then_hospital_distance",
+        "ambiguous_distance",
+        "explicit_hospital_navigation"
+      ]
+    }
+  ],
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "turn_handling": {
+    "turn_detection": "vad",
+    "endpointing": {
+      "min_delay": 0.4,
+      "max_delay": 3.0
+    },
+    "interruption": {
+      "enabled": true,
+      "mode": "vad",
+      "resume_false_interruption": true
+    }
+  },
+  "cache_entries": 2,
+  "cache_byte_limit": "Requested268435456; installed seeded sequential path does not enforce byte cap; count2 retained.",
+  "model_references_from": "results/iteration19/post-inference-validation.json",
+  "source_audio_creation": {
+    "spoken_stems": {
+      "airport_road": "Navigate to Airport Road.",
+      "hospital_distance": "How far is Manipal Hospital, Old Airport Road?",
+      "airport_distance": "How far is the airport from here?",
+      "office_drive_time": "How long does it take to drive to the office?",
+      "navigate_airport": "Navigate to the airport.",
+      "ambiguous_distance": "How far is Airport Road?",
+      "navigate_hospital": "Please navigate to the hospital."
+    },
+    "inference": "Existing local Kokoro82M af_heart speed1.1; first complete render once per stem, shared across arms.",
+    "format": "mono PCM16 24000Hz WAV",
+    "preparation_asr": "not_run",
+    "preparation_vad": "not_run"
+  },
+  "selected_scope": {
+    "captures": 12,
+    "input_publications": 16,
+    "distinct_rendered_stems": 7,
+    "expected_navigation_mutations": 4,
+    "required_route_information_reads": 8,
+    "expected_final_replies": 12,
+    "initial_replies_before_followup": 4,
+    "arm_order": [
+      "baseline",
+      "candidate"
+    ],
+    "case_order": [
+      "ambiguous_then_hospital_distance",
+      "airport_distance",
+      "office_drive_time",
+      "active_airport_then_hospital_distance",
+      "ambiguous_distance",
+      "explicit_hospital_navigation"
+    ]
+  },
+  "exposure": "Hospital distance is a known iteration19 failure. Other forms are newly composed wording using an already known map; no held-out or unseen-entity claim. All waveforms will be fresh first renders.",
+  "mechanism_criteria": "Record recognized request, all original/rejected/repaired plans and physical reads/mutations. A complete grounded route-information question must get a matching successful compute; optional valid state-keyed reuse is legitimate in component tests. No oracle text, forced plans, repairs beyond normal single semantic repair, or outcome-selected reruns.",
+  "effect_contract": "Every declared navigation effect needs same-execution matching successful compute/start, version1, empty stops, replaced null, already_active false. Queries do not start/cancel/add a stop. Active-airport case permits the original start only and must have zero navigation attempts after the final query. All required route reads are first reads of their destinations in fresh rooms; require actual physical successful nonstale compute. Preserve no-op/errors/skips/duplicates.",
+  "setup_policy": "Before either first service launch, observe availability of all four existing local ports for up to90seconds and preserve every observation. Never kill an unrelated listener. If unavailable after the deadline, retain setup failure. No setup or capture retry/replacement is planned.",
+  "limits": [
+    "Fixed baseline-then-candidate order and one conversation per condition; no causal latency or population claim.",
+    "Both arms retain iteration19 continuation and iteration18 recognition-aware output. No injected recognition delay, ASR decoder change or pronunciation selection.",
+    "Unknown/ambiguous/qualified/compound/current-route/nondefault-unit questions outside recognized contract retain ordinary planning; component tests define boundaries.",
+    "Whole received-stream ASR follows both timed stacks and owned process termination, once per capture. Manual speech facts separate from capture completion.",
+    "All previous raw sources, failures and checkpoints remain archived."
+  ]
+}

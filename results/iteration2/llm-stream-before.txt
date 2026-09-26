@@ -1,0 +1,254 @@
+FFFFFFFF.                                                                [100%]
+=================================== FAILURES ===================================
+________ test_json_stream_ignores_quoted_braces_and_reasoning[chunks0] _________
+
+raw = '{"reply": "a brace }'
+
+    def parse_json(raw: str) -> dict[str, Any]:
+        s = _THINK.sub("", raw).strip()
+        s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s.strip())
+        start, end = s.find("{"), s.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError("no JSON object in LLM output")
+        try:
+>           return json.loads(s[start:end + 1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+agent/coordinator/llm_client.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10107fc50>
+s = '{"reply": "a brace }', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+>           obj, end = self.scan_once(s, idx)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+E           json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 11 (char 10)
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/decoder.py:353: JSONDecodeError
+
+The above exception was the direct cause of the following exception:
+
+chunks = ['{"reply": "a brace }', ' is text", "calls": []}']
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("chunks", [
+        ['{"reply": "a brace }', ' is text", "calls": []}'],
+        ['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail'],
+        ['<think>{"example":1}', '</think>\n{"calls": [], "reply":"Ready"}'],
+        ['```json\n{"reply":"quote \\" }', ' stays quoted", "calls":[]}\n```'],
+    ])
+    async def test_json_stream_ignores_quoted_braces_and_reasoning(chunks):
+        stream = Stream(chunks)
+        raw = await client_for(stream)._stream({}, True)
+>       assert parse_json(raw)["calls"] == []
+               ^^^^^^^^^^^^^^^
+
+tests/unit/test_llm_stream.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+raw = '{"reply": "a brace }'
+
+    def parse_json(raw: str) -> dict[str, Any]:
+        s = _THINK.sub("", raw).strip()
+        s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s.strip())
+        start, end = s.find("{"), s.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError("no JSON object in LLM output")
+        try:
+            return json.loads(s[start:end + 1])
+        except json.JSONDecodeError as e:
+>           raise ValueError(str(e)) from e
+E           ValueError: Unterminated string starting at: line 1 column 11 (char 10)
+
+agent/coordinator/llm_client.py:103: ValueError
+________ test_json_stream_ignores_quoted_braces_and_reasoning[chunks1] _________
+
+chunks = ['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail']
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("chunks", [
+        ['{"reply": "a brace }', ' is text", "calls": []}'],
+        ['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail'],
+        ['<think>{"example":1}', '</think>\n{"calls": [], "reply":"Ready"}'],
+        ['```json\n{"reply":"quote \\" }', ' stays quoted", "calls":[]}\n```'],
+    ])
+    async def test_json_stream_ignores_quoted_braces_and_reasoning(chunks):
+        stream = Stream(chunks)
+        raw = await client_for(stream)._stream({}, True)
+        assert parse_json(raw)["calls"] == []
+        assert stream.closed
+        if chunks[-1] == ' unwanted tail':
+>           assert stream.consumed == len(chunks) - 1
+E           assert 3 == (3 - 1)
+E            +  where 3 = <tests.unit.test_llm_stream.Stream object at 0x10511da10>.consumed
+E            +  and   3 = len(['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail'])
+
+tests/unit/test_llm_stream.py:53: AssertionError
+________ test_json_stream_ignores_quoted_braces_and_reasoning[chunks2] _________
+
+chunks = ['<think>{"example":1}', '</think>\n{"calls": [], "reply":"Ready"}']
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("chunks", [
+        ['{"reply": "a brace }', ' is text", "calls": []}'],
+        ['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail'],
+        ['<think>{"example":1}', '</think>\n{"calls": [], "reply":"Ready"}'],
+        ['```json\n{"reply":"quote \\" }', ' stays quoted", "calls":[]}\n```'],
+    ])
+    async def test_json_stream_ignores_quoted_braces_and_reasoning(chunks):
+        stream = Stream(chunks)
+        raw = await client_for(stream)._stream({}, True)
+>       assert parse_json(raw)["calls"] == []
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'calls'
+
+tests/unit/test_llm_stream.py:50: KeyError
+________ test_json_stream_ignores_quoted_braces_and_reasoning[chunks3] _________
+
+raw = '```json\n{"reply":"quote \\" }'
+
+    def parse_json(raw: str) -> dict[str, Any]:
+        s = _THINK.sub("", raw).strip()
+        s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s.strip())
+        start, end = s.find("{"), s.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError("no JSON object in LLM output")
+        try:
+>           return json.loads(s[start:end + 1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+agent/coordinator/llm_client.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x10107fc50>
+s = '{"reply":"quote \\" }', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+>           obj, end = self.scan_once(s, idx)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+E           json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 10 (char 9)
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/json/decoder.py:353: JSONDecodeError
+
+The above exception was the direct cause of the following exception:
+
+chunks = ['```json\n{"reply":"quote \\" }', ' stays quoted", "calls":[]}\n```']
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("chunks", [
+        ['{"reply": "a brace }', ' is text", "calls": []}'],
+        ['{"reply": "a brace {', ' is text", "calls": []}', ' unwanted tail'],
+        ['<think>{"example":1}', '</think>\n{"calls": [], "reply":"Ready"}'],
+        ['```json\n{"reply":"quote \\" }', ' stays quoted", "calls":[]}\n```'],
+    ])
+    async def test_json_stream_ignores_quoted_braces_and_reasoning(chunks):
+        stream = Stream(chunks)
+        raw = await client_for(stream)._stream({}, True)
+>       assert parse_json(raw)["calls"] == []
+               ^^^^^^^^^^^^^^^
+
+tests/unit/test_llm_stream.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+raw = '```json\n{"reply":"quote \\" }'
+
+    def parse_json(raw: str) -> dict[str, Any]:
+        s = _THINK.sub("", raw).strip()
+        s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s.strip())
+        start, end = s.find("{"), s.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError("no JSON object in LLM output")
+        try:
+            return json.loads(s[start:end + 1])
+        except json.JSONDecodeError as e:
+>           raise ValueError(str(e)) from e
+E           ValueError: Unterminated string starting at: line 1 column 10 (char 9)
+
+agent/coordinator/llm_client.py:103: ValueError
+__ test_malformed_model_objects_do_not_silently_reinterpret[[{"calls": []}]] ___
+
+raw = '[{"calls": []}]'
+
+    @pytest.mark.parametrize("raw", ['[{"calls": []}]', '{"calls": [], "calls": [{"tool":"wrong"}]}',
+                                    '{"amount": NaN}', 'prose before {"calls": []}'])
+    def test_malformed_model_objects_do_not_silently_reinterpret(raw):
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_llm_stream.py:59: Failed
+_ test_malformed_model_objects_do_not_silently_reinterpret[{"calls": [], "calls": [{"tool":"wrong"}]}] _
+
+raw = '{"calls": [], "calls": [{"tool":"wrong"}]}'
+
+    @pytest.mark.parametrize("raw", ['[{"calls": []}]', '{"calls": [], "calls": [{"tool":"wrong"}]}',
+                                    '{"amount": NaN}', 'prose before {"calls": []}'])
+    def test_malformed_model_objects_do_not_silently_reinterpret(raw):
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_llm_stream.py:59: Failed
+__ test_malformed_model_objects_do_not_silently_reinterpret[{"amount": NaN}] ___
+
+raw = '{"amount": NaN}'
+
+    @pytest.mark.parametrize("raw", ['[{"calls": []}]', '{"calls": [], "calls": [{"tool":"wrong"}]}',
+                                    '{"amount": NaN}', 'prose before {"calls": []}'])
+    def test_malformed_model_objects_do_not_silently_reinterpret(raw):
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_llm_stream.py:59: Failed
+_ test_malformed_model_objects_do_not_silently_reinterpret[prose before {"calls": []}] _
+
+raw = 'prose before {"calls": []}'
+
+    @pytest.mark.parametrize("raw", ['[{"calls": []}]', '{"calls": [], "calls": [{"tool":"wrong"}]}',
+                                    '{"amount": NaN}', 'prose before {"calls": []}'])
+    def test_malformed_model_objects_do_not_silently_reinterpret(raw):
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_llm_stream.py:59: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_llm_stream.py::test_json_stream_ignores_quoted_braces_and_reasoning[chunks0]
+FAILED tests/unit/test_llm_stream.py::test_json_stream_ignores_quoted_braces_and_reasoning[chunks1]
+FAILED tests/unit/test_llm_stream.py::test_json_stream_ignores_quoted_braces_and_reasoning[chunks2]
+FAILED tests/unit/test_llm_stream.py::test_json_stream_ignores_quoted_braces_and_reasoning[chunks3]
+FAILED tests/unit/test_llm_stream.py::test_malformed_model_objects_do_not_silently_reinterpret[[{"calls": []}]]
+FAILED tests/unit/test_llm_stream.py::test_malformed_model_objects_do_not_silently_reinterpret[{"calls": [], "calls": [{"tool":"wrong"}]}]
+FAILED tests/unit/test_llm_stream.py::test_malformed_model_objects_do_not_silently_reinterpret[{"amount": NaN}]
+FAILED tests/unit/test_llm_stream.py::test_malformed_model_objects_do_not_silently_reinterpret[prose before {"calls": []}]
+8 failed, 1 passed in 0.44s

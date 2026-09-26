@@ -1,0 +1,921 @@
+{
+  "kind": "post_run_comparison_and_failure_explanation_not_rescoring",
+  "captured_at": "2026-09-25T19:07:39.614832+00:00",
+  "scope": "Read-only review of all 24 paired development outcomes, failed plans, attempted calls and raw coordinator events. Only this new review artifact is written; original results, expectations, scorer, plans and scores are preserved.",
+  "original_scores": {
+    "before": {
+      "passed": 17,
+      "total": 24
+    },
+    "after": {
+      "passed": 17,
+      "total": 24
+    },
+    "score_unchanged": true
+  },
+  "outcome_changes": {
+    "fail_to_pass": [
+      "syn_shop_03",
+      "syn_multi_02"
+    ],
+    "pass_to_fail": [
+      "syn_fin_04",
+      "syn_house_01"
+    ],
+    "pass_to_pass": [
+      "syn_travel_01",
+      "syn_travel_04",
+      "syn_travel_06",
+      "syn_fin_01",
+      "syn_fin_02",
+      "syn_fin_03",
+      "syn_fin_05",
+      "syn_house_02",
+      "syn_house_03",
+      "syn_house_04",
+      "syn_house_05",
+      "syn_shop_01",
+      "syn_shop_02",
+      "syn_shop_04",
+      "syn_shop_05"
+    ],
+    "fail_to_fail": [
+      "syn_travel_02",
+      "syn_travel_03",
+      "syn_travel_05",
+      "syn_fin_06",
+      "syn_multi_01"
+    ]
+  },
+  "interpretation": "Two semantic improvements are offset by a new representation mismatch and a new unsupported apartment-search attempt. The unchanged 17/24 score hides this exchange; it does not establish aggregate improvement. Among the seven current failures, six concern representation/expected argument contracts and one contains a semantic regression plus a manifest/backend contract mismatch. These explanations are not adjusted scores.",
+  "provenance": {
+    "artifact_sha256": {
+      "results/iteration2/local-synthetic-run1/results.json": "1c9839dc8f5b1da3421bd4adfa78a8c1b535c43ea3de9acf1b85d47324ab6715",
+      "results/iteration2/local-synthetic-run1/review.json": "5cd8cbe745fd2aaa803b76c311ad8c03852341854411626832088137205fe1b0",
+      "results/iteration2/local-synthetic-run1/manifest.json": "55f11d92276b3d6a997a3b5fd4247eab93b7675443e94268f3a28c46c658ddba",
+      "results/iteration3/local-synthetic-run1/results.json": "2ae116185df0142d527348a5d1908ba07bf71e161363f0b54f2f5594ab99aa19",
+      "results/iteration3/local-synthetic-run1/manifest.json": "f775c1723cbefef1c826dd8043fc87b80daa0b1db426ac94844a46579316c7cb",
+      "results/iteration3/local-synthetic-run1/verification.json": "caefd54b099ec1ba4abfc9ffa3d9bf12be0cb395400a1f0ac6d57ee0b8529b90",
+      "tests/synthetic/scenarios.yaml": "4d5ee872c7280aeb4ac10abb575d821bc7f1c63012e097d61a94551202d92d58",
+      "tests/synthetic/run_synthetic.py": "d413adf9b47917a81bd6627e33fe7374525e2692494beb5994f87d02f3743a68"
+    },
+    "frozen_source_files_verified": 28,
+    "all_frozen_source_hashes_match_current": true,
+    "source_mismatches": [],
+    "saved_post_run_verification": {
+      "finished_at": "2026-09-25T19:04:48.795249+00:00",
+      "exit_code": 0,
+      "source_mismatches": []
+    },
+    "common_frozen_source_files_changed_between_runs": [
+      "agent/coordinator/executor.py",
+      "agent/coordinator/resolver.py",
+      "agent/tools/car_tools.py",
+      "agent/tools/manifest.py"
+    ],
+    "same_scenario_and_scorer_hashes": true
+  },
+  "scoring_policy": "Unchanged conservative development scorer counts all attempted calls, including failures; requires a bijective tool multiset and exact argument key sets; casefolds/collapses whitespace; permits only explicitly expected * wildcards. Date ordinals and descriptive suffixes are not normalized. No new score is computed here.",
+  "all_24_outcomes": [
+    {
+      "id": "syn_travel_01",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_travel_02",
+      "before_pass": false,
+      "after_pass": false,
+      "attempted_calls_changed": false,
+      "classification": "representation_mismatch",
+      "explanation": "Corrected March 5th remains March 5th; expectation is March 5. No superseded March 3 dispatch.",
+      "before_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Toronto",
+            "date": "March 5th"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Toronto",
+            "date": "March 5th"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Toronto",
+            "date": "March 5"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Toronto', 'date': 'March 5'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          16
+        ],
+        "tool_started": [
+          23
+        ],
+        "tool_done": [
+          24
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_travel_03",
+      "before_pass": false,
+      "after_pass": false,
+      "attempted_calls_changed": false,
+      "classification": "representation_and_expected_argument_contract",
+      "explanation": "July 2nd versus July 2; booking additionally supplies a valid optional flight_id resolved from the preceding search, while expectation omits that key.",
+      "before_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Madrid",
+            "date": "July 2nd"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Priya Nair",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Madrid",
+            "date": "July 2nd"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Priya Nair",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Madrid",
+            "date": "July 2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Priya Nair"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Madrid', 'date': 'July 2'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          21,
+          23
+        ],
+        "tool_done": [
+          22,
+          24
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_travel_04",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_travel_05",
+      "before_pass": false,
+      "after_pass": false,
+      "attempted_calls_changed": false,
+      "classification": "representation_and_expected_argument_contract",
+      "explanation": "May 9th versus May 9; booking additionally supplies a valid optional flight_id resolved from the preceding search, while expectation omits that key. Corrected Stockholm is used.",
+      "before_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Stockholm",
+            "date": "May 9th"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Tom Becker",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "search_flights",
+          {
+            "destination": "Stockholm",
+            "date": "May 9th"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Tom Becker",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Stockholm",
+            "date": "May 9"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Tom Becker"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Stockholm', 'date': 'May 9'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          19,
+          21
+        ],
+        "tool_done": [
+          20,
+          22
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_travel_06",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_fin_01",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_fin_02",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_fin_03",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_fin_04",
+      "before_pass": true,
+      "after_pass": false,
+      "attempted_calls_changed": true,
+      "classification": "representation_mismatch",
+      "explanation": "New failure: checking account versus expected checking. Both refer to the corrected account description, but the unchanged scorer compares exact normalized strings; real-backend equivalence is unverified.",
+      "before_calls": [
+        [
+          "modify_autopay",
+          {
+            "bill_type": "water",
+            "source_account": "checking"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "modify_autopay",
+          {
+            "bill_type": "water",
+            "source_account": "checking account"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "modify_autopay",
+          "args": {
+            "bill_type": "water",
+            "source_account": "checking"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'modify_autopay', 'args': {'bill_type': 'water', 'source_account': 'checking'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          17
+        ],
+        "tool_done": [
+          18
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_fin_05",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_fin_06",
+      "before_pass": false,
+      "after_pass": false,
+      "attempted_calls_changed": false,
+      "classification": "representation_mismatch",
+      "explanation": "Unchanged black card versus expected black; currency conversion matches.",
+      "before_calls": [
+        [
+          "get_exchange_rate",
+          {
+            "amount": 1200,
+            "from_currency": "CAD",
+            "to_currency": "INR"
+          }
+        ],
+        [
+          "get_card_benefits",
+          {
+            "card_type": "black card"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "get_exchange_rate",
+          {
+            "amount": 1200,
+            "from_currency": "CAD",
+            "to_currency": "INR"
+          }
+        ],
+        [
+          "get_card_benefits",
+          {
+            "card_type": "black card"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "get_exchange_rate",
+          "args": {
+            "amount": 1200,
+            "from_currency": "CAD",
+            "to_currency": "INR"
+          }
+        },
+        {
+          "tool": "get_card_benefits",
+          "args": {
+            "card_type": "black"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'get_card_benefits', 'args': {'card_type': 'black'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          19,
+          20
+        ],
+        "tool_done": [
+          21,
+          22
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_house_01",
+      "before_pass": true,
+      "after_pass": false,
+      "attempted_calls_changed": true,
+      "classification": "semantic_regression_and_backend_contract_error",
+      "explanation": "New unsupported early search on vague apartment-hunting greeting uses invented city=apartment. The call then raises because upstream mock requires bedrooms and max_price even though the manifest marks them optional. Later Denver search succeeds; the earlier failed attempt is correctly retained and counted.",
+      "before_calls": [
+        [
+          "search_apartments",
+          {
+            "city": "Denver",
+            "bedrooms": 2,
+            "max_price": 2000
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "search_apartments",
+          {
+            "city": "apartment"
+          }
+        ],
+        [
+          "search_apartments",
+          {
+            "city": "Denver",
+            "bedrooms": 2,
+            "max_price": 2000
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_apartments",
+          "args": {
+            "city": "Denver",
+            "bedrooms": 2,
+            "max_price": 2000
+          }
+        }
+      ],
+      "after_why": "tools expected {'search_apartments': 1} got {'search_apartments': 2}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          13
+        ],
+        "tool_started": [
+          8,
+          20
+        ],
+        "tool_done": [
+          21
+        ],
+        "tool_error": [
+          9
+        ]
+      }
+    },
+    {
+      "id": "syn_house_02",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_house_03",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_house_04",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_house_05",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_shop_01",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_shop_02",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_shop_03",
+      "before_pass": false,
+      "after_pass": true,
+      "attempted_calls_changed": true,
+      "classification": "semantic_improvement",
+      "explanation": "Previously invented max_price=1000 is omitted; corrected quantity=1 and product-result reference are preserved.",
+      "before_calls": [
+        [
+          "search_products",
+          {
+            "query": "coffee grinder",
+            "max_price": 1000
+          }
+        ],
+        [
+          "add_to_cart",
+          {
+            "product_id": "PROD1",
+            "quantity": 1
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "search_products",
+          {
+            "query": "coffee grinder"
+          }
+        ],
+        [
+          "add_to_cart",
+          {
+            "product_id": "PROD1",
+            "quantity": 1
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "coffee grinder"
+          }
+        },
+        {
+          "tool": "add_to_cart",
+          "args": {
+            "product_id": "*",
+            "quantity": 1
+          }
+        }
+      ],
+      "after_why": "",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          16
+        ],
+        "tool_started": [
+          23,
+          25
+        ],
+        "tool_done": [
+          24,
+          26
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_shop_04",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_shop_05",
+      "before_pass": true,
+      "after_pass": true,
+      "attempted_calls_changed": false,
+      "classification": "unchanged_pass",
+      "explanation": "Attempted calls and pass outcome match the previous run."
+    },
+    {
+      "id": "syn_multi_01",
+      "before_pass": false,
+      "after_pass": false,
+      "attempted_calls_changed": false,
+      "classification": "representation_and_expected_argument_contract",
+      "explanation": "October 4th versus October 4; booking additionally supplies grounded optional flight_id omitted by expectation. Requested passport update is retained.",
+      "before_calls": [
+        [
+          "update_identity_doc",
+          {
+            "doc_type": "passport",
+            "doc_number": "R330981"
+          }
+        ],
+        [
+          "search_flights",
+          {
+            "destination": "Dublin",
+            "date": "October 4th"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Maya Chen",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "update_identity_doc",
+          {
+            "doc_type": "passport",
+            "doc_number": "R330981"
+          }
+        ],
+        [
+          "search_flights",
+          {
+            "destination": "Dublin",
+            "date": "October 4th"
+          }
+        ],
+        [
+          "book_flight",
+          {
+            "passenger_name": "Maya Chen",
+            "flight_id": "FL123"
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Dublin",
+            "date": "October 4"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Maya Chen"
+          }
+        },
+        {
+          "tool": "update_identity_doc",
+          "args": {
+            "doc_type": "passport",
+            "doc_number": "R330981"
+          }
+        }
+      ],
+      "after_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Dublin', 'date': 'October 4'}}",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          21,
+          22,
+          25
+        ],
+        "tool_done": [
+          23,
+          24,
+          26
+        ],
+        "tool_error": []
+      }
+    },
+    {
+      "id": "syn_multi_02",
+      "before_pass": false,
+      "after_pass": true,
+      "attempted_calls_changed": true,
+      "classification": "semantic_improvement",
+      "explanation": "Previously omitted independent neighborhood filter update is now executed along with the requested apartment search.",
+      "before_calls": [
+        [
+          "search_apartments",
+          {
+            "city": "Chicago",
+            "bedrooms": 2,
+            "max_price": 2200,
+            "pets_allowed": true
+          }
+        ]
+      ],
+      "after_calls": [
+        [
+          "update_search_filter",
+          {
+            "filter_name": "neighborhood",
+            "value": "Lincoln Park"
+          }
+        ],
+        [
+          "search_apartments",
+          {
+            "city": "Chicago",
+            "bedrooms": 2,
+            "max_price": 2200,
+            "pets_allowed": true
+          }
+        ]
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_apartments",
+          "args": {
+            "city": "Chicago",
+            "bedrooms": 2,
+            "max_price": 2200,
+            "pets_allowed": true
+          }
+        },
+        {
+          "tool": "update_search_filter",
+          "args": {
+            "filter_name": "neighborhood",
+            "value": "Lincoln Park"
+          }
+        }
+      ],
+      "after_why": "",
+      "after_plan_count": 2,
+      "event_indices_zero_based": {
+        "plan_ready": [
+          3,
+          10
+        ],
+        "tool_started": [
+          21,
+          22
+        ],
+        "tool_done": [
+          23,
+          24
+        ],
+        "tool_error": []
+      }
+    }
+  ],
+  "execution_audit": {
+    "before": {
+      "event_counts": {
+        "user_final": 53,
+        "ack": 53,
+        "agent_say": 77,
+        "plan_ready": 48,
+        "gate_open": 48,
+        "gate_committed": 48,
+        "slot_update": 77,
+        "tool_waiting": 34,
+        "tool_started": 34,
+        "tool_done": 34,
+        "user_resumed": 5,
+        "gate_cancelled": 5,
+        "turn_merged": 5
+      },
+      "tool_attempts": 34,
+      "successful_completions": 34,
+      "successful_write_completions": 11,
+      "tool_errors": [],
+      "coordinator_timeout_ids": [],
+      "unpaired_start_terminal_scenario_ids": [],
+      "duplicate_dispatch_identity_scenario_ids": [],
+      "repeated_identical_tool_args_scenario_ids": [],
+      "stale_or_missing_stale_marker_completions": [],
+      "starts_with_operation_id_different_from_latest_user_intent": [],
+      "non_success_completions": []
+    },
+    "after": {
+      "event_counts": {
+        "user_final": 53,
+        "ack": 53,
+        "agent_say": 76,
+        "plan_ready": 48,
+        "gate_open": 48,
+        "gate_committed": 48,
+        "slot_update": 80,
+        "tool_waiting": 36,
+        "tool_started": 36,
+        "tool_done": 35,
+        "user_resumed": 5,
+        "gate_cancelled": 5,
+        "turn_merged": 5,
+        "tool_error": 1
+      },
+      "tool_attempts": 36,
+      "successful_completions": 35,
+      "successful_write_completions": 12,
+      "tool_errors": [
+        {
+          "id": "syn_house_01",
+          "event_index": 9,
+          "data": {
+            "execution_id": "3560154cfd98469dacc6ed3722e9a978",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_apartments",
+            "args": {
+              "city": "apartment"
+            },
+            "error": "search_apartments() missing 2 required positional arguments: 'bedrooms' and 'max_price'"
+          }
+        }
+      ],
+      "coordinator_timeout_ids": [],
+      "unpaired_start_terminal_scenario_ids": [],
+      "duplicate_dispatch_identity_scenario_ids": [],
+      "repeated_identical_tool_args_scenario_ids": [],
+      "stale_or_missing_stale_marker_completions": [],
+      "starts_with_operation_id_different_from_latest_user_intent": [],
+      "non_success_completions": []
+    },
+    "interpretation": "Before: 34 starts/34 successful completions. After: 36 starts/35 successful completions/one failed read attempt. Every start pairs with one terminal done/error event. No observed duplicate dispatch identities, identical repeated calls within a scenario, stale completion markers, outdated operation starts, or coordinator timeouts. This is bounded trace evidence, not a guarantee for other schedules/backends."
+  },
+  "limitations": [
+    "Text-only local-model development scenarios, already examined before; not held out and not official Full-Duplex-Bench evaluation.",
+    "Single run per version, same pinned model/seed, with multiple source changes and model/runtime cache history; individual change causality is not isolated.",
+    "Synthetic configuration suppresses result speech. No audio, listener latency, or speech-quality claims follow from these traces.",
+    "Schema validation can reject malformed types but cannot infer that city=apartment is semantically ungrounded. The separate mock-required/manifest-optional mismatch remains exposed.",
+    "Representation equivalence is explanatory only: permissive deterministic mocks do not prove a real backend treats checking account and checking, or ordinal and cardinal date strings, identically."
+  ],
+  "backend_contract_mismatch": {
+    "tool": "search_apartments",
+    "manifest_source": "agent/tools/bench_tools.py",
+    "manifest_required": [
+      "city"
+    ],
+    "manifest_optional": [
+      "bedrooms",
+      "max_price",
+      "pets_allowed"
+    ],
+    "pinned_backend_source": "bench/Full-Duplex-Bench/v3/mock_apis.py",
+    "backend_required_positional": [
+      "city",
+      "bedrooms",
+      "max_price"
+    ],
+    "observed_failure": "search_apartments() missing 2 required positional arguments: 'bedrooms' and 'max_price'",
+    "independent_semantic_error": "The vague greeting supplies no city. Setting city=apartment is unsupported regardless of the optional-parameter contract mismatch.",
+    "disposition": "Documented follow-up only; review does not change production, scenarios, tests or score."
+  }
+}

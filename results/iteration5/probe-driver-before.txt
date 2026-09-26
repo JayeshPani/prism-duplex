@@ -1,0 +1,187 @@
+..................FFFFFFFFFFF                                            [100%]
+=================================== FAILURES ===================================
+______ test_probe_cli_is_optional_and_mutually_exclusive_with_correction _______
+
+    def test_probe_cli_is_optional_and_mutually_exclusive_with_correction():
+        base = ["--input", "initial.wav", "--out", "new-run"]
+>       baseline = capture.parse_args(base)
+                   ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:202: AttributeError
+____________ test_probe_cli_rejects_invalid_observation_duration[0] ____________
+
+seconds = '0'
+
+    @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf", "-inf"])
+    def test_probe_cli_rejects_invalid_observation_duration(seconds):
+        with pytest.raises(SystemExit):
+>           capture.parse_args(["--input", "initial.wav", "--probe", "noise.wav", "--out", "new-run",
+            ^^^^^^^^^^^^^^^^^^
+                                f"--probe-observation-seconds={seconds}"])
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:216: AttributeError
+___________ test_probe_cli_rejects_invalid_observation_duration[-1] ____________
+
+seconds = '-1'
+
+    @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf", "-inf"])
+    def test_probe_cli_rejects_invalid_observation_duration(seconds):
+        with pytest.raises(SystemExit):
+>           capture.parse_args(["--input", "initial.wav", "--probe", "noise.wav", "--out", "new-run",
+            ^^^^^^^^^^^^^^^^^^
+                                f"--probe-observation-seconds={seconds}"])
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:216: AttributeError
+___________ test_probe_cli_rejects_invalid_observation_duration[nan] ___________
+
+seconds = 'nan'
+
+    @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf", "-inf"])
+    def test_probe_cli_rejects_invalid_observation_duration(seconds):
+        with pytest.raises(SystemExit):
+>           capture.parse_args(["--input", "initial.wav", "--probe", "noise.wav", "--out", "new-run",
+            ^^^^^^^^^^^^^^^^^^
+                                f"--probe-observation-seconds={seconds}"])
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:216: AttributeError
+___________ test_probe_cli_rejects_invalid_observation_duration[inf] ___________
+
+seconds = 'inf'
+
+    @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf", "-inf"])
+    def test_probe_cli_rejects_invalid_observation_duration(seconds):
+        with pytest.raises(SystemExit):
+>           capture.parse_args(["--input", "initial.wav", "--probe", "noise.wav", "--out", "new-run",
+            ^^^^^^^^^^^^^^^^^^
+                                f"--probe-observation-seconds={seconds}"])
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:216: AttributeError
+__________ test_probe_cli_rejects_invalid_observation_duration[-inf] ___________
+
+seconds = '-inf'
+
+    @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf", "-inf"])
+    def test_probe_cli_rejects_invalid_observation_duration(seconds):
+        with pytest.raises(SystemExit):
+>           capture.parse_args(["--input", "initial.wav", "--probe", "noise.wav", "--out", "new-run",
+            ^^^^^^^^^^^^^^^^^^
+                                f"--probe-observation-seconds={seconds}"])
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'parse_args'
+
+tests/unit/test_livekit_audio_experiment.py:216: AttributeError
+___ test_probe_observes_full_window_despite_new_transcript_and_failed_result ___
+
+    @pytest.mark.asyncio
+    async def test_probe_observes_full_window_despite_new_transcript_and_failed_result():
+        state = speaking_result()
+        state.frame(3, -10, -40)
+        trigger = state.correction_trigger(3)
+        event_start = len(state.events)
+        deadline = time.monotonic() + .025
+    
+        async def short_tail():
+            # A new transcript and failed original handle are outcomes, not a reason
+            # to reset the observation window or claim successful speech completion.
+            event(state, "user_final", 4, intent_version=2, text="invented recognition")
+            event(state, "interruption_requested", 4.1, reason="new turn")
+            event(state, "speech_handle", 4.2, speech_id="result1", state="failed", error="synthesis failed")
+    
+>       clipped = await capture.observe_probe_window(short_tail, asyncio.Event(), deadline, [])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'observe_probe_window'
+
+tests/unit/test_livekit_audio_experiment.py:235: AttributeError
+_ test_probe_with_no_new_events_waits_window_and_reports_original_result_state[False] _
+
+finished = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("finished", [False, True])
+    async def test_probe_with_no_new_events_waits_window_and_reports_original_result_state(finished):
+        state = speaking_result()
+        state.frame(3, -10, -40)
+        if finished:
+            event(state, "speech_handle", 4, speech_id="result1", state="finished")
+        event_start = len(state.events)
+        deadline = time.monotonic() + .015
+    
+        async def no_tail():
+            pass
+    
+>       await capture.observe_probe_window(no_tail, asyncio.Event(), deadline, [])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'observe_probe_window'
+
+tests/unit/test_livekit_audio_experiment.py:259: AttributeError
+_ test_probe_with_no_new_events_waits_window_and_reports_original_result_state[True] _
+
+finished = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("finished", [False, True])
+    async def test_probe_with_no_new_events_waits_window_and_reports_original_result_state(finished):
+        state = speaking_result()
+        state.frame(3, -10, -40)
+        if finished:
+            event(state, "speech_handle", 4, speech_id="result1", state="finished")
+        event_start = len(state.events)
+        deadline = time.monotonic() + .015
+    
+        async def no_tail():
+            pass
+    
+>       await capture.observe_probe_window(no_tail, asyncio.Event(), deadline, [])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'observe_probe_window'
+
+tests/unit/test_livekit_audio_experiment.py:259: AttributeError
+__ test_probe_deadline_caps_trailing_silence_instead_of_extending_observation __
+
+    @pytest.mark.asyncio
+    async def test_probe_deadline_caps_trailing_silence_instead_of_extending_observation():
+        cancelled = asyncio.Event()
+    
+        async def blocked_tail():
+            try:
+                await asyncio.Event().wait()
+            finally:
+                cancelled.set()
+    
+        deadline = time.monotonic() + .01
+        clipped = await asyncio.wait_for(
+>           capture.observe_probe_window(blocked_tail, asyncio.Event(), deadline, []), .5)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'observe_probe_window'
+
+tests/unit/test_livekit_audio_experiment.py:279: AttributeError
+______________ test_probe_preserves_source_and_receiver_failures _______________
+
+    @pytest.mark.asyncio
+    async def test_probe_preserves_source_and_receiver_failures():
+        async def failed_tail():
+            raise TimeoutError("source transport timed out")
+    
+        with pytest.raises(TimeoutError, match="source transport timed out"):
+>           await capture.observe_probe_window(failed_tail, asyncio.Event(), time.monotonic() + 1, [])
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'scripts.local_livekit_audio_experiment' has no attribute 'observe_probe_window'
+
+tests/unit/test_livekit_audio_experiment.py:289: AttributeError
+=========================== short test summary info ============================
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_is_optional_and_mutually_exclusive_with_correction
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_rejects_invalid_observation_duration[0]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_rejects_invalid_observation_duration[-1]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_rejects_invalid_observation_duration[nan]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_rejects_invalid_observation_duration[inf]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_cli_rejects_invalid_observation_duration[-inf]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_observes_full_window_despite_new_transcript_and_failed_result
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_with_no_new_events_waits_window_and_reports_original_result_state[False]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_with_no_new_events_waits_window_and_reports_original_result_state[True]
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_deadline_caps_trailing_silence_instead_of_extending_observation
+FAILED tests/unit/test_livekit_audio_experiment.py::test_probe_preserves_source_and_receiver_failures
+11 failed, 18 passed in 0.14s

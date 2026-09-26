@@ -1,0 +1,47 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790425957.255021}
+{"type": "session_started", "data": {"room": "car-audio-52e64fcec77447818e8d80e80ac80853", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790425957.2551968}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790425957.507275}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790425959.305424}
+{"type": "user_final", "data": {"text": "Navigate to Airport Road.", "merged": "Navigate to Airport Road.", "intent_version": 1}, "ts": 1790425960.212172}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790425960.914813}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790425960.91517}
+{"type": "speech_handle", "data": {"speech_id": "speech_29b351e47d36", "state": "queued"}, "ts": 1790425960.916265}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790425961.5118878}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790425962.4070148}
+{"type": "speech_handle", "data": {"speech_id": "speech_29b351e47d36", "state": "finished", "error": null}, "ts": 1790425962.409368}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Navigate to Airport Road.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "Airport Road"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to Airport Road."}, "ts": 1790425963.831239}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790425963.8313842}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790425963.831721}
+{"type": "slot_update", "data": {"slot": "query", "value": "Airport Road", "previous": null}, "ts": 1790425963.8317912}
+{"type": "tool_waiting", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}}, "ts": 1790425963.8319612}
+{"type": "tool_waiting", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, "ts": 1790425963.8320608}
+{"type": "tool_waiting", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790425963.832126}
+{"type": "tool_started", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}, "state_changing": false}, "ts": 1790425963.832754}
+{"type": "tool_error", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}, "result": {"status": "error", "code": "place_ambiguous", "query": "Airport Road", "place_role": "destination", "places": [], "message": "ambiguous destination 'Airport Road'; ask for the place name", "candidates": [{"place_id": "P_HOSP", "name": "Manipal Hospital, Old Airport Road"}, {"place_id": "K_SBUX_AIR", "name": "Starbucks, Airport Road"}]}, "error": "ambiguous destination 'Airport Road'; ask for the place name"}, "ts": 1790425963.836752}
+{"type": "tool_error", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "error": "unresolved reference $c1.places[0].name"}, "ts": 1790425963.837895}
+{"type": "tool_error", "data": {"execution_id": "aa0c9e974cac4cdfb50aef2645878ff0", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "error": "unresolved reference $c2.route_id"}, "ts": 1790425963.838251}
+{"type": "agent_say", "data": {"text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?", "intent_version": 1, "kind": "result"}, "ts": 1790425963.838888}
+{"type": "speech_handle", "data": {"speech_id": "speech_bd528fb0d0c5", "state": "queued"}, "ts": 1790425963.8395572}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790425965.3531342}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790425970.36737}
+{"type": "speech_handle", "data": {"speech_id": "speech_bd528fb0d0c5", "state": "finished", "error": null}, "ts": 1790425970.368669}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790425970.805686}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790425972.455782}
+{"type": "user_final", "data": {"text": "Please stop navigation.", "merged": "Please stop navigation.", "intent_version": 2}, "ts": 1790425973.5346508}
+{"type": "ack", "data": {"text": "Okay, one sec."}, "ts": 1790425974.240268}
+{"type": "agent_say", "data": {"text": "Okay, one sec.", "intent_version": 2, "kind": "ack"}, "ts": 1790425974.2405481}
+{"type": "speech_handle", "data": {"speech_id": "speech_171055d71f25", "state": "queued"}, "ts": 1790425974.241432}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790425974.800493}
+{"type": "plan_ready", "data": {"intent_version": 2, "utterance": "Please stop navigation.", "repaired": "", "complete": true, "corrections": [], "slots": {}, "calls": [{"id": "c1", "tool": "cancel_navigation", "args": {}}], "reply": "Stopping navigation."}, "ts": 1790425975.7835178}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790425975.783614}
+{"type": "speech_handle", "data": {"speech_id": "speech_171055d71f25", "state": "interruption_requested", "error": null}, "ts": 1790425975.7839448}
+{"type": "gate_committed", "data": {"intent_version": 2, "calls": ["cancel_navigation"]}, "ts": 1790425975.784024}
+{"type": "tool_waiting", "data": {"execution_id": "eaf608cfc67641ad8aa6a209cf21a2c3", "operation_id": "turn-2", "id": "c1", "tool": "cancel_navigation", "args": {}}, "ts": 1790425975.7843132}
+{"type": "tool_started", "data": {"execution_id": "eaf608cfc67641ad8aa6a209cf21a2c3", "operation_id": "turn-2", "id": "c1", "tool": "cancel_navigation", "args": {}, "state_changing": true}, "ts": 1790425975.784887}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790425975.786947}
+{"type": "tool_done", "data": {"execution_id": "eaf608cfc67641ad8aa6a209cf21a2c3", "operation_id": "turn-2", "id": "c1", "tool": "cancel_navigation", "args": {}, "result": {"status": "success", "cancelled": null, "navigation_version": 0, "route_active": false, "route_id": null, "destination": null, "destination_id": null, "stops": [], "stop_ids": [], "eta_min": null, "distance_km": null, "polyline": []}, "stale": false, "duration_ms": 5}, "ts": 1790425975.79043}
+{"type": "agent_say", "data": {"text": "There is no active navigation to cancel.", "intent_version": 2, "kind": "result"}, "ts": 1790425975.792346}
+{"type": "speech_handle", "data": {"speech_id": "speech_5ca2798a8b1b", "state": "queued"}, "ts": 1790425975.792543}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790425976.4693062}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790425978.7317371}
+{"type": "speech_handle", "data": {"speech_id": "speech_5ca2798a8b1b", "state": "finished", "error": null}, "ts": 1790425978.732917}

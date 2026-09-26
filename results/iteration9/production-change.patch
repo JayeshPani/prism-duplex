@@ -1,0 +1,65 @@
+--- a/agent/coordinator/coordinator.py
++++ b/agent/coordinator/coordinator.py
+@@ -225,7 +225,10 @@
+                                      is_current=lambda: version == self._intent_version and not self._closed)
+         if version == self._intent_version and not self._closed and self.cfg.speak_results and self.responder is not None:
+             try:
+-                summary = await self.responder.summarize(res.repaired or utterance, ex)
++                if res.repaired:
++                    summary = await self.responder.summarize(utterance, ex, repaired_request=res.repaired)
++                else:
++                    summary = await self.responder.summarize(utterance, ex)
+             except Exception as error:
+                 self.bus.emit(E.TOOL_ERROR, id=f"summary-{version}", tool="responder", phase="summary",
+                               intent_version=version, error=str(error))
+--- a/agent/coordinator/responder.py
++++ b/agent/coordinator/responder.py
+@@ -19,6 +19,8 @@
+ say it is done. For "blocked" say this operation was already completed and was not repeated. For \
+ "unknown" say the action's outcome could not be confirmed and it was not retried; never claim \
+ success or failure. For "error"/"skipped"/"cancelled" say it could not be completed. \
++Answer the original user request after applying its corrections. A repaired request is \
++an interpretation; do not drop questions or requested details absent from that interpretation. \
+ Reply with the sentence only."""
+ 
+ 
+@@ -125,15 +127,15 @@
+                 text = f"Now navigating to {destination}{via}, replacing {replaced}."
+             else:
+                 text = f"Navigation to {destination}{via} has started."
+-            text += f" ETA: {eta} minutes."
++            text += f" Estimated arrival in {eta} minutes."
+         else:
+             added, present, extra = result.get("added"), result.get("already_present"), result.get("extra_min")
+             if not isinstance(added, str) or not added or type(present) is not bool or type(extra) is not int:
+                 return None
+             if present:
+-                text = f"The stop at {added} is already on your route. ETA to {destination}: {eta} minutes."
++                text = f"The stop at {added} is already on your route. Estimated time to {destination}: {eta} minutes."
+             else:
+-                text = f"Added {added} as a stop. ETA to {destination}: {eta} minutes, {extra} extra minutes."
++                text = f"Added {added} as a stop. Estimated time to {destination}: {eta} minutes, {extra} extra minutes."
+     return text if len(text.split()) <= 30 and _action_only_request(request, ex, target) else None
+ 
+ 
+@@ -141,7 +143,7 @@
+     def __init__(self, llm: LLMClient) -> None:
+         self.llm = llm
+ 
+-    async def summarize(self, request: str, ex: Execution) -> str:
++    async def summarize(self, request: str, ex: Execution, *, repaired_request: str | None = None) -> str:
+         if any(o.status == "unknown" for o in ex.outcomes.values()):
+             return "I couldn't confirm whether that action completed, so I haven't retried it."
+         for outcome in ex.outcomes.values():
+@@ -165,7 +167,10 @@
+         ]
+         if not outcomes:
+             return ""
+-        user = f"User request: {request}\nResults: {json.dumps(outcomes, default=str)}"
++        user = f"User request: {request}"
++        if repaired_request:
++            user += f"\nRepaired request (interpretation): {repaired_request}"
++        user += f"\nResults: {json.dumps(outcomes, default=str)}"
+         text = await self.llm.complete(SYSTEM, user)
+         from .llm_client import _THINK
+         return _THINK.sub("", text).strip().strip('"')

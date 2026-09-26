@@ -1,0 +1,456 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+__ test_run_closes_resources_and_preserves_dispatched_calls_and_trace[False] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107475290>
+timeout = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout", [False, True])
+    async def test_run_closes_resources_and_preserves_dispatched_calls_and_trace(monkeypatch, timeout):
+        class ShortDeadlineCoordinator(Coordinator):
+            async def drain(self, timeout=60):
+                await super().drain(timeout=.01)
+    
+        llm, instances = setup_run(monkeypatch, ShortDeadlineCoordinator, delay=1 if timeout else 0)
+        try:
+            result = await runner.run_one(SCENARIO, CONFIG, verbose=False)
+>           assert instances[0]._closed
+E           assert False
+E            +  where False = <tests.unit.test_synthetic_runner.test_run_closes_resources_and_preserves_dispatched_calls_and_trace.<locals>.ShortDeadlineCoordinator object at 0x1074666d0>._closed
+
+tests/unit/test_synthetic_runner.py:47: AssertionError
+___ test_run_closes_resources_and_preserves_dispatched_calls_and_trace[True] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107474090>
+timeout = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout", [False, True])
+    async def test_run_closes_resources_and_preserves_dispatched_calls_and_trace(monkeypatch, timeout):
+        class ShortDeadlineCoordinator(Coordinator):
+            async def drain(self, timeout=60):
+                await super().drain(timeout=.01)
+    
+        llm, instances = setup_run(monkeypatch, ShortDeadlineCoordinator, delay=1 if timeout else 0)
+        try:
+            result = await runner.run_one(SCENARIO, CONFIG, verbose=False)
+            assert instances[0]._closed
+>           llm.client.close.assert_awaited_once()
+
+tests/unit/test_synthetic_runner.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncMock id='4417234960'>
+
+    def assert_awaited_once(self):
+        """
+        Assert that the mock was awaited exactly once.
+        """
+        if not self.await_count == 1:
+            msg = (f"Expected {self._mock_name or 'mock'} to have been awaited once."
+                   f" Awaited {self.await_count} times.")
+>           raise AssertionError(msg)
+E           AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/unittest/mock.py:2283: AssertionError
+_____________________ test_cancelled_run_closes_resources ______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107477bd0>
+
+    @pytest.mark.asyncio
+    async def test_cancelled_run_closes_resources(monkeypatch):
+        entered = asyncio.Event()
+    
+        class WaitingCoordinator(Coordinator):
+            async def drain(self, timeout=60):
+                entered.set()
+                await asyncio.Event().wait()
+    
+        llm, instances = setup_run(monkeypatch, WaitingCoordinator, delay=1)
+        task = asyncio.create_task(runner.run_one(SCENARIO, CONFIG, verbose=False))
+        try:
+            await asyncio.wait_for(entered.wait(), 1)
+            task.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await task
+>           assert instances[0]._closed
+E           assert False
+E            +  where False = <tests.unit.test_synthetic_runner.test_cancelled_run_closes_resources.<locals>.WaitingCoordinator object at 0x10749de10>._closed
+
+tests/unit/test_synthetic_runner.py:81: AssertionError
+__________ test_invalid_coordinator_config_still_closes_model_client ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10749d3d0>
+
+    @pytest.mark.asyncio
+    async def test_invalid_coordinator_config_still_closes_model_client(monkeypatch):
+        llm, _ = setup_run(monkeypatch, Coordinator)
+        with pytest.raises(TypeError):
+            await runner.run_one(SCENARIO, {"coordinator": {"invalid": True}}, verbose=False)
+>       llm.client.close.assert_awaited_once()
+
+tests/unit/test_synthetic_runner.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncMock id='4417722064'>
+
+    def assert_awaited_once(self):
+        """
+        Assert that the mock was awaited exactly once.
+        """
+        if not self.await_count == 1:
+            msg = (f"Expected {self._mock_name or 'mock'} to have been awaited once."
+                   f" Awaited {self.await_count} times.")
+>           raise AssertionError(msg)
+E           AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/unittest/mock.py:2283: AssertionError
+_________________ test_nonpositive_concurrency_is_rejected[0] __________________
+
+fut = <Task cancelled name='Task-31' coro=<main() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/synthetic/run_synthetic.py:120>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/synthetic/run_synthetic.py:138: in main
+    res = await asyncio.gather(*(guarded(s) for s in scs))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/synthetic/run_synthetic.py:135: in guarded
+    async with sem:
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:15: in __aenter__
+    await self.acquire()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Semaphore object at 0x10746c7d0 [locked]>
+
+    async def acquire(self):
+        """Acquire a semaphore.
+    
+        If the internal counter is larger than zero on entry,
+        decrement it by one and return True immediately.  If it is
+        zero on entry, block, waiting until some other coroutine has
+        called release() to make it larger than 0, and then return
+        True.
+        """
+        if not self.locked():
+            self._value -= 1
+            return True
+    
+        if self._waiters is None:
+            self._waiters = collections.deque()
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+    
+        # Finally block should be called before the CancelledError
+        # handling as we don't want CancelledError to call
+        # _wake_up_first() and attempt to wake up itself.
+        try:
+            try:
+>               await fut
+E               asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:387: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107531390>
+capsys = <_pytest.capture.CaptureFixture object at 0x107530850>
+concurrency = '0'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("concurrency", ["0", "-1"])
+    async def test_nonpositive_concurrency_is_rejected(monkeypatch, capsys, concurrency):
+        monkeypatch.setattr(sys, "argv", ["run_synthetic", "-j", concurrency])
+        monkeypatch.setattr(runner, "load_config", lambda _: {"profile": "test", "llm": {"model": "test"}})
+        with pytest.raises(SystemExit) as error:
+>           await asyncio.wait_for(runner.main(), .1)
+
+tests/unit/test_synthetic_runner.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-31' coro=<main() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/synthetic/run_synthetic.py:120>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+_________________ test_nonpositive_concurrency_is_rejected[-1] _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10757cb50>
+capsys = <_pytest.capture.CaptureFixture object at 0x10757c210>
+concurrency = '-1'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("concurrency", ["0", "-1"])
+    async def test_nonpositive_concurrency_is_rejected(monkeypatch, capsys, concurrency):
+        monkeypatch.setattr(sys, "argv", ["run_synthetic", "-j", concurrency])
+        monkeypatch.setattr(runner, "load_config", lambda _: {"profile": "test", "llm": {"model": "test"}})
+        with pytest.raises(SystemExit) as error:
+>           await asyncio.wait_for(runner.main(), .1)
+
+tests/unit/test_synthetic_runner.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:489: in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+tests/synthetic/run_synthetic.py:132: in main
+    sem = asyncio.Semaphore(a.j)
+          ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Semaphore' object has no attribute '_value'") raised in repr()] Semaphore object at 0x107570590>
+value = -1
+
+    def __init__(self, value=1):
+        if value < 0:
+>           raise ValueError("Semaphore initial value must be >= 0")
+E           ValueError: Semaphore initial value must be >= 0
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:348: ValueError
+_______________ test_empty_scenario_selection_is_rejected[None] ________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10749c650>
+capsys = <_pytest.capture.CaptureFixture object at 0x10749cf50>
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-9/test_empty_scenario_selection_0')
+only = None
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("only", [None, "missing"])
+    async def test_empty_scenario_selection_is_rejected(monkeypatch, capsys, tmp_path, only):
+        (tmp_path / "scenarios.yaml").write_text("- id: available\n" if only else "[]\n")
+        monkeypatch.setattr(runner, "HERE", tmp_path)
+        monkeypatch.setattr(runner, "load_config", lambda _: {"profile": "test", "llm": {"model": "test"}})
+        monkeypatch.setattr(sys, "argv", ["run_synthetic"] + (["--only", only] if only else []))
+        with pytest.raises(SystemExit) as error:
+>           await runner.main()
+
+tests/unit/test_synthetic_runner.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def main() -> None:
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--profile", default=None)
+        ap.add_argument("--only", default=None)
+        ap.add_argument("-j", type=int, default=1)
+        ap.add_argument("-v", action="store_true")
+        ap.add_argument("--out", default=None)
+        a = ap.parse_args()
+        cfg = load_config(a.profile)
+        scs = yaml.safe_load((HERE / "scenarios.yaml").read_text())
+        if a.only:
+            scs = [s for s in scs if a.only in s["id"]]
+        sem = asyncio.Semaphore(a.j)
+    
+        async def guarded(sc):
+            async with sem:
+                return await run_one(sc, cfg, a.v)
+    
+        res = await asyncio.gather(*(guarded(s) for s in scs))
+        for r in res:
+            mark = "PASS" if r["pass"] else "FAIL"
+            print(f"{mark} {r['id']:<16} {r['secs']:>5}s  {r['why']}")
+            if r["plans"]:
+                for p in r["plans"]:
+                    print("      plan:", json.dumps({k: p.get(k) for k in ("utterance", "complete", "calls", "reply")}, ensure_ascii=False)[:400])
+        n = sum(r["pass"] for r in res)
+>       print(f"\nprofile={cfg['profile']} model={cfg['llm']['model']}  pass {n}/{len(res)} = {n / len(res):.0%}")
+                                                                                               ^^^^^^^^^^^^
+E       ZeroDivisionError: division by zero
+
+tests/synthetic/run_synthetic.py:146: ZeroDivisionError
+______________ test_empty_scenario_selection_is_rejected[missing] ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1075f0d90>
+capsys = <_pytest.capture.CaptureFixture object at 0x1075f2910>
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-9/test_empty_scenario_selection_1')
+only = 'missing'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("only", [None, "missing"])
+    async def test_empty_scenario_selection_is_rejected(monkeypatch, capsys, tmp_path, only):
+        (tmp_path / "scenarios.yaml").write_text("- id: available\n" if only else "[]\n")
+        monkeypatch.setattr(runner, "HERE", tmp_path)
+        monkeypatch.setattr(runner, "load_config", lambda _: {"profile": "test", "llm": {"model": "test"}})
+        monkeypatch.setattr(sys, "argv", ["run_synthetic"] + (["--only", only] if only else []))
+        with pytest.raises(SystemExit) as error:
+>           await runner.main()
+
+tests/unit/test_synthetic_runner.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def main() -> None:
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--profile", default=None)
+        ap.add_argument("--only", default=None)
+        ap.add_argument("-j", type=int, default=1)
+        ap.add_argument("-v", action="store_true")
+        ap.add_argument("--out", default=None)
+        a = ap.parse_args()
+        cfg = load_config(a.profile)
+        scs = yaml.safe_load((HERE / "scenarios.yaml").read_text())
+        if a.only:
+            scs = [s for s in scs if a.only in s["id"]]
+        sem = asyncio.Semaphore(a.j)
+    
+        async def guarded(sc):
+            async with sem:
+                return await run_one(sc, cfg, a.v)
+    
+        res = await asyncio.gather(*(guarded(s) for s in scs))
+        for r in res:
+            mark = "PASS" if r["pass"] else "FAIL"
+            print(f"{mark} {r['id']:<16} {r['secs']:>5}s  {r['why']}")
+            if r["plans"]:
+                for p in r["plans"]:
+                    print("      plan:", json.dumps({k: p.get(k) for k in ("utterance", "complete", "calls", "reply")}, ensure_ascii=False)[:400])
+        n = sum(r["pass"] for r in res)
+>       print(f"\nprofile={cfg['profile']} model={cfg['llm']['model']}  pass {n}/{len(res)} = {n / len(res):.0%}")
+                                                                                               ^^^^^^^^^^^^
+E       ZeroDivisionError: division by zero
+
+tests/synthetic/run_synthetic.py:146: ZeroDivisionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_synthetic_runner.py::test_run_closes_resources_and_preserves_dispatched_calls_and_trace[False]
+FAILED tests/unit/test_synthetic_runner.py::test_run_closes_resources_and_preserves_dispatched_calls_and_trace[True]
+FAILED tests/unit/test_synthetic_runner.py::test_cancelled_run_closes_resources
+FAILED tests/unit/test_synthetic_runner.py::test_invalid_coordinator_config_still_closes_model_client
+FAILED tests/unit/test_synthetic_runner.py::test_nonpositive_concurrency_is_rejected[0]
+FAILED tests/unit/test_synthetic_runner.py::test_nonpositive_concurrency_is_rejected[-1]
+FAILED tests/unit/test_synthetic_runner.py::test_empty_scenario_selection_is_rejected[None]
+FAILED tests/unit/test_synthetic_runner.py::test_empty_scenario_selection_is_rejected[missing]
+8 failed in 0.74s

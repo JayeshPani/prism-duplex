@@ -1,0 +1,48 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790426007.452037}
+{"type": "session_started", "data": {"room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790426007.4522429}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790426007.7076008}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790426009.507309}
+{"type": "user_final", "data": {"text": "Navigate to Airport Road.", "merged": "Navigate to Airport Road.", "intent_version": 1}, "ts": 1790426010.544327}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790426011.248087}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790426011.248493}
+{"type": "speech_handle", "data": {"speech_id": "speech_ca556d996c7d", "state": "queued"}, "ts": 1790426011.2489758}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790426011.751539}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790426012.648208}
+{"type": "speech_handle", "data": {"speech_id": "speech_ca556d996c7d", "state": "finished", "error": null}, "ts": 1790426012.649667}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Navigate to Airport Road.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "Airport Road"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to Airport Road."}, "ts": 1790426014.088177}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790426014.088462}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790426014.088879}
+{"type": "slot_update", "data": {"slot": "query", "value": "Airport Road", "previous": null}, "ts": 1790426014.088963}
+{"type": "tool_waiting", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}}, "ts": 1790426014.089277}
+{"type": "tool_waiting", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, "ts": 1790426014.089385}
+{"type": "tool_waiting", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790426014.0894542}
+{"type": "tool_started", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}, "state_changing": false}, "ts": 1790426014.090094}
+{"type": "tool_error", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Airport Road"}, "result": {"status": "error", "code": "place_ambiguous", "query": "Airport Road", "place_role": "destination", "places": [], "message": "ambiguous destination 'Airport Road'; ask for the place name", "candidates": [{"place_id": "P_HOSP", "name": "Manipal Hospital, Old Airport Road"}, {"place_id": "K_SBUX_AIR", "name": "Starbucks, Airport Road"}]}, "error": "ambiguous destination 'Airport Road'; ask for the place name"}, "ts": 1790426014.093909}
+{"type": "tool_error", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "error": "unresolved reference $c1.places[0].name"}, "ts": 1790426014.095246}
+{"type": "tool_error", "data": {"execution_id": "3f63a6a3082649f78b9c24e65b896980", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "error": "unresolved reference $c2.route_id"}, "ts": 1790426014.0954611}
+{"type": "agent_say", "data": {"text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?", "intent_version": 1, "kind": "result"}, "ts": 1790426014.095902}
+{"type": "speech_handle", "data": {"speech_id": "speech_89587202e33b", "state": "queued"}, "ts": 1790426014.096286}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790426015.449766}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790426020.462972}
+{"type": "speech_handle", "data": {"speech_id": "speech_89587202e33b", "state": "finished", "error": null}, "ts": 1790426020.465313}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790426020.859491}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790426024.010638}
+{"type": "user_final", "data": {"text": "How far is Manipal Hospital, Old Airport Road?", "merged": "How far is Manipal Hospital, Old Airport Road?", "intent_version": 2}, "ts": 1790426025.065547}
+{"type": "ack", "data": {"text": "Okay, one sec."}, "ts": 1790426025.770599}
+{"type": "agent_say", "data": {"text": "Okay, one sec.", "intent_version": 2, "kind": "ack"}, "ts": 1790426025.771115}
+{"type": "speech_handle", "data": {"speech_id": "speech_8895b4eda4d4", "state": "queued"}, "ts": 1790426025.771692}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790426026.606091}
+{"type": "plan_ready", "data": {"intent_version": 2, "utterance": "How far is Manipal Hospital, Old Airport Road?", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "Manipal Hospital, Old Airport Road"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "Manipal Hospital, Old Airport Road"}}], "reply": "Searching for Manipal Hospital, Old Airport Road."}, "ts": 1790426027.583167}
+{"type": "gate_open", "data": {"hold_ms": 350, "remaining_ms": 0, "state_changing": false, "complete": true}, "ts": 1790426027.583292}
+{"type": "speech_handle", "data": {"speech_id": "speech_8895b4eda4d4", "state": "interruption_requested", "error": null}, "ts": 1790426027.58362}
+{"type": "gate_committed", "data": {"intent_version": 2, "calls": ["search_destination"]}, "ts": 1790426027.5836768}
+{"type": "slot_update", "data": {"slot": "query", "value": "Manipal Hospital, Old Airport Road", "previous": "Airport Road"}, "ts": 1790426027.583715}
+{"type": "tool_waiting", "data": {"execution_id": "168ef089c8654627a2db660b2c51f520", "operation_id": "turn-2", "id": "c1", "tool": "search_destination", "args": {"query": "Manipal Hospital, Old Airport Road"}}, "ts": 1790426027.5837991}
+{"type": "tool_started", "data": {"execution_id": "168ef089c8654627a2db660b2c51f520", "operation_id": "turn-2", "id": "c1", "tool": "search_destination", "args": {"query": "Manipal Hospital, Old Airport Road"}, "state_changing": false}, "ts": 1790426027.5842938}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790426027.586101}
+{"type": "tool_done", "data": {"execution_id": "168ef089c8654627a2db660b2c51f520", "operation_id": "turn-2", "id": "c1", "tool": "search_destination", "args": {"query": "Manipal Hospital, Old Airport Road"}, "result": {"status": "success", "places": [{"place_id": "P_HOSP", "name": "Manipal Hospital, Old Airport Road", "category": "hospital", "lat": 12.9592, "lng": 77.6485}]}, "stale": false, "duration_ms": 6}, "ts": 1790426027.590822}
+{"type": "agent_say", "data": {"text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.", "intent_version": 2, "kind": "result"}, "ts": 1790426029.645243}
+{"type": "speech_handle", "data": {"speech_id": "speech_6c6a3b4b5b28", "state": "queued"}, "ts": 1790426029.645818}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790426030.876648}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790426035.8047411}
+{"type": "speech_handle", "data": {"speech_id": "speech_6c6a3b4b5b28", "state": "finished", "error": null}, "ts": 1790426035.805643}

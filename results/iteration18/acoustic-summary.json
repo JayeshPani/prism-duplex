@@ -1,0 +1,1765 @@
+{
+  "created_at_utc": "2026-09-26T11:32:53.000186+00:00",
+  "method_sha256": "1852cedc7a6425b01a073416aa7fc5254ffacf1d8dfea792e5d240cb0e8a235b",
+  "audit_sha256": "fd485ed66d268f1f8525380973ae8205238c71fdcdcb08359ca608ec8b22eba7",
+  "method_limit": "Post-freeze reporting helper; frozen auditor criteria unchanged; all semantic speech reviews remain manual.",
+  "rows": [
+    {
+      "arm": "baseline",
+      "case": "native_silence",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421150.1002922
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.70561837501009
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4640.537,
+        "first_300ms_quiet_after_onset_ms": 4659.937
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "baseline",
+      "case": "native_voiced_stop",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 2,
+      "observed_effects": 2,
+      "physical_attempts": 4,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "voiced_stop_received_cutoff_screen": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "effect_2_state": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421202.22653
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790421212.023606
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Okay, one sec Navigation to Whitefield Itbel has been cancelled",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.541171334014507
+        }
+      ],
+      "old_handle_state": "interruption_requested",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": 2941.798,
+        "last_old_pcm_after_onset_ms": 700.531,
+        "first_300ms_quiet_after_onset_ms": 720.57
+      },
+      "recovery_exercised": "VAD_observed_pause_resume_requires_timeline_review"
+    },
+    {
+      "arm": "baseline",
+      "case": "native_breath_proxy",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421246.801069
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itville has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.5258537920017261
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4598.711,
+        "first_300ms_quiet_after_onset_ms": 4618.699
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "baseline",
+      "case": "native_noise_burst",
+      "extraction_status": "extracted",
+      "capture_status": "failed",
+      "played_inputs": 0,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 0,
+      "physical_attempts": 0,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "failed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "failed",
+        "input_2_bytes": "passed",
+        "input_2_published": "failed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "failed",
+        "old_handle_outcome": "unmeasured",
+        "no_non_speech_finalized_intent": "unmeasured",
+        "effect_count": "failed",
+        "no_extra_navigation_attempts": "failed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "failed",
+        "effect_1_fresh_compute_dependency": "failed"
+      },
+      "live_finals": [],
+      "declared_speech": [],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.6050857079972047
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "baseline",
+      "case": "delivery_delay5s_noise_burst",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421354.120327
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.7613459999847692
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4540.853,
+        "first_300ms_quiet_after_onset_ms": 4560.254
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "baseline",
+      "case": "delivery_delay5s_voiced_stop",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 2,
+      "observed_effects": 2,
+      "physical_attempts": 4,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "failed",
+        "voiced_stop_received_cutoff_screen": "failed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "effect_2_state": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421403.698603
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790421418.410832
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes. Okay. Navigation to Whitefield Itbull has been canceled.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.7290669590001926
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 7580.82,
+        "first_300ms_quiet_after_onset_ms": 780.749
+      },
+      "recovery_exercised": "VAD_observed_pause_resume_requires_timeline_review"
+    },
+    {
+      "arm": "baseline",
+      "case": "delivery_delay5s_silence",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421452.6747499
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbel has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.655610624991823
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4639.586,
+        "first_300ms_quiet_after_onset_ms": 4658.287
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "baseline",
+      "case": "delivery_delay5s_breath_proxy",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421501.318294
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbol has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.5361625409859698
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4599.101,
+        "first_300ms_quiet_after_onset_ms": 4619.458
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "clear_hospital",
+      "extraction_status": "extracted",
+      "capture_status": "completed_observation",
+      "played_inputs": 1,
+      "expected_inputs": 1,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "declared_input_inventory": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please navigate to Manipal Hospital, Old Airport Road.",
+            "merged": "Please navigate to Manipal Hospital, Old Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790421610.450541
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment. Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in five minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.5314420420036186
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": null
+    },
+    {
+      "arm": "candidate",
+      "case": "native_silence",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421639.242529
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.5743731659895275
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4621.248,
+        "first_300ms_quiet_after_onset_ms": 4640.293
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "pause_metro_250",
+      "extraction_status": "extracted",
+      "capture_status": "completed_observation",
+      "played_inputs": 1,
+      "expected_inputs": 1,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "declared_input_inventory": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "no_write_before_continuation": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please take me to MG Road Metro Station.",
+            "merged": "Please take me to MG Road Metro Station.",
+            "intent_version": 1
+          },
+          "ts": 1790421685.91976
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to MG Road Metro Station has started. Estimated arrival in thirteen minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.2848768339899834
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": null
+    },
+    {
+      "arm": "candidate",
+      "case": "native_voiced_stop",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 2,
+      "observed_effects": 2,
+      "physical_attempts": 4,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "voiced_stop_received_cutoff_screen": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "effect_2_state": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421706.009282
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790421716.353455
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation Okay, one sec Navigation to Whitefield Itbel has been cancelled",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.5427917919878382
+        }
+      ],
+      "old_handle_state": "interruption_requested",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": 3450.215,
+        "last_old_pcm_after_onset_ms": 679.74,
+        "first_300ms_quiet_after_onset_ms": 699.709
+      },
+      "recovery_exercised": "VAD_observed_pause_resume_requires_timeline_review"
+    },
+    {
+      "arm": "candidate",
+      "case": "disfluent_self_repair_hospital",
+      "extraction_status": "extracted",
+      "capture_status": "completed_observation",
+      "played_inputs": 1,
+      "expected_inputs": 1,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "declared_input_inventory": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Take me to Cubbin Park. Um no, I mean Manipal Hospital, Old Airport Road.",
+            "merged": "Take me to Cubbin Park. Um no, I mean Manipal Hospital, Old Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790421755.916733
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation has started to Manipal Hospital, Old Airport Road. The route is active and will take approximately 5 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment. Navigation has started to Manipal Hospital, Old Airport Road. The route is active and will take approximately five minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.42435620797914453
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": null
+    },
+    {
+      "arm": "candidate",
+      "case": "native_breath_proxy",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421791.6138072
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbel has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.7080007090116851
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4599.989,
+        "first_300ms_quiet_after_onset_ms": 4620.957
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "pause_metro_1200",
+      "extraction_status": "extracted",
+      "capture_status": "completed_observation",
+      "played_inputs": 1,
+      "expected_inputs": 1,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "declared_input_inventory": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "no_write_before_continuation": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please take me to.",
+            "merged": "Please take me to.",
+            "intent_version": 1
+          },
+          "ts": 1790421847.016542
+        },
+        {
+          "type": "turn_merged",
+          "data": {
+            "previous": "Please take me to.",
+            "added": "",
+            "retranscribed": "Please take me to MG Road Metro Station."
+          },
+          "ts": 1790421848.995062
+        },
+        {
+          "type": "turn_merged",
+          "data": {
+            "previous": "Please take me to.",
+            "added": "MG Road Metro Station."
+          },
+          "ts": 1790421849.0820138
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "MG Road Metro Station.",
+            "merged": "Please take me to. MG Road Metro Station.",
+            "intent_version": 2
+          },
+          "ts": 1790421849.082056
+        },
+        {
+          "type": "turn_merged",
+          "data": {
+            "previous": "Please take me to. MG Road Metro Station.",
+            "added": "",
+            "retranscribed": "Please take me to MG Road Metro Station."
+          },
+          "ts": 1790421849.21893
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "One moment.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to MG Road Metro Station has started. Estimated arrival in thirteen minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.6407683749857824
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": null
+    },
+    {
+      "arm": "candidate",
+      "case": "native_noise_burst",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421869.9003909
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.6374323340132833
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4640.266,
+        "first_300ms_quiet_after_onset_ms": 4660.477
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "ambiguous_road_then_hospital",
+      "extraction_status": "extracted",
+      "capture_status": "completed_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 0,
+      "physical_attempts": 2,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "effect_count": "failed",
+        "no_extra_navigation_attempts": "failed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "failed",
+        "effect_1_fresh_compute_dependency": "failed",
+        "no_navigation_attempt_before_clarifier": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Airport Road.",
+            "merged": "Navigate to Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790421914.041394
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "I mean Manipal Hospital, Old Airport Road.",
+            "merged": "I mean Manipal Hospital, Old Airport Road.",
+            "intent_version": 2
+          },
+          "ts": 1790421928.5735092
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment. Which place do you mean? Manipul Hospital, Old Airport Road, or Starbucks, Airport Road. Okay, one sec. The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.4566773329861462
+        }
+      ],
+      "old_handle_state": null,
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": null,
+        "first_300ms_quiet_after_onset_ms": null
+      },
+      "recovery_exercised": null
+    },
+    {
+      "arm": "candidate",
+      "case": "delivery_delay5s_noise_burst",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790421951.760181
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbel has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.6011369159969036
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4637.834,
+        "first_300ms_quiet_after_onset_ms": 4657.84
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "delivery_delay5s_voiced_stop",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 2,
+      "observed_effects": 2,
+      "physical_attempts": 4,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "voiced_stop_received_cutoff_screen": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed",
+        "effect_2_state": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790422002.171883
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790422017.753243
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation Okay, one sec Navigation to Whitefield Itville has been cancelled.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.705087000009371
+        }
+      ],
+      "old_handle_state": "interruption_requested",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": 8520.309,
+        "last_old_pcm_after_onset_ms": 699.443,
+        "first_300ms_quiet_after_onset_ms": 719.205
+      },
+      "recovery_exercised": "VAD_observed_pause_resume_requires_timeline_review"
+    },
+    {
+      "arm": "candidate",
+      "case": "delivery_delay5s_silence",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "failed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790422052.537736
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.6060626670077909
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4639.2,
+        "first_300ms_quiet_after_onset_ms": 4657.274
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    },
+    {
+      "arm": "candidate",
+      "case": "delivery_delay5s_breath_proxy",
+      "extraction_status": "extracted",
+      "capture_status": "completed_probe_observation",
+      "played_inputs": 2,
+      "expected_inputs": 2,
+      "expected_effects": 1,
+      "observed_effects": 1,
+      "physical_attempts": 3,
+      "checks": {
+        "one_declared_run": "passed",
+        "capture_completed": "passed",
+        "trusted_trace_equality": "passed",
+        "raw_trace_equality": "passed",
+        "promoted_identity_consistent": "passed",
+        "capture_errors_absent": "passed",
+        "agent_departed": "passed",
+        "trace_attempt_inventory": "passed",
+        "physical_attempts_have_matching_start": "passed",
+        "frame_integrity": "passed",
+        "capture_artifact_hashes": "passed",
+        "capture_matches_run_freeze": "passed",
+        "capture_agent_matches_worker": "passed",
+        "input_1_bytes": "passed",
+        "input_1_published": "passed",
+        "input_2_bytes": "passed",
+        "input_2_published": "passed",
+        "declared_input_inventory": "passed",
+        "probe_trigger_has_original_result": "passed",
+        "old_handle_outcome": "passed",
+        "no_non_speech_finalized_intent": "passed",
+        "effect_count": "passed",
+        "no_extra_navigation_attempts": "passed",
+        "no_stale_completed_navigation": "passed",
+        "effect_1_state": "passed",
+        "effect_1_fresh_compute_dependency": "passed"
+      },
+      "live_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Whitefield.",
+            "merged": "Navigate to Whitefield.",
+            "intent_version": 1
+          },
+          "ts": 1790422101.98773
+        }
+      ],
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack"
+        },
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result"
+        }
+      ],
+      "received_speech": [
+        {
+          "status": "completed",
+          "attempted": true,
+          "transcript": "One moment Navigation to Whitefield Itbull has started. Estimated arrival in forty minutes.",
+          "error": null,
+          "failed_stage": null,
+          "stt_seconds": 0.557499334012391
+        }
+      ],
+      "old_handle_state": "finished",
+      "probe_timing": {
+        "interruption_request_after_onset_ms": null,
+        "last_old_pcm_after_onset_ms": 4599.035,
+        "first_300ms_quiet_after_onset_ms": 4619.689
+      },
+      "recovery_exercised": "unexercised_no_observed_vad"
+    }
+  ]
+}

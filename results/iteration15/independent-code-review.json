@@ -1,0 +1,62 @@
+{
+  "recorded_at_utc": "2026-09-26T09:07:10.605207+00:00",
+  "reviewer": "pr_delivery_check independent agent",
+  "verdict": "No concrete launch blocker found within the narrow navigation-plan contract scope.",
+  "baseline": "results/iteration14/source-snapshot/",
+  "reviewed_source_sha256": {
+    "agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "tests/unit/test_navigation_plan_contract.py": "1b756a5550024711f0b5317b3c6d6b0ade937695cfcfb0406994b1c9ab5d051c"
+  },
+  "unchanged_responder_and_configuration": {
+    "agent/coordinator/responder.py": {
+      "current_sha256": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+      "iteration14_sha256": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14"
+    },
+    "agent/config.py": {
+      "current_sha256": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+      "iteration14_sha256": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8"
+    },
+    "agent/config.yaml": {
+      "current_sha256": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+      "iteration14_sha256": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923"
+    }
+  },
+  "manual_review_scope": [
+    "Compared the five modified production files with frozen iteration14 originals and read the new focused tests.",
+    "Whole positive command detection uses the original utterance and a uniquely grounded map destination; no forced repair for questions, negation, compound/unfamiliar wording, ambiguity, incomplete or no-call plans.",
+    "Covered commands require exactly one start_navigation linked to a newly planned compute_route for the requested target; extra start/cancel/waypoint calls reject. Both documented search place_id/name references and literal place IDs/names are supported.",
+    "One semantic repair retains the original built prompt, original request/context and an immutable copy of rejected JSON; a second contract failure cannot dispatch and receives no third semantic attempt.",
+    "Current-intent checks after awaited resolution/repair and after the synchronous rejection event prevent obsolete repair/dispatch. Read the focused cancellation-suppression and synchronous event-sink correction tests.",
+    "Responder/configuration are byte-identical to iteration14."
+  ],
+  "independent_execution": {
+    "method": "Executed once as an in-memory stdin Python script, then preserved its exact Python body in a separate file. The saved file was not rerun while creating this receipt.",
+    "actual_interpreter_invocation": [
+      ".venv/bin/python",
+      "-B",
+      "-"
+    ],
+    "working_directory_at_execution": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+    "stored_exact_python_body": "results/iteration15/independent_code_review_checks.py",
+    "stored_exact_python_body_sha256": "dcede5af68044823e6a76a7cbaa33c34223a889828b32f02de68f2d6392f5cf0",
+    "counted_boundary_checks": 60,
+    "counting": "18 excluded utterance cases; 36 positive command/target/extra-mutation cases; 4 search-reference/target cases; 2 incomplete/no-call cases. Mutation-preservation assertions and three source byte-equality checks are additional assertions, not added to 60.",
+    "exit_code": 0,
+    "observed_stdout": "60 independent in-memory boundary checks passed; responder and config identical to iteration14. No models, services, or source edits.\n",
+    "execution_timestamp": "Not separately captured; recorded_at_utc is receipt creation time, not claimed execution time.",
+    "source_receipt_limit": "Source hashes were captured after the execution, at receipt creation. The implementer confirmed stable behavioral source before execution; the final resolver docstring correction has no behavior change. No before/after atomic source-hash receipt was captured for the stdin probe.",
+    "reproduction_from_repository_root": "PYTHONPATH=. .venv/bin/python -B results/iteration15/independent_code_review_checks.py",
+    "reproduction_status": "Command supplied for future reproduction; not executed as part of receipt creation."
+  },
+  "limitations": [
+    "The 60-check probe directly exercises the pure validator, not LLM inference, RTC, audio, or end-to-end task success.",
+    "Cancellation/full-context conclusions also use manual source/test review; those async tests were not independently rerun by this reviewer.",
+    "The narrow validator does not establish full arbitrary-plan fidelity, additional via/read constraint fidelity, or safety of all preexisting model plans outside its recognized command scope.",
+    "This review does not repair the separate final-reply replacement-fact omission and does not claim full objective completion.",
+    "No production/test source, frozen iteration14 artifacts, index, commits, services or models were changed by this review."
+  ]
+}

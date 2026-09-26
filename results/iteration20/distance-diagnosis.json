@@ -1,0 +1,345 @@
+{
+  "created_at_utc": "2026-09-26T12:58:13.146959+00:00",
+  "status": "read_only_diagnosis_and_proposal",
+  "scope": "Iteration19 distance failure and current local planning/tool/summary boundaries. No model, service, test or production edit. This is a proposed contract, not an implemented or measured fix.",
+  "observed_evidence": [
+    {
+      "arm": "baseline",
+      "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+      "finals": [
+        {
+          "text": "Navigate to Airport Road.",
+          "merged": "Navigate to Airport Road.",
+          "intent_version": 1
+        },
+        {
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "merged": "How far is Manipal Hospital, Old Airport Road?",
+          "intent_version": 2
+        }
+      ],
+      "final_plan": [
+        {
+          "intent_version": 2,
+          "utterance": "How far is Manipal Hospital, Old Airport Road?",
+          "repaired": "",
+          "complete": true,
+          "corrections": [],
+          "slots": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_destination",
+              "args": {
+                "query": "Manipal Hospital, Old Airport Road"
+              }
+            }
+          ],
+          "reply": "Searching for Manipal Hospital, Old Airport Road."
+        }
+      ],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790426014.090174,
+          "attempt_id": "3f63a6a3082649f78b9c24e65b896980:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426014.094045,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "timestamp_start": 1790426027.5843468,
+          "attempt_id": "168ef089c8654627a2db660b2c51f520:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426027.590935,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "result_texts": [
+        {
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "compute_route_attempts": 0
+    },
+    {
+      "arm": "candidate",
+      "room": "car-audio-2d21e82a00b847b0b6b389bf040684a4",
+      "finals": [
+        {
+          "text": "Navigate to Airport Road.",
+          "merged": "Navigate to Airport Road.",
+          "intent_version": 1
+        },
+        {
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "merged": "How far is Manipal Hospital, Old Airport Road?",
+          "intent_version": 2
+        }
+      ],
+      "final_plan": [
+        {
+          "intent_version": 2,
+          "utterance": "How far is Manipal Hospital, Old Airport Road?",
+          "repaired": "",
+          "complete": true,
+          "continuation": null,
+          "corrections": [],
+          "slots": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_destination",
+              "args": {
+                "query": "Manipal Hospital, Old Airport Road"
+              }
+            }
+          ],
+          "reply": "Searching for Manipal Hospital, Old Airport Road."
+        }
+      ],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790426362.948093,
+          "attempt_id": "7f7542ef2f874f2ca27729ec05da53ca:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426362.9518359,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "timestamp_start": 1790426376.923201,
+          "attempt_id": "fc0d3cb26c2e406aa1481970d4450d8f:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426376.926705,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "result_texts": [
+        {
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+          "intent_version": 2,
+          "kind": "result"
+        }
+      ],
+      "compute_route_attempts": 0
+    }
+  ],
+  "diagnosis": [
+    "Both arms recognize the full hospital distance question correctly and plan only search_destination. The lookup returns place coordinates, not distance/ETA; neither arm dispatches compute_route. The responder accurately says distance is not provided.",
+    "The car domain guidance specifies a complete chain for navigation, but no equivalent prerequisite rule for distance/time information. _navigation_plan_issue explicitly leaves information-seeking requests unchanged and returns early for incomplete/no-call plans.",
+    "The original request survives the coordinator/responder boundary. This observed case is missing computation, not repaired-text loss or a broken distance backend. Adding a responder fact alone would invent an unobserved result."
+  ],
+  "smallest_coherent_change": [
+    "Keep the change in the car domain: add brief guidance that named-destination distance/estimated-driving-duration questions require compute_route, optionally after search_destination, and never require start_navigation/add_waypoint/cancel_navigation. Describe result units and current-car-position origin.",
+    "Add a positive whole-utterance information-query recognizer beside the existing navigation recognizer and integrate its narrow validator branch before the current incomplete/no-call early return. Reuse Manifest.plan_validator and the existing maximum-one semantic repair; do not introduce another retry or coordinator context abstraction.",
+    "For a supported whole question with a uniquely grounded named destination, require exactly one matching compute_route, directly naming the same place or referencing a matching search result. Permit only necessary matching destination lookup dependencies; reject mutations, a wrong destination, invented via, unrelated extra reads, lookup-only and empty/incomplete model plans. The complete original question determines eligibility; a model-written repaired field must not broaden it.",
+    "For recognized pure information questions whose place is unknown/ambiguous, never authorize a navigation mutation; allow a read-only lookup/compute returning structured uncertainty or a clarification. Do not choose a similarity candidate. Other unfamiliar/compound wording remains outside this narrow guarantee.",
+    "Initially keep existing responder synthesis with the original request and actual results: it already preserves questions and uses grounded facts. A deterministic information response is a separate optional change requiring whole-request eligibility and all-result/stale/failure coverage, not necessary to close missing compute."
+  ],
+  "state_and_freshness_boundary": [
+    "compute_route is declared read-only for navigation effects, but it allocates a route ID and stores an internal prepared route. Tests should assert unchanged active-route snapshot/version/stops, not claim no internal mutation or no work.",
+    "compute_route uses current car position, optional explicit via, static ROAD_FACTOR/CITY_KMPH estimates, kilometres and integer minutes. It does not report live traffic, an absolute arrival clock, or remaining time along the active route with its stops. Do not use prior navigation/history as proof of a fresh information result.",
+    "Existing compute cache context includes map version, navigation version and position. Same-context reuse is legitimate for this static map; requiring a physical attempt on every repeated query would overstate correctness. If freshness is explicitly requested or inputs/context change, test the actual existing cache semantics rather than silently treating history as a result.",
+    "Coordinator intent/version/closed checks and executor cancellation already suppress superseded result speech and stale cache insertion. Preserve them; no new write protection is needed for route reads."
+  ],
+  "risk_challenges": {
+    "current_route_or_history": "How far is it / how long left / what is my ETA require active-route context not represented by this named-destination contract. Clarify or retain general planning, do not convert history destination into an explicit new query automatically.",
+    "origin_qualifiers": "From office to airport, walking/biking, avoiding tolls, or tomorrow cannot be erased into current-car driving distance. Whole-match eligibility must fail for unsupported origins/modes/constraints; existing compute API has no origin/mode parameter.",
+    "units": "A miles/metres/hours request needs explicit supported conversion or fallback. Never label the backend kilometre number as miles. Bare ETA should be labeled estimated duration, not an arrival clock time.",
+    "stale_reads": "Corrections during slow compute/repair must not emit old facts or seed a cache for a changed context. Already-completed current-context reads may be reused; ledger history alone is not active-route state.",
+    "no_call_plans": "A model can evade a validator gated by complete/calls. For a fully grounded supported question, no calls or complete=false must cause the same bounded rejection/repair, then a visible safe failure without dispatch if still invalid.",
+    "unexpected_mutations": "A pure distance question with compute+start, add_waypoint, cancel, or a read sibling plus any mutation must be rejected as a whole before dispatch. Do not merely discard the mutation or run the valid sibling.",
+    "compound_requests": "Navigate to airport and tell me the distance, compare two destinations, ask opening hours too, or correct one subrequest are not simple read-only questions. Preserve every requested action/detail through the general planner; do not classify by the presence of distance/ETA keywords."
+  },
+  "independent_regression_plan": [
+    {
+      "case": "Named distance for MG Road Metro Station, separate from the observed hospital",
+      "assert": "Scripted lookup-only plan rejected, one repaired search/compute or direct compute accepted, actual returned distance sent with original question; active navigation unchanged."
+    },
+    {
+      "case": "Estimated driving duration to office, plus a distance-and-duration single-destination question if explicitly supported",
+      "assert": "Actual compute result supplies eta_min and requested distance; no mutation or fabricated absolute arrival time."
+    },
+    {
+      "case": "Known destination no-call and complete=false plans",
+      "assert": "Reject before dispatch; one repair only; repeated invalid response remains visible and has zero physical calls."
+    },
+    {
+      "case": "Pure read question plus malicious/unintended start/cancel/waypoint sibling or wrong-place compute",
+      "assert": "Whole plan rejected before any read or write; no active route changes."
+    },
+    {
+      "case": "Existing active airport route with an explicit stop, then distance question to a different named place",
+      "assert": "Current active destination/stops/route/version remain identical; returned estimate is the newly requested direct route, not existing-route remaining time."
+    },
+    {
+      "case": "Unknown/ambiguous destination and similar-sounding label",
+      "assert": "Structured uncertainty/clarification stays read-only; no guessed candidate or activation."
+    },
+    {
+      "case": "Origin, mode, time, units, negation, unrelated detail and compound action questions",
+      "assert": "Positive grammar declines unsupported whole wording rather than dropping qualifiers or independent requests."
+    },
+    {
+      "case": "Correction or close while semantic repair or slow compute is pending",
+      "assert": "Superseded result cannot speak or dispatch a mutation; late reads retain their actual status and do not populate stale cache."
+    },
+    {
+      "case": "Repeated identical static query versus changed position/navigation context",
+      "assert": "Same-context cache reuse allowed and visible; changed context recomputes, with summaries using current outcomes."
+    }
+  ],
+  "limits": [
+    "Only the lookup-only distance failure is observed here; ETA and other named-place coverage are design tests, not live results.",
+    "No new broad general language or safety guarantee is established for questions outside the positive contract.",
+    "Semantic repair can still fail; preserve rejected plans and terminal failures and do not claim retry initiation solely from a rejection event."
+  ],
+  "source_refs": {
+    "agent/tools/car_tools.py": [
+      {
+        "line": 101,
+        "text": "def _navigation_destination(utterance: str) -> str | None:"
+      },
+      {
+        "line": 159,
+        "text": "def _navigation_plan_issue(utterance: str, complete: bool, calls: list[PlannedCall]) -> str | None:"
+      },
+      {
+        "line": 201,
+        "text": "class NavState:"
+      },
+      {
+        "line": 216,
+        "text": "def build_car_manifest() -> Manifest:"
+      },
+      {
+        "line": 238,
+        "text": "async def compute_route(destination: str, via: str | None = None) -> dict:"
+      },
+      {
+        "line": 260,
+        "text": "async def start_navigation(route_id: str) -> dict:"
+      },
+      {
+        "line": 333,
+        "text": "m.add(ToolSpec(\"compute_route\", \"Compute a driving route from the car's position (slow, ~2-3 s).\","
+      }
+    ],
+    "agent/tools/manifest.py": [
+      {
+        "line": 49,
+        "text": "class Manifest:"
+      }
+    ],
+    "agent/coordinator/resolver.py": [
+      {
+        "line": 127,
+        "text": "def build_user_prompt(self, utterance: str, history: list[dict[str, str]],"
+      },
+      {
+        "line": 171,
+        "text": "def _checked_resolution(self, utterance: str, data: dict[str, Any], *,"
+      }
+    ],
+    "agent/coordinator/responder.py": [
+      {
+        "line": 95,
+        "text": "def _navigation_summary(request: str, ex: Execution) -> str | None:"
+      },
+      {
+        "line": 168,
+        "text": "async def summarize(self, request: str, ex: Execution, *, repaired_request: str | None = None,"
+      }
+    ],
+    "agent/coordinator/coordinator.py": [
+      {
+        "line": 154,
+        "text": "async def _resolve_and_gate(self, utterance: str, version: int,"
+      },
+      {
+        "line": 273,
+        "text": "summary = await self.responder.summarize("
+      },
+      {
+        "line": 277,
+        "text": "summary = await self.responder.summarize(utterance, ex, repaired_request=res.repaired)"
+      },
+      {
+        "line": 279,
+        "text": "summary = await self.responder.summarize(utterance, ex)"
+      }
+    ],
+    "agent/coordinator/executor.py": [
+      {
+        "line": 202,
+        "text": "async def _call(self, ex: Execution, c: PlannedCall, args: dict[str, Any],"
+      },
+      {
+        "line": 209,
+        "text": "cached = self.ledger.cached_read(c.tool, args, context)"
+      },
+      {
+        "line": 315,
+        "text": "self.ledger.remember_read(c.tool, args, result, context)"
+      }
+    ],
+    "agent/coordinator/ledger.py": [
+      {
+        "line": 51,
+        "text": "def cached_read(self, tool: str, args: dict[str, Any], context: Any = None) -> dict[str, Any] | None:"
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "agent/tools/car_tools.py": "458baa1a8def5325305eb4971c99eec702de2be6f163fc814bfd7442324b3328",
+    "agent/tools/manifest.py": "3d474ed7d121bc38317ad6ef6abf8c3a41bf4c62e513b784b665ef67de0ecf24",
+    "agent/coordinator/resolver.py": "4b5b26a6d6d17a35dec15522cf5d4e0f124acfbb13e7ce022e579d9be5bdec19",
+    "agent/coordinator/responder.py": "9830cb062e5aab314c1acd12ad4118831e81b942094ffc6145b02769d1fc2639",
+    "agent/coordinator/coordinator.py": "fbe9e06056f0462befcdc9617b8754809ebe0faa4bee9f84afc472566b3e3863",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "results/iteration19-baseline/run-report.json": "8534ebf4e9a3548e8e616eb1fac1630a39f3a30169fa136379e21d1f562d02fe",
+    "results/iteration19-baseline/rtc-distance_query_after_ambiguity-1/report.json": "830ca4b964ee76f58c1eda79e14801625a52779148c1cb5f39af2b403028c215",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-be7b2d773dd04bbeb5645f7716701ab1.jsonl": "93482bbe5362032b901b60a7efca268999b2ba6d4084ce09773e0297f6a2255f",
+    "results/iteration19-baseline/local-stack-run1/tool-calls.jsonl": "0714b46eab46352b8f20dc67b97a7a2a90a73bd79ae7768b811729a37d8f68ea",
+    "results/iteration19-candidate/run-report.json": "0f910b0e46e4e569491c11b4ad22c43fc2f2ac24c65062e359a043b9e4767879",
+    "results/iteration19-candidate/rtc-distance_query_after_ambiguity-1/report.json": "a86dac70d837d6600e4630d195bd588a882d1529e579e313cc6a204f51891727",
+    "results/iteration19-candidate/local-stack-run1/traces/car-audio-2d21e82a00b847b0b6b389bf040684a4.jsonl": "d70e3e73612edd0a78555b6dae5225e8aba12b63f916e9a3129a05b93919d016",
+    "results/iteration19-candidate/local-stack-run1/tool-calls.jsonl": "2e347b950bf9abb5780f8d1d351fafc87450327417556cb8329e888f04aa8433"
+  }
+}

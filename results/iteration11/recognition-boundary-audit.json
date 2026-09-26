@@ -1,0 +1,452 @@
+{
+  "created_at_utc": "2026-09-26T07:01:50.257354+00:00",
+  "scope": "Read-only installed LiveKit1.8.3 and iteration10 failed correction audit, plus a bounded dummy-channel component reproduction. No model inference, live RTC, production edits or retrospective cause claim.",
+  "finding": "The leading source-derived explanation is the default3s AEC warmup silence substitution: the correction lies wholly inside the predicted first-speaking warmup window. Actual gate state and substituted frame receipts were not recorded in iteration10, so past-run attribution remains inferred. The component reproduction independently proves the installed routing behavior.",
+  "source_provenance": {
+    "iteration10_main_snapshot": "results/iteration11/before/agent/main.py",
+    "snapshot_sha256": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "matches_iteration10_frozen_main": true,
+    "note": "Parent is editing current main.py for trace offload; this analysis cites the preserved pre-edit main snapshot that matches the RTC run."
+  },
+  "observed_failed_trial": {
+    "name": "rtc-correction-1",
+    "room": "car-audio-4a3ef818129b4f95998d46f473752ba3",
+    "status": "failed",
+    "error": "TimeoutError('observation deadline exceeded')",
+    "failed_stage": "final_result_completion",
+    "all_correction_samples_published": true,
+    "samples": 46592,
+    "sample_rate": 24000,
+    "first_agent_speaking_utc": "2026-09-26T06:41:09.921843+00:00",
+    "ack_state": "interruption_requested; no agent speaking event before result",
+    "correction_input_started_utc": "2026-09-26T06:41:10.050698+00:00",
+    "scheduled_correction_activity_utc": [
+      "2026-09-26T06:41:10.090698+00:00",
+      "2026-09-26T06:41:11.870698+00:00"
+    ],
+    "user_state_events": [
+      {
+        "line": 26,
+        "utc": "2026-09-26T06:41:10.330179+00:00",
+        "type": "user_state",
+        "data": {
+          "state": "speaking"
+        },
+        "ts": 1790404870.330179
+      },
+      {
+        "line": 27,
+        "utc": "2026-09-26T06:41:12.576870+00:00",
+        "type": "user_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790404872.57687
+      },
+      {
+        "line": 30,
+        "utc": "2026-09-26T06:41:30.777173+00:00",
+        "type": "user_state",
+        "data": {
+          "state": "away"
+        },
+        "ts": 1790404890.777173
+      }
+    ],
+    "user_final_count": 1,
+    "post_correction_user_final_count": 0,
+    "post_correction_stt_completion_log_count": 0,
+    "initial_result_state": "finished",
+    "predicted_aec_window_utc": [
+      "2026-09-26T06:41:09.921843+00:00",
+      "2026-09-26T06:41:12.921843+00:00"
+    ],
+    "activity_inside_predicted_window": true,
+    "predicted_warmup_remaining_at_speech_end_seconds": 1.051145,
+    "timing_boundary": "Activity bounds are the recorder scheduled RMS interval; first-speaking time is server trace. No server per-frame gate or recognition-stage trace exists."
+  },
+  "pipeline": [
+    {
+      "stage": "Independent VAD streams",
+      "fact": "Agent.default.stt_node wraps nonstreaming LocalSTT in StreamAdapter, which creates its own VAD stream. AudioRecognition also creates a separate VAD stream for user-state events. A session speaking/listening pair does not prove adapter EOS or recognize submission. Silero stream() creates per-stream model state.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent.py",
+          "lines": [
+            507,
+            550
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/stt/stream_adapter.py",
+          "lines": [
+            112,
+            150
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+          "lines": [
+            1873,
+            1900
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/plugins/silero/vad.py",
+          "lines": [
+            162,
+            178
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "AEC / uninterruptible routing",
+      "fact": "AgentActivity.push_audio sends silence to STT during active AEC warmup or uninterruptible speech; VAD receives original frames through AudioRecognition._push_audio. First speaking starts a one-shot warmup timer. Default3.0s applies because PRISM supplies no aec_warmup_duration; current speech allows interruptions by default, making AEC the relevant silence branch.",
+      "refs": [
+        {
+          "path": "results/iteration11/before/agent/main.py",
+          "lines": [
+            109,
+            118
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+          "lines": [
+            1651,
+            1684
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+          "lines": [
+            747,
+            773
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+          "lines": [
+            117,
+            117
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+          "lines": [
+            2177,
+            2191
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+          "lines": [
+            1719,
+            1725
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "Segment submission / serialization",
+      "fact": "StreamAdapter awaits recognition serially after its own END_OF_SPEECH. LocalSTT appends its resampled segment before awaiting one shared single-worker engine pool; native calls and retranscriptions can queue. Current stt duration starts after preparation but before queue submission, mixing queue wait, WAV work, native work and event-loop resume. Only a successful return logs completion.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/stt/stream_adapter.py",
+          "lines": [
+            125,
+            163
+          ]
+        },
+        {
+          "path": "agent/pipeline/local_stt.py",
+          "lines": [
+            45,
+            95
+          ]
+        },
+        {
+          "path": "agent/pipeline/local_stt.py",
+          "lines": [
+            130,
+            169
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "Empty/error/cancelled recognition",
+      "fact": "StreamAdapter drops empty alternatives/text. LocalSTT normally logs an empty successful result before it is dropped; absence of that completion log weakens this explanation. Cancellation before await resumes also omits completion logging and cannot stop an already-running native pool job. SDK recognize() has no generic timeout wrapper around _recognize_impl; this implementation does not use conn_options to bound native execution.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/stt/stream_adapter.py",
+          "lines": [
+            144,
+            152
+          ]
+        },
+        {
+          "path": "agent/pipeline/local_stt.py",
+          "lines": [
+            93,
+            95
+          ]
+        },
+        {
+          "path": "agent/pipeline/local_stt.py",
+          "lines": [
+            161,
+            169
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/stt/stt.py",
+          "lines": [
+            217,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "Transcription versus finalized application turn",
+      "fact": "The application forwards only interim user_input_transcribed events directly and invokes Coordinator.on_user_turn from on_user_turn_completed. A final STT event and a finalized coordinator user_final are separate boundaries. Adaptive transcript holding and manual-turn rejection exist in SDK but current explicit VAD mode supplies neither as the leading explanation; no completed local STT log exists for this clip.",
+      "refs": [
+        {
+          "path": "results/iteration11/before/agent/main.py",
+          "lines": [
+            88,
+            91
+          ]
+        },
+        {
+          "path": "results/iteration11/before/agent/main.py",
+          "lines": [
+            170,
+            173
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+          "lines": [
+            1133,
+            1182
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+          "lines": [
+            2517,
+            2564
+          ]
+        }
+      ]
+    }
+  ],
+  "interruption_word_dependency": {
+    "effective_options": {
+      "enabled": true,
+      "mode": "vad",
+      "min_duration": 0.5,
+      "min_words": 0,
+      "resume_false_interruption": true,
+      "false_interruption_timeout": 2.0
+    },
+    "fact": "Do not describe all interruption as word-gated: SDK audio-activity pause can happen without words at min_words0, subject to the0.5s VAD threshold and AEC gate. AEC explicitly suppresses this path during warmup. Final transcript/committed turn can permanently interrupt a paused handle; PRISM itself only clears the floor on VAD, then increments intent and cancels active speech on a finalized nonempty turn. Nonstreaming LocalSTT provides no interim words.",
+    "refs": [
+      {
+        "path": "agent/config.py",
+        "lines": [
+          71,
+          75
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/turn.py",
+        "lines": [
+          190,
+          198
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+        "lines": [
+          2310,
+          2376
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+        "lines": [
+          2447,
+          2464
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+        "lines": [
+          2517,
+          2564
+        ]
+      },
+      {
+        "path": "agent/coordinator/coordinator.py",
+        "lines": [
+          83,
+          138
+        ]
+      }
+    ]
+  },
+  "hypotheses_ranked": [
+    {
+      "hypothesis": "AEC silence substitution prevented adapter speech detection / recognition dispatch",
+      "support": "Strong source-and-timing inference: entire correction and its VAD listening event precede predicted warmup expiry, first ack never triggered speaking, no localSTT completion follows. Component routing reproduced.",
+      "missing": "Actual active gate and STT branch PCM in original run."
+    },
+    {
+      "hypothesis": "Adapter-specific VAD did not close a speech segment or STT input/consumer stalled",
+      "support": "Mechanically possible because detector streams/channels are independent.",
+      "missing": "Adapter VAD EOS and per-branch frame receipts; not directly evidenced."
+    },
+    {
+      "hypothesis": "Recognition submitted but remained queued/native-running or cancelled before coroutine resumed",
+      "support": "Mechanically possible with shared single-worker executor and serial adapter; existing completion-only timing cannot identify these boundaries.",
+      "missing": "Submit, worker entry, native start/end, cancellation and await-resume timestamps; no claim of a hang or memory cause."
+    },
+    {
+      "hypothesis": "Recognition returned empty / a final was filtered before turn completion",
+      "support": "SDK can omit empty finals and application user_final is downstream of STT.",
+      "missing": "Would normally have a LocalSTT completion log; none appears. Current VAD configuration does not support asserting adaptive/manual filtering."
+    }
+  ],
+  "minimal_opt_in_observability": [
+    "Assign room, segment ID and operation kind (segment/retranscribe/warmup) before recognition. Buffer monotonic_ns+wall-anchor stage receipts in memory: recognize_enter, executor_submit, worker_enter, WAV_ready, native_enter, native_return, worker_exit, await_resume, event_return; explicit cancelled/error with same ID. Store sample rate/count and PCM hash on the worker, not in the event-loop callback. Native completion may outlive cancelled await; record both independently.",
+    "Use the public Agent.stt_node override to wrap the audio iterator passed unchanged to Agent.default.stt_node, aggregating delivered frame/sample/nonzero counts and preserving opt-in post-gate PCM only for this development experiment. Correlate with existing session VAD events and recorder input. No added VAD pass or altered segmentation; seeing zero STT frames during real VAD activity distinguishes withholding from a model queue.",
+    "At session start record effective aec_warmup_duration and interruption options. For exact gate attribution, add bounded diagnostic snapshots of the installed SDK AEC timer/remaining state and current handle interruptibility at user-state transitions, explicitly version-scoped private reads; no monkeypatch or algorithm change. If private reads are avoided, retain gate attribution as inference from post-gate PCM and default timing.",
+    "Record all user_input_transcribed events (final and interim), LocalSTT metrics/error, and on_user_turn_completed as separate lightweight receipts. Optional transcription_timeout is a supported diagnostic event, disabled by default; listen without generating a reply or changing turn decisions.",
+    "Persist diagnostics through an owned off-loop writer with explicit dropped-record/flush/cleanup status; no per-frame sync disk writes. Capture all declared cases including missing segments and empty/error/cancelled outcomes. Do not silently retry or extend a deadline."
+  ],
+  "supported_setting": {
+    "name": "AgentSession(aec_warmup_duration=...)",
+    "location": "agent/main.py entrypoint AgentSession constructor (preserved iteration10 lines112\u2013116); not a turn_handling/interruption option.",
+    "default": 3.0,
+    "disable_values": [
+      null,
+      0.0
+    ],
+    "implementation_semantics": "Explicit duration bypasses participant-type auto-selection. None or0 sets remaining0, disables startup silence substitution and its AEC interruption guard. It does not disable actual client/device acoustic echo cancellation.",
+    "appropriate_scope": "A separately declared local prerecorded no-echo PCM condition may explicitly disable the suppression to measure this boundary. For physical microphones/speakers, removing echo warmup can admit echo-driven recognition/interruptions; retain current default absent a separate measured real-mic decision. No production setting changed.",
+    "refs": [
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+        "lines": [
+          411,
+          415
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+        "lines": [
+          507,
+          523
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+        "lines": [
+          578,
+          580
+        ]
+      },
+      {
+        "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+        "lines": [
+          2098,
+          2110
+        ]
+      }
+    ]
+  },
+  "component_reproduction": {
+    "script": "results/iteration11/reproduce_aec_boundary.py",
+    "report": "results/iteration11/aec-boundary-reproduction.json",
+    "stdout": "results/iteration11/aec-boundary-reproduction.txt",
+    "status": "passed",
+    "method": "Call actual installed AgentActivity.push_audio and AudioRecognition._push_audio with dummy output channels and deterministic nonzero20ms16k PCM; use the real3s loop timer and actual AgentSession._on_aec_warmup_expired callback. No model modules, RTC service or VAD inference. Timer setup is explicit in harness; first-speaking timer creation is separately inspected in source.",
+    "rows": [
+      {
+        "label": "before_warmup_timer",
+        "monotonic": 124273.448013208,
+        "warmup_remaining": 3.0,
+        "warmup_timer_active": false,
+        "vad_received_original_object": true,
+        "vad_pcm_matches_input": true,
+        "stt_received_original_object": true,
+        "stt_pcm_matches_input": true,
+        "stt_pcm_all_zero": false,
+        "frame_dimensions_preserved": true
+      },
+      {
+        "label": "during_warmup_timer",
+        "monotonic": 124273.448103083,
+        "warmup_remaining": 3.0,
+        "warmup_timer_active": true,
+        "vad_received_original_object": true,
+        "vad_pcm_matches_input": true,
+        "stt_received_original_object": false,
+        "stt_pcm_matches_input": false,
+        "stt_pcm_all_zero": true,
+        "frame_dimensions_preserved": true
+      },
+      {
+        "label": "after_actual_timer_expired",
+        "monotonic": 124276.450283583,
+        "warmup_remaining": 0.0,
+        "warmup_timer_active": false,
+        "vad_received_original_object": true,
+        "vad_pcm_matches_input": true,
+        "stt_received_original_object": true,
+        "stt_pcm_matches_input": true,
+        "stt_pcm_all_zero": false,
+        "frame_dimensions_preserved": true
+      }
+    ],
+    "source_hashes_unchanged": true,
+    "model_module_prefixes_present": [],
+    "boundary": "Proves installed component routing for given state, not that the original runtime took that path or that an actual recognizer would recover a transcript."
+  },
+  "source_sha256": {
+    "results/iteration11/before/agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent.py": "c9150b97a14bf2a7c1fa442ddac1396ecb181898caccf258411c6b64de31b924",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/turn.py": "a91d395fecc9238e15f1ed36cea2faca0fcd5f5b2ab6447d25afd6f75136210d",
+    ".venv/lib/python3.11/site-packages/livekit/agents/stt/stream_adapter.py": "04c4a730f99ca6efe0d2496aa3ca263c276957966ae5eff6be1ea169500b477f",
+    ".venv/lib/python3.11/site-packages/livekit/agents/stt/stt.py": "9f1865d4da1c141e6761d1066e475d000aea51e9b7462dd70f3791167e0b4e73",
+    ".venv/lib/python3.11/site-packages/livekit/plugins/silero/vad.py": "a09d859c2a45f336d3f3d7e7cd17b9b7c97e5fe349657cc8fa7fa31d32bb21c7",
+    ".venv/lib/python3.11/site-packages/livekit/agents/utils/audio.py": "156224cb36f90989d63a119f444cbdae084b73d9788d16cb71d5ab08907691a1"
+  },
+  "evidence_sha256": {
+    "results/iteration10/run-report.json": "47f7b94da193059dfad272f0ba546a65703b922d990838d76b9f923f7e3aead5",
+    "results/iteration10/rtc-correction-1/report.json": "a662b7a6f50edd4d075d79f93abe766743deaa33b3a26eb4f6b2b9e2829d8976",
+    "results/iteration10/rtc-correction-1/events.jsonl": "46f1e62f9f7f8d91cc6bcaebcafcd3619e91c9e7a020abaf57eb07b42cf091ac",
+    "results/iteration10/local-stack-run1/traces/car-audio-4a3ef818129b4f95998d46f473752ba3.jsonl": "af2187a4e1181d06b4f32637481528e25a71e3c4224f91a1e297bc8ea8e5638a",
+    "results/iteration10/local-stack-run1/worker.log": "ef75e9a919ddeae2433db9be2dd698907e8146ab19934e64504f13ca3f454070",
+    "results/iteration10/supplementary-log-review.json": "79c70a688ceb81e8f4ef6aefce90676ef46427bdf61d9129e5c1bd69fa6cdb5d",
+    "results/iteration11/reproduce_aec_boundary.py": "cf9929dce1147adda2cd6078f78ebb08645db3b11b81c520655e2af03ed4c171",
+    "results/iteration11/aec-boundary-reproduction.json": "863861b3c0e05755dc6acc2c7928a08ee35a5142ca8139e41fad8af590f8367b",
+    "results/iteration11/aec-boundary-reproduction.txt": "f63389b1599c89a98e02eee60a97cd327b1b12f09ef9c926b332cb1e1f5ca8ed"
+  },
+  "limits": [
+    "No live rerun, model inference, algorithm change or global setting change.",
+    "The436ms trace flush sample was in waypoint-2, not this correction; neither trace I/O nor memory/queue/native cause is attributed from correlation.",
+    "The second clip was submitted at the client; exact server post-gate PCM and native segment data are absent.",
+    "ASR completion logs include queue and native time but omit starts and cancelled/failed returns; missing logs do not prove native non-entry."
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "status": "completed_observation",
+  "started_at": "2026-09-26T08:09:43.510405+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/audio-assets/navigate-mgroad.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/rtc-waypoint-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "12",
+    "--correction",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/audio-assets/add-coffee.wav"
+  ],
+  "room": "car-audio-ac21a9437d3b4cd283cc89bca80d0899",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/audio-assets/navigate-mgroad.wav",
+      "file": "initial.wav",
+      "sha256": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d",
+      "sample_rate": 24000,
+      "samples": 55296,
+      "duration_seconds": 2.304,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 52320,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 128499.746158916,
+        "drained_monotonic": 128502.0518605,
+        "scheduled_end_monotonic": 128502.050158916,
+        "published_samples": 55296
+      }
+    },
+    {
+      "label": "correction",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/audio-assets/add-coffee.wav",
+      "file": "correction.wav",
+      "sha256": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c",
+      "sample_rate": 24000,
+      "samples": 40960,
+      "duration_seconds": 1.7066666666666668,
+      "activity_start_sample": 480,
+      "activity_end_sample": 36000,
+      "timing": {
+        "label": "correction",
+        "started_monotonic": 128519.488090625,
+        "drained_monotonic": 128521.196767541,
+        "scheduled_end_monotonic": 128521.19475729167,
+        "published_samples": 40960
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMFQvy4wMZTLmV",
+      "participant": "agent-AJ_cdh4tDh4gjwx",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means current result handle finished plus observed client quiet tail; it is not a navigation accuracy score.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Delayed data attribution requires the same native sender identity to resolve as AGENT. Coordinator receipts retain original times; attribution-resolution times are recorded separately. Unresolved, blank and non-agent senders remain untrusted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "rtc_identity_adapter": {
+    "sdk_version": "1.1.18",
+    "sdk_room_source_sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    "boundary": "Room._on_room_event synchronous data_received callback",
+    "max_pending_packets": 256,
+    "max_pending_bytes": 1048576,
+    "handler_compatibility": "reviewed_source_match"
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "7f43b2e141a8779a9b7a3280c18971820b62a046ebbe0afe940cef04904fb2ee"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/local-stack-run1/worker-manifest.json",
+    "sha256": "6de63cfd9f63fee7ac9de67ab0b912ab3e74e9ae0601f4c85ba2a655f07707dc"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration13/protocol.json",
+    "sha256": "d46f987cb4c67ed60be0cdb96bd0adade7fcf2e41b63e3535becd751d5deec41"
+  },
+  "correction_trigger": {
+    "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+    "intent_version": 1,
+    "kind": "result",
+    "speech_id": "speech_79e7bd54306d",
+    "queued_at": 128518.473558166,
+    "state": "queued",
+    "first_loud_at": 128519.487831875,
+    "preceding_quiet_seconds": 13.559816666995175,
+    "last_loud_at": 128519.487831875
+  },
+  "cleanup_errors": [],
+  "data_attribution_counts": {
+    "promoted": 53
+  },
+  "finished_at": "2026-09-26T08:10:22.442437+00:00",
+  "event_counts": {
+    "agent_state": 9,
+    "session_started": 1,
+    "user_state": 4,
+    "user_final": 2,
+    "ack": 2,
+    "agent_say": 4,
+    "speech_handle": 8,
+    "plan_ready": 2,
+    "gate_open": 2,
+    "gate_committed": 2,
+    "slot_update": 2,
+    "tool_waiting": 5,
+    "tool_started": 5,
+    "tool_done": 5
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_02b7add161ed",
+      "queued_at": 128504.689540875,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 128506.067669458,
+      "error": null
+    },
+    {
+      "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_79e7bd54306d",
+      "queued_at": 128518.473558166,
+      "state": "interruption_requested",
+      "first_loud_at": 128519.487831875,
+      "preceding_quiet_seconds": 13.559816666995175,
+      "last_loud_at": 128520.16681725,
+      "ended_at": 128522.759849041,
+      "error": null
+    },
+    {
+      "text": "Okay, one sec.",
+      "intent_version": 2,
+      "kind": "ack",
+      "speech_id": "speech_00cad4018068",
+      "queued_at": 128523.470869125,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 128525.2296845,
+      "error": null
+    },
+    {
+      "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_395a358e571b",
+      "queued_at": 128527.18606275,
+      "state": "finished",
+      "first_loud_at": 128528.167677916,
+      "preceding_quiet_seconds": 3.060370833001798,
+      "last_loud_at": 128536.086112833,
+      "ended_at": 128536.150942833,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d",
+    "worker_manifest.json": "6de63cfd9f63fee7ac9de67ab0b912ab3e74e9ae0601f4c85ba2a655f07707dc",
+    "events.jsonl": "1456dc660fa70cf385256869321e96363688e743654e58c3f3889b3942b3d615",
+    "correction.wav": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c",
+    "frames.jsonl": "8711f31ae2626f5ef1d9cc2fcd45433fc4f22e7dd029ea9a546d7af7b256353e",
+    "protocol.json": "d46f987cb4c67ed60be0cdb96bd0adade7fcf2e41b63e3535becd751d5deec41",
+    "received-1.pcm": "7e94dafd950373c4ee7d9229d22a4c53135edf5714d8505d286ae2c41406f811"
+  }
+}

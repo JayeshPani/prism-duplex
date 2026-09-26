@@ -10,25 +10,27 @@ const LANES: { id: Span["lane"]; label: string }[] = [
   { id: "tools", label: "Tools" },
 ];
 const TONE: Record<Span["tone"], string> = {
-  neutral: "#8a95a5", held: "var(--held)", done: "var(--commit)", stale: "var(--stale)", blocked: "var(--stale)",
+  neutral: "#8a95a5", held: "var(--held)", done: "var(--commit)", stale: "var(--stale)", blocked: "var(--stale)", error: "#b42318", unknown: "#8a5600", reused: "#58728c",
 };
 const WINDOW_S = 24;
 const W = 1200, LANE_H = 30, LEFT = 110, TOP = 6;
 
 // One shared clock for speech, the commit gate and tool calls: a stale plan is
 // visible as an amber hold cut short in rose; a blocked duplicate as a hollow mark.
-export default function Ribbon({ spans, clockOffset }: { spans: Span[]; clockOffset: number }) {
+export default function Ribbon({ spans, clockOffset, reviewEnd, reviewStart }: { spans: Span[]; clockOffset: number; reviewEnd?: number; reviewStart?: number }) {
   const [now, setNow] = useState(() => Date.now() / 1000);
   useEffect(() => {
+    if (reviewEnd != null) return;
     let raf = 0;
     const tick = () => { setNow(Date.now() / 1000); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [reviewEnd]);
 
-  const agentNow = now + clockOffset;
-  const t0 = agentNow - WINDOW_S;
-  const x = (t: number) => LEFT + ((t - t0) / WINDOW_S) * (W - LEFT);
+  const agentNow = reviewEnd ?? now + clockOffset;
+  const windowS = reviewStart != null ? Math.max(1, agentNow - reviewStart + 0.1) : WINDOW_S;
+  const t0 = agentNow - windowS;
+  const x = (t: number) => LEFT + ((t - t0) / windowS) * (W - LEFT);
   const H = TOP + LANES.length * LANE_H + 18;
 
   return (
@@ -40,9 +42,9 @@ export default function Ribbon({ spans, clockOffset }: { spans: Span[]; clockOff
             <line x1={LEFT} x2={W} y1={TOP + i * LANE_H + 15} y2={TOP + i * LANE_H + 15} stroke="var(--rule)" />
           </g>
         ))}
-        {[0, 5, 10, 15, 20].map((s) => (
+        {[0, 1, 2, 3, 4].map(i => i * windowS / 5).map((s) => (
           <text key={s} x={x(agentNow - s)} y={H - 2} fontSize="11" fill="var(--muted)" textAnchor="middle">
-            {s === 0 ? "now" : `-${s}s`}
+            {s === 0 ? "now" : `-${Number(s.toFixed(1))}s`}
           </text>
         ))}
         {spans.filter((s) => (s.end ?? agentNow) > t0).map((s, i) => {
@@ -70,7 +72,10 @@ export default function Ribbon({ spans, clockOffset }: { spans: Span[]; clockOff
       <div className="legend">
         <span style={{ ["--c" as any]: "var(--held)" }}>Plan held, waiting for you to finish</span>
         <span style={{ ["--c" as any]: "var(--commit)" }}>Committed or done</span>
-        <span style={{ ["--c" as any]: "var(--stale)" }}>Dropped as stale, or duplicate blocked</span>
+        <span style={{ ["--c" as any]: "var(--stale)" }}>Cancelled or retry blocked</span>
+        <span style={{ ["--c" as any]: "#b42318" }}>Failed</span>
+        <span style={{ ["--c" as any]: "#8a5600" }}>Outcome unknown</span>
+        <span style={{ ["--c" as any]: "#58728c" }}>Reused result</span>
       </div>
     </section>
   );

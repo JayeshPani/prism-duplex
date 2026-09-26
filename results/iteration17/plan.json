@@ -1,0 +1,46 @@
+{
+  "declared_at_utc": "2026-09-26T09:51:56.385519+00:00",
+  "previous_goal_turn": "progress: completed and retained the narrow responder fix,655tests,one frozen four-room suite,independent raw/speech/source/model reviews; all four final speech cases pass and two trusted-trace failures remain. All248 prior checkpoint hashes revalidated before this iteration.",
+  "purpose": "Screen the actual memory/prefill/recognition/useful-work tradeoff of one versus two retained Qwen prompt-cache entries while investigating the separate missing native sender identity boundary.",
+  "hypothesis": "One retained prompt-cache entry may lower logical retained KV size but may require more prefill and increase response latency; overall system memory and STT generation may or may not change.",
+  "baseline_checkpoint": {
+    "path": "results/iteration16/final-validation.json",
+    "sha256": "3e8012c6ad7ef788a47bb44033f4ba22b9b95b7eff1d11874676a2677f4c4ddd"
+  },
+  "arms": [
+    {
+      "name": "cache2-before",
+      "directory": "results/iteration17-cache2-before",
+      "entries": 2
+    },
+    {
+      "name": "cache1",
+      "directory": "results/iteration17-cache1",
+      "entries": 1
+    },
+    {
+      "name": "cache2-after",
+      "directory": "results/iteration17-cache2-after",
+      "entries": 2
+    }
+  ],
+  "controls": [
+    "Production, config, recorder, installed runtime and model bytes stay fixed from16. No server/runtime/agent patch or global system memory change.",
+    "Only --prompt-cache-size changes2\u21921\u21922; full argv receipts retain nominal268435456byte budget, which is unenforced for seeded sequential requests. Seed7,prefill256,max500,thinkingfalse and all speech/model settings remain.",
+    "Each arm starts fresh owned LLM/worker/LiveKit services and preserves fixed cancel/return/return/cancel order, identical3WAVs, all10turns/effects,6interruptions and4final speech cases.",
+    "Run all three timed arms to terminal with owned PID checks before any received-speech ASR. Do not rerender audio, retry trials, exclude failures or select successes.",
+    "Use the same full-byte model/source/input preflight before every arm and existing bounded readiness/trial/departure/cleanup timeouts. No external workload processes are terminated.",
+    "Production source is unchanged: reuse the exact16test receipt after verifying every76tested-source hash; do not describe it as newly executed tests.",
+    "All scripts/protocols/inputs are frozen before launch; independent preparation review validates only allowed argument and path differences.",
+    "Full-trace equality remains scored independently. Anonymous packets stay rejected and raw content cannot authenticate them. Separate identity investigation is read-only; its hypotheses do not change this experiment."
+  ],
+  "decision": "Screen only. Keep the two-entry production setting unless later evidence justifies a change; a promising single candidate arm warrants replication rather than a causal/general-capacity claim. Full decision and measurement contract in comparison-protocol.json.",
+  "limitations": [
+    "Three fresh processes in fixed order with one B process are not independent population replicates or a randomized causal study.",
+    "Logical cache GB is not resident allocation. Whole-system memory/swap includes unrelated workloads and preexisting pages; .5s samples can miss peaks.",
+    "Same input WAVs need not produce identical VAD-segmented normalized PCM; compare exact PCM identities separately and retain unmatched calls.",
+    "Same configuration/source does not prove adaptive prompt bytes stay identical after differing model/tool outputs.",
+    "Reused synthetic development audio; no held-out FDB, human microphone/speaker/echo or simultaneous-room capacity claim.",
+    "PR delivery still requires user-selected staging; no Git staging, commit or publication is performed by this iteration."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "declared_at_utc": "2026-09-26T07:28:41.825251+00:00",
+  "previous_turn_classification": "progress: completed iteration11 validation, documented measured failures, and exposed frozen raw evidence for PR staging",
+  "objective": "Identify which observed STT stage accounts for slow final transcripts before selecting a production change. Preserve navigation, interruption and cleanup checks.",
+  "baseline": "iteration11 waypoint2:2.58s segment,13.603s STT stage and14.383s final transcript delay; no exact segment/native phase retained",
+  "hypotheses": [
+    "Worker queue contention, file/decoder work, native generation and event-loop return delay are separable candidates; no cause is assumed.",
+    "Buffered experiment-only instrumentation can record exact normalized recognition segments and boundary timestamps while forwarding original calls unchanged."
+  ],
+  "declared_run": "Same four waypoint/baseline/waypoint/correction conversations and identical input WAVs; unchanged production/model/AEC/turn settings; one run, no retry/exclusion.",
+  "decision_rule": "Report each call, stages and overhead; identify dominant measured boundary only where evidence supports it. Do not infer causal improvement against historical runs or change production before interpreting results.",
+  "verification": [
+    "Focused wrapper tests: original results/exceptions, identity/ordering/room attribution, waiting/native/cancelled completion, no diagnostic writes until finalize",
+    "Independent wrapper review and source/model/method freeze before launch",
+    "All calls, tool effects, trace mismatches, received audio, warnings, process exits and failed checks remain in denominator"
+  ],
+  "limits": [
+    "Instrumentation adds clocks/wrappers and input-byte copies; record this overhead. Stage wall time is not GPU-exclusive compute and may include deferred work; do not insert synchronization to make timings look cleaner.",
+    "A reused development suite with four rooms is neither held-out evaluation nor a latency population estimate.",
+    "Input retention is synthetic experiment-only and is not a production microphone retention feature."
+  ]
+}

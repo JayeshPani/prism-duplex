@@ -1,0 +1,1652 @@
+{
+  "created_at_utc": "2026-09-26T05:35:35.395901+00:00",
+  "scope": "All declared iteration8 raw captures, room-filtered tool/server traces and runner cleanup; no inference or content quality score.",
+  "summary": {
+    "declared_trials": 4,
+    "audited_trials": 4,
+    "shared_attempts": 18,
+    "successful_attempts": 18,
+    "attempt_status_counts": {
+      "done": 18
+    },
+    "attempts_without_end": 0,
+    "observed_effects": 6,
+    "checks": {
+      "agent_departed": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "all_attempts_done": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "all_done_results_successful": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "attempt_count": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "attempt_event_pairs": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "attempt_sequence": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "capture_completed": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "expected_effects": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "frame_integrity": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "frozen_source_receipts": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "full_trace_equality": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "no_capture_errors": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "no_server_tool_errors": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "no_stale_results": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "old_result_interruption_requested": {
+        "passed": 2,
+        "evaluated": 2
+      },
+      "raw_hashes": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "result_after_effect_1": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "result_after_effect_2": {
+        "passed": 2,
+        "evaluated": 2
+      },
+      "room_cleanup_logged": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "speech_handles_settled": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "transcript_1": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "transcript_2": {
+        "passed": 2,
+        "evaluated": 2
+      }
+    }
+  },
+  "suite_status": "completed",
+  "undeclared_runs": [],
+  "unassigned_attempts": [],
+  "failed_checks": [
+    {
+      "name": "rtc-correction-2",
+      "checks": [
+        "full_trace_equality"
+      ]
+    }
+  ],
+  "frozen_inputs_unchanged_at_end": true,
+  "current_frozen_input_mismatches": [],
+  "worker_cleanup": {
+    "clean_exit": true,
+    "all_agents_departed": true,
+    "records": [
+      {
+        "role": "worker",
+        "pid": 96959,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "scripts/local_livekit_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration8/local-stack-run1/worker-manifest.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T05:33:38.703440+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 96946,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T05:33:38.792662+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 96945,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration8/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T05:33:38.797329+00:00"
+      }
+    ],
+    "drain_logs": [
+      {
+        "message": "draining worker",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "id": "AW_JYshFzVthhJR",
+        "timeout": 3600,
+        "pid": 96959,
+        "timestamp": "2026-09-26T05:33:37.746943+00:00"
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "results/iteration8/audit_live.py": "bda460791ec8a462708aaa9cae0482f3d11c19c36aedf7a317c46f835f3c4d16",
+    "results/iteration8/protocol.json": "a5ec64ba7602632fbc89108d090539fc9a0a986b85b699ab283a58ab582083ff",
+    "results/iteration8/run-report.json": "a9e741262e5db4dc001b08713637ba1b807bc491193440c54a4823d9ae5f8f92",
+    "results/iteration8/local-stack-run1/worker.log": "5684670efb7be485793fee808da2916049deac1ca0177d1079dc40ce236eea99",
+    "results/iteration8/local-stack-run1/tool-calls.jsonl": "93a8ffff96bcefe6dd11633da1eae73b7b0bb69afcd6308f59ba16df20fa8a12"
+  },
+  "limitations": [
+    "Four serial repeated development cases with a shared warm stack; no general accuracy, physical playback, capacity or live slow-logging benefit claim.",
+    "Full trace equality failures are retained. Missing initial listening and server events after client disconnect are classified separately; wall-clock boundary ordering uses same-host clocks and is not exact transport attribution.",
+    "Latency uses client monotonic receipt versus scheduled 20 ms RMS-threshold input boundaries. Tool start is durable intention preparation, not confirmed backend entry. Ack and substantive response remain separate.",
+    "Old speech tail scans every above-threshold frame before the next utterance queue, including untagged tail. PCM/text association is heuristic; interruption_requested is not confirmed physical stop time.",
+    "Frame offsets verify saved PCM completeness, not receipt of every transmitted packet or drainage of SDK queues. No concatenation introduces missing wall-clock gaps.",
+    "Whole received-audio ASR and semantic speech review are separate pending artifacts; declared text plus PCM is not proof of intelligibility or complete content.",
+    "Agent absence, cleanup logs and worker exit are separate observations. No room deletion is used. Late server events after recorder exit remain in raw traces.",
+    "Malformed or missing trials remain in the declared denominator with audit_error; unassigned attempt rows are preserved. Runtime worker warnings require separate inspection."
+  ],
+  "trials": [
+    {
+      "name": "rtc-baseline-1",
+      "case": "baseline",
+      "room": "car-audio-94bb4b5163774853b8c61854d1c52339",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": true,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "speech_handles_settled": true
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790400720.617712,
+          "attempt_id": "7f8b5efbed864349a947271b125b9dee:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400720.620948,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790400720.622435,
+          "attempt_id": "7f8b5efbed864349a947271b125b9dee:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400723.124511,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790400723.125598,
+          "attempt_id": "7f8b5efbed864349a947271b125b9dee:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400723.12654,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "7f8b5efbed864349a947271b125b9dee",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790400723.1264372
+        }
+      ],
+      "trace": {
+        "server_count": 29,
+        "client_count": 29,
+        "missing": [],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 119020.609932125,
+          "speech_end_monotonic": 119021.869932125,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1727.627,
+            "ack_text_ms": 2440.296,
+            "result_text_ms": 15950.509,
+            "first_tool_intention_ms": 13442.24,
+            "navigation_intention_ms": 15947.9,
+            "navigation_success_ms": 15949.147,
+            "first_ack_pcm_ms": 2977.271,
+            "first_result_pcm_ms": 16997.862,
+            "result_handle_finished_ms": 21858.048
+          }
+        }
+      ],
+      "interruption": null,
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_fe374285a9ae",
+          "queued_at": 119024.310354458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119025.659021,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_3728378d93a2",
+          "queued_at": 119037.820764958,
+          "state": "finished",
+          "first_loud_at": 119038.867793916,
+          "preceding_quiet_seconds": 13.358011958000134,
+          "last_loud_at": 119043.650351416,
+          "ended_at": 119043.72798,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-94bb4b5163774853b8c61854d1c52339",
+        "started_at": "2026-09-26T05:32:10.292576+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T05:32:10.292695+00:00",
+            "elapsed_seconds": 0.00011237499711569399,
+            "participants": [
+              {
+                "identity": "agent-AJ_AcpFEBxS7yeC",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:10.798120+00:00",
+            "elapsed_seconds": 0.5055384169972967,
+            "participants": [
+              {
+                "identity": "agent-AJ_AcpFEBxS7yeC",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:11.301058+00:00",
+            "elapsed_seconds": 1.0084694170072908,
+            "participants": [
+              {
+                "identity": "agent-AJ_AcpFEBxS7yeC",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:11.817339+00:00",
+            "elapsed_seconds": 1.5247524169972166,
+            "participants": [
+              {
+                "identity": "agent-AJ_AcpFEBxS7yeC",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:12.319738+00:00",
+            "elapsed_seconds": 2.0271442500088597,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T05:32:12.320745+00:00",
+        "elapsed_seconds": 2.0281424169952516
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-94bb4b5163774853b8c61854d1c52339",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:32:12.065729+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-94bb4b5163774853b8c61854d1c52339",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:32:12.068108+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "d191112d7d8fae060dfe93e00aad18f8f2172338fe9687aed635fb64df5e8f81",
+        "events.jsonl": "281dde945a4cd6e41b4862f84a0459684019126e3097a91e88987a19418f0d83",
+        "frames.jsonl": "c5acfab1abfdc967660f518b82b2586b57a635db8adee40ef6621231303632af",
+        "protocol.json": "a5ec64ba7602632fbc89108d090539fc9a0a986b85b699ab283a58ab582083ff",
+        "received-1.pcm": "b56fa4894609bcd2117a519157a5f03e92ad307e95c539665bf5c60aae4841d3",
+        "report.json": "f74780ab07d9ae4892efd91fcdbd4a98db37135046c566bd3d1b2daf6c7d40c2",
+        "server_trace": "bc26e96988e28806741ee2e22a9ce5f417d3ee19c68714e942168d079d2d396b"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 1208,
+        "pcm_bytes": {
+          "received-1.pcm": 1159680
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-correction-1",
+      "case": "correction",
+      "room": "car-audio-46877fa4b16d4230a7513f6adf63abf6",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": true,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "transcript_2": true,
+        "result_after_effect_2": true,
+        "old_result_interruption_requested": true,
+        "speech_handles_settled": true
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790400739.569036,
+          "attempt_id": "8bd1c75f129a4908b5118c9e621f4ab9:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400739.5737112,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790400739.575041,
+          "attempt_id": "8bd1c75f129a4908b5118c9e621f4ab9:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400742.078785,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790400742.081002,
+          "attempt_id": "8bd1c75f129a4908b5118c9e621f4ab9:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400742.083046,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "office"
+          },
+          "timestamp_start": 1790400752.353804,
+          "attempt_id": "e4eccf49bf6b4e4bb5f6f9dfbd89cfa7:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400752.3570912,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_OFFICE"
+          },
+          "timestamp_start": 1790400752.3584151,
+          "attempt_id": "e4eccf49bf6b4e4bb5f6f9dfbd89cfa7:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400754.860925,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "timestamp_start": 1790400754.862356,
+          "attempt_id": "e4eccf49bf6b4e4bb5f6f9dfbd89cfa7:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400754.863399,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "8bd1c75f129a4908b5118c9e621f4ab9",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 2
+          },
+          "ts": 1790400742.082844
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "e4eccf49bf6b4e4bb5f6f9dfbd89cfa7",
+            "operation_id": "turn-2",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": "Kempegowda International Airport",
+              "already_active": false,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R2",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790400754.863292
+        }
+      ],
+      "trace": {
+        "server_count": 57,
+        "client_count": 57,
+        "missing": [],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 119047.81852375,
+          "speech_end_monotonic": 119049.07852375001,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1858.386,
+            "ack_text_ms": 2564.625,
+            "result_text_ms": 7699.386,
+            "first_tool_intention_ms": 5185.66,
+            "navigation_intention_ms": 7695.477,
+            "navigation_success_ms": 7697.882,
+            "first_ack_pcm_ms": 3122.575,
+            "first_result_pcm_ms": 8683.04,
+            "result_handle_finished_ms": null
+          }
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 119057.80194875,
+          "speech_end_monotonic": 119059.58194875001,
+          "transcript": "Actually, go to the office instead.",
+          "utterances": [
+            {
+              "text": "Okay, one sec.",
+              "intent_version": 2,
+              "kind": "ack"
+            },
+            {
+              "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+              "intent_version": 2,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1777.083,
+            "ack_text_ms": 2485.637,
+            "result_text_ms": 9976.266,
+            "first_tool_intention_ms": 7466.569,
+            "navigation_intention_ms": 9973.779,
+            "navigation_success_ms": 9973.961,
+            "first_ack_pcm_ms": 3080.833,
+            "first_result_pcm_ms": 11460.908,
+            "result_handle_finished_ms": 18281.916
+          }
+        }
+      ],
+      "interruption": {
+        "old_handle": {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_6f1134187997",
+          "queued_at": 119056.77840525,
+          "state": "interruption_requested",
+          "first_loud_at": 119057.761563625,
+          "preceding_quiet_seconds": 4.898542374998215,
+          "last_loud_at": 119058.440811625,
+          "ended_at": 119061.358080333,
+          "error": null
+        },
+        "last_old_frame_line": 538,
+        "last_old_frame": {
+          "received_monotonic": 119058.540373708,
+          "received_unix": 1790400743.849207,
+          "track_sid": "TR_AM5xapooYjhBwM",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 515520,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -27.203295140319554,
+          "heuristic_result_speech_id": null
+        },
+        "following_frame": {
+          "received_monotonic": 119058.562716583,
+          "received_unix": 1790400743.871428,
+          "track_sid": "TR_AM5xapooYjhBwM",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 516480,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -53.81740525333704,
+          "heuristic_result_speech_id": null
+        },
+        "last_old_pcm_after_input_onset_ms": 738.425,
+        "user_speaking_after_input_onset_ms": 208.096,
+        "handle_interruption_after_input_onset_ms": 3556.132,
+        "untagged_tail_after_recorder_last_ms": 99.562,
+        "next_utterance_queue_monotonic": 119062.067802208
+      },
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_d9106f0b7d75",
+          "queued_at": 119051.643309958,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119052.986178083,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_6f1134187997",
+          "queued_at": 119056.77840525,
+          "state": "interruption_requested",
+          "first_loud_at": 119057.761563625,
+          "preceding_quiet_seconds": 4.898542374998215,
+          "last_loud_at": 119058.440811625,
+          "ended_at": 119061.358080333,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_706d7e93cd65",
+          "queued_at": 119062.067802208,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119063.653677,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_5c525289eabb",
+          "queued_at": 119069.559762041,
+          "state": "finished",
+          "first_loud_at": 119071.042857041,
+          "preceding_quiet_seconds": 7.50189929100452,
+          "last_loud_at": 119077.781856666,
+          "ended_at": 119077.863865166,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-46877fa4b16d4230a7513f6adf63abf6",
+        "started_at": "2026-09-26T05:32:44.250483+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T05:32:44.251138+00:00",
+            "elapsed_seconds": 0.000650957998004742,
+            "participants": [
+              {
+                "identity": "agent-AJ_48kDrsxHVQXt",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:44.755155+00:00",
+            "elapsed_seconds": 0.5046922500041546,
+            "participants": [
+              {
+                "identity": "agent-AJ_48kDrsxHVQXt",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:45.258617+00:00",
+            "elapsed_seconds": 1.0081570000038482,
+            "participants": [
+              {
+                "identity": "agent-AJ_48kDrsxHVQXt",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:45.763546+00:00",
+            "elapsed_seconds": 1.5130526669963729,
+            "participants": [
+              {
+                "identity": "agent-AJ_48kDrsxHVQXt",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:32:46.265342+00:00",
+            "elapsed_seconds": 2.014843249999103,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T05:32:46.266267+00:00",
+        "elapsed_seconds": 2.0157616670039715
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-46877fa4b16d4230a7513f6adf63abf6",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:32:46.211914+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-46877fa4b16d4230a7513f6adf63abf6",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:32:46.212481+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "d191112d7d8fae060dfe93e00aad18f8f2172338fe9687aed635fb64df5e8f81",
+        "events.jsonl": "8fa666383cd0c4482a4d0becd6a405a1dda7faa3fcf612654dcb27e453f2db48",
+        "correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+        "frames.jsonl": "939bb9797a6a7a32ddf4292c4e7e41a35e1678f8e7a39515c9d1de85105dcafd",
+        "protocol.json": "a5ec64ba7602632fbc89108d090539fc9a0a986b85b699ab283a58ab582083ff",
+        "received-1.pcm": "b0b081272ee926d3b7b129dfcc147638d0fc8ed3492eaa1d3fcc9df4723db500",
+        "report.json": "77e51c5411ae50533a0abad2e8054877285f50049518c163583c8d35a54852c5",
+        "server_trace": "ed2ff66e227627f9dcc8bc749e23599326836cd02a2a3178cff5087cfe6695a4"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 1555,
+        "pcm_bytes": {
+          "received-1.pcm": 1492800
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-correction-2",
+      "case": "correction",
+      "room": "car-audio-5fad756bfcc34d1d892f2138f10d4856",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": false,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "transcript_2": true,
+        "result_after_effect_2": true,
+        "old_result_interruption_requested": true,
+        "speech_handles_settled": true
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790400773.483711,
+          "attempt_id": "e9de3843e9034eab801d22544bdba917:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400773.486049,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790400773.4869518,
+          "attempt_id": "e9de3843e9034eab801d22544bdba917:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400775.9903018,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790400775.992649,
+          "attempt_id": "e9de3843e9034eab801d22544bdba917:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400775.993933,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "office"
+          },
+          "timestamp_start": 1790400784.8763819,
+          "attempt_id": "fa2b21bd95ab46f1a27e43d31d1bfa79:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400784.879275,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_OFFICE"
+          },
+          "timestamp_start": 1790400784.880244,
+          "attempt_id": "fa2b21bd95ab46f1a27e43d31d1bfa79:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400787.383106,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "timestamp_start": 1790400787.388116,
+          "attempt_id": "fa2b21bd95ab46f1a27e43d31d1bfa79:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400787.3901591,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "e9de3843e9034eab801d22544bdba917",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790400775.9938052
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "fa2b21bd95ab46f1a27e43d31d1bfa79",
+            "operation_id": "turn-2",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": "Kempegowda International Airport",
+              "already_active": false,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R2",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 2
+          },
+          "ts": 1790400787.3899379
+        }
+      ],
+      "trace": {
+        "server_count": 57,
+        "client_count": 56,
+        "missing": [
+          {
+            "line": 1,
+            "event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790400767.025853
+            },
+            "classification": "initial_listening"
+          }
+        ],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 119081.779575458,
+          "speech_end_monotonic": 119083.03957545801,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1752.685,
+            "ack_text_ms": 2457.315,
+            "result_text_ms": 7647.842,
+            "first_tool_intention_ms": 5137.5,
+            "navigation_intention_ms": 7644.831,
+            "navigation_success_ms": 7646.395,
+            "first_ack_pcm_ms": 3061.521,
+            "first_result_pcm_ms": 8622.941,
+            "result_handle_finished_ms": null
+          }
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 119091.70301025,
+          "speech_end_monotonic": 119093.48301025001,
+          "transcript": "Actually, go to the office instead.",
+          "utterances": [
+            {
+              "text": "Okay, one sec.",
+              "intent_version": 2,
+              "kind": "ack"
+            },
+            {
+              "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+              "intent_version": 2,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1908.894,
+            "ack_text_ms": 2614.228,
+            "result_text_ms": 8602.362,
+            "first_tool_intention_ms": 6086.797,
+            "navigation_intention_ms": 8597.402,
+            "navigation_success_ms": 8599.841,
+            "first_ack_pcm_ms": 3199.746,
+            "first_result_pcm_ms": 10057.644,
+            "result_handle_finished_ms": 16848.277
+          }
+        }
+      ],
+      "interruption": {
+        "old_handle": {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_bc761e0cc83c",
+          "queued_at": 119090.6880545,
+          "state": "interruption_requested",
+          "first_loud_at": 119091.662516875,
+          "preceding_quiet_seconds": 4.899652042004163,
+          "last_loud_at": 119092.362306875,
+          "ended_at": 119095.391133958,
+          "error": null
+        },
+        "last_old_frame_line": 535,
+        "last_old_frame": {
+          "received_monotonic": 119092.442644666,
+          "received_unix": 1790400777.7517068,
+          "track_sid": "TR_AMwt3pB6Rm2gZA",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 512640,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -29.663125647415907,
+          "heuristic_result_speech_id": null
+        },
+        "following_frame": {
+          "received_monotonic": 119092.4609305,
+          "received_unix": 1790400777.769983,
+          "track_sid": "TR_AMwt3pB6Rm2gZA",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 513600,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -67.28785492963235,
+          "heuristic_result_speech_id": null
+        },
+        "last_old_pcm_after_input_onset_ms": 739.634,
+        "user_speaking_after_input_onset_ms": 217.364,
+        "handle_interruption_after_input_onset_ms": 3688.124,
+        "untagged_tail_after_recorder_last_ms": 80.338,
+        "next_utterance_queue_monotonic": 119096.097537833
+      },
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_8e8d64c32b69",
+          "queued_at": 119085.497127916,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119086.89485175,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_bc761e0cc83c",
+          "queued_at": 119090.6880545,
+          "state": "interruption_requested",
+          "first_loud_at": 119091.662516875,
+          "preceding_quiet_seconds": 4.899652042004163,
+          "last_loud_at": 119092.362306875,
+          "ended_at": 119095.391133958,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_2b9ec480fabe",
+          "queued_at": 119096.097537833,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119097.668044625,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_f1f3af46c710",
+          "queued_at": 119102.085908458,
+          "state": "finished",
+          "first_loud_at": 119103.540654708,
+          "preceding_quiet_seconds": 5.977694291999796,
+          "last_loud_at": 119110.262606083,
+          "ended_at": 119110.331286833,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-5fad756bfcc34d1d892f2138f10d4856",
+        "started_at": "2026-09-26T05:33:16.785702+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T05:33:16.786371+00:00",
+            "elapsed_seconds": 0.0006641249929089099,
+            "participants": [
+              {
+                "identity": "agent-AJ_AEUaSyQ9budV",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:17.293228+00:00",
+            "elapsed_seconds": 0.5075203750020592,
+            "participants": [
+              {
+                "identity": "agent-AJ_AEUaSyQ9budV",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:17.797889+00:00",
+            "elapsed_seconds": 1.012176250005723,
+            "participants": [
+              {
+                "identity": "agent-AJ_AEUaSyQ9budV",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:18.300818+00:00",
+            "elapsed_seconds": 1.5150990830006776,
+            "participants": [
+              {
+                "identity": "agent-AJ_AEUaSyQ9budV",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:18.806908+00:00",
+            "elapsed_seconds": 2.02118199999677,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T05:33:18.807762+00:00",
+        "elapsed_seconds": 2.0220317909988808
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-5fad756bfcc34d1d892f2138f10d4856",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:33:18.699701+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-5fad756bfcc34d1d892f2138f10d4856",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:33:18.701156+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "d191112d7d8fae060dfe93e00aad18f8f2172338fe9687aed635fb64df5e8f81",
+        "events.jsonl": "6ff393dd7e0fc17e3c765db1f916f9af142faf70c8dc76b490f702364654fb3f",
+        "correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+        "frames.jsonl": "8cbc60c5b2b743174ea3ab36284f74017dd7e5b9d7b06cb0cac43368109b8bc2",
+        "protocol.json": "a5ec64ba7602632fbc89108d090539fc9a0a986b85b699ab283a58ab582083ff",
+        "received-1.pcm": "426f23293ecae64ae40a20b7eac3d1d035932ba220b7459262378bdda8a55eb2",
+        "report.json": "c405ff2fc162981c13130ea96494e5bd07e27987f1e5858741ccd0b306b9df52",
+        "server_trace": "b19922347dbaa729dd0724905e9e7987fdfe4a43ce5e58d2e1ea62f1d7a825c0"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 1480,
+        "pcm_bytes": {
+          "received-1.pcm": 1420800
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-baseline-2",
+      "case": "baseline",
+      "room": "car-audio-b99ff5caad064b37b4bcef282ab62a84",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": true,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "speech_handles_settled": true
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790400806.259878,
+          "attempt_id": "706329c82d3a414b9d10ef83f4334b6b:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400806.264192,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790400806.265955,
+          "attempt_id": "706329c82d3a414b9d10ef83f4334b6b:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400808.769423,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790400808.773922,
+          "attempt_id": "706329c82d3a414b9d10ef83f4334b6b:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790400808.7762282,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "706329c82d3a414b9d10ef83f4334b6b",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 2
+          },
+          "ts": 1790400808.775999
+        }
+      ],
+      "trace": {
+        "server_count": 29,
+        "client_count": 29,
+        "missing": [],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 119114.399921208,
+          "speech_end_monotonic": 119115.659921208,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1871.792,
+            "ack_text_ms": 2577.635,
+            "result_text_ms": 7812.399,
+            "first_tool_intention_ms": 5294.696,
+            "navigation_intention_ms": 7806.184,
+            "navigation_success_ms": 7809.979,
+            "first_ack_pcm_ms": 3152.135,
+            "first_result_pcm_ms": 8796.04,
+            "result_handle_finished_ms": 13650.066
+          }
+        }
+      ],
+      "interruption": null,
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_4e61ebc7359a",
+          "queued_at": 119118.237827791,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 119119.592407833,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_665799dc64e9",
+          "queued_at": 119123.473078166,
+          "state": "finished",
+          "first_loud_at": 119124.455961041,
+          "preceding_quiet_seconds": 5.002914208002039,
+          "last_loud_at": 119129.234524833,
+          "ended_at": 119129.30998725,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-b99ff5caad064b37b4bcef282ab62a84",
+        "started_at": "2026-09-26T05:33:35.708901+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T05:33:35.709610+00:00",
+            "elapsed_seconds": 0.0007066669932100922,
+            "participants": [
+              {
+                "identity": "agent-AJ_DML7PKcyLU3q",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:36.229283+00:00",
+            "elapsed_seconds": 0.5203807920042891,
+            "participants": [
+              {
+                "identity": "agent-AJ_DML7PKcyLU3q",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:36.738304+00:00",
+            "elapsed_seconds": 1.029391542004305,
+            "participants": [
+              {
+                "identity": "agent-AJ_DML7PKcyLU3q",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:37.240819+00:00",
+            "elapsed_seconds": 1.5319113339937758,
+            "participants": [
+              {
+                "identity": "agent-AJ_DML7PKcyLU3q",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T05:33:37.742339+00:00",
+            "elapsed_seconds": 2.03342325000267,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T05:33:37.743829+00:00",
+        "elapsed_seconds": 2.0349080419982783
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-b99ff5caad064b37b4bcef282ab62a84",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:33:37.648034+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-b99ff5caad064b37b4bcef282ab62a84",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 96959,
+          "timestamp": "2026-09-26T05:33:37.648958+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "d191112d7d8fae060dfe93e00aad18f8f2172338fe9687aed635fb64df5e8f81",
+        "events.jsonl": "b0efa2e99eb02415610ac31f60a4195c0f8b4dcda30e09dd85294144da523f0f",
+        "frames.jsonl": "6ddb3dc4bced7130d1f100d86a8c843e50f8a5cc58848d6f983ebdda9dd4c3e6",
+        "protocol.json": "a5ec64ba7602632fbc89108d090539fc9a0a986b85b699ab283a58ab582083ff",
+        "received-1.pcm": "9ce534c8f8ef65dd497e8339976bd83064bc29a9a29428a16d91122b072ab2cd",
+        "report.json": "e2bf28b805052edfdc3fd9d9ae8243b99011b0e53dfada2e6cd64e3fa9fff8a0",
+        "server_trace": "fb621aa2478f830b0d67024e0c6fd238be99b9f4a48b724840dff8e5ea10ea84"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 798,
+        "pcm_bytes": {
+          "received-1.pcm": 766080
+        },
+        "invalid_lines": []
+      }
+    }
+  ]
+}

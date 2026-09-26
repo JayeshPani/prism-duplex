@@ -1,0 +1,264 @@
+{
+  "status": "completed_observation",
+  "started_at": "2026-09-26T12:39:14.994510+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/airport_road.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/rtc-distance_query_after_ambiguity-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--followup-trigger",
+    "response-finished",
+    "--final-response-kind",
+    "non-ack",
+    "--followup",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/distance_query.wav"
+  ],
+  "room": "car-audio-2d21e82a00b847b0b6b389bf040684a4",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "followup_trigger": "response-finished",
+    "final_response_kind": "non-ack",
+    "followup_finished_quiet_seconds": 0.15,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/airport_road.wav",
+      "file": "initial.wav",
+      "sha256": "0ff22e0be9cb32d33de8662badf6a36b2be6b90a64f8e063d985d3d6cecbc928",
+      "sample_rate": 24000,
+      "samples": 36352,
+      "duration_seconds": 1.5146666666666666,
+      "activity_start_sample": 960,
+      "activity_end_sample": 33600,
+      "intent_before_input": null,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 144670.285501625,
+        "drained_monotonic": 144671.80348025,
+        "scheduled_end_monotonic": 144671.80016829167,
+        "published_samples": 36352
+      }
+    },
+    {
+      "label": "followup_1",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/distance_query.wav",
+      "file": "followup_1.wav",
+      "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+      "sample_rate": 24000,
+      "samples": 67584,
+      "duration_seconds": 2.816,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 65280,
+      "intent_before_input": 1,
+      "timing": {
+        "label": "followup_1",
+        "started_monotonic": 144684.124352625,
+        "drained_monotonic": 144686.943699541,
+        "scheduled_end_monotonic": 144686.94035262498,
+        "published_samples": 67584
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMF4bCijdYPdNY",
+      "participant": "agent-AJ_ezfXqkxGJPtb",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means a matched current response handle finished with received PCM and client quiet tail; it is not task or navigation accuracy. The configured final_response_kind selects eligible speech kinds.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Delayed data attribution requires the same native sender identity to resolve as AGENT. Coordinator receipts retain original times; attribution-resolution times are recorded separately. Unresolved, blank and non-agent senders remain untrusted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "rtc_identity_adapter": {
+    "sdk_version": "1.1.18",
+    "sdk_room_source_sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    "boundary": "Room._on_room_event synchronous data_received callback",
+    "max_pending_packets": 256,
+    "max_pending_bytes": 1048576,
+    "handler_compatibility": "reviewed_source_match"
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "fbe9e06056f0462befcdc9617b8754809ebe0faa4bee9f84afc472566b3e3863",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "4b5b26a6d6d17a35dec15522cf5d4e0f124acfbb13e7ce022e579d9be5bdec19",
+    "agent/coordinator/responder.py": "9830cb062e5aab314c1acd12ad4118831e81b942094ffc6145b02769d1fc2639",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "458baa1a8def5325305eb4971c99eec702de2be6f163fc814bfd7442324b3328",
+    "agent/tools/manifest.py": "3d474ed7d121bc38317ad6ef6abf8c3a41bf4c62e513b784b665ef67de0ecf24",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "0b1b6417bf43bdebdc02c2cb8b77035d4da601c0722b4ce0f70e33e71086249a"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/local-stack-run1/worker-manifest.json",
+    "sha256": "732c83d09959a1d4b4133a5cba7d79b64bcb7c61a64b06c26daf102b690d79eb"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/protocol.json",
+    "sha256": "40bcffcdfd017c56a49eb1885bebf96a9f5d5f43f0f3fce42240e2d4aab8be2d"
+  },
+  "followup_1_trigger": {
+    "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+    "intent_version": 1,
+    "kind": "result",
+    "speech_id": "speech_560de5b55dc0",
+    "queued_at": 144677.590222125,
+    "state": "finished",
+    "first_loud_at": 144679.023608666,
+    "preceding_quiet_seconds": 2.721549457986839,
+    "last_loud_at": 144683.862909875,
+    "ended_at": 144683.966311541,
+    "error": null
+  },
+  "completion": {
+    "reason": "fresh_non_ack_handle_finished_with_pcm_and_quiet_tail",
+    "handle": {
+      "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_34c7c95227c2",
+      "queued_at": 144693.6393375,
+      "state": "finished",
+      "first_loud_at": 144695.184641166,
+      "preceding_quiet_seconds": 3.9218205000215676,
+      "last_loud_at": 144699.961218458,
+      "ended_at": 144700.044205541,
+      "error": null
+    }
+  },
+  "cleanup_errors": [],
+  "data_attribution_counts": {
+    "promoted": 48
+  },
+  "finished_at": "2026-09-26T12:39:46.442075+00:00",
+  "event_counts": {
+    "agent_state": 9,
+    "session_started": 1,
+    "user_state": 4,
+    "user_final": 2,
+    "ack": 2,
+    "agent_say": 4,
+    "speech_handle": 8,
+    "plan_ready": 2,
+    "gate_open": 2,
+    "gate_committed": 2,
+    "slot_update": 2,
+    "tool_waiting": 4,
+    "tool_started": 2,
+    "tool_error": 3,
+    "tool_done": 1
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_c897a2ab2e1e",
+      "queued_at": 144674.73540325,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 144676.440051625,
+      "error": null
+    },
+    {
+      "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_560de5b55dc0",
+      "queued_at": 144677.590222125,
+      "state": "finished",
+      "first_loud_at": 144679.023608666,
+      "preceding_quiet_seconds": 2.721549457986839,
+      "last_loud_at": 144683.862909875,
+      "ended_at": 144683.966311541,
+      "error": null
+    },
+    {
+      "text": "Okay, one sec.",
+      "intent_version": 2,
+      "kind": "ack",
+      "speech_id": "speech_2fdfa5e632ad",
+      "queued_at": 144689.759344375,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 144691.379984625,
+      "error": null
+    },
+    {
+      "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_34c7c95227c2",
+      "queued_at": 144693.6393375,
+      "state": "finished",
+      "first_loud_at": 144695.184641166,
+      "preceding_quiet_seconds": 3.9218205000215676,
+      "last_loud_at": 144699.961218458,
+      "ended_at": 144700.044205541,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "0ff22e0be9cb32d33de8662badf6a36b2be6b90a64f8e063d985d3d6cecbc928",
+    "worker_manifest.json": "732c83d09959a1d4b4133a5cba7d79b64bcb7c61a64b06c26daf102b690d79eb",
+    "followup_1.wav": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+    "events.jsonl": "4fcda5187508d136a4d887fbd2a67a9ff3c18d5ada4e89747adb12f2a96f1309",
+    "frames.jsonl": "e1504a4323871b89aaa893a821b26961f5cc0eb7581465bbe6eb38f531780525",
+    "protocol.json": "40bcffcdfd017c56a49eb1885bebf96a9f5d5f43f0f3fce42240e2d4aab8be2d",
+    "received-1.pcm": "b53405387b1a5879b2967898b372c2502f8fbe3513c170cb2b2eeafae0aeecc8"
+  }
+}

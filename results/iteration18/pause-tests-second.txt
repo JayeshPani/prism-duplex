@@ -1,0 +1,22 @@
+agent/pipeline/recognition_pause.py SHA256 a8ce6c776c3ad2a2586d2f7cacf470f02e5be053174988da85ffdf72ea509f30
+tests/unit/test_recognition_pause.py SHA256 2f0a25093c51d2e5af36914c703e5f37693ca95e6cacbcdb575b495fbcd576a8
+...................F...                                                  [100%]
+=================================== FAILURES ===================================
+___________ test_unowned_sdk_resume_is_unchanged_while_user_speaking ___________
+
+make_output = <function make_output.<locals>.make at 0x10bcc09a0>
+
+    @pytest.mark.asyncio
+    async def test_unowned_sdk_resume_is_unchanged_while_user_speaking(make_output):
+        case = make_output(pending=0, speaking=True)
+        case.output.pause()
+        case.output.resume()
+>       assert case.sink.resumes == 1 and case.sink.enabled.is_set()
+E       AssertionError: assert (0 == 1)
+E        +  where 0 = WaitingSink(label='test sink', next=None).resumes
+E        +    where WaitingSink(label='test sink', next=None) = namespace(output=RecognitionAwareAudioOutput(label='RecognitionAwareAudioOutput', next=_AudioSinkProxy(label='AudioSin... object at 0x10bce7710>, handles=[<livekit.agents.voice.speech_handle.SpeechHandle object at 0x10bce7710>], emitted=[]).sink
+
+tests/unit/test_recognition_pause.py:290: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_recognition_pause.py::test_unowned_sdk_resume_is_unchanged_while_user_speaking
+1 failed, 22 passed in 0.69s

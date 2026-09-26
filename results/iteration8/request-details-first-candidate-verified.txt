@@ -1,0 +1,77 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__ test_explicit_list_request_is_not_hidden_when_read_also_supplies_waypoint ___
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x104585990>)
+
+    @pytest.mark.asyncio
+    async def test_explicit_list_request_is_not_hidden_when_read_also_supplies_waypoint(navigation):
+        manifest, engine = navigation
+        route = await prepare_route(manifest)
+        await manifest.get("start_navigation").fn(route_id=route["route_id"])
+        execution = await engine.run([
+            PlannedCall("nearby", "find_nearby", {"category": "coffee"}),
+            PlannedCall("stop", "add_waypoint", {"place_id": "$nearby.places[0].place_id"}),
+        ])
+        assert all(outcome.status == "done" for outcome in execution.outcomes.values())
+        places = execution.outcomes["nearby"].result["places"]
+        assert len(places) == 3
+        request = "List all nearby coffee places and add the nearest one as a stop."
+>       payload = await fallback(execution, request)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:299: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+execution = Execution(calls=[PlannedCall(id='nearby', tool='find_nearby', args={'category': 'coffee'}), PlannedCall(id='stop', too...e048c4933de843108c744cc38dc86309', operation_id='affc4937d867474390b42e5338f9663e', stale=False, validation_error=None)
+request = 'List all nearby coffee places and add the nearest one as a stop.'
+
+    async def fallback(execution, request="Summarize these requested actions."):
+        llm = FallbackLLM()
+        text = await Responder(llm).summarize(request, execution)
+>       assert text == "Model fallback summary."
+E       AssertionError: assert 'Added Blue T...xtra minutes.' == 'Model fallback summary.'
+E         
+E         - Model fallback summary.
+E         + Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.
+
+tests/unit/test_navigation_summaries.py:61: AssertionError
+_______ test_navigation_distance_question_keeps_full_request_and_results _______
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x1047e1810>)
+
+    @pytest.mark.asyncio
+    async def test_navigation_distance_question_keeps_full_request_and_results(navigation):
+        _manifest, engine = navigation
+        execution = await engine.run(route_calls("Cubbon Park"))
+        assert all(outcome.status == "done" for outcome in execution.outcomes.values())
+        request = "Navigate to Cubbon Park and tell me the route distance in kilometers."
+>       payload = await fallback(execution, request)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:312: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+execution = Execution(calls=[PlannedCall(id='lookup', tool='search_destination', args={'query': 'Cubbon Park'}), PlannedCall(id='r...ec9f2ceaf3584dd1a02a18e0892467b0', operation_id='f08392664b344b30b8a20f2b96a6c0ea', stale=False, validation_error=None)
+request = 'Navigate to Cubbon Park and tell me the route distance in kilometers.'
+
+    async def fallback(execution, request="Summarize these requested actions."):
+        llm = FallbackLLM()
+        text = await Responder(llm).summarize(request, execution)
+>       assert text == "Model fallback summary."
+E       AssertionError: assert 'Navigation t...: 18 minutes.' == 'Model fallback summary.'
+E         
+E         - Model fallback summary.
+E         + Navigation to Cubbon Park has started. ETA: 18 minutes.
+
+tests/unit/test_navigation_summaries.py:61: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/_pytest/config/__init__.py:1345
+  /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_summaries.py::test_explicit_list_request_is_not_hidden_when_read_also_supplies_waypoint
+FAILED tests/unit/test_navigation_summaries.py::test_navigation_distance_question_keeps_full_request_and_results
+2 failed, 1 warning in 0.07s

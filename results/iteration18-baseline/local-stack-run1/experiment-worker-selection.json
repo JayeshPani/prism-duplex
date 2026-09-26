@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-09-26T11:12:17.839657+00:00",
+  "policy": "baseline",
+  "condition_file": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/active-condition.json",
+  "protocol": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/protocol.json",
+  "source_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/controlled_worker.py": "ef823901fe86f4edfb04221843a4dd243ff63b2c7b0da77b76b42fb826b39b34",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/protocol.json": "edb71293c6a95c6a2349290b441426675f3c37df170568c97acdd00799b3de10"
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3"
+  },
+  "method": "STTDiagnostics installed first, then context-scoped Engine.transcribe delivery hold, then unchanged iteration11 AEC observer/worker. Only baseline replaces the application output symbol with a transparent public AudioOutput chain.",
+  "limits": [
+    "Delay applies to every successful room recognition including initial and empty text in the bound case; never selects on transcript or PCM.",
+    "Engine/native failure or cancellation is re-raised without adding a delay. Cancellation during synthetic hold remains cancellation.",
+    "Warmup, direct engine calls and whole-span transcribe_since are excluded. Pending LocalSTT count includes the hold.",
+    "Condition is read once per LocalSTT object at its first recognition. Serial fresh-room/departure ordering is a suite responsibility; every observed binding retains the exact condition hash.",
+    "No live diagnostic writes after launch selection. SIGKILL can leave buffered reports unavailable.",
+    "The baseline shares current counters/SDK false-event logging; it is an output-policy control, not a replay of historical source."
+  ]
+}

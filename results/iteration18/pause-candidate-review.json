@@ -1,0 +1,129 @@
+{
+  "created_at_utc": "2026-09-26T10:58:53.291810+00:00",
+  "scope": "Independent read-only review of the corrected RecognitionAwareAudioOutput plus LocalSTT and main wiring. No tests, models, services, evaluated-source or test edits during this review.",
+  "verdict": "No concrete blocking correctness regression found within the wired per-room local recognizer/session scope.",
+  "findings": [],
+  "checks": {
+    "tested_source_matches:agent/pipeline/recognition_pause.py": true,
+    "tested_source_matches:agent/pipeline/local_stt.py": true,
+    "tested_source_matches:agent/main.py": true,
+    "tested_source_matches:agent/coordinator/events.py": true,
+    "tested_source_matches:tests/unit/test_recognition_pause.py": true,
+    "tested_source_matches:tests/unit/test_local_stt_recognition_state.py": true,
+    "generation_component_source_matches:.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": true,
+    "generation_component_source_matches:.venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py": true,
+    "generation_component_source_matches:.venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py": true,
+    "generation_component_source_matches:agent/pipeline/recognition_pause.py": true,
+    "generation_component_source_matches:.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": true,
+    "generation_component_source_matches:results/iteration18/exercise_generation_pause_final.py": true,
+    "generation_component_reports_passed_and_unchanged": true,
+    "existing_full_suite_receipt_is_685_passed": true,
+    "existing_focused_receipt_is_45_passed": true
+  },
+  "all_receipt_checks_pass": true,
+  "reviewed_sha256": {
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "tests/unit/test_recognition_pause.py": "2f0a25093c51d2e5af36914c703e5f37693ca95e6cacbcdb575b495fbcd576a8",
+    "tests/unit/test_local_stt_recognition_state.py": "60a8f88ee912a6a03312639a179ccc9660a3bb9f3aba1a32b728fc1537ffe2bc",
+    "results/iteration18/pause-tests-first.txt": "3ef0e7d7f202f024d8e236cc7e09ecdbd157132dfb733acc314d6292f5f91d29",
+    "results/iteration18/pause-tests-second.txt": "19c64eff32e1bc0ef24d58d140aa537ca293bfa503b991598603c63116993f66",
+    "results/iteration18/pause-and-stt-tests.txt": "2cb0878f2730753ea1c73ca9f555b1ab2409512ba545b995fa55ebe1c94da387",
+    "results/iteration18/full-tests.txt": "16e755a1e30fdb496849ff732bf61f09036010c9254ea90ad5418f09503d4abf",
+    "results/iteration18/tested-source.json": "2c408a30e53525e14edaebdd586ce800963fac16e00e13f008bd336341a11493",
+    "results/iteration18/generation-pause-final/generation-pause-component.json": "d79286ca06cf1b70e968c3f0d0c985905a01bc198c3d871e8d4386958fe7b049",
+    "results/iteration18/exercise_generation_pause_final.py": "66a6f77ac127540d959d811ecd696b24e701df5def10bd4fd74b4cc8180071c6",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/io.py": "036be88ab335a701ab3a991b69c821b2c22c6955b04dccc5df43a5a55731eecf",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py": "627612bcfe739d510302d8ea1869ea7076dfd45348436423282b1f72f7f80b26",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/transcription/synchronizer.py": "4164e549d3d55e7a07423b4e5482d7b73c3fbb20e84879edfdbcda4011d61177",
+    ".venv/lib/python3.11/site-packages/livekit/agents/stt/stt.py": "9f1865d4da1c141e6761d1066e475d000aea51e9b7462dd70f3791167e0b4e73",
+    ".venv/lib/python3.11/site-packages/livekit/rtc/event_emitter.py": "d88d21ab68d9ad393661f7b259282daebed0c68f6739edc61a58d0ec4221fa91"
+  },
+  "observations": [
+    {
+      "topic": "Resume is intercepted before downstream wakeup",
+      "source": "agent/pipeline/recognition_pause.py",
+      "lines": [
+        56,
+        78
+      ],
+      "assessment": "A hold requires the same public current handle captured by pause, pending room recognition, interruptibility and downstream pause capability. A repeated SDK resume remains blocked by the existing hold; an unowned resume directly delegates, including when user_speaking is true. This fixes the independently preserved red case."
+    },
+    {
+      "topic": "Public chain and playback bookkeeping",
+      "source": "agent/pipeline/recognition_pause.py",
+      "lines": [
+        18,
+        46
+      ],
+      "assessment": "The wrapper uses public AudioOutput next_in_chain, base capture/flush bookkeeping and inherited playback event forwarding. It forwards clear_buffer and delegates lifecycle. No installed SDK mutation or private SDK member is used by production changes. Existing component evidence includes real SDK segment/event forwarding; separate generation evidence substitutes only the device AudioSource."
+    },
+    {
+      "topic": "Completion is not cancellation request",
+      "source": "agent/pipeline/recognition_pause.py",
+      "lines": [
+        91,
+        120
+      ],
+      "assessment": "Positive text, failure, cancellation and deadline target only the captured current interruptible handle and keep the sink held until done. Later empty notifications cannot release a cancelling hold. The SDK generation component confirms clear/cleanup and subsequent speech progress for nonempty, error and timeout with its disclosed fake device boundary."
+    },
+    {
+      "topic": "Noise recovery and renewed speech",
+      "source": "agent/pipeline/recognition_pause.py",
+      "lines": [
+        48,
+        54,
+        133,
+        151
+      ],
+      "assessment": "Empty completion requires pending count zero, no newer SDK pause, and user listening to release an owned hold. A new SDK pause invalidates the previous resume request. Loss of interruptibility drops the owned hold without force-interrupting the protected handle."
+    },
+    {
+      "topic": "Late completion after old handle finished",
+      "source": "agent/pipeline/recognition_pause.py",
+      "lines": [
+        62,
+        86,
+        113,
+        151
+      ],
+      "assessment": "recognition_completed never acquires a hold. Done/current-handle mismatch clears an old hold; delayed old done/deadline callbacks check captured identity before acting. A new handle cannot inherit the old paused_handle predicate on a normal resume. It can acquire a separate hold only after its own SDK pause and a resume while the room count is still pending; this is the declared room-wide unresolved-recognition policy, not a direct late-callback mutation."
+    },
+    {
+      "topic": "Pending recognition accounting",
+      "source": "agent/pipeline/local_stt.py",
+      "lines": [
+        108,
+        116,
+        160,
+        183
+      ],
+      "assessment": "The per-instance counter covers the engine await and SpeechEvent construction, decrements before synchronous completion notification in finally, and distinguishes returned/failed/cancelled. Warmup/direct/whole-span transcription do not enter it. Await cancellation is explicitly not native-inference completion; the saved STT tests verify that distinction."
+    },
+    {
+      "topic": "Wiring and bounded cleanup",
+      "source": "agent/main.py",
+      "lines": [
+        160,
+        168,
+        180,
+        226
+      ],
+      "assessment": "The public wrapper is installed after session.start and before readiness, only when the selected output can pause. User-state changes notify it. Session close and job cleanup close it idempotently, and job cleanup removes the STT completion callback. Hold timers and handle callbacks are removed; closed/detached wrappers ignore late resume/completion releases."
+    }
+  ],
+  "evidence_limits": [
+    "The 45 focused/lifecycle and 685 full-suite receipts were produced by root and only inspected here; this review does not claim another test execution.",
+    "The final SDK generation exercise uses actual generation/scheduling and does not manually mark handles done, but replaces AudioSource with a zero-queued fake; it is not real transport/native buffering evidence.",
+    "Public agent_false_interruption.resumed and agent_state=speaking describe SDK decisions. A suppressed downstream resume can leave those states showing speaking; PCM and recognition_pause telemetry must remain separate in the live audit.",
+    "Recognition ownership is per room, not keyed to a transcript/utterance ID. A newly SDK-paused handle may be held while an older room recognition is still pending; this should not be represented as per-request causal attribution.",
+    "The hold begins at an SDK resume decision while recognition is already pending. This cannot undo earlier native/device buffering or prevent a resume that occurred before the recognizer await became pending.",
+    "Whole output replacement detaches and closes the wrapper. Runtime replace_audio_tail/handoff and arbitrary concurrent custom output mutation are not demonstrated by the current wired session or saved tests.",
+    "No live RTC quality, physical audible-stop latency, or general disfluency/noise recovery claim is established by this review."
+  ]
+}

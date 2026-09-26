@@ -1,0 +1,2799 @@
+{
+  "kind": "scripted_development_experiment",
+  "status": "completed",
+  "repo": "/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/prism-reliability-baseline-f2lepudm",
+  "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "repeats": 5,
+  "policies": {
+    "fixed": {
+      "hold_read_ms": 40,
+      "hold_state_ms": 40
+    },
+    "read_write_adaptive": {
+      "hold_read_ms": 20,
+      "hold_state_ms": 60
+    }
+  },
+  "runner_sha256": "46744d4c02c752ba42d69411a8a995276369f6be45cb96c4ebc5f78adb6dca08",
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "185ba2a67959b2b514f9df949ad76bbd1cb9a81899faabdb11773650f929a852",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0db9952a8efae9b37f27f9a93bcbb1d7d1a5fee5715f741a1dcd1efd345c75e",
+    "agent/coordinator/events.py": "886a58d44219a1ea01ef0ab80036b87ab90895876f2f48fff161264dfc253b4e",
+    "agent/coordinator/executor.py": "abb1b245562ff911e9d185894284db85a524f0c607cd967bbdcf4374f6faff05",
+    "agent/coordinator/ledger.py": "c854cebd9fc092c9bda786055be010a38ddb8bc53ac9bb801947e6187b4e8dc1",
+    "agent/coordinator/llm_client.py": "16e09b5d7ac38af4ac7418d40f3bc570a16ea45e480a01564dd7145299f4f223",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "959dacffedb86d6c403cdfb4870af984e2ed8ab1ccf010a53be8007d034ab99f",
+    "agent/coordinator/resolver.py": "7ecf4582f921aec752a04c9699ac3468610ded083673b00dffd66a292b190468",
+    "agent/coordinator/responder.py": "c8258657e56b14a5e5311cc834f177941de9119dde131e696884b3c538731edd",
+    "agent/main.py": "43ee9f2a3c86367eb34eae9db0e925d57b817972d989ec36fb339ec15bd7a890",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "6f2cb83781321186ff25d11af1aeabd726eb61f3cee1f84dfd985e5950de5f2a",
+    "agent/pipeline/local_tts.py": "77d0da14b15b96aef45bb6246c5531504e2d8fffd9ccea0d153c96603b68de89",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "16c60473d088f931514f05e5261f2110d1d6f3d1af06e6a28de57de3ab35cd9a",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "3526360d85ecd663bba39cb64e467b973f39af057218772ebf4dc126bc8738c3",
+    "agent/tools/car_tools.py": "363c351f5ea0d3ee11ce2add4094d76dd915a8670e234809c99c26a7b5da4a33",
+    "agent/tools/manifest.py": "dca07695e2051d793d9833061a9b6db6ac96bf6b50d964da83c66ac1d2b316ad"
+  },
+  "route_compute_ms": 40,
+  "write_delay_ms_only_in_write_boundary_scenario": 30,
+  "expected_outcomes_declared_before_execution": {
+    "correction_before_commit": {
+      "destinations": [
+        "P_OFFICE"
+      ],
+      "final": "P_OFFICE"
+    },
+    "correction_during_route": {
+      "destinations": [
+        "P_OFFICE"
+      ],
+      "final": "P_OFFICE"
+    },
+    "correction_during_write": {
+      "destinations": [
+        "P_AIRPORT",
+        "P_OFFICE"
+      ],
+      "final": "P_OFFICE"
+    },
+    "return_to_destination": {
+      "destinations": [
+        "P_AIRPORT",
+        "P_OFFICE",
+        "P_AIRPORT"
+      ],
+      "final": "P_AIRPORT"
+    },
+    "overlapping_rooms": {
+      "room_a": "P_AIRPORT",
+      "room_b": "P_OFFICE"
+    },
+    "repeat_same_stop": {
+      "destinations": [
+        "P_OFFICE"
+      ],
+      "final": "P_OFFICE",
+      "polyline_points": 3
+    },
+    "read_lookup": {
+      "place_id": "K_BLUETOKAI"
+    }
+  },
+  "timing_origin": "final transcript submission (not speech end or acoustic playback)",
+  "limitations": [
+    "Scripted resolver and simulated map; no model or speech-quality measurement.",
+    "Scaled timing illustrates tradeoffs; it does not tune production thresholds.",
+    "No held-out evaluation or proof of crash-safe exactly-once execution."
+  ],
+  "intended_action_count_definition": "Each requested navigation, distinct stop, or lookup; superseded destinations excluded. Required actions count even in scenarios failing for extra effects.",
+  "runs": [
+    {
+      "policy": "fixed",
+      "scenario": "correction_before_commit",
+      "repeat": 1,
+      "trace": "trace-fixed-correction_before_commit-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.63337500358466,
+        82.94649999879766
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.76333300455008,
+        82.95770800032187
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.95770800032187
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_before_commit",
+      "repeat": 2,
+      "trace": "trace-fixed-correction_before_commit-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.33125000225846,
+        82.29754200146999
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.14804199815262,
+        82.30470900889486
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.30470900889486
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_before_commit",
+      "repeat": 3,
+      "trace": "trace-fixed-correction_before_commit-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.26524999446701,
+        82.53649999096524
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.38324998819735,
+        82.54474999557715
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.54474999557715
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_before_commit",
+      "repeat": 4,
+      "trace": "trace-fixed-correction_before_commit-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        40.88616599619854,
+        82.181165998918
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.01425000152085,
+        82.18924999528099
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.18924999528099
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_before_commit",
+      "repeat": 5,
+      "trace": "trace-fixed-correction_before_commit-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.374959007953294,
+        82.67075000912882
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.47920899884775,
+        82.68191700335592
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.68191700335592
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_route",
+      "repeat": 1,
+      "trace": "trace-fixed-correction_during_route-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.43583400582429,
+        82.81304199772421,
+        41.54787500738166,
+        83.03216600324959
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.5616250076564,
+        82.82675000373274,
+        82.73704101156909,
+        83.34075000311714
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.82675000373274,
+        83.34075000311714
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_route",
+      "repeat": 2,
+      "trace": "trace-fixed-correction_during_route-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.67187500570435,
+        83.32541699928697,
+        41.78508400218561,
+        83.29170900105964
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.97275000950322,
+        83.34654200007208,
+        82.96762501413468,
+        83.50912500463892
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.34654200007208,
+        83.50912500463892
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_route",
+      "repeat": 3,
+      "trace": "trace-fixed-correction_during_route-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.88320800312795,
+        83.46937500755303,
+        41.97833400394302,
+        83.02787500724662
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        83.06933300627861,
+        83.48629099782556,
+        82.47241699427832,
+        83.40379199944437
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.48629099782556,
+        83.40379199944437
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_route",
+      "repeat": 4,
+      "trace": "trace-fixed-correction_during_route-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.94362500857096,
+        83.42116601124872,
+        41.730833996552974,
+        83.73779199609999
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.88787500350736,
+        83.44833301089238,
+        83.07399999466725,
+        84.28270899457857
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.44833301089238,
+        84.28270899457857
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_route",
+      "repeat": 5,
+      "trace": "trace-fixed-correction_during_route-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.71016700274777,
+        83.52045800711494,
+        41.941417002817616,
+        83.56166699377354
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.98833300068509,
+        83.5434580076253,
+        83.16937499330379,
+        83.99129199096933
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.5434580076253,
+        83.99129199096933
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_write",
+      "repeat": 1,
+      "trace": "trace-fixed-correction_during_write-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.846125008305535,
+        83.14816700294614,
+        41.408165998291224,
+        82.87399999971967
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.74683300987817,
+        114.40312500053551,
+        82.6096660020994,
+        114.30858299718238
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        114.40312500053551,
+        114.30858299718238
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_write",
+      "repeat": 2,
+      "trace": "trace-fixed-correction_during_write-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.72729200217873,
+        82.9082090058364,
+        41.38841599342413,
+        82.65791600570083
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.65174999542069,
+        114.0118750045076,
+        82.49066599819344,
+        114.68708299798891
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        114.0118750045076,
+        114.68708299798891
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_write",
+      "repeat": 3,
+      "trace": "trace-fixed-correction_during_write-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.238999998313375,
+        82.45508300024085,
+        41.2239590077661,
+        82.44941700831987
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.32470799703151,
+        113.52524999529123,
+        82.30687500326894,
+        113.65416701301001
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        113.52524999529123,
+        113.65416701301001
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_write",
+      "repeat": 4,
+      "trace": "trace-fixed-correction_during_write-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        40.69570799765643,
+        81.28308299637865,
+        41.187000009813346,
+        82.54787500482053
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        81.04687499871943,
+        112.3556669917889,
+        82.34866600832902,
+        113.80320800526533
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        112.3556669917889,
+        113.80320800526533
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "correction_during_write",
+      "repeat": 5,
+      "trace": "trace-fixed-correction_during_write-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.35662500630133,
+        82.69624999957159,
+        41.423458998906426,
+        82.31312500720378
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.50266700633802,
+        113.84933300723787,
+        82.05720900150482,
+        112.8328339982545
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        113.84933300723787,
+        112.8328339982545
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "return_to_destination",
+      "repeat": 1,
+      "trace": "trace-fixed-return_to_destination-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        43.836624987307005,
+        85.42345798923634,
+        41.724208000232466,
+        83.66366699920036
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        84.95816600043327,
+        85.45020798919722,
+        83.07975000934675,
+        84.28266699775122
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        85.45020798919722,
+        84.28266699775122
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "return_to_destination",
+      "repeat": 2,
+      "trace": "trace-fixed-return_to_destination-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.5835000021616,
+        83.02750000439119,
+        41.40133399050683,
+        82.8428339882521
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.75070799572859,
+        83.04370800033212,
+        82.57641698583029,
+        83.19095899059903
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.04370800033212,
+        83.19095899059903
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "return_to_destination",
+      "repeat": 3,
+      "trace": "trace-fixed-return_to_destination-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.93162500450853,
+        83.13966600690037,
+        41.56199999852106,
+        82.69533299608156
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.6852080062963,
+        83.16304101026617,
+        82.38720800727606,
+        83.0809580074856
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.16304101026617,
+        83.0809580074856
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "return_to_destination",
+      "repeat": 4,
+      "trace": "trace-fixed-return_to_destination-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.699749999679625,
+        83.16708401252981,
+        41.537124998285435,
+        82.86358400073368
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.8613750054501,
+        83.18608401168603,
+        82.66570900741499,
+        83.11904199945275
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.18608401168603,
+        83.11904199945275
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "return_to_destination",
+      "repeat": 5,
+      "trace": "trace-fixed-return_to_destination-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.278624994447455,
+        82.37495900539216,
+        41.37641700799577,
+        82.61845800734591
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.19033399655018,
+        82.38195900048595,
+        82.47170799586456,
+        82.78425000025891
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.38195900048595,
+        82.78425000025891
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "overlapping_rooms",
+      "repeat": 1,
+      "trace": "trace-fixed-overlapping_rooms-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.215582998120226,
+        82.58924999972805,
+        41.25308299262542,
+        82.63262499531265
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.36245799344033,
+        82.60133299336303,
+        82.46504199632909,
+        82.78937499562744
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.60133299336303,
+        82.78937499562744
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "overlapping_rooms",
+      "repeat": 2,
+      "trace": "trace-fixed-overlapping_rooms-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.40204100986011,
+        82.81033299863338,
+        41.438250002101995,
+        82.8744589962298
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.5394999992568,
+        82.82000001054257,
+        82.61270899674855,
+        83.7987919949228
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.82000001054257,
+        83.7987919949228
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "overlapping_rooms",
+      "repeat": 3,
+      "trace": "trace-fixed-overlapping_rooms-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.31687500921544,
+        82.72687499993481,
+        41.350041996338405,
+        82.83116699021775
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.45775000250433,
+        82.73775000998285,
+        82.54687499720603,
+        83.0173339927569
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.73775000998285,
+        83.0173339927569
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "overlapping_rooms",
+      "repeat": 4,
+      "trace": "trace-fixed-overlapping_rooms-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.04508300952148,
+        81.93387500068638,
+        41.10562500136439,
+        82.03258299909066
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        81.4579170109937,
+        81.95120800519362,
+        81.68458299769554,
+        82.24908300326206
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        81.95120800519362,
+        82.24908300326206
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "overlapping_rooms",
+      "repeat": 5,
+      "trace": "trace-fixed-overlapping_rooms-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.664834003313445,
+        83.1212500052061,
+        41.725917006260715,
+        83.19566700083669
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.80708399252035,
+        83.13191699562594,
+        82.92070799507201,
+        83.48062500590459
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.13191699562594,
+        83.48062500590459
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "repeat_same_stop",
+      "repeat": 1,
+      "trace": "trace-fixed-repeat_same_stop-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.6379170055734,
+        83.0828339967411,
+        41.58566700061783,
+        41.72445900621824
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.79691700590774,
+        83.0974169948604,
+        41.640333001851104,
+        41.90487500454765
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.0974169948604,
+        41.640333001851104,
+        41.90487500454765
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "repeat_same_stop",
+      "repeat": 2,
+      "trace": "trace-fixed-repeat_same_stop-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.63887498725671,
+        83.44779099570587,
+        40.8341250004014,
+        41.617708004196174
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.95470799203031,
+        83.46783299930394,
+        40.89591599768028,
+        41.727667005034164
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.46783299930394,
+        40.89591599768028,
+        41.727667005034164
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "repeat_same_stop",
+      "repeat": 3,
+      "trace": "trace-fixed-repeat_same_stop-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.88845799944829,
+        83.19245799793862,
+        41.64041600597557,
+        42.03295899787918
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.82533299643546,
+        83.21224999963306,
+        41.70400000293739,
+        42.171709006652236
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.21224999963306,
+        41.70400000293739,
+        42.171709006652236
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "repeat_same_stop",
+      "repeat": 4,
+      "trace": "trace-fixed-repeat_same_stop-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.5899579966208,
+        83.68720799626317,
+        41.60625000076834,
+        40.86420800013002
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        82.98816699243616,
+        83.71704199817032,
+        41.682542010676116,
+        40.955249991384335
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        83.71704199817032,
+        41.682542010676116,
+        40.955249991384335
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "repeat_same_stop",
+      "repeat": 5,
+      "trace": "trace-fixed-repeat_same_stop-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.56945800059475,
+        82.23383300355636,
+        41.53966601006687,
+        41.303083999082446
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        81.79712500714231,
+        82.25350000429899,
+        41.58429100061767,
+        41.36666699196212
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        82.25350000429899,
+        41.58429100061767,
+        41.36666699196212
+      ]
+    },
+    {
+      "policy": "fixed",
+      "scenario": "read_lookup",
+      "repeat": 1,
+      "trace": "trace-fixed-read_lookup-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.35600000154227
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        41.374499996891245
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "fixed",
+      "scenario": "read_lookup",
+      "repeat": 2,
+      "trace": "trace-fixed-read_lookup-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.0555839916924
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        41.07441699306946
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "fixed",
+      "scenario": "read_lookup",
+      "repeat": 3,
+      "trace": "trace-fixed-read_lookup-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.32341701188125
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        41.341292002471164
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "fixed",
+      "scenario": "read_lookup",
+      "repeat": 4,
+      "trace": "trace-fixed-read_lookup-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        40.64241699234117
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        40.65774999617133
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "fixed",
+      "scenario": "read_lookup",
+      "repeat": 5,
+      "trace": "trace-fixed-read_lookup-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        41.2566660088487
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        41.27012500248384
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_before_commit",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-correction_before_commit-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.400499995215796,
+        102.6274169998942
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.4934589950135,
+        102.63374999340158
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.63374999340158
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_before_commit",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-correction_before_commit-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.377749996609055,
+        102.67304199805949
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.49299999850336,
+        102.68237499985844
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.68237499985844
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_before_commit",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-correction_before_commit-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.420917001669295,
+        102.85650000150781
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.59562499413732,
+        102.86808300588746
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.86808300588746
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_before_commit",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-correction_before_commit-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.62712500372436,
+        103.1929170130752
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.82625000400003,
+        103.20920900267083
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.20920900267083
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_before_commit",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-correction_before_commit-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 2,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.64529200759716,
+        103.07437500159722
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.54150000400841,
+        103.09600000618957
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.09600000618957
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_route",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-correction_during_route-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.8824579869397,
+        103.21720798674505,
+        61.41454100725241,
+        102.87395800696686
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.01624999556225,
+        103.22749998886138,
+        102.62104100547731,
+        103.13654100173153
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.22749998886138,
+        103.13654100173153
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_route",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-correction_during_route-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.90170900663361,
+        103.84004200750496,
+        61.81670799560379,
+        103.51724999782164
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.26670900394674,
+        103.86304200801533,
+        103.05041600076947,
+        103.87341599562205
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.86304200801533,
+        103.87341599562205
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_route",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-correction_during_route-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.572000005980954,
+        103.51204199832864,
+        61.91879199468531,
+        103.5092919919407
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.95600000245031,
+        103.53479199693538,
+        103.09124999912456,
+        103.84620899276342
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.53479199693538,
+        103.84620899276342
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_route",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-correction_during_route-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.76066699845251,
+        103.26495800109114,
+        61.71212499612011,
+        103.00062499300111
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.98795800190419,
+        103.27670798869804,
+        102.83474999596365,
+        103.17120800027624
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.27670798869804,
+        103.17120800027624
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_route",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-correction_during_route-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 1,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.33799999952316,
+        102.5630829972215,
+        60.62858299992513,
+        101.84200000367127
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.42583299987018,
+        102.57000000274274,
+        101.71245801029727,
+        101.98825001134537
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.57000000274274,
+        101.98825001134537
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_write",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-correction_during_write-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.247625009855255,
+        101.52166600164492,
+        61.24354200437665,
+        102.49145900888834
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        101.37512501387391,
+        132.21912500739563,
+        102.34525000851136,
+        133.71462500072084
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        132.21912500739563,
+        133.71462500072084
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_write",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-correction_during_write-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.13237500539981,
+        102.40679199341685,
+        61.342374989180826,
+        102.22754199639894
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.23541699815542,
+        133.48133300314657,
+        101.920874993084,
+        133.33508299547248
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        133.48133300314657,
+        133.33508299547248
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_write",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-correction_during_write-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.51466601295397,
+        103.02329101250507,
+        61.65891700948123,
+        103.25029199884739
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.66808301093988,
+        134.15641601022799,
+        102.8803329973016,
+        134.78837499860674
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        134.15641601022799,
+        134.78837499860674
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_write",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-correction_during_write-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.981499995454215,
+        103.65391700179316,
+        61.82191699917894,
+        103.60895800113212
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.19745799642988,
+        134.87358299607877,
+        103.1134170043515,
+        135.17920800950378
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        134.87358299607877,
+        135.17920800950378
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "correction_during_write",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-correction_during_write-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 1,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        62.150792000466026,
+        103.41304200119339,
+        61.61866700858809,
+        103.14987500896677
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.93445899151266,
+        134.571667003911,
+        102.7867079974385,
+        134.7381670057075
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        134.571667003911,
+        134.7381670057075
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "return_to_destination",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-return_to_destination-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        60.821833001682535,
+        102.39720800018404,
+        61.52487499639392,
+        102.87454100034665
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.03941600047983,
+        102.41316599422134,
+        102.67770799691789,
+        103.080000000773
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.41316599422134,
+        103.080000000773
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "return_to_destination",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-return_to_destination-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.28325000463519,
+        102.51354200590868,
+        61.439417011570185,
+        102.77525000856258
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.3716250056168,
+        102.5221669988241,
+        102.57912499946542,
+        102.99562499858439
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.5221669988241,
+        102.99562499858439
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "return_to_destination",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-return_to_destination-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.270125006558374,
+        102.54366601293441,
+        60.52674999227747,
+        101.97241700370796
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.36954101128504,
+        102.55162500834558,
+        101.69883399794344,
+        102.18487499514595
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.55162500834558,
+        102.18487499514595
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "return_to_destination",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-return_to_destination-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.7710829974385,
+        103.38962500100024,
+        61.92183299572207,
+        103.66083300323226
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.00775000359863,
+        103.40824999730103,
+        103.18049999477807,
+        104.09437499765772
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.40824999730103,
+        104.09437499765772
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "return_to_destination",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-return_to_destination-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 3,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT",
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        62.365165998926386,
+        103.12762499961536,
+        61.94425000285264,
+        103.8035410019802
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.72604100464378,
+        103.14725000353064,
+        103.28929100069217,
+        104.3172079953365
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.14725000353064,
+        104.3172079953365
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "overlapping_rooms",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-overlapping_rooms-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        64.36433400085662,
+        106.50470900873188,
+        64.5444999972824,
+        106.56941600609571
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        105.79408399644308,
+        106.52737499913201,
+        106.08445800608024,
+        106.96766599721741
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        106.52737499913201,
+        106.96766599721741
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "overlapping_rooms",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-overlapping_rooms-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.73533300170675,
+        103.66712500399444,
+        61.84837500040885,
+        103.76804099360015
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.00312499748543,
+        103.68395800469443,
+        103.16833299293648,
+        104.11712499626447
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.68395800469443,
+        104.11712499626447
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "overlapping_rooms",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-overlapping_rooms-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.851542006479576,
+        103.36750000715256,
+        61.89562499639578,
+        103.37791599158663
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.05058400263079,
+        103.3767920016544,
+        103.17175000091083,
+        104.67112499463838
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.3767920016544,
+        104.67112499463838
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "overlapping_rooms",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-overlapping_rooms-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.49112500133924,
+        102.77699999278411,
+        61.5287079999689,
+        102.79520800395403
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.59949999453966,
+        102.7827090001665,
+        102.64658300729934,
+        102.93483300483786
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.7827090001665,
+        102.93483300483786
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "overlapping_rooms",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-overlapping_rooms-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 2,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_AIRPORT"
+        ],
+        "b": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_AIRPORT",
+        "b": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.31979099882301,
+        102.61237499071285,
+        61.349374998826534,
+        102.65050000452902
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.41925000445917,
+        102.61929099215195,
+        102.4887090025004,
+        102.79475001152605
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.61929099215195,
+        102.79475001152605
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "repeat_same_stop",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-repeat_same_stop-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.10712500230875,
+        102.38362500967924,
+        61.43258299562149,
+        61.45512500370387
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.21941700729076,
+        102.39174999878742,
+        61.46700000681449,
+        61.511332998634316
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.39174999878742,
+        61.46700000681449,
+        61.511332998634316
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "repeat_same_stop",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-repeat_same_stop-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.4531250030268,
+        102.362916994025,
+        60.63429200730752,
+        61.47579199750908
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.10375000315253,
+        102.3698329954641,
+        60.67125000117812,
+        61.54845899436623
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.3698329954641,
+        60.67125000117812,
+        61.54845899436623
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "repeat_same_stop",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-repeat_same_stop-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        60.87637499149423,
+        102.55554199102335,
+        61.98833299276885,
+        61.73570799001027
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        102.11558399896603,
+        102.5847499986412,
+        62.08791599783581,
+        61.81837499025278
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        102.5847499986412,
+        62.08791599783581,
+        61.81837499025278
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "repeat_same_stop",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-repeat_same_stop-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.93416699534282,
+        103.54325000662357,
+        61.70358299277723,
+        61.98329200560693
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.17124999710359,
+        103.56254200451076,
+        61.76112499088049,
+        62.08541699743364
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.56254200451076,
+        61.76112499088049,
+        62.08541699743364
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "repeat_same_stop",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-repeat_same_stop-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": false,
+      "intended_actions_expected": 2,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 4,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": [
+          "P_OFFICE"
+        ]
+      },
+      "final_destinations": {
+        "a": "P_OFFICE"
+      },
+      "final_transcript_to_dispatch_ms": [
+        61.63962499704212,
+        103.959833009867,
+        61.34966701210942,
+        61.51374999899417
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        103.01937500480562,
+        103.98775000066962,
+        61.38866700348444,
+        61.57016700308304
+      ],
+      "final_transcript_to_effect_completion_ms": [
+        103.98775000066962,
+        61.38866700348444,
+        61.57016700308304
+      ]
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "read_lookup",
+      "repeat": 1,
+      "trace": "trace-read_write_adaptive-read_lookup-1.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        21.470083011081442
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        21.495041000889614
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "read_lookup",
+      "repeat": 2,
+      "trace": "trace-read_write_adaptive-read_lookup-2.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        21.400708006694913
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        21.422500009066425
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "read_lookup",
+      "repeat": 3,
+      "trace": "trace-read_write_adaptive-read_lookup-3.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        20.467999987886287
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        20.48566599842161
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "read_lookup",
+      "repeat": 4,
+      "trace": "trace-read_write_adaptive-read_lookup-4.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        21.587042007013224
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        21.608375012874603
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    },
+    {
+      "policy": "read_write_adaptive",
+      "scenario": "read_lookup",
+      "repeat": 5,
+      "trace": "trace-read_write_adaptive-read_lookup-5.jsonl",
+      "timeout": false,
+      "error": null,
+      "success": true,
+      "intended_actions_expected": 1,
+      "intended_actions_completed": 1,
+      "stale_dispatches": 0,
+      "superseded_inflight_write_completions": 0,
+      "backend_attempts": 1,
+      "cancelled_attempts": 0,
+      "observed_destinations": {
+        "a": []
+      },
+      "final_destinations": {
+        "a": null
+      },
+      "final_transcript_to_dispatch_ms": [
+        21.32362499833107
+      ],
+      "final_transcript_to_tool_completion_ms": [
+        21.34237499558367
+      ],
+      "final_transcript_to_effect_completion_ms": []
+    }
+  ],
+  "summary": {
+    "fixed": {
+      "runs": 35,
+      "successful_scenarios": 20,
+      "intended_actions_expected": 55,
+      "intended_actions_completed": 45,
+      "timeouts": 0,
+      "stale_dispatches": 5,
+      "superseded_inflight_write_completions": 5,
+      "final_transcript_to_dispatch_ms": {
+        "n": 115,
+        "p50_ms": 41.883,
+        "p95_ms": 83.52
+      },
+      "final_transcript_to_tool_completion_ms": {
+        "n": 115,
+        "p50_ms": 82.751,
+        "p95_ms": 113.803
+      },
+      "final_transcript_to_effect_completion_ms": {
+        "n": 60,
+        "p50_ms": 83.119,
+        "p95_ms": 114.012
+      }
+    },
+    "read_write_adaptive": {
+      "runs": 35,
+      "successful_scenarios": 20,
+      "intended_actions_expected": 55,
+      "intended_actions_completed": 45,
+      "timeouts": 0,
+      "stale_dispatches": 5,
+      "superseded_inflight_write_completions": 5,
+      "final_transcript_to_dispatch_ms": {
+        "n": 115,
+        "p50_ms": 61.944,
+        "p95_ms": 103.768
+      },
+      "final_transcript_to_tool_completion_ms": {
+        "n": 115,
+        "p50_ms": 102.835,
+        "p95_ms": 134.156
+      },
+      "final_transcript_to_effect_completion_ms": {
+        "n": 60,
+        "p50_ms": 103.137,
+        "p95_ms": 134.738
+      }
+    }
+  }
+}

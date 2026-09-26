@@ -1,0 +1,40 @@
+{
+  "declared_at_utc": "2026-09-26T08:24:20.104485+00:00",
+  "timing": "Frozen before live RTC or received-audio ASR.",
+  "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+  "suite_protocol_sha256": "d38f24979f0fd1baaeb927bba59986585c59cd90a82818be2e6d6bb9b78f2eeb",
+  "declared_trials": [
+    {
+      "id": "rtc-cancel-1",
+      "case": "cancel"
+    },
+    {
+      "id": "rtc-repeat-1",
+      "case": "repeat"
+    },
+    {
+      "id": "rtc-repeat-2",
+      "case": "repeat"
+    },
+    {
+      "id": "rtc-cancel-2",
+      "case": "cancel"
+    }
+  ],
+  "scope": "All four whole received streams, original order; no trimming/retries/success selection.",
+  "method": "Pinned local offline production Parakeet ASR, whole mono PCM16 resampled 24\u219216kHz. ASR is a proxy, not human listening.",
+  "review": {
+    "cancel": "Final reply affirms confirmed airport navigation cancellation, not that there was no active navigation. Initial old reply may be truncated. Backend cleared route separately verified.",
+    "repeat": "Final reply affirms active airport navigation replacing office and88-minute estimate. Initial airport/middle office replies are intentionally interrupted and need not be complete in ASR; declared summaries/effects remain audited.",
+    "errors": "Retain every number/name variant or missing fact; do not normalize away errors."
+  },
+  "limitations": [
+    "Reused synthetic development inputs and two repeated cases, not held-out FDB evaluation or human microphone/echo evidence.",
+    "Four fixed-order serial rooms and shared models do not support population accuracy, causal latency or concurrent-room capacity claims.",
+    "Client PCM receipt, speech-handle state and physical audible stop are different boundaries.",
+    "Planner optional lookup/cached read changes can alter physical attempt count; effects and allowable attempt chains are checked separately.",
+    "Default ICE/STUN may use network services although model inference stays local.",
+    "Private SDK sender identity shim is restricted to the reviewed installed source hash.",
+    "Initial/middle result speech is deliberately interrupted; full wording is assessed only for final replies."
+  ]
+}

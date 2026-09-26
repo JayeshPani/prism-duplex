@@ -1,0 +1,14 @@
+{
+  "at_utc": "2026-09-26T07:10:37.106012+00:00",
+  "error": "KeyError('baseline') in pre-launch metadata helper",
+  "cause": "Prepared protocol has no baseline field; the shell continued to the runner after helper failure.",
+  "completed_before_failure": [
+    "tested-source checksum assertion"
+  ],
+  "not_completed": [
+    "protocol baseline hash enrichment",
+    "received-audio-review-protocol.json creation",
+    "fresh pre-RTC model hashes"
+  ],
+  "decision": "Preserve already-running declared suite. Runner freezes actual source/protocol/input hashes itself. Do not mutate frozen inputs or restart; record missing preflight evidence explicitly."
+}

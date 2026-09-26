@@ -1,0 +1,167 @@
+{
+  "declared_at_utc": "2026-09-26T05:52:45.555977+00:00",
+  "hypothesis": "Spelling out the arrival estimate avoids the observed ETA-to-Ida recognition ambiguity while preserving destination, minutes and action outcome.",
+  "scope": "Four previously observed development result texts, sixteen Kokoro-to-Parakeet render/transcribe trials in ABBA order. No planner/tool/RTC effect or latency claim.",
+  "arm_order": [
+    "A",
+    "B",
+    "B",
+    "A"
+  ],
+  "declared_trials": 16,
+  "cases": [
+    {
+      "id": "airport_start",
+      "texts": {
+        "A": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+        "B": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes."
+      },
+      "expected_minutes": 88,
+      "expected_candidate_label": "estimated arrival",
+      "source": "results/iteration8/rtc-baseline-1/report.json",
+      "source_sha256": "f74780ab07d9ae4892efd91fcdbd4a98db37135046c566bd3d1b2daf6c7d40c2",
+      "source_selector": {
+        "kind": "result",
+        "intent_version": 1
+      },
+      "word_counts": {
+        "A": 10,
+        "B": 12
+      }
+    },
+    {
+      "id": "office_replacement",
+      "texts": {
+        "A": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+        "B": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes."
+      },
+      "expected_minutes": 29,
+      "expected_candidate_label": "estimated arrival",
+      "source": "results/iteration8/rtc-correction-1/report.json",
+      "source_sha256": "77e51c5411ae50533a0abad2e8054877285f50049518c163583c8d35a54852c5",
+      "source_selector": {
+        "kind": "result",
+        "intent_version": 2
+      },
+      "word_counts": {
+        "A": 14,
+        "B": 16
+      }
+    },
+    {
+      "id": "add_stop",
+      "texts": {
+        "A": "Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.",
+        "B": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station: 13 minutes, 0 extra minutes."
+      },
+      "expected_minutes": 13,
+      "expected_candidate_label": "estimated time",
+      "source": "results/iteration8/summary-comparison.json",
+      "source_sha256": "490d02a3acb3629b62f2bb4efbf39062e88ff49ad1d547d4291be0ab451473bc",
+      "source_selector": {
+        "block": 2,
+        "case": "add_stop"
+      },
+      "word_counts": {
+        "A": 18,
+        "B": 19
+      }
+    },
+    {
+      "id": "repeat_stop",
+      "texts": {
+        "A": "The stop at Blue Tokai, Indiranagar is already on your route. ETA to Office (Manyata Tech Park): 31 minutes.",
+        "B": "The stop at Blue Tokai, Indiranagar is already on your route. Estimated time to Office (Manyata Tech Park): 31 minutes."
+      },
+      "expected_minutes": 31,
+      "expected_candidate_label": "estimated time",
+      "source": "results/iteration8/summary-comparison.json",
+      "source_sha256": "490d02a3acb3629b62f2bb4efbf39062e88ff49ad1d547d4291be0ab451473bc",
+      "source_selector": {
+        "block": 2,
+        "case": "repeat_stop"
+      },
+      "word_counts": {
+        "A": 19,
+        "B": 20
+      }
+    }
+  ],
+  "configuration": {
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "review": "Keep all verbatim outputs; review destination/stop/replacement/no-op, duration and estimate wording for each declared text. Do not convert proper-name or number spelling differences into missing facts automatically. No human intelligibility score.",
+  "limits": [
+    "Previously observed development cases, selected to investigate a known acronym issue; not held-out evaluation.",
+    "One synthetic voice and production ASR cannot separate pronunciation from recognition error.",
+    "ABBA order shares loaded speech models; first cold inference retained; timings descriptive, no population estimates.",
+    "No LLM or RTC services during offline comparison; no trimming, retries or transcript-conditioned selection.",
+    "Candidate adds one or two spoken words and can change thirty-word fallback coverage. Test existing grounded-summary boundaries separately."
+  ],
+  "model_files_sha256": {
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/.gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/README.md": "af484ebbab54ee50ccfa4f07e778c0f7b2f05a0ac6a2d138e5aee5aae1366f9b",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/config.json": "9bd323e60afe2615c983a5d9fc3a2c0470df2a03edf90c0f861bd59509d07264",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/model.safetensors": "b958c37a6baa6874a279108755c8f2818e27bf647d72d54800a234a421341dfe",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/tokenizer.model": "5a3a82c48998709f9bc9f5db2924d99a899d20bf82550ca52272da7c7557b0a0",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/tokenizer.vocab": "dbe7ec6bd066c4526080940e1614e6582b9161515e856c2c39a1d49267c88cbc",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/vocab.txt": "70b25deed256d79365a3c290d6191c31cc2315d952faf18d5c3a334f46e4866e",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+  },
+  "frozen_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890",
+    "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "results/iteration8/rtc-baseline-1/report.json": "f74780ab07d9ae4892efd91fcdbd4a98db37135046c566bd3d1b2daf6c7d40c2",
+    "results/iteration8/rtc-correction-1/report.json": "77e51c5411ae50533a0abad2e8054877285f50049518c163583c8d35a54852c5",
+    "results/iteration8/summary-comparison.json": "490d02a3acb3629b62f2bb4efbf39062e88ff49ad1d547d4291be0ab451473bc",
+    "results/iteration9/coordinator-before.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+    "results/iteration9/coordinator-candidate.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "results/iteration9/measure_eta_speech.py": "ba6e34e1b321afac83a4384857be9601e6847953b7c92393f3861dcb8018fd8e",
+    "results/iteration9/responder-before.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731",
+    "results/iteration9/responder-candidate.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890",
+    "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d",
+    "tests/unit/test_summary_request_fidelity.py": "c25a324e0d3116dca6ae1f52ee28848effbcf40e160590412c2b520669ab1e9c",
+    "tests/unit/test_speech_truthfulness.py": "cb91ff564994755b52302f32cd79d3c84c94734c6dafdf8469c67e75e087c7f9",
+    "results/iteration9/eta-text-validation.json": "fae2000609227c11ee89ac5500f2f4e073c97aecec6d86501c9bd54ce366b623",
+    "results/iteration9/full-suite.txt": "ebb0a16a8110dbed86dbb6e3ccec399379b2f7a7679ded271e8150805a988c58",
+    "results/iteration9/run_eta_supervised.py": "8fc8c98f788fdcde3885cd3d55b209adc0645c40a4e078379cfa26296ccf1465"
+  },
+  "frozen_at_utc": "2026-09-26T05:59:06.682763+00:00",
+  "supervision": {
+    "process_deadline_seconds": 300,
+    "sigterm_grace_seconds": 20,
+    "then": "SIGKILL owned process group only, preserving partial evidence and supervisor receipt"
+  }
+}

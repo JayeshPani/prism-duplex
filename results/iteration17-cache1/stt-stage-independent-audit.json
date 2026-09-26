@@ -1,0 +1,2187 @@
+{
+  "created_at_utc": "2026-09-26T10:17:01.444404+00:00",
+  "scope": "Every retained call/stage/PCM and every declared capture, preserving failure, cancellation and pending outcomes.",
+  "source_sha256": {
+    "local-stack-run1/stt-diagnostics/report.json": "9065241991edb314901834907ed059be233b1f2f463881c934453b4febd74e3f",
+    "run-report.json": "141740f744ddd1bc6bfdda1b2821a78eda28c1c35f5d5e51eb268075e8e33e63",
+    "protocol.json": "98f6b0efc62bc731c57e147a7d51fb3ae325470d82c08966f09f491c25cc8605",
+    "preflight.json": "25b34c3e3fcc675172d70e5caa1afe3c87c1311ee2468ab7c02bce554990d4a6",
+    "local-stack-run1/stt-diagnostics-exit.json": "0d670171f89f75b5c8fb3f4af2f00401a0b49e769529e890931828a96ad52d7a",
+    "stt-stage-analysis.json": "95dc5174197b3ab857467cccfd867c0f2e089c2c33da0c81aee3ef435102d84e",
+    "rtc-cancel-1/report.json": "0dfd549cff317b11c3fbba467d22f6afa5cdf208fa55e1ec1d6b5cd64a2881eb",
+    "rtc-cancel-1/events.jsonl": "e26c0aafa09d921250d59629f99e0fd41fd91a35eea987bdd632f28efe0640f8",
+    "rtc-repeat-1/report.json": "aedc2fb8cd6964a5e4cb461184534c23d7f957cba870eea725e27197ad718807",
+    "rtc-repeat-1/events.jsonl": "013ffac9a5640902bef57777bf21fbbacebcb05dbd25548520b139efbc1c5fa7",
+    "rtc-repeat-2/report.json": "c75ab865d743d3a2d1c91ee2b3eb15113987b48280370c506d8d46b6de527c9f",
+    "rtc-repeat-2/events.jsonl": "bc9daae6963c2a79b5b48775c8d04f4540d46e68317c78c082c5acfd9aab7ccb",
+    "rtc-cancel-2/report.json": "34d64a9fc97ca2e19638d6a642869a1085caeaae68070eeb551325f58140cf60",
+    "rtc-cancel-2/events.jsonl": "9154921487320592c3e2788e325fd72ea68463c3470b52ea9f7f95d1b2cc90c4",
+    "audit_stt_stages.py": "ca73fabc052cbb5b6249b4fbc798741b57b707486d85c0273578662396351c25"
+  },
+  "artifact_consistency_checks_pass": true,
+  "consistency_issues": [],
+  "counts": {
+    "declared_captures": 4,
+    "capture_statuses": {
+      "completed_observation": 4
+    },
+    "native_calls": 11,
+    "recognition_calls": 10,
+    "call_types": {
+      "warmup": 1,
+      "_recognize_impl": 10
+    },
+    "request_types": {
+      "load": 1,
+      "warmup": 1,
+      "_recognize_impl": 10,
+      "transcribe_since": 10
+    },
+    "native_outcomes": {
+      "returned": 11
+    },
+    "caller_outcomes": {
+      "returned": 11
+    },
+    "request_outcomes": {
+      "returned": 22
+    },
+    "transcribe_since_without_engine_call": 10,
+    "verified_stages": 110,
+    "verified_pcm_files": 22,
+    "distinct_submitted_pcm_hashes": 11
+  },
+  "capture_mapping": [
+    {
+      "trial": "rtc-cancel-1",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "published_utterances": 2,
+      "recognition_calls": 2,
+      "user_finals": 2,
+      "turns": [
+        {
+          "call_id": "stt-call-002",
+          "input_label": "initial",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 1
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-003",
+          "input_label": "followup_1",
+          "final": {
+            "text": "Cancel navigation.",
+            "merged": "Cancel navigation.",
+            "intent_version": 2
+          },
+          "text_matches_call": true
+        }
+      ]
+    },
+    {
+      "trial": "rtc-repeat-1",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "published_utterances": 3,
+      "recognition_calls": 3,
+      "user_finals": 3,
+      "turns": [
+        {
+          "call_id": "stt-call-004",
+          "input_label": "initial",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 1
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-005",
+          "input_label": "followup_1",
+          "final": {
+            "text": "Actually, go to the office instead.",
+            "merged": "Actually, go to the office instead.",
+            "intent_version": 2
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-006",
+          "input_label": "followup_2",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 3
+          },
+          "text_matches_call": true
+        }
+      ]
+    },
+    {
+      "trial": "rtc-repeat-2",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "published_utterances": 3,
+      "recognition_calls": 3,
+      "user_finals": 3,
+      "turns": [
+        {
+          "call_id": "stt-call-007",
+          "input_label": "initial",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 1
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-008",
+          "input_label": "followup_1",
+          "final": {
+            "text": "Actually, go to the office instead.",
+            "merged": "Actually, go to the office instead.",
+            "intent_version": 2
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-009",
+          "input_label": "followup_2",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 3
+          },
+          "text_matches_call": true
+        }
+      ]
+    },
+    {
+      "trial": "rtc-cancel-2",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "published_utterances": 2,
+      "recognition_calls": 2,
+      "user_finals": 2,
+      "turns": [
+        {
+          "call_id": "stt-call-010",
+          "input_label": "initial",
+          "final": {
+            "text": "Navigate to the airport.",
+            "merged": "Navigate to the airport.",
+            "intent_version": 1
+          },
+          "text_matches_call": true
+        },
+        {
+          "call_id": "stt-call-011",
+          "input_label": "followup_1",
+          "final": {
+            "text": "Cancel navigation.",
+            "merged": "Cancel navigation.",
+            "intent_version": 2
+          },
+          "text_matches_call": true
+        }
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "call_id": "stt-call-001",
+      "request_id": "stt-request-002",
+      "room": null,
+      "call_type": "warmup",
+      "caller_outcome": {
+        "monotonic_ns": 135561076438041,
+        "unix_ns": 1790417246418183000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": ""
+      },
+      "native_outcome": {
+        "monotonic_ns": 135561073896958,
+        "unix_ns": 1790417246415642000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": ""
+      },
+      "future_outcome": {
+        "monotonic_ns": 135561075200583,
+        "unix_ns": 1790417246416946000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.01025,
+        "submit_to_worker_entry": 0.021,
+        "worker_entry_to_native_completion": 1115.355792,
+        "native_completion_to_caller_return": 2.541083,
+        "api_entry_to_caller_return": 1117.928125
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.002625
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.099333
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.027
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.034333
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.036167
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1114.609083
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 65.224292
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 1.311334
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1047.658458
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.136542
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 32000,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 32000,
+        "file": "pcm/stt-call-001-submitted_pcm.pcm",
+        "sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "duration_seconds": 1.0
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 32000,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 32000,
+        "file": "pcm/stt-call-001-written_wav_pcm.pcm",
+        "sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "duration_seconds": 1.0
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-002",
+      "request_id": "stt-request-003",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135568539389000,
+        "unix_ns": 1790417253881153000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135568539263083,
+        "unix_ns": 1790417253881027000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135568539297708,
+        "unix_ns": 1790417253881062000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.041708,
+        "submit_to_worker_entry": 0.204917,
+        "worker_entry_to_native_completion": 1484.086333,
+        "native_completion_to_caller_return": 0.125917,
+        "api_entry_to_caller_return": 1484.458875
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.019625
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.487875
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.08125
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.112625
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.443834
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1482.502417
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 87.865084
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.634209
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1393.85075
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.160625
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-002-submitted_pcm.pcm",
+        "sha256": "8d0e9542aa2e1b8b1fccad7b3c0518e94d8f66f3021aa85319359a4bc883ec65",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-002-written_wav_pcm.pcm",
+        "sha256": "8d0e9542aa2e1b8b1fccad7b3c0518e94d8f66f3021aa85319359a4bc883ec65",
+        "duration_seconds": 1.92
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-003",
+      "request_id": "stt-request-005",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135599209760916,
+        "unix_ns": 1790417284551603000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135599209627875,
+        "unix_ns": 1790417284551470000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135599209661041,
+        "unix_ns": 1790417284551503000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.036667,
+        "submit_to_worker_entry": 0.088458,
+        "worker_entry_to_native_completion": 12709.504917,
+        "native_completion_to_caller_return": 0.133041,
+        "api_entry_to_caller_return": 12709.763083
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.020208
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.530792
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.075833
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.063875
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.05325
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 12707.7145
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 95.417333
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.281583
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 12611.862041
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.647042
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 66176,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 66176,
+        "file": "pcm/stt-call-003-submitted_pcm.pcm",
+        "sha256": "b52c7208c4711b01ab68f87ed205a1dec842a17293ec89e45d313227daee35ec",
+        "duration_seconds": 2.068
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 66176,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 66176,
+        "file": "pcm/stt-call-003-written_wav_pcm.pcm",
+        "sha256": "b52c7208c4711b01ab68f87ed205a1dec842a17293ec89e45d313227daee35ec",
+        "duration_seconds": 2.068
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-004",
+      "request_id": "stt-request-007",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135620235584583,
+        "unix_ns": 1790417305577481000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135620235417791,
+        "unix_ns": 1790417305577314000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135620235448000,
+        "unix_ns": 1790417305577344000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.084333,
+        "submit_to_worker_entry": 0.169375,
+        "worker_entry_to_native_completion": 6591.375958,
+        "native_completion_to_caller_return": 0.166792,
+        "api_entry_to_caller_return": 6591.796458
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.031958
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.894333
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.276292
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.405708
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.446292
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 6588.711166
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 101.204375
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.5765
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 6486.7245
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.179417
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-004-submitted_pcm.pcm",
+        "sha256": "bc93e09a44057d53991b9ce550f086039965c25f1364cfc38e9fbc5911e6f9c1",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-004-written_wav_pcm.pcm",
+        "sha256": "bc93e09a44057d53991b9ce550f086039965c25f1364cfc38e9fbc5911e6f9c1",
+        "duration_seconds": 1.92
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-005",
+      "request_id": "stt-request-009",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135631686420750,
+        "unix_ns": 1790417317028346000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135631686286500,
+        "unix_ns": 1790417317028212000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135631686313125,
+        "unix_ns": 1790417317028239000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.056708,
+        "submit_to_worker_entry": 0.207,
+        "worker_entry_to_native_completion": 1833.236792,
+        "native_completion_to_caller_return": 0.13425,
+        "api_entry_to_caller_return": 1833.63475
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.013334
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.765666
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.205709
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.257
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.238916
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1830.875291
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 104.763666
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.682208
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1725.203042
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.46875
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-005-submitted_pcm.pcm",
+        "sha256": "31f8ae847168adf859f0b0f268bec16a060bd9d5a02036af10c56466a6172cb6",
+        "duration_seconds": 2.772
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-005-written_wav_pcm.pcm",
+        "sha256": "31f8ae847168adf859f0b0f268bec16a060bd9d5a02036af10c56466a6172cb6",
+        "duration_seconds": 2.772
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-006",
+      "request_id": "stt-request-011",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135644945332375,
+        "unix_ns": 1790417330287292000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135644945249541,
+        "unix_ns": 1790417330287209000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135644945273500,
+        "unix_ns": 1790417330287233000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.026167,
+        "submit_to_worker_entry": 0.071458,
+        "worker_entry_to_native_completion": 1555.1205,
+        "native_completion_to_caller_return": 0.082834,
+        "api_entry_to_caller_return": 1555.300959
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.019
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.708875
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.041625
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.07475
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.421125
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1553.522875
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 94.475333
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.290209
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1458.604083
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.162916
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 74368,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 74368,
+        "file": "pcm/stt-call-006-submitted_pcm.pcm",
+        "sha256": "2741a00f03976eb0996eadfe69a4cc67cf244b2ef1896107a33dbc3297104014",
+        "duration_seconds": 2.324
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 74368,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 74368,
+        "file": "pcm/stt-call-006-written_wav_pcm.pcm",
+        "sha256": "2741a00f03976eb0996eadfe69a4cc67cf244b2ef1896107a33dbc3297104014",
+        "duration_seconds": 2.324
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-007",
+      "request_id": "stt-request-013",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135688264101833,
+        "unix_ns": 1790417373606172000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135688264004000,
+        "unix_ns": 1790417373606074000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135688264030500,
+        "unix_ns": 1790417373606101000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.021417,
+        "submit_to_worker_entry": 0.104167,
+        "worker_entry_to_native_completion": 18303.017375,
+        "native_completion_to_caller_return": 0.097833,
+        "api_entry_to_caller_return": 18303.240792
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.01925
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 8.925458
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.139166
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.164083
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.538375
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 18292.032042
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 116.892916
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.23925
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 18174.722
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.851334
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 62464,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 62464,
+        "file": "pcm/stt-call-007-submitted_pcm.pcm",
+        "sha256": "f0b8d1d4037d00b9bc2b21a5792bfc267e7421410738e59de5729af1912bc91d",
+        "duration_seconds": 1.952
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 62464,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 62464,
+        "file": "pcm/stt-call-007-written_wav_pcm.pcm",
+        "sha256": "f0b8d1d4037d00b9bc2b21a5792bfc267e7421410738e59de5729af1912bc91d",
+        "duration_seconds": 1.952
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-008",
+      "request_id": "stt-request-015",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135717880310041,
+        "unix_ns": 1790417403222456000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135717879750250,
+        "unix_ns": 1790417403221896000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135717880034208,
+        "unix_ns": 1790417403222180000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.030875,
+        "submit_to_worker_entry": 0.079375,
+        "worker_entry_to_native_completion": 19717.908917,
+        "native_completion_to_caller_return": 0.559791,
+        "api_entry_to_caller_return": 19718.578958
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.018417
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.302208
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.08125
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.313125
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.194
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 19716.033125
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 100.675334
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.676959
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 19614.391625
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.149292
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 87680,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 87680,
+        "file": "pcm/stt-call-008-submitted_pcm.pcm",
+        "sha256": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+        "duration_seconds": 2.74
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 87680,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 87680,
+        "file": "pcm/stt-call-008-written_wav_pcm.pcm",
+        "sha256": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+        "duration_seconds": 2.74
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-009",
+      "request_id": "stt-request-017",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135735634438666,
+        "unix_ns": 1790417420976630000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135735632397708,
+        "unix_ns": 1790417420974589000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135735632421791,
+        "unix_ns": 1790417420974613000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.032708,
+        "submit_to_worker_entry": 0.125625,
+        "worker_entry_to_native_completion": 5871.163125,
+        "native_completion_to_caller_return": 2.040958,
+        "api_entry_to_caller_return": 5873.362416
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.019333
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.298792
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.192084
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.240875
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.099875
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 5869.8865
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 103.639875
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 2.012959
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 5763.894792
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.142959
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 75392,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 75392,
+        "file": "pcm/stt-call-009-submitted_pcm.pcm",
+        "sha256": "c4d423c95af6f76f6a2cb3e5b577a0f695aad3b35df37fafd40661ef674b33b8",
+        "duration_seconds": 2.356
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 75392,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 75392,
+        "file": "pcm/stt-call-009-written_wav_pcm.pcm",
+        "sha256": "c4d423c95af6f76f6a2cb3e5b577a0f695aad3b35df37fafd40661ef674b33b8",
+        "duration_seconds": 2.356
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-010",
+      "request_id": "stt-request-019",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135777166730083,
+        "unix_ns": 1790417462509028000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135777166575916,
+        "unix_ns": 1790417462508874000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135777166603541,
+        "unix_ns": 1790417462508902000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.023958,
+        "submit_to_worker_entry": 0.08075,
+        "worker_entry_to_native_completion": 14246.73675,
+        "native_completion_to_caller_return": 0.154167,
+        "api_entry_to_caller_return": 14246.995625
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.014542
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.139625
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.042208
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.168416
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.107958
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 14245.90025
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 81.867667
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.81575
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 14163.044541
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.152209
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-010-submitted_pcm.pcm",
+        "sha256": "1325dda65ea37b091ea22f3205ad6c2a7e081ce3b6d756483c941f8e1017570c",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-010-written_wav_pcm.pcm",
+        "sha256": "1325dda65ea37b091ea22f3205ad6c2a7e081ce3b6d756483c941f8e1017570c",
+        "duration_seconds": 1.92
+      },
+      "submitted_equals_written_pcm": true
+    },
+    {
+      "call_id": "stt-call-011",
+      "request_id": "stt-request-021",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 135801735135041,
+        "unix_ns": 1790417487077496000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "native_outcome": {
+        "monotonic_ns": 135801734999708,
+        "unix_ns": 1790417487077361000,
+        "thread_id": 6257307648,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "future_outcome": {
+        "monotonic_ns": 135801735021625,
+        "unix_ns": 1790417487077382000,
+        "thread_id": 6257307648,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.0455,
+        "submit_to_worker_entry": 0.499584,
+        "worker_entry_to_native_completion": 15210.249833,
+        "native_completion_to_caller_return": 0.135333,
+        "api_entry_to_caller_return": 15210.93025
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.027
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.870541
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.434917
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.503166
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.134125
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 15207.445667
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 114.729875
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.963708
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 15091.339792
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.136584
+        }
+      ],
+      "submitted_pcm": {
+        "requested_bytes": 67200,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 67200,
+        "file": "pcm/stt-call-011-submitted_pcm.pcm",
+        "sha256": "66fc5ad8b471515a6010a97538d1a5ba5997186907477c3ea5191bda15de0a19",
+        "duration_seconds": 2.1
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 67200,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 67200,
+        "file": "pcm/stt-call-011-written_wav_pcm.pcm",
+        "sha256": "66fc5ad8b471515a6010a97538d1a5ba5997186907477c3ea5191bda15de0a19",
+        "duration_seconds": 2.1
+      },
+      "submitted_equals_written_pcm": true
+    }
+  ],
+  "requests": [
+    {
+      "request_id": "stt-request-001",
+      "call_type": "load",
+      "room": null,
+      "identity_error": "RuntimeError('no job context found, are you running this code inside a job entrypoint?')",
+      "entry": {
+        "monotonic_ns": 135558979777166,
+        "unix_ns": 1790417244321517000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135559958475541,
+        "unix_ns": 1790417245300218000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 978.698375
+    },
+    {
+      "request_id": "stt-request-002",
+      "call_type": "warmup",
+      "room": null,
+      "identity_error": "RuntimeError('no job context found, are you running this code inside a job entrypoint?')",
+      "entry": {
+        "monotonic_ns": 135559958490583,
+        "unix_ns": 1790417245300233000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135561078255500,
+        "unix_ns": 1790417246420001000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 1119.764917
+    },
+    {
+      "request_id": "stt-request-003",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135567052438708,
+        "unix_ns": 1790417252394199000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135568539822958,
+        "unix_ns": 1790417253881587000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 1487.38425
+    },
+    {
+      "request_id": "stt-request-004",
+      "call_type": "transcribe_since",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135568550691416,
+        "unix_ns": 1790417253892456000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135568550946750,
+        "unix_ns": 1790417253892711000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.255334
+    },
+    {
+      "request_id": "stt-request-005",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135586498565166,
+        "unix_ns": 1790417271840375000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135599210869916,
+        "unix_ns": 1790417284552712000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 12712.30475
+    },
+    {
+      "request_id": "stt-request-006",
+      "call_type": "transcribe_since",
+      "room": "car-audio-b662c5963f4b476ebc477e4839517c10",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135599217083416,
+        "unix_ns": 1790417284558926000,
+        "thread_id": 6159249408
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135599217112416,
+        "unix_ns": 1790417284558955000,
+        "thread_id": 6159249408,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.029
+    },
+    {
+      "request_id": "stt-request-007",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135613641186208,
+        "unix_ns": 1790417298983066000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135620236660833,
+        "unix_ns": 1790417305578557000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 6595.474625
+    },
+    {
+      "request_id": "stt-request-008",
+      "call_type": "transcribe_since",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135620240987333,
+        "unix_ns": 1790417305582884000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135620241013833,
+        "unix_ns": 1790417305582910000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.0265
+    },
+    {
+      "request_id": "stt-request-009",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135629849517000,
+        "unix_ns": 1790417315191438000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135631686831041,
+        "unix_ns": 1790417317028757000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 1837.314041
+    },
+    {
+      "request_id": "stt-request-010",
+      "call_type": "transcribe_since",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135631694190458,
+        "unix_ns": 1790417317036116000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135631694213625,
+        "unix_ns": 1790417317036139000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.023167
+    },
+    {
+      "request_id": "stt-request-011",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135643388962291,
+        "unix_ns": 1790417328730918000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135644945617166,
+        "unix_ns": 1790417330287577000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 1556.654875
+    },
+    {
+      "request_id": "stt-request-012",
+      "call_type": "transcribe_since",
+      "room": "car-audio-fa22620c471a45f0a034c0a1343c99ad",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135644950948750,
+        "unix_ns": 1790417330292908000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135644950973375,
+        "unix_ns": 1790417330292933000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.024625
+    },
+    {
+      "request_id": "stt-request-013",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135669959788375,
+        "unix_ns": 1790417355301812000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135688266231625,
+        "unix_ns": 1790417373608302000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 18306.44325
+    },
+    {
+      "request_id": "stt-request-014",
+      "call_type": "transcribe_since",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135688271641208,
+        "unix_ns": 1790417373613712000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135688271703083,
+        "unix_ns": 1790417373613773000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.061875
+    },
+    {
+      "request_id": "stt-request-015",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135698159764166,
+        "unix_ns": 1790417383501860000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135717881755166,
+        "unix_ns": 1790417403223901000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 19721.991
+    },
+    {
+      "request_id": "stt-request-016",
+      "call_type": "transcribe_since",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135717887993041,
+        "unix_ns": 1790417403230139000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135717888037666,
+        "unix_ns": 1790417403230184000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.044625
+    },
+    {
+      "request_id": "stt-request-017",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135729759613625,
+        "unix_ns": 1790417415101790000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135735635533875,
+        "unix_ns": 1790417420977726000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 5875.92025
+    },
+    {
+      "request_id": "stt-request-018",
+      "call_type": "transcribe_since",
+      "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135735646371625,
+        "unix_ns": 1790417420988563000,
+        "thread_id": 17431736320
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135735646401833,
+        "unix_ns": 1790417420988593000,
+        "thread_id": 17431736320,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.030208
+    },
+    {
+      "request_id": "stt-request-019",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135762918828583,
+        "unix_ns": 1790417448261090000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135777169585458,
+        "unix_ns": 1790417462511883000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 14250.756875
+    },
+    {
+      "request_id": "stt-request-020",
+      "call_type": "transcribe_since",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135777179016291,
+        "unix_ns": 1790417462521315000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135777179047750,
+        "unix_ns": 1790417462521346000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.031459
+    },
+    {
+      "request_id": "stt-request-021",
+      "call_type": "_recognize_impl",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135786521251000,
+        "unix_ns": 1790417471863574000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135801737965458,
+        "unix_ns": 1790417487080326000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 15216.714458
+    },
+    {
+      "request_id": "stt-request-022",
+      "call_type": "transcribe_since",
+      "room": "car-audio-013fab4f05bb448480f59dea91343a6f",
+      "identity_error": null,
+      "entry": {
+        "monotonic_ns": 135801746036458,
+        "unix_ns": 1790417487088397000,
+        "thread_id": 17472172032
+      },
+      "stages": [],
+      "return": {
+        "monotonic_ns": 135801746066708,
+        "unix_ns": 1790417487088428000,
+        "thread_id": 17472172032,
+        "status": "returned",
+        "result_text": null
+      },
+      "elapsed_ms": 0.03025
+    }
+  ],
+  "slowest_recognition_call": {
+    "call_id": "stt-call-008",
+    "request_id": "stt-request-015",
+    "room": "car-audio-013f677f43c7464688d23c52226f7a3b",
+    "call_type": "_recognize_impl",
+    "caller_outcome": {
+      "monotonic_ns": 135717880310041,
+      "unix_ns": 1790417403222456000,
+      "thread_id": 17431736320,
+      "status": "returned",
+      "result_text": "Actually, go to the office instead."
+    },
+    "native_outcome": {
+      "monotonic_ns": 135717879750250,
+      "unix_ns": 1790417403221896000,
+      "thread_id": 6257307648,
+      "status": "returned",
+      "result_text": "Actually, go to the office instead."
+    },
+    "future_outcome": {
+      "monotonic_ns": 135717880034208,
+      "unix_ns": 1790417403222180000,
+      "thread_id": 6257307648,
+      "cancelled": false,
+      "status": "returned",
+      "result_text": null
+    },
+    "milliseconds": {
+      "api_entry_to_submit": 0.030875,
+      "submit_to_worker_entry": 0.079375,
+      "worker_entry_to_native_completion": 19717.908917,
+      "native_completion_to_caller_return": 0.559791,
+      "api_entry_to_caller_return": 19718.578958
+    },
+    "stages": [
+      {
+        "name": "engine_load_check",
+        "status": "returned",
+        "milliseconds": 0.018417
+      },
+      {
+        "name": "tempfile_create",
+        "status": "returned",
+        "milliseconds": 0.302208
+      },
+      {
+        "name": "wave_open",
+        "status": "returned",
+        "milliseconds": 0.08125
+      },
+      {
+        "name": "wave_writeframes",
+        "status": "returned",
+        "milliseconds": 0.313125
+      },
+      {
+        "name": "wave_close",
+        "status": "returned",
+        "milliseconds": 0.194
+      },
+      {
+        "name": "model_transcribe",
+        "status": "returned",
+        "milliseconds": 19716.033125
+      },
+      {
+        "name": "parakeet_load_audio",
+        "status": "returned",
+        "milliseconds": 100.675334
+      },
+      {
+        "name": "parakeet_get_logmel",
+        "status": "returned",
+        "milliseconds": 0.676959
+      },
+      {
+        "name": "parakeet_generate",
+        "status": "returned",
+        "milliseconds": 19614.391625
+      },
+      {
+        "name": "tempfile_unlink",
+        "status": "returned",
+        "milliseconds": 0.149292
+      }
+    ],
+    "submitted_pcm": {
+      "requested_bytes": 87680,
+      "sample_rate": 16000,
+      "sample_format": "native int16 mono",
+      "status": "retained",
+      "bytes": 87680,
+      "file": "pcm/stt-call-008-submitted_pcm.pcm",
+      "sha256": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+      "duration_seconds": 2.74
+    },
+    "written_wav_pcm": {
+      "requested_bytes": 87680,
+      "sample_rate": 16000,
+      "sample_format": "native int16 mono",
+      "status": "retained",
+      "bytes": 87680,
+      "file": "pcm/stt-call-008-written_wav_pcm.pcm",
+      "sha256": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+      "duration_seconds": 2.74
+    },
+    "submitted_equals_written_pcm": true
+  },
+  "declared_turns": 10,
+  "source_input_method_manifests": {
+    "preflight": {
+      "files": 52,
+      "all_match": true,
+      "mismatches": [],
+      "observed_sha256": {
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/analyze_stt.py": "26d34fa85a010c94ae3efea846239648581c8c244fe3565603f7f82add2a685b",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audit_live.py": "e4568b1b68639fc9132f26de23715ea5008eb8c3e81e7c73913f76e3a22d3205",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audit_semantic_repair.py": "29a7087f8b97ff2bf43c84492211a384a301cbf7d2e7fe0ddbc2764cfb38290a",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audit_stt_stages.py": "ca73fabc052cbb5b6249b4fbc798741b57b707486d85c0273578662396351c25",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audit_supplementary.py": "5e80ab0832cba8a592c3d06658b4a17236f6fca2ca08c6b4453b72bb97785910",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/instrumented_worker.py": "6d7da6a8d29afbff81fe7f25827d74fd736ae113d0427c7c91986dfd263371ea",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/preflight.py": "9bf33c204d326d1645c9b2506eea28e19315646642b68ee44ef28b8fb77667d7",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/review_received_audio.py": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/run_received_audio_supervised.py": "18a28fca610a6e128a56723ffbb65a1fc330101210ac308129854f9c24ffcdf7",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/run_suite.py": "dff6ac1fe05b4d430c8cc28a67985989e5436c3d46b5b7d686bdde2ee26e6aee",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/summarize_completion.py": "b9fedb5da5eab71e616d9febe979051b0cce94e4489e98992738e3ff64128e57",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/summarize_latency.py": "68516466de446f414284a8d42a0d7bc73898200287b4715e74d737fbecb7e2cb",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/protocol.json": "98f6b0efc62bc731c57e147a7d51fb3ae325470d82c08966f09f491c25cc8605",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/plan.json": "17ebc3b2b613757f1496b7968f52bf40a52fd6d6b8e2eb61bbbc564879482227",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/received-audio-review-protocol.json": "bb83bd4ef2291e00ad613beabac2e6dd7aa4d7309545a9f5d3f0cce17b3f54c8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/tested-source.json": "48a4e09f2065f8307926f73b031c70a7b3d6ee764f672393b22311810416b95f",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/full-tests.txt": "aafce0e6ef5786b599d7b83c9be7e4d8e4b4cf7c5cb1ff3a5e1bf2903c98e8cb",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration16/local-stack-run1/llm-launch.json": "15c18594098a98e88af39c2ec6cdfba365645d1bb3a54d57935cbfe177d2df19",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration16/local-stack-run1/livekit.yaml": "5e533151983ad839d9bb4ba99f4e7e3511e44eb4ca4ea1025a14e915ca2434da",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17/comparison-protocol.json": "3b11cbce838a2fdea30148ce5b05f2f4e59ec5216586fdd10f844facb1b8ef87",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/cancel.wav": "3040f518eb41536377197fc62843227868f5bbb9efb632d25ae71cde35beec6c",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/correct.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/navigate.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54"
+      }
+    },
+    "runner": {
+      "files": 41,
+      "all_match": true,
+      "mismatches": [],
+      "observed_sha256": {
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/instrumented_worker.py": "6d7da6a8d29afbff81fe7f25827d74fd736ae113d0427c7c91986dfd263371ea",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/run_suite.py": "dff6ac1fe05b4d430c8cc28a67985989e5436c3d46b5b7d686bdde2ee26e6aee",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/preflight.json": "25b34c3e3fcc675172d70e5caa1afe3c87c1311ee2468ab7c02bce554990d4a6",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/received-audio-review-protocol.json": "bb83bd4ef2291e00ad613beabac2e6dd7aa4d7309545a9f5d3f0cce17b3f54c8",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/review_received_audio.py": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/run_received_audio_supervised.py": "18a28fca610a6e128a56723ffbb65a1fc330101210ac308129854f9c24ffcdf7",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/protocol.json": "98f6b0efc62bc731c57e147a7d51fb3ae325470d82c08966f09f491c25cc8605",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/plan.json": "17ebc3b2b613757f1496b7968f52bf40a52fd6d6b8e2eb61bbbc564879482227",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/local-stack-run1/livekit.yaml": "5e533151983ad839d9bb4ba99f4e7e3511e44eb4ca4ea1025a14e915ca2434da",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/cancel.wav": "3040f518eb41536377197fc62843227868f5bbb9efb632d25ae71cde35beec6c",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/correct.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration17-cache1/audio-assets/navigate.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54"
+      }
+    }
+  },
+  "preflight_model_receipts_match": true,
+  "verified_pcm_sha256": {
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-submitted_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-written_wav_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-submitted_pcm.pcm": "8d0e9542aa2e1b8b1fccad7b3c0518e94d8f66f3021aa85319359a4bc883ec65",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-written_wav_pcm.pcm": "8d0e9542aa2e1b8b1fccad7b3c0518e94d8f66f3021aa85319359a4bc883ec65",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-submitted_pcm.pcm": "b52c7208c4711b01ab68f87ed205a1dec842a17293ec89e45d313227daee35ec",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-written_wav_pcm.pcm": "b52c7208c4711b01ab68f87ed205a1dec842a17293ec89e45d313227daee35ec",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-submitted_pcm.pcm": "bc93e09a44057d53991b9ce550f086039965c25f1364cfc38e9fbc5911e6f9c1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-written_wav_pcm.pcm": "bc93e09a44057d53991b9ce550f086039965c25f1364cfc38e9fbc5911e6f9c1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-submitted_pcm.pcm": "31f8ae847168adf859f0b0f268bec16a060bd9d5a02036af10c56466a6172cb6",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-written_wav_pcm.pcm": "31f8ae847168adf859f0b0f268bec16a060bd9d5a02036af10c56466a6172cb6",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-submitted_pcm.pcm": "2741a00f03976eb0996eadfe69a4cc67cf244b2ef1896107a33dbc3297104014",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-written_wav_pcm.pcm": "2741a00f03976eb0996eadfe69a4cc67cf244b2ef1896107a33dbc3297104014",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-submitted_pcm.pcm": "f0b8d1d4037d00b9bc2b21a5792bfc267e7421410738e59de5729af1912bc91d",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-written_wav_pcm.pcm": "f0b8d1d4037d00b9bc2b21a5792bfc267e7421410738e59de5729af1912bc91d",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-008-submitted_pcm.pcm": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-008-written_wav_pcm.pcm": "c59f506b389fb7a9238a48b11d67ef3882e3673084fcc6e71ace60c6687bd7f8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-009-submitted_pcm.pcm": "c4d423c95af6f76f6a2cb3e5b577a0f695aad3b35df37fafd40661ef674b33b8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-009-written_wav_pcm.pcm": "c4d423c95af6f76f6a2cb3e5b577a0f695aad3b35df37fafd40661ef674b33b8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-010-submitted_pcm.pcm": "1325dda65ea37b091ea22f3205ad6c2a7e081ce3b6d756483c941f8e1017570c",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-010-written_wav_pcm.pcm": "1325dda65ea37b091ea22f3205ad6c2a7e081ce3b6d756483c941f8e1017570c",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-011-submitted_pcm.pcm": "66fc5ad8b471515a6010a97538d1a5ba5997186907477c3ea5191bda15de0a19",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-011-written_wav_pcm.pcm": "66fc5ad8b471515a6010a97538d1a5ba5997186907477c3ea5191bda15de0a19"
+  },
+  "same_submitted_pcm_groups": [
+    [
+      "stt-call-001"
+    ],
+    [
+      "stt-call-002"
+    ],
+    [
+      "stt-call-003"
+    ],
+    [
+      "stt-call-004"
+    ],
+    [
+      "stt-call-005"
+    ],
+    [
+      "stt-call-006"
+    ],
+    [
+      "stt-call-007"
+    ],
+    [
+      "stt-call-008"
+    ],
+    [
+      "stt-call-009"
+    ],
+    [
+      "stt-call-010"
+    ],
+    [
+      "stt-call-011"
+    ]
+  ],
+  "source_current_before_after_match": true,
+  "observer_identical_to_iteration16": true,
+  "native_model_references": [
+    {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    }
+  ],
+  "preflight_model_receipts": {
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/.gitattributes": {
+      "reference": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "observed": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/README.md": {
+      "reference": "af484ebbab54ee50ccfa4f07e778c0f7b2f05a0ac6a2d138e5aee5aae1366f9b",
+      "observed": "af484ebbab54ee50ccfa4f07e778c0f7b2f05a0ac6a2d138e5aee5aae1366f9b"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/config.json": {
+      "reference": "9bd323e60afe2615c983a5d9fc3a2c0470df2a03edf90c0f861bd59509d07264",
+      "observed": "9bd323e60afe2615c983a5d9fc3a2c0470df2a03edf90c0f861bd59509d07264"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/model.safetensors": {
+      "reference": "b958c37a6baa6874a279108755c8f2818e27bf647d72d54800a234a421341dfe",
+      "observed": "b958c37a6baa6874a279108755c8f2818e27bf647d72d54800a234a421341dfe"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/tokenizer.model": {
+      "reference": "5a3a82c48998709f9bc9f5db2924d99a899d20bf82550ca52272da7c7557b0a0",
+      "observed": "5a3a82c48998709f9bc9f5db2924d99a899d20bf82550ca52272da7c7557b0a0"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/tokenizer.vocab": {
+      "reference": "dbe7ec6bd066c4526080940e1614e6582b9161515e856c2c39a1d49267c88cbc",
+      "observed": "dbe7ec6bd066c4526080940e1614e6582b9161515e856c2c39a1d49267c88cbc"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/vocab.txt": {
+      "reference": "70b25deed256d79365a3c290d6191c31cc2315d952faf18d5c3a334f46e4866e",
+      "observed": "70b25deed256d79365a3c290d6191c31cc2315d952faf18d5c3a334f46e4866e"
+    },
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/kokoro-v1.0.onnx": {
+      "reference": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "observed": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5"
+    },
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/voices-v1.0.bin": {
+      "reference": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "observed": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+    },
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/model.safetensors": {
+      "reference": "f2d29621aab300336ad645567ff38c42aac755513006ef4e8a579cf7ef5256d8",
+      "observed": "f2d29621aab300336ad645567ff38c42aac755513006ef4e8a579cf7ef5256d8"
+    }
+  },
+  "diagnostic_health": {
+    "dropped_calls": 0,
+    "dropped_requests": 0,
+    "observation_error_count": 0,
+    "observation_errors": [],
+    "pending_native_call_ids": [],
+    "retained_pcm_bytes": 1476608,
+    "observation_hooks": 387,
+    "observation_total_ns": 3339829,
+    "observation_max_ns": 347291
+  },
+  "dropped_stage_count": 0,
+  "limits": [
+    "Consistency checks are not a conversation success score. All declared failures remain in the capture mapping.",
+    "Mapping uses exact room plus chronological call/input/final order and transcript comparison; native diagnostics have no coordinator operation ID.",
+    "Exact normalized PCM equality is checked independently of reused source WAVs. Warmup remains separate from recognition counts.",
+    "Only completed stage endpoints permit duration computation; absent/cancelled/pending outcomes are retained rather than inferred successful.",
+    "Stage intervals nest. No extra accelerator synchronization was added; lazy frontend work can appear within generation host wall time.",
+    "Queue boundaries include dispatch/instrumentation/scheduling. Measured helper overhead excludes some clock/wrapper/context costs and is not a bound on total observer overhead.",
+    "Identical observer bytes preserve the previously reviewed wrapper behavior and its limits, not zero observer impact. Preflight model receipts are preserved; this audit does not reread GB-scale model files.",
+    "These observations neither explain the earlier uninstrumented 13-second call nor demonstrate causal performance improvement."
+  ]
+}

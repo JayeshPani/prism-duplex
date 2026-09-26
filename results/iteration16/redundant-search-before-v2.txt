@@ -1,0 +1,222 @@
+Responder SHA256: 09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14 (matches frozen iteration15)
+FFFFF......................F..........                                   [100%]
+=================================== FAILURES ===================================
+_ test_redundant_lookup_speaks_complete_replacement_without_model[False-False] _
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x106960f90>)
+reused = False, reordered = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reused", [False, True])
+    @pytest.mark.parametrize("reordered", [False, True])
+    async def test_redundant_lookup_speaks_complete_replacement_without_model(navigation, reused, reordered):
+        manifest, engine = navigation
+        prior = await manifest.get("compute_route").fn(destination="Cubbon Park")
+        await manifest.get("start_navigation").fn(route_id=prior["route_id"])
+        if reused:
+            await engine.run([PlannedCall("cached", "search_destination", {"query": "metro"})])
+        planned = calls()
+        if reordered:
+            planned = [planned[2], planned[1], planned[0]]
+        execution = await engine.run(planned)
+        assert execution.outcomes["lookup"].status == ("reused" if reused else "done")
+        result = execution.outcomes["start"].result
+>       text = await Responder(NoModel()).summarize("Navigate to the metro.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:174: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_redundant_navigation_search.NoModel object at 0x106962690>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("confirmed navigation should use its actual result")
+E       AssertionError: confirmed navigation should use its actual result
+
+tests/unit/test_redundant_navigation_search.py:16: AssertionError
+_ test_redundant_lookup_speaks_complete_replacement_without_model[False-True] __
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x106942010>)
+reused = True, reordered = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reused", [False, True])
+    @pytest.mark.parametrize("reordered", [False, True])
+    async def test_redundant_lookup_speaks_complete_replacement_without_model(navigation, reused, reordered):
+        manifest, engine = navigation
+        prior = await manifest.get("compute_route").fn(destination="Cubbon Park")
+        await manifest.get("start_navigation").fn(route_id=prior["route_id"])
+        if reused:
+            await engine.run([PlannedCall("cached", "search_destination", {"query": "metro"})])
+        planned = calls()
+        if reordered:
+            planned = [planned[2], planned[1], planned[0]]
+        execution = await engine.run(planned)
+        assert execution.outcomes["lookup"].status == ("reused" if reused else "done")
+        result = execution.outcomes["start"].result
+>       text = await Responder(NoModel()).summarize("Navigate to the metro.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:174: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_redundant_navigation_search.NoModel object at 0x106954d10>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("confirmed navigation should use its actual result")
+E       AssertionError: confirmed navigation should use its actual result
+
+tests/unit/test_redundant_navigation_search.py:16: AssertionError
+_ test_redundant_lookup_speaks_complete_replacement_without_model[True-False] __
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x106a88290>)
+reused = False, reordered = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reused", [False, True])
+    @pytest.mark.parametrize("reordered", [False, True])
+    async def test_redundant_lookup_speaks_complete_replacement_without_model(navigation, reused, reordered):
+        manifest, engine = navigation
+        prior = await manifest.get("compute_route").fn(destination="Cubbon Park")
+        await manifest.get("start_navigation").fn(route_id=prior["route_id"])
+        if reused:
+            await engine.run([PlannedCall("cached", "search_destination", {"query": "metro"})])
+        planned = calls()
+        if reordered:
+            planned = [planned[2], planned[1], planned[0]]
+        execution = await engine.run(planned)
+        assert execution.outcomes["lookup"].status == ("reused" if reused else "done")
+        result = execution.outcomes["start"].result
+>       text = await Responder(NoModel()).summarize("Navigate to the metro.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:174: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_redundant_navigation_search.NoModel object at 0x106a8b610>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("confirmed navigation should use its actual result")
+E       AssertionError: confirmed navigation should use its actual result
+
+tests/unit/test_redundant_navigation_search.py:16: AssertionError
+__ test_redundant_lookup_speaks_complete_replacement_without_model[True-True] __
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x106a2d190>)
+reused = True, reordered = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reused", [False, True])
+    @pytest.mark.parametrize("reordered", [False, True])
+    async def test_redundant_lookup_speaks_complete_replacement_without_model(navigation, reused, reordered):
+        manifest, engine = navigation
+        prior = await manifest.get("compute_route").fn(destination="Cubbon Park")
+        await manifest.get("start_navigation").fn(route_id=prior["route_id"])
+        if reused:
+            await engine.run([PlannedCall("cached", "search_destination", {"query": "metro"})])
+        planned = calls()
+        if reordered:
+            planned = [planned[2], planned[1], planned[0]]
+        execution = await engine.run(planned)
+        assert execution.outcomes["lookup"].status == ("reused" if reused else "done")
+        result = execution.outcomes["start"].result
+>       text = await Responder(NoModel()).summarize("Navigate to the metro.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:174: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_redundant_navigation_search.NoModel object at 0x106a2ddd0>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("confirmed navigation should use its actual result")
+E       AssertionError: confirmed navigation should use its actual result
+
+tests/unit/test_redundant_navigation_search.py:16: AssertionError
+_________ test_each_redundant_search_must_resolve_the_same_destination _________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x1069552d0>)
+
+    @pytest.mark.asyncio
+    async def test_each_redundant_search_must_resolve_the_same_destination(navigation):
+        _manifest, engine = navigation
+        execution = await engine.run(calls() + [
+            PlannedCall("second", "search_destination", {"query": "MG Road Metro Station"})])
+>       assert "MG Road Metro Station" in await Responder(NoModel()).summarize("Go to the metro.", execution)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:174: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_redundant_navigation_search.NoModel object at 0x106933950>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("confirmed navigation should use its actual result")
+E       AssertionError: confirmed navigation should use its actual result
+
+tests/unit/test_redundant_navigation_search.py:16: AssertionError
+____ test_via_source_destination_does_not_become_the_requested_destination _____
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...lidator=<function _navigation_plan_issue at 0x106916980>), <agent.coordinator.executor.Executor object at 0x106a20110>)
+
+    @pytest.mark.asyncio
+    async def test_via_source_destination_does_not_become_the_requested_destination(navigation):
+        _manifest, engine = navigation
+        execution = await engine.run([
+            PlannedCall("via", "compute_route", {"destination": "metro"}),
+            PlannedCall("route", "compute_route", {"destination": "Cubbon Park", "via": "$via.destination_id"}),
+            PlannedCall("start", "start_navigation", {"route_id": "$route.route_id"}),
+        ])
+        result = execution.outcomes["start"].result
+        assert result["destination"] == "Cubbon Park" and result["stop_ids"] == ["P_MGROAD"]
+>       payload = await fallback(execution, "Navigate to the metro.")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_redundant_navigation_search.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+execution = Execution(calls=[PlannedCall(id='via', tool='compute_route', args={'destination': 'metro'}), PlannedCall(id='route', t...82a166a5add04b76a40ec88e87683dae', operation_id='52192e2c54fc4028b17121350adb6a1c', stale=False, validation_error=None)
+request = 'Navigate to the metro.'
+
+    async def fallback(execution, request="Navigate to the metro."):
+        model = RecordingModel()
+>       assert await Responder(model).summarize(request, execution) == "Full request handled by model."
+E       AssertionError: assert 'Navigation t...n 18 minutes.' == 'Full request...led by model.'
+E         
+E         - Full request handled by model.
+E         + Navigation to Cubbon Park via MG Road Metro Station has started. Estimated arrival in 18 minutes.
+
+tests/unit/test_redundant_navigation_search.py:43: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_redundant_navigation_search.py::test_redundant_lookup_speaks_complete_replacement_without_model[False-False]
+FAILED tests/unit/test_redundant_navigation_search.py::test_redundant_lookup_speaks_complete_replacement_without_model[False-True]
+FAILED tests/unit/test_redundant_navigation_search.py::test_redundant_lookup_speaks_complete_replacement_without_model[True-False]
+FAILED tests/unit/test_redundant_navigation_search.py::test_redundant_lookup_speaks_complete_replacement_without_model[True-True]
+FAILED tests/unit/test_redundant_navigation_search.py::test_each_redundant_search_must_resolve_the_same_destination
+FAILED tests/unit/test_redundant_navigation_search.py::test_via_source_destination_does_not_become_the_requested_destination
+6 failed, 32 passed in 0.50s

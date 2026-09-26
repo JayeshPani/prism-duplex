@@ -1,0 +1,32 @@
+........................................................................ [ 16%]
+........................................................................ [ 32%]
+..............................F......................................... [ 49%]
+........................................................................ [ 65%]
+........................................................................ [ 81%]
+........................................................................ [ 98%]
+........                                                                 [100%]
+=================================== FAILURES ===================================
+_________________ test_car_cancel_makes_navigation_repeatable __________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105ec4f50>
+
+    @pytest.mark.asyncio
+    async def test_car_cancel_makes_navigation_repeatable(monkeypatch):
+        monkeypatch.setattr("agent.tools.car_tools.ROUTE_COMPUTE_S", 0)
+        m = build_car_manifest()
+        bus, ledger, logged = EventBus(), Ledger(), []
+        ex = Executor(m, ledger, bus, lambda f, a, t0, t1: logged.append(f))
+        nav = [PlannedCall("c1", "compute_route", {"destination": "airport"}),
+               PlannedCall("c2", "start_navigation", {"route_id": "$c1.route_id"})]
+        await ex.run(nav, operation_id="navigate-1")
+        again = await ex.run(nav, operation_id="navigate-1")                       # same request twice -> blocked
+>       assert again.outcomes["c2"].status == "blocked"
+E       AssertionError: assert 'error' == 'blocked'
+E         
+E         - blocked
+E         + error
+
+tests/unit/test_guards.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_guards.py::test_car_cancel_makes_navigation_repeatable
+1 failed, 439 passed in 4.83s

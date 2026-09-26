@@ -1,0 +1,78 @@
+{
+  "reviewed_at_utc": "2026-09-25T19:47:51.506812+00:00",
+  "scope": "Read-only review of iteration4 artifacts and the three local RTC/received-speech scripts. No inference, raw edits, staging, or process termination performed.",
+  "source_sha256": {
+    "scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "scripts/local_livekit_audio_experiment.py": "cdf091dea1240e8fa6587dc75da4936936dd4f13daf4cc19a92caa1afd552226",
+    "scripts/review_received_speech.py": "f5a33d4447974ad622c8fe359640808da9e53c035d04a87419a4b0fdf67736eb"
+  },
+  "concrete_blockers": [],
+  "credentials": {
+    "result": "No private credential or access-token candidate observed.",
+    "checks": [
+      "Readable artifact text and script scan for private-key headers, JWTs, common provider token prefixes, and Authorization credentials.",
+      "Inspection of credential assignment candidates and script serialization paths.",
+      "Decoded and scanned every payload_base64 packet in the ten events.jsonl files."
+    ],
+    "decoded_packets_scanned": 431,
+    "token_pattern_matches": 0,
+    "intentional_public_credentials": "The loopback development configuration uses devkey/secret; ten apiKey log entries contain that public devkey. These are intentional local examples, not private credentials.",
+    "serialization": "The capture driver builds the RTC token in memory and does not serialize it or credential environment variables; the worker receipt excludes credential values. The scripts retain invocation and local source/sample provenance.",
+    "limits": "This is a bounded pattern and source review, not a proof that arbitrary secrets cannot occur. Binary PCM/WAV files were inventoried, not listened to for this check."
+  },
+  "size_snapshot": {
+    "files_excluding_this_review": 163,
+    "total_bytes": 45018788,
+    "largest_files": [
+      {
+        "path": "results/iteration4/rtc-correction-repeat4/received-concatenated.wav",
+        "bytes": 1700204
+      },
+      {
+        "path": "results/iteration4/rtc-correction-repeat4/received-1.pcm",
+        "bytes": 1700160
+      },
+      {
+        "path": "results/iteration4/rtc-correction-repeat2/received-concatenated.wav",
+        "bytes": 1697324
+      }
+    ],
+    "finding": "No oversized individual file observed; largest file is approximately 1.7 MB. The roughly 45 MB aggregate includes preserved PCM, convenient WAV copies, and resampled ASR inputs.",
+    "git_ignore": "Representative received PCM, received WAV, and worker log paths are not ignored. The existing results/**/raw/ rule does not exclude these iteration4 paths.",
+    "limits": "Inventory is a point-in-time snapshot while final documentation and review artifacts may still be added."
+  },
+  "cleanup": {
+    "supported_claim": "The task-owned LiveKit server, MLX server, and PRISM worker from local-stack-run1 stopped.",
+    "receipt": "results/iteration4/local-stack-run1/cleanup.json",
+    "command_identity": "All three recorded commands match their observed commands in the cleanup receipt before SIGTERM.",
+    "exit_receipts": [
+      {
+        "role": "worker",
+        "pid": 44724,
+        "exit_code": 0,
+        "path": "results/iteration4/local-stack-run1/worker-exit.json",
+        "pid_present_at_review": false
+      },
+      {
+        "role": "llm",
+        "pid": 44494,
+        "exit_code": -15,
+        "path": "results/iteration4/local-stack-run1/llm-exit.json",
+        "pid_present_at_review": false
+      },
+      {
+        "role": "livekit",
+        "pid": 44493,
+        "exit_code": 0,
+        "path": "results/iteration4/local-stack-run1/livekit-exit.json",
+        "pid_present_at_review": false
+      }
+    ],
+    "verification": "Read-only os.kill(pid, 0) returned ProcessLookupError for all three PIDs. lsof returned no TCP listeners on 7880/8081/8082 or UDP socket on 7882 (exit 1, empty output). Separate exit receipts substantiate cleanup.json despite its null returncode fields.",
+    "limits": "This supports stopping these three experiment processes, not a claim about every unrelated local process."
+  },
+  "publication_notes": [
+    "Local absolute paths and the development username remain in provenance; observed speech artifacts derive from the declared synthetic navigation experiment.",
+    "The received-speech audit labels transcription as an ASR proxy and preserves its limits; this artifact review makes no listening-quality or physical playback-latency claim."
+  ]
+}

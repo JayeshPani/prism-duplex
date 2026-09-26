@@ -1,0 +1,74 @@
+PASS syn_travel_01      5.3s  
+      plan: {"utterance": "Hello there, I was hoping you could help me with some travel stuff.", "complete": true, "calls": [], "reply": "Hi there! How can I assist you with your travel plans?"}
+      plan: {"utterance": "So um, I want flights to Lisbon on the, uh, twelfth of June.", "complete": true, "calls": [{"id": "c1", "tool": "search_flights", "args": {"destination": "Lisbon", "date": "June 12"}}], "reply": "Searching flights to Lisbon on June 12th."}
+FAIL syn_travel_02      5.3s  no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Toronto', 'date': 'March 5'}}
+      plan: {"utterance": "Hi.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Find flights to Toronto on March 3rd - no wait, March 5th, sorry.", "complete": true, "calls": [{"id": "c1", "tool": "search_flights", "args": {"destination": "Toronto", "date": "March 5th"}}], "reply": "Searching flights to Toronto on March 5th."}
+FAIL syn_travel_03      7.4s  no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Madrid', 'date': 'July 2'}}
+      plan: {"utterance": "Hey, I need to sort out a trip.", "complete": true, "calls": [], "reply": "Sure, let me know where you're planning to go and when."}
+      plan: {"utterance": "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair.", "complete": true, "calls": [{"id": "c1", "tool": "search_flights", "args": {"destination": "Madrid", "date": "July 2nd"}}, {"id": "c2", "tool": "book_flight", "args": {"passenger_name": "Priya Nair", "flight_id": "$c1.flights[0].flight_id"}}], "reply": "Searching for flights to Madrid on 
+PASS syn_travel_04      4.0s  
+      plan: {"utterance": "Good morning.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2.", "complete": true, "calls": [{"id": "c1", "tool": "update_identity_doc", "args": {"doc_type": "driver_license", "doc_number": "K449012"}}], "reply": "Updating your driver's license number."}
+FAIL syn_travel_05      6.0s  no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Stockholm', 'date': 'May 9'}}
+      plan: {"utterance": "Hi, quick thing.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker.", "complete": true, "calls": [{"id": "c1", "tool": "search_flights", "args": {"destination": "Stockholm", "date": "May 9th"}}, {"id": "c2", "tool": "book_flight", "args": {"passenger_name": "Tom Becker", "flight_id": "$c1.flights[0].flight_id"}}], "reply": "Searching flights to Stockholm
+PASS syn_travel_06      4.9s  
+      plan: {"utterance": "Hello.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0.", "complete": true, "calls": [{"id": "c1", "tool": "update_identity_doc", "args": {"doc_type": "passport", "doc_number": "P778120"}}], "reply": "Updating your passport document number to P778120."}
+PASS syn_fin_01         3.7s  
+      plan: {"utterance": "Hi, I have a money question.", "complete": true, "calls": [], "reply": "Sure, what's your question about money?"}
+      plan: {"utterance": "How much is, um, two hundred and fifty euros in US dollars?", "complete": true, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 250, "from_currency": "EUR", "to_currency": "USD"}}], "reply": "Converting two hundred and fifty euros to US dollars."}
+PASS syn_fin_02         5.0s  
+      plan: {"utterance": "Hey.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Convert 80 pounds to yen - wait no, to Swiss francs.", "complete": true, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 80, "from_currency": "GBP", "to_currency": "CHF"}}], "reply": "Converting 80 pounds to Swiss francs."}
+PASS syn_fin_03         3.3s  
+      plan: {"utterance": "Hello there.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "What perks do I get with the, um, the titanium card?", "complete": true, "calls": [{"id": "c1", "tool": "get_card_benefits", "args": {"card_type": "titanium"}}], "reply": "Looking up the benefits of the titanium card."}
+FAIL syn_fin_04         4.3s  no distinct argument match for {'tool': 'modify_autopay', 'args': {'bill_type': 'water', 'source_account': 'checking'}}
+      plan: {"utterance": "Hi, billing stuff today.", "complete": true, "calls": [], "reply": "How can I assist you with your billing today?"}
+      plan: {"utterance": "Set up autopay for my water bill from my savings, uh, no, from my checking account.", "complete": true, "calls": [{"id": "c1", "tool": "modify_autopay", "args": {"bill_type": "water", "source_account": "checking account"}}], "reply": "Setting up autopay for your water bill using your checking account."}
+PASS syn_fin_05         4.7s  
+      plan: {"utterance": "Hi.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account.", "complete": true, "calls": [{"id": "c1", "tool": "get_card_benefits", "args": {"card_type": "silver"}}, {"id": "c2", "tool": "modify_autopay", "args": {"bill_type": "phone", "source_account": "savings"}}], "reply": "Checking the benefits on your silver card and switching your ph
+FAIL syn_fin_06         5.0s  no distinct argument match for {'tool': 'get_card_benefits', 'args': {'card_type': 'black'}}
+      plan: {"utterance": "Hey there.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?", "complete": true, "calls": [{"id": "c1", "tool": "get_exchange_rate", "args": {"amount": 1200, "from_currency": "CAD", "to_currency": "INR"}}, {"id": "c2", "tool": "get_card_benefits", "args": {"card_type": "black card"}}], "reply": "Converting 1200 Canadian dollars 
+FAIL syn_house_01       6.1s  tools expected {'search_apartments': 1} got {'search_apartments': 2}
+      plan: {"utterance": "Hi, I'm apartment hunting.", "complete": true, "calls": [{"id": "c1", "tool": "search_apartments", "args": {"city": "apartment"}}], "reply": "Searching for apartments in your city."}
+      plan: {"utterance": "Find me a two bedroom in Denver, uh, under 2000 a month.", "complete": true, "calls": [{"id": "c1", "tool": "search_apartments", "args": {"city": "Denver", "bedrooms": 2, "max_price": 2000}}], "reply": "Searching for two bedroom apartments in Denver under 2000 a month."}
+PASS syn_house_02       5.7s  
+      plan: {"utterance": "Hello.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Search for three bedroom places in Austin under 2500 - actually, make it two bedrooms.", "complete": true, "calls": [{"id": "c1", "tool": "search_apartments", "args": {"city": "Austin", "bedrooms": 2, "max_price": 2500}}], "reply": "Searching for two bedroom places in Austin under 2500."}
+PASS syn_house_03       4.4s  
+      plan: {"utterance": "Hi there.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "How long is the commute from 12 Pine Street to the central library by bike?", "complete": true, "calls": [{"id": "c1", "tool": "calculate_commute", "args": {"origin_address": "12 Pine Street", "destination_address": "central library", "mode": "cycling"}}], "reply": "Calculating the commute from 12 Pine Street to the central library by bike."}
+PASS syn_house_04       4.5s  
+      plan: {"utterance": "Hey.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Change my max rent filter to, um, 1800. No sorry, 1750.", "complete": true, "calls": [{"id": "c1", "tool": "update_search_filter", "args": {"filter_name": "max_price", "value": 1750}}], "reply": "Updating your max rent filter to 1750."}
+PASS syn_house_05       6.8s  
+      plan: {"utterance": "Hi, I need help finding a place.", "complete": true, "calls": [], "reply": "Sure! What type of place are you looking for?"}
+      plan: {"utterance": "Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station.", "complete": true, "calls": [{"id": "c1", "tool": "search_apartments", "args": {"city": "Portland", "bedrooms": 1, "max_price": 1600}}, {"id": "c2", "tool": "calculate_commute", "args": {"origin_address": "$c1.results[0].id", "destination_address": "Union Stat
+PASS syn_shop_01        3.7s  
+      plan: {"utterance": "Hi.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Where's my order, um, the number is Z Q 5 5 1 8.", "complete": true, "calls": [{"id": "c1", "tool": "track_order", "args": {"order_id": "ZQ5518"}}], "reply": "Tracking your order with ID ZQ5518."}
+PASS syn_shop_02        4.9s  
+      plan: {"utterance": "Hello.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart.", "complete": true, "calls": [{"id": "c1", "tool": "search_products", "args": {"query": "yoga mat", "max_price": 30}}, {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "$c1.products[0].product_id", "quantity": 2}}], "reply": "Looking for a yoga mat under 30 dollars and adding two to your cart."}
+PASS syn_shop_03        5.1s  
+      plan: {"utterance": "Hey there.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Search for a, a coffee grinder and put three - no, just one in the cart.", "complete": true, "calls": [{"id": "c1", "tool": "search_products", "args": {"query": "coffee grinder"}}, {"id": "c2", "tool": "add_to_cart", "args": {"product_id": "$c1.products[0].product_id", "quantity": 1}}], "reply": "Searching for a coffee grinder and adding one to your cart."}
+PASS syn_shop_04        4.8s  
+      plan: {"utterance": "Hi.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60.", "complete": true, "calls": [{"id": "c1", "tool": "track_order", "args": {"order_id": "M402"}}, {"id": "c2", "tool": "search_products", "args": {"query": "wireless earbuds", "max_price": 60}}], "reply": "Tracking order M402 and searching for wireless earbuds under 60."}
+PASS syn_shop_05        4.5s  
+      plan: {"utterance": "Hello, I want to do some shopping.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Um... I want to look for... uh... hiking boots, I think, under a hundred and twenty.", "complete": true, "calls": [{"id": "c1", "tool": "search_products", "args": {"query": "hiking boots", "max_price": 120}}], "reply": "Looking for hiking boots under a hundred and twenty."}
+FAIL syn_multi_01       7.1s  no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Dublin', 'date': 'October 4'}}
+      plan: {"utterance": "Hi, a couple of things.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1.", "complete": true, "calls": [{"id": "c1", "tool": "search_flights", "args": {"destination": "Dublin", "date": "October 4th"}}, {"id": "c2", "tool": "book_flight", "args": {"passenger_name": "Maya Chen", "flight_id": "$c1.flights[0].flight_id"}}, {"id": "c3", "tool": "update
+PASS syn_multi_02       6.1s  
+      plan: {"utterance": "Hey.", "complete": true, "calls": [], "reply": "Hi! What can I help you with?"}
+      plan: {"utterance": "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park.", "complete": true, "calls": [{"id": "c1", "tool": "search_apartments", "args": {"city": "Chicago", "bedrooms": 2, "max_price": 2200, "pets_allowed": true}}, {"id": "c2", "tool": "update_search_filter", "args": {"filter_name": "neighborhood", "value": "Lincoln 
+
+profile=local-mac model=mlx-community/Qwen3-8B-4bit  pass 17/24 = 71%

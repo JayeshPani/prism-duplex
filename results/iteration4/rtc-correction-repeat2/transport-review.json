@@ -1,0 +1,299 @@
+{
+  "run": "rtc-correction-repeat2",
+  "room": "car-audio-ea7bb96e573d45b5b956071ae929545d",
+  "pilot": false,
+  "status": "completed_observation",
+  "checks": {
+    "completed_observation": true,
+    "raw_artifact_hashes": true,
+    "coordinator_trace_equality": false,
+    "effect_sequence": true,
+    "attempt_sequence": true,
+    "all_attempts_done": true,
+    "attempt_event_coverage": true,
+    "no_stale_results": true,
+    "capture_worker_source_receipts_agree": true,
+    "no_capture_errors": true,
+    "no_error_events": true,
+    "transcript_1": true,
+    "grounded_declared_result_1": true,
+    "result_after_effect_1": true,
+    "transcript_2": true,
+    "grounded_declared_result_2": true,
+    "result_after_effect_2": true,
+    "correction_after_initial_effect": true,
+    "old_result_interruption_requested": true,
+    "speech_handle_states": true
+  },
+  "all_checks_pass": false,
+  "attempt_count": 6,
+  "calls": [
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:13",
+      "function": "search_destination",
+      "args": {
+        "query": "airport"
+      },
+      "timestamp_start": 1790365013.5214121,
+      "attempt_id": "7d833cde7f9b43a8929df4cc93497029:c1",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365013.5228622,
+      "end_evidence": "executor_observation_ended"
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:14",
+      "function": "compute_route",
+      "args": {
+        "destination": "P_AIRPORT"
+      },
+      "timestamp_start": 1790365013.523725,
+      "attempt_id": "7d833cde7f9b43a8929df4cc93497029:c2",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365016.026589,
+      "end_evidence": "executor_observation_ended"
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:15",
+      "function": "start_navigation",
+      "args": {
+        "route_id": "R1"
+      },
+      "timestamp_start": 1790365016.027828,
+      "attempt_id": "7d833cde7f9b43a8929df4cc93497029:c3",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365016.029365,
+      "end_evidence": "executor_observation_ended"
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:16",
+      "function": "search_destination",
+      "args": {
+        "query": "office"
+      },
+      "timestamp_start": 1790365027.148671,
+      "attempt_id": "2c759331fabf4c9d92467013d30df2a6:c1",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365027.150526,
+      "end_evidence": "executor_observation_ended"
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:17",
+      "function": "compute_route",
+      "args": {
+        "destination": "P_OFFICE"
+      },
+      "timestamp_start": 1790365027.151263,
+      "attempt_id": "2c759331fabf4c9d92467013d30df2a6:c2",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365029.6536992,
+      "end_evidence": "executor_observation_ended"
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:18",
+      "function": "start_navigation",
+      "args": {
+        "route_id": "R2"
+      },
+      "timestamp_start": 1790365029.654795,
+      "attempt_id": "2c759331fabf4c9d92467013d30df2a6:c3",
+      "status": "done",
+      "dispatch_evidence": "intention_before_backend_entry",
+      "timestamp_end": 1790365029.655468,
+      "end_evidence": "executor_observation_ended"
+    }
+  ],
+  "observed_effects": [
+    [
+      "start_navigation",
+      "P_AIRPORT",
+      []
+    ],
+    [
+      "start_navigation",
+      "P_OFFICE",
+      []
+    ]
+  ],
+  "turns": [
+    {
+      "intent_version": 1,
+      "input": "initial",
+      "speech_onset_monotonic": 88052.287339666,
+      "speech_end_monotonic": 88053.54733966601,
+      "transcript": "Navigate to the airport.",
+      "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "metrics": {
+        "transcript_ms": 1647.523,
+        "ack_text_ms": 2351.155,
+        "result_text_ms": 8394.535,
+        "first_tool_notification_ms": 5073.291,
+        "navigation_dispatch_notification_ms": 7578.243,
+        "navigation_success_notification_ms": 7578.555,
+        "first_ack_pcm_ms": 2926.302,
+        "first_result_pcm_ms": 9446.199,
+        "result_handle_finished_ms": null
+      },
+      "references": {
+        "transcript_ms": "events.jsonl:261",
+        "ack_text_ms": "events.jsonl:265",
+        "result_text_ms": "events.jsonl:301",
+        "first_tool_notification_ms": "events.jsonl:289",
+        "navigation_dispatch_notification_ms": "events.jsonl:297",
+        "navigation_success_notification_ms": "events.jsonl:299",
+        "first_ack_pcm_ms": "frames.jsonl:211",
+        "first_result_pcm_ms": "frames.jsonl:537",
+        "result_handle_finished_ms": null
+      },
+      "max_input_capture_lateness_ms": 2.111
+    },
+    {
+      "intent_version": 2,
+      "input": "correction",
+      "speech_onset_monotonic": 88063.033668875,
+      "speech_end_monotonic": 88064.81366887501,
+      "transcript": "Actually, go to the office instead.",
+      "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+      "metrics": {
+        "transcript_ms": 1733.167,
+        "ack_text_ms": 2436.991,
+        "result_text_ms": 12861.486,
+        "first_tool_notification_ms": 7434.248,
+        "navigation_dispatch_notification_ms": 9937.977,
+        "navigation_success_notification_ms": 9938.397,
+        "first_ack_pcm_ms": 3059.814,
+        "first_result_pcm_ms": 13900.129,
+        "result_handle_finished_ms": 21788.161
+      },
+      "references": {
+        "transcript_ms": "events.jsonl:616",
+        "ack_text_ms": "events.jsonl:620",
+        "result_text_ms": "events.jsonl:658",
+        "first_tool_notification_ms": "events.jsonl:646",
+        "navigation_dispatch_notification_ms": "events.jsonl:654",
+        "navigation_success_notification_ms": "events.jsonl:656",
+        "first_ack_pcm_ms": "frames.jsonl:781",
+        "first_result_pcm_ms": "frames.jsonl:1323",
+        "result_handle_finished_ms": "events.jsonl:666"
+      },
+      "max_input_capture_lateness_ms": 1.788
+    }
+  ],
+  "interruption": {
+    "origin": "correction input threshold speech onset",
+    "metrics": {
+      "last_old_correlated_pcm_ms": 739.891,
+      "next_below_threshold_frame_ms": 759.916,
+      "user_speaking_event_ms": 246.892,
+      "agent_listening_event_ms": 694.531,
+      "coordinator_interruption_requested_ms": 3512.249
+    },
+    "last_old_frame": "frames.jsonl:576",
+    "following_frame": "frames.jsonl:577",
+    "last_old_pcm_after_user_speaking_ms": 493.0,
+    "untagged_tail_after_recorder_last_ms": 60.322,
+    "old_handle_state": "interruption_requested",
+    "next_frame_rms_db": -41.436738053387565,
+    "quiet_before_next_utterance_queue_ms": 3457.482
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_44bfae92225d",
+      "queued_at": 88055.898878583,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 88057.268609375,
+      "error": null
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_df13196fcd6c",
+      "queued_at": 88061.942344083,
+      "state": "interruption_requested",
+      "first_loud_at": 88062.993538375,
+      "preceding_quiet_seconds": 5.859505333995912,
+      "last_loud_at": 88063.713238375,
+      "ended_at": 88066.545917458,
+      "error": null
+    },
+    {
+      "text": "Okay, one sec.",
+      "intent_version": 2,
+      "kind": "ack",
+      "speech_id": "speech_2a1d8498e2e7",
+      "queued_at": 88067.251066333,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 88068.857605416,
+      "error": null
+    },
+    {
+      "text": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_b1c59dd85390",
+      "queued_at": 88077.675661083,
+      "state": "finished",
+      "first_loud_at": 88078.713797666,
+      "preceding_quiet_seconds": 9.960190458004945,
+      "last_loud_at": 88086.553326916,
+      "ended_at": 88086.601829625,
+      "error": null
+    }
+  ],
+  "error_events": [],
+  "client_wall_monotonic_offset_range_ms": 0.019,
+  "raw_sha256": {
+    "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "worker_manifest.json": "ef3e09d5a6619e4613fb517ed02dafe3b8f20e91d115f7e35e98926498bc79c1",
+    "events.jsonl": "3f225c3f048ef94c40a2da17ea88c55e05fa3d38fcc03e3cb02dc2ea7e4caeb1",
+    "correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+    "frames.jsonl": "dfa321ac23d40013a6fda94dc0a8d00759dc0b7345cda50a78637266622c93fb",
+    "protocol.json": "72be363f77a36d2f14851ef84c8df814d502179c5cc09c87a4b949b0781d03f1",
+    "received-1.pcm": "f5cfca92112b67e51ea558b0ab489ddeb58bb3dc968503398084522976fc646b",
+    "report.json": "5e61b28accc7328e26b481f775b9522a37ece7a4d73d6b3afca25a83fb3d02bb"
+  },
+  "server_trace_sha256": "827112efd60528d16edd2053e53cc75f7ea6447546a87c3a3668ada61f78dadc",
+  "trace_comparison": {
+    "server_event_count": 57,
+    "received_event_count": 56,
+    "missing_server_events": [
+      {
+        "reference": "../local-stack-run1/traces/car-audio-ea7bb96e573d45b5b956071ae929545d.jsonl:1",
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790365007.12783
+      }
+    ],
+    "unexpected_received_events": [],
+    "received_is_exact_server_suffix": true
+  },
+  "received_concatenated_wav": {
+    "file": "received-concatenated.wav",
+    "sha256": "1d0c33a54dc56a6a9e7a20ed0f9f9aac11cbbeb213eec12d62291c9c524a49a8",
+    "duration_seconds": 35.36,
+    "label": "Exact PCM frame order with original silent samples; no inserted arrival gaps or physical playout claim."
+  },
+  "limitations": [
+    "Ten serial synthetic trials: five baseline and five correction, including both pilots. Repeated identical inputs, warmed shared processes, fixed ordering and cache confounds; not held-out, human-driving or independent trial evidence.",
+    "Five captures omit only the initial server agent_state=listening event before session_started. Exact whole-trace equality fails for those trials; all later server events match. Correct tool effects do not erase this capture-completeness limitation.",
+    "Timing subtracts same-client monotonic observations from scheduled threshold speech end/onset. Input boundaries use 20ms frames at RMS >= -40dBFS, not human phoneme annotations. Capture lateness and queueing are separate from the schedule.",
+    "tool_started/dispatch-log starts mark intention before backend entry; tool_done reports simulated backend success. Client receipt adds data delivery delay. Server wall timestamps are not subtracted from client monotonic values.",
+    "Text/intent is matched to speech handles by adjacent event order; PCM has no utterance ID. One output track and nonoverlapping utterance windows support heuristic correlation, not exact text-to-RTP alignment or intelligibility.",
+    "Old-result activity scans ALL threshold-exceeding frames before the next utterance queue, including frames the recorder stopped tagging after agent_state became listening. Last-frame arrival and following quiet-frame arrival are transport observations, not physical audible-stop bounds.",
+    "interruption_requested is the coordinator's later request at finalized text, not confirmed playback cancellation or the time PCM ceased. Earlier cessation is consistent with SDK speech interruption; this capture does not directly identify its internal cause.",
+    "Received speech is assessed separately in received-speech-review; no audio inference occurs in this audit. Declared grounded text and non-silent PCM alone do not establish complete, intelligible speech. Shared worker logs contain phonemizer word-count warnings during result synthesis.",
+    "Exact concatenated WAVs preserve every received sample and existing silence, but insert no callback-arrival gaps. They are not reconstructed playout timelines. No microphone echo, speaker output, road noise or WAN behavior is measured."
+  ]
+}

@@ -1,0 +1,892 @@
+{
+  "frozen_at_utc": "2026-09-26T13:26:37.954467+00:00",
+  "command": [
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/review_received_audio.py",
+    "--suite-root",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/received-audio-review"
+  ],
+  "method": {
+    "created_before_input_render": true,
+    "script_sha256": "7b65949bb34ce4d0de58682029814aa1e6b4e6c2035b1bca889f08147091d78a",
+    "suite_protocol_sha256": {
+      "iteration20-baseline": "f3e2781c46e39c5d486a28acc596f0da6f6826f534e26c48c45e585d42982067",
+      "iteration20-candidate": "7e38ffa6b89ee2bb71c6a80230276f6f61aaea1e82353651be90c02bcb2a5ec0"
+    },
+    "method": "One whole received stream per declared capture, untrimmed and without retry/selection; only after both timed stacks stop. Local ASR and manual factual review remain separate."
+  },
+  "method_sha256": "d32798ceb4a1f8ccf368b2ebf87604506dee490582f61f0108e4e13dfa413fbf",
+  "suite_status": "completed_with_failed_captures",
+  "suite_sha256": {
+    "protocol.json": "7e38ffa6b89ee2bb71c6a80230276f6f61aaea1e82353651be90c02bcb2a5ec0",
+    "run-report.json": "c6f4174b02a9fde6d35505ad8414db88a09d246f13ebab27eed7d489d63c4dcf"
+  },
+  "trial_order": [
+    "rtc-ambiguous_then_hospital_distance-1",
+    "rtc-airport_distance-1",
+    "rtc-office_drive_time-1",
+    "rtc-active_airport_then_hospital_distance-1",
+    "rtc-ambiguous_distance-1",
+    "rtc-explicit_hospital_navigation-1"
+  ],
+  "trials": [
+    {
+      "id": "rtc-ambiguous_then_hospital_distance-1",
+      "case": "ambiguous_then_hospital_distance",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-ambiguous_then_hospital_distance-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "c155d6df7c0606f24ea6e7dc4379917df5ca998cc83865012fce5af6ddfde783",
+        "events.jsonl": "df0d9e8cf7608e2b4d476c259dc9df8df31ab73c5766c9ce50a5e46b22d01741",
+        "frames.jsonl": "61880ae48a52eb3304b4961c8b25b5f2b47e462af1382ea295f6a33b34d0c64b",
+        "received-1.pcm": "9ee42dba873cd16ef0606d12698c8fd9f630c2f4662f23264b40679506b07d56"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-ambiguous_then_hospital_distance-1",
+          "case": "ambiguous_then_hospital_distance",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/airport_road.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-ambiguous_then_hospital_distance-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "non-ack",
+            "--followup-trigger",
+            "response-finished",
+            "--followup",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/hospital_distance.wav"
+          ],
+          "started_at": "2026-09-26T13:21:12.950230+00:00",
+          "condition": {
+            "case_id": "ambiguous_then_hospital_distance",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "dc2a1292f7ac0321e45f28e214396f06abac97edbfd9a4432518aafbc29cbd44",
+          "pid": 82533,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T13:22:02.027996+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-9bee3ee0e328420195485effb9afd5ae",
+            "started_at": "2026-09-26T13:22:02.324429+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:22:02.324584+00:00",
+                "elapsed_seconds": 0.00014879199443385005,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_tLPBKAJGK6ni",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:02.835928+00:00",
+                "elapsed_seconds": 0.5114952500152867,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_tLPBKAJGK6ni",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:03.339436+00:00",
+                "elapsed_seconds": 1.0150187500112224,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_tLPBKAJGK6ni",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:03.843905+00:00",
+                "elapsed_seconds": 1.5194702500011772,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_tLPBKAJGK6ni",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:04.346309+00:00",
+                "elapsed_seconds": 2.0219020420045126,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:22:04.348289+00:00",
+            "elapsed_seconds": 2.0238465419970453
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-9bee3ee0e328420195485effb9afd5ae",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_2b3611f97d01",
+          "queued_at": 147192.976486083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147194.393690958,
+          "error": null
+        },
+        {
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_b53da9af8fec",
+          "queued_at": 147204.174249541,
+          "state": "finished",
+          "first_loud_at": 147205.578372541,
+          "preceding_quiet_seconds": 11.319355082989205,
+          "last_loud_at": 147210.419357833,
+          "ended_at": 147210.498813583,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_c624420dcacb",
+          "queued_at": 147216.095126166,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147217.855624041,
+          "error": null
+        },
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road is 2.2 km, with an estimated travel time of 5 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_4f3b34aa3718",
+          "queued_at": 147225.982644291,
+          "state": "finished",
+          "first_loud_at": 147228.359125708,
+          "preceding_quiet_seconds": 10.600094207999064,
+          "last_loud_at": 147235.478786833,
+          "ended_at": 147235.530680708,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-airport_distance-1",
+      "case": "airport_distance",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-airport_distance-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "227b22fee5988298c55ad4e126b163a69dff093c12f21e98f4bcf20c6d13a704",
+        "events.jsonl": "f8c7f2c744e9ed2d087bb5b3e8efaecea5dfeffaf12b746d869de7432618e48b",
+        "frames.jsonl": "13cc30b9a014d65fcdea8c87ebe4083908fb6386d39b6ea21079dce1b6d929d1",
+        "received-1.pcm": "e728d2032e6f0024c756006c92dc14f03f898c0c5de14bb82750c9e0d7ca3d7d"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-airport_distance-1",
+          "case": "airport_distance",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/airport_distance.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-airport_distance-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "non-ack"
+          ],
+          "started_at": "2026-09-26T13:22:04.384590+00:00",
+          "condition": {
+            "case_id": "airport_distance",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "39823fdd255aca8654e4b6263745435bcb52b3ce6d80587407a6112e4b6fd854",
+          "pid": 82997,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T13:22:34.697703+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-12e6edfa5a804669a5cdbe308b634466",
+            "started_at": "2026-09-26T13:22:34.720290+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:22:34.731093+00:00",
+                "elapsed_seconds": 0.010801958997035399,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_rRu3BJ2X4TjY",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:35.254836+00:00",
+                "elapsed_seconds": 0.5345450839959085,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_rRu3BJ2X4TjY",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:35.756998+00:00",
+                "elapsed_seconds": 1.0367122089955956,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_rRu3BJ2X4TjY",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:36.262434+00:00",
+                "elapsed_seconds": 1.542153916991083,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_rRu3BJ2X4TjY",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:36.765923+00:00",
+                "elapsed_seconds": 2.0456362089898903,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:22:36.767067+00:00",
+            "elapsed_seconds": 2.046765458973823
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-12e6edfa5a804669a5cdbe308b634466",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b3c6c75ea47c",
+          "queued_at": 147253.355912208,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 147254.909647291,
+          "error": null
+        },
+        {
+          "text": "The distance to Kempegowda International Airport is 35.4 kilometers. The estimated travel time is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_2896d3fddf85",
+          "queued_at": 147259.322899125,
+          "state": "finished",
+          "first_loud_at": 147260.827840875,
+          "preceding_quiet_seconds": 5.859872166998684,
+          "last_loud_at": 147268.088213416,
+          "ended_at": 147268.151351458,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-office_drive_time-1",
+      "case": "office_drive_time",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-office_drive_time-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "6fee231fa568f24faa99768f94591b04e05d165d6c86dc989c34d9e1a8461ecd",
+        "events.jsonl": "cfe3580800f18653e157dc37a2f5b28dfd93c4473ee29d27ec8cc9a0da800db7",
+        "frames.jsonl": "0e436c68e5493b05a833073f5d5eef7dc63940852354ae0ba0370de55da00a8f",
+        "received-1.pcm": "9af71f5ef39f1868eded7158bc5128dd2812ce73219a5ad45c44b15f202854c9"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-office_drive_time-1",
+          "case": "office_drive_time",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/office_drive_time.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-office_drive_time-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "non-ack"
+          ],
+          "started_at": "2026-09-26T13:22:36.796810+00:00",
+          "condition": {
+            "case_id": "office_drive_time",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "f75108ea53d5a223b499246932db6cfc0dc168f3b6191e01551e55303ee315a2",
+          "pid": 83155,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T13:22:55.882180+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-ab550814f2bf4bbba8d09f2f26d0ee5a",
+            "started_at": "2026-09-26T13:22:55.893635+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:22:55.900567+00:00",
+                "elapsed_seconds": 0.006932165997568518,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_nW2BttoDKFon",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:56.414156+00:00",
+                "elapsed_seconds": 0.5205437080003321,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_nW2BttoDKFon",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:56.917353+00:00",
+                "elapsed_seconds": 1.023784707998857,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_nW2BttoDKFon",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:57.421290+00:00",
+                "elapsed_seconds": 1.5276542079809587,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_nW2BttoDKFon",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:22:57.924052+00:00",
+                "elapsed_seconds": 2.03041895799106,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:22:57.925767+00:00",
+            "elapsed_seconds": 2.032126874983078
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-ab550814f2bf4bbba8d09f2f26d0ee5a",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_5e1f3b60d665",
+          "queued_at": 147282.832207541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147284.631058,
+          "error": null
+        },
+        {
+          "text": "Sorry, could you say that again?",
+          "intent_version": 1,
+          "kind": "response",
+          "speech_id": "speech_f4d090e52f48",
+          "queued_at": 147287.181944708,
+          "state": "finished",
+          "first_loud_at": 147287.910899958,
+          "preceding_quiet_seconds": 3.4050852920045145,
+          "last_loud_at": 147289.350600833,
+          "ended_at": 147289.388371916,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-active_airport_then_hospital_distance-1",
+      "case": "active_airport_then_hospital_distance",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-active_airport_then_hospital_distance-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "55b2dd429905d177a0ff8f2d9776f06bf18b821554ce73c27714fd1e0af91a62",
+        "events.jsonl": "022d701c29cf84258e07bcb143ae47b845849e823de5906e35d04f882c275397",
+        "frames.jsonl": "7feab55f46de24697003e985257355ea94317fda40f96a3a2e5c1339d196ecbb",
+        "received-1.pcm": "e06eab7a937cea59b5fcfb03303e4cef64887dcb583d3f6650d0b23a19d87208"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-active_airport_then_hospital_distance-1",
+          "case": "active_airport_then_hospital_distance",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/navigate_airport.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-active_airport_then_hospital_distance-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "non-ack",
+            "--followup-trigger",
+            "response-finished",
+            "--followup",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/hospital_distance.wav"
+          ],
+          "started_at": "2026-09-26T13:22:57.954360+00:00",
+          "condition": {
+            "case_id": "active_airport_then_hospital_distance",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "fdabeb98b10834dae92d40efcce695a43a387e691e6f2b695e112da1b0ff2ce6",
+          "pid": 83255,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T13:23:52.155557+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-5b667ddd54854ce2aa1d3ccdcca2de5b",
+            "started_at": "2026-09-26T13:23:52.163659+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:23:52.168382+00:00",
+                "elapsed_seconds": 0.004721500008599833,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_F7Xp4MRtQ6ch",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:23:52.693244+00:00",
+                "elapsed_seconds": 0.5298526250116993,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_F7Xp4MRtQ6ch",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:23:53.198360+00:00",
+                "elapsed_seconds": 1.034701208001934,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_F7Xp4MRtQ6ch",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:23:53.720892+00:00",
+                "elapsed_seconds": 1.5572321660001762,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_F7Xp4MRtQ6ch",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:23:54.223308+00:00",
+                "elapsed_seconds": 2.0596502909902483,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:23:54.225425+00:00",
+            "elapsed_seconds": 2.061761040997226
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-5b667ddd54854ce2aa1d3ccdcca2de5b",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_4bae1e503a3f",
+          "queued_at": 147299.632160875,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147300.989402958,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_2b18f399de38",
+          "queued_at": 147306.179928333,
+          "state": "finished",
+          "first_loud_at": 147307.892967041,
+          "preceding_quiet_seconds": 7.039339957991615,
+          "last_loud_at": 147313.573544041,
+          "ended_at": 147313.595771708,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_e9ba560edbed",
+          "queued_at": 147326.276330875,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147328.544623708,
+          "error": null
+        },
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road is 2.2 km, with an estimated travel time of 5 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_d862cafc9451",
+          "queued_at": 147336.052147041,
+          "state": "finished",
+          "first_loud_at": 147338.43369025,
+          "preceding_quiet_seconds": 10.000016292004148,
+          "last_loud_at": 147345.5740735,
+          "ended_at": 147345.622161291,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-ambiguous_distance-1",
+      "case": "ambiguous_distance",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-ambiguous_distance-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "04b45843fcfa99f4fd47d5f7e4f46ae9f028f3d3d86a1a2066f68760a4b057d2",
+        "events.jsonl": "5ded21cc312fae4de94e649e46fe145d109486e2c7e63836bef0a98411333433",
+        "frames.jsonl": "c0ce4d0f8bbe7f506f82a08d0e67ae4a478bed0c1898736b90ec1ef736f9cd30",
+        "received-1.pcm": "f578f8efe95d70dd5fb8fee0b0a6383a6200b5a7ee01082a135344f27eb224d0"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-ambiguous_distance-1",
+          "case": "ambiguous_distance",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/ambiguous_distance.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-ambiguous_distance-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "non-ack"
+          ],
+          "started_at": "2026-09-26T13:23:54.275312+00:00",
+          "condition": {
+            "case_id": "ambiguous_distance",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "e01f5a11b144dcacc672e708c7658c0e68737e68322c551e911ffbdaf3706dc7",
+          "pid": 83456,
+          "exit_code": 1,
+          "finished_at": "2026-09-26T13:24:39.787882+00:00",
+          "capture_status": "failed",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-067214d80b164047a0bdaab2cd6a81e3",
+            "started_at": "2026-09-26T13:24:39.844165+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:24:39.863825+00:00",
+                "elapsed_seconds": 0.019646165979793295,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_CTw9x5UqS3sb",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:24:40.426250+00:00",
+                "elapsed_seconds": 0.5820952499925625,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_CTw9x5UqS3sb",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:24:40.930571+00:00",
+                "elapsed_seconds": 1.0864365829911549,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_CTw9x5UqS3sb",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:24:41.434845+00:00",
+                "elapsed_seconds": 1.5906739579804707,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_CTw9x5UqS3sb",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:24:41.941428+00:00",
+                "elapsed_seconds": 2.097255625005346,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_CTw9x5UqS3sb",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:24:42.464211+00:00",
+                "elapsed_seconds": 2.620927665993804,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:24:42.470699+00:00",
+            "elapsed_seconds": 2.6265151249826886
+          }
+        }
+      ],
+      "capture_status": "failed",
+      "room": "car-audio-067214d80b164047a0bdaab2cd6a81e3",
+      "declared_speech": [],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-explicit_hospital_navigation-1",
+      "case": "explicit_hospital_navigation",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-explicit_hospital_navigation-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "3a8373484ebbb146c87e9e2c1643b44768f60bf19571b25a35bc6239a9d0bb24",
+        "events.jsonl": "f5a6d47569a23f308d0590d5650e2ecac54ee8df1c5006e60d60e527ce2023b9",
+        "frames.jsonl": "1c1bbba794cee4a7824eb7a1cf78f5aa496251eb79941a9b1f1428c9a8678509",
+        "received-1.pcm": "f45395c28c2eaef7c3c5aaa93552239e9024be18e43faa8164e75344236d8749"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-explicit_hospital_navigation-1",
+          "case": "explicit_hospital_navigation",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/navigate_hospital.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/rtc-explicit_hospital_navigation-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--final-response-kind",
+            "result"
+          ],
+          "started_at": "2026-09-26T13:24:42.591299+00:00",
+          "condition": {
+            "case_id": "explicit_hospital_navigation",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "1bd202e31736cfc705c8325e94d0a25b46d47949f13a1d458a6e21fe7553f097",
+          "pid": 83602,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T13:25:17.909244+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-7aa791a949844b70869ccbee509d725c",
+            "started_at": "2026-09-26T13:25:17.927209+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T13:25:17.933230+00:00",
+                "elapsed_seconds": 0.006018874992150813,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_RXofp2jkAv87",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:25:18.457151+00:00",
+                "elapsed_seconds": 0.5299497090163641,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_RXofp2jkAv87",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:25:18.960285+00:00",
+                "elapsed_seconds": 1.0330783340032212,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_RXofp2jkAv87",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:25:19.462580+00:00",
+                "elapsed_seconds": 1.535366875003092,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_RXofp2jkAv87",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T13:25:19.965779+00:00",
+                "elapsed_seconds": 2.038728584011551,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T13:25:19.973744+00:00",
+            "elapsed_seconds": 2.046594792016549
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-7aa791a949844b70869ccbee509d725c",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c551764f0a3f",
+          "queued_at": 147418.086618875,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147420.63467875,
+          "error": null
+        },
+        {
+          "text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_99c8ef6913b4",
+          "queued_at": 147424.278625666,
+          "state": "finished",
+          "first_loud_at": 147425.742202208,
+          "preceding_quiet_seconds": 5.200556249998044,
+          "last_loud_at": 147431.341730666,
+          "ended_at": 147431.394838416,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    }
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "fbe9e06056f0462befcdc9617b8754809ebe0faa4bee9f84afc472566b3e3863",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "4b5b26a6d6d17a35dec15522cf5d4e0f124acfbb13e7ce022e579d9be5bdec19",
+    "agent/coordinator/responder.py": "9830cb062e5aab314c1acd12ad4118831e81b942094ffc6145b02769d1fc2639",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "cb6ead8d503e28f043bcb98a596c228908bc2eb95f9212be54fa2423d4cffe12",
+    "agent/tools/manifest.py": "3d474ed7d121bc38317ad6ef6abf8c3a41bf4c62e513b784b665ef67de0ecf24",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "results/iteration20/review_received_audio.py": "7b65949bb34ce4d0de58682029814aa1e6b4e6c2035b1bca889f08147091d78a",
+    "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d"
+  }
+}

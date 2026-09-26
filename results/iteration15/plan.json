@@ -1,0 +1,24 @@
+{
+  "declared_at_utc": "2026-09-26T08:52:33.249941+00:00",
+  "purpose": "Test one bounded navigation-plan repair after iteration14 revealed a compute-only plan for a fresh navigation request.",
+  "hypothesis": "Rejecting deficient grounded navigation command plans before dispatch and allowing one full-context repair prevents the missing activation without creating writes for route queries or cancelled/incomplete requests.",
+  "scope": "Five production files add a car-only contract and one coordinator-owned semantic repair. Covered complete nonempty whole commands must ground uniquely, activate a matching current-plan computed route, and include exactly one start with no cancel/waypoint mutation. No-call/incomplete/unknown/ambiguous/question/negated/compound requests retain current handling. Responder, recorder, model configuration, audio inputs and expected effects are unchanged.",
+  "controls": [
+    "First reproduce the omission in deterministic tests using independent places; verify repair failure and correction-during-repair cause no obsolete dispatch.",
+    "Freeze full tested source and models before one cancel/repeat/repeat/cancel live suite using exact iteration14 WAVs.",
+    "Keep all rejected plans and logical repair attempts distinct from actual dispatched calls and parser-level JSON retries.",
+    "Retain all cases including missing final speech facts, refusal/clarification instead of action, or repeated missing activation. No retries/exclusions.",
+    "Review every whole received stream once after timed services exit."
+  ],
+  "unchanged_limits": [
+    "Reused development audio is not held-out evidence.",
+    "Small serial fixed-order replay cannot prove a causal latency improvement or population accuracy.",
+    "Response-wording defect is deliberately unchanged and continues to be scored.",
+    "Physical audibility/human echo, FDB evaluation and organizer brief remain separate requirements."
+  ],
+  "prelaunch_validation": {
+    "full_tests": "617 passed in 5.40s",
+    "focused_tests": "107 passed in 2.59s",
+    "independent_review": "No blocker for narrow contract; independent-code-review.json records exact scope and preserved check method."
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "started_at_utc": "2026-09-26T10:39:55.400468+00:00",
+  "status": "passed",
+  "scope": "Actual installed SDK interruption/EOU methods, real default2s timers, real SpeechHandle/EventEmitter, dummy session/output/state and synthetic pending recognition Future. No model, VAD inference, native audio, RTC, networking or full generation cleanup.",
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3"
+  },
+  "source_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py": "627612bcfe739d510302d8ea1869ea7076dfd45348436423282b1f72f7f80b26",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/reproduce_false_resume.py": "480415b34cb6adfbd2908c26209ad7a8f3776cf3df07e930ad12104ec5a60a81",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/rtc/event_emitter.py": "d88d21ab68d9ad393661f7b259282daebed0c68f6739edc61a58d0ec4221fa91",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e"
+  },
+  "cases": [
+    {
+      "label": "pending_nonempty",
+      "status": "passed",
+      "outcome": "Cancel navigation.",
+      "eot_pending_control": false,
+      "default_timeout_seconds": 2.0,
+      "after_timeout": {
+        "paused": false,
+        "handle_interrupted": false,
+        "recognition_pending": true,
+        "sdk_false_interruption_pending": false
+      },
+      "final_handle_interrupted": true,
+      "events": [
+        {
+          "event": "sink_pause",
+          "elapsed_ms": 0.1212080242112279,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.12283300748094916,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "agent_speech_paused",
+          "elapsed_ms": 0.12425001477822661,
+          "recognition_pending": true
+        },
+        {
+          "event": "recognition_eos",
+          "elapsed_ms": 0.12883302406407893,
+          "recognition_pending": true
+        },
+        {
+          "event": "user_state",
+          "elapsed_ms": 0.1294999965466559,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "empty_transcript_eou_guard",
+          "elapsed_ms": 0.19466702360659838,
+          "recognition_pending": true,
+          "eot_task_is_none": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2001.4277920126915,
+          "recognition_pending": true,
+          "state": "speaking"
+        },
+        {
+          "event": "recognition_agent_resumed",
+          "elapsed_ms": 2001.4332920254674,
+          "recognition_pending": true
+        },
+        {
+          "event": "sink_resume",
+          "elapsed_ms": 2001.434917008737,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_false_interruption",
+          "elapsed_ms": 2002.6927500148304,
+          "recognition_pending": true,
+          "resumed": true
+        },
+        {
+          "event": "after_default_timeout",
+          "elapsed_ms": 2082.2854170110077,
+          "recognition_pending": true,
+          "paused": false,
+          "handle_interrupted": false,
+          "sdk_false_interruption_pending": false
+        },
+        {
+          "event": "synthetic_recognition_settled",
+          "elapsed_ms": 2082.2880000050645,
+          "recognition_pending": false,
+          "text": "Cancel navigation."
+        },
+        {
+          "event": "final_event",
+          "elapsed_ms": 2082.5203330023214,
+          "recognition_pending": false,
+          "text": "Cancel navigation."
+        },
+        {
+          "event": "sink_pause",
+          "elapsed_ms": 2082.5322500022594,
+          "recognition_pending": false
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2082.5333330139983,
+          "recognition_pending": false,
+          "state": "listening"
+        },
+        {
+          "event": "agent_speech_paused",
+          "elapsed_ms": 2082.5341250165366,
+          "recognition_pending": false
+        },
+        {
+          "event": "sink_resume",
+          "elapsed_ms": 2082.5899170013145,
+          "recognition_pending": false
+        }
+      ]
+    },
+    {
+      "label": "pending_empty",
+      "status": "passed",
+      "outcome": "",
+      "eot_pending_control": false,
+      "default_timeout_seconds": 2.0,
+      "after_timeout": {
+        "paused": false,
+        "handle_interrupted": false,
+        "recognition_pending": true,
+        "sdk_false_interruption_pending": false
+      },
+      "final_handle_interrupted": false,
+      "events": [
+        {
+          "event": "sink_pause",
+          "elapsed_ms": 0.06845899042673409,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.06925000343471766,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "agent_speech_paused",
+          "elapsed_ms": 0.06999998004175723,
+          "recognition_pending": true
+        },
+        {
+          "event": "recognition_eos",
+          "elapsed_ms": 0.07316700066439807,
+          "recognition_pending": true
+        },
+        {
+          "event": "user_state",
+          "elapsed_ms": 0.07358400034718215,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "empty_transcript_eou_guard",
+          "elapsed_ms": 0.079624995123595,
+          "recognition_pending": true,
+          "eot_task_is_none": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2001.9629999878816,
+          "recognition_pending": true,
+          "state": "speaking"
+        },
+        {
+          "event": "recognition_agent_resumed",
+          "elapsed_ms": 2001.9674169889186,
+          "recognition_pending": true
+        },
+        {
+          "event": "sink_resume",
+          "elapsed_ms": 2001.9706249877345,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_false_interruption",
+          "elapsed_ms": 2002.0308340026531,
+          "recognition_pending": true,
+          "resumed": true
+        },
+        {
+          "event": "after_default_timeout",
+          "elapsed_ms": 2082.133708987385,
+          "recognition_pending": true,
+          "paused": false,
+          "handle_interrupted": false,
+          "sdk_false_interruption_pending": false
+        },
+        {
+          "event": "synthetic_recognition_settled",
+          "elapsed_ms": 2082.1357920067385,
+          "recognition_pending": false,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "label": "open_eot_control",
+      "status": "passed",
+      "outcome": "",
+      "eot_pending_control": true,
+      "default_timeout_seconds": 2.0,
+      "after_timeout": {
+        "paused": true,
+        "handle_interrupted": false,
+        "recognition_pending": true,
+        "sdk_false_interruption_pending": true
+      },
+      "final_handle_interrupted": false,
+      "events": [
+        {
+          "event": "sink_pause",
+          "elapsed_ms": 0.06604098598472774,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.06674998439848423,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "agent_speech_paused",
+          "elapsed_ms": 0.06770799518562853,
+          "recognition_pending": true
+        },
+        {
+          "event": "recognition_eos",
+          "elapsed_ms": 0.07070798892527819,
+          "recognition_pending": true
+        },
+        {
+          "event": "user_state",
+          "elapsed_ms": 0.07120799273252487,
+          "recognition_pending": true,
+          "state": "listening"
+        },
+        {
+          "event": "empty_transcript_eou_guard",
+          "elapsed_ms": 0.07675000233575702,
+          "recognition_pending": true,
+          "eot_task_is_none": true
+        },
+        {
+          "event": "control_eot_task_opened",
+          "elapsed_ms": 0.08066601003520191,
+          "recognition_pending": true
+        },
+        {
+          "event": "after_default_timeout",
+          "elapsed_ms": 2080.3443749900907,
+          "recognition_pending": true,
+          "paused": true,
+          "handle_interrupted": false,
+          "sdk_false_interruption_pending": true
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2080.389707989525,
+          "recognition_pending": true,
+          "state": "speaking"
+        },
+        {
+          "event": "recognition_agent_resumed",
+          "elapsed_ms": 2080.391541006975,
+          "recognition_pending": true
+        },
+        {
+          "event": "sink_resume",
+          "elapsed_ms": 2080.3923750063404,
+          "recognition_pending": true
+        },
+        {
+          "event": "agent_false_interruption",
+          "elapsed_ms": 2080.448458000319,
+          "recognition_pending": true,
+          "resumed": true
+        },
+        {
+          "event": "synthetic_recognition_settled",
+          "elapsed_ms": 2080.4694579856005,
+          "recognition_pending": false,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic pending future is not a model inference; it isolates that the SDK timer observes EOT task, not that future.",
+    "Dummy sink does not prove PCM cutoff/queue cleanup or application hold integration safety.",
+    "No historical live cause is established; live false-interruption and pause/resume events were not recorded."
+  ],
+  "finished_at_utc": "2026-09-26T10:40:01.649408+00:00",
+  "sources_unchanged": true
+}

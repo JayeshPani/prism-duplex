@@ -1,0 +1,550 @@
+{
+  "kind": "post_run_failure_explanation_not_rescoring",
+  "captured_at": "2026-09-25T18:37:46.107044+00:00",
+  "original_result": {
+    "passed": 17,
+    "total": 24,
+    "failed": 7,
+    "score_unchanged": true
+  },
+  "scope": "Independent read-only audit of existing scenario expectations, raw plans/events and current source verified against the frozen pre-run manifest. No model calls, rerun, scenario edits, score changes, or artifact replacement.",
+  "provenance": {
+    "artifact_sha256": {
+      "results/iteration2/local-synthetic-run1/results.json": "1c9839dc8f5b1da3421bd4adfa78a8c1b535c43ea3de9acf1b85d47324ab6715",
+      "results/iteration2/local-synthetic-run1/manifest.json": "55f11d92276b3d6a997a3b5fd4247eab93b7675443e94268f3a28c46c658ddba",
+      "tests/synthetic/scenarios.yaml": "4d5ee872c7280aeb4ac10abb575d821bc7f1c63012e097d61a94551202d92d58",
+      "tests/synthetic/run_synthetic.py": "d413adf9b47917a81bd6627e33fe7374525e2692494beb5994f87d02f3743a68"
+    },
+    "frozen_source_files_verified": 27,
+    "all_frozen_source_hashes_match_current": true,
+    "backend_source_reviewed_after_run": {
+      "path": "bench/Full-Duplex-Bench/v3/mock_apis.py",
+      "sha256": "475cc7e896f0c7d88fdf07f400de0f527c06f70ab452527eb82cf5a25c17292d",
+      "note": "This review records the currently checked-out mock source hash; it does not add a missing pre-run source observation."
+    }
+  },
+  "scoring_policy": "Existing conservative development scorer casefolds and collapses whitespace, compares exact argument key sets and a bijective tool multiset, and permits only explicit expected * wildcards. It does not normalize ordinal dates or card descriptors. Original why can stop at the first mismatch; this review enumerates additional mismatches.",
+  "failure_summary": {
+    "semantic_error_ids": [
+      "syn_shop_03",
+      "syn_multi_02"
+    ],
+    "representation_or_expected_argument_contract_ids": [
+      "syn_travel_02",
+      "syn_travel_03",
+      "syn_travel_05",
+      "syn_fin_06",
+      "syn_multi_01"
+    ],
+    "interpretation": "Five failures concern representation/expected argument contracts and two contain semantic errors. These are explanatory categories, not a revised pass rate. Real-backend equivalence is not established by permissive deterministic mocks."
+  },
+  "failures": [
+    {
+      "id": "syn_travel_02",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Toronto', 'date': 'March 5'}}",
+      "user_request_segments": [
+        "Find flights to Toronto on March 3rd -",
+        "no wait, March 5th, sorry."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Toronto",
+            "date": "March 5"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Toronto",
+            "date": "March 5th"
+          }
+        }
+      ],
+      "classification": "representation_mismatch",
+      "all_observed_mismatches": [
+        {
+          "kind": "date_ordinal",
+          "tool": "search_flights",
+          "field": "date",
+          "expected": "March 5",
+          "actual": "March 5th",
+          "interpretation": "Same stated calendar day. Scorer does not normalize ordinal suffixes; no March 3 dispatch appears."
+        }
+      ],
+      "execution_interpretation": "The resumed segment cancelled the pending gate. The only search uses the corrected date.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          23
+        ],
+        "tool_done": [
+          24
+        ],
+        "gate_cancelled": [
+          11
+        ],
+        "turn_merged": [
+          12
+        ]
+      }
+    },
+    {
+      "id": "syn_travel_03",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Madrid', 'date': 'July 2'}}",
+      "user_request_segments": [
+        "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Madrid",
+            "date": "July 2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Priya Nair"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Madrid",
+            "date": "July 2nd"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Priya Nair",
+            "flight_id": "FL123"
+          }
+        }
+      ],
+      "classification": "representation_and_expected_argument_contract_mismatch",
+      "all_observed_mismatches": [
+        {
+          "kind": "date_ordinal",
+          "tool": "search_flights",
+          "field": "date",
+          "expected": "July 2",
+          "actual": "July 2nd",
+          "interpretation": "Same stated calendar day."
+        },
+        {
+          "kind": "extra_schema_supported_grounded_argument",
+          "tool": "book_flight",
+          "field": "flight_id",
+          "expected": "key absent",
+          "actual": "FL123",
+          "interpretation": "The plan references $c1.flights[0].flight_id, resolved from the preceding successful search. This is a valid optional tool argument, not an extra semantic action."
+        }
+      ],
+      "execution_interpretation": "The search completes before booking begins; passenger is Priya Nair as requested.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          19,
+          21
+        ],
+        "tool_done": [
+          20,
+          22
+        ],
+        "gate_cancelled": [],
+        "turn_merged": []
+      }
+    },
+    {
+      "id": "syn_travel_05",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Stockholm', 'date': 'May 9'}}",
+      "user_request_segments": [
+        "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Stockholm",
+            "date": "May 9"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Tom Becker"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Stockholm",
+            "date": "May 9th"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Tom Becker",
+            "flight_id": "FL123"
+          }
+        }
+      ],
+      "classification": "representation_and_expected_argument_contract_mismatch",
+      "all_observed_mismatches": [
+        {
+          "kind": "date_ordinal",
+          "tool": "search_flights",
+          "field": "date",
+          "expected": "May 9",
+          "actual": "May 9th",
+          "interpretation": "Same stated calendar day."
+        },
+        {
+          "kind": "extra_schema_supported_grounded_argument",
+          "tool": "book_flight",
+          "field": "flight_id",
+          "expected": "key absent",
+          "actual": "FL123",
+          "interpretation": "Grounded through $c1.flights[0].flight_id after search completion; optional argument is valid."
+        }
+      ],
+      "execution_interpretation": "The only destination dispatched is corrected Stockholm, never Oslo. Search precedes booking for Tom Becker.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          19,
+          21
+        ],
+        "tool_done": [
+          20,
+          22
+        ],
+        "gate_cancelled": [],
+        "turn_merged": []
+      }
+    },
+    {
+      "id": "syn_fin_06",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'get_card_benefits', 'args': {'card_type': 'black'}}",
+      "user_request_segments": [
+        "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?"
+      ],
+      "expected_calls": [
+        {
+          "tool": "get_exchange_rate",
+          "args": {
+            "amount": 1200,
+            "from_currency": "CAD",
+            "to_currency": "INR"
+          }
+        },
+        {
+          "tool": "get_card_benefits",
+          "args": {
+            "card_type": "black"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "get_exchange_rate",
+          "args": {
+            "amount": 1200,
+            "from_currency": "CAD",
+            "to_currency": "INR"
+          }
+        },
+        {
+          "tool": "get_card_benefits",
+          "args": {
+            "card_type": "black card"
+          }
+        }
+      ],
+      "classification": "card_label_representation_mismatch",
+      "all_observed_mismatches": [
+        {
+          "kind": "card_label_descriptor",
+          "tool": "get_card_benefits",
+          "field": "card_type",
+          "expected": "black",
+          "actual": "black card",
+          "interpretation": "Not a casing mismatch: casefold is already applied. The extra descriptor follows the user wording. The mock returns identical fixed benefits for every card_type, so mock success cannot establish equivalence for a real card backend."
+        }
+      ],
+      "execution_interpretation": "Currency conversion arguments match exactly. No additional or omitted tool call appears.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          19,
+          20
+        ],
+        "tool_done": [
+          21,
+          22
+        ],
+        "gate_cancelled": [],
+        "turn_merged": []
+      }
+    },
+    {
+      "id": "syn_shop_03",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'search_products', 'args': {'query': 'coffee grinder'}}",
+      "user_request_segments": [
+        "Search for a, a coffee grinder and put three -",
+        "no, just one in the cart."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "coffee grinder"
+          }
+        },
+        {
+          "tool": "add_to_cart",
+          "args": {
+            "product_id": "*",
+            "quantity": 1
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "coffee grinder",
+            "max_price": 1000
+          }
+        },
+        {
+          "tool": "add_to_cart",
+          "args": {
+            "product_id": "PROD1",
+            "quantity": 1
+          }
+        }
+      ],
+      "classification": "semantic_error_unsupported_constraint",
+      "all_observed_mismatches": [
+        {
+          "kind": "invented_search_budget",
+          "tool": "search_products",
+          "field": "max_price",
+          "expected": "key absent; no user budget",
+          "actual": 1000,
+          "interpretation": "An unsupported price constraint, not harmless representation. Tool description explicitly allows max_price only when the user supplies a budget. The mock result reports price 990, while its source would use 99.99 without max_price."
+        }
+      ],
+      "execution_interpretation": "Quantity correction succeeds: only quantity 1 is added. PROD1 is grounded through the preceding search. That does not excuse the invented budget; fixed mock product IDs/cart totals cannot establish a real purchase outcome.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          25,
+          27
+        ],
+        "tool_done": [
+          26,
+          28
+        ],
+        "gate_cancelled": [
+          11
+        ],
+        "turn_merged": [
+          12
+        ]
+      }
+    },
+    {
+      "id": "syn_multi_01",
+      "original_pass": false,
+      "original_why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Dublin', 'date': 'October 4'}}",
+      "user_request_segments": [
+        "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Dublin",
+            "date": "October 4"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Maya Chen"
+          }
+        },
+        {
+          "tool": "update_identity_doc",
+          "args": {
+            "doc_type": "passport",
+            "doc_number": "R330981"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "update_identity_doc",
+          "args": {
+            "doc_type": "passport",
+            "doc_number": "R330981"
+          }
+        },
+        {
+          "tool": "search_flights",
+          "args": {
+            "destination": "Dublin",
+            "date": "October 4th"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "passenger_name": "Maya Chen",
+            "flight_id": "FL123"
+          }
+        }
+      ],
+      "classification": "representation_and_expected_argument_contract_mismatch",
+      "all_observed_mismatches": [
+        {
+          "kind": "date_ordinal",
+          "tool": "search_flights",
+          "field": "date",
+          "expected": "October 4",
+          "actual": "October 4th",
+          "interpretation": "Same stated calendar day."
+        },
+        {
+          "kind": "extra_schema_supported_grounded_argument",
+          "tool": "book_flight",
+          "field": "flight_id",
+          "expected": "key absent",
+          "actual": "FL123",
+          "interpretation": "Grounded through the successful flight search; optional argument is valid."
+        }
+      ],
+      "execution_interpretation": "Passport R330981 update matches. It completes independently before the search, but booking starts after search completion. The calls array is completion order, not dispatch order; this ordering is not a failure.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          21,
+          22,
+          25
+        ],
+        "tool_done": [
+          23,
+          24,
+          26
+        ],
+        "gate_cancelled": [],
+        "turn_merged": []
+      }
+    },
+    {
+      "id": "syn_multi_02",
+      "original_pass": false,
+      "original_why": "tools expected {'search_apartments': 1, 'update_search_filter': 1} got {'search_apartments': 1}",
+      "user_request_segments": [
+        "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park."
+      ],
+      "expected_calls": [
+        {
+          "tool": "search_apartments",
+          "args": {
+            "city": "Chicago",
+            "bedrooms": 2,
+            "max_price": 2200,
+            "pets_allowed": true
+          }
+        },
+        {
+          "tool": "update_search_filter",
+          "args": {
+            "filter_name": "neighborhood",
+            "value": "Lincoln Park"
+          }
+        }
+      ],
+      "actual_calls_completion_order": [
+        {
+          "tool": "search_apartments",
+          "args": {
+            "city": "Chicago",
+            "bedrooms": 2,
+            "max_price": 2200,
+            "pets_allowed": true
+          }
+        }
+      ],
+      "classification": "semantic_error_omitted_action",
+      "all_observed_mismatches": [
+        {
+          "kind": "omitted_requested_action",
+          "tool": "update_search_filter",
+          "expected": {
+            "filter_name": "neighborhood",
+            "value": "Lincoln Park"
+          },
+          "actual": "absent from plan and execution",
+          "interpretation": "The planner omits the explicit second request. No executor error explains the omission."
+        }
+      ],
+      "execution_interpretation": "Apartment search arguments match, but the saved neighborhood filter is never updated.",
+      "event_indices_zero_based": {
+        "tool_started": [
+          18
+        ],
+        "tool_done": [
+          19
+        ],
+        "gate_cancelled": [],
+        "turn_merged": []
+      }
+    }
+  ],
+  "execution_audit": {
+    "event_counts": {
+      "user_final": 53,
+      "ack": 53,
+      "agent_say": 77,
+      "plan_ready": 48,
+      "gate_open": 48,
+      "gate_committed": 48,
+      "slot_update": 77,
+      "tool_waiting": 34,
+      "tool_started": 34,
+      "tool_done": 34,
+      "user_resumed": 5,
+      "gate_cancelled": 5,
+      "turn_merged": 5
+    },
+    "successful_tool_done_count": 34,
+    "tool_error_count": 0,
+    "coordinator_timeout_ids": [],
+    "unpaired_start_completion_scenario_ids": [],
+    "duplicate_execution_id_call_id_scenario_ids": [],
+    "repeated_identical_tool_args_within_scenario_ids": [],
+    "stale_or_missing_stale_marker_completions": [],
+    "non_success_completions": [],
+    "interpretation": "All 34 observed starts pair one-to-one by execution_id plus call id with successful completions carrying stale=false. There are no observed error events, timeout results, repeated dispatch identities, or identical repeated calls within an independent scenario. This is bounded evidence from these traces, not an exactly-once or stale-free guarantee for other timings/backends."
+  },
+  "limitations": [
+    "Text-only independent development scenarios using an already-warm local model; not held-out, live audio, or an official Full-Duplex-Bench score.",
+    "Result speech was explicitly disabled for this run and recorded before it. These results do not validate substantive spoken answers.",
+    "Deterministic mock successes do not establish external effects. For example booking returns a fixed reference and card benefits do not vary by card type.",
+    "Raw complete plans and events are retained; incomplete planner token streams are not available for this audit."
+  ]
+}

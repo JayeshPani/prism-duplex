@@ -1,0 +1,92 @@
+{
+  "created_at_utc": "2026-09-26T11:50:38.232160+00:00",
+  "status": "passed",
+  "scope": "Independent bounded review of the four final documents against saved iteration18 evidence, with current-vs-historical framing and local-link checks. Read-only except this new receipt. No models, services, tests or model-weight reads.",
+  "checks": {
+    "all_99_archived_capture_reports_exist": true,
+    "all21_cases_63attempts_23effects_match": true,
+    "manual_final_facts_7of8_and12of13": true,
+    "interruption_handles1of2_and2of2": true,
+    "attempt_statuses62done1error": true,
+    "published_inputs14plus22": true,
+    "trace_totals721raw709trusted12missing": true,
+    "trace_case_counts2of8_and8of13": true,
+    "published_nonspeech11_unexercised": true,
+    "30native_2warmup_26room_2span": true,
+    "no_dropped_pending_error_observations": true,
+    "5holds_perarm_pending_boundaries": true,
+    "153warning_rows3watchdogs21server_labels": true,
+    "memory_values_round_as_documented": true,
+    "pause_activity_gaps_match": true,
+    "latency_full_denominator_and_two_unfulfilled": true,
+    "latency_ack_PCM_unmeasured": true,
+    "latency_percentiles_independently_recalculated": true,
+    "five_doc_latency_table_rows_match": true,
+    "interruption_table12_values_match": true,
+    "post_receipt_exact_census_and_absence": true,
+    "all_local_markdown_links_exist": true,
+    "PR_required_sections_present": true,
+    "hard_total_pause_cap_claim_removed": true,
+    "verifier_scope_statement_corrected": true,
+    "local_git_prepared_only_state": true,
+    "all_four_documents_stable_during_review": true
+  },
+  "issues": [],
+  "resolved_findings": [
+    {
+      "finding": "Post-verifier described as rejecting any interrupted/failed phase",
+      "resolution": "Document now distinguishes nonterminal/missing or unresolved integrity/process state from terminal failed capture/ASR phases and explicitly preserves verifier interruption as failed."
+    },
+    {
+      "finding": "Thirty seconds described as a hard cap on total audio pause",
+      "resolution": "All four documents now describe the recognition-wait deadline requesting interruption, with release dependent on generation cleanup."
+    }
+  ],
+  "reviewed_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/README.md": "33481ccf33eb15663aa8f0156d3ec8ff9772375eac6d1b1201aabaaa2985813f",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/docs/iteration18.md": "1992bed9f4289bab5230310441e0e694274038aeecf7f1191331e8f590d7ca48",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/docs/completion-audit.md": "c635c363a800660311c2e182619786c6880e54b00c9fbe7ee5fe614dd710a208",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-pr-description.md": "3dbd924efd8f1e7f5eb04a304cd79d1f784713a56db68b56b288225b2d7da5eb"
+  },
+  "evidence_sha256": {
+    "results/iteration18/acoustic-audit.json": "fd485ed66d268f1f8525380973ae8205238c71fdcdcb08359ca608ec8b22eba7",
+    "results/iteration18/acoustic-summary.json": "9a2ee8188e507cebc939b62131cede048cbdf9f41ac59d627675bef44fb62dbb",
+    "results/iteration18/speech-fact-review.json": "03316ecb4bb0309c84ecd3d524f63b7f459e06ba53abcba362ec4c23697e6d75",
+    "results/iteration18/latency-review.json": "bcf3ec573b074cccfe153718babdb3f6c8cc55984ad85c307e9709c97ca2e978",
+    "results/iteration18/review_latency.py": "5b3428b41799ca990ea4ade5d64740d69c92a9952c1eafa8f8766363d0659ea0",
+    "results/iteration18/post-inference-validation.json": "7845596d23397d46c62ef5786006170d75b87fefe061d1f7e4f65a3852c9db51",
+    "results/iteration18/postcheck-readiness-review.json": "201e0d4494ada9d91ecbcb7d6ec90cd3ba124eab57bed353be768979524207ce",
+    "results/iteration18/combined-mechanism-comparison.json": "14a0f41262786641038dcb1a87fc166ba4fd2e53a5cf7631e22a3654900fad0e",
+    "results/iteration18/experimental-harness-review.json": "f00acd03d8efc01d4fd8634bffd22fb2c2154ff18afb59a06f7df24230b01ba5",
+    "results/iteration18/freeze-review.json": "f819da24bae13bfcff35d89fc0d5c53be25ab507c7eed731a3a6d1ded951db8f",
+    "results/iteration18/input-assets.json": "63cdafddf708cdbf6c6709d8d421ef5b4ea63672b1d8f5ad88cf089d1f84356d",
+    "results/iteration18/tested-source-v2.json": "b4ce0f94cbc789a1222a151f4b35a76bcda552fab180777f1c8de751f2ead7ac",
+    "results/iteration18/full-tests-v2.txt": "d5fe7c3c50fd90300200f3194d1736c101948c5cde666c5e383f7bba85a10ae2",
+    "results/iteration18/verify_after_inference.py": "e35d04c819950b6de2d8887a81b6c6afe23aa14a769429adb1b6a795e03939a6",
+    "results/iteration18-baseline/baseline-mechanism-review.json": "0b00c58278f1ff8ad99b177643b020005e96f32c8ff3414d721927e252c4ac13",
+    "results/iteration18-candidate/candidate-mechanism-review.json": "3d405b010b0f3540bdc2387edef8f7948d0fd1f803a502bb6015486db68cfbc4",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb"
+  },
+  "local_link_checks": {
+    "checked": 32,
+    "missing": []
+  },
+  "local_git_observation": {
+    "branch": "reliability-navigation",
+    "staged_paths": "",
+    "commits_ahead": "0"
+  },
+  "latency_review_assessment": "All 21 rows preserve last spoken-input anchors, latest unique non-ack handle and independent manual/all-effect fulfillment gates. Nineteen fulfilled values; both failures remain null for fulfillment, ambiguity observed finish remains present, all ack PCM remains null. Every group nearest-rank percentile independently recalculated.",
+  "qualitative_assessment": [
+    "Failed startup, incomplete clarified navigation, 11 trusted-trace mismatches and delayed baseline old-reply completion remain visible, with no success-by-capture or success-by-ASR conflation.",
+    "Observed controlled delay mechanism is separated from natural inference, physical audible timing, broad quality and causality. Non-speech controls explicitly did not exercise empty-recognition recovery.",
+    "Current two-entry configuration and iteration18 observations are separated from historical iteration17 cache-screen outcomes. No one-entry adoption or new untouched held-out benchmark claim appears.",
+    "Warnings, server JS_FAILED labels, observer scope and memory/latency denominators remain qualified. Fixed order, shared host and small samples remain disclosed.",
+    "Prepared PR has Summary, Changes, Testing and Notes, and explicitly says unpublished. Local zero-staged/zero-ahead state is independently checked; GitHub open-PR status is parent-reported and was not freshly queried by this reviewer."
+  ],
+  "limits": [
+    "This review validates documented claims against retained evidence; it is not a fresh experimental replication or a complete repository security/behavioral audit.",
+    "Historical contextual claims were reviewed for accurate framing; the 99 capture inventory was independently counted, but earlier model runs were not repeated.",
+    "No external website availability check or human listening was performed. Local links were verified, and all document hashes bind this verdict to final reviewed bytes."
+  ]
+}

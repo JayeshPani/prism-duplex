@@ -1,0 +1,42 @@
+{
+  "source_sha256": "dc832a569bd604b91d07d78c6355e57c5ef9ce5a58b4e92037d6cac34a2b17d4",
+  "samples": 493,
+  "interval_requested_s": 0.5,
+  "first_at_utc": "2026-09-26T04:50:43.529789+00:00",
+  "last_at_utc": "2026-09-26T04:55:00.838410+00:00",
+  "duration_s": 257.30820258299354,
+  "system_available_min_bytes": 262012928,
+  "swap_start_bytes": 3631939584,
+  "swap_end_bytes": 8322220032,
+  "swap_max_bytes": 9131065344,
+  "rss_peak_per_owned_pid_bytes": {
+    "livekit": {
+      "80618": 54788096,
+      "80633": 81920
+    },
+    "llm": {
+      "80619": 4894228480
+    },
+    "worker": {
+      "80630": 1394900992
+    }
+  },
+  "sampling_errors": [
+    {
+      "sample": 20,
+      "role": "livekit",
+      "error": "PID still exists but it's a zombie (pid=80665)"
+    },
+    {
+      "sample": 492,
+      "role": "worker",
+      "error": "process no longer exists (pid=80630)"
+    }
+  ],
+  "limits": [
+    "Monitor covers startup, serial captures and service shutdown; the last sample can precede final exit by the sampling interval. Recorder and API observer are excluded.",
+    "System memory and pre-existing swap include other applications; growth cannot all be attributed to PRISM.",
+    "RSS is resident pages, not total model allocation; do not sum overlapping unified-memory figures.",
+    "Sampling can miss brief processes and peaks; eight serial repeated inputs do not establish simultaneous-room capacity."
+  ]
+}

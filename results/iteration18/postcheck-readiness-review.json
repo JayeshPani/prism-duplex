@@ -1,0 +1,87 @@
+{
+  "created_at_utc": "2026-09-26T11:31:35.490680+00:00",
+  "status": "reviewed_no_open_blocker",
+  "scope": "Post-freeze static review and small source/snapshot/PCM-byte checks. No validation method, ASR/model inference, services, tests or model-weight reads executed. Parent owns actual ASR/post-validation.",
+  "checks": {
+    "preflight_passed": true,
+    "exact_117_frozen_sources": true,
+    "all_frozen_source_bytes_match": true,
+    "exact_11_unique_runtime_members": true,
+    "snapshot_receipt_hash_matches": true,
+    "exact_117_snapshot_source_mapping": true,
+    "all_snapshot_bytes_match": true,
+    "unique_snapshot_paths": true,
+    "ten_declared_model_references_metadata_only": true,
+    "thirteen_input_asset_rows": true,
+    "ASR_method_hash_matches": true,
+    "failed_capture_stays_declared": true,
+    "failed_capture_has_no_speech_handles": true,
+    "failed_capture_nonempty_PCM": true,
+    "failed_capture_has_no_input_start_events": true,
+    "baseline_full_terminal_run_order": true,
+    "baseline_ASR_protocol_hash_matches": true,
+    "candidate_full_terminal_run_order": true,
+    "candidate_ASR_protocol_hash_matches": true
+  },
+  "expected_post_validation_census": {
+    "frozen_source_files": 117,
+    "snapshots": 117,
+    "critical_runtime_sources": 11,
+    "model_references": 10,
+    "input_asset_files": 13,
+    "phase_receipts": [
+      "inputs",
+      "baseline",
+      "candidate",
+      "asr-baseline",
+      "asr-candidate"
+    ],
+    "declared_ASR_rows": {
+      "baseline": 8,
+      "candidate": 13,
+      "total": 21
+    }
+  },
+  "baseline_failure": {
+    "case": "native_noise_burst",
+    "capture_status": "failed",
+    "failed_stage": "connect_and_session_ready",
+    "error": "TimeoutError()",
+    "PCM_bytes": 2124480,
+    "samples": 1062240,
+    "duration_seconds": 44.26,
+    "minimum_sample": -2,
+    "maximum_sample": 2,
+    "nonzero_samples": 21820,
+    "peak_dbfs": -84.28839878591474,
+    "speech_handles": 0,
+    "input_start_events": 0,
+    "interpretation": "Readiness timeout prevented input playback, but received audio is a nonempty near-silent 44.26-second stream. It passes the frozen nonempty PCM gate and will be transcribed untrimmed. ASR may complete (possibly with empty transcript) while capture/task/content remain failed; an empty-file ASR error must not be assumed."
+  },
+  "method_assessment": [
+    "Frozen ASR derives rows from all declared cases, preserving failed capture metadata and rejecting genuinely empty/malformed PCM inside a retained error row. No capture-status exclusion exists.",
+    "If all eight baseline streams transcribe successfully with clean unchanged inputs/source/suite and pool shutdown, baseline ASR status may truthfully be completed despite one failed live capture. If a stream fails, completed_with_errors and its nonzero phase exit remain retained.",
+    "Post-validation requires terminal phase exits and complete per-arm denominator, source/snapshot integrity, and absence of owned PIDs before model reads. It allows terminal nonzero conversational/ASR phases; passed therefore means the stated evidence/source census passed, not that all conversations, transcriptions or facts succeeded. Inspect ASR integrity booleans, row errors and capture statuses separately in final reporting.",
+    "BaseException paths in post-validation retain failed status; finally writes finish evidence only. The reviewed model-read loop follows phase/PID/source/snapshot prerequisite checks."
+  ],
+  "evidence_sha256": {
+    "results/iteration18/preflight.json": "ee93709b5aa197c6eaa905e3ddee567a12618f915eb873655d2d49176e328402",
+    "results/iteration18/source-snapshot.json": "d37675ced1638b91b26229d74802e9f9b64805ed912d25fdefddfeb3dea55688",
+    "results/iteration18/verify_after_inference.py": "e35d04c819950b6de2d8887a81b6c6afe23aa14a769429adb1b6a795e03939a6",
+    "results/iteration18/review_received_audio.py": "663bb0b40f95d3bd4edaad4047546449cee158818c8092673a766be37eeb1bb0",
+    "results/iteration18/received-audio-review-protocol.json": "0de1db98e442edd28fe0d92a1336d469d537f122a599e8fa1c275942c27bfb01",
+    "results/iteration18/input-assets.json": "63cdafddf708cdbf6c6709d8d421ef5b4ea63672b1d8f5ad88cf089d1f84356d",
+    "results/iteration18-baseline/protocol.json": "ae6a27c6b3f57b277736dbe2a12c0394aabda471a8f78c26c1f0cab10ab4b504",
+    "results/iteration18-baseline/run-report.json": "ca3c4eaf346baea096325c4d5b9646ba79e64cd3e037001b28e2a81be682ea1c",
+    "results/iteration18-candidate/protocol.json": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c",
+    "results/iteration18-candidate/run-report.json": "4d4454d42b396039cf3292aa7f2cadca6513f7ece6d0820a8fabe4bc7ff58be8",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/report.json": "583bbf5abc972149d499bf6f47b88d097d426b6c8e75d0af2e2b49ae608a16aa",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/events.jsonl": "96d99c07eb2f05fd75e0e9b02c78be464041b95c7ac07aa8986d1f0701fc5ecc",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/received-1.pcm": "10df8ac416538c6fa57ddbccb89e6735f5f3cbe55d390e0cb6976cabe70650a6"
+  },
+  "limitations": [
+    "No ASR results were reviewed here; manual factual review must wait for both ASR processes to finish.",
+    "Source and snapshot hashes were checked without importing accelerator/model modules or rereading model files. Ten-model census is metadata only in this receipt.",
+    "This receipt is produced after the timed captures and does not amend any frozen method or historical artifact."
+  ]
+}

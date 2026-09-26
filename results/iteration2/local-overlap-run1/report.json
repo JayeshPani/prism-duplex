@@ -1,0 +1,2232 @@
+{
+  "status": "completed",
+  "started_at": "2026-09-25T18:32:47.893494+00:00",
+  "command": [
+    "scripts/local_overlap_experiment.py",
+    "--out",
+    "results/iteration2/local-overlap-run1",
+    "--audio",
+    "results/iteration2/local-speech-run1/raw/direct-stt-16k.wav",
+    "--llm-pid",
+    "14081",
+    "--batch-timeout",
+    "240"
+  ],
+  "scope": "Concurrent independent local component capacity workloads; no causal conversation or tool execution",
+  "expected": {
+    "levels": [
+      1,
+      2,
+      4
+    ],
+    "stt_reference": "Navigate to Maple Library.",
+    "planner_input": "Navigate to the office.",
+    "planner_contract": "complete office route+start plan, optional preceding office lookup; string place arguments, no extra argument keys/calls/waypoint",
+    "tts_input": "Your route is ready.",
+    "tts_check": "nonempty PCM only, speech content not scored"
+  },
+  "batch_deadline_s": 240.0,
+  "memory_sample_interval_s": 0.25,
+  "limitations": [
+    "Repeated synthetic audio and one planner request; no general conversational accuracy claim",
+    "Same warm process/server, ascending 1/2/4 order, first cold inference retained; caches/order confound scaling",
+    "Component wall time includes production queue waiting; no audible or network transport latency",
+    "Deadline bounds observation, not native execution; timed-out native threads may delay process exit",
+    "RSS and MLX allocations overlap and must not be added; server peak is sampled, not lifetime peak",
+    "Configured local endpoint and supplied PID are not proof they refer to the same server"
+  ],
+  "batches": [
+    {
+      "rooms": 1,
+      "status": "completed",
+      "attempts": [
+        {
+          "room": 1,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84217.914896375,
+          "queue_inclusive_seconds": 3.046530207997421,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84217.915364583,
+          "queue_inclusive_seconds": 11.549684083001921,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84218.124080291,
+          "queue_inclusive_seconds": 1.5504780420014868,
+          "audio_file": "raw/rooms-1-room-1.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        }
+      ],
+      "memory_samples": [
+        {
+          "at_monotonic": 84217.914744916,
+          "process_rss_bytes": 748273664,
+          "process_lifetime_peak_rss_bytes": 749338624,
+          "mlx_active_bytes": 41107656,
+          "mlx_peak_bytes": 82118664,
+          "mlx_cache_bytes": 41017500,
+          "external_server_rss_bytes": 4623466496,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84218.76283075,
+          "process_rss_bytes": 511770624,
+          "process_lifetime_peak_rss_bytes": 749338624,
+          "mlx_active_bytes": 155000612,
+          "mlx_peak_bytes": 155947336,
+          "mlx_cache_bytes": 50350224,
+          "external_server_rss_bytes": 4623564800,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84219.015110916,
+          "process_rss_bytes": 520962048,
+          "process_lifetime_peak_rss_bytes": 749338624,
+          "mlx_active_bytes": 80005916,
+          "mlx_peak_bytes": 203069220,
+          "mlx_cache_bytes": 172231832,
+          "external_server_rss_bytes": 4733648896,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84219.265648083,
+          "process_rss_bytes": 778993664,
+          "process_lifetime_peak_rss_bytes": 789463040,
+          "mlx_active_bytes": 810014836,
+          "mlx_peak_bytes": 828490750,
+          "mlx_cache_bytes": 135445696,
+          "external_server_rss_bytes": 4711677952,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84219.516890708,
+          "process_rss_bytes": 860635136,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1285343204,
+          "mlx_peak_bytes": 1413810164,
+          "mlx_cache_bytes": 227178960,
+          "external_server_rss_bytes": 4708450304,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84219.769281916,
+          "process_rss_bytes": 832847872,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1775907820,
+          "mlx_peak_bytes": 1775907820,
+          "mlx_cache_bytes": 68550088,
+          "external_server_rss_bytes": 4635934720,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84220.021588083,
+          "process_rss_bytes": 742637568,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 2043501428,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 94755528,
+          "external_server_rss_bytes": 4633493504,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84220.273780291,
+          "process_rss_bytes": 753565696,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1263079714,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 875177242,
+          "external_server_rss_bytes": 4640964608,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84220.525992083,
+          "process_rss_bytes": 756760576,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1259868376,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 880487796,
+          "external_server_rss_bytes": 4641423360,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84220.778185083,
+          "process_rss_bytes": 751812608,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1273890852,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 917839216,
+          "external_server_rss_bytes": 4641161216,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84221.030318916,
+          "process_rss_bytes": 766164992,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641406976,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84221.280825875,
+          "process_rss_bytes": 766164992,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641734656,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84221.532943375,
+          "process_rss_bytes": 766328832,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641882112,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84221.785055583,
+          "process_rss_bytes": 564461568,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641357824,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84222.037149583,
+          "process_rss_bytes": 564461568,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641439744,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84222.2892615,
+          "process_rss_bytes": 242581504,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641472512,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84222.541378791,
+          "process_rss_bytes": 190545920,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641472512,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84222.793505875,
+          "process_rss_bytes": 190201856,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641718272,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84223.045629166,
+          "process_rss_bytes": 94388224,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641914880,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84223.297765958,
+          "process_rss_bytes": 85999616,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642013184,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84223.5499585,
+          "process_rss_bytes": 85999616,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642013184,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84223.80207525,
+          "process_rss_bytes": 85966848,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642045952,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84224.054193833,
+          "process_rss_bytes": 85213184,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642177024,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84224.306326625,
+          "process_rss_bytes": 85213184,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642177024,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84224.558442708,
+          "process_rss_bytes": 75317248,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642177024,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84224.810644541,
+          "process_rss_bytes": 57376768,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642045952,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84225.062780416,
+          "process_rss_bytes": 51036160,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4642373632,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84225.314987333,
+          "process_rss_bytes": 43106304,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641882112,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84225.567123833,
+          "process_rss_bytes": 43122688,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641816576,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84225.819223625,
+          "process_rss_bytes": 36470784,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641783808,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84226.071299458,
+          "process_rss_bytes": 36241408,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4641783808,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84226.323397791,
+          "process_rss_bytes": 31113216,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4643897344,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84226.575513875,
+          "process_rss_bytes": 47759360,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647124992,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84226.827600583,
+          "process_rss_bytes": 48103424,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647452672,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84227.079678708,
+          "process_rss_bytes": 48119808,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647600128,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84227.331760583,
+          "process_rss_bytes": 48267264,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647731200,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84227.583861083,
+          "process_rss_bytes": 48332800,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647829504,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84227.835950708,
+          "process_rss_bytes": 48332800,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647862272,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84228.088062083,
+          "process_rss_bytes": 48365568,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648026112,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84228.340186,
+          "process_rss_bytes": 48381952,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648124416,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84228.592290916,
+          "process_rss_bytes": 46465024,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648009728,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84228.844392958,
+          "process_rss_bytes": 46284800,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647895040,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84229.095802791,
+          "process_rss_bytes": 46284800,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4647944192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84229.347910083,
+          "process_rss_bytes": 46268416,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648124416,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84229.470038,
+          "process_rss_bytes": 50593792,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648173568,
+          "external_server_error": null
+        }
+      ],
+      "total_wall_seconds": 11.555264000009629,
+      "memory_after": {
+        "at_monotonic": 84229.470038,
+        "process_rss_bytes": 50593792,
+        "process_lifetime_peak_rss_bytes": 925614080,
+        "mlx_active_bytes": 1277473484,
+        "mlx_peak_bytes": 2075792254,
+        "mlx_cache_bytes": 927367884,
+        "external_server_rss_bytes": 4648173568,
+        "external_server_error": null
+      },
+      "sampled_peak_process_rss_bytes": 860635136,
+      "sampled_peak_server_rss_bytes": 4733648896
+    },
+    {
+      "rooms": 2,
+      "status": "completed",
+      "attempts": [
+        {
+          "room": 1,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84229.471440791,
+          "queue_inclusive_seconds": 1.066609208995942,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84229.472532875,
+          "queue_inclusive_seconds": 3.471322457990027,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84229.477515166,
+          "queue_inclusive_seconds": 0.744215416998486,
+          "audio_file": "raw/rooms-2-room-1.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84229.4785035,
+          "queue_inclusive_seconds": 1.2509001660073409,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84229.479528,
+          "queue_inclusive_seconds": 6.699517500004731,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84229.4821865,
+          "queue_inclusive_seconds": 1.279730833004578,
+          "audio_file": "raw/rooms-2-room-2.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        }
+      ],
+      "memory_samples": [
+        {
+          "at_monotonic": 84229.471242625,
+          "process_rss_bytes": 51118080,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 927367884,
+          "external_server_rss_bytes": 4648173568,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84229.723426583,
+          "process_rss_bytes": 317112320,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 2030435476,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 208351748,
+          "external_server_rss_bytes": 4732567552,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84229.974653291,
+          "process_rss_bytes": 446365696,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 2035057714,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 204450406,
+          "external_server_rss_bytes": 4733042688,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84230.495742208,
+          "process_rss_bytes": 472383488,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1304563268,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 935156948,
+          "external_server_rss_bytes": 4733681664,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84230.748007666,
+          "process_rss_bytes": 475758592,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733861888,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84231.000105333,
+          "process_rss_bytes": 475922432,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733878272,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84231.252184,
+          "process_rss_bytes": 475922432,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733878272,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84231.503618708,
+          "process_rss_bytes": 475922432,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733960192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84231.754974458,
+          "process_rss_bytes": 475922432,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733960192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84232.007080583,
+          "process_rss_bytes": 475873280,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733960192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84232.258563958,
+          "process_rss_bytes": 475873280,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733960192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84232.510713958,
+          "process_rss_bytes": 475873280,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733976576,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84232.762806791,
+          "process_rss_bytes": 475611136,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733960192,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84233.014898333,
+          "process_rss_bytes": 475824128,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734631936,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84233.266965375,
+          "process_rss_bytes": 475365376,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4740726784,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84233.519059916,
+          "process_rss_bytes": 475365376,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4740775936,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84233.7712025,
+          "process_rss_bytes": 475365376,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4740775936,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84234.022378166,
+          "process_rss_bytes": 475201536,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735336448,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84234.273377375,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735287296,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84234.523770333,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735287296,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84234.775849791,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735287296,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84235.0279285,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735270912,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84235.280044041,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735270912,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84235.532176333,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735270912,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84235.784000958,
+          "process_rss_bytes": 475185152,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4735254528,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84236.034891791,
+          "process_rss_bytes": 474972160,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734369792,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84236.205234791,
+          "process_rss_bytes": 467058688,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4728766464,
+          "external_server_error": null
+        }
+      ],
+      "total_wall_seconds": 6.733956166994176,
+      "memory_after": {
+        "at_monotonic": 84236.205234791,
+        "process_rss_bytes": 467058688,
+        "process_lifetime_peak_rss_bytes": 925614080,
+        "mlx_active_bytes": 1277473484,
+        "mlx_peak_bytes": 2075792254,
+        "mlx_cache_bytes": 962345036,
+        "external_server_rss_bytes": 4728766464,
+        "external_server_error": null
+      },
+      "sampled_peak_process_rss_bytes": 475922432,
+      "sampled_peak_server_rss_bytes": 4740775936
+    },
+    {
+      "rooms": 4,
+      "status": "completed",
+      "attempts": [
+        {
+          "room": 1,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84236.881430708,
+          "queue_inclusive_seconds": 3.1639332920021843,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84236.903219041,
+          "queue_inclusive_seconds": 12.73966333399585,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 1,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84237.02227225,
+          "queue_inclusive_seconds": 3.860932415991556,
+          "audio_file": "raw/rooms-4-room-1.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84238.012545416,
+          "queue_inclusive_seconds": 2.757173749996582,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84238.163635791,
+          "queue_inclusive_seconds": 8.30274295900017,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 2,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84238.344195208,
+          "queue_inclusive_seconds": 2.865053292000084,
+          "audio_file": "raw/rooms-4-room-2.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        },
+        {
+          "room": 3,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84238.691246958,
+          "queue_inclusive_seconds": 2.590560374999768,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 3,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84239.336127333,
+          "queue_inclusive_seconds": 13.48309245800192,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 3,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84239.565448375,
+          "queue_inclusive_seconds": 3.277854500003741,
+          "audio_file": "raw/rooms-4-room-3.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        },
+        {
+          "room": 4,
+          "component": "stt",
+          "status": "completed",
+          "started_monotonic": 84239.728177541,
+          "queue_inclusive_seconds": 3.094807417000993,
+          "transcript": "Navigate to Maple Library.",
+          "normalized_reference": "navigate to maple library",
+          "normalized_transcript": "navigate to maple library",
+          "exact_normalized": true,
+          "word_edits": 0,
+          "reference_words": 4,
+          "wer": 0.0,
+          "passed": true
+        },
+        {
+          "room": 4,
+          "component": "llm",
+          "status": "completed",
+          "started_monotonic": 84239.825669458,
+          "queue_inclusive_seconds": 16.2386242079956,
+          "plan": {
+            "complete": true,
+            "repaired": "",
+            "corrections": [],
+            "slots": {
+              "query": "office"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "office"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to the office.",
+            "raw": {
+              "complete": true,
+              "corrections": [],
+              "calls": [
+                {
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  }
+                },
+                {
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "$c1.places[0].place_id"
+                  }
+                },
+                {
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "$c2.route_id"
+                  }
+                }
+              ],
+              "reply": "Navigating to the office."
+            }
+          },
+          "passed": true
+        },
+        {
+          "room": 4,
+          "component": "tts",
+          "status": "completed",
+          "started_monotonic": 84239.933395875,
+          "queue_inclusive_seconds": 2.9612654999946244,
+          "audio_file": "raw/rooms-4-room-4.wav",
+          "audio_sha256": "4640dcf58808c1449155b795e9b572871705565abfad15a2cc22cf4d6c588206",
+          "audio_seconds": 1.1946666666666668,
+          "passed": true
+        }
+      ],
+      "memory_samples": [
+        {
+          "at_monotonic": 84236.881018041,
+          "process_rss_bytes": 467107840,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4728782848,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84242.84317375,
+          "process_rss_bytes": 488833024,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4702978048,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84243.214872583,
+          "process_rss_bytes": 489275392,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4702978048,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84243.465468583,
+          "process_rss_bytes": 337690624,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733943808,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84243.716836125,
+          "process_rss_bytes": 338427904,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734304256,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84243.968209666,
+          "process_rss_bytes": 338444288,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734451712,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84244.220076208,
+          "process_rss_bytes": 338460672,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734550016,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84244.472162916,
+          "process_rss_bytes": 338526208,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734566400,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84244.7223415,
+          "process_rss_bytes": 338575360,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4734631936,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84244.973117791,
+          "process_rss_bytes": 336461824,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4718116864,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84245.224737208,
+          "process_rss_bytes": 336461824,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4718116864,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84245.476825041,
+          "process_rss_bytes": 331890688,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4717625344,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84245.728908416,
+          "process_rss_bytes": 331890688,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4717674496,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84245.9809885,
+          "process_rss_bytes": 331890688,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4717674496,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84246.233079791,
+          "process_rss_bytes": 331874304,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4717674496,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84249.400792708,
+          "process_rss_bytes": 326565888,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733288448,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84250.097981541,
+          "process_rss_bytes": 320372736,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84250.349300708,
+          "process_rss_bytes": 319160320,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84250.601055208,
+          "process_rss_bytes": 319160320,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84250.853090333,
+          "process_rss_bytes": 312819712,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84251.105187458,
+          "process_rss_bytes": 312819712,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84251.35563275,
+          "process_rss_bytes": 312754176,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729667584,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84251.607048,
+          "process_rss_bytes": 312803328,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729683968,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84251.857706541,
+          "process_rss_bytes": 312803328,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729683968,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84252.108354,
+          "process_rss_bytes": 312819712,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729683968,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84252.360424166,
+          "process_rss_bytes": 311099392,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729634816,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84252.612528041,
+          "process_rss_bytes": 310853632,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4729634816,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84253.142516166,
+          "process_rss_bytes": 297418752,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745101312,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84253.394404208,
+          "process_rss_bytes": 297435136,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745101312,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84253.644700875,
+          "process_rss_bytes": 289341440,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745101312,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84253.896832666,
+          "process_rss_bytes": 289357824,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745101312,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84254.148942541,
+          "process_rss_bytes": 289357824,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745625600,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84254.401058875,
+          "process_rss_bytes": 289374208,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745658368,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84254.65284925,
+          "process_rss_bytes": 288866304,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4745838592,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84254.904964125,
+          "process_rss_bytes": 288735232,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4742545408,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84255.157102916,
+          "process_rss_bytes": 289013760,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4742725632,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84255.409321583,
+          "process_rss_bytes": 288997376,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4742905856,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84255.660145083,
+          "process_rss_bytes": 288915456,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4741414912,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84255.912224666,
+          "process_rss_bytes": 288849920,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733255680,
+          "external_server_error": null
+        },
+        {
+          "at_monotonic": 84256.072462583,
+          "process_rss_bytes": 289226752,
+          "process_lifetime_peak_rss_bytes": 925614080,
+          "mlx_active_bytes": 1277473484,
+          "mlx_peak_bytes": 2075792254,
+          "mlx_cache_bytes": 962345036,
+          "external_server_rss_bytes": 4733255680,
+          "external_server_error": null
+        }
+      ],
+      "total_wall_seconds": 19.19137929099088,
+      "memory_after": {
+        "at_monotonic": 84256.072462583,
+        "process_rss_bytes": 289226752,
+        "process_lifetime_peak_rss_bytes": 925614080,
+        "mlx_active_bytes": 1277473484,
+        "mlx_peak_bytes": 2075792254,
+        "mlx_cache_bytes": 962345036,
+        "external_server_rss_bytes": 4733255680,
+        "external_server_error": null
+      },
+      "sampled_peak_process_rss_bytes": 489275392,
+      "sampled_peak_server_rss_bytes": 4745838592
+    }
+  ],
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "repository": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "status": "M README.md\n M agent/config.py\n M agent/config.yaml\n M agent/coordinator/coordinator.py\n M agent/coordinator/events.py\n M agent/coordinator/executor.py\n M agent/coordinator/ledger.py\n M agent/coordinator/llm_client.py\n M agent/coordinator/refs.py\n M agent/coordinator/resolver.py\n M agent/coordinator/responder.py\n M agent/main.py\n M agent/pipeline/local_stt.py\n M agent/pipeline/local_tts.py\n M agent/telemetry/fdb_logger.py\n M agent/tools/car_tools.py\n M agent/tools/manifest.py\n M scripts/download_models.sh\n M scripts/fdb_eval.py\n M scripts/fdb_infer.py\n M scripts/run_benchmark.sh\n M tests/synthetic/run_synthetic.py\n M tests/unit/test_coordinator.py\n M tests/unit/test_guards.py\n M web/app/globals.css\n M web/app/page.tsx\n M web/components/CarMap.tsx\n M web/components/Ribbon.tsx\n M web/lib/events.ts\n M web/tsconfig.json\n?? agent/model_assets.py\n?? docs/\n?? requirements/test.txt\n?? results/iteration2/\n?? results/reliability/\n?? scripts/capture_run.py\n?? scripts/local_navigation_experiment.py\n?? scripts/local_overlap_experiment.py\n?? scripts/local_speech_experiment.py\n?? scripts/probe_fdb_contract.py\n?? scripts/reliability_experiment.py\n?? scripts/stt_warmup_experiment.py\n?? tests/unit/test_coordinator_lifecycle.py\n?? tests/unit/test_coordinator_reliability.py\n?? tests/unit/test_dispatch_telemetry.py\n?? tests/unit/test_evaluation_manifest.py\n?? tests/unit/test_executor_reliability.py\n?? tests/unit/test_llm_stream.py\n?? tests/unit/test_model_assets.py\n?? tests/unit/test_navigation_experiment.py\n?? tests/unit/test_navigation_reliability.py\n?? tests/unit/test_overlap_scoring.py\n?? tests/unit/test_place_clarification.py\n?? tests/unit/test_resolver_validation.py\n?? tests/unit/test_scoring.py\n?? tests/unit/test_session_config.py\n?? tests/unit/test_speech_truthfulness.py\n?? tests/unit/test_synthetic_runner.py\n?? tests/unit/test_tts_paths.py\n?? web/lib/events.test.ts",
+    "tracked_diff_sha256": "c3e0aea82518ba99b5cd9a44ba1574eb86020f150ef87be91301a11b0b00e5e2",
+    "untracked_source_file_sha256": {
+      "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+      "docs/iteration2.md": "ed465a821ed74380a03254816a44022c0743e6bbecab3ddbecab6bde72da8f88",
+      "docs/reliability.md": "1068db2842da70475751073dc41b4beaa17cbd0db68c63701cd7be63188bdec8",
+      "docs/research.md": "7cdaf806735648b0e8f32450c43a3e7ba83c1f7534ddd4b12d958d676dacebde",
+      "requirements/test.txt": "154b151d706a43a546bd805e1b513f9bddac3cb5d88d443370b1f4c30d497def",
+      "scripts/capture_run.py": "1b769dc59b648bcd4fb5a406118fe394e6abb8b077a27f061dfa98eaedb36a20",
+      "scripts/local_navigation_experiment.py": "d7e4b6ce9fdfa4280baeb07a77d0e4ad7e3ab88b2ec9dfafdbc952076a3a654d",
+      "scripts/local_overlap_experiment.py": "9e300ee2ccc65d693d4ce8dde90419935af5b83e4e95a34bcfe7cee3f907a409",
+      "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d",
+      "scripts/probe_fdb_contract.py": "8052eadb25d8a2141e5c34a9358e91ea93c79c0e6bb94d1fada12582b8627063",
+      "scripts/reliability_experiment.py": "46744d4c02c752ba42d69411a8a995276369f6be45cb96c4ebc5f78adb6dca08",
+      "scripts/stt_warmup_experiment.py": "64a6c52d5b48435d312860e6d7619c9280d45d1e86173ee300f22092eff8b50e",
+      "tests/unit/test_coordinator_lifecycle.py": "2e5f3017f26c789b5c3a52d137fe95f0dea5b28ec0c6bd1ee594098b44579915",
+      "tests/unit/test_coordinator_reliability.py": "7a41a7f6f2b37b0987d8f3b3a72edbcd72f6ed748f4e25c3fd304890e53f8446",
+      "tests/unit/test_dispatch_telemetry.py": "212e3dec31da6265f5925c039519badbdf806a709fe36fedf5f989deb5eebe79",
+      "tests/unit/test_evaluation_manifest.py": "17d65cccd7e280b04a5bca3e483c50664fd0f1cbba20c7281cfc65cd36b6efb0",
+      "tests/unit/test_executor_reliability.py": "d929299dbdcbc3def97ee953f36b04169a57edb112d1dbf6c5eafb9243a90a13",
+      "tests/unit/test_llm_stream.py": "d9be152c3f66fdc9d6de505d77b1e0cb1267d963d37ea4a3eaaa5de8ffa49c33",
+      "tests/unit/test_model_assets.py": "dd95a12eaa2fd5da44643ac21c80fff552a3a08ac71b9862535f479b9e8c4446",
+      "tests/unit/test_navigation_experiment.py": "20b3a7a6f5b603695a94c6345f9e012faa0bf3d091737a7d5c6e395905838958",
+      "tests/unit/test_navigation_reliability.py": "ce4ad50fb3add68f12de764d5722ae816ee5dbbc1f09e0b74efcffe07291ca30",
+      "tests/unit/test_overlap_scoring.py": "5e7d5db7ca9625d82aa1ea48a605c3f40ab1a3f60f3360a1a7901d9c650e6d5d",
+      "tests/unit/test_place_clarification.py": "ce9162de81173c2696a2097c64748b3bb53aa6f1019136aa8f66ce876f704b14",
+      "tests/unit/test_resolver_validation.py": "416c72c2b5bdf091805916b0212ccb9c521b049912e56f6eeb398d99edc12ac0",
+      "tests/unit/test_scoring.py": "9495eea7a28fcbce08e1c66839a14babbf6e2ea290d12894893bfaec96378edc",
+      "tests/unit/test_session_config.py": "f1b55b4419b4246a7574474982b61f9e79e228c5d9997ba263b06be7b733ba82",
+      "tests/unit/test_speech_truthfulness.py": "fbc2d27f7974cba5fca18e4330345f8a6dde840728973e389397b213750c9895",
+      "tests/unit/test_synthetic_runner.py": "b07da0fd64d67c87e53b3c353603e43b82bba24e09b0b16e92978efd7126ce3e",
+      "tests/unit/test_tts_paths.py": "e2494d5e4668fff53dae574bda64f76e5abd84385a360bb9cf8daca8c5f4dab9",
+      "web/lib/events.test.ts": "53d81ad05d283c244cf3b1ef97776b807dbbcd6b6fadce2021322865e51c679f"
+    }
+  },
+  "harness_sha256": "9e300ee2ccc65d693d4ce8dde90419935af5b83e4e95a34bcfe7cee3f907a409",
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "7e6c9544c29dfbe1922d566c68f9b3ebd392787a057eece989c758fd3c3c498f",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "e8af104f85c6be1ad077a4323875e711c5480a3329b51df853fc3da2ab3a4863",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "3526360d85ecd663bba39cb64e467b973f39af057218772ebf4dc126bc8738c3",
+    "agent/tools/car_tools.py": "e2ecf0e4d2762ac33f5f770e12450281b4bf4136804a41b0085b22183abb7141",
+    "agent/tools/manifest.py": "77b344367cd6f79cc1a386db4fd731b88a7ff068f75621e3d9decdaae38e9b2e",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923"
+  },
+  "hardware": {
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "cpu_count": 10,
+    "physical_memory_bytes": 17179869184
+  },
+  "packages": {
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.3",
+    "PyJWT": "2.15.0",
+    "PyYAML": "6.0.3",
+    "Pygments": "2.21.0",
+    "aiofiles": "25.1.0",
+    "aiohappyeyeballs": "2.7.1",
+    "aiohttp": "3.14.3",
+    "aiosignal": "1.4.0",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "audioread": "3.1.0",
+    "av": "18.1.0",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.1",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "coloredlogs": "15.0.1",
+    "dacite": "1.9.2",
+    "decorator": "5.3.1",
+    "distro": "1.9.0",
+    "dlinfo": "2.0.0",
+    "docstring_parser": "0.18.0",
+    "espeakng-loader": "0.2.4",
+    "eval_type_backport": "0.4.0",
+    "ffmpeg-python": "0.2.0",
+    "filelock": "4.0.3",
+    "flatbuffers": "25.12.19",
+    "frozenlist": "1.8.0",
+    "fsspec": "2026.9.0",
+    "future": "1.0.0",
+    "googleapis-common-protos": "1.75.4",
+    "grpcio": "1.84.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface_hub": "1.33.0",
+    "humanfriendly": "10.0",
+    "idna": "3.20",
+    "iniconfig": "2.3.0",
+    "jiter": "0.17.0",
+    "joblib": "1.6.0",
+    "json_repair": "0.60.1",
+    "kokoro-onnx": "0.6.1",
+    "lazy-loader": "0.6",
+    "librosa": "0.11.0",
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3",
+    "livekit-api": "1.2.1",
+    "livekit-blingfire": "1.1.0",
+    "livekit-local-inference": "0.2.7",
+    "livekit-plugins-openai": "1.8.3",
+    "livekit-plugins-silero": "1.8.3",
+    "livekit-protocol": "1.1.27",
+    "llvmlite": "0.49.0",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3",
+    "mlx-metal": "0.32.2",
+    "mpmath": "1.3.0",
+    "msgpack": "1.2.2",
+    "multidict": "6.9.1",
+    "narwhals": "2.26.0",
+    "nest-asyncio": "1.6.0",
+    "numba": "0.67.0",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.23.2",
+    "openai": "2.54.0",
+    "opentelemetry-api": "1.44.0",
+    "opentelemetry-exporter-otlp": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-common": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-grpc": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-http": "1.44.0",
+    "opentelemetry-proto": "1.44.0",
+    "opentelemetry-sdk": "1.44.0",
+    "opentelemetry-semantic-conventions": "0.65b0",
+    "packaging": "26.3",
+    "parakeet-mlx": "0.5.2",
+    "phonemizer": "3.4.0",
+    "pillow": "12.3.0",
+    "platformdirs": "4.11.13",
+    "pluggy": "1.6.0",
+    "pooch": "1.9.0",
+    "prometheus_client": "0.26.0",
+    "propcache": "0.5.4",
+    "protobuf": "7.36.2",
+    "psutil": "7.2.2",
+    "pycparser": "3.0",
+    "pydantic": "2.13.5",
+    "pydantic_core": "2.46.5",
+    "pydub": "0.25.1",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "python-dotenv": "1.2.3",
+    "regex": "2026.9.10",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "safetensors": "0.8.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.17.1",
+    "sentencepiece": "0.2.2",
+    "shellingham": "1.5.4",
+    "sniffio": "1.3.1",
+    "sounddevice": "0.5.6",
+    "soundfile": "0.14.0",
+    "soxr": "1.1.0",
+    "sympy": "1.14.0",
+    "threadpoolctl": "3.7.0",
+    "tokenizers": "0.23.2",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "typer": "0.27.2",
+    "types-protobuf": "7.35.1.20260906",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "watchfiles": "1.3.0",
+    "yarl": "1.25.1"
+  },
+  "models": {
+    "stt": {
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "declared_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+      "resolved_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+      "snapshot_path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487",
+      "reproducibility": "frozen",
+      "runtime_loaded_revision": null,
+      "inference_observed": false
+    },
+    "llm": {
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "declared_revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "resolved_revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "snapshot_path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+      "reproducibility": "frozen",
+      "runtime_loaded_revision": null,
+      "inference_observed": false
+    }
+  },
+  "tts_assets": {
+    "kokoro-v1.0.onnx": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
+      "expected_sha256": null,
+      "observed_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "reference_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "reference_origin": "PRISM local-speech-run1 observed bytes, 2026-09-25; not a publisher digest",
+      "matches_reference": true,
+      "source_verified": false,
+      "runtime_loaded": true
+    },
+    "voices-v1.0.bin": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin",
+      "expected_sha256": null,
+      "observed_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "reference_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "reference_origin": "PRISM local-speech-run1 observed bytes, 2026-09-25; not a publisher digest",
+      "matches_reference": true,
+      "source_verified": false,
+      "runtime_loaded": true
+    }
+  },
+  "input_audio": {
+    "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration2/local-speech-run1/raw/direct-stt-16k.wav",
+    "sha256": "4a95e37b3f4a0283197ea5983ee05f17fc8fe0d7fc53f4b4817eba0691baec71",
+    "seconds": 1.6853125
+  },
+  "external_server": {
+    "pid": 14081,
+    "command": [
+      "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "-m",
+      "mlx_lm",
+      "server",
+      "--model",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8081",
+      "--chat-template-args",
+      "{\"enable_thinking\":false}",
+      "--decode-concurrency",
+      "1",
+      "--prompt-concurrency",
+      "1",
+      "--prefill-step-size",
+      "256",
+      "--prompt-cache-size",
+      "1",
+      "--prompt-cache-bytes",
+      "268435456",
+      "--max-tokens",
+      "500"
+    ],
+    "created": 1790360101.591336
+  },
+  "memory_before_load": {
+    "at_monotonic": 84215.105773083,
+    "process_rss_bytes": 137986048,
+    "process_lifetime_peak_rss_bytes": 143392768,
+    "mlx_active_bytes": 0,
+    "mlx_peak_bytes": 0,
+    "mlx_cache_bytes": 0,
+    "external_server_rss_bytes": 4623958016,
+    "external_server_error": null
+  },
+  "load_seconds": {
+    "stt": 1.9196466249995865,
+    "tts": 0.8747088749951217
+  },
+  "memory_after_load": {
+    "at_monotonic": 84217.900291791,
+    "process_rss_bytes": 747454464,
+    "process_lifetime_peak_rss_bytes": 749338624,
+    "mlx_active_bytes": 41107656,
+    "mlx_peak_bytes": 82118664,
+    "mlx_cache_bytes": 41017500,
+    "external_server_rss_bytes": 4623466496,
+    "external_server_error": null
+  },
+  "model_load_receipts": [
+    {
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "declared_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+      "resolved_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+      "snapshot_path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487",
+      "reproducibility": "frozen",
+      "runtime_loaded_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+      "inference_observed": false,
+      "component": "agent_stt",
+      "backend": "parakeet-mlx",
+      "evidence": "local_loader_returned",
+      "pid": 20958,
+      "loaded_at_utc": "2026-09-25T18:32:51.927804+00:00"
+    }
+  ],
+  "summary": {
+    "planned": 21,
+    "completed": 21,
+    "passed_declared_checks": 21
+  },
+  "finished_observing_at": "2026-09-25T18:33:30.978217+00:00"
+}

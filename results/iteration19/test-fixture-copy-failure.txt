@@ -1,0 +1,644 @@
+...................FFFFFFFF..........                                    [100%]
+=================================== FAILURES ===================================
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[stale] _
+
+build = <function build.<locals>.make at 0x1104de0c0>, boundary = 'stale'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-287' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4568763664: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4568686672: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[invalid] _
+
+build = <function build.<locals>.make at 0x1104de5c0>, boundary = 'invalid'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-297' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4569751952: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4569752144: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[wrong_query] _
+
+build = <function build.<locals>.make at 0x1104de3e0>, boundary = 'wrong_query'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-307' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4568552016: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4568553040: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[stop] _
+
+build = <function build.<locals>.make at 0x1104df1a0>, boundary = 'stop'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-317' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4569834128: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4569829520: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[not_found] _
+
+build = <function build.<locals>.make at 0x1104dd440>, boundary = 'not_found'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-327' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4569971792: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4569971728: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[done] _
+
+build = <function build.<locals>.make at 0x1104dcfe0>, boundary = 'done'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-337' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4570030992: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4570031376: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[blocked] _
+
+build = <function build.<locals>.make at 0x1104ddee0>, boundary = 'blocked'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-347' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4569932624: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4569931472: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+_ test_continuation_requires_matching_current_destination_error_without_prior_effect[unknown] _
+
+build = <function build.<locals>.make at 0x1104dcfe0>, boundary = 'unknown'
+
+    @pytest.mark.parametrize('boundary', ['stale', 'invalid', 'wrong_query', 'stop', 'not_found',
+                                         'done', 'blocked', 'unknown'])
+    async def test_continuation_requires_matching_current_destination_error_without_prior_effect(build, boundary):
+        coordinator, _, _, _, _ = build([plan('Airport Road', search=True)])
+        try:
+            coordinator.on_user_turn('Navigate to Airport Road.')
+            await coordinator.drain()
+            previous, execution = coordinator._request_context
+>           execution = deepcopy(execution)
+                        ^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:172: in deepcopy
+    y = _reconstruct(x, memo, *rv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:271: in _reconstruct
+    state = deepcopy(state, memo)
+            ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:146: in deepcopy
+    y = copier(x, memo)
+        ^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:231: in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+                             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = <Task finished name='Task-357' coro=<Executor.run.<locals>.run_one() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:150> result=None>
+memo = {4569799632: <[AttributeError("'Execution' object has no attribute 'calls'") raised in repr()] Execution object at 0x1...ute.route_id'})], 4569797712: PlannedCall(id='lookup', tool='search_destination', args={'query': 'Airport Road'}), ...}
+_nil = []
+
+    def deepcopy(x, memo=None, _nil=[]):
+        """Deep copy operation on arbitrary Python objects.
+    
+        See the module's __doc__ string for more info.
+        """
+    
+        if memo is None:
+            memo = {}
+    
+        d = id(x)
+        y = memo.get(d, _nil)
+        if y is not _nil:
+            return y
+    
+        cls = type(x)
+    
+        copier = _deepcopy_dispatch.get(cls)
+        if copier is not None:
+            y = copier(x, memo)
+        else:
+            if issubclass(cls, type):
+                y = _deepcopy_atomic(x, memo)
+            else:
+                copier = getattr(x, "__deepcopy__", None)
+                if copier is not None:
+                    y = copier(memo)
+                else:
+                    reductor = dispatch_table.get(cls)
+                    if reductor:
+                        rv = reductor(x)
+                    else:
+                        reductor = getattr(x, "__reduce_ex__", None)
+                        if reductor is not None:
+>                           rv = reductor(4)
+                                 ^^^^^^^^^^^
+E                           TypeError: cannot pickle '_asyncio.Task' object
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/copy.py:161: TypeError
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[stale]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[invalid]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[wrong_query]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[stop]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[not_found]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[done]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[blocked]
+FAILED tests/unit/test_navigation_clarification.py::test_continuation_requires_matching_current_destination_error_without_prior_effect[unknown]
+8 failed, 29 passed in 0.46s

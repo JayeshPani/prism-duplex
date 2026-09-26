@@ -1,0 +1,628 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-09-26T05:29:30.167176+00:00",
+  "protocol": {
+    "declared_at_utc": "2026-09-26T05:29:29.738822+00:00",
+    "hypothesis": "When one successful navigation mutation and only its prerequisite reads provide a complete short reply, constructing speech from the returned facts removes the summary model round trip without changing effects or falsely claiming outcomes.",
+    "design": "Identical frozen completed executions replayed through baseline snapshot or candidate snapshot, within one fresh local Qwen server. No tools execute and no speech/audio inference runs during timing.",
+    "sources": {
+      "A": "responder-before.py",
+      "B": "responder-candidate.py"
+    },
+    "arm_order": [
+      "A",
+      "B",
+      "B",
+      "A"
+    ],
+    "case_order": [
+      "start",
+      "replace",
+      "via",
+      "already_active",
+      "add_stop",
+      "repeat_stop",
+      "cancel_active",
+      "cancel_idle",
+      "route_only",
+      "independent_query"
+    ],
+    "case_count": 10,
+    "declared_trials": 40,
+    "deadline_per_summary_s": 40,
+    "expected_direct_cases": [
+      "start",
+      "replace",
+      "via",
+      "already_active",
+      "add_stop",
+      "repeat_stop",
+      "cancel_active",
+      "cancel_idle"
+    ],
+    "expected_model_cases": [
+      "route_only",
+      "independent_query"
+    ],
+    "timing": "Wall-clock monotonic duration of awaited summarize only; request logging buffered and flushed after timing. Logical complete() calls are distinct from possible retries/HTTP attempts.",
+    "configuration": {
+      "profile": "local-mac",
+      "seed": 7,
+      "coordinator": {
+        "hold_read_ms": 350,
+        "hold_state_ms": 700,
+        "hold_incomplete_ms": 1800,
+        "ack_after_ms": 700,
+        "resume_grace_ms": 1200,
+        "speak_results": true
+      },
+      "llm": {
+        "base_url": "http://127.0.0.1:8081/v1",
+        "model": "mlx-community/Qwen3-8B-4bit",
+        "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+        "request_model": "default_model",
+        "no_think": false,
+        "json_mode": false,
+        "max_tokens": 500,
+        "allow_unfrozen": false
+      },
+      "stt": {
+        "kind": "parakeet-mlx",
+        "model": "mlx-community/parakeet-tdt-0.6b-v2",
+        "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+      },
+      "tts": {
+        "kind": "kokoro",
+        "voice": "af_heart",
+        "speed": 1.1
+      }
+    },
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "packages": {
+      "mlx": "0.32.2",
+      "mlx-lm": "0.31.3",
+      "openai": "2.54.0",
+      "httpx": "0.28.1",
+      "psutil": "7.2.2"
+    },
+    "frozen_sha256": {
+      "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+      "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/coordinator/coordinator.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+      "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+      "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+      "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+      "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+      "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+      "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+      "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+      "agent/coordinator/responder.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731",
+      "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+      "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+      "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+      "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+      "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+      "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+      "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+      "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+      "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+      "scripts/cache_policy_experiment.py": "d209174c528d602d59e029265d074d2dcb787ec96f3780054571828744154fee",
+      "scripts/capture_run.py": "1b769dc59b648bcd4fb5a406118fe394e6abb8b077a27f061dfa98eaedb36a20",
+      "results/iteration7/local-stack-run1/llm-launch.json": "f4ddb54cdb5acd338ffe57507305018e3a3c949746d0d9e4501277f1a8d61463",
+      "results/iteration8/responder-before.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+      "results/iteration8/responder-candidate.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731",
+      "results/iteration8/inputs.json": "bb01af1d757c892afb24de3be68ef6c226543fd126a4dd8459c5f99c2507bb0e",
+      "results/iteration8/prepare_inputs.py": "f4f5de3c104a4a10ffd2b0e789e6cb73f90c3d60912be2dc9a84a3e0cc2af429",
+      "results/iteration8/measure_summaries.py": "802ff11d68e035815336e750c51da12531da499f6538307962ab279e1bf10ed1"
+    },
+    "model_files_sha256": {
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/config.json": "e5485285fd7e289e76e9cffa112f6dc2e3426519082f7db9b69041589f81a218",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/model.safetensors": "f2d29621aab300336ad645567ff38c42aac755513006ef4e8a579cf7ef5256d8"
+    },
+    "limits": [
+      "Development cases declared and constructed before implementation; no benchmark or held-out inputs.",
+      "All40declaredrows, failures, missing trials and model outputs retained; primary timing subgroup is the eight predeclared direct-eligible cases.",
+      "Shared-server ABBA order is not equal-cache control or independent sampling; each A ends in fallback cases that the next B reuses. Keep block/case results and first cold summary.",
+      "The candidate changes summary wording/history and model-cache activity in a conversation; this isolated stage comparison cannot establish end-to-end RTC latency or planning equivalence.",
+      "No concurrent tests, RTC, STT or TTS during timed comparisons; other applications remain unisolated.",
+      "Input construction used zero mock route delay solely to create result objects, not as a performance treatment."
+    ],
+    "supersedes_unexecuted_declaration": "summary-protocol-before-request-guard.json",
+    "candidate_scope": "Positive complete action-command grammar using returned names and planned literal labels. Unknown wording, including explicitly requested additional information, keeps model synthesis.",
+    "premeasurement_expectation_note": "The retained input case via was initially declared direct, but its shortened Manipal Hospital request does not match the full planned/returned label under the final command guard. Expect model fallback there; preserve the original per-case expectation and include it in the predeclared timing subgroup, reporting this coverage shortfall."
+  },
+  "protocol_sha256": "f67771d340a30347adbb544b912b8b82c4af009e67216ce9634bcf17d957ef9c",
+  "trials": [
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "start",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to MG Road Metro Station has started. The route is active and will take approximately 13 minutes.",
+      "elapsed_ms": 4677.86320799496,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "replace",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation has been updated to route to Whitefield (ITPL) with route ID R2.",
+      "elapsed_ms": 2302.0103329909034,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "via",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Manipal Hospital via Blue Tokai, Indiranagar has started. Route R1 is active with an estimated travel time of 6 minutes.",
+      "elapsed_ms": 2884.048124993569,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "already_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The active route R1 has been started again. It is already active and navigating to Office (Manyata Tech Park).",
+      "elapsed_ms": 1939.9425000010524,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "add_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The nearest coffee stop, Blue Tokai, has been added to the route.",
+      "elapsed_ms": 2374.0715000021737,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "repeat_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The stop \"Blue Tokai, Indiranagar\" was already present and not repeated.",
+      "elapsed_ms": 1805.5109160050051,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "cancel_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation to Cubbon Park has been successfully cancelled.",
+      "elapsed_ms": 1048.47341599816,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "cancel_idle",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation cancellation was successful. No active route was found.",
+      "elapsed_ms": 943.1786250061123,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "route_only",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "The route to MG Road Metro Station has been computed successfully with route ID R1. The estimated travel time is 13 minutes.",
+      "elapsed_ms": 1618.5302500089165,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 1,
+      "arm": "A",
+      "case": "independent_query",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "Navigation to MG Road Metro Station has started. Nearby coffee places include Blue Tokai, Third Wave Coffee, and Starbucks with detour times of 1, 31, and 67 minutes respectively.",
+      "elapsed_ms": 3487.9240000009304,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "start",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to MG Road Metro Station has started. ETA: 13 minutes.",
+      "elapsed_ms": 0.4598749947035685,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "replace",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Now navigating to Whitefield (ITPL), replacing Cubbon Park. ETA: 40 minutes.",
+      "elapsed_ms": 0.21933400421403348,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "via",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Manipal Hospital via Blue Tokai, Indiranagar has started. Route R1 is active with an estimated travel time of 6 minutes.",
+      "elapsed_ms": 2893.768583002384,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "already_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Office (Manyata Tech Park) via Ather Grid charger, Indiranagar is already active. ETA: 29 minutes.",
+      "elapsed_ms": 0.09458299609832466,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "add_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.",
+      "elapsed_ms": 0.10191700130235404,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "repeat_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The stop at Blue Tokai, Indiranagar is already on your route. ETA to Office (Manyata Tech Park): 31 minutes.",
+      "elapsed_ms": 0.1817500015022233,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "cancel_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Cubbon Park has been cancelled.",
+      "elapsed_ms": 0.06637499609496444,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "cancel_idle",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "There is no active navigation to cancel.",
+      "elapsed_ms": 0.04920799983665347,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "route_only",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "The route to MG Road Metro Station has been computed successfully with route ID R1. The estimated travel time is 13 minutes.",
+      "elapsed_ms": 1640.228374992148,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 2,
+      "arm": "B",
+      "case": "independent_query",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "Navigation to MG Road Metro Station has started. Nearby coffee places include Blue Tokai, Third Wave Coffee, and Starbucks with detour times of 1, 31, and 67 minutes respectively.",
+      "elapsed_ms": 3507.6076249970356,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "start",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to MG Road Metro Station has started. ETA: 13 minutes.",
+      "elapsed_ms": 0.17033399490173906,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "replace",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Now navigating to Whitefield (ITPL), replacing Cubbon Park. ETA: 40 minutes.",
+      "elapsed_ms": 0.13549999857787043,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "via",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Manipal Hospital via Blue Tokai, Indiranagar has started. Route R1 is active with an estimated travel time of 6 minutes.",
+      "elapsed_ms": 2910.9602920070756,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "already_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Office (Manyata Tech Park) via Ather Grid charger, Indiranagar is already active. ETA: 29 minutes.",
+      "elapsed_ms": 0.1210409973282367,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "add_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.",
+      "elapsed_ms": 0.14445799752138555,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "repeat_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The stop at Blue Tokai, Indiranagar is already on your route. ETA to Office (Manyata Tech Park): 31 minutes.",
+      "elapsed_ms": 0.0991669949144125,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "cancel_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Cubbon Park has been cancelled.",
+      "elapsed_ms": 0.11812499724328518,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "cancel_idle",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "There is no active navigation to cancel.",
+      "elapsed_ms": 0.08724999497644603,
+      "logical_model_calls": 0
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "route_only",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "The route to MG Road Metro Station has been computed successfully with route ID R1. The estimated travel time is 13 minutes.",
+      "elapsed_ms": 1628.7152500008233,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 3,
+      "arm": "B",
+      "case": "independent_query",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "Navigation to MG Road Metro Station has started. Nearby coffee places include Blue Tokai, Third Wave Coffee, and Starbucks with detour times of 1, 31, and 67 minutes respectively.",
+      "elapsed_ms": 3489.027042000089,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "start",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to MG Road Metro Station has started. The route is active and will take approximately 13 minutes.",
+      "elapsed_ms": 2692.0657500013476,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "replace",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation has been updated to route to Whitefield (ITPL) with route ID R2.",
+      "elapsed_ms": 2335.059374992852,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "via",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "Navigation to Manipal Hospital via Blue Tokai, Indiranagar has started. Route R1 is active with an estimated travel time of 6 minutes.",
+      "elapsed_ms": 2898.258832996362,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "already_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The active route R1 has been started again. It is already active and navigating to Office (Manyata Tech Park).",
+      "elapsed_ms": 1967.1042910049437,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "add_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The nearest coffee stop, Blue Tokai, has been added to the route.",
+      "elapsed_ms": 2379.767999998876,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "repeat_stop",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The stop \"Blue Tokai, Indiranagar\" was already present and not repeated.",
+      "elapsed_ms": 1803.7319169961847,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "cancel_active",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation to Cubbon Park has been successfully cancelled.",
+      "elapsed_ms": 1077.9810839885613,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "cancel_idle",
+      "status": "completed",
+      "expected_path": "direct",
+      "text": "The navigation cancellation was successful. No active route was found.",
+      "elapsed_ms": 922.8872919920832,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "route_only",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "The route to MG Road Metro Station has been computed successfully with route ID R1. The estimated travel time is 13 minutes.",
+      "elapsed_ms": 1625.0366659951396,
+      "logical_model_calls": 1
+    },
+    {
+      "block": 4,
+      "arm": "A",
+      "case": "independent_query",
+      "status": "completed",
+      "expected_path": "model",
+      "text": "Navigation to MG Road Metro Station has started. Nearby coffee places include Blue Tokai, Third Wave Coffee, and Starbucks with detour times of 1, 31, and 67 minutes respectively.",
+      "elapsed_ms": 3508.5732500010636,
+      "logical_model_calls": 1
+    }
+  ],
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "launch": {
+    "command": [
+      "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "-m",
+      "mlx_lm",
+      "server",
+      "--model",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8081",
+      "--chat-template-args",
+      "{\"enable_thinking\":false}",
+      "--decode-concurrency",
+      "1",
+      "--prompt-concurrency",
+      "1",
+      "--prefill-step-size",
+      "256",
+      "--prompt-cache-size",
+      "2",
+      "--prompt-cache-bytes",
+      "268435456",
+      "--max-tokens",
+      "500"
+    ],
+    "pid": 96206,
+    "started_at_utc": "2026-09-26T05:29:33.601231+00:00"
+  },
+  "llm_configuration": {
+    "base_url": "http://127.0.0.1:8081/v1",
+    "model": "default_model",
+    "api_key_env": null,
+    "temperature": 0.0,
+    "seed": 7,
+    "max_tokens": 500,
+    "no_think": false,
+    "json_mode": false,
+    "timeout_s": 30.0
+  },
+  "server_exit": {
+    "pid": 96206,
+    "exit_code": -15,
+    "forced_kill": false
+  },
+  "finished_at_utc": "2026-09-26T05:30:36.139668+00:00",
+  "frozen_inputs_unchanged": true,
+  "declared_trials": 40,
+  "missing_trials": 0,
+  "exact_trial_coverage": true,
+  "model_bytes_unchanged": true
+}

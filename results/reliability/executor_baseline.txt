@@ -1,0 +1,776 @@
+FFFFFFFFFFFFFFFFFFFF                                                     [100%]
+=================================== FAILURES ===================================
+_______________ test_invalid_plan_has_no_partial_effects[calls0] _______________
+
+calls = [PlannedCall(id='c1', tool='act', args={}), PlannedCall(id='c1', tool='act', args={})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+        result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+>       assert effects == []
+E       assert [{}] == []
+E         
+E         Left contains one more item: {}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:40: AssertionError
+_______________ test_invalid_plan_has_no_partial_effects[calls1] _______________
+
+calls = [PlannedCall(id='c1', tool='act', args={}), PlannedCall(id='c2', tool='act', args={'x': '$missing.id'})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+        result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+>       assert effects == []
+E       assert [{}] == []
+E         
+E         Left contains one more item: {}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:40: AssertionError
+_______________ test_invalid_plan_has_no_partial_effects[calls2] _______________
+
+calls = [PlannedCall(id='c1', tool='act', args={'nested': [{'x': '$missing.id'}]})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+        result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+>       assert effects == []
+E       AssertionError: assert [{'nested': [...issing.id'}]}] == []
+E         
+E         Left contains one more item: {'nested': [{'x': '$missing.id'}]}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:40: AssertionError
+_______________ test_invalid_plan_has_no_partial_effects[calls3] _______________
+
+fut = <Task cancelled name='Task-19' coro=<Executor.run() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:62>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/executor.py:87: in run
+    await asyncio.gather(*ex.tasks.values(), return_exceptions=True)
+agent/coordinator/executor.py:72: in run_one
+    await done_events[dep].wait()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x103385d90 [set]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:213: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+calls = [PlannedCall(id='c1', tool='act', args={'x': '$c1.id'})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+>       result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_executor_reliability.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-19' coro=<Executor.run() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:62>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+_______________ test_invalid_plan_has_no_partial_effects[calls4] _______________
+
+fut = <Task cancelled name='Task-24' coro=<Executor.run() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:62>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+>                   return fut.result()
+                           ^^^^^^^^^^^^
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/executor.py:87: in run
+    await asyncio.gather(*ex.tasks.values(), return_exceptions=True)
+agent/coordinator/executor.py:72: in run_one
+    await done_events[dep].wait()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x1033259d0 [set]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/locks.py:213: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+calls = [PlannedCall(id='c1', tool='act', args={'x': '$c2.id'}), PlannedCall(id='c2', tool='act', args={'x': '$c1.id'})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+>       result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_executor_reliability.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Task cancelled name='Task-24' coro=<Executor.run() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py:62>>
+timeout = 0.1
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        This function is a coroutine.
+        """
+        loop = events.get_running_loop()
+    
+        if timeout is None:
+            return await fut
+    
+        if timeout <= 0:
+            fut = ensure_future(fut, loop=loop)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut, loop=loop)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise exceptions.TimeoutError() from exc
+    
+        waiter = loop.create_future()
+        timeout_handle = loop.call_later(timeout, _release_waiter, waiter)
+        cb = functools.partial(_release_waiter, waiter)
+    
+        fut = ensure_future(fut, loop=loop)
+        fut.add_done_callback(cb)
+    
+        try:
+            # wait until the future completes or the timeout
+            try:
+                await waiter
+            except exceptions.CancelledError:
+                if fut.done():
+                    return fut.result()
+                else:
+                    fut.remove_done_callback(cb)
+                    # We must ensure that the task is not running
+                    # after wait_for() returns.
+                    # See https://bugs.python.org/issue32751
+                    await _cancel_and_wait(fut, loop=loop)
+                    raise
+    
+            if fut.done():
+                return fut.result()
+            else:
+                fut.remove_done_callback(cb)
+                # We must ensure that the task is not running
+                # after wait_for() returns.
+                # See https://bugs.python.org/issue32751
+                await _cancel_and_wait(fut, loop=loop)
+                # In case task cancellation failed with some
+                # exception, we should re-raise it
+                # See https://bugs.python.org/issue40607
+                try:
+                    return fut.result()
+                except exceptions.CancelledError as exc:
+>                   raise exceptions.TimeoutError() from exc
+E                   TimeoutError
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py:502: TimeoutError
+_______________ test_invalid_plan_has_no_partial_effects[calls5] _______________
+
+calls = [PlannedCall(id='c1', tool='act', args={}), PlannedCall(id='c2', tool='missing_tool', args={})]
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("calls", [
+        [PlannedCall("c1", "act", {}), PlannedCall("c1", "act", {})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"x": "$missing.id"})],
+        [PlannedCall("c1", "act", {"nested": [{"x": "$missing.id"}]})],
+        [PlannedCall("c1", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {"x": "$c2.id"}), PlannedCall("c2", "act", {"x": "$c1.id"})],
+        [PlannedCall("c1", "act", {}), PlannedCall("c2", "missing_tool", {})],
+    ])
+    async def test_invalid_plan_has_no_partial_effects(calls):
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"id": "value"}
+    
+        engine, logged = executor(act)
+        result = await asyncio.wait_for(engine.run(calls), timeout=0.1)
+>       assert effects == []
+E       assert [{}] == []
+E         
+E         Left contains one more item: {}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:40: AssertionError
+_______ test_nested_references_are_dependencies_and_resolve_recursively ________
+
+    def test_nested_references_are_dependencies_and_resolve_recursively():
+        args = {"payload": [{"id": "$c1.id"}], "direct": "$c2"}
+>       assert deps_of(args) == {"c1", "c2"}
+E       AssertionError: assert {'c2'} == {'c1', 'c2'}
+E         
+E         Extra items in the right set:
+E         'c1'
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:47: AssertionError
+____ test_opaque_identifiers_are_not_lossily_canonicalized[ABC-123-ABC_123] ____
+
+first = 'ABC-123', second = 'ABC_123'
+
+    @pytest.mark.parametrize("first,second", [("ABC-123", "ABC_123"), ("ABC123", "abc123"), ("ABC123", " ABC123 ")])
+    def test_opaque_identifiers_are_not_lossily_canonicalized(first, second):
+>       assert action_key("act", {"id": first}) != action_key("act", {"id": second})
+E       assert 'act:{"id": "abc 123"}' != 'act:{"id": "abc 123"}'
+E        +  where 'act:{"id": "abc 123"}' = action_key('act', {'id': 'ABC-123'})
+E        +  and   'act:{"id": "abc 123"}' = action_key('act', {'id': 'ABC_123'})
+
+tests/unit/test_executor_reliability.py:55: AssertionError
+_____ test_opaque_identifiers_are_not_lossily_canonicalized[ABC123-abc123] _____
+
+first = 'ABC123', second = 'abc123'
+
+    @pytest.mark.parametrize("first,second", [("ABC-123", "ABC_123"), ("ABC123", "abc123"), ("ABC123", " ABC123 ")])
+    def test_opaque_identifiers_are_not_lossily_canonicalized(first, second):
+>       assert action_key("act", {"id": first}) != action_key("act", {"id": second})
+E       assert 'act:{"id": "abc123"}' != 'act:{"id": "abc123"}'
+E        +  where 'act:{"id": "abc123"}' = action_key('act', {'id': 'ABC123'})
+E        +  and   'act:{"id": "abc123"}' = action_key('act', {'id': 'abc123'})
+
+tests/unit/test_executor_reliability.py:55: AssertionError
+____ test_opaque_identifiers_are_not_lossily_canonicalized[ABC123- ABC123 ] ____
+
+first = 'ABC123', second = ' ABC123 '
+
+    @pytest.mark.parametrize("first,second", [("ABC-123", "ABC_123"), ("ABC123", "abc123"), ("ABC123", " ABC123 ")])
+    def test_opaque_identifiers_are_not_lossily_canonicalized(first, second):
+>       assert action_key("act", {"id": first}) != action_key("act", {"id": second})
+E       assert 'act:{"id": "abc123"}' != 'act:{"id": "abc123"}'
+E        +  where 'act:{"id": "abc123"}' = action_key('act', {'id': 'ABC123'})
+E        +  and   'act:{"id": "abc123"}' = action_key('act', {'id': ' ABC123 '})
+
+tests/unit/test_executor_reliability.py:55: AssertionError
+___________ test_explicit_failure_is_retryable_and_not_reported_done ___________
+
+    @pytest.mark.asyncio
+    async def test_explicit_failure_is_retryable_and_not_reported_done():
+        attempts = []
+    
+        async def act():
+            attempts.append(1)
+            return {"status": "error", "error": "backend rejected request"}
+    
+        engine, logged = executor(act)
+        first = await engine.run([PlannedCall("c1", "act", {})])
+        second = await engine.run([PlannedCall("c1", "act", {})])
+>       assert first.outcomes["c1"].status == second.outcomes["c1"].status == "error"
+E       AssertionError: assert 'done' == 'blocked'
+E         
+E         - blocked
+E         + done
+
+tests/unit/test_executor_reliability.py:69: AssertionError
+________________ test_error_result_cannot_feed_dependent_write _________________
+
+    @pytest.mark.asyncio
+    async def test_error_result_cannot_feed_dependent_write():
+        effects = []
+    
+        async def act(**args):
+            effects.append(args)
+            return {"status": "error", "id": "unusable"}
+    
+        engine, logged = executor(act)
+        result = await engine.run([PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"id": "$c1.id"})])
+>       assert effects == [{}]
+E       AssertionError: assert [{}, {'id': 'unusable'}] == [{}]
+E         
+E         Left contains one more item: {'id': 'unusable'}
+E         Use -v to get more diff
+
+tests/unit/test_executor_reliability.py:84: AssertionError
+____________ test_write_exception_is_unknown_logged_and_not_retried ____________
+
+    @pytest.mark.asyncio
+    async def test_write_exception_is_unknown_logged_and_not_retried():
+        effects = []
+    
+        async def act():
+            effects.append("backend may have committed")
+            raise TimeoutError("acknowledgment lost")
+    
+        engine, logged = executor(act)
+        first = await engine.run([PlannedCall("c1", "act", {})])
+        second = await engine.run([PlannedCall("c1", "act", {})])
+>       assert first.outcomes["c1"].status == second.outcomes["c1"].status == "unknown"
+E       AssertionError: assert 'error' == 'unknown'
+E         
+E         - unknown
+E         + error
+
+tests/unit/test_executor_reliability.py:100: AssertionError
+________ test_new_intention_can_repeat_but_same_operation_retry_cannot _________
+
+    @pytest.mark.asyncio
+    async def test_new_intention_can_repeat_but_same_operation_retry_cannot():
+        effects = []
+    
+        async def act():
+            effects.append(1)
+            return {"status": "success"}
+    
+        engine, logged = executor(act)
+        calls = [PlannedCall("c1", "act", {})]
+>       first = await engine.run(calls, operation_id="first-visit")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Executor.run() got an unexpected keyword argument 'operation_id'
+
+tests/unit/test_executor_reliability.py:115: TypeError
+_________________ test_separate_runs_default_to_new_intentions _________________
+
+    @pytest.mark.asyncio
+    async def test_separate_runs_default_to_new_intentions():
+        effects = []
+    
+        async def act():
+            effects.append(1)
+            return {"status": "success"}
+    
+        engine, _ = executor(act)
+        await engine.run([PlannedCall("c1", "act", {})])
+        await engine.run([PlannedCall("c1", "act", {})])
+>       assert len(effects) == 2
+E       assert 1 == 2
+E        +  where 1 = len([1])
+
+tests/unit/test_executor_reliability.py:133: AssertionError
+_____________ test_cancel_reaches_all_executions_and_logs_attempts _____________
+
+    @pytest.mark.asyncio
+    async def test_cancel_reaches_all_executions_and_logs_attempts():
+        started = asyncio.Queue()
+        release = asyncio.Event()
+    
+        async def act(**args):
+            await started.put(args)
+            await release.wait()
+            return {"status": "success"}
+    
+        engine, logged = executor(act, state=False)
+        runs = [asyncio.create_task(engine.run([PlannedCall("c1", "act", {"id": i})])) for i in range(2)]
+        try:
+            for _ in runs:
+                await asyncio.wait_for(started.get(), 0.2)
+>           assert engine.cancel_stale() == 2
+E           assert 1 == 2
+E            +  where 1 = cancel_stale()
+E            +    where cancel_stale = <agent.coordinator.executor.Executor object at 0x10328ced0>.cancel_stale
+
+tests/unit/test_executor_reliability.py:151: AssertionError
+_____________ test_version_is_checked_immediately_before_dispatch ______________
+
+    @pytest.mark.asyncio
+    async def test_version_is_checked_immediately_before_dispatch():
+        effects = []
+    
+        async def act():
+            effects.append(1)
+            return {"status": "success"}
+    
+        engine, logged = executor(act)
+>       result = await engine.run([PlannedCall("c1", "act", {})], is_current=lambda: False)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Executor.run() got an unexpected keyword argument 'is_current'
+
+tests/unit/test_executor_reliability.py:170: TypeError
+______ test_started_write_finishes_but_its_stale_dependent_does_not_start ______
+
+    @pytest.mark.asyncio
+    async def test_started_write_finishes_but_its_stale_dependent_does_not_start():
+        started, release = asyncio.Event(), asyncio.Event()
+        effects = []
+        current = True
+    
+        async def act(**args):
+            effects.append(args)
+            started.set()
+            await release.wait()
+            return {"status": "success", "id": "value"}
+    
+        engine, logged = executor(act)
+>       run = asyncio.create_task(engine.run([
+            PlannedCall("c1", "act", {}), PlannedCall("c2", "act", {"id": "$c1.id"}),
+        ], is_current=lambda: current))
+E       TypeError: Executor.run() got an unexpected keyword argument 'is_current'
+
+tests/unit/test_executor_reliability.py:188: TypeError
+___________ test_shutdown_marks_cancelled_write_unknown_and_logs_it ____________
+
+    @pytest.mark.asyncio
+    async def test_shutdown_marks_cancelled_write_unknown_and_logs_it():
+        started = asyncio.Event()
+    
+        async def act():
+            started.set()
+            await asyncio.Event().wait()
+    
+        engine, logged = executor(act)
+        run = asyncio.create_task(engine.run([PlannedCall("c1", "act", {})]))
+        try:
+            await asyncio.wait_for(started.wait(), 0.2)
+>           await asyncio.wait_for(engine.aclose(timeout=0.01), 0.2)
+                                   ^^^^^^^^^^^^^
+E           AttributeError: 'Executor' object has no attribute 'aclose'
+
+tests/unit/test_executor_reliability.py:218: AttributeError
+__________ test_dynamic_reads_are_not_cached_without_explicit_context __________
+
+    @pytest.mark.asyncio
+    async def test_dynamic_reads_are_not_cached_without_explicit_context():
+        async def act():
+            return {"status": "success"}
+    
+        engine, logged = executor(act, state=False)
+        await engine.run([PlannedCall("c1", "act", {})])
+        await engine.run([PlannedCall("c1", "act", {})])
+>       assert len(logged) == 2
+E       AssertionError: assert 1 == 2
+E        +  where 1 = len([('act', {}, 1790355297.6525939, 1790355297.6525939)])
+
+tests/unit/test_executor_reliability.py:236: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls0]
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls1]
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls2]
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls3]
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls4]
+FAILED tests/unit/test_executor_reliability.py::test_invalid_plan_has_no_partial_effects[calls5]
+FAILED tests/unit/test_executor_reliability.py::test_nested_references_are_dependencies_and_resolve_recursively
+FAILED tests/unit/test_executor_reliability.py::test_opaque_identifiers_are_not_lossily_canonicalized[ABC-123-ABC_123]
+FAILED tests/unit/test_executor_reliability.py::test_opaque_identifiers_are_not_lossily_canonicalized[ABC123-abc123]
+FAILED tests/unit/test_executor_reliability.py::test_opaque_identifiers_are_not_lossily_canonicalized[ABC123- ABC123 ]
+FAILED tests/unit/test_executor_reliability.py::test_explicit_failure_is_retryable_and_not_reported_done
+FAILED tests/unit/test_executor_reliability.py::test_error_result_cannot_feed_dependent_write
+FAILED tests/unit/test_executor_reliability.py::test_write_exception_is_unknown_logged_and_not_retried
+FAILED tests/unit/test_executor_reliability.py::test_new_intention_can_repeat_but_same_operation_retry_cannot
+FAILED tests/unit/test_executor_reliability.py::test_separate_runs_default_to_new_intentions
+FAILED tests/unit/test_executor_reliability.py::test_cancel_reaches_all_executions_and_logs_attempts
+FAILED tests/unit/test_executor_reliability.py::test_version_is_checked_immediately_before_dispatch
+FAILED tests/unit/test_executor_reliability.py::test_started_write_finishes_but_its_stale_dependent_does_not_start
+FAILED tests/unit/test_executor_reliability.py::test_shutdown_marks_cancelled_write_unknown_and_logs_it
+FAILED tests/unit/test_executor_reliability.py::test_dynamic_reads_are_not_cached_without_explicit_context
+20 failed in 0.36s

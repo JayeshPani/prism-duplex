@@ -1,0 +1,50 @@
+{
+  "source": "experiment.json",
+  "score": {
+    "runs": 4,
+    "passed": 2,
+    "backend_attempts": 18,
+    "backend_effects": 6,
+    "runtime_errors": 0,
+    "timeouts": 0,
+    "backend_errors": 2,
+    "final_text_to_first_response": {
+      "n": 9,
+      "p50_ms": 10536.293,
+      "p95_ms": 17006.126
+    },
+    "final_text_to_ack": {
+      "n": 10,
+      "p50_ms": 703.109,
+      "p95_ms": 1518.523
+    },
+    "final_text_to_dispatch": {
+      "n": 18,
+      "p50_ms": 10402.566,
+      "p95_ms": 14119.461
+    },
+    "final_text_to_effect": {
+      "n": 6,
+      "p50_ms": 7076.927,
+      "p95_ms": 14119.522
+    }
+  },
+  "diagnoses": [
+    {
+      "case": "return_to_destination",
+      "cause": "Turn 3 raw model output planned only compute_route; no start_navigation attempt existed. Backend retained office correctly.",
+      "boundary": "Historical-outcome prompt confusion is a hypothesis, not proved model reasoning."
+    },
+    {
+      "case": "waypoint_and_cancel",
+      "cause": "Full phrase Blue Tokai in Indiranagar did not exactly or partially match punctuation-normalized fixed-map name; clarification preserved active route.",
+      "boundary": "Unnecessary clarification, not an unintended place selection."
+    },
+    {
+      "case": "waypoint_and_cancel",
+      "cause": "Plan narration announced completed cancellation before backend dispatch.",
+      "boundary": "Run success heuristic does not detect premature narration or all factual response errors."
+    }
+  ],
+  "review": "All four cases retained. Two passing cases demonstrate required effects and basic response presence, not comprehensive semantic speech accuracy. Model-generated route IDs spoken unnecessarily are still visible in raw replies."
+}

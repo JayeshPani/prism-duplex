@@ -1,0 +1,375 @@
+{
+  "created_at_utc": "2026-09-26T09:29:13.446327+00:00",
+  "scope": "Read-only local implementation and retained-data investigation. Preparation only; no inference/services/imports of model libraries, package/config/source changes, downloads or staging. Iteration16 evaluated configuration is unchanged.",
+  "conclusion": "The nominal 256 MiB prompt-cache byte setting is not enforced for PRISM seeded requests. The two-entry LRU count is enforced. A future one-entry arm is the smallest existing-CLI memory tradeoff experiment; it may increase prefill work and must not be treated as an adopted improvement.",
+  "installed_versions": {
+    "mlx-lm": "0.31.3",
+    "mlx": "0.32.2"
+  },
+  "confirmed_controls": [
+    {
+      "claim": "PRISM supplies seed=7. The server permits batching only if seed is None, so these requests use sequential _serve_single. Decode/prompt concurrency flags do not create parallel seeded inference.",
+      "evidence": [
+        "agent/config.yaml:4",
+        "agent/coordinator/llm_client.py:37-43",
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:685-686",
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:814-825"
+      ]
+    },
+    {
+      "claim": "run() constructs LRUPromptCache with max_size only; max_bytes defaults to 2**63. The CLI byte-budget trim is inside batched admission and is absent from _serve_single. Changing only --prompt-cache-bytes cannot bound this seeded path.",
+      "evidence": [
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:795-798",
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:963-1022",
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:1743",
+        ".venv/lib/python3.11/site-packages/mlx_lm/models/cache.py:1659-1662"
+      ]
+    },
+    {
+      "claim": "The two-entry limit is enforced at insertion. Logical retained cache reaches 0.75 decimal GB in iteration15 despite the 268435456-byte flag. Prefix lookup deep-copies cache structures; recorded logical bytes are not an independently measured allocation or total-RSS bound.",
+      "evidence": [
+        ".venv/lib/python3.11/site-packages/mlx_lm/models/cache.py:1674-1692",
+        ".venv/lib/python3.11/site-packages/mlx_lm/models/cache.py:1704-1739",
+        "results/iteration15/local-stack-run1/llm-launch.json:1-32",
+        "results/iteration15/local-stack-run1/llm.log:61"
+      ],
+      "observed_cache_rows": [
+        {
+          "line": 6,
+          "sequences": 0,
+          "logged_gb": 0.0
+        },
+        {
+          "line": 20,
+          "sequences": 1,
+          "logged_gb": 0.3
+        },
+        {
+          "line": 29,
+          "sequences": 2,
+          "logged_gb": 0.64
+        },
+        {
+          "line": 36,
+          "sequences": 2,
+          "logged_gb": 0.64
+        },
+        {
+          "line": 44,
+          "sequences": 2,
+          "logged_gb": 0.64
+        },
+        {
+          "line": 53,
+          "sequences": 2,
+          "logged_gb": 0.72
+        },
+        {
+          "line": 61,
+          "sequences": 2,
+          "logged_gb": 0.75
+        },
+        {
+          "line": 69,
+          "sequences": 2,
+          "logged_gb": 0.75
+        },
+        {
+          "line": 77,
+          "sequences": 2,
+          "logged_gb": 0.75
+        },
+        {
+          "line": 112,
+          "sequences": 2,
+          "logged_gb": 0.75
+        },
+        {
+          "line": 122,
+          "sequences": 2,
+          "logged_gb": 0.75
+        },
+        {
+          "line": 130,
+          "sequences": 2,
+          "logged_gb": 0.75
+        }
+      ]
+    },
+    {
+      "claim": "Prefill step size 256 applies to sequential generation and limits tokens in each prefill chunk, not total prompt/KV bytes. Generation clears the free allocator cache between prefill chunks. The per-request max_tokens 500 bounds generated tokens; the server CLI default is overridable by request values and is not a general memory ceiling.",
+      "evidence": [
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:979-987",
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:1169-1174",
+        ".venv/lib/python3.11/site-packages/mlx_lm/generate.py:426-451",
+        "agent/coordinator/llm_client.py:37-43"
+      ]
+    },
+    {
+      "claim": "Server startup and stream generation set the MLX wired limit to the device recommended working set. This is resident-memory policy, not a shared host cap. Installed MLX documentation describes the allocation memory limit as a guideline (default 1.5 times recommended working set), and the free allocator-cache limit defaults to that memory limit. Reviewed PRISM/MLX-LM paths do not explicitly lower either. Numeric live allocator limits were not queried; no MLX runtime was imported.",
+      "evidence": [
+        ".venv/lib/python3.11/site-packages/mlx_lm/server.py:1888-1890",
+        ".venv/lib/python3.11/site-packages/mlx_lm/generate.py:230-266",
+        ".venv/lib/python3.11/site-packages/mlx/core/__init__.pyi:830-895"
+      ]
+    },
+    {
+      "claim": "STT uses one shared model and one executor worker per process. Its measured queues are sub-millisecond in the three inspected suites; the slow host boundary is inside Parakeet generation. This does not exclude driver/accelerator synchronization, page movement, scheduler or thermal effects inside that boundary.",
+      "evidence": [
+        "agent/pipeline/local_stt.py:43-69",
+        "agent/pipeline/local_stt.py:74-95",
+        "results/iteration15/stt-stage-independent-audit.json"
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "iteration": 12,
+      "recognition_calls": 6,
+      "slowest_call": "stt-call-004",
+      "result_text": "Navigate to MG Road Metro Station.",
+      "submitted_pcm_sha256": "154d9eea03918756fe547dd2eef33aee1a1415aa14231d0c63a822e351a40095",
+      "submitted_pcm_bytes": 91136,
+      "api_ms": 6852.704625,
+      "dispatch_queue_ms": 0.091833,
+      "generate_host_boundary_ms": 6772.920041,
+      "maximum_recognition_queue_ms": 0.126417,
+      "recognition_api_range_ms": [
+        906.907292,
+        6852.704625
+      ],
+      "memory_samples": 348,
+      "suite_min_available_bytes": 325910528,
+      "suite_min_available_memory_line": 20,
+      "suite_peak_swap_bytes": 9564061696,
+      "during_slowest_call": {
+        "clock": "Same-host monotonic: raw engine_api_entry through caller_return inclusive, joined to memory.jsonl monotonic field.",
+        "memory_line_numbers": [
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220
+        ],
+        "available_bytes_range": [
+          1382187008,
+          1881407488
+        ],
+        "swap_used_bytes_range": [
+          8528986112,
+          9482272768
+        ],
+        "suite_minimum_falls_inside_slow_call": false
+      }
+    },
+    {
+      "iteration": 14,
+      "recognition_calls": 10,
+      "slowest_call": "stt-call-010",
+      "result_text": "Navigate to the airport.",
+      "submitted_pcm_sha256": "0518f53d8c409ce8dc95c75cebabd83cc4ed006e112ea99704f83563fe0e1029",
+      "submitted_pcm_bytes": 62464,
+      "api_ms": 2486.459209,
+      "dispatch_queue_ms": 0.131833,
+      "generate_host_boundary_ms": 2384.698583,
+      "maximum_recognition_queue_ms": 0.415083,
+      "recognition_api_range_ms": [
+        955.675667,
+        2486.459209
+      ],
+      "memory_samples": 340,
+      "suite_min_available_bytes": 551518208,
+      "suite_min_available_memory_line": 15,
+      "suite_peak_swap_bytes": 10031333376,
+      "during_slowest_call": {
+        "clock": "Same-host monotonic: raw engine_api_entry through caller_return inclusive, joined to memory.jsonl monotonic field.",
+        "memory_line_numbers": [
+          288,
+          289,
+          290,
+          291,
+          292
+        ],
+        "available_bytes_range": [
+          1363886080,
+          1655816192
+        ],
+        "swap_used_bytes_range": [
+          9285402624,
+          9731375104
+        ],
+        "suite_minimum_falls_inside_slow_call": false
+      }
+    },
+    {
+      "iteration": 15,
+      "recognition_calls": 10,
+      "slowest_call": "stt-call-007",
+      "result_text": "Navigate to the airport.",
+      "submitted_pcm_sha256": "f7311905f5248b8125b96a4687fd03a8c1350dfbc4f3420460817af968170787",
+      "submitted_pcm_bytes": 61440,
+      "api_ms": 7886.797791,
+      "dispatch_queue_ms": 0.222584,
+      "generate_host_boundary_ms": 7785.466959,
+      "maximum_recognition_queue_ms": 0.470208,
+      "recognition_api_range_ms": [
+        1147.92,
+        7886.797791
+      ],
+      "memory_samples": 365,
+      "suite_min_available_bytes": 119898112,
+      "suite_min_available_memory_line": 19,
+      "suite_peak_swap_bytes": 10948771840,
+      "during_slowest_call": {
+        "clock": "Same-host monotonic: raw engine_api_entry through caller_return inclusive, joined to memory.jsonl monotonic field.",
+        "memory_line_numbers": [
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213
+        ],
+        "available_bytes_range": [
+          1406615552,
+          1713340416
+        ],
+        "swap_used_bytes_range": [
+          9482665984,
+          9788063744
+        ],
+        "suite_minimum_falls_inside_slow_call": false
+      }
+    }
+  ],
+  "causal_limits": [
+    "Iteration15 slow recognition takes 7.886798 s API-to-caller, 7.785467 s inside generation, with 0.222584 ms dispatch queue. During that call sampled available memory is about 1.407\u20131.713 GB; the suite minimum 0.120 GB occurs elsewhere. A suite-wide minimum is not evidence of contemporaneous exhaustion.",
+    "Iteration12 slow call is a different utterance/PCM; iteration14 and15 slow calls have different normalized PCM hashes/lengths despite both saying airport. Different raw segment bytes, background applications, warm caches and fixed run order defeat a causal historical speed comparison.",
+    "STT stages are nested host-boundary durations and may include lazy execution/synchronization. Do not sum overlapping stages or label generation time exclusive accelerator compute.",
+    "System memory/swap includes unrelated workloads and preexisting swap; half-second samples can miss peaks. Owned RSS excludes the separate recorder and is not total unified-memory allocation. Swap use levels are not measured per-process paging causation.",
+    "The earlier full-output cache comparison found a substantial one-entry prefill/latency cost. Its recorded 0.38/0.68 GB logical caches and similar sampled RSS do not establish actual memory savings or harm for this current causal RTC workload."
+  ],
+  "hypotheses_not_findings": [
+    "Reducing retained KV entries may reduce pressure on the shared-memory system and recognition variability, while more prefill may instead increase compute contention/latency.",
+    "Slow generation may reflect shared accelerator/driver scheduling, page movement or background/thermal state; current artifacts do not isolate these mechanisms."
+  ],
+  "proposed_future_experiment": {
+    "status": "Not launched, not applied to iteration16. Freeze one source/config version after the separate responder change before comparing.",
+    "single_changed_factor": "--prompt-cache-size: baseline 2 vs candidate 1. Keep --prompt-cache-bytes 268435456 recorded but label it unenforced on this path.",
+    "smallest_useful_screen": "A2 \u2192 B1 \u2192 A2 fresh full-stack processes, each running the same existing four-case cancel/return/return/cancel protocol and identical WAVs. Twelve serial captures, not twelve independent hardware replicates. Returning to A helps detect drift; fixed order and one B process still preclude a general causal/statistical claim.",
+    "baseline_llm_argv": [
+      "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "-m",
+      "mlx_lm",
+      "server",
+      "--model",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8081",
+      "--chat-template-args",
+      "{\"enable_thinking\":false}",
+      "--decode-concurrency",
+      "1",
+      "--prompt-concurrency",
+      "1",
+      "--prefill-step-size",
+      "256",
+      "--prompt-cache-size",
+      "2",
+      "--prompt-cache-bytes",
+      "268435456",
+      "--max-tokens",
+      "500"
+    ],
+    "candidate_llm_argv": [
+      "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "-m",
+      "mlx_lm",
+      "server",
+      "--model",
+      "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8081",
+      "--chat-template-args",
+      "{\"enable_thinking\":false}",
+      "--decode-concurrency",
+      "1",
+      "--prompt-concurrency",
+      "1",
+      "--prefill-step-size",
+      "256",
+      "--prompt-cache-size",
+      "1",
+      "--prompt-cache-bytes",
+      "268435456",
+      "--max-tokens",
+      "500"
+    ],
+    "baseline_shell_command": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python -m mlx_lm server --model /Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192 --host 127.0.0.1 --port 8081 --chat-template-args '{\"enable_thinking\":false}' --decode-concurrency 1 --prompt-concurrency 1 --prefill-step-size 256 --prompt-cache-size 2 --prompt-cache-bytes 268435456 --max-tokens 500",
+    "candidate_shell_command": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python -m mlx_lm server --model /Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192 --host 127.0.0.1 --port 8081 --chat-template-args '{\"enable_thinking\":false}' --decode-concurrency 1 --prompt-concurrency 1 --prefill-step-size 256 --prompt-cache-size 1 --prompt-cache-bytes 268435456 --max-tokens 500",
+    "controller_requirements": [
+      "Use new output directories and a newly frozen experiment controller. Existing iteration15 run_suite.py obtains its LLM argv from iteration4/llm-launch.json; do not edit or relaunch that frozen controller/output. Override only the selected --prompt-cache-size value in the new controller, and retain full argv receipts.",
+      "Keep model bytes/revisions, requests/prompts, seed 7, all decoding options, prefill 256, STT/TTS/VAD settings, audio bytes, substantive speech, tool semantics and warmup unchanged. Retain every parser/repair/responder invocation and failure; do not remove seed to enter batching.",
+      "Retain existing whole-suite/individual client deadlines, owned-process shutdown and independent PID checks. Check port availability and source/model/input hashes in a separate preflight before starting services. This preparation did not launch the proposed experiment."
+    ],
+    "checks": [
+      "Count log-reported retained caches and logical bytes in every arm; candidate must never exceed one retained entry at observation points. Capture remaining prompt-token counts to expose additional prefill work.",
+      "Use the same half-second memory sampler and STT host-stage observer in all arms. Report per-stage distributions, slow call rows, exact normalized PCM hashes, queue times, memory/swap levels/deltas and read/sample errors. Compare matching PCM subsets separately; raw RTC segmentation may differ despite equal input WAV bytes.",
+      "Require all ten transcripts/effects, four backend cases and six interruptions, and retain final speech facts as a separate denominator. Do not discard failed captures or make changed model text disappear from comparisons.",
+      "Compare full final-input-to-fulfilled-reply timing alongside ACK/result PCM. Memory improvement alone cannot justify a latency or quality regression; first fresh-process requests and all failures remain included.",
+      "Retain all prompts/raw responses if a future observer is added, with the same observer in both arms. Otherwise describe equality as frozen configuration/input equality, not proof that adaptive conversation prompts stayed identical after differing outputs."
+    ],
+    "other_knobs_deferred": [
+      "Do not remove seed, quantize KV, shrink/swap models, reduce max_tokens or suppress response/repair calls in this comparison.",
+      "A future explicit LRU max_bytes wrapper or MLX free-allocator-cache cap would be a separate code/runtime experiment, not evidence that today's --prompt-cache-bytes works. Lowering wired/global system limits is not proposed.",
+      "If one-entry latency regression dominates, keep two entries and separately test prefill 256\u2192128 with otherwise identical controls; it changes temporary prefill work granularity, not retained KV budget."
+    ]
+  },
+  "evidence_sha256": {
+    ".venv/lib/python3.11/site-packages/mlx_lm/server.py": "cdfcb4ac848636f9927851a0ec7a951584526530cb7832ba58049e4a9144db8b",
+    ".venv/lib/python3.11/site-packages/mlx_lm/models/cache.py": "819ed95dcbf755652363cfdb15a639890447abb534a06dcefd52c7fff5055750",
+    ".venv/lib/python3.11/site-packages/mlx_lm/generate.py": "270778ad53eaca55a8533d82e6752660fe5d2605c4aa0879b48a50a91f69345f",
+    ".venv/lib/python3.11/site-packages/mlx/core/__init__.pyi": "303c2bfd24f7c01b4860de5c89ef59e3c588ed344732b3d777c55d1f9dea4cb7",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "results/iteration15/run_suite.py": "a35c77ce992be3b58b5591962536fe528b17c9bc49ba07a88bff8d86f00b4e30",
+    "results/iteration15/local-stack-run1/llm-launch.json": "9f2ec33adff56a14e288b862109120622b107285f3473aa1bad55292e5aae1c3",
+    "results/iteration15/local-stack-run1/llm.log": "bfa3e53ced1b43f883150c0daf0b8b2f9469026f69ac27abcda6a2edcb0f6be9",
+    "results/iteration3/cache-source-audit.json": "05584deffb479c5f04d493c1c8e72af014934173cb4c964e844ac81b084b2531",
+    "results/iteration3/cache-policy-run1/analysis.json": "df0c44593efd23f8296efd6804b7b8420e68a39741c0687e3e0118cb7d78d5d2",
+    "docs/iteration3.md": "2f8a9b55a30a279c0129f41b5cb00fc6d0566fb87ccb44e0f8a1fe41d0bd67fe",
+    "results/iteration12/stt-stage-independent-audit.json": "ad2e61b7d2501f5b9df08782af06e1a76d1391c046fb0f48087b9cb2f8f8f81f",
+    "results/iteration12/local-stack-run1/stt-diagnostics/report.json": "d9b5e6a033a4ee323ecdb2037efe93ad5a1792e22f16a8f872d41ee8b2d5490d",
+    "results/iteration12/memory.jsonl": "1f40b2f9ee703cbe90f37210b2fb3d05360100d68535a8ed81b26b57cebb82e1",
+    "results/iteration14/stt-stage-independent-audit.json": "71c77012e855ecfa72d8406fa08685419a6f66173299ad1c4531e942021d7581",
+    "results/iteration14/local-stack-run1/stt-diagnostics/report.json": "45a118129dd4f88915c6077061cd0cf0655ce3e019f8cf62b74fc6c646ccac75",
+    "results/iteration14/memory.jsonl": "c764d4ae2a0a109cc452758d1de02372dbc1b07835b2a2dcc06efb1521395f6a",
+    "results/iteration15/stt-stage-independent-audit.json": "7f1322b389547a76e90b48d9d1e4c8b48e107fd32e897743bd32d1b2c7229a08",
+    "results/iteration15/local-stack-run1/stt-diagnostics/report.json": "ee829e8e026e5a5f0480e0ad1c62e1ad9eafa7447400063dfaf6b5c5f3189b67",
+    "results/iteration15/memory.jsonl": "21328dd9c1059b413d25455b34103dedfb94f66f7775a501394ebaf4b2904b74"
+  },
+  "verification": "Derived rows directly from saved JSON/JSONL and inspected installed source files. No model execution or package mutation. Exact future commands are recorded for review only."
+}

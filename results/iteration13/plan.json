@@ -1,0 +1,19 @@
+{
+  "declared_at_utc": "2026-09-26T08:01:51.470008+00:00",
+  "prior_checkpoint": "iteration12: measured generation-dominated STT delay; found public-packet readiness rejection and preserved baseline failure",
+  "hypothesis": "Retaining the native sender identity and deferring attribution until that same participant resolves as an agent prevents event-order readiness loss without trusting anonymous/non-agent packets.",
+  "change_scope": "Recorder sender attribution and focused tests only. Keep production agent/model/turn/AEC settings and input audio unchanged.",
+  "historical_limit": "Iteration12 public SDK packets discarded original identity; cannot prove whether it was blank or unresolved and cannot repair that capture retrospectively.",
+  "verification": [
+    "Focused event-order/trust/FIFO/timestamp and original-handler-delegation tests; unresolvable identity remains untrusted",
+    "Independent code review and full relevant tests before source/model/method preflight",
+    "Repeat all four existing conversations once in fixed order with recorder native identity/buffer status retained. No retry or capture-success exclusion.",
+    "Preserve all attempted/published-input checks, raw packet/promoted/server event equality, execution, audio, cleanup and warnings separately."
+  ],
+  "decision_rule": "Keep only if callback behavior and sender attribution remain faithful, deterministic delayed-participant tests pass, and integration evidence is reported with every failure. A live run without delayed attribution validates compatibility only, not reproduction of the startup race.",
+  "limits": [
+    "Uses the installed SDK native event boundary; source/version receipt must disclose compatibility scope.",
+    "No change to recognition compute or claim of controlled conversational speedup.",
+    "Playback timing remains client receipt relative to scheduled input, not physical sound."
+  ]
+}

@@ -1,0 +1,504 @@
+FFFFFFFFFF.                                                              [100%]
+=================================== FAILURES ===================================
+____________ test_slow_native_boundary_keeps_loop_responsive[mkdir] ____________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105396f50>
+phase = 'mkdir'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["mkdir", "open", "write", "flush", "close"])
+    async def test_slow_native_boundary_keeps_loop_responsive(tmp_path, monkeypatch, phase):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, phase, monkeypatch)
+        writer = TraceWriter(path)
+    
+        async def lifecycle():
+            await writer.start()
+            writer(Event("observation", {"value": 7}, ts=1))
+            return await writer.aclose()
+    
+        task = asyncio.create_task(lifecycle())
+        try:
+            await held.witness_responsive_loop()
+            assert not task.done()
+            held.release.set()
+            assert await asyncio.wait_for(task, 3)
+>           assert records(path) == [{"type": "observation", "data": {"value": 7}, "ts": 1}]
+                   ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep0/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+____________ test_slow_native_boundary_keeps_loop_responsive[open] _____________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1053249d0>
+phase = 'open'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["mkdir", "open", "write", "flush", "close"])
+    async def test_slow_native_boundary_keeps_loop_responsive(tmp_path, monkeypatch, phase):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, phase, monkeypatch)
+        writer = TraceWriter(path)
+    
+        async def lifecycle():
+            await writer.start()
+            writer(Event("observation", {"value": 7}, ts=1))
+            return await writer.aclose()
+    
+        task = asyncio.create_task(lifecycle())
+        try:
+            await held.witness_responsive_loop()
+            assert not task.done()
+            held.release.set()
+            assert await asyncio.wait_for(task, 3)
+>           assert records(path) == [{"type": "observation", "data": {"value": 7}, "ts": 1}]
+                   ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep1/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+____________ test_slow_native_boundary_keeps_loop_responsive[write] ____________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10527e090>
+phase = 'write'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["mkdir", "open", "write", "flush", "close"])
+    async def test_slow_native_boundary_keeps_loop_responsive(tmp_path, monkeypatch, phase):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, phase, monkeypatch)
+        writer = TraceWriter(path)
+    
+        async def lifecycle():
+            await writer.start()
+            writer(Event("observation", {"value": 7}, ts=1))
+            return await writer.aclose()
+    
+        task = asyncio.create_task(lifecycle())
+        try:
+            await held.witness_responsive_loop()
+            assert not task.done()
+            held.release.set()
+            assert await asyncio.wait_for(task, 3)
+>           assert records(path) == [{"type": "observation", "data": {"value": 7}, "ts": 1}]
+                   ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep2/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+____________ test_slow_native_boundary_keeps_loop_responsive[flush] ____________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1053442d0>
+phase = 'flush'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["mkdir", "open", "write", "flush", "close"])
+    async def test_slow_native_boundary_keeps_loop_responsive(tmp_path, monkeypatch, phase):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, phase, monkeypatch)
+        writer = TraceWriter(path)
+    
+        async def lifecycle():
+            await writer.start()
+            writer(Event("observation", {"value": 7}, ts=1))
+            return await writer.aclose()
+    
+        task = asyncio.create_task(lifecycle())
+        try:
+            await held.witness_responsive_loop()
+            assert not task.done()
+            held.release.set()
+            assert await asyncio.wait_for(task, 3)
+>           assert records(path) == [{"type": "observation", "data": {"value": 7}, "ts": 1}]
+                   ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep3/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+____________ test_slow_native_boundary_keeps_loop_responsive[close] ____________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105355010>
+phase = 'close'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["mkdir", "open", "write", "flush", "close"])
+    async def test_slow_native_boundary_keeps_loop_responsive(tmp_path, monkeypatch, phase):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, phase, monkeypatch)
+        writer = TraceWriter(path)
+    
+        async def lifecycle():
+            await writer.start()
+            writer(Event("observation", {"value": 7}, ts=1))
+            return await writer.aclose()
+    
+        task = asyncio.create_task(lifecycle())
+        try:
+            await held.witness_responsive_loop()
+            assert not task.done()
+            held.release.set()
+            assert await asyncio.wait_for(task, 3)
+>           assert records(path) == [{"type": "observation", "data": {"value": 7}, "ts": 1}]
+                   ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_slow_native_boundary_keep4/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+_______ test_fifo_payloads_are_frozen_before_callers_mutate_nested_data ________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_fifo_payloads_are_frozen_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1053bba90>
+
+    @pytest.mark.asyncio
+    async def test_fifo_payloads_are_frozen_before_callers_mutate_nested_data(tmp_path, monkeypatch):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, "write", monkeypatch)
+        writer = TraceWriter(path)
+        await writer.start()
+        first = Event("first", {"items": [{"name": "original"}], "path": Path("receipt.txt")}, ts=11)
+        second = Event("second", {"values": [2]}, ts=12)
+        try:
+            writer(first)
+            await held.witness_responsive_loop()
+            first.data["items"][0]["name"] = "changed"
+            first.data["items"].append({"name": "later"})
+            first.type, first.ts = "replaced", 99
+            writer(second)
+            second.data["values"].append(200)
+            writer(Event("third", {"value": 3}, ts=13))
+            held.release.set()
+            assert await writer.aclose(timeout=2)
+>           assert records(path) == [
+                   ^^^^^^^^^^^^^
+                {"type": "first", "data": {"items": [{"name": "original"}], "path": "receipt.txt"}, "ts": 11},
+                {"type": "second", "data": {"values": [2]}, "ts": 12},
+                {"type": "third", "data": {"value": 3}, "ts": 13},
+            ]
+
+tests/unit/test_trace_writer.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_fifo_payloads_are_frozen_0/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+_ test_uncertain_persistence_is_reported_without_retry_or_later_append[write] __
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105260c90>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x105262e10>
+failure = 'write'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("failure", ["write", "flush"])
+    async def test_uncertain_persistence_is_reported_without_retry_or_later_append(tmp_path, monkeypatch, caplog, failure):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, failure, monkeypatch, fail=failure)
+        writer = TraceWriter(path)
+        await writer.start()
+        first = Event("first", {"value": 1}, ts=1)
+        first_line = json.dumps(first.to_dict(), default=str) + "\n"
+        try:
+            writer(first)
+            await held.witness_responsive_loop()
+            writer(Event("queued-before-failure", {"value": 2}, ts=2))
+            held.release.set()
+            assert not await writer.aclose(timeout=2)
+            writer(Event("submitted-after-failure", {"value": 3}, ts=3))
+            assert not await writer.aclose(timeout=2)
+            assert (writer.accepted, writer.written, writer.rejected) == (2, 0, 1)
+            assert sum(phase == "write" for phase, _ in held.calls) == 1
+>           assert path.read_text() == (first_line[:len(first_line) // 2] if failure == "write" else first_line)
+                   ^^^^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:173: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+------------------------------ Captured log call -------------------------------
+ERROR    prism.trace:trace_writer.py:43 trace I/O failed: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0/room/trace.jsonl
+Traceback (most recent call last):
+  File "/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/trace_writer.py", line 73, in _write
+    self._file.write(payload)
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/unit/test_trace_writer.py", line 79, in write
+    raise OSError("injected partial trace write")
+OSError: injected partial trace write
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=0 pending=False
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=1 pending=False
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_0/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=1 pending=False
+_ test_uncertain_persistence_is_reported_without_retry_or_later_append[flush] __
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105260210>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x105262150>
+failure = 'flush'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("failure", ["write", "flush"])
+    async def test_uncertain_persistence_is_reported_without_retry_or_later_append(tmp_path, monkeypatch, caplog, failure):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, failure, monkeypatch, fail=failure)
+        writer = TraceWriter(path)
+        await writer.start()
+        first = Event("first", {"value": 1}, ts=1)
+        first_line = json.dumps(first.to_dict(), default=str) + "\n"
+        try:
+            writer(first)
+            await held.witness_responsive_loop()
+            writer(Event("queued-before-failure", {"value": 2}, ts=2))
+            held.release.set()
+            assert not await writer.aclose(timeout=2)
+            writer(Event("submitted-after-failure", {"value": 3}, ts=3))
+            assert not await writer.aclose(timeout=2)
+            assert (writer.accepted, writer.written, writer.rejected) == (2, 0, 1)
+            assert sum(phase == "write" for phase, _ in held.calls) == 1
+>           assert path.read_text() == (first_line[:len(first_line) // 2] if failure == "write" else first_line)
+                   ^^^^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:173: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+------------------------------ Captured log call -------------------------------
+ERROR    prism.trace:trace_writer.py:43 trace I/O failed: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1/room/trace.jsonl
+Traceback (most recent call last):
+  File "/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/trace_writer.py", line 74, in _write
+    self._file.flush()
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/unit/test_trace_writer.py", line 86, in flush
+    raise OSError("injected trace flush acknowledgment failure")
+OSError: injected trace flush acknowledgment failure
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=0 pending=False
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=1 pending=False
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_uncertain_persistence_is_1/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=1 pending=False
+_______ test_close_timeout_and_cancelled_waiter_preserve_eventual_drain ________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_close_timeout_and_cancell0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105263d50>
+
+    @pytest.mark.asyncio
+    async def test_close_timeout_and_cancelled_waiter_preserve_eventual_drain(tmp_path, monkeypatch):
+        path = tmp_path / "room" / "trace.jsonl"
+        held = HeldIO(path, "write", monkeypatch)
+        writer = TraceWriter(path)
+        await writer.start()
+        waiter = None
+        try:
+            writer(Event("first", {}, ts=1))
+            await held.witness_responsive_loop()
+            writer(Event("second", {}, ts=2))
+            assert not await writer.aclose(timeout=0.01)
+            assert not held.guard_released.is_set() and not held.file.closed
+            waiter = asyncio.create_task(writer.aclose(timeout=2))
+            await asyncio.sleep(0)
+            waiter.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await waiter
+            assert writer.written == 0 and not held.file.closed
+            held.release.set()
+            assert await writer.aclose(timeout=2)
+>           assert [row["type"] for row in records(path)] == ["first", "second"]
+                                           ^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_close_timeout_and_cancell0/room/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+------------------------------ Captured log call -------------------------------
+ERROR    prism.trace:trace_writer.py:96 trace cleanup: /private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_close_timeout_and_cancell0/room/trace.jsonl complete=False accepted=2 flushed=0 rejected=0 pending=True
+_____________ test_blocked_room_does_not_hold_another_rooms_trace ______________
+
+tmp_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_blocked_room_does_not_hol0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1052f86d0>
+
+    @pytest.mark.asyncio
+    async def test_blocked_room_does_not_hold_another_rooms_trace(tmp_path, monkeypatch):
+        slow_path, healthy_path = tmp_path / "slow" / "trace.jsonl", tmp_path / "healthy" / "trace.jsonl"
+        held = HeldIO(slow_path, "write", monkeypatch)
+        slow, healthy = TraceWriter(slow_path), TraceWriter(healthy_path)
+        await slow.start()
+        try:
+            slow(Event("slow-room", {}, ts=1))
+            await held.witness_responsive_loop()
+            await healthy.start()
+            healthy(Event("healthy-room", {}, ts=2))
+            assert await healthy.aclose(timeout=1)
+            assert not held.guard_released.is_set() and not held.release.is_set()
+            assert slow.written == 0
+            assert records(healthy_path) == [{"type": "healthy-room", "data": {}, "ts": 2}]
+            held.release.set()
+            assert await slow.aclose(timeout=2)
+>           assert [row["type"] for row in records(slow_path)] == ["slow-room"]
+                                           ^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_trace_writer.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_trace_writer.py:94: in records
+    return [json.loads(line) for line in path.read_text().splitlines()]
+                                         ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-58/test_blocked_room_does_not_hol0/slow/trace.jsonl')
+encoding = 'utf-8', errors = None
+
+    def read_text(self, encoding=None, errors=None):
+        """
+        Open the file in text mode, read it, and close the file.
+        """
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E       TypeError: 'FileProxy' object does not support the context manager protocol
+
+../../../../.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/pathlib.py:1058: TypeError
+=========================== short test summary info ============================
+FAILED tests/unit/test_trace_writer.py::test_slow_native_boundary_keeps_loop_responsive[mkdir]
+FAILED tests/unit/test_trace_writer.py::test_slow_native_boundary_keeps_loop_responsive[open]
+FAILED tests/unit/test_trace_writer.py::test_slow_native_boundary_keeps_loop_responsive[write]
+FAILED tests/unit/test_trace_writer.py::test_slow_native_boundary_keeps_loop_responsive[flush]
+FAILED tests/unit/test_trace_writer.py::test_slow_native_boundary_keeps_loop_responsive[close]
+FAILED tests/unit/test_trace_writer.py::test_fifo_payloads_are_frozen_before_callers_mutate_nested_data
+FAILED tests/unit/test_trace_writer.py::test_uncertain_persistence_is_reported_without_retry_or_later_append[write]
+FAILED tests/unit/test_trace_writer.py::test_uncertain_persistence_is_reported_without_retry_or_later_append[flush]
+FAILED tests/unit/test_trace_writer.py::test_close_timeout_and_cancelled_waiter_preserve_eventual_drain
+FAILED tests/unit/test_trace_writer.py::test_blocked_room_does_not_hold_another_rooms_trace
+10 failed, 1 passed in 0.22s

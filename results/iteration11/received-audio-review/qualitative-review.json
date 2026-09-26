@@ -1,0 +1,482 @@
+{
+  "created_at_utc": "2026-09-26T07:17:22.016426+00:00",
+  "scope": "All four received whole-stream ASR outputs reviewed against frozen final facts, with original/final speech-handle states assessed separately; no general quality score.",
+  "input_sha256": {
+    "protocol.json": "cad4a9e67376042b4f858839ec05291eae64e18dd622f7450fb81d41f5904d61",
+    "received-audio-review-protocol.json": "f6e9e50407eed71472826ceb2a4897665472ca46b76ae2cea51467c71dcf876e",
+    "received-audio-review/protocol.json": "f556053c547c3a5f05b1b00b69bed21ca25d76df8237b3138f62836fc9610ade",
+    "received-audio-review/report.json": "b81180b02303ca49bce2b0adcdeb97d0a4d01bf25e1e705846fc782e672a5fd8"
+  },
+  "analysis_script_sha256": "e2cd0e7d26610e724384235b12fb99477c0d083779b8a36910c3380da4c4d3bf",
+  "review_method_timing": "Review method file frozen after RTC launch but before any received-audio ASR; all four cases, whole streams and expected facts were already declared in suite protocol and iteration11 plan. Preparation error preserved separately.",
+  "counts": {
+    "declared": 4,
+    "asr_completed": 4,
+    "capture_status_counts": {
+      "completed_observation": 4
+    },
+    "core_final_requested_facts_mentioned_with_name_variants": 4,
+    "final_expected_duration_mentioned": 4,
+    "waypoint_final_thirteen_and_zero_extra": 2,
+    "waypoint_denominator": 2,
+    "required_original_result_interruptions": 3,
+    "required_original_result_interruptions_observed": 2,
+    "content_and_required_handle_state_met": 3,
+    "rows_with_proper_name_deviations": 4,
+    "raw_and_resampled_files_verified": 20
+  },
+  "trials": [
+    {
+      "id": "rtc-waypoint-1",
+      "case": "waypoint",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "verbatim_transcript": "One moment Navigation Okay, one sec Added blue talkai in Duriniger as a stop. Estimated time to MG Road Metro Station is thirteen minutes, zero extra minutes.",
+      "exact_reviewed_transcript_guard": true,
+      "expected_final_facts": {
+        "MG Road destination unchanged": true,
+        "Blue Tokai Indiranagar added": true,
+        "estimated time is 13 minutes": true,
+        "0 extra minutes": true
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "fact_scope": "Final requested action relation, destination and duration clauses are represented with the named spelling deviations. 'Unchanged' destination is compared to the declared initial destination; tool state is verified in the separate raw audit.",
+      "manual_review": {
+        "final_minute_wording": "thirteen",
+        "final_minutes": 13,
+        "extra_minute_wording": "zero",
+        "extra_minutes": 0,
+        "proper_name_deviations": {
+          "Blue Tokai": "blue talkai",
+          "Indiranagar": "Duriniger"
+        },
+        "initial_result_coverage": "Only 'Navigation' remains; initial destination, started clause and initial estimate are absent, consistent with the recorded interruption request.",
+        "initial_result_state": "interruption_requested",
+        "other_wording_deviations": [
+          "Punctuation between acknowledgment and truncated navigation clauses is absent."
+        ]
+      },
+      "speech_handle_comparison": {
+        "original_interruption_required": true,
+        "original_result_state": "interruption_requested",
+        "required_original_interruption_observed": true,
+        "final_result_state": "finished",
+        "final_result_intent_version": 2,
+        "content_and_required_handle_state_met": true
+      },
+      "declared_speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_ebe22179ba1d",
+          "queued_at": 124927.893729375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124929.305758833,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_40e8d19974cc",
+          "queued_at": 124942.013713,
+          "state": "interruption_requested",
+          "first_loud_at": 124943.055142666,
+          "preceding_quiet_seconds": 13.899899165990064,
+          "last_loud_at": 124943.715882458,
+          "ended_at": 124947.32150475,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_4fd614a59844",
+          "queued_at": 124948.031632083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124949.62619825,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_8bd1cdb3fda4",
+          "queued_at": 124951.884494916,
+          "state": "finished",
+          "first_loud_at": 124952.937222375,
+          "preceding_quiet_seconds": 3.4213578749913722,
+          "last_loud_at": 124960.856837,
+          "ended_at": 124960.919647875,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 38.94,
+      "resampled_duration_seconds": 38.94
+    },
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "verbatim_transcript": "One moment. Navigation to Kempegauda International Airport has started. Estimated arrival in 88 minutes.",
+      "exact_reviewed_transcript_guard": true,
+      "expected_final_facts": {
+        "airport navigation started": true,
+        "estimated arrival in 88 minutes": true
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "fact_scope": "Final requested action relation, destination and duration clauses are represented with the named spelling deviations. 'Unchanged' destination is compared to the declared initial destination; tool state is verified in the separate raw audit.",
+      "manual_review": {
+        "final_minute_wording": "88",
+        "final_minutes": 88,
+        "extra_minute_wording": null,
+        "extra_minutes": null,
+        "proper_name_deviations": {
+          "Kempegowda": "Kempegauda"
+        },
+        "initial_result_coverage": "Full airport-start relation and 88-minute estimate are represented.",
+        "initial_result_state": "finished",
+        "other_wording_deviations": []
+      },
+      "speech_handle_comparison": {
+        "original_interruption_required": false,
+        "original_result_state": "finished",
+        "required_original_interruption_observed": null,
+        "final_result_state": "finished",
+        "final_result_intent_version": 1,
+        "content_and_required_handle_state_met": true
+      },
+      "declared_speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_0e162e7ae15d",
+          "queued_at": 124973.701386375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124975.77445475,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_24fbfb8d80b4",
+          "queued_at": 124979.536363125,
+          "state": "finished",
+          "first_loud_at": 124980.95843,
+          "preceding_quiet_seconds": 5.3223435419931775,
+          "last_loud_at": 124986.656995,
+          "ended_at": 124986.696524916,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 22.3,
+      "resampled_duration_seconds": 22.3
+    },
+    {
+      "id": "rtc-waypoint-2",
+      "case": "waypoint",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "verbatim_transcript": "One moment Navigation MG Road Metro Station has started. Estimated arrival in thirteen minutes. Okay, one sec. Added blue talkai in Durinegar as a stop. Estimated time to MG Road Metro Station is thirteen minutes, zero extra minutes.",
+      "exact_reviewed_transcript_guard": true,
+      "expected_final_facts": {
+        "MG Road destination unchanged": true,
+        "Blue Tokai Indiranagar added": true,
+        "estimated time is 13 minutes": true,
+        "0 extra minutes": true
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "fact_scope": "Final requested action relation, destination and duration clauses are represented with the named spelling deviations. 'Unchanged' destination is compared to the declared initial destination; tool state is verified in the separate raw audit.",
+      "manual_review": {
+        "final_minute_wording": "thirteen",
+        "final_minutes": 13,
+        "extra_minute_wording": "zero",
+        "extra_minutes": 0,
+        "proper_name_deviations": {
+          "Blue Tokai": "blue talkai",
+          "Indiranagar": "Durinegar"
+        },
+        "initial_result_coverage": "Full initial MG Road start and thirteen-minute estimate remain. This does not meet the declared original-result interruption requirement.",
+        "initial_result_state": "finished",
+        "other_wording_deviations": [
+          "The preposition 'to' is absent after the initial 'Navigation'.",
+          "Punctuation after the first acknowledgment is absent."
+        ]
+      },
+      "speech_handle_comparison": {
+        "original_interruption_required": true,
+        "original_result_state": "finished",
+        "required_original_interruption_observed": false,
+        "final_result_state": "finished",
+        "final_result_intent_version": 2,
+        "content_and_required_handle_state_met": false
+      },
+      "declared_speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_12254d4979ab",
+          "queued_at": 125003.563472583,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125005.191961166,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_697ca0232a9c",
+          "queued_at": 125009.095210541,
+          "state": "finished",
+          "first_loud_at": 125010.169308875,
+          "preceding_quiet_seconds": 5.120777792006265,
+          "last_loud_at": 125019.348309708,
+          "ended_at": 125019.36281325,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_f2bb070b51e3",
+          "queued_at": 125026.76515025,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125028.915977916,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_c6aa9b0e96a7",
+          "queued_at": 125030.628637708,
+          "state": "finished",
+          "first_loud_at": 125032.529063916,
+          "preceding_quiet_seconds": 3.7219097079942003,
+          "last_loud_at": 125040.469074708,
+          "ended_at": 125040.518236666,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 50.16,
+      "resampled_duration_seconds": 50.16
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "verbatim_transcript": "One moment Navigation to Ok, one sec. Now navigating to office, Maniata Tech Park, replacing Kempegauda International Airport, estimated arrival in twenty-nine minutes.",
+      "exact_reviewed_transcript_guard": true,
+      "expected_final_facts": {
+        "office navigation": true,
+        "previous airport replaced": true,
+        "estimated arrival in 29 minutes": true
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "fact_scope": "Final requested action relation, destination and duration clauses are represented with the named spelling deviations. 'Unchanged' destination is compared to the declared initial destination; tool state is verified in the separate raw audit.",
+      "manual_review": {
+        "final_minute_wording": "twenty-nine",
+        "final_minutes": 29,
+        "extra_minute_wording": null,
+        "extra_minutes": null,
+        "proper_name_deviations": {
+          "Manyata": "Maniata",
+          "Kempegowda": "Kempegauda"
+        },
+        "initial_result_coverage": "Only 'Navigation to' remains from the old result. Its initial airport-start and 88-minute estimate are absent; the final replacement clause names the airport separately.",
+        "initial_result_state": "interruption_requested",
+        "other_wording_deviations": [
+          "Acknowledgment 'Okay' is rendered 'Ok'; punctuation boundaries differ."
+        ]
+      },
+      "speech_handle_comparison": {
+        "original_interruption_required": true,
+        "original_result_state": "interruption_requested",
+        "required_original_interruption_observed": true,
+        "final_result_state": "finished",
+        "final_result_intent_version": 2,
+        "content_and_required_handle_state_met": true
+      },
+      "declared_speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_663b0f939d16",
+          "queued_at": 125055.1010035,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125057.277358083,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_7f2e24d9f17e",
+          "queued_at": 125060.777388125,
+          "state": "interruption_requested",
+          "first_loud_at": 125062.861682833,
+          "preceding_quiet_seconds": 5.7212744999997085,
+          "last_loud_at": 125063.539797458,
+          "ended_at": 125067.051506708,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_9dbcf4114d2d",
+          "queued_at": 125067.758622291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125069.449919333,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_5f82b615a61f",
+          "queued_at": 125075.642485125,
+          "state": "finished",
+          "first_loud_at": 125077.298556375,
+          "preceding_quiet_seconds": 7.979069416993298,
+          "last_loud_at": 125084.997962833,
+          "ended_at": 125085.051684625,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 41.18,
+      "resampled_duration_seconds": 41.18
+    }
+  ],
+  "raw_and_resampled_hash_checks": [
+    {
+      "file": "results/iteration11/rtc-waypoint-1/report.json",
+      "sha256": "c678dc061d57b15902aaee33893137930afe152b241e8dbb41ad0cd3ab9f5e94",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-1/events.jsonl",
+      "sha256": "1825a108a7db128ea86d36d129f9b9c0d9c5214542100eb3a742711c48110245",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-1/frames.jsonl",
+      "sha256": "25cbe7ae2c9ca31f7ee9080e288c0ea2e5842a3908206f87d417801c9d1860a0",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-1/received-1.pcm",
+      "sha256": "d524631eac8746030bc2769b3f68777566502e32a1791bf1dde69880d0b5f077",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/received-audio-review/resampled/rtc-waypoint-1.wav",
+      "sha256": "e0faa3d890fe5d4b63cdad959fe9424a0de4d04198aba94181c8f407b727d1ae",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-baseline-1/report.json",
+      "sha256": "17a7ad8d096c7f320998580960421d112d1ae5601247bb3dc21b0ea619ea45ed",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-baseline-1/events.jsonl",
+      "sha256": "a6ac9a57a008a1ad67e60ccc43fe9bff3c5b99b0d6ea34aef8fed9efa05acfae",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-baseline-1/frames.jsonl",
+      "sha256": "12d579d77143898b50a7242e8f14cd5bf421a1ff43b450eda525be43bbf2a7a6",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-baseline-1/received-1.pcm",
+      "sha256": "e093638aa881aeea96f2d0cc9579fe73f8bf452b2e33fb6275f4b67bbfd9dcff",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/received-audio-review/resampled/rtc-baseline-1.wav",
+      "sha256": "037766adaf4d705321c3a1501c67471e509116f24e1a88d9db3780c1131e2f8b",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-2/report.json",
+      "sha256": "dcc60ea04fd81f7cb31e026a39cf4f4b0b676b5a4e6e36b11b151a4d8db32962",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-2/events.jsonl",
+      "sha256": "6a4d2f5a5454c51851e655e7135ece99a9ebceaf3ce15d38d0f78a56460bace7",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-2/frames.jsonl",
+      "sha256": "dc3e6d7fcf72c2568a45b0ce44b50df784c8b8c878359abf73b9dc5b4c1946e9",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-waypoint-2/received-1.pcm",
+      "sha256": "3459ff736f97c220f93ea690da9a734708be0353b026f4c9062379579d19e964",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/received-audio-review/resampled/rtc-waypoint-2.wav",
+      "sha256": "4e9774f782e035912cb4e983bbc1e83ba6c5c1ece2f00213ba71e07652299ec0",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-correction-1/report.json",
+      "sha256": "9d62aff798075305c8b7e9f3dce7bede13dbb7e4af668e32143343e1b6d0bd61",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-correction-1/events.jsonl",
+      "sha256": "b638a9403cb6663c16cbefa1e111f69c9b139092e27c753f38db96f0b479fa29",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-correction-1/frames.jsonl",
+      "sha256": "e18082e3036c740cec822a4b91a5482199975ecf16dacab06d7905aec755c6e4",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/rtc-correction-1/received-1.pcm",
+      "sha256": "46653f60d779e55e8b3e4769992f885c06718a6db3562ce176859c36a788d2f4",
+      "matches": true
+    },
+    {
+      "file": "results/iteration11/received-audio-review/resampled/rtc-correction-1.wav",
+      "sha256": "5237253799f8c7d1bfe7ca3f2b57d0d145c836db397866f4a13c7db28403d56e",
+      "matches": true
+    }
+  ],
+  "asr_report_receipts": {
+    "inputs_unchanged": true,
+    "source_unchanged": true,
+    "suite_unchanged": true
+  },
+  "limits": [
+    "Final requested content is represented in 4/4 streams with proper-name deviations. This is not a 4/4 full-scenario or exact-name fidelity pass.",
+    "Original-result interruption is recorded for waypoint1 and correction, 2/3 required cases. Waypoint2's old result finished and its complete content remains; that declared interruption requirement fails.",
+    "Both final stop summaries say 'thirteen' and 'zero'; the office replacement says 'twenty-nine'. Verbatim strings remain available and are not normalized to erase numeric differences.",
+    "Truncated original results in waypoint1/correction are consistent with intended interruption, not missing required final response facts. A finished speech handle is distinct from physical acoustic playback.",
+    "Whole-stream ASR does not provide word timing or prove human intelligibility. This review cannot isolate pronunciation versus recognition as the cause of name variations.",
+    "All four complete streams remain untrimmed. Four fixed synthetic development captures share warm models and candidate instrumentation; no held-out accuracy or causal historical before/after latency claim.",
+    "The ASR method file was frozen after RTC launch but before received ASR; the suite had already declared cases, whole streams and expected facts. The preparation timing exception is preserved.",
+    "Full raw transport/effect, interruption timing, source provenance and cleanup audits remain separate; this review makes no new inference or production change."
+  ]
+}

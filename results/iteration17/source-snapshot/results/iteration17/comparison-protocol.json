@@ -1,0 +1,300 @@
+{
+  "declared_at_utc": "2026-09-26T09:53:23.835301+00:00",
+  "status": "declared_before_any_iteration17_timed_arm",
+  "purpose": "Screen the retained prompt-cache entry-count trade-off on the frozen iteration16 navigation workload, preserving quality, useful-work timing and resource uncertainty.",
+  "single_changed_factor": {
+    "flag": "--prompt-cache-size",
+    "arm_values": [
+      2,
+      1,
+      2
+    ],
+    "unchanged_byte_flag": 268435456,
+    "byte_flag_limit": "The installed seeded sequential serving path does not enforce this byte flag; it must not be described as a 256 MiB allocation cap. The entry-count limit is the tested control."
+  },
+  "arm_order": [
+    "A2_first",
+    "B1",
+    "A2_return"
+  ],
+  "arms": [
+    {
+      "arm_id": "A2_first",
+      "directory": "results/iteration17-cache2-before",
+      "cache_entries": 2,
+      "fresh_full_stack": true,
+      "run_order": [
+        "cancel",
+        "repeat",
+        "repeat",
+        "cancel"
+      ],
+      "expected": {
+        "captures": 4,
+        "input_turns": 10,
+        "effects": 10,
+        "interruption_pairs": 6,
+        "complete_final_replies": 4,
+        "physical_attempts_reference_range": [
+          18,
+          26
+        ]
+      }
+    },
+    {
+      "arm_id": "B1",
+      "directory": "results/iteration17-cache1",
+      "cache_entries": 1,
+      "fresh_full_stack": true,
+      "run_order": [
+        "cancel",
+        "repeat",
+        "repeat",
+        "cancel"
+      ],
+      "expected": {
+        "captures": 4,
+        "input_turns": 10,
+        "effects": 10,
+        "interruption_pairs": 6,
+        "complete_final_replies": 4,
+        "physical_attempts_reference_range": [
+          18,
+          26
+        ]
+      }
+    },
+    {
+      "arm_id": "A2_return",
+      "directory": "results/iteration17-cache2-after",
+      "cache_entries": 2,
+      "fresh_full_stack": true,
+      "run_order": [
+        "cancel",
+        "repeat",
+        "repeat",
+        "cancel"
+      ],
+      "expected": {
+        "captures": 4,
+        "input_turns": 10,
+        "effects": 10,
+        "interruption_pairs": 6,
+        "complete_final_replies": 4,
+        "physical_attempts_reference_range": [
+          18,
+          26
+        ]
+      }
+    }
+  ],
+  "declared_trials": [
+    {
+      "arm_id": "A2_first",
+      "directory": "results/iteration17-cache2-before/rtc-cancel-1",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_first",
+      "directory": "results/iteration17-cache2-before/rtc-repeat-1",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_first",
+      "directory": "results/iteration17-cache2-before/rtc-repeat-2",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_first",
+      "directory": "results/iteration17-cache2-before/rtc-cancel-2",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "B1",
+      "directory": "results/iteration17-cache1/rtc-cancel-1",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "B1",
+      "directory": "results/iteration17-cache1/rtc-repeat-1",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "B1",
+      "directory": "results/iteration17-cache1/rtc-repeat-2",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "B1",
+      "directory": "results/iteration17-cache1/rtc-cancel-2",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_return",
+      "directory": "results/iteration17-cache2-after/rtc-cancel-1",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_return",
+      "directory": "results/iteration17-cache2-after/rtc-repeat-1",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_return",
+      "directory": "results/iteration17-cache2-after/rtc-repeat-2",
+      "case": "repeat",
+      "expected_turns": 3,
+      "expected_effects": 3,
+      "expected_interruptions": 2,
+      "expected_complete_final_reply": 1
+    },
+    {
+      "arm_id": "A2_return",
+      "directory": "results/iteration17-cache2-after/rtc-cancel-2",
+      "case": "cancel",
+      "expected_turns": 2,
+      "expected_effects": 2,
+      "expected_interruptions": 1,
+      "expected_complete_final_reply": 1
+    }
+  ],
+  "full_denominators": {
+    "timed_arms": 3,
+    "captures": 12,
+    "input_turns": 30,
+    "requested_effects": 30,
+    "interruption_pairs": 18,
+    "complete_final_speech_cases": 12,
+    "cancellation_cases": 6,
+    "return_cases": 6,
+    "reference_physical_attempt_range": [
+      54,
+      78
+    ],
+    "expected_native_recognition_calls": 30,
+    "expected_separate_warmups": 3
+  },
+  "denominator_rule": "All declared arms/captures/turns remain in every applicable outcome inventory. Failed, unrun, timed-out, missing or interrupted observations are explicit rows with reasons and null timings when unavailable; no replacement trials, success-only comparison, retry/exclusion or invented observation. Additional actual calls, transcripts, effects, parser/repair/fallback work and packets remain included even beyond planned counts.",
+  "baseline_refs_sha256": {
+    "results/iteration16/resource-investigation.json": "c614527807804e515f9dafd4c981f38be350bee3a3e5a2cbd745575a1fb13c85",
+    "results/iteration16/protocol.json": "7b23147cdbd375c4a50222971227ea7c7ef22bd5b6dd10dc9e2a7432216e2369",
+    "results/iteration16/received-audio-review-protocol.json": "933709411813dfbb4f8b17e45535d0d6cf7915ed7b39af8ef5af71cc5edaef45",
+    "results/iteration16/stt-stage-independent-audit.json": "b4db178c8146593d32731cc94a239771be19bdb396511be9e5381473d221a61b",
+    "results/iteration16/final-validation.json": "3e8012c6ad7ef788a47bb44033f4ba22b9b95b7eff1d11874676a2677f4c4ddd"
+  },
+  "input_audio": {
+    "cancel": {
+      "path": "results/iteration16/audio-assets/cancel.wav",
+      "sha256": "3040f518eb41536377197fc62843227868f5bbb9efb632d25ae71cde35beec6c"
+    },
+    "correct": {
+      "path": "results/iteration16/audio-assets/correct.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3"
+    },
+    "navigate": {
+      "path": "results/iteration16/audio-assets/navigate.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54"
+    }
+  },
+  "controls": [
+    "Freeze the completed iteration16 production source, configuration and recorder bytes for all three arms. Inherit its exact case expectations, speech criteria, trigger rules and deadlines; do not edit historical artifacts.",
+    "Use fresh output directories, fresh LLM/agent/LiveKit processes and fresh rooms per arm. Reuse model bytes/revisions, synthetic WAV bytes, seed 7, decoding options, prefill step size 256, max_tokens 500, STT/TTS/VAD settings and unchanged STT/AEC instrumentation. Do not add runtime observers in one arm only.",
+    "Use the same separate preflight method before every arm, verifying complete source/model/input receipts and required free ports. Record actual full launch argv and process identities in each arm, and independently verify only prompt-cache-size differs among semantic LLM settings.",
+    "Keep initial load/warmup and the first fresh-process request in recorded outcomes. Fresh processes do not reset OS/file caches, system swap, unrelated background load or thermal state.",
+    "Run all three timed arms sequentially before any received-audio ASR. After each arm preserve room departure and bounded owned-process cleanup receipts; verify owned services/clients absent before the next arm. Do not kill external processes or delete rooms to conceal cleanup failures.",
+    "No tests, downloads, model changes or extra inference during timed arms. Whole-stream ASR runs only after all timed services have exited, under the unchanged pinned review method. Review each available declared whole stream once, without trimming or retries; missing streams remain failed/unmeasured cases.",
+    "Frozen prompt templates/settings and input WAVs do not prove byte-identical adaptive requests: differing outputs, transcripts, history, slots, tool results, parser retries and semantic repairs can change later prompts and physical requests. Retain available raw planner/responder receipts and distinguish parsed plans, logical invocations and actual server requests; mark unavailable request counts/equality explicitly."
+  ],
+  "required_quality_checks": {
+    "inputs_and_effects": "Per arm retain all10 finalized transcripts against exact declared text, every attempted/reused call and all10 expected navigation effects. Preserve allowed-plan checks separately from semantic effects. Both return cases must activate airport\u2192office\u2192airport through distinct fresh routes; both cancellations must clear the route.",
+    "interruptions": "Require all6 declared preceding result handles interrupted per arm using distinct newly finalized turn/result triggers. Report observed PCM tails and handle interruption separately; neither proves physical audible stop.",
+    "final_speech": "Per arm all4 final replies must finish and satisfy unchanged predeclared facts: cancellation confirms airport navigation cancelled, with no-active backend state checked separately; return confirms active airport navigation replacing office and88-minute estimate. Intentionally interrupted earlier replies need not be complete in whole-stream ASR. Preserve every proper-name/numeric deviation.",
+    "trace_and_runtime": "Independently report full trusted client/server trace equality for all12 captures, identity-missing/untrusted packets, raw decoded comparison, tool errors, stale/unknown/pending effects, warnings, native observer health and server job statuses. Never relabel prior or new failures successful because effects or ASR pass. Raw decoded equality cannot authenticate sender identity.",
+    "physical_calls": "Reference18\u201326 physical attempts per arm is inherited from declared allowed plans, not a license to truncate. Count every physical attempt/reuse/status; record plan changes and repair/fallback work, including attempts outside the reference range as failures/deviations. Request counts can legitimately vary with adaptive planning."
+  },
+  "metrics": {
+    "summary_method": "Nearest-rank p50/p95 = sorted available values[ceil(n*p)-1], accompanied by full declared n, observed n, failed/unmeasured count, every raw value and arm/case/turn identity. Preserve cold first observations. No significance tests or pooled population claim.",
+    "grouping": "Primary summaries are separate A2_first, B1 and A2_return arms, with initial4/followup6/all10 turn groups and cancellation2/return2/all4 case groups. Show A-to-A drift and B versus each A; do not merge both baselines into8 independent replicates or pool all30 turns to hide arm differences. Any pooled table is descriptive with dependence labels.",
+    "receipt_latency": [
+      "Scheduled RMS-threshold input speech end \u2192 finalized transcript, acknowledgment text/PCM, first tool intention, mutation intention/success, substantive result text/PCM and result-handle finish. State all clock/receipt boundaries; intention is not backend entry and PCM receipt is not physical playback.",
+      "Mutation success \u2192 result text/PCM, and preceding result PCM tail/handle interruption relative to each followup onset. Interrupted result finish stays null."
+    ],
+    "fulfilled_case_completion": {
+      "start": "Final input scheduled speech end, not the first input of the conversation.",
+      "end": "Client observation of final result handle finished.",
+      "required_gate": [
+        "Every declared backend effect for the full case succeeded.",
+        "All final reply facts passed the whole-stream review.",
+        "Final result handle finished and its elapsed observation exists."
+      ],
+      "failure": "Retain null fulfilled time and specific failure reasons for any unmet condition, beside observed-but-unfulfilled finish time. The full12case denominator always remains. Trace equality/cleanup remain distinct mandatory reported outcomes rather than being silently folded into this metric."
+    },
+    "stt": {
+      "all_call_inventory": "Retain every outer request and native call, including warmup, cancellation, errors, pending/late completion and extra recognitions. Expected30recognitions+3warmups is a declared target, not a filtered count. Report dropped records/bytes and missing endpoints.",
+      "timings": [
+        "Engine API entry\u2192submit; submit\u2192worker entry; worker entry\u2192native completion; native completion\u2192caller return; full API\u2192caller.",
+        "Original model load/check, tempfile/WAV operations, model.transcribe, Parakeet load_audio, get_logmel and generate host-call boundaries. Preserve nesting and do not sum parent with children."
+      ],
+      "pcm_identity": "Hash and retain exact16k mono int16 submitted and WAV-write PCM payloads, bytes, sample rate and equality per call. Equal source WAVs or rounded durations do not imply identical endpointed PCM.",
+      "matched_subset": "Alongside all-call summaries, report cross-arm exact submitted-PCM SHA256+byte-count+sample-rate matches for the same declared case/turn role, excluding warmup from recognition comparisons. List all occurrences and unmatched rows. No matching subset is reported as n=0, not fabricated equivalence; matched rows remain dependent and are not substitute full-denominator results.",
+      "interpretation": "No added accelerator synchronization. Queue includes dispatch/instrumentation/scheduling; generate may include lazy compute, synchronization and memory movement. Timing is not GPU-exclusive. Report observer measured hooks/cost and its incomplete overhead boundary."
+    },
+    "llm_cache_prefill": "Retain every server-reported cache entry count/logical byte value, remaining prompt/prefill token count and available prefill/decode timing with request order. Count whether candidate ever exceeds one retained entry at observation points. Distinguish logged logical cache bytes from allocated/resident memory and incomplete logging from a zero value. Added prefill, parser/repair/fallback work and generated-token counts must remain visible; absent telemetry is explicitly unavailable.",
+    "memory": "Use the same sampler/cadence in all arms. Report whole-system available-memory and swap start/end/min/max, within-arm deltas, sample counts/errors, and owned stack parents/descendants RSS with declared exclusions (separate recorder client excluded by inherited sampler). RSS is not total unified allocation and sums can double-count shared pages. Align sampled memory rows to each slow STT/request window by same-host monotonic clocks; disclose sampling gaps/peaks missed. Swap levels/deltas are not per-process paging or causation.",
+    "provenance_cleanup": "Preserve arm source/model/input hashes before/after, launch commands/PIDs, readiness failures, room departure, trace flush, worker exit/escalation, SDK job status and final owned-PID absence. Retain all failures even if useful work completed."
+  },
+  "decision_rule": {
+    "classification": "Exploratory screen only; no production/default cache change is authorized by this protocol or justified by a single middle arm.",
+    "invalid_or_inconclusive": "Factor/source/model/input/preflight violations, missing required arm evidence or unresolved owned-process cleanup make the comparison invalid/inconclusive. Retain all12declared outcome rows rather than rerun/select replacements.",
+    "quality_gate": "Any B1 failure in declared transcripts, effects, interruption or final-speech facts disqualifies a favorable quality-preserving screen label. Report analogous A failures and all trace/runtime failures explicitly; source/attribution uncertainty cannot be traded away for memory or latency.",
+    "promising_for_replication_only": "Require intended one-entry behavior and lower observed peak logical retained-cache bytes than each A arm, complete B1 quality, and fulfilled-case reply p50 and p95 no worse than either A arm with all4cases measured. Show all per-case costs and A-to-A drift. This label supports another controlled replication, not adoption, statistical superiority or a claim of actual memory savings.",
+    "tradeoff_or_unfavorable": "If lower logical retention comes with slower fulfilled replies, label the observed trade-off and retain two entries pending stronger evidence. Added prefill remains a disclosed useful-work cost even when measured replies are not slower and the promising-for-replication criteria hold. System-memory or RSS differences alone cannot establish allocation savings or outweigh a demonstrated latency/quality regression. Conflicting/weak memory evidence remains ambiguous, not a measured benefit.",
+    "interpretation": "Assess useful-work quality and completion latency before isolated resource numbers. Any future adoption needs independently replicated evidence that the memory benefit is real and worth prefill/latency cost; this fixed A/B/A order with only one B process cannot establish that causal conclusion."
+  },
+  "limits": [
+    "Twelve serial captures share three process lifetimes and one machine; they are not twelve independent hardware replicates. Fixed order, warm file caches, unrelated applications, preexisting swap and thermal drift remain confounders.",
+    "The same synthetic development cases informed the production fix. This is not held-out evaluation, broad language fidelity, concurrent-room capacity, human microphone/echo testing or physical acoustic timing.",
+    "All timing/reporting comparisons are descriptive. Frozen settings do not establish identical adaptive prompts or PCM segments, and different useful work is not silently normalized away.",
+    "The selected cache entry control does not cap total LLM/STT/TTS/system memory. No new MLX limits, quantization, seed removal, batching, prefill-size changes or model changes belong in this screen."
+  ]
+}

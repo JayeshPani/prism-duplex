@@ -1,0 +1,666 @@
+{
+  "frozen_at_utc": "2026-09-26T07:13:55.563893+00:00",
+  "command": [
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/review_received_audio.py",
+    "--suite-root",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/received-audio-review"
+  ],
+  "method": {
+    "frozen_at_utc": "2026-09-26T07:11:42.662345+00:00",
+    "timing": "Review method file frozen after RTC launch but before any received-audio ASR; all four cases, whole streams and expected facts were already declared in suite protocol and iteration11 plan. Preparation error preserved separately.",
+    "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+    "suite_protocol_sha256": "cad4a9e67376042b4f858839ec05291eae64e18dd622f7450fb81d41f5904d61",
+    "declared_trials": [
+      {
+        "id": "rtc-waypoint-1",
+        "case": "waypoint"
+      },
+      {
+        "id": "rtc-baseline-1",
+        "case": "baseline"
+      },
+      {
+        "id": "rtc-waypoint-2",
+        "case": "waypoint"
+      },
+      {
+        "id": "rtc-correction-1",
+        "case": "correction"
+      }
+    ],
+    "scope": "All four declared whole received PCM streams, in original order; failures/unavailable rows remain in the denominator.",
+    "method": "Pinned production LocalSTT through offline cached Parakeet on local-mac; resample entire mono PCM16 24 kHz to16 kHz with existing helper. No trimming, silence removal, retries or capture-success selection.",
+    "review": {
+      "waypoint": "First MG Road navigation result is intentionally interrupted; final Blue Tokai Indiranagar addition retains MG Road destination, estimate13minutes and0extra. Retain all incorrect entity/number spellings; do not normalize13and30.",
+      "baseline": "Airport start estimatedarrival88minutes.",
+      "correction": "Office replacement ofairport estimatedarrival29minutes.",
+      "score": "Verbatim whole-stream ASR plus reviewed facts, not human listening or held-out accuracy."
+    },
+    "limitations": [
+      "Production ASR proxy cannot distinguish pronunciation from recognition errors; no human listening.",
+      "Whole-stream text does not establish word timestamps or physical playback.",
+      "Four repeated synthetic development captures share warm models and a fixed order.",
+      "Review is performed only after timed suite and owned model services have stopped. Its timings are separate from conversation latency."
+    ],
+    "declared_at_utc": "2026-09-26T07:11:42.662345+00:00",
+    "suite_root": "results/iteration11",
+    "note": "No clipping, retries, capture-success selection or new content criteria. Existing iteration10 whole-stream method reused."
+  },
+  "method_sha256": "f6e9e50407eed71472826ceb2a4897665472ca46b76ae2cea51467c71dcf876e",
+  "suite_status": "completed",
+  "suite_sha256": {
+    "protocol.json": "cad4a9e67376042b4f858839ec05291eae64e18dd622f7450fb81d41f5904d61",
+    "run-report.json": "fc24e88c57d85db588dcec7bbdfb6dd2f296b124b9fd0884086862f45d60d608"
+  },
+  "trial_order": [
+    "rtc-waypoint-1",
+    "rtc-baseline-1",
+    "rtc-waypoint-2",
+    "rtc-correction-1"
+  ],
+  "trials": [
+    {
+      "id": "rtc-waypoint-1",
+      "case": "waypoint",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-waypoint-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "c678dc061d57b15902aaee33893137930afe152b241e8dbb41ad0cd3ab9f5e94",
+        "events.jsonl": "1825a108a7db128ea86d36d129f9b9c0d9c5214542100eb3a742711c48110245",
+        "frames.jsonl": "25cbe7ae2c9ca31f7ee9080e288c0ea2e5842a3908206f87d417801c9d1860a0",
+        "received-1.pcm": "d524631eac8746030bc2769b3f68777566502e32a1791bf1dde69880d0b5f077"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-waypoint-1",
+          "case": "waypoint",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/navigate-mgroad.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-waypoint-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12",
+            "--correction",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/add-coffee.wav"
+          ],
+          "started_at": "2026-09-26T07:10:07.061453+00:00",
+          "pid": 36178,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T07:10:47.444385+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-e1127c9410504599bdab000671d7f86a",
+            "started_at": "2026-09-26T07:10:47.703851+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T07:10:47.704003+00:00",
+                "elapsed_seconds": 0.00014604200259782374,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_8TK7HBBcU6Md",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:10:48.216872+00:00",
+                "elapsed_seconds": 0.5130166250019101,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_8TK7HBBcU6Md",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:10:48.720040+00:00",
+                "elapsed_seconds": 1.0161797920009121,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_8TK7HBBcU6Md",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:10:49.224203+00:00",
+                "elapsed_seconds": 1.5203379589947872,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_8TK7HBBcU6Md",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:10:49.726451+00:00",
+                "elapsed_seconds": 2.0225787090021186,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T07:10:49.727554+00:00",
+            "elapsed_seconds": 2.0236771250056336
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-e1127c9410504599bdab000671d7f86a",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_ebe22179ba1d",
+          "queued_at": 124927.893729375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124929.305758833,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_40e8d19974cc",
+          "queued_at": 124942.013713,
+          "state": "interruption_requested",
+          "first_loud_at": 124943.055142666,
+          "preceding_quiet_seconds": 13.899899165990064,
+          "last_loud_at": 124943.715882458,
+          "ended_at": 124947.32150475,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_4fd614a59844",
+          "queued_at": 124948.031632083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124949.62619825,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_8bd1cdb3fda4",
+          "queued_at": 124951.884494916,
+          "state": "finished",
+          "first_loud_at": 124952.937222375,
+          "preceding_quiet_seconds": 3.4213578749913722,
+          "last_loud_at": 124960.856837,
+          "ended_at": 124960.919647875,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-baseline-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "17a7ad8d096c7f320998580960421d112d1ae5601247bb3dc21b0ea619ea45ed",
+        "events.jsonl": "a6ac9a57a008a1ad67e60ccc43fe9bff3c5b99b0d6ea34aef8fed9efa05acfae",
+        "frames.jsonl": "12d579d77143898b50a7242e8f14cd5bf421a1ff43b450eda525be43bbf2a7a6",
+        "received-1.pcm": "e093638aa881aeea96f2d0cc9579fe73f8bf452b2e33fb6275f4b67bbfd9dcff"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-baseline-1",
+          "case": "baseline",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/navigate.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-baseline-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-26T07:10:49.735041+00:00",
+          "pid": 36422,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T07:11:13.200715+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-90789d0efb274a98bcb78ea2d1b62995",
+            "started_at": "2026-09-26T07:11:13.214463+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T07:11:13.223615+00:00",
+                "elapsed_seconds": 0.009157334003248252,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_VTweHnVR6QsB",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:11:13.742050+00:00",
+                "elapsed_seconds": 0.5276311250054277,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_VTweHnVR6QsB",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:11:14.246197+00:00",
+                "elapsed_seconds": 1.0317872500017984,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_VTweHnVR6QsB",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:11:14.749422+00:00",
+                "elapsed_seconds": 1.5350356670096517,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_VTweHnVR6QsB",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:11:15.253088+00:00",
+                "elapsed_seconds": 2.038723709003534,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T07:11:15.254947+00:00",
+            "elapsed_seconds": 2.0405747500044527
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-90789d0efb274a98bcb78ea2d1b62995",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_0e162e7ae15d",
+          "queued_at": 124973.701386375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 124975.77445475,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_24fbfb8d80b4",
+          "queued_at": 124979.536363125,
+          "state": "finished",
+          "first_loud_at": 124980.95843,
+          "preceding_quiet_seconds": 5.3223435419931775,
+          "last_loud_at": 124986.656995,
+          "ended_at": 124986.696524916,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-waypoint-2",
+      "case": "waypoint",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-waypoint-2",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "dcc60ea04fd81f7cb31e026a39cf4f4b0b676b5a4e6e36b11b151a4d8db32962",
+        "events.jsonl": "6a4d2f5a5454c51851e655e7135ece99a9ebceaf3ce15d38d0f78a56460bace7",
+        "frames.jsonl": "dc3e6d7fcf72c2568a45b0ce44b50df784c8b8c878359abf73b9dc5b4c1946e9",
+        "received-1.pcm": "3459ff736f97c220f93ea690da9a734708be0353b026f4c9062379579d19e964"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-waypoint-2",
+          "case": "waypoint",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/navigate-mgroad.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-waypoint-2",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12",
+            "--correction",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/add-coffee.wav"
+          ],
+          "started_at": "2026-09-26T07:11:15.264823+00:00",
+          "pid": 36727,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T07:12:07.372796+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-b4daa3c1de7842269dd22215a92d2467",
+            "started_at": "2026-09-26T07:12:07.456107+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T07:12:07.470843+00:00",
+                "elapsed_seconds": 0.01390104200982023,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_SChuYs2phuBv",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:08.002103+00:00",
+                "elapsed_seconds": 0.5451575839979341,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_SChuYs2phuBv",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:08.505970+00:00",
+                "elapsed_seconds": 1.0490297500073211,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_SChuYs2phuBv",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:09.009274+00:00",
+                "elapsed_seconds": 1.5523346670088358,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T07:12:09.012192+00:00",
+            "elapsed_seconds": 1.5552272089989856
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-b4daa3c1de7842269dd22215a92d2467",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_12254d4979ab",
+          "queued_at": 125003.563472583,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125005.191961166,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_697ca0232a9c",
+          "queued_at": 125009.095210541,
+          "state": "finished",
+          "first_loud_at": 125010.169308875,
+          "preceding_quiet_seconds": 5.120777792006265,
+          "last_loud_at": 125019.348309708,
+          "ended_at": 125019.36281325,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_f2bb070b51e3",
+          "queued_at": 125026.76515025,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125028.915977916,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_c6aa9b0e96a7",
+          "queued_at": 125030.628637708,
+          "state": "finished",
+          "first_loud_at": 125032.529063916,
+          "preceding_quiet_seconds": 3.7219097079942003,
+          "last_loud_at": 125040.469074708,
+          "ended_at": 125040.518236666,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-correction-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "9d62aff798075305c8b7e9f3dce7bede13dbb7e4af668e32143343e1b6d0bd61",
+        "events.jsonl": "b638a9403cb6663c16cbefa1e111f69c9b139092e27c753f38db96f0b479fa29",
+        "frames.jsonl": "e18082e3036c740cec822a4b91a5482199975ecf16dacab06d7905aec755c6e4",
+        "received-1.pcm": "46653f60d779e55e8b3e4769992f885c06718a6db3562ce176859c36a788d2f4"
+      },
+      "suite_run_entries": [
+        {
+          "name": "rtc-correction-1",
+          "case": "correction",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/navigate.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/rtc-correction-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12",
+            "--correction",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/audio-assets/correct.wav"
+          ],
+          "started_at": "2026-09-26T07:12:09.081548+00:00",
+          "pid": 36908,
+          "exit_code": 0,
+          "finished_at": "2026-09-26T07:12:51.569426+00:00",
+          "capture_status": "completed_observation",
+          "capture_cleanup_errors": [],
+          "room_departure": {
+            "room": "car-audio-41bf35a76da84e75b6ae684e2b183961",
+            "started_at": "2026-09-26T07:12:51.576669+00:00",
+            "observations": [
+              {
+                "at": "2026-09-26T07:12:51.582995+00:00",
+                "elapsed_seconds": 0.006473542001913302,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_bBM8eis7zDg8",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:52.104821+00:00",
+                "elapsed_seconds": 0.5281686670059571,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_bBM8eis7zDg8",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:52.609313+00:00",
+                "elapsed_seconds": 1.032644833001541,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_bBM8eis7zDg8",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:53.114148+00:00",
+                "elapsed_seconds": 1.5374649170116754,
+                "participants": [
+                  {
+                    "identity": "agent-AJ_bBM8eis7zDg8",
+                    "kind": 4
+                  }
+                ]
+              },
+              {
+                "at": "2026-09-26T07:12:53.617078+00:00",
+                "elapsed_seconds": 2.0403878330107545,
+                "participants": []
+              }
+            ],
+            "agent_departed": true,
+            "finished_at": "2026-09-26T07:12:53.618041+00:00",
+            "elapsed_seconds": 2.0413458330003778
+          }
+        }
+      ],
+      "capture_status": "completed_observation",
+      "room": "car-audio-41bf35a76da84e75b6ae684e2b183961",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_663b0f939d16",
+          "queued_at": 125055.1010035,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125057.277358083,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_7f2e24d9f17e",
+          "queued_at": 125060.777388125,
+          "state": "interruption_requested",
+          "first_loud_at": 125062.861682833,
+          "preceding_quiet_seconds": 5.7212744999997085,
+          "last_loud_at": 125063.539797458,
+          "ended_at": 125067.051506708,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_9dbcf4114d2d",
+          "queued_at": 125067.758622291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 125069.449919333,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_5f82b615a61f",
+          "queued_at": 125075.642485125,
+          "state": "finished",
+          "first_loud_at": 125077.298556375,
+          "preceding_quiet_seconds": 7.979069416993298,
+          "last_loud_at": 125084.997962833,
+          "ended_at": 125085.051684625,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    }
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "results/iteration11/review_received_audio.py": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+    "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d"
+  }
+}

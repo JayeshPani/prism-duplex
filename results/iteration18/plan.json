@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-09-26T10:37:34.522326+00:00",
+  "previous_goal_turn": "progress",
+  "progress_evidence": "Iteration17 completed the declared three-arm screen, rejected one-entry cache, preserved three interruption failures and verified570artifacts; this changes next action to pending-recognition interruption semantics.",
+  "baseline_checkpoint": {
+    "path": "results/iteration17/final-validation.json",
+    "sha256": "9d7ee7faec189dd111ad44290b712194e7da1eb80396451b5c3c7009bdadaa5f",
+    "artifact_count": 570,
+    "all_artifact_hashes_revalidated": true
+  },
+  "hypothesis": "A two-second false-interruption resume can expire before non-streaming recognition produces any final transcript; no pending EOU task exists to defer the resume. Recorded stop/restart patterns alone do not identify the callback, so source and controlled SDK evidence are required.",
+  "work": [
+    "Reconstruct actual17receiver/STT/state timelines and attribution limits.",
+    "Read installed SDK default timeout, pause, EOU and transcription behavior; reproduce with actual installed methods without model inference.",
+    "Design a minimal recognition-aware pause policy or evaluate available public controls, preserving recovery from empty/noise recognition and cleanup.",
+    "Predeclare independent acoustic and slow-recognition scenarios with full speech/effect/false-interruption criteria before live validation.",
+    "Retain supported change only after appropriate tests and actual-audio evidence; preserve every failure and update docs/PRdraft."
+  ],
+  "constraints": [
+    "Production cache remains2entries; no causal cache/memory claim.",
+    "Do not edit17frozen methods/raw evidence or synced project sources.",
+    "No fake interim transcript or invented intent; preserve nonempty/empty/error/cancel distinctions.",
+    "A slow timeout alone is not proof of recognized speech; no indefinite mute or suppression of useful work to improve cutoff.",
+    "No installed SDK edits; any private dependency adapter requires an explicit justified/pinned boundary. Prefer public hooks.",
+    "No staging; actualPR still requires user-selected staging."
+  ],
+  "baseline_source_sha256": {
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f"
+  },
+  "status": "investigation_before_policy_change"
+}

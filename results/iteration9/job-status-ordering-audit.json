@@ -1,0 +1,292 @@
+{
+  "created_at_utc": "2026-09-26T06:14:57.821016+00:00",
+  "scope": "Read-only installed SDK/source inspection and frozen server/application log correlation. No code changes, tests, services or inferred remediation.",
+  "versions": {
+    "livekit_agents": "1.8.3",
+    "rtc": "1.1.18",
+    "server_version_from_startup_log": "1.13.7",
+    "server_version_source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/livekit.log",
+    "server_version_line": 4,
+    "job_executor": "thread"
+  },
+  "summary": {
+    "iteration9_jobs": 4,
+    "iteration9_server_failures": 4,
+    "cleanup_starts_after_server_failure_labels": 4,
+    "application_cleanup_finish_logs": 4,
+    "interpretation": "Server job failure and application cleanup/worker exit are separate observations. SDK source places room departure before registered application callbacks and before eventual JS_SUCCESS construction; all four logs are consistent with that ordering. The server error text does not come from Python _update_job_status, which always sends an empty error field."
+  },
+  "observations": [
+    {
+      "job_id": "AJ_6ix4P4BkNcNM",
+      "room": "car-audio-57c6c9afe702494ea8f25f32b3f31b91",
+      "server_state": "JS_FAILED",
+      "server_error": "agent worker left the room",
+      "server_log_line": 26,
+      "server_label_at_utc": "2026-09-26T06:01:21.597000+00:00",
+      "session_closure_log_line": 24,
+      "session_closure_log": {
+        "message": "closing agent session due to participant disconnect (disable via `RoomInputOptions.close_on_disconnect=False`)",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "room": "car-audio-57c6c9afe702494ea8f25f32b3f31b91",
+        "participant": "audio-probe-7a393444fbdb45fa839e3ed5a9980cf2",
+        "reason": "CLIENT_INITIATED",
+        "pid": 8722,
+        "timestamp": "2026-09-26T06:01:19.586632+00:00"
+      },
+      "cleanup_start_log_line": 26,
+      "cleanup_start_at_utc": "2026-09-26T06:01:21.599127+00:00",
+      "cleanup_end_log_line": 27,
+      "cleanup_end_at_utc": "2026-09-26T06:01:21.599644+00:00",
+      "cleanup_start_minus_server_label_ms": 2.127,
+      "cleanup_end_minus_server_label_ms": 2.644
+    },
+    {
+      "job_id": "AJ_YVjXjJGwQrND",
+      "room": "car-audio-4c9f99fd17974e1facfdd6fa8d4c3bd0",
+      "server_state": "JS_FAILED",
+      "server_error": "agent worker left the room",
+      "server_log_line": 55,
+      "server_label_at_utc": "2026-09-26T06:01:57.646000+00:00",
+      "session_closure_log_line": 39,
+      "session_closure_log": {
+        "message": "closing agent session due to participant disconnect (disable via `RoomInputOptions.close_on_disconnect=False`)",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "room": "car-audio-4c9f99fd17974e1facfdd6fa8d4c3bd0",
+        "participant": "audio-probe-bc760d5ae6d64ee3a3ab86e2e4942c99",
+        "reason": "CLIENT_INITIATED",
+        "pid": 8722,
+        "timestamp": "2026-09-26T06:01:55.638797+00:00"
+      },
+      "cleanup_start_log_line": 41,
+      "cleanup_start_at_utc": "2026-09-26T06:01:57.648464+00:00",
+      "cleanup_end_log_line": 42,
+      "cleanup_end_at_utc": "2026-09-26T06:01:57.648882+00:00",
+      "cleanup_start_minus_server_label_ms": 2.464,
+      "cleanup_end_minus_server_label_ms": 2.882
+    },
+    {
+      "job_id": "AJ_EazGaUe8s758",
+      "room": "car-audio-558b4292ffb34505b8957759082c5139",
+      "server_state": "JS_FAILED",
+      "server_error": "agent worker left the room",
+      "server_log_line": 84,
+      "server_label_at_utc": "2026-09-26T06:02:45.124000+00:00",
+      "session_closure_log_line": 54,
+      "session_closure_log": {
+        "message": "closing agent session due to participant disconnect (disable via `RoomInputOptions.close_on_disconnect=False`)",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "room": "car-audio-558b4292ffb34505b8957759082c5139",
+        "participant": "audio-probe-13fc595d4fd247efa1d870d1f57a73fb",
+        "reason": "CLIENT_INITIATED",
+        "pid": 8722,
+        "timestamp": "2026-09-26T06:02:43.116322+00:00"
+      },
+      "cleanup_start_log_line": 56,
+      "cleanup_start_at_utc": "2026-09-26T06:02:45.125676+00:00",
+      "cleanup_end_log_line": 57,
+      "cleanup_end_at_utc": "2026-09-26T06:02:45.126173+00:00",
+      "cleanup_start_minus_server_label_ms": 1.676,
+      "cleanup_end_minus_server_label_ms": 2.173
+    },
+    {
+      "job_id": "AJ_Auxh5X9HEzUy",
+      "room": "car-audio-fcdfbd38b9214d2f837b09294646d2c4",
+      "server_state": "JS_FAILED",
+      "server_error": "agent worker left the room",
+      "server_log_line": 106,
+      "server_label_at_utc": "2026-09-26T06:03:05.218000+00:00",
+      "session_closure_log_line": 67,
+      "session_closure_log": {
+        "message": "closing agent session due to participant disconnect (disable via `RoomInputOptions.close_on_disconnect=False`)",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "room": "car-audio-fcdfbd38b9214d2f837b09294646d2c4",
+        "participant": "audio-probe-eab23618581e43c99d9d07320e8a90c5",
+        "reason": "CLIENT_INITIATED",
+        "pid": 8722,
+        "timestamp": "2026-09-26T06:03:03.212018+00:00"
+      },
+      "cleanup_start_log_line": 69,
+      "cleanup_start_at_utc": "2026-09-26T06:03:05.219602+00:00",
+      "cleanup_end_log_line": 70,
+      "cleanup_end_at_utc": "2026-09-26T06:03:05.220107+00:00",
+      "cleanup_start_minus_server_label_ms": 1.6019999999999999,
+      "cleanup_end_minus_server_label_ms": 2.1069999999999998
+    }
+  ],
+  "historical_server_labels": [
+    {
+      "iteration": 7,
+      "server_log": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration7/local-stack-run1/livekit.log",
+      "sha256": "d28d476cefad7ddae340a56903e5e7f8eeea1791117dc9fb2273acac812ed353",
+      "ended_job_records": 8,
+      "JS_FAILED_agent_worker_left_the_room": 8
+    },
+    {
+      "iteration": 8,
+      "server_log": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration8/local-stack-run1/livekit.log",
+      "sha256": "63e9ba9f2c3822a59d958ee06acb8bedee0753274a1a3addb19b827bf5aa8746",
+      "ended_job_records": 4,
+      "JS_FAILED_agent_worker_left_the_room": 4
+    },
+    {
+      "iteration": 9,
+      "server_log": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/livekit.log",
+      "sha256": "40b2e8999256323020ff1d7bdc6dea47471c7c64505312efd61fc922662b1737",
+      "ended_job_records": 4,
+      "JS_FAILED_agent_worker_left_the_room": 4
+    }
+  ],
+  "source_evidence": [
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py",
+      "start_line": 179,
+      "end_line": 199,
+      "sha256": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+      "observation": "PRISM close handler sets closing=True and calls ctx.shutdown; registered callback then closes coordinator/UI tasks/HTTP/trace. It does not call room.disconnect or set server job status.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py",
+      "start_line": 44,
+      "end_line": 68,
+      "sha256": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+      "observation": "Launch manifest records SDK versions and selected source hashes; AgentServer uses THREAD executor and the existing PRISM entrypoint.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/room_io.py",
+      "start_line": 457,
+      "end_line": 489,
+      "sha256": "a1b83271c5c68759457da71194dbb47d69bbbe3716b26cf982645030c7184a94",
+      "observation": "Linked participant disconnect with configured close_on_disconnect schedules session close with PARTICIPANT_DISCONNECTED.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+      "start_line": 1294,
+      "end_line": 1325,
+      "sha256": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+      "observation": "AgentSession tears down activity, marks itself stopped, synchronously emits close, then closes room I/O.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/job.py",
+      "start_line": 871,
+      "end_line": 872,
+      "sha256": "4010bf83dc66315f05004588dfb57ee824d35112f9bbff5f34c2ebc18975c60b",
+      "observation": "JobContext.shutdown only invokes the supplied _on_shutdown callback.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py",
+      "start_line": 299,
+      "end_line": 305,
+      "sha256": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+      "observation": "Context shutdown marks user_initiated=True and resolves the shutdown future.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py",
+      "start_line": 399,
+      "end_line": 419,
+      "sha256": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+      "observation": "Job waits for shutdown future, runs shutdown sequence, then performs SDK per-job/HTTP cleanup.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py",
+      "start_line": 437,
+      "end_line": 504,
+      "sha256": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+      "observation": "SDK awaits session close and session-end work; sends ShuttingDown and Exiting IPC, disconnects room at479, then gathers registered shutdown callbacks at497\u2013504.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py",
+      "start_line": 279,
+      "end_line": 306,
+      "sha256": "44a8d953398d45459740fe91453e14c14e11e322be37107159205d0804371a90",
+      "observation": "Thread executor awaits thread join, finishes its monitors/channels, then assigns JobStatus.SUCCESS.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py",
+      "start_line": 325,
+      "end_line": 336,
+      "sha256": "44a8d953398d45459740fe91453e14c14e11e322be37107159205d0804371a90",
+      "observation": "ShuttingDown resolves an internal future; Exiting logs a debug message. Neither sends a server JS_SUCCESS here.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/proc_pool.py",
+      "start_line": 274,
+      "end_line": 280,
+      "sha256": "1a316c188b22003236d2d17221496afb78f7fb9f61627c3ef28354616829fe4e",
+      "observation": "Pool waits for proc.join(), then emits process_closed.",
+      "matches_iteration9_launch_receipt": null,
+      "launch_receipt_limit": "Current installed source inspected; this file has no dedicated SDK launch hash in the existing worker manifest."
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+      "start_line": 815,
+      "end_line": 818,
+      "sha256": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e",
+      "observation": "Lifecycle handler asynchronously schedules _update_job_status and owns its task.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+      "start_line": 834,
+      "end_line": 836,
+      "sha256": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e",
+      "observation": "Status reporting is registered for process_started, process_closed and process_job_launched.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    },
+    {
+      "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+      "start_line": 1580,
+      "end_line": 1595,
+      "sha256": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e",
+      "observation": "Executor SUCCESS maps to JS_SUCCESS, FAILED to JS_FAILED; UpdateJobStatus always has error=\"\", then queues the message.",
+      "matches_iteration9_launch_receipt": true,
+      "launch_receipt_limit": null
+    }
+  ],
+  "supported_inference": [
+    "A departure-versus-final-status ordering mismatch is a concrete hypothesis: the server records agent departure as failure before the SDK reaches its post-join success reporting path.",
+    "PRISM invokes the SDK shutdown API from the close event; no separate PRISM room.disconnect or manual failed-status assignment exists in that bridge. A defect in our callback order is not established by these labels.",
+    "The same label occurs in8/8 iteration7,4/4 iteration8 and4/4 iteration9 records, so it predates the iteration9 ETA/request-fidelity changes."
+  ],
+  "limits": [
+    "We did not capture outgoing worker UpdateJobStatus frames or a server status-transition history. Source shows when the SDK would construct success, not that success was sent, received, accepted or persisted for these specific jobs.",
+    "The running server source at agent/worker.go:556 and the server branch that creates agent worker left the room were not inspected. We cannot establish whether this label is expected policy, terminal state winning a race, an SDK/server compatibility issue, or a reporting defect.",
+    "Do not call the server failures harmless or remediated. Application cleanup, agent absence, known navigation effects and process exit0 do not prove server JS_SUCCESS.",
+    "Thread executor SUCCESS is assigned after normal join in the inspected code; worker process exit0 is weaker than independently observed per-job status success.",
+    "Only worker.py and job_thread_executor.py among these SDK sources are directly frozen by the worker launch receipt; additional SDK files are exact current local sources with their hashes, not new runtime instrumentation.",
+    "Server timestamps are millisecond precision with +0530 offset; application timestamps are UTC with microseconds. Differences are wall-clock log correlations on the same host, not exact wire latency or proof of message-processing order."
+  ],
+  "next_bounded_investigation": "Inspect the exact LiveKit server1.13.7 job-state transition source, then instrument one owned no-inference room shutdown to retain SDK job-completion/queued-status events and server job transitions. Preserve room-departure-before/after evidence and original failure labels. Establish supported normal-shutdown semantics before changing cleanup order; do not manually mark success or delete rooms to hide the mismatch.",
+  "evidence_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/worker.log": "cc58fc2d9d19c0bd4caa883ef23d5522a7a8240fad55f86069445bca4306b480",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/livekit.log": "40b2e8999256323020ff1d7bdc6dea47471c7c64505312efd61fc922662b1737",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/worker-manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/run-report.json": "6992dd607b245200b6076acbbeefaeadc953454fa0302a35ab5360c148e45d77"
+  }
+}
