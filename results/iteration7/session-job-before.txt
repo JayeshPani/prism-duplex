@@ -1,0 +1,117 @@
+agent/main.py sha256: d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787
+.FFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_ test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.PARTICIPANT_DISCONNECTED] _
+
+start_room = <function start_room.<locals>.start at 0x104990ea0>
+reason = <CloseReason.PARTICIPANT_DISCONNECTED: 'participant_disconnected'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reason", [CloseReason.PARTICIPANT_DISCONNECTED,
+                                       CloseReason.ERROR, CloseReason.JOB_SHUTDOWN])
+    async def test_session_close_requests_job_shutdown_and_drains_resources(start_room, reason):
+        room = await start_room()
+        room.coord.on_user_turn("Navigate to the airport.")
+        await asyncio.wait_for(room.planning_started.wait(), 1)
+        await asyncio.wait_for(room.ctx.publish_started.wait(), 1)
+        job = asyncio.create_task(room.ctx.finish_shutdown(room.session))
+        try:
+            await room.session.aclose(reason)
+>           assert room.ctx.shutdown_requested.is_set(), "closed session left its job running"
+E           AssertionError: closed session left its job running
+E           assert False
+E            +  where False = is_set()
+E            +    where is_set = <asyncio.locks.Event object at 0x10498b7d0 [unset, waiters:1]>.is_set
+E            +      where <asyncio.locks.Event object at 0x10498b7d0 [unset, waiters:1]> = <tests.unit.test_session_job_lifecycle.Context object at 0x104988a90>.shutdown_requested
+E            +        where <tests.unit.test_session_job_lifecycle.Context object at 0x104988a90> = namespace(ctx=<tests.unit.test_session_job_lifecycle.Context object at 0x104988a90>, session=<tests.unit.test_session_...yncio.locks.Event object at 0x10498ba50 [set]>, planning_cancelled=<asyncio.locks.Event object at 0x1049a7510 [unset]>).ctx
+
+tests/unit/test_session_job_lifecycle.py:185: AssertionError
+_ test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.ERROR] _
+
+start_room = <function start_room.<locals>.start at 0x104a28220>
+reason = <CloseReason.ERROR: 'error'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reason", [CloseReason.PARTICIPANT_DISCONNECTED,
+                                       CloseReason.ERROR, CloseReason.JOB_SHUTDOWN])
+    async def test_session_close_requests_job_shutdown_and_drains_resources(start_room, reason):
+        room = await start_room()
+        room.coord.on_user_turn("Navigate to the airport.")
+        await asyncio.wait_for(room.planning_started.wait(), 1)
+        await asyncio.wait_for(room.ctx.publish_started.wait(), 1)
+        job = asyncio.create_task(room.ctx.finish_shutdown(room.session))
+        try:
+            await room.session.aclose(reason)
+>           assert room.ctx.shutdown_requested.is_set(), "closed session left its job running"
+E           AssertionError: closed session left its job running
+E           assert False
+E            +  where False = is_set()
+E            +    where is_set = <asyncio.locks.Event object at 0x1049e2710 [unset, waiters:1]>.is_set
+E            +      where <asyncio.locks.Event object at 0x1049e2710 [unset, waiters:1]> = <tests.unit.test_session_job_lifecycle.Context object at 0x1049e2a10>.shutdown_requested
+E            +        where <tests.unit.test_session_job_lifecycle.Context object at 0x1049e2a10> = namespace(ctx=<tests.unit.test_session_job_lifecycle.Context object at 0x1049e2a10>, session=<tests.unit.test_session_...yncio.locks.Event object at 0x1049e2d50 [set]>, planning_cancelled=<asyncio.locks.Event object at 0x1049e3350 [unset]>).ctx
+
+tests/unit/test_session_job_lifecycle.py:185: AssertionError
+_ test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.JOB_SHUTDOWN] _
+
+start_room = <function start_room.<locals>.start at 0x104992c00>
+reason = <CloseReason.JOB_SHUTDOWN: 'job_shutdown'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("reason", [CloseReason.PARTICIPANT_DISCONNECTED,
+                                       CloseReason.ERROR, CloseReason.JOB_SHUTDOWN])
+    async def test_session_close_requests_job_shutdown_and_drains_resources(start_room, reason):
+        room = await start_room()
+        room.coord.on_user_turn("Navigate to the airport.")
+        await asyncio.wait_for(room.planning_started.wait(), 1)
+        await asyncio.wait_for(room.ctx.publish_started.wait(), 1)
+        job = asyncio.create_task(room.ctx.finish_shutdown(room.session))
+        try:
+            await room.session.aclose(reason)
+>           assert room.ctx.shutdown_requested.is_set(), "closed session left its job running"
+E           AssertionError: closed session left its job running
+E           assert False
+E            +  where False = is_set()
+E            +    where is_set = <asyncio.locks.Event object at 0x1049d5fd0 [unset, waiters:1]>.is_set
+E            +      where <asyncio.locks.Event object at 0x1049d5fd0 [unset, waiters:1]> = <tests.unit.test_session_job_lifecycle.Context object at 0x1049d64d0>.shutdown_requested
+E            +        where <tests.unit.test_session_job_lifecycle.Context object at 0x1049d64d0> = namespace(ctx=<tests.unit.test_session_job_lifecycle.Context object at 0x1049d64d0>, session=<tests.unit.test_session_...yncio.locks.Event object at 0x1049d7690 [set]>, planning_cancelled=<asyncio.locks.Event object at 0x1049d6010 [unset]>).ctx
+
+tests/unit/test_session_job_lifecycle.py:185: AssertionError
+________________ test_close_during_session_start_is_not_missed _________________
+
+start_room = <function start_room.<locals>.start at 0x104a298a0>
+
+    @pytest.mark.asyncio
+    async def test_close_during_session_start_is_not_missed(start_room):
+        room = await start_room(close_during_start=True)
+>       assert room.ctx.shutdown_requested.is_set(), "close listener was installed too late"
+E       AssertionError: close listener was installed too late
+E       assert False
+E        +  where False = is_set()
+E        +    where is_set = <asyncio.locks.Event object at 0x1049b74d0 [unset]>.is_set
+E        +      where <asyncio.locks.Event object at 0x1049b74d0 [unset]> = <tests.unit.test_session_job_lifecycle.Context object at 0x1049b6bd0>.shutdown_requested
+E        +        where <tests.unit.test_session_job_lifecycle.Context object at 0x1049b6bd0> = namespace(ctx=<tests.unit.test_session_job_lifecycle.Context object at 0x1049b6bd0>, session=<tests.unit.test_session_...cio.locks.Event object at 0x1049b4150 [unset]>, planning_cancelled=<asyncio.locks.Event object at 0x1049e1b50 [unset]>).ctx
+
+tests/unit/test_session_job_lifecycle.py:205: AssertionError
+_______________ test_closing_one_room_does_not_shutdown_another ________________
+
+start_room = <function start_room.<locals>.start at 0x1049927a0>
+
+    @pytest.mark.asyncio
+    async def test_closing_one_room_does_not_shutdown_another(start_room):
+        first, second = await start_room(), await start_room()
+        await first.session.aclose(CloseReason.PARTICIPANT_DISCONNECTED)
+>       assert first.ctx.shutdown_requested.is_set()
+E       assert False
+E        +  where False = is_set()
+E        +    where is_set = <asyncio.locks.Event object at 0x104a51d90 [unset]>.is_set
+E        +      where <asyncio.locks.Event object at 0x104a51d90 [unset]> = <tests.unit.test_session_job_lifecycle.Context object at 0x104a50590>.shutdown_requested
+E        +        where <tests.unit.test_session_job_lifecycle.Context object at 0x104a50590> = namespace(ctx=<tests.unit.test_session_job_lifecycle.Context object at 0x104a50590>, session=<tests.unit.test_session_...cio.locks.Event object at 0x104a52a50 [unset]>, planning_cancelled=<asyncio.locks.Event object at 0x104a50850 [unset]>).ctx
+
+tests/unit/test_session_job_lifecycle.py:214: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_session_job_lifecycle.py::test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.PARTICIPANT_DISCONNECTED]
+FAILED tests/unit/test_session_job_lifecycle.py::test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.ERROR]
+FAILED tests/unit/test_session_job_lifecycle.py::test_session_close_requests_job_shutdown_and_drains_resources[CloseReason.JOB_SHUTDOWN]
+FAILED tests/unit/test_session_job_lifecycle.py::test_close_during_session_start_is_not_missed
+FAILED tests/unit/test_session_job_lifecycle.py::test_closing_one_room_does_not_shutdown_another
+5 failed, 1 passed in 0.48s

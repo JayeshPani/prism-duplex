@@ -1,0 +1,44 @@
+# Live cancellation and a legitimate return visit
+
+The previous live captures covered destination correction and waypoint addition. Cancellation and airport → office → airport had tool/text regressions but no recorded live-audio acceptance cases. This iteration tests those two remaining navigation sequences with unchanged production agent code, models and settings.
+
+The [declared protocol](../results/iteration14/protocol.json) runs cancel/return/return/cancel in four fresh rooms on one shared local stack. The airport and office input WAVs are exact prior bytes; the third return-trip input reuses the original airport WAV. A new “Cancel navigation.” clip is rendered once with the existing local Kokoro configuration and checked once through local Parakeet. One preparation script failed while constructing its single-item list before any model load or render; that source/error and empty output directory remain under `preparation-failures`. The corrected preparation retains its first render, model checks and terminal process receipt.
+
+The recorder adds ordered `--followup` clips. A later clip waits for a newly finalized intent after the preceding input began, a current substantive response with observed PCM, and an unused speech handle. The third input cannot reuse the original airport reply or fire on the office acknowledgment. Each trigger wait, input and timeout has a separate label. Existing correction/probe modes remain supported. The focused recorder suite passes 49 tests; the complete suite passes **575 tests in 5.28 seconds** with source hashes unchanged.
+
+## Expected outcomes
+
+Each cancellation case requires an airport start followed by confirmed cancellation: navigation version advances 1→2, the route becomes inactive, route/destination/ETA/distance become null, and stop/polyline lists become empty. The final reply must confirm that the airport route was cancelled, rather than claiming there was no route.
+
+Each return case requires three real starts, airport→office→airport, with versions 1→2→3, 88→29→88-minute estimates, correct replaced destinations and three distinct newly computed route IDs. The final complete reply must report the airport route replacing the office and its 88-minute estimate. Initial and middle replies are deliberately interrupted, so their complete content is assessed from declared summaries/effects, not demanded from truncated received audio.
+
+Navigation may plan compute→start directly or resolve a place first. Static place lookup reuse is valid; route computation must reflect the new navigation version. Physical attempt count therefore has a declared range of 18–26 for the four cases, while all ten mutation effects remain mandatory. Planned shapes, physical attempts, reused reads and semantic effects are checked separately. Every missing/additional final transcript, failure and effect remains visible. All six adjacent interruption pairs are audited, including the second interruption in each return case.
+
+## Results
+
+All **4/4 captures** completed, with all **ten finalized input transcripts exact**, **22 successful physical attempts**, one valid reused static search and all **six earlier result handles interrupted**. Requested effects are **9/10** and complete backend cases are **3/4**. Successful attempted calls do not establish that the planner requested every necessary action. The [effect/plan audit](../results/iteration14/audit.json) retains all six failed checks in the first return case.
+
+| Case | Backend outcome | Final received reply |
+| --- | --- | --- |
+| `rtc-cancel-1` | Airport start, then cancellation; version 2, inactive route and cleared route fields | Confirms airport cancellation; complete declared facts |
+| `rtc-repeat-1` | Airport R1/version 1, office R2/version 2, then fresh airport R3 computed **without `start_navigation`**; office remains active | Reports only route computation and R3; requested return was not completed |
+| `rtc-repeat-2` | Airport R1 → office R2 → airport R3, versions 1→2→3 and estimates 88→29→88; final start replaces the office | Confirms airport activation and 88 minutes but omits that it replaced the office |
+| `rtc-cancel-2` | Airport start, then cancellation; version 2, inactive route and cleared route fields | Confirms airport cancellation; complete declared facts |
+
+The [whole-stream speech review](../results/iteration14/received-audio-review/qualitative-review.json) covers all four received streams and verifies twenty raw/resampled file hashes. Complete declared final speech facts pass **2/4**, both cancellations; complete return replies pass **0/2**. In the second return case, the replacement fact is missing from the generated text as well as the received-audio transcription. All four final handles finish, including the compute-only response, so finishing speech is not task completion. Proper-name deviations remain in all four ASR transcripts. This review is an ASR content proxy, not human listening.
+
+## Timing and diagnostics
+
+The [latency summary](../results/iteration14/latency-summary.json) measures scheduled input speech-end to original client receipt using nearest-rank percentiles. Initial substantive PCM p50/p95 is **9.404/16.942 seconds** (4/4); follow-up substantive PCM is **9.179/16.108 seconds** (6/6). Follow-up mutation success has only five of six observations because the first return omitted activation. Follow-up result-handle finish p50/p95 is **11.048/23.619 seconds** for four finished replies; the two middle replies were intentionally interrupted. Both PCM and finish distributions include the unfulfilled compute-only response and cannot be labeled successful task latency. Old non-silent PCM tails span **0.681–0.776 seconds** across all six interruption pairs; handle interruption is a separate observation, not physical audible stop time.
+
+The unchanged stage observer records eleven native STT calls: one warmup and ten recognitions. The [independent STT audit](../results/iteration14/stt-stage-independent-audit.json) verifies 110 stages and all 22 submitted/temporary-WAV PCM files, with matching bytes, no dropped records, errors or pending native calls. Recognition API durations span **0.956–2.486 seconds**. Nested stage times include lazy execution and must not be summed. The historical 6.853-second call remains in iteration12; different inputs/runtime state prevent a causal improvement claim.
+
+The [supplementary log review](../results/iteration14/supplementary-log-review.json) confirms exact raw/promoted/server event equality in all four rooms. All **259 events** were accepted and flushed with zero rejected; no packets needed deferred sender lookup, so live buffering recovery remains unexercised. All application cleanups finish, all agents depart and the worker exits 0 without escalation, while all four server jobs retain `JS_FAILED` labels. Across the eight latest cleanup suites, thirty-six rooms have this observed worker-exit outcome; this does not guarantee general bounded teardown.
+
+The run retains **42 warning rows**, including one **797.1 ms** watchdog stall without a sampled stack, and no runtime error/traceback rows. Echo warmup substitution appears in 72 observed subframes (3.6 seconds) with no follow-up overlap. Memory pressure remains substantial: minimum sampled available memory is about 0.552 GB and peak swap about 10.031 GB. These observations do not establish the cause of the earlier missed correction.
+
+## Reproduction and remaining work
+
+The [source snapshot](../results/iteration14/source-snapshot.json), [preflight](../results/iteration14/preflight.json), [suite report](../results/iteration14/run-report.json) and [post-inference validation](../results/iteration14/post-inference-validation.json) retain commands, source/model receipts and process outcomes. Post-inference validation matches all **39 actual run-frozen files** before and after checking all **ten model artifacts**, and observes all **eight owned suite/reviewer PIDs absent**. Hash agreement freezes reference bytes; it does not authenticate publishers. Copied scripts/receipts contain machine-specific paths and require rebinding and fresh output directories for reproduction. Original preparation failures and historical iterations remain unchanged.
+
+The first repair priority is the missing route-activation plan in the first return case. The second is complete final speech facts, including the replaced destination. Fresh bounded regressions must preserve this frozen evidence and check backend state separately from finished speech. Broader acoustic scenarios, simultaneous live rooms, policy comparisons and a fresh adapted FDB run remain open in the [completion audit](completion-audit.md). These reused synthetic development inputs cannot establish held-out accuracy, physical playback timing, human microphone/echo behavior or concurrent-room capacity.

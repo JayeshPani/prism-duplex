@@ -1,0 +1,299 @@
+{
+  "created_at_utc": "2026-09-26T09:13:41.821918+00:00",
+  "scope": "Manual review of all frozen whole-stream local ASR outputs; no human listening or new inference.",
+  "input_sha256": {
+    "review_received_facts.py": "284d7f5d9a44ed73143de380b4002480b8697136eae63dd35c36290feb95adf3",
+    "protocol.json": "a789255dc41d433a60f7935f2c0c5bb1b98337dcbed48d9d982b1373fe9304d7",
+    "audit.json": "379706faa73c2d8017cb7a4df9a1b788754884fd1ca306f963d532d257809bfe",
+    "received-audio-review-protocol.json": "404c7930b2dd631ab1aad68658523d197a827046607b6946cbe15df9cdf65863",
+    "received-audio-review/report.json": "d9fffe915dd6704abb45608be4f60be996563818c27247afbba2aa3d6735eb98",
+    "received-audio-review/protocol.json": "0a88e8c604edb2f8ec70a845afa2ddc1fc4e0c420d887b89709d190afa198c3e"
+  },
+  "raw_and_resampled_sha256": {
+    "rtc-cancel-1/report.json": "dbd1c3139e4c2d9d66212cde69cd7c2fdfb006c528795b0b2c8df257548da453",
+    "rtc-cancel-1/events.jsonl": "6bed0c4df069ff6d4b73b66bed9edf02b6907d3a53d73a01e8e2ba2016a73eea",
+    "rtc-cancel-1/frames.jsonl": "3134a48893276b9c03c5672cc41335685fccc1bc23fbbb5e0c87b30bec682fe4",
+    "rtc-cancel-1/received-1.pcm": "008661c189708aa70906f2c3c9252c943bceb4bc8d9d6b0c6442cd796d0cd73d",
+    "received-audio-review/resampled/rtc-cancel-1.wav": "155776146612d4503756f52c80e2cc18053e24cb4d5e4cf07fd902adaab4a816",
+    "rtc-repeat-1/report.json": "fff3f0143cbfa2f6f381573031ec1fca064f32c90f8bf5f9dd215b7860295e3f",
+    "rtc-repeat-1/events.jsonl": "0b17715038c6e0339163095e3a2ced6147b90d25eba71a718a468a4b45e1bd2e",
+    "rtc-repeat-1/frames.jsonl": "8c0d3e0ec3c61894b0e8390a5ec9335feef8ceb2bcd044f11c10539ea2ee1735",
+    "rtc-repeat-1/received-1.pcm": "ed1bb1bc95033473656a453eeba8143f6218d04e0e8b6fd4b969fc6e430c9fb6",
+    "received-audio-review/resampled/rtc-repeat-1.wav": "a7da4773708adc0f402fc09791c961f2a590968b8b2282a70cb12a8df253735e",
+    "rtc-repeat-2/report.json": "f016576044be4dbad2f7871e4e7385328e29f8d454348d2a05c136a317d20ba9",
+    "rtc-repeat-2/events.jsonl": "cb5611c178424309777965104ffb4bca4def2f332bbe8aa2a0a63a0c52b5c53b",
+    "rtc-repeat-2/frames.jsonl": "60fa9a943cf7315c5a92cbb3cc9bef8b0eec0381ade7497494b0bd34b7b2bc1c",
+    "rtc-repeat-2/received-1.pcm": "48b095f1f1ce3837c48cce0673cda8ffca3181a04078097ab9097a0544b30f55",
+    "received-audio-review/resampled/rtc-repeat-2.wav": "cf0e163aaa550c7f0cf9022945c8e35b528c9d16cc8e3b7b901eae3f1308e14e",
+    "rtc-cancel-2/report.json": "0ee9b754501b74fc97287f728562f9715999441ed830436ef4e239f260fe7950",
+    "rtc-cancel-2/events.jsonl": "ec7afbcc447ca98128630bc740a8a9de3c1011ff05d3a22204cfe82f571f8d8c",
+    "rtc-cancel-2/frames.jsonl": "ddddadf2c76ef999c3a1bd3b94eb515cb036074665f3e8e7523002261d8ba057",
+    "rtc-cancel-2/received-1.pcm": "5375a05ee7adb0c5f246fe6f76bbda948324032324eb5561a39aca574f544c11",
+    "received-audio-review/resampled/rtc-cancel-2.wav": "1acbe3734b8f1b9779f0d59a863986aea04f4324f1698e62af982effd73fb58c"
+  },
+  "trials": [
+    {
+      "id": "rtc-cancel-1",
+      "case": "cancel",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment. Navigation to OK, one sec. Navigation to Kempegauda International Airport has been cancelled.",
+        "facts": {
+          "confirmed_airport_cancellation": true
+        },
+        "complete_declared_final_speech": true,
+        "note": "Confirmed airport cancellation; cleared backend state is independently checked.",
+        "name_variants": {
+          "Kempegowda": "Kempegauda"
+        }
+      },
+      "semantic_effect_case_passed": true,
+      "name_variants": {
+        "Kempegowda": "Kempegauda"
+      },
+      "other_variants": "Eighty-eight is the correct spoken numeric value; original hyphenation, acknowledgement spelling/punctuation and interrupted fragments remain verbatim.",
+      "declared_result_speech": [
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_e7030fabe1bf",
+          "queued_at": 132023.513397625,
+          "state": "interruption_requested",
+          "first_loud_at": 132024.633602708,
+          "preceding_quiet_seconds": 13.20088995801052,
+          "last_loud_at": 132025.353497541,
+          "ended_at": 132027.561979833,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_f98ab4c13963",
+          "queued_at": 132030.661384125,
+          "state": "finished",
+          "first_loud_at": 132031.733533291,
+          "preceding_quiet_seconds": 1.9404716659919359,
+          "last_loud_at": 132035.393390291,
+          "ended_at": 132035.520587583,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 30.76
+    },
+    {
+      "id": "rtc-repeat-1",
+      "case": "repeat",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment. Navigation to okay, one sec. Now navigating. Sure, let me check. Now navigating to Kempegauda International Airport, replacing office, Maniata Tech Park. Estimated arrival in eighty-eight minutes.",
+        "facts": {
+          "airport_navigation_active": true,
+          "office_replaced": true,
+          "arrival_88_minutes": true
+        },
+        "complete_declared_final_speech": true,
+        "note": "Final speech reports airport navigation replacing the office and an eighty-eight-minute estimate. Proper-name spelling differences are retained separately; no human listening.",
+        "name_variants": {
+          "Kempegowda": "Kempegauda",
+          "Manyata": "Maniata"
+        }
+      },
+      "semantic_effect_case_passed": true,
+      "name_variants": {
+        "Kempegowda": "Kempegauda",
+        "Manyata": "Maniata"
+      },
+      "other_variants": "Eighty-eight is the correct spoken numeric value; original hyphenation, acknowledgement spelling/punctuation and interrupted fragments remain verbatim.",
+      "declared_result_speech": [
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_156c7ad62eac",
+          "queued_at": 132049.231040125,
+          "state": "interruption_requested",
+          "first_loud_at": 132050.288680875,
+          "preceding_quiet_seconds": 4.899919125018641,
+          "last_loud_at": 132050.967792791,
+          "ended_at": 132054.080733,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_9f3a334b91ac",
+          "queued_at": 132060.233933708,
+          "state": "interruption_requested",
+          "first_loud_at": 132061.808706458,
+          "preceding_quiet_seconds": 5.560526291985298,
+          "last_loud_at": 132062.508653083,
+          "ended_at": 132065.160966791,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Kempegowda International Airport, replacing Office (Manyata Tech Park). Estimated arrival in 88 minutes.",
+          "intent_version": 3,
+          "kind": "result",
+          "speech_id": "speech_1c40a03cdcde",
+          "queued_at": 132076.931569375,
+          "state": "finished",
+          "first_loud_at": 132078.968585958,
+          "preceding_quiet_seconds": 11.240343042009044,
+          "last_loud_at": 132086.58776325,
+          "ended_at": 132086.617760125,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 47.58
+    },
+    {
+      "id": "rtc-repeat-2",
+      "case": "repeat",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment Navigation to Okay, one sec Now navigating Sure, let me check Navigation to Kempegauda International Airport has started. The route is active with an estimated time of arrival of eighty-eight minutes.",
+        "facts": {
+          "airport_navigation_active": true,
+          "office_replaced": false,
+          "arrival_88_minutes": true
+        },
+        "complete_declared_final_speech": false,
+        "note": "Airport activation and eighty-eight minutes are present; the predeclared replaced-office fact is absent from both generated and recognized final speech. Backend replacement succeeds separately.",
+        "name_variants": {
+          "Kempegowda": "Kempegauda"
+        }
+      },
+      "semantic_effect_case_passed": true,
+      "name_variants": {
+        "Kempegowda": "Kempegauda"
+      },
+      "other_variants": "Eighty-eight is the correct spoken numeric value; original hyphenation, acknowledgement spelling/punctuation and interrupted fragments remain verbatim.",
+      "declared_result_speech": [
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_78bcdbc6b813",
+          "queued_at": 132107.262974666,
+          "state": "interruption_requested",
+          "first_loud_at": 132109.581328625,
+          "preceding_quiet_seconds": 6.499713041994255,
+          "last_loud_at": 132110.240582208,
+          "ended_at": 132113.707931875,
+          "error": null
+        },
+        {
+          "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_6d08c0a0157e",
+          "queued_at": 132121.966042416,
+          "state": "interruption_requested",
+          "first_loud_at": 132123.5215445,
+          "preceding_quiet_seconds": 7.500724666984752,
+          "last_loud_at": 132124.202681916,
+          "ended_at": 132126.776823458,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The route is active with an estimated time of arrival of 88 minutes.",
+          "intent_version": 3,
+          "kind": "result",
+          "speech_id": "speech_55180058a057",
+          "queued_at": 132140.097287458,
+          "state": "finished",
+          "first_loud_at": 132141.1807605,
+          "preceding_quiet_seconds": 12.119145584001672,
+          "last_loud_at": 132148.681648291,
+          "ended_at": 132148.739719958,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 58.76
+    },
+    {
+      "id": "rtc-cancel-2",
+      "case": "cancel",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment. Navigation. Okay, one sec. Navigation to Kempegauda International Airport has been cancelled.",
+        "facts": {
+          "confirmed_airport_cancellation": true
+        },
+        "complete_declared_final_speech": true,
+        "note": "Confirmed airport cancellation; cleared backend state is independently checked.",
+        "name_variants": {
+          "Kempegowda": "Kempegauda"
+        }
+      },
+      "semantic_effect_case_passed": true,
+      "name_variants": {
+        "Kempegowda": "Kempegauda"
+      },
+      "other_variants": "Eighty-eight is the correct spoken numeric value; original hyphenation, acknowledgement spelling/punctuation and interrupted fragments remain verbatim.",
+      "declared_result_speech": [
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_c19ceac7a6ed",
+          "queued_at": 132162.804648583,
+          "state": "interruption_requested",
+          "first_loud_at": 132163.873870791,
+          "preceding_quiet_seconds": 5.280035332980333,
+          "last_loud_at": 132164.554495958,
+          "ended_at": 132166.806190416,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_64c3d6357744",
+          "queued_at": 132169.924803,
+          "state": "finished",
+          "first_loud_at": 132171.03414625,
+          "preceding_quiet_seconds": 1.8995722089894116,
+          "last_loud_at": 132174.693601875,
+          "ended_at": 132174.833226875,
+          "error": null
+        }
+      ],
+      "received_duration_seconds": 22.66
+    }
+  ],
+  "counts": {
+    "declared": 4,
+    "asr_completed": 4,
+    "capture_completed": 4,
+    "semantic_effect_cases_passed": 4,
+    "complete_declared_final_speech_facts": 3,
+    "final_result_handles_finished": 4,
+    "required_original_result_interruptions": 6,
+    "required_original_result_interruptions_observed": 6,
+    "correct_cancellation_replies": 2,
+    "cancellation_denominator": 2,
+    "complete_return_replies": 1,
+    "return_denominator": 2,
+    "rows_with_proper_name_deviations": 4,
+    "raw_and_resampled_files_verified": 20
+  },
+  "asr_report_receipts": {
+    "inputs_unchanged": true,
+    "source_unchanged": true,
+    "suite_unchanged": true
+  },
+  "limits": [
+    "All final speeches finish; one omits a required replacement fact. Finished speech remains separate from completed requested work.",
+    "The second return stays a spoken-content failure for its missing office-replacement clause despite successful state change. The first return passes after a logged plan repair.",
+    "All initial/middle replies are intentionally interrupted, so their full wording is not required in whole-stream ASR.",
+    "Names remain verbatim; ASR cannot distinguish synthesis pronunciation from recognition errors or establish physical playback timing."
+  ]
+}

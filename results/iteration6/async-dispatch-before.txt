@@ -1,0 +1,323 @@
+FFFF..FFFFF                                                              [100%]
+=================================== FAILURES ===================================
+_____ test_slow_start_leaves_loop_responsive_and_is_durable_before_backend _____
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_slow_start_leaves_loop_re0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_slow_start_leaves_loop_responsive_and_is_durable_before_backend(log_path):
+        logger, observed = HeldLogger("started"), []
+    
+        async def act():
+            observed.extend(calls(log_path))
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1e50>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105da2110: set>.is_set
+E        +      where <threading.Event at 0x105da2110: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1e50>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+_______ test_slow_finish_leaves_loop_responsive_and_normal_run_awaits_it _______
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_slow_finish_leaves_loop_r0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_slow_finish_leaves_loop_responsive_and_normal_run_awaits_it(log_path):
+        logger = HeldLogger("finished")
+    
+        async def act():
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1990>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105da3cd0: set>.is_set
+E        +      where <threading.Event at 0x105da3cd0: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1990>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+_ test_correction_during_start_never_dispatches_and_finalizes_late_intention[False] _
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_correction_during_start_n0/attempts.jsonl')
+changing = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("changing", [False, True])
+    async def test_correction_during_start_never_dispatches_and_finalizes_late_intention(log_path, changing):
+        logger, effects, current = HeldLogger("started"), [], [True]
+    
+        async def act():
+            effects.append("effect")
+            return {"status": "success"}
+    
+        engine = executor(act, logger, changing=changing)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})], operation_id="old",
+                                              is_current=lambda: current[0]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d7f8d0>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105d7e9d0: set>.is_set
+E        +      where <threading.Event at 0x105d7e9d0: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d7f8d0>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+_ test_correction_during_start_never_dispatches_and_finalizes_late_intention[True] _
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_correction_during_start_n1/attempts.jsonl')
+changing = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("changing", [False, True])
+    async def test_correction_during_start_never_dispatches_and_finalizes_late_intention(log_path, changing):
+        logger, effects, current = HeldLogger("started"), [], [True]
+    
+        async def act():
+            effects.append("effect")
+            return {"status": "success"}
+    
+        engine = executor(act, logger, changing=changing)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})], operation_id="old",
+                                              is_current=lambda: current[0]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d4c750>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105d4fc10: set>.is_set
+E        +      where <threading.Event at 0x105d4fc10: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d4c750>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+____ test_parent_cancellation_during_completion_io_preserves_known_success _____
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_parent_cancellation_durin0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_parent_cancellation_during_completion_io_preserves_known_success(log_path):
+        logger = HeldLogger("finished")
+    
+        async def act():
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d43b10>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105d42550: set>.is_set
+E        +      where <threading.Event at 0x105d42550: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d43b10>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+_ test_close_is_bounded_and_reports_held_io_until_eventual_finalization[started] _
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_close_is_bounded_and_repo0/attempts.jsonl')
+phase = 'started'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["started", "finished"])
+    async def test_close_is_bounded_and_reports_held_io_until_eventual_finalization(log_path, phase):
+        logger, effects = HeldLogger(phase), []
+    
+        async def act():
+            effects.append("effect")
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:239: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105bac250>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105bac110: set>.is_set
+E        +      where <threading.Event at 0x105bac110: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105bac250>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+_ test_close_is_bounded_and_reports_held_io_until_eventual_finalization[finished] _
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_close_is_bounded_and_repo1/attempts.jsonl')
+phase = 'finished'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["started", "finished"])
+    async def test_close_is_bounded_and_reports_held_io_until_eventual_finalization(log_path, phase):
+        logger, effects = HeldLogger(phase), []
+    
+        async def act():
+            effects.append("effect")
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:239: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1c10>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105d1efd0: set>.is_set
+E        +      where <threading.Event at 0x105d1efd0: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105da1c10>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+________ test_resolved_mutable_arguments_are_frozen_for_log_and_backend ________
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_resolved_mutable_argument0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_resolved_mutable_arguments_are_frozen_for_log_and_backend(log_path):
+        logger, shared, observed = HeldLogger("started"), {"destination": "airport"}, []
+    
+        async def lookup():
+            return {"status": "success", "payload": shared}
+    
+        async def act(payload):
+            observed.append(deepcopy(payload))
+            return {"status": "success"}
+    
+        manifest = Manifest("mutable-result")
+        manifest.add(ToolSpec("lookup", "", {}, [], False, lookup))
+        manifest.add(ToolSpec("act", "", {"payload": {}}, ["payload"], True, act))
+        engine = Executor(manifest, Ledger(), EventBus(), attempt_logger=logger)
+        task = asyncio.create_task(engine.run([PlannedCall("lookup", "lookup", {}),
+                                              PlannedCall("write", "act", {"payload": "$lookup.payload"})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:275: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d4e610>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x105d4d750: set>.is_set
+E        +      where <threading.Event at 0x105d4d750: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x105d4e610>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:82: AssertionError
+__________ test_current_version_is_rechecked_after_start_persistence ___________
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-43/test_current_version_is_rechec0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_current_version_is_rechecked_after_start_persistence(log_path):
+        logger, current, effects = fdb_logger.FDBToolLogger("test-room"), [True], []
+        real_start, loop = logger.started, asyncio.get_running_loop()
+    
+        def persist_then_correct(*args):
+            real_start(*args)
+            loop.call_soon_threadsafe(current.__setitem__, 0, False)
+    
+        logger.started = persist_then_correct
+    
+        async def act():
+            effects.append("effect")
+            return {"status": "success"}
+    
+        engine = executor(act, logger)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})],
+                                              is_current=lambda: current[0]))
+        try:
+            result = await asyncio.wait_for(task, 2)
+>           assert effects == [] and result.outcomes["write"].status == "cancelled"
+E           AssertionError: assert (['effect'] == []
+E             
+E             Left contains one more item: 'effect'
+E             Use -v to get more diff)
+
+tests/unit/test_async_dispatch_telemetry.py:307: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_slow_start_leaves_loop_responsive_and_is_durable_before_backend
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_slow_finish_leaves_loop_responsive_and_normal_run_awaits_it
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_correction_during_start_never_dispatches_and_finalizes_late_intention[False]
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_correction_during_start_never_dispatches_and_finalizes_late_intention[True]
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_parent_cancellation_during_completion_io_preserves_known_success
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_close_is_bounded_and_reports_held_io_until_eventual_finalization[started]
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_close_is_bounded_and_reports_held_io_until_eventual_finalization[finished]
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_resolved_mutable_arguments_are_frozen_for_log_and_backend
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_current_version_is_rechecked_after_start_persistence
+9 failed, 2 passed in 8.27s

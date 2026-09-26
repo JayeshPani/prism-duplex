@@ -1,0 +1,222 @@
+FFFFFF.....F........                                                     [100%]
+=================================== FAILURES ===================================
+________ test_start_and_replacement_use_successful_destination_and_eta _________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105cb04d0>)
+
+    @pytest.mark.asyncio
+    async def test_start_and_replacement_use_successful_destination_and_eta(navigation):
+        _manifest, engine = navigation
+        responder = Responder(UnavailableLLM())
+        first = await engine.run(route_calls("Cubbon Park"))
+        result = first.outcomes["start"].result
+>       text = await responder.summarize("Navigate to the park.", first)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105cb0d50>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 7.1, "eta_min": 18, "polyline": [[12.9719, 77.6412], [12.9763, 77.5929]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+_________________ test_start_with_requested_via_names_the_stop _________________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105c9e550>)
+
+    @pytest.mark.asyncio
+    async def test_start_with_requested_via_names_the_stop(navigation):
+        _manifest, engine = navigation
+        execution = await engine.run(route_calls("Cubbon Park", via="R_MTR"))
+        result = execution.outcomes["start"].result
+>       text = await Responder(UnavailableLLM()).summarize("Navigate via the restaurant.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105ca5290>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words..._km": 11.9, "eta_min": 30, "polyline": [[12.9719, 77.6412], [12.9553, 77.5855], [12.9763, 77.5929]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+___________ test_already_active_preserves_stops_and_uses_current_eta ___________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105d8c790>)
+
+    @pytest.mark.asyncio
+    async def test_already_active_preserves_stops_and_uses_current_eta(navigation):
+        manifest, engine = navigation
+        route = await prepare_route(manifest)
+        await manifest.get("start_navigation").fn(route_id=route["route_id"])
+        with_stop = await manifest.get("add_waypoint").fn(place_id="K_TWC_HEB")
+        assert with_stop["eta_min"] != route["eta_min"]
+        execution = await engine.run([PlannedCall("start", "start_navigation", {"route_id": route["route_id"]})])
+        result = execution.outcomes["start"].result
+        assert result["already_active"] is True
+        assert result["stop_ids"] == with_stop["stop_ids"]
+>       text = await Responder(UnavailableLLM()).summarize("Start this route again.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105d8f810>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...nce_km": 22.1, "eta_min": 55, "polyline": [[12.9719, 77.6412], [13.04, 77.595], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+________ test_add_and_repeat_stop_report_current_eta_and_extra_minutes _________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105dbc350>)
+
+    @pytest.mark.asyncio
+    async def test_add_and_repeat_stop_report_current_eta_and_extra_minutes(navigation):
+        manifest, engine = navigation
+        route = await prepare_route(manifest, "P_WHITEFIELD")
+        await manifest.get("start_navigation").fn(route_id=route["route_id"])
+        planned = [PlannedCall("stop", "add_waypoint", {"place_id": "K_TWC_HEB"})]
+        first = await engine.run(planned)
+        result = first.outcomes["stop"].result
+        assert result["already_present"] is False and result["extra_min"] > 0
+>       text = await Responder(UnavailableLLM()).summarize("Add Third Wave Coffee in Hebbal.", first)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105db7350>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...tance_km": 37.3, "eta_min": 93, "polyline": [[12.9719, 77.6412], [13.04, 77.595], [12.9698, 77.75]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+____ test_cancel_active_and_absent_navigation_have_distinct_truthful_speech ____
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105d64950>)
+
+    @pytest.mark.asyncio
+    async def test_cancel_active_and_absent_navigation_have_distinct_truthful_speech(navigation):
+        manifest, engine = navigation
+        route = await prepare_route(manifest, "P_CUBBON")
+        await manifest.get("start_navigation").fn(route_id=route["route_id"])
+        planned = [PlannedCall("cancel", "cancel_navigation", {})]
+        active = await engine.run(planned)
+>       text = await Responder(UnavailableLLM()).summarize("Stop navigation.", active)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105d651d0>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...nation_id": null, "stops": [], "stop_ids": [], "eta_min": null, "distance_km": null, "polyline": []}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+________ test_reused_prerequisite_is_accepted_but_unrelated_read_is_not ________
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105db4590>)
+
+    @pytest.mark.asyncio
+    async def test_reused_prerequisite_is_accepted_but_unrelated_read_is_not(navigation):
+        _manifest, engine = navigation
+        await engine.run([PlannedCall("cached", "search_destination", {"query": "Cubbon Park"})])
+        execution = await engine.run(route_calls("Cubbon Park"))
+        assert execution.outcomes["lookup"].status == "reused"
+>       assert "Cubbon Park" in await Responder(UnavailableLLM()).summarize("Go to the park.", execution)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:164: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105d70f50>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 7.1, "eta_min": 18, "polyline": [[12.9719, 77.6412], [12.9763, 77.5929]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+______ test_success_facts_are_not_recovered_from_request_or_place_catalog ______
+
+navigation = (Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by na...irmation. Replies must be short: the driver is driving.'), <agent.coordinator.executor.Executor object at 0x105d1f8d0>)
+
+    @pytest.mark.asyncio
+    async def test_success_facts_are_not_recovered_from_request_or_place_catalog(navigation):
+        manifest, engine = navigation
+        route = await prepare_route(manifest)
+        real_start = manifest.tools["start_navigation"].fn
+    
+        async def remote_result(route_id):
+            result = await real_start(route_id=route_id)
+            return {**result, "destination": "Harbor Museum", "navigating_to": "Harbor Museum",
+                    "destination_id": "REMOTE_MUSEUM", "eta_min": 137}
+    
+        manifest.tools["start_navigation"].fn = remote_result
+        execution = await engine.run([PlannedCall("start", "start_navigation", {"route_id": route["route_id"]})])
+>       text = await Responder(UnavailableLLM()).summarize("The request mentions a different park and 4 minutes.", execution)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_navigation_summaries.py:254: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:49: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_navigation_summaries.UnavailableLLM object at 0x105d1cd50>
+_args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words..._ids": [], "distance_km": 5.1, "eta_min": 137, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]')
+
+    async def complete(self, *_args):
+>       raise AssertionError("successful navigation summary must not need a model")
+E       AssertionError: successful navigation summary must not need a model
+
+tests/unit/test_navigation_summaries.py:17: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_summaries.py::test_start_and_replacement_use_successful_destination_and_eta
+FAILED tests/unit/test_navigation_summaries.py::test_start_with_requested_via_names_the_stop
+FAILED tests/unit/test_navigation_summaries.py::test_already_active_preserves_stops_and_uses_current_eta
+FAILED tests/unit/test_navigation_summaries.py::test_add_and_repeat_stop_report_current_eta_and_extra_minutes
+FAILED tests/unit/test_navigation_summaries.py::test_cancel_active_and_absent_navigation_have_distinct_truthful_speech
+FAILED tests/unit/test_navigation_summaries.py::test_reused_prerequisite_is_accepted_but_unrelated_read_is_not
+FAILED tests/unit/test_navigation_summaries.py::test_success_facts_are_not_recovered_from_request_or_place_catalog
+7 failed, 13 passed in 0.50s

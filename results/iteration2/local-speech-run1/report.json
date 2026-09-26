@@ -1,0 +1,270 @@
+{
+  "started_at_utc": "2026-09-25T17:48:58.163810+00:00",
+  "command": [
+    "scripts/local_speech_experiment.py",
+    "--profile",
+    "local-mac",
+    "--out",
+    "results/iteration2/local-speech-run1"
+  ],
+  "status": "completed",
+  "profile": "local-mac",
+  "scope": "Independent development text rendered by the same local Kokoro voice, then transcribed locally; synthetic audio only",
+  "limitations": [
+    "No human speech, live transport, VAD, interruption, microphone, tool execution, or benchmark evaluation",
+    "Four single trials; no statistical latency or accuracy generalization",
+    "Timing includes the first cold inference; no warm-up or discarded cases",
+    "This process loads speech models only; system-wide competing workloads are not measured",
+    "RSS and MLX memory are different overlapping measurements; do not sum them"
+  ],
+  "normalization": "ASCII lowercase alphanumeric tokens; punctuation separates tokens; no number spelling, synonym, or entity normalization",
+  "timing": "Wall-clock seconds; TTS includes PCM conversion; STT includes its production worker and temporary WAV; excludes asset hashing",
+  "hardware": {
+    "os": "macOS-15.3.1-arm64-arm-64bit",
+    "architecture": "arm64",
+    "processor": "arm",
+    "cpu_count": 10
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "model_load_seconds": {
+    "tts": 0.6360660420032218,
+    "stt": 17.889598583002225
+  },
+  "packages": {
+    "mlx": "0.32.2",
+    "parakeet-mlx": "0.5.2",
+    "kokoro-onnx": "0.6.1",
+    "onnxruntime": "1.23.2",
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3",
+    "huggingface-hub": "1.33.0",
+    "numpy": "2.2.6",
+    "soundfile": "0.14.0",
+    "psutil": "7.2.2"
+  },
+  "cases": [
+    {
+      "id": "direct",
+      "reference": "Navigate to Maple Library.",
+      "status": "completed",
+      "attempted": true,
+      "tts_seconds": 1.1238855410047108,
+      "audio_24k": {
+        "file": "raw/direct-tts-24k.wav",
+        "sha256": "a77ddb3a9ad3af3ccd721cfd12df32a1e149c5d9cf50988d63c554630a8e3c0e",
+        "duration_seconds": 1.6853333333333333
+      },
+      "memory_after_tts": {
+        "process_peak_rss_bytes": 779616256,
+        "process_rss_bytes": 779616256,
+        "mlx_peak_bytes": 82118664
+      },
+      "resample_seconds": 0.11733604199253023,
+      "audio_16k": {
+        "file": "raw/direct-stt-16k.wav",
+        "sha256": "4a95e37b3f4a0283197ea5983ee05f17fc8fe0d7fc53f4b4817eba0691baec71",
+        "duration_seconds": 1.6853125
+      },
+      "stt_seconds": 2.8946404169982998,
+      "transcript": "Navigate to Maple Library.",
+      "normalized_reference": "navigate to maple library",
+      "normalized_transcript": "navigate to maple library",
+      "exact_normalized": true,
+      "word_edits": 0,
+      "reference_words": 4,
+      "wer": 0.0,
+      "stt_realtime_factor": 1.7175689475977303,
+      "memory_after_case": {
+        "process_peak_rss_bytes": 1237336064,
+        "process_rss_bytes": 1238302720,
+        "mlx_peak_bytes": 2636011062
+      }
+    },
+    {
+      "id": "correction",
+      "reference": "Take me to Brookfield Station. Actually, make that Cedar Market.",
+      "status": "completed",
+      "attempted": true,
+      "tts_seconds": 1.0756849580066046,
+      "audio_24k": {
+        "file": "raw/correction-tts-24k.wav",
+        "sha256": "e311b8c5ba7dc2d53218ec51e9c64e2e918222da31c1d329b06fa8fcb06609ba",
+        "duration_seconds": 3.52
+      },
+      "memory_after_tts": {
+        "process_peak_rss_bytes": 1652637696,
+        "process_rss_bytes": 1652637696,
+        "mlx_peak_bytes": 2636011062
+      },
+      "resample_seconds": 0.0020529160101432353,
+      "audio_16k": {
+        "file": "raw/correction-stt-16k.wav",
+        "sha256": "4c5157b733b04879c93dfa156d43c6db13c6c5369f4dc1e706b8477c7055099c",
+        "duration_seconds": 3.52
+      },
+      "stt_seconds": 0.3210651660047006,
+      "transcript": "Take me to Brookfield Station. Actually make that Cedar Market.",
+      "normalized_reference": "take me to brookfield station actually make that cedar market",
+      "normalized_transcript": "take me to brookfield station actually make that cedar market",
+      "exact_normalized": true,
+      "word_edits": 0,
+      "reference_words": 10,
+      "wer": 0.0,
+      "stt_realtime_factor": 0.09121169488769904,
+      "memory_after_case": {
+        "process_peak_rss_bytes": 1660813312,
+        "process_rss_bytes": 1658961920,
+        "mlx_peak_bytes": 2636011062
+      }
+    },
+    {
+      "id": "ambiguous_place",
+      "reference": "Navigate to Riverside.",
+      "status": "completed",
+      "attempted": true,
+      "tts_seconds": 0.4700925830111373,
+      "audio_24k": {
+        "file": "raw/ambiguous_place-tts-24k.wav",
+        "sha256": "a56a1228e5636cf71855ad8f7ff25105159117c5d64108b8a4dfb111710cfe13",
+        "duration_seconds": 1.4293333333333333
+      },
+      "memory_after_tts": {
+        "process_peak_rss_bytes": 1660911616,
+        "process_rss_bytes": 1660911616,
+        "mlx_peak_bytes": 2636011062
+      },
+      "resample_seconds": 0.0014870000013615936,
+      "audio_16k": {
+        "file": "raw/ambiguous_place-stt-16k.wav",
+        "sha256": "af45ce86df9603dde4aa6595135d4173f0698bd7fcadca74056e1b6b38eff213",
+        "duration_seconds": 1.4293125
+      },
+      "stt_seconds": 0.10311116599768866,
+      "transcript": "Navigate to Riverside.",
+      "normalized_reference": "navigate to riverside",
+      "normalized_transcript": "navigate to riverside",
+      "exact_normalized": true,
+      "word_edits": 0,
+      "reference_words": 3,
+      "wer": 0.0,
+      "stt_realtime_factor": 0.07214039336932172,
+      "memory_after_case": {
+        "process_peak_rss_bytes": 1661878272,
+        "process_rss_bytes": 1660747776,
+        "mlx_peak_bytes": 2636011062
+      }
+    },
+    {
+      "id": "place_and_number",
+      "reference": "Take me to West Harbor Garage, level two.",
+      "status": "completed",
+      "attempted": true,
+      "tts_seconds": 0.6588162499974715,
+      "audio_24k": {
+        "file": "raw/place_and_number-tts-24k.wav",
+        "sha256": "7e77aa10034fac6609758b1367fee055597864f887f60110d772a1504231ad49",
+        "duration_seconds": 2.368
+      },
+      "memory_after_tts": {
+        "process_peak_rss_bytes": 1661878272,
+        "process_rss_bytes": 1659437056,
+        "mlx_peak_bytes": 2636011062
+      },
+      "resample_seconds": 0.0010315830004401505,
+      "audio_16k": {
+        "file": "raw/place_and_number-stt-16k.wav",
+        "sha256": "34769267c5099f8803f3731ab1e5f605964c72dd958ffd432304bd7feea3333d",
+        "duration_seconds": 2.368
+      },
+      "stt_seconds": 0.12215262500103563,
+      "transcript": "Take me to West Harbor Garage, level 2.",
+      "normalized_reference": "take me to west harbor garage level two",
+      "normalized_transcript": "take me to west harbor garage level 2",
+      "exact_normalized": false,
+      "word_edits": 1,
+      "reference_words": 8,
+      "wer": 0.125,
+      "stt_realtime_factor": 0.05158472339570762,
+      "memory_after_case": {
+        "process_peak_rss_bytes": 1661878272,
+        "process_rss_bytes": 1660370944,
+        "mlx_peak_bytes": 2636011062
+      }
+    }
+  ],
+  "harness_sha256": "72d2410904a039ac1a87e96bee1458f42fe46896732679bb36755f370b43c57e",
+  "configuration": {
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "stt_model": {
+    "model": "mlx-community/parakeet-tdt-0.6b-v2",
+    "declared_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+    "resolved_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+    "snapshot_path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487",
+    "reproducibility": "frozen",
+    "runtime_loaded_revision": "8ae155301e23d820d82aa60d24817c900e69e487",
+    "inference_observed": true,
+    "files_sha256": {
+      ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "README.md": "af484ebbab54ee50ccfa4f07e778c0f7b2f05a0ac6a2d138e5aee5aae1366f9b",
+      "config.json": "9bd323e60afe2615c983a5d9fc3a2c0470df2a03edf90c0f861bd59509d07264",
+      "model.safetensors": "b958c37a6baa6874a279108755c8f2818e27bf647d72d54800a234a421341dfe",
+      "tokenizer.model": "5a3a82c48998709f9bc9f5db2924d99a899d20bf82550ca52272da7c7557b0a0",
+      "tokenizer.vocab": "dbe7ec6bd066c4526080940e1614e6582b9161515e856c2c39a1d49267c88cbc",
+      "vocab.txt": "70b25deed256d79365a3c290d6191c31cc2315d952faf18d5c3a334f46e4866e"
+    }
+  },
+  "tts_assets": {
+    "kokoro-v1.0.onnx": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
+      "expected_sha256": null,
+      "observed_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "source_verified": false,
+      "runtime_loaded": true,
+      "inference_observed": true
+    },
+    "voices-v1.0.bin": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin",
+      "expected_sha256": null,
+      "observed_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "source_verified": false,
+      "runtime_loaded": true,
+      "inference_observed": true
+    }
+  },
+  "memory_before_load": {
+    "process_peak_rss_bytes": 148652032,
+    "process_rss_bytes": 66158592,
+    "mlx_peak_bytes": 0
+  },
+  "memory_after_tts_load": {
+    "process_peak_rss_bytes": 600473600,
+    "process_rss_bytes": 600195072,
+    "mlx_peak_bytes": 0
+  },
+  "memory_after_stt_load": {
+    "process_peak_rss_bytes": 732200960,
+    "process_rss_bytes": 732200960,
+    "mlx_peak_bytes": 82118664
+  },
+  "summary": {
+    "planned": 4,
+    "attempted": 4,
+    "completed": 4,
+    "failed_or_not_completed": 0,
+    "exact_normalized": 3,
+    "exact_denominator": 4,
+    "wer_completed_only_denominator_words": 25,
+    "wer_completed_only": 0.04
+  },
+  "finished_at_utc": "2026-09-25T17:49:26.293240+00:00"
+}

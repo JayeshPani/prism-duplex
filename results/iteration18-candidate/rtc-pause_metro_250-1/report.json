@@ -1,0 +1,185 @@
+{
+  "status": "completed_observation",
+  "started_at": "2026-09-26T11:21:19.505172+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/pause_metro_250.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/rtc-pause_metro_250-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "30"
+  ],
+  "room": "car-audio-e9b208e10e1645899b7b1930d263b94b",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "followup_trigger": "result-audio",
+    "followup_finished_quiet_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/pause_metro_250.wav",
+      "file": "initial.wav",
+      "sha256": "235b58851916bc6c3d9bfdb9a0da9869c08a22d4ff3b9cb918040e29c83abf44",
+      "sample_rate": 24000,
+      "samples": 71536,
+      "duration_seconds": 2.9806666666666666,
+      "activity_start_sample": 480,
+      "activity_end_sample": 68640,
+      "intent_before_input": null,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 139994.705578583,
+        "drained_monotonic": 139997.692203916,
+        "scheduled_end_monotonic": 139997.68624524967,
+        "published_samples": 71536
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AM6aoXy7gExFZj",
+      "participant": "agent-AJ_d6aiU8y8E5Sp",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means current result handle finished plus observed client quiet tail; it is not a navigation accuracy score.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Delayed data attribution requires the same native sender identity to resolve as AGENT. Coordinator receipts retain original times; attribution-resolution times are recorded separately. Unresolved, blank and non-agent senders remain untrusted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "rtc_identity_adapter": {
+    "sdk_version": "1.1.18",
+    "sdk_room_source_sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    "boundary": "Room._on_room_event synchronous data_received callback",
+    "max_pending_packets": 256,
+    "max_pending_bytes": 1048576,
+    "handler_compatibility": "reviewed_source_match"
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "62822a111b1a50515d169254b3172f4207568e0e87dcd41adba13775eb7ee1f7"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/worker-manifest.json",
+    "sha256": "3d06046bf0f43019b6464d732ec45065fab07688210d99f9eef76345f9d761dc"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/protocol.json",
+    "sha256": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c"
+  },
+  "cleanup_errors": [],
+  "data_attribution_counts": {
+    "promoted": 29
+  },
+  "finished_at": "2026-09-26T11:21:39.633542+00:00",
+  "event_counts": {
+    "agent_state": 5,
+    "session_started": 1,
+    "user_state": 2,
+    "user_final": 1,
+    "ack": 1,
+    "agent_say": 2,
+    "speech_handle": 4,
+    "plan_ready": 1,
+    "gate_open": 1,
+    "gate_committed": 1,
+    "slot_update": 1,
+    "tool_waiting": 3,
+    "tool_started": 3,
+    "tool_done": 3
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_3dc5a0d84e3c",
+      "queued_at": 140001.273070291,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 140002.73297675,
+      "error": null
+    },
+    {
+      "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_99d19fafaf65",
+      "queued_at": 140006.858319833,
+      "state": "finished",
+      "first_loud_at": 140007.856531833,
+      "preceding_quiet_seconds": 5.258649333001813,
+      "last_loud_at": 140013.197891333,
+      "ended_at": 140013.259316708,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "235b58851916bc6c3d9bfdb9a0da9869c08a22d4ff3b9cb918040e29c83abf44",
+    "worker_manifest.json": "3d06046bf0f43019b6464d732ec45065fab07688210d99f9eef76345f9d761dc",
+    "events.jsonl": "b87999508a7e0e3083d4a986e8fc9b9a83c298d30c86b3376083c7319ace46ff",
+    "frames.jsonl": "13b19bd7580041ba5ae99903c9c5f2b3780c72c57a9c7879a60d74295c2ac3e5",
+    "protocol.json": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c",
+    "received-1.pcm": "57db091220ba6867781074fa609ee2ca3157747b8fa91abb4f27921b09487e19"
+  }
+}

@@ -1,0 +1,252 @@
+FFFF.FFFFFFFFF.                                                          [100%]
+=================================== FAILURES ===================================
+_ test_specific_place_wins_over_generic_alias[Starbucks, Airport Road-K_SBUX_AIR] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Starbucks, Airport Road', place_id = 'K_SBUX_AIR'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("query,place_id", [
+        ("Starbucks, Airport Road", "K_SBUX_AIR"),
+        ("Starbucks Airport Road", "K_SBUX_AIR"),
+        ("Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("take me to Starbucks Airport Road", "K_SBUX_AIR"),
+        ("airport", "P_AIRPORT"),
+    ])
+    async def test_specific_place_wins_over_generic_alias(car, query, place_id):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["places"][0]["place_id"] == place_id
+E       AssertionError: assert 'P_AIRPORT' == 'K_SBUX_AIR'
+E         
+E         - K_SBUX_AIR
+E         + P_AIRPORT
+
+tests/unit/test_navigation_reliability.py:39: AssertionError
+_ test_specific_place_wins_over_generic_alias[Starbucks Airport Road-K_SBUX_AIR] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Starbucks Airport Road', place_id = 'K_SBUX_AIR'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("query,place_id", [
+        ("Starbucks, Airport Road", "K_SBUX_AIR"),
+        ("Starbucks Airport Road", "K_SBUX_AIR"),
+        ("Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("take me to Starbucks Airport Road", "K_SBUX_AIR"),
+        ("airport", "P_AIRPORT"),
+    ])
+    async def test_specific_place_wins_over_generic_alias(car, query, place_id):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["places"][0]["place_id"] == place_id
+E       AssertionError: assert 'P_AIRPORT' == 'K_SBUX_AIR'
+E         
+E         - K_SBUX_AIR
+E         + P_AIRPORT
+
+tests/unit/test_navigation_reliability.py:39: AssertionError
+_ test_specific_place_wins_over_generic_alias[Manipal Hospital, Old Airport Road-P_HOSP] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Manipal Hospital, Old Airport Road', place_id = 'P_HOSP'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("query,place_id", [
+        ("Starbucks, Airport Road", "K_SBUX_AIR"),
+        ("Starbucks Airport Road", "K_SBUX_AIR"),
+        ("Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("take me to Starbucks Airport Road", "K_SBUX_AIR"),
+        ("airport", "P_AIRPORT"),
+    ])
+    async def test_specific_place_wins_over_generic_alias(car, query, place_id):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["places"][0]["place_id"] == place_id
+E       AssertionError: assert 'P_AIRPORT' == 'P_HOSP'
+E         
+E         - P_HOSP
+E         + P_AIRPORT
+
+tests/unit/test_navigation_reliability.py:39: AssertionError
+_ test_specific_place_wins_over_generic_alias[take me to Starbucks Airport Road-K_SBUX_AIR] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'take me to Starbucks Airport Road', place_id = 'K_SBUX_AIR'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("query,place_id", [
+        ("Starbucks, Airport Road", "K_SBUX_AIR"),
+        ("Starbucks Airport Road", "K_SBUX_AIR"),
+        ("Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("take me to Starbucks Airport Road", "K_SBUX_AIR"),
+        ("airport", "P_AIRPORT"),
+    ])
+    async def test_specific_place_wins_over_generic_alias(car, query, place_id):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["places"][0]["place_id"] == place_id
+E       AssertionError: assert 'P_AIRPORT' == 'K_SBUX_AIR'
+E         
+E         - K_SBUX_AIR
+E         + P_AIRPORT
+
+tests/unit/test_navigation_reliability.py:39: AssertionError
+________________ test_airport_office_airport_returns_to_airport ________________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_airport_office_airport_returns_to_airport(car):
+        logged = []
+        executor = Executor(car, Ledger(), EventBus(), lambda tool, *args: logged.append(tool))
+        for destination in ("airport", "office", "airport"):
+            await executor.run(route_plan(destination))
+        # Observe the backend effect, not just an executor success label.
+        cancelled = await car.get("cancel_navigation").fn()
+>       assert cancelled["cancelled"] == "Kempegowda International Airport"
+E       AssertionError: assert 'Office (Manyata Tech Park)' == 'Kempegowda I...ional Airport'
+E         
+E         - Kempegowda International Airport
+E         + Office (Manyata Tech Park)
+
+tests/unit/test_navigation_reliability.py:50: AssertionError
+_________________ test_nearby_lookup_changes_with_destination __________________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_nearby_lookup_changes_with_destination(car):
+        executor = Executor(car, Ledger(), EventBus(), lambda *args: None)
+        query = [PlannedCall("coffee", "find_nearby", {"category": "coffee"})]
+        await executor.run(route_plan("airport"))
+        first = (await executor.run(query)).outcomes["coffee"].result
+        await executor.run(route_plan("office"))
+        second = (await executor.run(query)).outcomes["coffee"].result
+        detours = lambda result: {p["place_id"]: p["detour_min"] for p in result["places"]}
+        assert detours(first)["K_SBUX_AIR"] == 4
+>       assert detours(second)["K_SBUX_AIR"] == 79
+E       assert 4 == 79
+
+tests/unit/test_navigation_reliability.py:64: AssertionError
+__________ test_adding_a_second_stop_preserves_first_stop_coordinates __________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_adding_a_second_stop_preserves_first_stop_coordinates(car):
+        await navigate(car, "office")
+        await car.get("add_waypoint").fn(place_id="K_SBUX_AIR")
+        second = await car.get("add_waypoint").fn(place_id="K_BLUETOKAI")
+>       assert second["polyline"] == [[12.9719, 77.6412], [13.1500, 77.6600],
+                                      [12.9700, 77.6400], [13.0475, 77.6200]]
+E       assert [[12.9719, 77....0475, 77.62]] == [[12.9719, 77....0475, 77.62]]
+E         
+E         At index 1 diff: [13.1989, 77.7068] != [13.15, 77.66]
+E         Use -v to get more diff
+
+tests/unit/test_navigation_reliability.py:72: AssertionError
+____________ test_existing_stop_is_idempotent_by_resolved_place_id _____________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_existing_stop_is_idempotent_by_resolved_place_id(car):
+        await navigate(car, "office")
+        first = await car.get("add_waypoint").fn(place_id="K_SBUX_AIR")
+        repeated = await car.get("add_waypoint").fn(place_id="Starbucks Airport Road")
+>       assert repeated["polyline"] == first["polyline"]
+E       assert [[12.9719, 77....0475, 77.62]] == [[12.9719, 77....0475, 77.62]]
+E         
+E         At index 1 diff: [13.1989, 77.7068] != [13.15, 77.66]
+E         Left contains one more item: [13.0475, 77.62]
+E         Use -v to get more diff
+
+tests/unit/test_navigation_reliability.py:81: AssertionError
+_______________ test_starting_active_route_preserves_added_stops _______________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_starting_active_route_preserves_added_stops(car):
+        started = await navigate(car, "office")
+        with_stop = await car.get("add_waypoint").fn(place_id="K_BLUETOKAI")
+        repeated = await car.get("start_navigation").fn(route_id=started["route_id"])
+>       assert repeated["polyline"] == with_stop["polyline"]
+E       assert [[12.9719, 77....0475, 77.62]] == [[12.9719, 77....0475, 77.62]]
+E         
+E         At index 1 diff: [13.0475, 77.62] != [12.97, 77.64]
+E         Right contains one more item: [13.0475, 77.62]
+E         Use -v to get more diff
+
+tests/unit/test_navigation_reliability.py:91: AssertionError
+_____________ test_cancel_returns_an_explicit_empty_route_snapshot _____________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_cancel_returns_an_explicit_empty_route_snapshot(car):
+        started = await navigate(car, "airport")
+        cancelled = await car.get("cancel_navigation").fn()
+>       assert cancelled["route_active"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'route_active'
+
+tests/unit/test_navigation_reliability.py:100: KeyError
+___________ test_route_context_changes_only_with_successful_mutation ___________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_route_context_changes_only_with_successful_mutation(car):
+        started = await navigate(car, "office")
+>       assert started["navigation_version"] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'navigation_version'
+
+tests/unit/test_navigation_reliability.py:115: KeyError
+_____________ test_cancel_invalidates_cached_nearby_route_context ______________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_cancel_invalidates_cached_nearby_route_context(car):
+        executor = Executor(car, Ledger(), EventBus(), lambda *args: None)
+        await executor.run(route_plan("office"))
+        query = [PlannedCall("coffee", "find_nearby", {"category": "coffee"})]
+        await executor.run(query)
+        await executor.run([PlannedCall("cancel", "cancel_navigation", {})])
+        actual = (await executor.run(query)).outcomes["coffee"].result
+        expected = await build_car_manifest().get("find_nearby").fn(category="coffee")
+>       assert actual["places"] == expected["places"]
+E       AssertionError: assert [{'place_id':...our_min': 79}] == [{'place_id':...our_min': 67}]
+E         
+E         At index 0 diff: {'place_id': 'K_BLUETOKAI', 'name': 'Blue Tokai, Indiranagar', 'detour_min': 2} != {'place_id': 'K_BLUETOKAI', 'name': 'Blue Tokai, Indiranagar', 'detour_min': 1}
+E         Use -v to get more diff
+
+tests/unit/test_navigation_reliability.py:139: AssertionError
+__________ test_unknown_via_is_an_error_not_a_silently_changed_route ___________
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+
+    @pytest.mark.asyncio
+    async def test_unknown_via_is_an_error_not_a_silently_changed_route(car):
+        result = await car.get("compute_route").fn(destination="office", via="NONEXISTENT_ZZZ_1289")
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_navigation_reliability.py:145: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_reliability.py::test_specific_place_wins_over_generic_alias[Starbucks, Airport Road-K_SBUX_AIR]
+FAILED tests/unit/test_navigation_reliability.py::test_specific_place_wins_over_generic_alias[Starbucks Airport Road-K_SBUX_AIR]
+FAILED tests/unit/test_navigation_reliability.py::test_specific_place_wins_over_generic_alias[Manipal Hospital, Old Airport Road-P_HOSP]
+FAILED tests/unit/test_navigation_reliability.py::test_specific_place_wins_over_generic_alias[take me to Starbucks Airport Road-K_SBUX_AIR]
+FAILED tests/unit/test_navigation_reliability.py::test_airport_office_airport_returns_to_airport
+FAILED tests/unit/test_navigation_reliability.py::test_nearby_lookup_changes_with_destination
+FAILED tests/unit/test_navigation_reliability.py::test_adding_a_second_stop_preserves_first_stop_coordinates
+FAILED tests/unit/test_navigation_reliability.py::test_existing_stop_is_idempotent_by_resolved_place_id
+FAILED tests/unit/test_navigation_reliability.py::test_starting_active_route_preserves_added_stops
+FAILED tests/unit/test_navigation_reliability.py::test_cancel_returns_an_explicit_empty_route_snapshot
+FAILED tests/unit/test_navigation_reliability.py::test_route_context_changes_only_with_successful_mutation
+FAILED tests/unit/test_navigation_reliability.py::test_cancel_invalidates_cached_nearby_route_context
+FAILED tests/unit/test_navigation_reliability.py::test_unknown_via_is_an_error_not_a_silently_changed_route
+13 failed, 2 passed in 0.08s

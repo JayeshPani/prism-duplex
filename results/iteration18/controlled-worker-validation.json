@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-09-26T11:04:54.255699+00:00",
+  "status": "model_free_adapter_validation_passed_launcher_not_executed",
+  "files_sha256": {
+    "results/iteration18/controlled_worker.py": "ef823901fe86f4edfb04221843a4dd243ff63b2c7b0da77b76b42fb826b39b34",
+    "results/iteration18/test_controlled_worker.py": "437abc637f1db722d116941896977618165ab075d6ac1c19b3cd230a615c4879",
+    "results/iteration18/controlled-worker-tests.txt": "8aac72934b077956617556fa14f095d612a0fdb2ef09b3fef8d14582ccd1008b",
+    "results/iteration12/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+    "results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+    "scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1"
+  },
+  "hash_boundary": "Hashes checked after the focused tests and CLI help completed, before any model/service launch. This receipt is not a model or runtime worker validation.",
+  "invocation": ".venv/bin/python results/iteration18/controlled_worker.py --policy baseline|candidate --condition-file PATH --protocol results/iteration18/protocol.json --manifest PATH",
+  "focused_tests": {
+    "command": ".venv/bin/python -m pytest results/iteration18/test_controlled_worker.py -q",
+    "passed": 11,
+    "elapsed_seconds": 0.66,
+    "exit_code": 0,
+    "output": "results/iteration18/controlled-worker-tests.txt",
+    "scope": "Real LocalSTT pending/completion lifecycle with stub engine, injected sleep barrier, real SDK AudioOutput chain; no models, services, RTC network or native inference."
+  },
+  "checks": [
+    "Returned nonempty and empty text remain pending throughout injected hold; engine observation finishes before hold starts; completion emitted afterward.",
+    "Native-await and delivery-hold cancellation propagate and report cancelled, never confirmed empty; context does not leak to later calls.",
+    "Engine failure identity is preserved and receives no added delay.",
+    "Each LocalSTT object binds once, concurrent task contexts remain separate, later condition change does not alter the old binding, and repeated recognitions in a delayed case all retain delay.",
+    "Warmup, normal and nested whole-span retranscription, and inherited child-task engine calls are excluded.",
+    "Unknown case, mismatched delay or boolean delay fail before backend invocation.",
+    "Baseline public chain delegates PCM, playback events, pause, resume, flush and clear without evaluating recognition state.",
+    "CLI help completes without main model imports; method and dependency Python AST parse."
+  ],
+  "independent_read_only_review": {
+    "reviewer": "/root/place_clarification",
+    "finding": "No concrete adapter ordering/context flaw. Same-task/engine scope, post-observed-native delay, whole-span reset, unchanged errors/cancellation and baseline chaining checked.",
+    "suite_requirement": "Must not change condition file until preceding room departure is verified. Condition is deliberately bound at first recognition, not inferred from packet payload or model output."
+  },
+  "dependencies": {
+    "stt_observer": "results/iteration12/stt_diagnostics.py",
+    "same_bytes_as": "results/iteration17-cache2-before/stt_diagnostics.py",
+    "same_sha256": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+    "aec_launcher": "results/iteration11/instrumented_worker.py"
+  },
+  "runtime_outputs": [
+    "experiment-worker-selection.json",
+    "recognition-delivery-diagnostics.json",
+    "stt-diagnostics/report.json",
+    "stt-diagnostics-exit.json",
+    "aec-discard-diagnostics.json",
+    "worker-manifest.json"
+  ],
+  "limits": [
+    "Injected sleep barrier checks requested duration=5 but does not measure five seconds of actual elapsed waiting; live execution remains pending.",
+    "Only baseline output policy differs between arms; both use current LocalSTT pending counters and shared SDK false-interruption logging.",
+    "Exact runtime condition bytes/hash and get_job_context room are retained once per LocalSTT. Serial suite transition log and verified room departure remain runner responsibilities.",
+    "All diagnostic rows remain buffered until launcher exit. Abrupt process termination can leave reports unavailable.",
+    "No production, historical/frozen method, configuration, raw audio or git staging edits were performed."
+  ]
+}

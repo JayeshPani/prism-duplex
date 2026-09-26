@@ -1,0 +1,47 @@
+{
+  "declared_at_utc": "2026-09-26T04:26:16.234535+00:00",
+  "hypothesis": "Offloading durable attempt-log I/O frees the asyncio loop during disk/lock stalls while preserving persistence-before-entry, post-await intent validation, truthful outcomes and bounded cleanup reporting.",
+  "evidence_prompt": "Iteration 5 recorded a 612.5 ms watchdog interval, sampled inside synchronous telemetry os.replace. This does not isolate replace duration or prove a missed interruption.",
+  "scope": "Attempt logger only. Preserve snapshot format, locks and durability; keep arbitrary legacy callbacks and event sinks synchronous. No model/audio tuning.",
+  "acceptance": [
+    "Existing telemetry/crash/upstream collection regressions remain passing",
+    "Event-loop witness runs while start and completion logging are held",
+    "Correction or close during start prevents backend entry and releases the ledger reservation",
+    "Late saved cancelled intention is retained/finalized, with owned work and observed errors",
+    "Known completion stays done during logging cancellation or timeout",
+    "Shutdown reports pending telemetry without inventing unknown effects; native disk threads are not claimed stopped",
+    "Attempt identity and argument bytes remain stable across the new await boundary"
+  ],
+  "planned_comparison": {
+    "method": "Fresh subprocess per condition; existing synchronous executor versus candidate. Real FDBToolLogger with a declared 100 ms sleep injected before os.replace for start or finish. asyncio ticker every 5 ms while a single successful no-op mock write runs.",
+    "run_order": [
+      "start",
+      "start",
+      "start",
+      "start",
+      "start",
+      "finish",
+      "finish",
+      "finish",
+      "finish",
+      "finish"
+    ],
+    "metrics": [
+      "maximum loop ticker scheduling lateness",
+      "backend effects",
+      "row statuses and attempt count",
+      "overall run time"
+    ],
+    "limitations": "Fault injection and no-op backend; not a repeat of the observed storage cause, live RTC latency, microphone interaction or throughput. All runs retained; no threshold tuning."
+  },
+  "baseline": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "python": "3.9.6",
+    "source_sha256": {
+      "agent/coordinator/executor.py": "dec83a0ae501008370d3f4714808a9dff04bacd56a175bb7296369e467c67f30",
+      "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+      "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+      "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af"
+    }
+  }
+}

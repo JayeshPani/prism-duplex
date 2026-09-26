@@ -1,0 +1,92 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_read_cache_does_not_reuse_result_from_a_changed_context[start_persistence] _
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-47/test_read_cache_does_not_reuse0/attempts.jsonl')
+change_during = 'start_persistence'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("change_during", ["start_persistence", "backend_read"])
+    async def test_read_cache_does_not_reuse_result_from_a_changed_context(log_path, change_during):
+        logger = HeldLogger("started" if change_during == "start_persistence" else "none")
+        state, observed = {"scope": "A"}, []
+        backend_entered, release_backend = asyncio.Event(), asyncio.Event()
+    
+        async def act():
+            if change_during == "backend_read" and not observed:
+                backend_entered.set()
+                await release_backend.wait()
+            observed.append(state["scope"])
+            return {"status": "success", "scope": state["scope"]}
+    
+        engine = executor(act, logger, changing=False)
+        engine.manifest.tools["act"].cache_context = lambda: state["scope"]
+        task = asyncio.create_task(engine.run([PlannedCall("first", "act", {})]))
+        try:
+            if change_during == "start_persistence":
+                await witness_responsive_loop(logger)
+            else:
+                await asyncio.wait_for(backend_entered.wait(), 2)
+            assert observed == []
+            state["scope"] = "B"
+            logger.release.set()
+            release_backend.set()
+            first = await asyncio.wait_for(task, 2)
+            assert first.outcomes["first"].result["scope"] == "B"
+    
+            state["scope"] = "A"
+            second = await asyncio.wait_for(engine.run([PlannedCall("second", "act", {})]), 2)
+>           assert second.outcomes["second"].status == "done"
+E           AssertionError: assert 'reused' == 'done'
+E             
+E             - done
+E             + reused
+
+tests/unit/test_async_dispatch_telemetry.py:373: AssertionError
+__ test_read_cache_does_not_reuse_result_from_a_changed_context[backend_read] __
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-47/test_read_cache_does_not_reuse1/attempts.jsonl')
+change_during = 'backend_read'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("change_during", ["start_persistence", "backend_read"])
+    async def test_read_cache_does_not_reuse_result_from_a_changed_context(log_path, change_during):
+        logger = HeldLogger("started" if change_during == "start_persistence" else "none")
+        state, observed = {"scope": "A"}, []
+        backend_entered, release_backend = asyncio.Event(), asyncio.Event()
+    
+        async def act():
+            if change_during == "backend_read" and not observed:
+                backend_entered.set()
+                await release_backend.wait()
+            observed.append(state["scope"])
+            return {"status": "success", "scope": state["scope"]}
+    
+        engine = executor(act, logger, changing=False)
+        engine.manifest.tools["act"].cache_context = lambda: state["scope"]
+        task = asyncio.create_task(engine.run([PlannedCall("first", "act", {})]))
+        try:
+            if change_during == "start_persistence":
+                await witness_responsive_loop(logger)
+            else:
+                await asyncio.wait_for(backend_entered.wait(), 2)
+            assert observed == []
+            state["scope"] = "B"
+            logger.release.set()
+            release_backend.set()
+            first = await asyncio.wait_for(task, 2)
+            assert first.outcomes["first"].result["scope"] == "B"
+    
+            state["scope"] = "A"
+            second = await asyncio.wait_for(engine.run([PlannedCall("second", "act", {})]), 2)
+>           assert second.outcomes["second"].status == "done"
+E           AssertionError: assert 'reused' == 'done'
+E             
+E             - done
+E             + reused
+
+tests/unit/test_async_dispatch_telemetry.py:373: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_read_cache_does_not_reuse_result_from_a_changed_context[start_persistence]
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_read_cache_does_not_reuse_result_from_a_changed_context[backend_read]
+2 failed, 12 deselected in 0.45s

@@ -1,0 +1,1738 @@
+{
+  "created_at_utc": "2026-09-26T06:42:30.676460+00:00",
+  "scope": "All declared iteration10 raw captures, room-filtered tool/server traces and runner cleanup; no inference or content quality score.",
+  "summary": {
+    "declared_trials": 4,
+    "audited_trials": 4,
+    "shared_attempts": 16,
+    "successful_attempts": 16,
+    "attempt_status_counts": {
+      "done": 16
+    },
+    "attempts_without_end": 0,
+    "observed_effects": 6,
+    "checks": {
+      "agent_departed": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "all_attempts_done": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "all_done_results_successful": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "attempt_count": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "attempt_event_pairs": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "attempt_sequence": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "capture_completed": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "declared_effect_facts": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "declared_input_audio": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "declared_input_count": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "expected_effects": {
+        "passed": 3,
+        "evaluated": 4
+      },
+      "frame_integrity": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "frozen_source_receipts": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "full_trace_equality": {
+        "passed": 2,
+        "evaluated": 4
+      },
+      "no_capture_errors": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "no_server_tool_errors": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "no_stale_results": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "old_result_interruption_requested": {
+        "passed": 0,
+        "evaluated": 3
+      },
+      "raw_hashes": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "result_after_effect_1": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "result_after_effect_2": {
+        "passed": 1,
+        "evaluated": 3
+      },
+      "room_cleanup_logged": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "speech_handles_settled": {
+        "passed": 1,
+        "evaluated": 4
+      },
+      "transcript_1": {
+        "passed": 4,
+        "evaluated": 4
+      },
+      "transcript_2": {
+        "passed": 1,
+        "evaluated": 3
+      }
+    }
+  },
+  "suite_status": "completed_with_failed_captures",
+  "undeclared_runs": [],
+  "unassigned_attempts": [],
+  "failed_checks": [
+    {
+      "name": "rtc-waypoint-1",
+      "checks": [
+        "old_result_interruption_requested",
+        "speech_handles_settled"
+      ]
+    },
+    {
+      "name": "rtc-baseline-1",
+      "checks": [
+        "full_trace_equality"
+      ]
+    },
+    {
+      "name": "rtc-waypoint-2",
+      "checks": [
+        "transcript_2",
+        "result_after_effect_2",
+        "old_result_interruption_requested",
+        "speech_handles_settled"
+      ]
+    },
+    {
+      "name": "rtc-correction-1",
+      "checks": [
+        "capture_completed",
+        "full_trace_equality",
+        "attempt_sequence",
+        "attempt_count",
+        "expected_effects",
+        "declared_effect_facts",
+        "transcript_2",
+        "result_after_effect_2",
+        "old_result_interruption_requested",
+        "speech_handles_settled"
+      ]
+    }
+  ],
+  "frozen_inputs_unchanged_at_end": true,
+  "current_frozen_input_mismatches": [],
+  "worker_cleanup": {
+    "clean_exit": true,
+    "all_agents_departed": true,
+    "records": [
+      {
+        "role": "worker",
+        "pid": 23181,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "scripts/local_livekit_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/local-stack-run1/worker-manifest.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T06:42:16.497880+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 23175,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T06:42:16.626222+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 23174,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T06:42:16.635478+00:00"
+      }
+    ],
+    "drain_logs": [
+      {
+        "message": "draining worker",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "id": "AW_gMBhqUzQX47D",
+        "timeout": 3600,
+        "pid": 23181,
+        "timestamp": "2026-09-26T06:42:15.239090+00:00"
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "results/iteration10/audit_live.py": "6546d24f03391da08f94779997f8724fb209dcc3ed1e47f7b318122f9b47566e",
+    "results/iteration10/protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+    "results/iteration10/run-report.json": "47f7b94da193059dfad272f0ba546a65703b922d990838d76b9f923f7e3aead5",
+    "results/iteration10/local-stack-run1/worker.log": "ef75e9a919ddeae2433db9be2dd698907e8146ab19934e64504f13ca3f454070",
+    "results/iteration10/local-stack-run1/tool-calls.jsonl": "a393f6693b55ccd93753a70fa357d9fd14f6d1edf962d233f9ff386a4c382477"
+  },
+  "limitations": [
+    "Four serial repeated development cases with a shared warm stack; no general accuracy, physical playback, capacity or live slow-logging benefit claim.",
+    "Full trace equality failures are retained. Missing initial listening and server events after client disconnect are classified separately; wall-clock boundary ordering uses same-host clocks and is not exact transport attribution.",
+    "Latency uses client monotonic receipt versus scheduled 20 ms RMS-threshold input boundaries. Tool start is durable intention preparation, not confirmed backend entry. Ack and substantive response remain separate.",
+    "Per-turn mutation timing names the declared state-changing tool, including add_waypoint. The driver labels every triggered second utterance correction; waypoint requests add a stop without replacing the destination.",
+    "Old speech tail scans every above-threshold frame before the next utterance queue, including untagged tail. PCM/text association is heuristic; interruption_requested is not confirmed physical stop time.",
+    "Frame offsets verify saved PCM completeness, not receipt of every transmitted packet or drainage of SDK queues. No concatenation introduces missing wall-clock gaps.",
+    "Whole received-audio ASR and semantic speech review are separate pending artifacts; declared text plus PCM is not proof of intelligibility or complete content.",
+    "Agent absence, cleanup logs and worker exit are separate observations. No room deletion is used. Late server events after recorder exit remain in raw traces.",
+    "Malformed or missing trials remain in the declared denominator with audit_error; unassigned attempt rows are preserved. Runtime worker warnings require separate inspection."
+  ],
+  "trials": [
+    {
+      "name": "rtc-waypoint-1",
+      "case": "waypoint",
+      "room": "car-audio-41244080711149eb8a37da7667a0624f",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": true,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "declared_effect_facts": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "declared_input_count": true,
+        "declared_input_audio": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "transcript_2": true,
+        "result_after_effect_2": true,
+        "old_result_interruption_requested": false,
+        "speech_handles_settled": false
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "MG Road Metro Station"
+          },
+          "timestamp_start": 1790404732.7941508,
+          "attempt_id": "2518269005ac4b98992ff7aba641768d:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404732.79926,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_MGROAD"
+          },
+          "timestamp_start": 1790404732.8007941,
+          "attempt_id": "2518269005ac4b98992ff7aba641768d:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404735.3034391,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790404735.30552,
+          "attempt_id": "2518269005ac4b98992ff7aba641768d:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404735.306786,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "find_nearby",
+          "args": {
+            "category": "coffee"
+          },
+          "timestamp_start": 1790404751.4906309,
+          "attempt_id": "3c903cda072c4b84b4da5a501a074e55:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404751.494405,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "add_waypoint",
+          "args": {
+            "place_id": "K_BLUETOKAI"
+          },
+          "timestamp_start": 1790404751.496594,
+          "attempt_id": "3c903cda072c4b84b4da5a501a074e55:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404751.497695,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "2518269005ac4b98992ff7aba641768d",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790404735.306672
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "3c903cda072c4b84b4da5a501a074e55",
+            "operation_id": "turn-2",
+            "id": "c2",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "K_BLUETOKAI"
+            },
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": false,
+              "extra_min": 0,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 5.3,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790404751.4975832
+        }
+      ],
+      "trace": {
+        "server_count": 55,
+        "client_count": 55,
+        "missing": [],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "mutation_tool": "start_navigation",
+          "speech_onset_monotonic": 123030.686468,
+          "speech_end_monotonic": 123032.806468,
+          "transcript": "Navigate to MG Road Metro Station.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 1970.709,
+            "ack_text_ms": 2678.562,
+            "result_text_ms": 17208.36,
+            "first_tool_intention_ms": 14696.837,
+            "mutation_intention_ms": 17204.689,
+            "mutation_success_ms": 17205.942,
+            "first_ack_pcm_ms": 3437.789,
+            "first_result_pcm_ms": 18517.66,
+            "result_handle_finished_ms": 27305.137
+          }
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "mutation_tool": "add_waypoint",
+          "speech_onset_monotonic": 123051.344307041,
+          "speech_end_monotonic": 123052.824307041,
+          "transcript": "Add the nearest coffee as a stop.",
+          "utterances": [
+            {
+              "text": "Okay, one sec.",
+              "intent_version": 2,
+              "kind": "ack"
+            },
+            {
+              "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+              "intent_version": 2,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 8615.539,
+            "ack_text_ms": 9346.899,
+            "result_text_ms": 13416.98,
+            "first_tool_intention_ms": 13373.172,
+            "mutation_intention_ms": 13377.272,
+            "mutation_success_ms": 13416.421,
+            "first_ack_pcm_ms": 11099.703,
+            "first_result_pcm_ms": 14279.636,
+            "result_handle_finished_ms": 22263.622
+          }
+        }
+      ],
+      "interruption": {
+        "old_handle": {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_6461ab2943a6",
+          "queued_at": 123050.015082166,
+          "state": "finished",
+          "first_loud_at": 123051.324128166,
+          "preceding_quiet_seconds": 14.420163916001911,
+          "last_loud_at": 123060.044322625,
+          "ended_at": 123060.111605166,
+          "error": null
+        },
+        "last_old_frame_line": 1469,
+        "last_old_frame": {
+          "received_monotonic": 123060.044322625,
+          "received_unix": 1790404745.340087,
+          "track_sid": "TR_AMuQUmKRj77jbx",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 1409280,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -35.56459967163533,
+          "heuristic_result_speech_id": "speech_6461ab2943a6"
+        },
+        "following_frame": {
+          "received_monotonic": 123060.063677333,
+          "received_unix": 1790404745.3594382,
+          "track_sid": "TR_AMuQUmKRj77jbx",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 1410240,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -53.537955890847584,
+          "heuristic_result_speech_id": null
+        },
+        "last_old_pcm_after_input_onset_ms": 8700.016,
+        "user_speaking_after_input_onset_ms": 184.492,
+        "handle_interruption_after_input_onset_ms": 8767.298,
+        "untagged_tail_after_recorder_last_ms": 0.0,
+        "next_utterance_queue_monotonic": 123062.172759208
+      },
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_6a59e3bae6f4",
+          "queued_at": 123035.485295541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 123037.047832916,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_6461ab2943a6",
+          "queued_at": 123050.015082166,
+          "state": "finished",
+          "first_loud_at": 123051.324128166,
+          "preceding_quiet_seconds": 14.420163916001911,
+          "last_loud_at": 123060.044322625,
+          "ended_at": 123060.111605166,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_60ced7ab1780",
+          "queued_at": 123062.172759208,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 123064.921491708,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_2a93d0ecf9a9",
+          "queued_at": 123066.241468541,
+          "state": "finished",
+          "first_loud_at": 123067.103943083,
+          "preceding_quiet_seconds": 2.299873583004228,
+          "last_loud_at": 123075.024285958,
+          "ended_at": 123075.087928708,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-41244080711149eb8a37da7667a0624f",
+        "started_at": "2026-09-26T06:39:21.986594+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T06:39:21.986733+00:00",
+            "elapsed_seconds": 0.00013183300325181335,
+            "participants": [
+              {
+                "identity": "agent-AJ_ADdd8jgRMmsM",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:22.498403+00:00",
+            "elapsed_seconds": 0.5118064580019563,
+            "participants": [
+              {
+                "identity": "agent-AJ_ADdd8jgRMmsM",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:23.000510+00:00",
+            "elapsed_seconds": 1.013910041001509,
+            "participants": [
+              {
+                "identity": "agent-AJ_ADdd8jgRMmsM",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:23.501757+00:00",
+            "elapsed_seconds": 1.5151527909911238,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T06:39:23.502791+00:00",
+        "elapsed_seconds": 1.5161867499991786
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-41244080711149eb8a37da7667a0624f",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:39:23.453935+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-41244080711149eb8a37da7667a0624f",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:39:23.456313+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d",
+        "worker_manifest.json": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6",
+        "events.jsonl": "aef11b693e8d283f309b912c27fc1ac6f1f75b35ed259a6e4873c3fd5ce3d1d9",
+        "correction.wav": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c",
+        "frames.jsonl": "741910b78cd454512432234be14adb2d861354502b4286151545e9a5fc4095cb",
+        "protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+        "received-1.pcm": "a304003eded7829fb36d3ac04592a4e848a1903e757eb963c53f3ac9ef0bb190",
+        "report.json": "3d7136b519d808b6497c4c2edfcd1e855aad1c7e3200e3ad7ef4dad251f010f3",
+        "server_trace": "d692762a17f3bf7af1586673e4d906f43d8f308a783eed1c0cc2391eedab4eae"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 2272,
+        "pcm_bytes": {
+          "received-1.pcm": 2181120
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-baseline-1",
+      "case": "baseline",
+      "room": "car-audio-32063eadc7ac42bcacb4ef899e479046",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": false,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "declared_effect_facts": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "declared_input_count": true,
+        "declared_input_audio": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "speech_handles_settled": true
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790404779.163998,
+          "attempt_id": "f3c5f3b65c4f46099e826384b6e138cd:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404779.167488,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790404779.168674,
+          "attempt_id": "f3c5f3b65c4f46099e826384b6e138cd:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404781.671175,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790404781.672611,
+          "attempt_id": "f3c5f3b65c4f46099e826384b6e138cd:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404781.67377,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "f3c5f3b65c4f46099e826384b6e138cd",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790404781.673651
+        }
+      ],
+      "trace": {
+        "server_count": 29,
+        "client_count": 28,
+        "missing": [
+          {
+            "line": 1,
+            "event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790404764.392321
+            },
+            "classification": "initial_listening"
+          }
+        ],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "mutation_tool": "start_navigation",
+          "speech_onset_monotonic": 123079.159522666,
+          "speech_end_monotonic": 123080.41952266601,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 9191.524,
+            "ack_text_ms": 9900.945,
+            "result_text_ms": 15962.241,
+            "first_tool_intention_ms": 13451.591,
+            "mutation_intention_ms": 15958.053,
+            "mutation_success_ms": 15959.752,
+            "first_ack_pcm_ms": 11501.347,
+            "first_result_pcm_ms": 17243.392,
+            "result_handle_finished_ms": 22970.378
+          }
+        }
+      ],
+      "interruption": null,
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_2ca10e5c4db6",
+          "queued_at": 123090.320916041,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 123092.720335541,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_596a969e083a",
+          "queued_at": 123096.382210208,
+          "state": "finished",
+          "first_loud_at": 123097.662915041,
+          "preceding_quiet_seconds": 5.079956875008065,
+          "last_loud_at": 123103.362583375,
+          "ended_at": 123103.389901125,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-32063eadc7ac42bcacb4ef899e479046",
+        "started_at": "2026-09-26T06:39:49.987827+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T06:39:50.048514+00:00",
+            "elapsed_seconds": 0.0643912089872174,
+            "participants": [
+              {
+                "identity": "agent-AJ_gGukZGda6qa8",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:50.695190+00:00",
+            "elapsed_seconds": 0.7073679589957464,
+            "participants": [
+              {
+                "identity": "agent-AJ_gGukZGda6qa8",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:51.199587+00:00",
+            "elapsed_seconds": 1.2117494169942802,
+            "participants": [
+              {
+                "identity": "agent-AJ_gGukZGda6qa8",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:51.710477+00:00",
+            "elapsed_seconds": 1.7226369169948157,
+            "participants": [
+              {
+                "identity": "agent-AJ_gGukZGda6qa8",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:39:52.212579+00:00",
+            "elapsed_seconds": 2.2247376249870285,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T06:39:52.222062+00:00",
+        "elapsed_seconds": 2.2342159589898074
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-32063eadc7ac42bcacb4ef899e479046",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:39:51.796972+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-32063eadc7ac42bcacb4ef899e479046",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:39:51.799130+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6",
+        "events.jsonl": "631189ac03fca4ae2bcb1711849408f07b5985ecbdf28512c64ee03355c25a0c",
+        "frames.jsonl": "50f3d6da1b737b2d79ed53ff10aeefa547c6541821ea944f99dfbc3264ec0c06",
+        "protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+        "received-1.pcm": "67198ed3942c74648a3d61961ea3a96d6caaede96ffd3c68008350067ec19476",
+        "report.json": "f6548178a1499e603209f6860b002e4981b72682abb52fb8816e0a05aad9d39b",
+        "server_trace": "240959d14705c94f6ecedf3704533363753156874c4f3f20f647ceb62c22ad6d"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 1265,
+        "pcm_bytes": {
+          "received-1.pcm": 1214400
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-waypoint-2",
+      "case": "waypoint",
+      "room": "car-audio-5561ee0cae724b0494a81bf2579f1f13",
+      "checks": {
+        "capture_completed": true,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": true,
+        "attempt_sequence": true,
+        "attempt_count": true,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": true,
+        "declared_effect_facts": true,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "declared_input_count": true,
+        "declared_input_audio": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "transcript_2": false,
+        "result_after_effect_2": false,
+        "old_result_interruption_requested": false,
+        "speech_handles_settled": false
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "MG Road Metro Station"
+          },
+          "timestamp_start": 1790404812.931544,
+          "attempt_id": "bc1623fb165842e68013484a7c79bd15:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404812.954106,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_MGROAD"
+          },
+          "timestamp_start": 1790404812.960701,
+          "attempt_id": "bc1623fb165842e68013484a7c79bd15:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404815.462695,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790404815.4646971,
+          "attempt_id": "bc1623fb165842e68013484a7c79bd15:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404815.465816,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "find_nearby",
+          "args": {
+            "category": "coffee"
+          },
+          "timestamp_start": 1790404834.803262,
+          "attempt_id": "06bf84744a784b1e8e9155d410ff4a77:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404834.8083022,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "add_waypoint",
+          "args": {
+            "place_id": "K_BLUETOKAI"
+          },
+          "timestamp_start": 1790404834.80968,
+          "attempt_id": "06bf84744a784b1e8e9155d410ff4a77:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404834.8116338,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "bc1623fb165842e68013484a7c79bd15",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790404815.465719
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "06bf84744a784b1e8e9155d410ff4a77",
+            "operation_id": "turn-3",
+            "id": "c2",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "K_BLUETOKAI"
+            },
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": false,
+              "extra_min": 0,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 5.3,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 2
+          },
+          "ts": 1790404834.81151
+        }
+      ],
+      "trace": {
+        "server_count": 66,
+        "client_count": 66,
+        "missing": [],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "mutation_tool": "start_navigation",
+          "speech_onset_monotonic": 123108.699827416,
+          "speech_end_monotonic": 123110.819827416,
+          "transcript": "Navigate to MG Road Metro Station.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 12404.322,
+            "ack_text_ms": 13113.259,
+            "result_text_ms": 19353.195,
+            "first_tool_intention_ms": 16838.039,
+            "mutation_intention_ms": 19349.834,
+            "mutation_success_ms": 19351.263,
+            "first_ack_pcm_ms": 16828.979,
+            "first_result_pcm_ms": 20621.555,
+            "result_handle_finished_ms": 30394.556
+          }
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "mutation_tool": "add_waypoint",
+          "speech_onset_monotonic": 123131.462045708,
+          "speech_end_monotonic": 123132.942045708,
+          "transcript": "Add the nearest coffee as",
+          "utterances": [
+            {
+              "text": "Okay, one sec.",
+              "intent_version": 2,
+              "kind": "ack"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 10394.9,
+            "ack_text_ms": 11105.549,
+            "result_text_ms": null,
+            "first_tool_intention_ms": null,
+            "mutation_intention_ms": null,
+            "mutation_success_ms": null,
+            "first_ack_pcm_ms": null,
+            "first_result_pcm_ms": null,
+            "result_handle_finished_ms": null
+          }
+        }
+      ],
+      "interruption": {
+        "old_handle": {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_56c64d4d14f3",
+          "queued_at": 123130.174752666,
+          "state": "finished",
+          "first_loud_at": 123131.441382833,
+          "preceding_quiet_seconds": 3.7405460830050288,
+          "last_loud_at": 123141.160925,
+          "ended_at": 123141.214383416,
+          "error": null
+        },
+        "last_old_frame_line": 1625,
+        "last_old_frame": {
+          "received_monotonic": 123141.160925,
+          "received_unix": 1790404826.4570649,
+          "track_sid": "TR_AMU2u6AaAvUMmd",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 1559040,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -37.01702949097441,
+          "heuristic_result_speech_id": "speech_56c64d4d14f3"
+        },
+        "following_frame": {
+          "received_monotonic": 123141.179776458,
+          "received_unix": 1790404826.475921,
+          "track_sid": "TR_AMU2u6AaAvUMmd",
+          "pcm_file": "received-1.pcm",
+          "offset_bytes": 1560000,
+          "size_bytes": 960,
+          "samples": 480,
+          "rms_db": -55.20139888008999,
+          "heuristic_result_speech_id": null
+        },
+        "last_old_pcm_after_input_onset_ms": 9698.879,
+        "user_speaking_after_input_onset_ms": 277.641,
+        "handle_interruption_after_input_onset_ms": 9752.338,
+        "untagged_tail_after_recorder_last_ms": 0.0,
+        "next_utterance_queue_monotonic": 123144.047805291
+      },
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_e6c28c81654d",
+          "queued_at": 123123.935159666,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 123127.654284291,
+          "error": null
+        },
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_56c64d4d14f3",
+          "queued_at": 123130.174752666,
+          "state": "finished",
+          "first_loud_at": 123131.441382833,
+          "preceding_quiet_seconds": 3.7405460830050288,
+          "last_loud_at": 123141.160925,
+          "ended_at": 123141.214383416,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_139e3a85ab71",
+          "queued_at": 123144.047805291,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 123144.246403583,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 3,
+          "kind": "ack",
+          "speech_id": "speech_b0cdb46d7b4e",
+          "queued_at": 123145.336191125,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 123147.293934666,
+          "error": null
+        },
+        {
+          "text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.",
+          "intent_version": 3,
+          "kind": "result",
+          "speech_id": "speech_3c2d33743c87",
+          "queued_at": 123149.518427041,
+          "state": "finished",
+          "first_loud_at": 123150.640936833,
+          "preceding_quiet_seconds": 3.4794629579992034,
+          "last_loud_at": 123158.561412875,
+          "ended_at": 123158.620491666,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-5561ee0cae724b0494a81bf2579f1f13",
+        "started_at": "2026-09-26T06:40:45.058487+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T06:40:45.064443+00:00",
+            "elapsed_seconds": 0.005956084001809359,
+            "participants": [
+              {
+                "identity": "agent-AJ_HgiJPfbWRfCH",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:40:45.586140+00:00",
+            "elapsed_seconds": 0.5276567919936497,
+            "participants": [
+              {
+                "identity": "agent-AJ_HgiJPfbWRfCH",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:40:46.088641+00:00",
+            "elapsed_seconds": 1.0301640839898027,
+            "participants": [
+              {
+                "identity": "agent-AJ_HgiJPfbWRfCH",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:40:46.591249+00:00",
+            "elapsed_seconds": 1.5327565839979798,
+            "participants": [
+              {
+                "identity": "agent-AJ_HgiJPfbWRfCH",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:40:47.093180+00:00",
+            "elapsed_seconds": 2.034688333995291,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T06:40:47.094687+00:00",
+        "elapsed_seconds": 2.036189459002344
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-5561ee0cae724b0494a81bf2579f1f13",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:40:46.961881+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-5561ee0cae724b0494a81bf2579f1f13",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:40:46.964376+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d",
+        "worker_manifest.json": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6",
+        "events.jsonl": "43b41d5f8203629a0b1af5e91ce00593b70664dd14eb9d0a16e5b5b03fe71232",
+        "correction.wav": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c",
+        "frames.jsonl": "ed6374c02d8121957d4ce809510582991ecccd919cebc8bb6c91b21dfdfad047",
+        "protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+        "received-1.pcm": "5ef36cc954e9b727251459d2106b527fb28a027a5f19c6253ff860abb085d8d8",
+        "report.json": "234762ac24bedd1eb9a629fa5ffc9343a9268291bbd0f91fcf99adf9ed82be0a",
+        "server_trace": "d5a6ad0f5d4ac5ebcb569c2e9d990fe6ae68a54f37d895acc6ea489e49b8a693"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 2549,
+        "pcm_bytes": {
+          "received-1.pcm": 2447040
+        },
+        "invalid_lines": []
+      }
+    },
+    {
+      "name": "rtc-correction-1",
+      "case": "correction",
+      "room": "car-audio-4a3ef818129b4f95998d46f473752ba3",
+      "checks": {
+        "capture_completed": false,
+        "raw_hashes": true,
+        "frozen_source_receipts": true,
+        "full_trace_equality": false,
+        "attempt_sequence": false,
+        "attempt_count": false,
+        "attempt_event_pairs": true,
+        "all_attempts_done": true,
+        "all_done_results_successful": true,
+        "expected_effects": false,
+        "declared_effect_facts": false,
+        "no_stale_results": true,
+        "frame_integrity": true,
+        "no_capture_errors": true,
+        "no_server_tool_errors": true,
+        "agent_departed": true,
+        "room_cleanup_logged": true,
+        "declared_input_count": true,
+        "declared_input_audio": true,
+        "transcript_1": true,
+        "result_after_effect_1": true,
+        "transcript_2": false,
+        "result_after_effect_2": false,
+        "old_result_interruption_requested": false,
+        "speech_handles_settled": false
+      },
+      "calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "timestamp_start": 1790404865.971375,
+          "attempt_id": "833b00cc74ec453c9d55be084ab758f4:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404865.992942,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "timestamp_start": 1790404865.9990668,
+          "attempt_id": "833b00cc74ec453c9d55be084ab758f4:c2",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404868.510273,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "timestamp_start": 1790404868.51157,
+          "attempt_id": "833b00cc74ec453c9d55be084ab758f4:c3",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790404868.512655,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "effects": [
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "833b00cc74ec453c9d55be084ab758f4",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Kempegowda International Airport",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Kempegowda International Airport",
+              "destination_id": "P_AIRPORT",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 35.4,
+              "eta_min": 88,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  13.1989,
+                  77.7068
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 1
+          },
+          "ts": 1790404868.5125551
+        }
+      ],
+      "trace": {
+        "server_count": 30,
+        "client_count": 29,
+        "missing": [
+          {
+            "line": 1,
+            "event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790404848.313298
+            },
+            "classification": "initial_listening"
+          }
+        ],
+        "extra": []
+      },
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "mutation_tool": "start_navigation",
+          "speech_onset_monotonic": 123163.081021416,
+          "speech_end_monotonic": 123164.34102141601,
+          "transcript": "Navigate to the airport.",
+          "utterances": [
+            {
+              "text": "One moment.",
+              "intent_version": 1,
+              "kind": "ack"
+            },
+            {
+              "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+              "intent_version": 1,
+              "kind": "result"
+            }
+          ],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": 11269.497,
+            "ack_text_ms": 12014.217,
+            "result_text_ms": 18880.723,
+            "first_tool_intention_ms": 16367.794,
+            "mutation_intention_ms": 18877.182,
+            "mutation_success_ms": 18878.642,
+            "first_ack_pcm_ms": null,
+            "first_result_pcm_ms": 20415.152,
+            "result_handle_finished_ms": 26146.715
+          }
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "mutation_tool": "start_navigation",
+          "speech_onset_monotonic": 123184.796835875,
+          "speech_end_monotonic": 123186.576835875,
+          "transcript": null,
+          "utterances": [],
+          "speech_end_to_client_observation_ms": {
+            "transcript_ms": null,
+            "ack_text_ms": null,
+            "result_text_ms": null,
+            "first_tool_intention_ms": null,
+            "mutation_intention_ms": null,
+            "mutation_success_ms": null,
+            "first_ack_pcm_ms": null,
+            "first_result_pcm_ms": null,
+            "result_handle_finished_ms": null
+          }
+        }
+      ],
+      "interruption": null,
+      "probe": null,
+      "speech_handles": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_4acd35980c27",
+          "queued_at": 123176.3582835,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 123180.680545125,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_cd2f9a0db41e",
+          "queued_at": 123183.221971541,
+          "state": "finished",
+          "first_loud_at": 123184.756173458,
+          "preceding_quiet_seconds": null,
+          "last_loud_at": 123190.436027083,
+          "ended_at": 123190.487736791,
+          "error": null
+        }
+      ],
+      "server_error_events": [],
+      "capture_errors": {
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      "room_departure": {
+        "room": "car-audio-4a3ef818129b4f95998d46f473752ba3",
+        "started_at": "2026-09-26T06:42:13.191100+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T06:42:13.197608+00:00",
+            "elapsed_seconds": 0.006363666994730011,
+            "participants": [
+              {
+                "identity": "agent-AJ_KQiFEiyr3ziq",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:42:13.725237+00:00",
+            "elapsed_seconds": 0.5340056669956539,
+            "participants": [
+              {
+                "identity": "agent-AJ_KQiFEiyr3ziq",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:42:14.228606+00:00",
+            "elapsed_seconds": 1.0373627499939175,
+            "participants": [
+              {
+                "identity": "agent-AJ_KQiFEiyr3ziq",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:42:14.731361+00:00",
+            "elapsed_seconds": 1.5401149169920245,
+            "participants": [
+              {
+                "identity": "agent-AJ_KQiFEiyr3ziq",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T06:42:15.233242+00:00",
+            "elapsed_seconds": 2.041996208994533,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T06:42:15.235108+00:00",
+        "elapsed_seconds": 2.043854958988959
+      },
+      "room_cleanup_logs": [
+        {
+          "message": "room cleanup started: car-audio-4a3ef818129b4f95998d46f473752ba3",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:42:15.063282+00:00"
+        },
+        {
+          "message": "room cleanup finished: car-audio-4a3ef818129b4f95998d46f473752ba3",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 23181,
+          "timestamp": "2026-09-26T06:42:15.064923+00:00"
+        }
+      ],
+      "raw_sha256": {
+        "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+        "worker_manifest.json": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6",
+        "events.jsonl": "46f1e62f9f7f8d91cc6bcaebcafcd3619e91c9e7a020abaf57eb07b42cf091ac",
+        "correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+        "frames.jsonl": "48bb70aae7bfa18cc3b5f93d6e68ad9a81493a14fbbb527d87f61d190af09631",
+        "protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+        "received-1.pcm": "26538b269731f4ec1eb50fb8b5a3d73c8ad46a93322d3d34eb4f77f9d2387e0b",
+        "report.json": "a662b7a6f50edd4d075d79f93abe766743deaa33b3a26eb4f6b2b9e2829d8976",
+        "server_trace": "af2187a4e1181d06b4f32637481528e25a71e3c4224f91a1e297bc8ea8e5638a"
+      },
+      "hash_mismatches": {
+        "artifacts": [],
+        "capture_frozen_sources": [],
+        "worker_sources": []
+      },
+      "frames": {
+        "count": 4234,
+        "pcm_bytes": {
+          "received-1.pcm": 4064640
+        },
+        "invalid_lines": []
+      }
+    }
+  ]
+}

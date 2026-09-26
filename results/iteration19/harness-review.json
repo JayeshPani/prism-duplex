@@ -1,0 +1,218 @@
+{
+  "created_at_utc": "2026-09-26T12:19:08.346432+00:00",
+  "status": "reviewed_no_open_concrete_blocker",
+  "scope": "Independent read-only iteration19 harness review before preflight/render. No models, services, RTC or inference launched; no method/production edits.",
+  "checks": {
+    "candidate_source_sha256_matches": true,
+    "baseline_package_sha256_matches": true,
+    "baseline_overrides_sha256_matches": true,
+    "baseline_receipt_hash_matches": true,
+    "exact_five_module_overlay": true,
+    "five_overlay_hashes_equal_iteration18": true,
+    "complete_baseline_package_inventory": true,
+    "both_arms_preserve_iteration18_recognition_guard": true,
+    "reviewed_methods_parse": true,
+    "baseline_package_selection": true,
+    "baseline_case_order": true,
+    "candidate_package_selection": true,
+    "candidate_case_order": true,
+    "same_llm_command_and_transport": true,
+    "cache_entries2": true,
+    "denominators10_20_6_8": true,
+    "no_recognition_delay": true,
+    "cancel_noop_not_navigation_effect": true,
+    "boundary_final_reply_mode_non_ack": true,
+    "pre_render_review": true
+  },
+  "declared_denominators": {
+    "captures": 10,
+    "input_publications": 20,
+    "navigation_effects": 6,
+    "rendered_stems": 8
+  },
+  "source_inventory": {
+    "candidate_files": 26,
+    "baseline_package_files": 26,
+    "historical_overlay_files": 5,
+    "checked_source_entries": 57,
+    "changed_modules": [
+      "agent/coordinator/coordinator.py",
+      "agent/coordinator/resolver.py",
+      "agent/coordinator/responder.py",
+      "agent/tools/car_tools.py",
+      "agent/tools/manifest.py"
+    ]
+  },
+  "model_free_import_probes": [
+    {
+      "arm": "baseline",
+      "python": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "exit_code": 0,
+      "stderr": "",
+      "agent_modules_loaded": 14,
+      "all_module_paths_under_selected_agent_package": true,
+      "continuation_hook_present": false,
+      "bytecode_writes_disabled": true,
+      "imports": [
+        "agent.coordinator.coordinator.Coordinator",
+        "agent.coordinator.responder.Responder",
+        "agent.tools.car_tools.build_car_manifest"
+      ],
+      "method": "Fresh Python -B subprocess; insert chosen package root before importing agent; inspect all loaded agent module paths/hashes. No agent.main or speech pipeline imported and no tools dispatched."
+    },
+    {
+      "arm": "candidate",
+      "python": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "exit_code": 0,
+      "stderr": "",
+      "agent_modules_loaded": 14,
+      "all_module_paths_under_selected_agent_package": true,
+      "continuation_hook_present": true,
+      "bytecode_writes_disabled": true,
+      "imports": [
+        "agent.coordinator.coordinator.Coordinator",
+        "agent.coordinator.responder.Responder",
+        "agent.tools.car_tools.build_car_manifest"
+      ],
+      "method": "Fresh Python -B subprocess; insert chosen package root before importing agent; inspect all loaded agent module paths/hashes. No agent.main or speech pipeline imported and no tools dispatched."
+    }
+  ],
+  "independently_computed_map_expectations": {
+    "method": "Pure _lookup, _km and _minutes functions from each separately imported car_tools package; no backend writes/model/audio execution. Both arms agreed.",
+    "destinations": {
+      "P_HOSP": {
+        "distance_km": 2.2,
+        "eta_min": 5
+      },
+      "K_TWC_HEB": {
+        "distance_km": 12.3,
+        "eta_min": 31
+      },
+      "C_ATHER_IND": {
+        "distance_km": 1.0,
+        "eta_min": 2
+      }
+    },
+    "ambiguity_candidates": {
+      "Airport Road": [
+        "P_HOSP",
+        "K_SBUX_AIR"
+      ],
+      "Hebbal": [
+        "C_TATA_HEB",
+        "K_TWC_HEB",
+        "F_IOC_HEB"
+      ],
+      "Indiranagar": [
+        "P_HOME",
+        "C_ATHER_IND",
+        "K_BLUETOKAI"
+      ]
+    }
+  },
+  "static_review": [
+    "controlled_worker selects complete package before agent imports, verifies all imported agent paths against that package and preflight, overrides legacy worker ROOT only for manifest source inventory, then restores it. Existing iteration11 AEC observer and iteration12 STT observer do not swap recognition policy or inject delivery hold.",
+    "Both arm manifests and client commands retain fresh non-ack response-finished followup triggering. Final mode is result for positive navigation and non-ack for cancel/query. Client capture completion is not a task-success score.",
+    "Initial no-call clarification is allowed and explicitly means the structured-place-error continuation hook was not exercised. No forced initial lookup, candidate selection, retry, rerender, or failed-case omission is scheduled.",
+    "Runner has finite startup waits, one driver per declared case,180s trial deadline plus bounded terminate/kill waits,10s departure observation, and stops before the next case if departure is unverified. Service cleanup uses20s then5s escalation; all3 expected clean exits are required for completed status.",
+    "Outer supervisor has finite360s input/1500s arm/600s ASR limits and bounded signal grace. Receipts preserve deadlines/nonzero exits; outputs use new paths. Source freeze is checked before each capture and in final cleanup.",
+    "Whole-stream ASR requires both suite terminal receipts and recorded driver/service PIDs absent before importing/loading ASR. All declared rows, unavailable captures and per-call failures remain. Post-verification waits for all five phases and all tracked PIDs before model byte reads.",
+    "Post-verifier now validates worker policy/package/config/plan/protocol, imported module hashes before/after, diagnostics flush, and manifest source hash references before model byte checks. BaseException handling preserves failed status."
+  ],
+  "resolved_findings": [
+    {
+      "finding": "An in-flight SystemExit(0) could preserve exit0 despite invalid final diagnostics/provenance because the failure branch raised only for launcher_returned.",
+      "resolution": "controlled_worker now always raises RuntimeError for invalid flush/module evidence; post-verifier independently requires successful diagnostics and package-bound imported-module/manifest receipts."
+    },
+    {
+      "finding": "Runner completed status originally checked worker cleanup but could overlook bad llm/livekit cleanup.",
+      "resolution": "service_cleanup_complete now requires exactly worker/llm/livekit with exits0/-15/0, no cleanup_error/escalation; otherwise completed is downgraded to completed_with_cleanup_failures."
+    }
+  ],
+  "open_findings": [],
+  "limits": [
+    "Import probes establish lightweight package selection, not full worker startup, model loading or actual RTC behavior. Runtime receipts must still confirm loaded paths and clean exit.",
+    "No preflight or model-byte validation run by this reviewer. Source preparation and present source bytes were checked; later preflight must freeze the reviewed methods and both packages before rendering.",
+    "Cleanup bounds govern explicitly owned processes; actual post-run process/descendant absence still needs recorded verification. Server job labels and application cleanup are separate outcomes.",
+    "Fixed arm order, one capture per case, exposed map/entities, synthetic voice and absence of injected recognition delay do not support population, microphone or causal-latency claims."
+  ],
+  "reviewed_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/source-preparation.json": "4665da50310f63d782c7c2e4d6fa6ef6f800dca2deb37b5cec7d9eab94afb7ea",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline.json": "1585ca06d8a13d589aef6dc8ae3c7b7a331152108bfd0805761e69cfabad8683",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/protocol.json": "d51c0a489de15c5fce3737ec0892648db27360b365202a525493bb888825d989",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/preflight.json": "ee93709b5aa197c6eaa905e3ddee567a12618f915eb873655d2d49176e328402",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py": "fbe9e06056f0462befcdc9617b8754809ebe0faa4bee9f84afc472566b3e3863",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/resolver.py": "4b5b26a6d6d17a35dec15522cf5d4e0f124acfbb13e7ce022e579d9be5bdec19",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/responder.py": "9830cb062e5aab314c1acd12ad4118831e81b942094ffc6145b02769d1fc2639",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/car_tools.py": "458baa1a8def5325305eb4971c99eec702de2be6f163fc814bfd7442324b3328",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/tools/manifest.py": "3d474ed7d121bc38317ad6ef6abf8c3a41bf4c62e513b784b665ef67de0ecf24",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-source/agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-source/agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-source/agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-source/agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-source/agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/preflight.py": "f2a1a30c70f3c48b7edad800b6e63371a82b0c0c740d5535e88d694f05bfd78c",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/controlled_worker.py": "0ea4c61751705d08c9dc1e1acecedf11c3694286939a387e686abe4cd774ef77",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/run_suite.py": "a8387b5deb3a4320eba4518c835db65bcaf9ce5be6a9c9b98e5bd1f995098f2b",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/verify_after_inference.py": "0309ddc041bcaba63849558b69947bda990935429581befcb72c22038964f60d",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/supervise.py": "9e374ff9ad62d9f1dfac2d9192097ce5bf0f498da053624493b0b3da99958783",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/review_received_audio.py": "57e737597ee479c6c4471e9ab202b63f99569dac715fb4e84fec87c05d1e5914",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/common.py": "2533fdaf7159555fbad521c0c345a16a3a18f006fd8854c217efb21f460b7a99",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/make_inputs.py": "6846c2b29fc6a33c3b8dc07a01f9611fe3f41d2db2097730f8da6719d665eb44",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py": "0b1b6417bf43bdebdc02c2cb8b77035d4da601c0722b4ce0f70e33e71086249a",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/plan.json": "74087a8954df785fc13258c25f5f60c8282a5eb6b9db53192bf9a090327f10f2",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/protocol.json": "e1a530b5df315672a71ea647fc678018ce592a0864c58b177c732106b7facf78",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/plan.json": "f958b9fae55446ed6d46f0328453624de9696da03b4284017626d7b1ca882ece",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-candidate/protocol.json": "40bcffcdfd017c56a49eb1885bebf96a9f5d5f43f0f3fce42240e2d4aab8be2d"
+  }
+}

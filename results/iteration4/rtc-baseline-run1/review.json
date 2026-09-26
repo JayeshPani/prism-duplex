@@ -1,0 +1,347 @@
+{
+  "reviewed_at_utc": "2026-09-25T19:36:41.156615+00:00",
+  "kind": "Source-backed baseline RTC artifact review; no model/audio inference or production changes",
+  "room": "car-audio-e15fca331d0f4154bfd310642ffae7e1",
+  "scope": "All captured coordinator events, matching room server trace, room-filtered shared dispatch log, complete frame index/PCM, source receipts, and baseline-time worker logs.",
+  "outcome": {
+    "recognized_text": "Navigate to the airport.",
+    "transcript_matches_declared_input": true,
+    "plan": [
+      "search_destination(query=airport)",
+      "compute_route(destination=$c1.places[0].place_id)",
+      "start_navigation(route_id=$c2.route_id)"
+    ],
+    "backend_attempts": 3,
+    "successful_navigation_effects": 1,
+    "destination_id": "P_AIRPORT",
+    "route_id": "R1",
+    "stop_ids": [],
+    "distance_km": 35.4,
+    "eta_min": 88,
+    "all_tool_done_stale_flags": false,
+    "declared_ack": "One moment.",
+    "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+    "declared_result_grounded": true,
+    "declared_result_after_success": true,
+    "received_audio_intelligibility": "Not established by this review; phonemizer warning makes separate inspection particularly relevant.",
+    "references": [
+      "events.jsonl:262",
+      "events.jsonl:276",
+      "events.jsonl:300",
+      "events.jsonl:304"
+    ]
+  },
+  "timing_origin": {
+    "method": "scheduled_input_activity_end = input_started_monotonic + activity_end_sample/sample_rate",
+    "input_started_monotonic": 87717.504784,
+    "activity_end_sample": 31680,
+    "sample_rate": 24000,
+    "scheduled_input_speech_end_monotonic": 87718.82478400001,
+    "threshold_dbfs": -40,
+    "activity_window_ms": 20,
+    "file_duration_seconds": 1.4293333333333333,
+    "internal_tail_after_activity_seconds": 0.10933333333333328,
+    "extra_published_silence_seconds": 1.0,
+    "schedule_lateness_ms": {
+      "min": 0.037,
+      "median": 2.038,
+      "max": 4.395
+    },
+    "last_active_frame_reference": "events.jsonl:142",
+    "limitation": "Speech end is the end of the last 20ms input frame meeting the RMS threshold, not a human-labeled phoneme boundary. Scheduling/capture queue time is observed but receiver playout of user input is not timestamped."
+  },
+  "speech_end_latencies_ms": {
+    "finalized_transcript_event_received": 1674.836,
+    "ack_text_event_received": 2379.292,
+    "first_ack_correlated_loud_pcm_received": 3245.683,
+    "first_tool_started_event_received": 14573.938,
+    "navigation_tool_started_event_received": 17075.494,
+    "navigation_success_event_received": 17077.496,
+    "substantive_result_text_event_received": 20605.723,
+    "first_result_correlated_loud_pcm_received": 21684.15,
+    "result_speech_handle_finished_event_received": 27963.343
+  },
+  "event_timing_details": [
+    {
+      "event": "user_final",
+      "tool": null,
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87720.499620416,
+      "from_input_speech_end_ms": 1674.836,
+      "reference": "events.jsonl:262"
+    },
+    {
+      "event": "ack",
+      "tool": null,
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87721.203808291,
+      "from_input_speech_end_ms": 2379.024,
+      "reference": "events.jsonl:264"
+    },
+    {
+      "event": "agent_say",
+      "tool": null,
+      "kind": "ack",
+      "state": null,
+      "received_monotonic": 87721.204075666,
+      "from_input_speech_end_ms": 2379.292,
+      "reference": "events.jsonl:266"
+    },
+    {
+      "event": "speech_handle",
+      "tool": null,
+      "kind": null,
+      "state": "queued",
+      "received_monotonic": 87721.204321333,
+      "from_input_speech_end_ms": 2379.537,
+      "reference": "events.jsonl:268"
+    },
+    {
+      "event": "speech_handle",
+      "tool": null,
+      "kind": null,
+      "state": "finished",
+      "received_monotonic": 87722.851073833,
+      "from_input_speech_end_ms": 4026.29,
+      "reference": "events.jsonl:274"
+    },
+    {
+      "event": "tool_started",
+      "tool": "search_destination",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87733.398722375,
+      "from_input_speech_end_ms": 14573.938,
+      "reference": "events.jsonl:290"
+    },
+    {
+      "event": "tool_done",
+      "tool": "search_destination",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87733.398970375,
+      "from_input_speech_end_ms": 14574.186,
+      "reference": "events.jsonl:292"
+    },
+    {
+      "event": "tool_started",
+      "tool": "compute_route",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87733.399153416,
+      "from_input_speech_end_ms": 14574.369,
+      "reference": "events.jsonl:294"
+    },
+    {
+      "event": "tool_done",
+      "tool": "compute_route",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87735.899608375,
+      "from_input_speech_end_ms": 17074.824,
+      "reference": "events.jsonl:296"
+    },
+    {
+      "event": "tool_started",
+      "tool": "start_navigation",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87735.9002785,
+      "from_input_speech_end_ms": 17075.494,
+      "reference": "events.jsonl:298"
+    },
+    {
+      "event": "tool_done",
+      "tool": "start_navigation",
+      "kind": null,
+      "state": null,
+      "received_monotonic": 87735.902280041,
+      "from_input_speech_end_ms": 17077.496,
+      "reference": "events.jsonl:300"
+    },
+    {
+      "event": "agent_say",
+      "tool": null,
+      "kind": "result",
+      "state": null,
+      "received_monotonic": 87739.4305075,
+      "from_input_speech_end_ms": 20605.723,
+      "reference": "events.jsonl:304"
+    },
+    {
+      "event": "speech_handle",
+      "tool": null,
+      "kind": null,
+      "state": "queued",
+      "received_monotonic": 87739.430912833,
+      "from_input_speech_end_ms": 20606.129,
+      "reference": "events.jsonl:306"
+    },
+    {
+      "event": "speech_handle",
+      "tool": null,
+      "kind": null,
+      "state": "finished",
+      "received_monotonic": 87746.788127333,
+      "from_input_speech_end_ms": 27963.343,
+      "reference": "events.jsonl:312"
+    }
+  ],
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_8a6952404822",
+      "queued_at": 87721.204321333,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 87722.851073833,
+      "error": null,
+      "derived_first_loud_frame": "frames.jsonl:227",
+      "derived_last_loud_frame": "frames.jsonl:260",
+      "derived_first_loud_at": 87722.070467,
+      "derived_last_loud_at": 87722.733180583,
+      "speech_end_to_first_loud_ms": 3245.683,
+      "loud_frame_count": 33,
+      "attribution": "Only one matching queued speech handle, agent speaking state, and no competing agent utterance. Ack attribution is derived here; original recorder tags only result PCM. No text/RTP semantic identifier exists."
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_bf4c4ea91287",
+      "queued_at": 87739.430912833,
+      "state": "finished",
+      "first_loud_at": 87740.508934083,
+      "preceding_quiet_seconds": 17.775753499998245,
+      "last_loud_at": 87746.747923083,
+      "ended_at": 87746.788127333,
+      "error": null,
+      "derived_first_loud_frame": "frames.jsonl:1149",
+      "derived_last_loud_frame": "frames.jsonl:1461",
+      "derived_first_loud_at": 87740.508934083,
+      "derived_last_loud_at": 87746.747923083,
+      "speech_end_to_first_loud_ms": 21684.15,
+      "loud_frame_count": 248,
+      "attribution": "Only one matching queued speech handle, agent speaking state, and no competing agent utterance. Ack attribution is derived here; original recorder tags only result PCM. No text/RTP semantic identifier exists."
+    }
+  ],
+  "backend_calls": [
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:1",
+      "room": "car-audio-e15fca331d0f4154bfd310642ffae7e1",
+      "call": {
+        "function": "search_destination",
+        "args": {
+          "query": "airport"
+        },
+        "timestamp_start": 1790364688.2994602,
+        "attempt_id": "933184b1e0934a4d93baf153e72bc9ee:c1",
+        "status": "done",
+        "dispatch_evidence": "intention_before_backend_entry",
+        "timestamp_end": 1790364688.301425,
+        "end_evidence": "executor_observation_ended"
+      }
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:2",
+      "room": "car-audio-e15fca331d0f4154bfd310642ffae7e1",
+      "call": {
+        "function": "compute_route",
+        "args": {
+          "destination": "P_AIRPORT"
+        },
+        "timestamp_start": 1790364688.302227,
+        "attempt_id": "933184b1e0934a4d93baf153e72bc9ee:c2",
+        "status": "done",
+        "dispatch_evidence": "intention_before_backend_entry",
+        "timestamp_end": 1790364690.8028731,
+        "end_evidence": "executor_observation_ended"
+      }
+    },
+    {
+      "reference": "../local-stack-run1/tool-calls.jsonl:3",
+      "room": "car-audio-e15fca331d0f4154bfd310642ffae7e1",
+      "call": {
+        "function": "start_navigation",
+        "args": {
+          "route_id": "R1"
+        },
+        "timestamp_start": 1790364690.8036458,
+        "attempt_id": "933184b1e0934a4d93baf153e72bc9ee:c3",
+        "status": "done",
+        "dispatch_evidence": "intention_before_backend_entry",
+        "timestamp_end": 1790364690.8041549,
+        "end_evidence": "executor_observation_ended"
+      }
+    }
+  ],
+  "integrity_and_sources": {
+    "recorded_artifact_hashes_verified": true,
+    "reviewed_raw_sha256": {
+      "report.json": "04c4c204efefb48e63fbfb56257e1e094453ecfbf0eb2ab109b9047af190581a",
+      "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "worker_manifest.json": "ef3e09d5a6619e4613fb517ed02dafe3b8f20e91d115f7e35e98926498bc79c1",
+      "events.jsonl": "1025d215213e45bb6ed03fed5565c8066b352a1e1defd9bbc4d350f6e97c889c",
+      "frames.jsonl": "7dd957411e27c08d7a092585937bb352d4609668928e7fb2cc7234a89e28df6c",
+      "protocol.json": "72be363f77a36d2f14851ef84c8df814d502179c5cc09c87a4b949b0781d03f1",
+      "received-1.pcm": "eac19e9db380473bc00e25254f76ecc5592eada3c5356bf5fcec205088c9acf9"
+    },
+    "server_trace_sha256": "ab910b27e3cbd33006f8cdaef03bf09de7fb44faa219083e82c951a0eba496d3",
+    "server_and_received_coordinator_event_sequences_match": true,
+    "server_event_count": 30,
+    "current_source_differences_from_capture": [],
+    "current_source_differences_from_worker_receipt": [],
+    "capture_worker_receipt_hash_disagreements": [],
+    "limitation": "Source receipts are declarations at launch/capture, not independent attestation of the loaded native/runtime state. Shared logs can grow; only the cited room entries and baseline timestamps are reviewed."
+  },
+  "audio_capture": {
+    "tracks": 1,
+    "frames": 1514,
+    "pcm_bytes": 1453440,
+    "pcm_duration_seconds": 30.28,
+    "frame_offset_ranges_contiguous_and_complete": true,
+    "arrival_span_first_to_last_seconds": 30.261555208009668,
+    "max_interframe_arrival_gap_ms": 84.64,
+    "derived_wav": {
+      "file": "received-concatenated.wav",
+      "sha256": "c0c7520e3e1a6dd6cb5c3eb76a637ae1756d3cfee92d6c99cada4100ca64de6d",
+      "label": "Exact received PCM in frame order, with original silent samples retained. Concatenated sample stream; not an arrival-time or physical playout reconstruction.",
+      "all_original_samples_preserved": true,
+      "arrival_gaps_inserted": false
+    },
+    "arrival_timeline_wav_created": false
+  },
+  "errors_and_warnings": {
+    "coordinator_or_receiver_errors": [],
+    "cleanup_errors": [],
+    "speech_handle_terminal_states": [
+      "finished",
+      "finished"
+    ],
+    "warnings": [
+      {
+        "reference": "../local-stack-run1/worker.log:19",
+        "timestamp": "2026-09-25T19:31:35.311801+00:00",
+        "message": "phonemizer: words count mismatch on 100.0% of the lines (1/1)",
+        "interpretation": "Warning occurs during baseline result synthesis; shared log line lacks room ID. No speech-handle error was reported, but complete/intelligible words must be checked in received audio."
+      },
+      {
+        "interpretation": "Worker logs also contain a short local-development HMAC-key warning at startup and untagged LiveKit teardown warnings after baseline disconnect. They do not prove a lost tool effect or received-audio defect."
+      }
+    ]
+  },
+  "clock_and_attribution_limits": [
+    "Primary latencies subtract two observations from the same client monotonic clock: the scheduled input activity end and receipt of data events or PCM. Server event/dispatch timestamps are wall-clock observations and are preserved separately, not silently mixed with monotonic values.",
+    "Across client journal pairs, wall-minus-monotonic offset range is 0.017ms. Server event timestamp to client wall receipt is observed at 0.979\u20139.385ms (median 1.741ms); these are same-host consistency observations, not independently synchronized one-way network-delay bounds.",
+    "tool_started and dispatch-log starts mark intention immediately before backend entry, not a hardware dispatch timestamp. tool_done reports observed simulated backend success; client receipt adds data delivery delay.",
+    "agent_say and speech_handle are separate data messages; queued handles do not carry text/intent IDs. PCM frames contain no speech ID. Adjacent event order, single active handle, speaking state and a quiet boundary make attribution plausible here but do not prove exact utterance-to-RTP alignment.",
+    "The recorder leaves acknowledgment first_loud_at null by design because it tags only result speech. This review derives acknowledgment activity from its unique queue-to-finish interval; null does not mean silent acknowledgment.",
+    "Output subscription occurred 26.493ms after input started, before input threshold activity began at +60ms and long before acknowledgment. The handler was installed before connection, but this does not prove complete capture of arbitrary earlier audio.",
+    "Activity threshold is RMS >= -40dBFS over 20ms frames. Callback arrival includes SDK decoding/buffering and event-loop scheduling. Physical speaker playback, microphone echo, listener perception and intelligibility are not measured.",
+    "This is one prerecorded synthetic baseline, not a distribution, held-out FDB result, interruption success measurement, or actual driving test. Raw model token responses are not saved by this RTC capture; plan_ready and result text are observed production events."
+  ]
+}

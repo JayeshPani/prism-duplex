@@ -1,0 +1,30 @@
+{
+  "declared_at": "2026-09-25T19:36:24.776467+00:00",
+  "purpose": "Repeat the two successful RTC development pilot cases with unchanged assets/source/config; preserve every additional outcome.",
+  "pilot_runs": [
+    "rtc-baseline-run1",
+    "rtc-correction-run1"
+  ],
+  "additional_repeats_per_case": 4,
+  "order": [
+    "rtc-baseline-repeat2",
+    "rtc-correction-repeat2",
+    "rtc-baseline-repeat3",
+    "rtc-correction-repeat3",
+    "rtc-baseline-repeat4",
+    "rtc-correction-repeat4",
+    "rtc-baseline-repeat5",
+    "rtc-correction-repeat5"
+  ],
+  "case_ready_timeout_s": 45,
+  "case_response_timeout_s": 90,
+  "external_process_deadline_s": 240,
+  "measurements": "Same-client input schedule, received PCM/frame arrivals, data events, all tool effects. Sample model/worker RSS and system memory/swap every0.5s during additional repeats.",
+  "analysis": "Report descriptive p50/p95 of all five observations per case/boundary, retaining pilot cold observations; separate first fresh-model request when discussing cache warmth. No independent population or controlled audio speedup claim.",
+  "limits": [
+    "Repeated synthetic inputs on localhost, not microphone/echo/road-noise evidence",
+    "Response/audio attribution remains the declared event-order heuristic",
+    "Memory starts after models initialized; excludes load-time peak and cannot be summed acrossRSS/MLX",
+    "A repeat cannot erase or replace a prior failure; missing/truncated output counts remain visible"
+  ]
+}

@@ -1,0 +1,1754 @@
+{
+  "created_at_utc": "2026-09-26T10:16:57.801571+00:00",
+  "scope": "All declared iteration17-cache1 intents, parsed plan rejection/acceptance/fallback receipts, and actual tool dispatch order. Separate from semantic outcome and speech scoring.",
+  "summary": {
+    "declared_trials": 4,
+    "audited_trials": 4,
+    "declared_intents": 10,
+    "outcome_counts": {
+      "initial_plan_accepted": 10
+    },
+    "observed_intent_rows": 10,
+    "rejection_events": 0,
+    "accepted_plan_events": 10,
+    "fallback_plan_events": 0,
+    "parsed_plan_receipts": 10,
+    "physical_tool_start_events": 24,
+    "tool_reuse_events": 2
+  },
+  "trials": [
+    {
+      "name": "rtc-cancel-1",
+      "case": "cancel",
+      "capture_status": "completed_observation",
+      "intents": [
+        {
+          "intent_version": 1,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 5,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 1
+                },
+                "ts": 1790417253.8918972
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 12,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 1,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {
+                    "query": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the airport."
+                },
+                "ts": 1790417265.911416
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 14,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 1,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417265.9123461
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 19,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "ff3dd98ff55a44f9bdcfd340401075fa",
+                  "operation_id": "turn-1",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417265.91398
+              }
+            },
+            {
+              "server_line": 21,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "ff3dd98ff55a44f9bdcfd340401075fa",
+                  "operation_id": "turn-1",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_AIRPORT"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417266.047499
+              }
+            },
+            {
+              "server_line": 23,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "ff3dd98ff55a44f9bdcfd340401075fa",
+                  "operation_id": "turn-1",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R1"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417268.914807
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 34,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Cancel navigation.",
+                  "merged": "Cancel navigation.",
+                  "intent_version": 2
+                },
+                "ts": 1790417284.557982
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 2,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 34,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Cancel navigation.",
+                  "merged": "Cancel navigation.",
+                  "intent_version": 2
+                },
+                "ts": 1790417284.557982
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 41,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 2,
+                  "utterance": "Cancel navigation.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {},
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "cancel_navigation",
+                      "args": {}
+                    }
+                  ],
+                  "reply": "Navigation has been cancelled."
+                },
+                "ts": 1790417287.652664
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 43,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 2,
+                  "calls": [
+                    "cancel_navigation"
+                  ]
+                },
+                "ts": 1790417287.653234
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 45,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "1a396c6aa5be4c358f7884eabec251d6",
+                  "operation_id": "turn-2",
+                  "id": "c1",
+                  "tool": "cancel_navigation",
+                  "args": {},
+                  "state_changing": true
+                },
+                "ts": 1790417287.655733
+              }
+            }
+          ],
+          "superseding_user_final_rows": [],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        }
+      ],
+      "unattributed_resolver_errors": [],
+      "checks": {
+        "all_intent_invariants": true,
+        "all_resolver_errors_attributed": true
+      },
+      "summary": {
+        "declared_intents": 2,
+        "observed_intent_rows": 2,
+        "outcome_counts": {
+          "initial_plan_accepted": 2
+        },
+        "rejection_events": 0,
+        "accepted_plan_events": 2,
+        "fallback_plan_events": 0,
+        "parsed_plan_receipts": 2,
+        "physical_tool_start_events": 4,
+        "tool_reuse_events": 0
+      }
+    },
+    {
+      "name": "rtc-repeat-1",
+      "case": "repeat",
+      "capture_status": "completed_observation",
+      "intents": [
+        {
+          "intent_version": 1,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 5,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 1
+                },
+                "ts": 1790417305.582334
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 12,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 1,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {
+                    "query": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the airport."
+                },
+                "ts": 1790417309.1814752
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 14,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 1,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417309.182153
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 19,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "06273c733e6a470ca8257b0ae36db623",
+                  "operation_id": "turn-1",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417309.183369
+              }
+            },
+            {
+              "server_line": 21,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "06273c733e6a470ca8257b0ae36db623",
+                  "operation_id": "turn-1",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_AIRPORT"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417309.1887748
+              }
+            },
+            {
+              "server_line": 23,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "06273c733e6a470ca8257b0ae36db623",
+                  "operation_id": "turn-1",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R1"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417311.695385
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 32,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Actually, go to the office instead.",
+                  "merged": "Actually, go to the office instead.",
+                  "intent_version": 2
+                },
+                "ts": 1790417317.0344708
+              }
+            },
+            {
+              "server_line": 60,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417330.291747
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 2,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 32,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Actually, go to the office instead.",
+                  "merged": "Actually, go to the office instead.",
+                  "intent_version": 2
+                },
+                "ts": 1790417317.0344708
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 39,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 2,
+                  "utterance": "Actually, go to the office instead.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [
+                    {
+                      "slot": "destination",
+                      "from": "airport",
+                      "to": "office"
+                    }
+                  ],
+                  "slots": {
+                    "query": "office"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "office"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the office. Estimated arrival in 15 minutes."
+                },
+                "ts": 1790417322.8135948
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 41,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 2,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417322.814049
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 47,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "45a787a8770e4e7caae425bcdd868962",
+                  "operation_id": "turn-2",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417322.815128
+              }
+            },
+            {
+              "server_line": 49,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "45a787a8770e4e7caae425bcdd868962",
+                  "operation_id": "turn-2",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_OFFICE"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417322.825942
+              }
+            },
+            {
+              "server_line": 51,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "45a787a8770e4e7caae425bcdd868962",
+                  "operation_id": "turn-2",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R2"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417325.330505
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 60,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417330.291747
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 3,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 60,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417330.291747
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 67,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 3,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [
+                    {
+                      "slot": "destination",
+                      "from": "office",
+                      "to": "airport"
+                    }
+                  ],
+                  "slots": {
+                    "query": "airport",
+                    "destination": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "airport"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes."
+                },
+                "ts": 1790417336.992573
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 69,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 3,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417336.99322
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 76,
+              "event": {
+                "type": "tool_reused",
+                "data": {
+                  "execution_id": "0c58e9b852a64f7d8a25f2ace3e3889e",
+                  "operation_id": "turn-3",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "reason": "same lookup in the same declared cache context"
+                },
+                "ts": 1790417336.9951758
+              }
+            },
+            {
+              "server_line": 77,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "0c58e9b852a64f7d8a25f2ace3e3889e",
+                  "operation_id": "turn-3",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417336.996087
+              }
+            },
+            {
+              "server_line": 79,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "0c58e9b852a64f7d8a25f2ace3e3889e",
+                  "operation_id": "turn-3",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R3"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417339.5066419
+              }
+            }
+          ],
+          "superseding_user_final_rows": [],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        }
+      ],
+      "unattributed_resolver_errors": [],
+      "checks": {
+        "all_intent_invariants": true,
+        "all_resolver_errors_attributed": true
+      },
+      "summary": {
+        "declared_intents": 3,
+        "observed_intent_rows": 3,
+        "outcome_counts": {
+          "initial_plan_accepted": 3
+        },
+        "rejection_events": 0,
+        "accepted_plan_events": 3,
+        "fallback_plan_events": 0,
+        "parsed_plan_receipts": 3,
+        "physical_tool_start_events": 8,
+        "tool_reuse_events": 1
+      }
+    },
+    {
+      "name": "rtc-repeat-2",
+      "case": "repeat",
+      "capture_status": "completed_observation",
+      "intents": [
+        {
+          "intent_version": 1,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 7,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 1
+                },
+                "ts": 1790417373.613237
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 14,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 1,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {
+                    "query": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the airport."
+                },
+                "ts": 1790417377.3544059
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 16,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 1,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417377.355137
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 21,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "9613edbbb7c144bf905fc00178dc3d47",
+                  "operation_id": "turn-1",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417377.355871
+              }
+            },
+            {
+              "server_line": 23,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "9613edbbb7c144bf905fc00178dc3d47",
+                  "operation_id": "turn-1",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_AIRPORT"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417377.3612192
+              }
+            },
+            {
+              "server_line": 25,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "9613edbbb7c144bf905fc00178dc3d47",
+                  "operation_id": "turn-1",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R1"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417379.8661492
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 36,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Actually, go to the office instead.",
+                  "merged": "Actually, go to the office instead.",
+                  "intent_version": 2
+                },
+                "ts": 1790417403.229513
+              }
+            },
+            {
+              "server_line": 66,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417420.987786
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 2,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 36,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Actually, go to the office instead.",
+                  "merged": "Actually, go to the office instead.",
+                  "intent_version": 2
+                },
+                "ts": 1790417403.229513
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 43,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 2,
+                  "utterance": "Actually, go to the office instead.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [
+                    {
+                      "slot": "destination",
+                      "from": "airport",
+                      "to": "office"
+                    }
+                  ],
+                  "slots": {
+                    "query": "office"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "office"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the office. Estimated arrival in 15 minutes."
+                },
+                "ts": 1790417409.015541
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 45,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 2,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417409.01633
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 51,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "020b49f5e77a4bc9b818caff55606a58",
+                  "operation_id": "turn-2",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "office"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417409.019268
+              }
+            },
+            {
+              "server_line": 53,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "020b49f5e77a4bc9b818caff55606a58",
+                  "operation_id": "turn-2",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_OFFICE"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417409.027624
+              }
+            },
+            {
+              "server_line": 55,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "020b49f5e77a4bc9b818caff55606a58",
+                  "operation_id": "turn-2",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R2"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417411.534175
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 66,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417420.987786
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 3,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 66,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 3
+                },
+                "ts": 1790417420.987786
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 73,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 3,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [
+                    {
+                      "slot": "destination",
+                      "from": "office",
+                      "to": "airport"
+                    }
+                  ],
+                  "slots": {
+                    "query": "airport",
+                    "destination": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "airport"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes."
+                },
+                "ts": 1790417427.5810719
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 75,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 3,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417427.581674
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 82,
+              "event": {
+                "type": "tool_reused",
+                "data": {
+                  "execution_id": "603cf01cbb4c4dcf8c7a37bd2d0d83db",
+                  "operation_id": "turn-3",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "reason": "same lookup in the same declared cache context"
+                },
+                "ts": 1790417427.584291
+              }
+            },
+            {
+              "server_line": 83,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "603cf01cbb4c4dcf8c7a37bd2d0d83db",
+                  "operation_id": "turn-3",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417427.584741
+              }
+            },
+            {
+              "server_line": 85,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "603cf01cbb4c4dcf8c7a37bd2d0d83db",
+                  "operation_id": "turn-3",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R3"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417430.093195
+              }
+            }
+          ],
+          "superseding_user_final_rows": [],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        }
+      ],
+      "unattributed_resolver_errors": [],
+      "checks": {
+        "all_intent_invariants": true,
+        "all_resolver_errors_attributed": true
+      },
+      "summary": {
+        "declared_intents": 3,
+        "observed_intent_rows": 3,
+        "outcome_counts": {
+          "initial_plan_accepted": 3
+        },
+        "rejection_events": 0,
+        "accepted_plan_events": 3,
+        "fallback_plan_events": 0,
+        "parsed_plan_receipts": 3,
+        "physical_tool_start_events": 8,
+        "tool_reuse_events": 1
+      }
+    },
+    {
+      "name": "rtc-cancel-2",
+      "case": "cancel",
+      "capture_status": "completed_observation",
+      "intents": [
+        {
+          "intent_version": 1,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 5,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Navigate to the airport.",
+                  "merged": "Navigate to the airport.",
+                  "intent_version": 1
+                },
+                "ts": 1790417462.5204349
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 12,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 1,
+                  "utterance": "Navigate to the airport.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {
+                    "query": "airport"
+                  },
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "search_destination",
+                      "args": {
+                        "query": "airport"
+                      }
+                    },
+                    {
+                      "id": "c2",
+                      "tool": "compute_route",
+                      "args": {
+                        "destination": "$c1.places[0].place_id"
+                      }
+                    },
+                    {
+                      "id": "c3",
+                      "tool": "start_navigation",
+                      "args": {
+                        "route_id": "$c2.route_id"
+                      }
+                    }
+                  ],
+                  "reply": "Navigating to the airport."
+                },
+                "ts": 1790417466.275199
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 14,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 1,
+                  "calls": [
+                    "search_destination",
+                    "compute_route",
+                    "start_navigation"
+                  ]
+                },
+                "ts": 1790417466.276175
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 19,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "07af155cef884e0db5e6bca827b40354",
+                  "operation_id": "turn-1",
+                  "id": "c1",
+                  "tool": "search_destination",
+                  "args": {
+                    "query": "airport"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417466.277513
+              }
+            },
+            {
+              "server_line": 21,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "07af155cef884e0db5e6bca827b40354",
+                  "operation_id": "turn-1",
+                  "id": "c2",
+                  "tool": "compute_route",
+                  "args": {
+                    "destination": "P_AIRPORT"
+                  },
+                  "state_changing": false
+                },
+                "ts": 1790417466.284322
+              }
+            },
+            {
+              "server_line": 23,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "07af155cef884e0db5e6bca827b40354",
+                  "operation_id": "turn-1",
+                  "id": "c3",
+                  "tool": "start_navigation",
+                  "args": {
+                    "route_id": "R1"
+                  },
+                  "state_changing": true
+                },
+                "ts": 1790417468.791025
+              }
+            }
+          ],
+          "superseding_user_final_rows": [
+            {
+              "server_line": 34,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Cancel navigation.",
+                  "merged": "Cancel navigation.",
+                  "intent_version": 2
+                },
+                "ts": 1790417487.0875058
+              }
+            }
+          ],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        },
+        {
+          "intent_version": 2,
+          "declared": true,
+          "status": "initial_plan_accepted",
+          "checks": {
+            "observed_rejection_attempt_order_bounded": true,
+            "at_most_one_accepted_plan": true,
+            "no_acceptance_after_second_rejection": true,
+            "rejections_before_accepted_plan": true,
+            "rejection_context_present": true,
+            "dispatch_only_after_accepted_plan": true,
+            "every_dispatch_call_in_accepted_plan": true,
+            "no_new_dispatch_after_supersession": true,
+            "no_acceptance_after_supersession": true,
+            "no_dispatch_for_unaccepted_rejection": true,
+            "fallback_plan_has_no_calls": true,
+            "commit_follows_ready_plan": true,
+            "no_result_speech_for_unaccepted_rejection": true
+          },
+          "user_final_rows": [
+            {
+              "server_line": 34,
+              "event": {
+                "type": "user_final",
+                "data": {
+                  "text": "Cancel navigation.",
+                  "merged": "Cancel navigation.",
+                  "intent_version": 2
+                },
+                "ts": 1790417487.0875058
+              }
+            }
+          ],
+          "rejected_plan_rows": [],
+          "accepted_plan_rows": [
+            {
+              "server_line": 39,
+              "event": {
+                "type": "plan_ready",
+                "data": {
+                  "intent_version": 2,
+                  "utterance": "Cancel navigation.",
+                  "repaired": "",
+                  "complete": true,
+                  "corrections": [],
+                  "slots": {},
+                  "calls": [
+                    {
+                      "id": "c1",
+                      "tool": "cancel_navigation",
+                      "args": {}
+                    }
+                  ],
+                  "reply": "Navigation has been cancelled."
+                },
+                "ts": 1790417490.279962
+              }
+            }
+          ],
+          "fallback_plan_rows": [],
+          "resolver_error_rows": [],
+          "gate_commit_rows": [
+            {
+              "server_line": 42,
+              "event": {
+                "type": "gate_committed",
+                "data": {
+                  "intent_version": 2,
+                  "calls": [
+                    "cancel_navigation"
+                  ]
+                },
+                "ts": 1790417490.28078
+              }
+            }
+          ],
+          "tool_dispatch_rows": [
+            {
+              "server_line": 44,
+              "event": {
+                "type": "tool_started",
+                "data": {
+                  "execution_id": "3cabd3d1d4b1428186d515bef5386618",
+                  "operation_id": "turn-2",
+                  "id": "c1",
+                  "tool": "cancel_navigation",
+                  "args": {},
+                  "state_changing": true
+                },
+                "ts": 1790417490.2817621
+              }
+            }
+          ],
+          "superseding_user_final_rows": [],
+          "observed_rejected_attempt_ordinals": [],
+          "accepted_attempt_ordinal_from_control_flow": 1,
+          "parsed_plan_receipts": 1,
+          "repair_start_receipt_available": false,
+          "actual_semantic_retry_started": null,
+          "wire_model_request_count": null,
+          "parser_level_json_attempt_count": null,
+          "ordering_boundary": "Tool starts/reuses must follow the accepted plan for this intent and match its call IDs/tools. Rejected and accepted plans can share IDs; IDs alone do not identify dispatch provenance."
+        }
+      ],
+      "unattributed_resolver_errors": [],
+      "checks": {
+        "all_intent_invariants": true,
+        "all_resolver_errors_attributed": true
+      },
+      "summary": {
+        "declared_intents": 2,
+        "observed_intent_rows": 2,
+        "outcome_counts": {
+          "initial_plan_accepted": 2
+        },
+        "rejection_events": 0,
+        "accepted_plan_events": 2,
+        "fallback_plan_events": 0,
+        "parsed_plan_receipts": 2,
+        "physical_tool_start_events": 4,
+        "tool_reuse_events": 0
+      }
+    }
+  ],
+  "failed_checks": [],
+  "evidence_sha256": {
+    "results/iteration17-cache1/audit_semantic_repair.py": "29a7087f8b97ff2bf43c84492211a384a301cbf7d2e7fe0ddbc2764cfb38290a",
+    "results/iteration17-cache1/run-report.json": "141740f744ddd1bc6bfdda1b2821a78eda28c1c35f5d5e51eb268075e8e33e63",
+    "results/iteration17-cache1/protocol.json": "98f6b0efc62bc731c57e147a7d51fb3ae325470d82c08966f09f491c25cc8605",
+    "results/iteration17-cache1/rtc-cancel-1/report.json": "0dfd549cff317b11c3fbba467d22f6afa5cdf208fa55e1ec1d6b5cd64a2881eb",
+    "results/iteration17-cache1/local-stack-run1/traces/car-audio-b662c5963f4b476ebc477e4839517c10.jsonl": "c6a0de59f062bc790e512ca3451995b5040ae4625c0dd976feaf31123d5d3a00",
+    "results/iteration17-cache1/rtc-repeat-1/report.json": "aedc2fb8cd6964a5e4cb461184534c23d7f957cba870eea725e27197ad718807",
+    "results/iteration17-cache1/local-stack-run1/traces/car-audio-fa22620c471a45f0a034c0a1343c99ad.jsonl": "695552953b21c955c8c64872c526552f4fb2c46738515205901c652024c9be29",
+    "results/iteration17-cache1/rtc-repeat-2/report.json": "c75ab865d743d3a2d1c91ee2b3eb15113987b48280370c506d8d46b6de527c9f",
+    "results/iteration17-cache1/local-stack-run1/traces/car-audio-013f677f43c7464688d23c52226f7a3b.jsonl": "717f3d1de254d6e3e25b82a2b7067da1e39ed873e2346552d099846c436adc3a",
+    "results/iteration17-cache1/rtc-cancel-2/report.json": "34d64a9fc97ca2e19638d6a642869a1085caeaae68070eeb551325f58140cf60",
+    "results/iteration17-cache1/local-stack-run1/traces/car-audio-013fab4f05bb448480f59dea91343a6f.jsonl": "1ebea01cca851426f0ff8188646c70c68d1bcac525d2bc2483ed60cb9914409a"
+  },
+  "implementation_source_sha256": {
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059"
+  },
+  "limits": [
+    "A rejection event records parsed schema-valid JSON rejected by the semantic contract, not a raw network response or proof that the retry started.",
+    "Accepted attempt ordinal is inferred from the frozen coordinator's one-repair control flow. No repair-start receipt exists; rejection followed by supersession does not distinguish no retry from cancellation during retry.",
+    "Parser retries and transport requests are unmeasured here. Parsed receipts, fallback events, physical tool attempts and cache reuses are reported separately.",
+    "plan_ready following an attributed resolver error is the deterministic fallback, not a successfully parsed model plan.",
+    "Supersession is an observed later finalized intent, not proof of an internal cancellation boundary. Missing terminal outcomes remain explicit.",
+    "Accepted plans and tool dispatch can still fail the frozen semantic, exact transcript or speech criteria in the separate core/received-audio audits."
+  ]
+}

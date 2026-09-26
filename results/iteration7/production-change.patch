@@ -1,0 +1,34 @@
+--- a/agent/main.py
++++ b/agent/main.py
+@@ -176,19 +176,30 @@
+     def _on_agent_state(ev) -> None:
+         bus.emit("agent_state", state=ev.new_state)
+ 
++    @session.on("close")
++    def _on_close(ev) -> None:
++        nonlocal closing
++        closing = True
++        # Session closure alone leaves the room job alive. Job shutdown owns
++        # coordinator, HTTP client and trace cleanup through the callback below.
++        ctx.shutdown(reason=f"agent session closed: {ev.reason.value}")
++
+     async def _cleanup() -> None:
+         nonlocal closing
+         closing = True
++        log.info("room cleanup started: %s", room)
+         await coord.aclose(timeout=5)
+         for task in ui_tasks:
+             task.cancel()
+         await asyncio.gather(*ui_tasks, return_exceptions=True)
+         await llm_client.client.close()
+         trace_f.close()
++        log.info("room cleanup finished: %s", room)
+ 
+     ctx.add_shutdown_callback(_cleanup)
+     await session.start(room=ctx.room, agent=DuplexAgent(coord))
+-    bus.emit("session_started", room=room, mode=mode, profile=CFG["profile"], llm=CFG["llm"]["model"])
++    if not closing:
++        bus.emit("session_started", room=room, mode=mode, profile=CFG["profile"], llm=CFG["llm"]["model"])
+ 
+ 
+ if __name__ == "__main__":

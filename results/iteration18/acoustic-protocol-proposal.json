@@ -1,0 +1,943 @@
+{
+  "declared_at_utc": "2026-09-26T10:41:35.580627+00:00",
+  "status": "proposal_only_no_audio_generated_no_models_or_services_run_not_an_executed_protocol",
+  "purpose": "A bounded new acoustic development set exercising incomplete pauses, disfluency repair, place ambiguity/clarification and voice versus non-speech during result playback, with slow transcript delivery separated from naturally slow inference.",
+  "objective_reference": {
+    "path": "/Users/rithikmeedinti/.codex/attachments/f0c38396-d37d-44e0-8252-e9deff005fc7/goal-objective.md",
+    "sha256": "1945d43fba4a8affec95501fd6333902f8bd27b4af5f75f8cb6725d2e4a84c7e",
+    "relevant_sections": [
+      "4 Measure real conversational performance",
+      "5 Meaningful development and failure testing",
+      "6 Evaluation credibility",
+      "7 Controlled changes"
+    ]
+  },
+  "independence": {
+    "authorship": "New wording, acoustic combinations, case labels and outcome criteria specified here before any new rendering or live outcome. Entities come from the existing simulated map, not benchmark answer files.",
+    "exposure": "Map semantics and some place names already appear in unit tests; prior airport/office acoustic cases and SDK/probe results informed this design. This is independently composed development input, not untouched held-out data or unseen-domain generalization.",
+    "labels": "No live results, VAD characterization, offline ASR output or preferred pronunciation may be used to select or rewrite inputs in this version."
+  },
+  "recommended_scope": {
+    "candidate_coverage_captures": 13,
+    "core_language_cases": 5,
+    "probe_cases_per_delay_condition": 4,
+    "delay_conditions_seconds": [
+      0,
+      5
+    ],
+    "fresh_room_per_capture": true,
+    "expected_total_successful_navigation_mutations": 15,
+    "expected_final_reply_cases": 13,
+    "expected_intentional_stop_interruptions": 2,
+    "non_speech_controls": 6,
+    "source_input_publications": 22,
+    "run_order": [
+      "clear_hospital",
+      "native_silence",
+      "pause_metro_250",
+      "native_voiced_stop",
+      "disfluent_self_repair_hospital",
+      "native_breath_proxy",
+      "pause_metro_1200",
+      "native_noise_burst",
+      "ambiguous_road_then_hospital",
+      "delivery_delay5s_noise_burst",
+      "delivery_delay5s_voiced_stop",
+      "delivery_delay5s_silence",
+      "delivery_delay5s_breath_proxy"
+    ],
+    "repeats": 1,
+    "repeated_data_limit": "Matched probe waveforms and reused pause stems are dependent observations; no population p95 or confidence claim.",
+    "paired_fix_comparison": "If claiming the root interruption fix helps, additionally replay the same eight probe cases on a frozen pre-fix source. Keep before8 and after8 separately matched; the five language cases are candidate-only coverage, not improvement measurements. Total21 captures if both scopes are adopted before launch. This proposal does not request launching either scope."
+  },
+  "source_audio_creation": {
+    "inference": "Only existing pinned local Kokoro-82M, voice af_heart, speed1.1; first render each of eight declared spoken stems once. Existing Parakeet snapshot may provide one verbatim offline preparation transcript per final speech asset, without retries/selection; that is not live ASR accuracy.",
+    "spoken_stems": {
+      "hospital_command": "Please navigate to Manipal Hospital, Old Airport Road.",
+      "pause_prefix": "Please take me to",
+      "metro_tail": "MG Road Metro Station.",
+      "self_repair_hospital": "Take me to Cubbon Park, um, no, I mean Manipal Hospital, Old Airport Road.",
+      "ambiguous_road": "Navigate to Airport Road.",
+      "hospital_clarifier": "I mean Manipal Hospital, Old Airport Road.",
+      "whitefield_command": "Navigate to Whitefield.",
+      "stop_navigation": "Please stop navigation."
+    },
+    "format": "Keep first-render mono PCM16 24000Hz WAV bytes and raw stems. No loudness normalization, word splice, selection or extra silence removal for spoken assets. Record sample counts, exact model references, generator source/packages/command/timing and source/output hashes.",
+    "pause_assembly": "Concatenate the exact same untrimmed pause_prefix PCM, exactly6000 or28800 zero samples, then the same metro_tail PCM. Preserve both stems. Labels describe inserted silence250/1200ms, not actual total acoustic gap; retain measured last-active-prefix to first-active-tail interval and all final segments.",
+    "controls": [
+      {
+        "asset": "silence900.wav",
+        "samples": 21600,
+        "formula": "All int16 zeros at24000Hz."
+      },
+      {
+        "asset": "noise_burst900.wav",
+        "samples": 21600,
+        "formula": "NumPy Generator(PCG64(1802)) standard_normal float64; rFFT retain300\u20133400Hz inclusive, other bins zero; inverse rFFT; multiply20ms linear onset/offset ramps; normalize global RMS to-24dBFS after ramps; np.rint toPCM16. Record library version, peak, clipping count and SHA."
+      },
+      {
+        "asset": "breath_proxy900.wav",
+        "samples": 21600,
+        "formula": "NumPy Generator(PCG64(1803)) standard_normal float64; rFFT retain500\u20136000Hz inclusive; inverse rFFT; raised-cosine attack180ms and decay720ms; normalize global RMS to-24dBFS after envelope; np.rint toPCM16. Record library version, peak, clipping count and SHA.",
+        "label_limit": "Artificial shaped noise only, not a real human breath, cough, road recording or microphone echo."
+      }
+    ],
+    "clipping_policy": "If normalized control exceeds int16 range, retain generation failure; do not silently clip, change seed or rerender until VAD responds. Amend a new protocol before any replacement.",
+    "vad_preparation": "Optional one frozen offline VAD characterization of every probe, with no input selection or gain tuning. Every declared stimulus remains in RTC even when VAD never triggers. No non-speech waveform duration/RMS proves model activation."
+  },
+  "cases": [
+    {
+      "id": "clear_hospital",
+      "category": [
+        "unnecessary_clarification",
+        "fully_specified_place"
+      ],
+      "inputs": [
+        {
+          "asset": "hospital_command.wav",
+          "text": "Please navigate to Manipal Hospital, Old Airport Road.",
+          "trigger": "session_ready"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_HOSP",
+            "eta_min": 5
+          }
+        ],
+        "final_speech": [
+          "navigation started to Manipal Hospital on Old Airport Road",
+          "five-minute arrival estimate grounded in returned route"
+        ],
+        "clarifications_after_complete_request": 0,
+        "ambiguity_boundary": "The full name is unique; neither the word airport nor a category should redirect to P_AIRPORT."
+      },
+      "recorder": "Existing --input and result completion suffice; current final-handle completion is capture status only."
+    },
+    {
+      "id": "native_silence",
+      "category": [
+        "non_speech_false_positive",
+        "native"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "silence900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "pause_metro_250",
+      "category": [
+        "within_request_pause",
+        "unnecessary_clarification"
+      ],
+      "inputs": [
+        {
+          "asset": "pause_metro_250.wav",
+          "segments": [
+            "Please take me to",
+            "MG Road Metro Station."
+          ],
+          "inserted_silence_ms": 250,
+          "trigger": "session_ready"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_MGROAD",
+            "eta_min": 13
+          }
+        ],
+        "writes_before_tail_activity": 0,
+        "final_speech": [
+          "navigation started to MG Road Metro Station",
+          "thirteen-minute arrival estimate"
+        ],
+        "clarifications_after_complete_request": 0
+      },
+      "recorder": "Existing single WAV supports the inserted pause. Actual acoustic quiet includes untrimmed TTS edge silence and must be measured."
+    },
+    {
+      "id": "native_voiced_stop",
+      "category": [
+        "playback_interruption",
+        "native"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          },
+          {
+            "tool": "cancel_navigation",
+            "cancelled_destination_id": "P_WHITEFIELD",
+            "navigation_version": 2,
+            "route_active": false,
+            "destination_id": null,
+            "route_id": null,
+            "stop_ids": []
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "Must express explicit stop navigation; preserve literal recognition and errors",
+        "final_speech": [
+          "Whitefield navigation cancelled; no suggestion it remains active"
+        ],
+        "interruption": "Require old result not to finish naturally; report pause/interruption-request/received-PCM cessation separately",
+        "mechanism_gate": "Real recognition latency and injected delivery hold are separately logged"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "disfluent_self_repair_hospital",
+      "category": [
+        "filled_pause",
+        "self_correction",
+        "obsolete_destination"
+      ],
+      "inputs": [
+        {
+          "asset": "self_repair_hospital.wav",
+          "text": "Take me to Cubbon Park, um, no, I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "session_ready"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_HOSP",
+            "eta_min": 5
+          }
+        ],
+        "forbidden_effect_destinations": [
+          "P_CUBBON",
+          "P_AIRPORT"
+        ],
+        "final_speech": [
+          "navigation started to Manipal Hospital on Old Airport Road",
+          "five-minute arrival estimate"
+        ],
+        "clarifications_after_complete_request": 0,
+        "boundary": "Old reads or cancelled plans remain visible. A completed Cubbon Park write is an unintended effect, not erased by later hospital success. This wording is outside the narrow whole-command validator; its behavior must be observed."
+      },
+      "recorder": "Existing single WAV; full-utterance first render only, do not synthesize a pre-repaired request as input."
+    },
+    {
+      "id": "native_breath_proxy",
+      "category": [
+        "non_speech_false_positive",
+        "native"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "breath_proxy900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "pause_metro_1200",
+      "category": [
+        "cross_endpoint_pause",
+        "incomplete_continuation"
+      ],
+      "inputs": [
+        {
+          "asset": "pause_metro_1200.wav",
+          "segments": [
+            "Please take me to",
+            "MG Road Metro Station."
+          ],
+          "inserted_silence_ms": 1200,
+          "trigger": "session_ready"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_MGROAD",
+            "eta_min": 13
+          }
+        ],
+        "writes_before_tail_activity": 0,
+        "final_speech": [
+          "navigation started to MG Road Metro Station",
+          "thirteen-minute arrival estimate"
+        ],
+        "clarifications_after_complete_request": 0,
+        "early_prompt_rule": "A finish-your-request prompt before the continuation is retained and counted as an anticipatory prompt, not automatically conflated with a question after the complete request. Whether VAD actually splits the span is an observed mechanism, not assumed from 1200ms."
+      },
+      "recorder": "Existing single WAV; audit all USER_FINAL and retranscription spans rather than requiring exactly one finalized segment."
+    },
+    {
+      "id": "native_noise_burst",
+      "category": [
+        "non_speech_false_positive",
+        "native"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "noise_burst900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "ambiguous_road_then_hospital",
+      "category": [
+        "ambiguous_place",
+        "clarification_recovery"
+      ],
+      "inputs": [
+        {
+          "asset": "ambiguous_road.wav",
+          "text": "Navigate to Airport Road.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "hospital_clarifier.wav",
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "expected": {
+        "initial_mutations": 0,
+        "ambiguity_candidate_ids": [
+          "P_HOSP",
+          "K_SBUX_AIR"
+        ],
+        "initial_speech": [
+          "request which Airport Road place the user means",
+          "do not claim navigation started or silently choose a candidate"
+        ],
+        "allowed_initial_paths": [
+          "No-call clarification with response kind",
+          "search_destination or compute_route returns place_ambiguous, dependent writes skipped, tool-result clarification"
+        ],
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_HOSP",
+            "eta_min": 5
+          }
+        ],
+        "final_speech": [
+          "navigation started to Manipal Hospital on Old Airport Road",
+          "five-minute arrival estimate"
+        ],
+        "clarifications_after_explicit_clarifier": 0,
+        "if_clarification_missing": "Retain capture failure and do not inject the clarifier on a stale or unrelated reply."
+      },
+      "recorder": "Needs explicit completed-nonack followup trigger; current --followup starts during result PCM and cannot faithfully wait for response/clarification kinds."
+    },
+    {
+      "id": "delivery_delay5s_noise_burst",
+      "category": [
+        "non_speech_false_positive",
+        "delivery_delay5s"
+      ],
+      "recognition_delivery_delay_seconds": 5,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "noise_burst900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "delivery_delay5s_voiced_stop",
+      "category": [
+        "playback_interruption",
+        "delivery_delay5s"
+      ],
+      "recognition_delivery_delay_seconds": 5,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          },
+          {
+            "tool": "cancel_navigation",
+            "cancelled_destination_id": "P_WHITEFIELD",
+            "navigation_version": 2,
+            "route_active": false,
+            "destination_id": null,
+            "route_id": null,
+            "stop_ids": []
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "Must express explicit stop navigation; preserve literal recognition and errors",
+        "final_speech": [
+          "Whitefield navigation cancelled; no suggestion it remains active"
+        ],
+        "interruption": "Require old result not to finish naturally; report pause/interruption-request/received-PCM cessation separately",
+        "mechanism_gate": "Real recognition latency and injected delivery hold are separately logged"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "delivery_delay5s_silence",
+      "category": [
+        "non_speech_false_positive",
+        "delivery_delay5s"
+      ],
+      "recognition_delivery_delay_seconds": 5,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "silence900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    },
+    {
+      "id": "delivery_delay5s_breath_proxy",
+      "category": [
+        "non_speech_false_positive",
+        "delivery_delay5s"
+      ],
+      "recognition_delivery_delay_seconds": 5,
+      "inputs": [
+        {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "breath_proxy900.wav",
+          "text": null,
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        }
+      ],
+      "expected": {
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_WHITEFIELD",
+            "eta_min": 40
+          }
+        ],
+        "extra_effects": 0,
+        "post_probe_user_final": "No nonempty finalized user turn; any hallucinated words remain a false-positive outcome",
+        "final_speech": [
+          "original Whitefield navigation confirmation remains complete or resumes",
+          "forty-minute arrival estimate remains present"
+        ],
+        "interruption": "No irreversible cancellation of the original result; a tentative pause is acceptable only if original speech resumes and finishes without dropped declared facts",
+        "mechanism_gate": "If no VAD response or pause occurs, count no false effect but mark false-interruption recovery unexercised; never call silence/no-VAD a successful resume test"
+      },
+      "recorder": "Existing --probe with 30s fixed post-drain window; full window retained irrespective of early speech finish. Capture completion is not quality success."
+    }
+  ],
+  "navigation_effect_contract": {
+    "required_chain": "A fresh compute_route for the declared place followed by start_navigation referencing that computation; search_destination is optional. Retain every read, retry, rejected plan and physical attempt; do not hardcode three attempts.",
+    "initial_state": {
+      "position_id": "P_HOME",
+      "route_active": false,
+      "navigation_version": 0
+    },
+    "success_state": {
+      "route_active": true,
+      "navigation_version": 1,
+      "stop_ids": [],
+      "replaced": null,
+      "already_active": false
+    },
+    "route_identity": "Require the successful start to reference its own fresh computed route; do not assume a literal route ID from a counter.",
+    "no_extra_effects": "No add_waypoint, extra start, cancel or unrelated write. Backend errors are not successful mutations."
+  },
+  "numeric_expectation_derivation": {
+    "method": "Read PLACES using ast.literal_eval only, independently calculate existing haversine*ROAD_FACTOR1.35 and max(1,round(km/24*60)); no car-tool imports, tests or model calls. All begin at P_HOME.",
+    "results": [
+      {
+        "id": "P_MGROAD",
+        "distance_km": 5.1,
+        "eta_min": 13
+      },
+      {
+        "id": "P_HOSP",
+        "distance_km": 2.2,
+        "eta_min": 5
+      },
+      {
+        "id": "P_WHITEFIELD",
+        "distance_km": 15.9,
+        "eta_min": 40
+      }
+    ],
+    "limits": "These are simulated-source expectations. Freeze/recheck them if source changes; generated speech must be compared against actual successful returned values as well."
+  },
+  "slow_recognition_condition": {
+    "purpose": "Deterministic stress for delayed final text delivery while VAD/RTC keep running; not a claim that cache pressure caused historical delays.",
+    "recommended_injection": "Experiment-only wrapper around LocalSTT._recognize_impl: await original with unchanged args; record native completion; await an ordinary cancellable asyncio.sleep(5.0); return the original unmodified SpeechEvent. Apply to every recognition in each delay-condition room, including initial input and empty results; no text, asset-hash or expected-answer selection. Do not delay blocking warmup or change model inference/cache/turn thresholds.",
+    "measurements": [
+      "wrapper-enter",
+      "original-return",
+      "hold-start",
+      "hold-end-or-cancel/error",
+      "event-delivered",
+      "actual engine/queue stages and normalized PCM hash"
+    ],
+    "fidelity": "Preserve cancellation and exception identity; do not shield/force delivery after cancellation, occupy the STT worker with sleeping, block the event loop, serialize unrelated rooms differently, or synthesize transcripts. Own/restore wrapper in finally. Whole-span retranscription remains separately recorded and is not silently given the same delay.",
+    "limit": "This isolates asynchronous SDK-facing delivery delay, not actual slow native inference, accelerator contention, shared-queue pressure or production capacity. Native0 and injected5 data must never be pooled as natural performance.",
+    "non_speech_gate": "Some controls produce no recognition call; then no injected hold occurs. Retain the planned condition and report delay mechanism unexercised for that probe rather than claiming slow-STT false-interruption coverage."
+  },
+  "minimal_recorder_additions": [
+    {
+      "need": "Clarification recovery",
+      "proposal": "Add an explicit opt-in followup trigger that waits for a fresh matched non-ack response/clarification/result handle to finish and150ms of received quiet before sending the next input. Add an explicit allowed-final-kind set for no-tool reply captures if they are run separately. Keep current result-PCM default and mutual exclusions.",
+      "required_guards": [
+        "source/SDK trust boundary unchanged; blank identity never promoted",
+        "intent/final timestamp after preceding input and strictly beyond prior intent",
+        "one unambiguous agent_say\u2192speech_handle association",
+        "same handle unused for a previous trigger",
+        "non-ack actual received PCM and completed handle; no bare acknowledgement",
+        "no stale earlier handle or merely queued response",
+        "kind/timeouts/trigger evidence and failure stage retained"
+      ],
+      "scope": "Playback currently tags loud frames only to active_result, so enabling non-ack modes also needs conservative kind-aware PCM association; do not simply relax kind checking globally."
+    },
+    {
+      "need": "Fixed outcome window",
+      "proposal": "Use existing --probe with --probe-observation-seconds30 for all eight probe captures. Add no production hook solely to make capture finish; the same finite window remains whether the outcome is success, false positive or no response.",
+      "scope": "No recorder addition needed for this mode or single-WAV pauses/disfluency."
+    },
+    {
+      "need": "Direct false-interruption evidence",
+      "proposal": "If root SDK investigation exposes a stable public agent_false_interruption/resumed event or output pause/resume observation, retain it in experiment-only instrumentation with monotonic timestamp and speech ID. Preserve current server/raw telemetry and limits.",
+      "scope": "Without explicit observation, same-handle/listening\u2192speaking/PCM continuation supports inferred resumption only, not a directly observed SDK classification."
+    }
+  ],
+  "runner_and_audit_gaps": [
+    "The frozen14\u201317 runner/audits expect cancel/repeat workloads and specific turn/effect inventories. Do not run the new cases through them unchanged or call their hardcoded checks authoritative. A new frozen harness must honor case-specific --probe versus followup mode and preserve all unrun/failed rows.",
+    "Do not require exactly one USER_FINAL per pause WAV; VAD may split spans and retranscription may merge them. Match complete user meaning, observed segmented text and finalized revisions separately, retaining omissions/hallucinations.",
+    "Unnecessary clarification must inspect recorded spoken content after a complete uniquely grounded request, not count kind=clarification only: resolver response or tool-error result can ask a question. Exact speech strings are not required; all required destination/state/ETA facts are.",
+    "For no-write ambiguity, distinguish permitted read errors/skipped dependencies from actual attempted or successful mutations. Wrong-route starts and premature writes remain failures even if later corrected.",
+    "Compute final reply timing from last meaningful user speech end through actual final received non-silent PCM/handle finish; do not equate a result handle flag with timely or physical audible cutoff. Keep late recognition, paused audio, old tail and clarification wait as separate intervals."
+  ],
+  "measurement_plan": {
+    "full_denominators": "All13 declared captures, all22 publications,15 expected mutations,13 final replies,2 intentional stop interruptions and6 non-speech controls. Report missing/unrun/failure rows and every extra effect/call/clarification beyond those denominators. Exact count is a predeclared target, never a filter.",
+    "input_meaning": "Preserve original text/segment recipe and verbatim offline/live transcripts. Primary semantic correctness uses frozen requested places/actions; exact transcript match is secondary. No posthoc spelling whitelist may silently convert an error into a pass. Human proper-name review may be separately labeled.",
+    "core_metrics": [
+      "effect correctness and unintended/premature mutations",
+      "destination/reference resolution and clarification after complete known requests",
+      "segmentation/merge/retranscription and self-correction success",
+      "input onset\u2192user-speaking and input end\u2192native/STT-final/coordinator-final",
+      "input onset\u2192first sustained old-PCM cessation and any later resumption",
+      "VAD response, output pause, explicit/inferred resume, irreversible interruption and original facts retained",
+      "acknowledgment latency separately from substantive speech",
+      "final-input speech-end\u2192effect dispatch and complete final reply",
+      "all attempted/reused/error/cancelled/unknown calls and trace equality",
+      "capture/room/worker cleanup plus memory/queue measurements"
+    ],
+    "timely_cutoff": "Predeclare receipt-level screen threshold1000ms from source activity onset to last attributable old non-silent PCM before at least300ms quiet. Keep continuous values and resumptions; count unmeasurable overlap separately. This is an engineering screen parameter, not a physiological or physical acoustic claim. An interruption_requested handle alone cannot pass.",
+    "false_positive_classification": [
+      "no VAD response: false-effect control only, recovery unexercised",
+      "VAD response without observable output pause",
+      "pause and same original speech resumes/completes",
+      "nonempty unintended STT final/intent and/or extra tool effect",
+      "irreversible interruption or missing original required facts",
+      "unresolved timeout/error/attribution overlap"
+    ],
+    "timing_reporting": "Show each value and full denominator. Descriptive nearest-rank p50/p95 only within matched probe conditions; with n1 per new language case and n4 per probe condition do not claim population percentiles, significance or general performance.",
+    "review": "After every timed comparison stack is closed, one whole-stream received-ASR pass per capture with no crop/retry/selection; preserve silence and both questions/replies. ASR proxy cannot establish human breath acoustics, intelligibility or physical playback.",
+    "timely_cutoff_applies_to": "The two intentional voiced-stop captures only. For non-speech controls, pause latency is descriptive and original speech should resume/finish; continuing speech when VAD never triggers is not a cutoff failure."
+  },
+  "freeze_and_limits": {
+    "must_precede_any_render_or_live_inference": [
+      "select the finite scope/source baseline/candidate before observing new outcomes",
+      "freeze source/config/SDK/observer/recorder/generator/auditor paths and exact local model reference bytes",
+      "record same two-entry LLM cache setting, seed and parameters; no runtime prompt augmentation with expected answers",
+      "freeze all final WAV hashes once first renders complete, including failed preparation transcripts and non-speech VAD outcomes",
+      "test any recorder/delay wrapper changes with deterministic no-model fixtures before launch, separately from inherited655-test evidence",
+      "bounded new output directories, owned process PIDs, no retry/exclusion; full before/after source/model reference/cleanup receipts"
+    ],
+    "proposed_deadlines_seconds": {
+      "ready": 45,
+      "response": 60,
+      "probe_observation": 30,
+      "trial_process": 180,
+      "agent_departure": 10,
+      "worker_sigterm_grace": 20
+    },
+    "observational_limits": [
+      "13 candidate captures share model/runtime state and one host; before/after order/cache/thermal confounds remain unless separately controlled",
+      "no true streaming partial transcript revisions or incremental speech model introduced",
+      "no actual human microphone, room echo, road noise, speaker timing or concurrent-room claim",
+      "silence/noise that never activates VAD does not validate false interruption recovery",
+      "fixed model assets and source hashes are reference agreement, not publisher authentication",
+      "root interruption implementation and SDK investigation are separate work; this proposal edits no production/test/audio files and does not authorize inference"
+    ]
+  },
+  "reviewed_source_evidence": [
+    {
+      "path": "agent/tools/car_tools.py",
+      "lines": [
+        25,
+        98
+      ],
+      "sha256": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+      "supports": "Stored places, unique exact/partial lookup and ambiguous Airport Road candidates; source formulas yield proposed numeric ETA expectations."
+    },
+    {
+      "path": "agent/tools/car_tools.py",
+      "lines": [
+        150,
+        216
+      ],
+      "sha256": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+      "supports": "Fresh NavState starts at home; computed route does not activate; first successful navigation sets version1 and no replaced destination."
+    },
+    {
+      "path": "agent/coordinator/coordinator.py",
+      "lines": [
+        84,
+        135
+      ],
+      "sha256": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+      "supports": "VAD floor management, empty transcript ignored, finalized new text supersedes intent and speech."
+    },
+    {
+      "path": "agent/coordinator/coordinator.py",
+      "lines": [
+        143,
+        216
+      ],
+      "sha256": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+      "supports": "Pending-span retranscription, incomplete request clarification and no guessed dispatch."
+    },
+    {
+      "path": "agent/coordinator/coordinator.py",
+      "lines": [
+        227,
+        260
+      ],
+      "sha256": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+      "supports": "No-tool reply uses response kind; tool-error summary can use result kind."
+    },
+    {
+      "path": "agent/coordinator/responder.py",
+      "lines": [
+        41,
+        48
+      ],
+      "sha256": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+      "supports": "Please/actually normalization and explicit stop-navigation recognition for grounded cancel summary."
+    },
+    {
+      "path": "agent/pipeline/local_stt.py",
+      "lines": [
+        131,
+        176
+      ],
+      "sha256": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+      "supports": "Non-streaming recognition and optional whole-span retranscription; shared native inference distinct from result delivery."
+    },
+    {
+      "path": "agent/main.py",
+      "lines": [
+        52,
+        66
+      ],
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+      "supports": "Configured Silero endpointing and local STT/TTS warmup; no evidence that waveform duration guarantees VAD classification."
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        37,
+        91
+      ],
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+      "supports": "MonoPCM16 accepted rates and absolute sample-deadline publication; a single source WAV can contain silence spans."
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        96,
+        186
+      ],
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+      "supports": "Result-only PCM association, freshness for followups, result-only completion and probe reporting."
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        531,
+        579
+      ],
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+      "supports": "Followups begin during new result PCM; probes have a fixed independent observation window."
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        613,
+        640
+      ],
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e",
+      "supports": "Current mutually exclusive correction/probe/followup CLI and bounded deadline options."
+    },
+    {
+      "path": "tests/unit/test_coordinator.py",
+      "lines": [
+        102,
+        130
+      ],
+      "sha256": "e38c403b7869f9700fee583f272d0e032b3cac882d6037a257b738ae3398a3d4",
+      "supports": "Scripted within-hold correction and incomplete continuation tests; these are not acoustic evidence."
+    },
+    {
+      "path": "tests/unit/test_coordinator.py",
+      "lines": [
+        167,
+        179
+      ],
+      "sha256": "e38c403b7869f9700fee583f272d0e032b3cac882d6037a257b738ae3398a3d4",
+      "supports": "Scripted noise-blip gate recovery; this does not run VAD or SDK audio pause/resume."
+    },
+    {
+      "path": "tests/unit/test_coordinator_reliability.py",
+      "lines": [
+        53,
+        95
+      ],
+      "sha256": "7a41a7f6f2b37b0987d8f3b3a72edbcd72f6ed748f4e25c3fd304890e53f8446",
+      "supports": "Incomplete request no-write and empty-text VAD blip does not irreversibly cancel speech at coordinator level."
+    },
+    {
+      "path": "tests/unit/test_place_clarification.py",
+      "lines": [
+        74,
+        110
+      ],
+      "sha256": "ce9162de81173c2696a2097c64748b3bb53aa6f1019136aa8f66ce876f704b14",
+      "supports": "Airport Road has hospital and Starbucks candidates; unresolved navigation remains an error without route activation."
+    },
+    {
+      "path": "tests/unit/test_livekit_audio_experiment.py",
+      "lines": [
+        114,
+        162
+      ],
+      "sha256": "a52b68ef495eb26573ee4647c750c4b20b379e957abf1eb13936be9876a2823e",
+      "supports": "Acknowledgment/silent/ambiguous-handle audio does not trigger correction."
+    },
+    {
+      "path": "tests/unit/test_livekit_audio_experiment.py",
+      "lines": [
+        223,
+        297
+      ],
+      "sha256": "a52b68ef495eb26573ee4647c750c4b20b379e957abf1eb13936be9876a2823e",
+      "supports": "Probe observation lasts to declared deadline and retains noncompletion/errors."
+    },
+    {
+      "path": "tests/unit/test_livekit_audio_experiment.py",
+      "lines": [
+        492,
+        561
+      ],
+      "sha256": "a52b68ef495eb26573ee4647c750c4b20b379e957abf1eb13936be9876a2823e",
+      "supports": "Followup freshness and unused-handle guard, with timeout attribution."
+    },
+    {
+      "path": "results/iteration14/make_inputs.py",
+      "lines": [
+        42,
+        88
+      ],
+      "sha256": "677bffc478773360f96f17674cc2445a91136ee133f76d912f215e4b6cca38b7",
+      "supports": "Prior local first-render method with full generated WAVs, one preparation ASR and model/cleanup receipts."
+    },
+    {
+      "path": "results/iteration5/protocol.json",
+      "lines": [
+        1,
+        71
+      ],
+      "sha256": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab",
+      "supports": "Prior airport-based noise/fragment controls and fixed-window methodology, already development-exposed."
+    },
+    {
+      "path": "results/iteration5/probe-audit.json",
+      "lines": [
+        1,
+        145
+      ],
+      "sha256": "0af16a792d33e14c37807e45619f91793c12c9332951aabc5cddabe6f475c3ee",
+      "supports": "Prior non-speech controls did not activate VAD; not a demonstrated false-pause recovery pass."
+    },
+    {
+      "path": "results/iteration17/comparison-report.json",
+      "lines": null,
+      "sha256": "cb12741fcc14754263ba28b2dd52a36a62e61e32a178a0b6ba267b1811503ef1",
+      "supports": "Latest late recognition and long old-PCM tails motivate a separate, explicitly controlled stress condition."
+    }
+  ],
+  "preparation_actions_performed": [
+    "Read objective, current recorder/coordinator/tools/STT/responder source, relevant tests and prior declared noise/audio-generation methods.",
+    "Calculated three simulated route ETA expectations with standalone stdlib math and AST literals only.",
+    "Wrote this proposal. No models, VAD characterization, services, tests, raw audio, staging or PR actions performed."
+  ]
+}

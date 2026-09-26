@@ -1,0 +1,193 @@
+{
+  "declared_at_utc": "2026-09-26T06:35:32.432317+00:00",
+  "purpose": "Verify the retained natural duration wording in actual interrupted waypoint addition, with unchanged airport and office-correction controls.",
+  "hypotheses": [
+    "Adding nearest coffee during the initial MG Road result preserves the destination and adds exactly the declared canonical stop.",
+    "The final waypoint result retains 13 minutes and zero extra minutes in text and received whole-stream ASR, with proper-name deviations reported separately.",
+    "Interrupted earlier handles stop, final results finish, all attempts remain recorded, and room/application/process cleanup are assessed separately from server job status."
+  ],
+  "run_order": [
+    "waypoint",
+    "baseline",
+    "waypoint",
+    "correction"
+  ],
+  "inputs": {
+    "navigate": {
+      "source": "results/iteration4/audio-assets/navigate.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54"
+    },
+    "correct": {
+      "source": "results/iteration4/audio-assets/correct.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3"
+    },
+    "navigate-mgroad": {
+      "source": "results/iteration10/waypoint-input-generation/navigate-mgroad.wav",
+      "sha256": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d"
+    },
+    "add-coffee": {
+      "source": "results/iteration10/waypoint-input-generation/add-coffee.wav",
+      "sha256": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c"
+    }
+  },
+  "expected": {
+    "waypoint": {
+      "initial_audio": "navigate-mgroad.wav",
+      "followup_audio": "add-coffee.wav",
+      "initial_input": "Navigate to MG Road Metro Station.",
+      "final_input": "Add the nearest coffee as a stop.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation",
+        "find_nearby",
+        "add_waypoint"
+      ],
+      "attempts": 5,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_MGROAD",
+          "stop_ids": [],
+          "eta_min": 13
+        },
+        {
+          "tool": "add_waypoint",
+          "destination_id": "P_MGROAD",
+          "stop_ids": [
+            "K_BLUETOKAI"
+          ],
+          "eta_min": 13,
+          "extra_min": 0
+        }
+      ],
+      "result_facts": [
+        "MG Road destination unchanged",
+        "Blue Tokai Indiranagar added",
+        "estimated time is 13 minutes",
+        "0 extra minutes"
+      ],
+      "original_result": "interrupted during observed substantive PCM"
+    },
+    "baseline": {
+      "initial_audio": "navigate.wav",
+      "initial_input": "Navigate to the airport.",
+      "final_input": "Navigate to the airport.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation"
+      ],
+      "attempts": 3,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_AIRPORT",
+          "stop_ids": [],
+          "eta_min": 88
+        }
+      ],
+      "result_facts": [
+        "airport navigation started",
+        "estimated arrival in 88 minutes"
+      ]
+    },
+    "correction": {
+      "initial_audio": "navigate.wav",
+      "followup_audio": "correct.wav",
+      "initial_input": "Navigate to the airport.",
+      "final_input": "Actually, go to the office instead.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation",
+        "search_destination",
+        "compute_route",
+        "start_navigation"
+      ],
+      "attempts": 6,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_AIRPORT",
+          "stop_ids": [],
+          "eta_min": 88
+        },
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_OFFICE",
+          "stop_ids": [],
+          "eta_min": 29
+        }
+      ],
+      "result_facts": [
+        "office navigation",
+        "previous airport replaced",
+        "estimated arrival in 29 minutes"
+      ],
+      "original_result": "interrupted during observed substantive PCM"
+    }
+  },
+  "protocol_limits": {
+    "capture_ready_seconds": 45,
+    "response_seconds": 60,
+    "probe_observation_seconds": 12,
+    "trial_process_deadline_seconds": 150,
+    "agent_departure_observation_seconds": 10,
+    "worker_sigterm_grace_seconds": 20,
+    "worker_sdk_drain_seconds": 3600
+  },
+  "method": [
+    "Four serial fresh rooms, one shared local stack, fixed waypoint/baseline/waypoint/correction order; no retries or exclusions.",
+    "Two new first-render production-voice inputs checked once by pinned ASR; old control WAVs copied exactly. Synthetic voice matches output voice, so no independent human-speech claim.",
+    "Existing driver correction label denotes the second input clip. Waypoint clips use that same observed-result PCM trigger for a stop-addition request, not a destination correction.",
+    "No source or configuration changes during a live suite; retain failed captures and all tool/error/runtime logs.",
+    "After each client exits, inspect only its owned room for agent presence for up to10seconds; do not delete the room to create apparent job cleanup.",
+    "Send worker SIGTERM after all trials and departure checks. Keep original20second outer grace and record any escalation separately from capture success.",
+    "Keep all raw trace equality failures, classifying initial-event omission and any events emitted after client disconnect separately.",
+    "Review full received audio through pinned local ASR after timed capture and owned-stack cleanup. This is an ASR proxy, not human listening."
+  ],
+  "limitations": [
+    "Development cases chosen to exercise an observed duration failure, not held-out evaluation.",
+    "No controlled RTC before/after comparison or population latency claim.",
+    "Exact declared tool sequence is checked separately from semantic effects; preserve valid alternatives and every extra/failed/stale attempt.",
+    "No injected slow logger in these live cases; ordinary compute_route delay remains. Controlled loop fault injection is separate iteration6 evidence.",
+    "Capture completion, tool effects, full trace equality, received content, caller cleanup, room-job departure and process exit are separate checks.",
+    "Input/frame/data transport timestamps do not establish physical audible timing. Default ICE/STUN may use network services although all model inference is local.",
+    "Existing recorder may omit the initial listening event; its receiver shutdown does not prove every transmitted frame arrived."
+  ],
+  "baseline": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "source_sha256": {
+      "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+      "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+      "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+      "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+      "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+      "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+      "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+      "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+      "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+      "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+      "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+      "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+      "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+      "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+      "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+      "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+      "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+      "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+      "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+      "scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+      "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11"
+    }
+  },
+  "offline_decision": "Retain C: 20/20 expected minutes versus A18/20; B18/20 trades 13 repair for16 regression. No global speed change. See number-analysis.json for all guarded transcripts and costs."
+}

@@ -1,0 +1,341 @@
+{
+  "status": "completed_probe_observation",
+  "started_at": "2026-09-25T19:58:50.495749+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+    "--probe",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/silence.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "12"
+  ],
+  "room": "car-audio-f7a952505401473c8d6b1ef64515dab5",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": 12.0,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+      "file": "initial.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 31680,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 89376.819923916,
+        "drained_monotonic": 89378.253473958,
+        "scheduled_end_monotonic": 89378.24925724934,
+        "published_samples": 34304
+      }
+    },
+    {
+      "label": "probe",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/silence.wav",
+      "file": "probe.wav",
+      "sha256": "0b9e427fb429f33f0f9a2ddd2c7389c7aba96c3a9411ba203367ac9c06779b32",
+      "sample_rate": 24000,
+      "samples": 14400,
+      "duration_seconds": 0.6,
+      "activity_start_sample": null,
+      "activity_end_sample": null,
+      "timing": {
+        "label": "probe",
+        "started_monotonic": 89398.838044708,
+        "drained_monotonic": 89399.438998291,
+        "scheduled_end_monotonic": 89399.438044708,
+        "published_samples": 14400
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMrMe3WTYdt8Ak",
+      "participant": "agent-AJ_3FgGSHMSBCEH",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Probe completion means only that the fixed observation window was captured; unfinished speech, recognition and interruptions remain outcomes, not a quality pass.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "dec83a0ae501008370d3f4714808a9dff04bacd56a175bb7296369e467c67f30",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+    "sha256": "46be8c30fbe034a03c13b421273662a5b833d6a9577b34ea70c7a3c4dead4d59"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+    "sha256": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab"
+  },
+  "probe_trigger": {
+    "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+    "intent_version": 1,
+    "kind": "result",
+    "speech_id": "speech_f180e0205848",
+    "queued_at": 89397.774830791,
+    "state": "queued",
+    "first_loud_at": 89398.837860041,
+    "preceding_quiet_seconds": 16.799704958000802,
+    "last_loud_at": 89398.837860041
+  },
+  "probe_observation": {
+    "started_monotonic": 89399.438998291,
+    "deadline_monotonic": 89411.438998291,
+    "observed_end_monotonic": 89411.439150041,
+    "trailing_silence_clipped_at_deadline": false,
+    "original_handle": {
+      "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_f180e0205848",
+      "queued_at": 89397.774830791,
+      "state": "finished",
+      "first_loud_at": 89398.837860041,
+      "preceding_quiet_seconds": 16.799704958000802,
+      "last_loud_at": 89405.058747416,
+      "ended_at": 89405.114365875,
+      "error": null
+    },
+    "current_intent_version": 1,
+    "current_result_handles": [
+      {
+        "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_f180e0205848",
+        "queued_at": 89397.774830791,
+        "state": "finished",
+        "first_loud_at": 89398.837860041,
+        "preceding_quiet_seconds": 16.799704958000802,
+        "last_loud_at": 89405.058747416,
+        "ended_at": 89405.114365875,
+        "error": null
+      }
+    ],
+    "original_result_finished": true,
+    "current_result_finished": true,
+    "events_since_probe_start": [
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790366360.0175319,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "airport"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Kempegowda International Airport",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Kempegowda International Airport",
+                "destination_id": "P_AIRPORT",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 35.4,
+                "eta_min": 88,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    13.1989,
+                    77.7068
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_f180e0205848",
+          "state": "finished",
+          "error": null
+        },
+        "ts": 1790366360.019181,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "airport"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Kempegowda International Airport",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Kempegowda International Airport",
+                "destination_id": "P_AIRPORT",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 35.4,
+                "eta_min": 88,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    13.1989,
+                    77.7068
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      }
+    ]
+  },
+  "cleanup_errors": [],
+  "finished_at": "2026-09-25T19:59:26.347816+00:00",
+  "event_counts": {
+    "agent_state": 5,
+    "session_started": 1,
+    "user_state": 3,
+    "user_final": 1,
+    "ack": 1,
+    "agent_say": 2,
+    "speech_handle": 4,
+    "plan_ready": 1,
+    "gate_open": 1,
+    "gate_committed": 1,
+    "slot_update": 1,
+    "tool_waiting": 3,
+    "tool_started": 3,
+    "tool_done": 3
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_7a199b973b65",
+      "queued_at": 89380.828941291,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 89382.17830275,
+      "error": null
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_f180e0205848",
+      "queued_at": 89397.774830791,
+      "state": "finished",
+      "first_loud_at": 89398.837860041,
+      "preceding_quiet_seconds": 16.799704958000802,
+      "last_loud_at": 89405.058747416,
+      "ended_at": 89405.114365875,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "worker_manifest.json": "46be8c30fbe034a03c13b421273662a5b833d6a9577b34ea70c7a3c4dead4d59",
+    "events.jsonl": "2584bfe38aae9729d24b73c19f56c51ab89148c63abc5cd35e04388f8369c4ad",
+    "frames.jsonl": "c9a29d1d7c458dffa9ad3105d62da01572f78e97d65d1b1d3f515e19c53c8ae8",
+    "protocol.json": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab",
+    "probe.wav": "0b9e427fb429f33f0f9a2ddd2c7389c7aba96c3a9411ba203367ac9c06779b32",
+    "received-1.pcm": "407ab8e8779a868424f86a4e53175c0c8e20ae8614adbaa8319cd077f20a6902"
+  }
+}

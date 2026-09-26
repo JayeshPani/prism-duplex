@@ -1,0 +1,591 @@
+{
+  "status": "passed",
+  "created_at_utc": "2026-09-26T12:29:00.761365+00:00",
+  "scope": "Model-free missing-case, cancellation-boundary and selected-package provenance fixtures; no models or services.",
+  "supersedes_validation": {
+    "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/auditor-validation.json",
+    "sha256": "87b2f48b4fab46a990e8e940d1cdf59758e4b197bf41ecd476ed9713b8ee6eb5"
+  },
+  "auditor_sha256": "3bd4bb04b27f4d6ad6b8aa405babbc1c982af43baa3b6e5cb5b7d46ef9fda037",
+  "protocol_sha256": "d51c0a489de15c5fce3737ec0892648db27360b365202a525493bb888825d989",
+  "missing_capture_summary": {
+    "policy": "candidate",
+    "agent_package_root": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+    "loaded_agent_modules": {
+      "agent": {
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "agent.main": {
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py",
+        "sha256": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1"
+      }
+    }
+  },
+  "missing_case_ids": [
+    {
+      "arm": "baseline",
+      "case": "airport_hospital_replay",
+      "status": "unrun"
+    },
+    {
+      "arm": "baseline",
+      "case": "cancel_pending_navigation",
+      "status": "unrun"
+    },
+    {
+      "arm": "baseline",
+      "case": "hebbal_third_wave",
+      "status": "unrun"
+    },
+    {
+      "arm": "baseline",
+      "case": "distance_query_after_ambiguity",
+      "status": "unrun"
+    },
+    {
+      "arm": "baseline",
+      "case": "indiranagar_ather",
+      "status": "unrun"
+    },
+    {
+      "arm": "candidate",
+      "case": "airport_hospital_replay",
+      "status": "unrun"
+    },
+    {
+      "arm": "candidate",
+      "case": "cancel_pending_navigation",
+      "status": "unrun"
+    },
+    {
+      "arm": "candidate",
+      "case": "hebbal_third_wave",
+      "status": "unrun"
+    },
+    {
+      "arm": "candidate",
+      "case": "distance_query_after_ambiguity",
+      "status": "unrun"
+    },
+    {
+      "arm": "candidate",
+      "case": "indiranagar_ather",
+      "status": "unrun"
+    }
+  ],
+  "cancel_boundary_fixtures": [
+    {
+      "case": "no_cancel",
+      "expected_pass": true,
+      "checks": {
+        "effect_count": {
+          "status": "passed",
+          "detail": {
+            "expected": 0,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "passed",
+          "detail": {
+            "observed_attempt_counts": {},
+            "allowed_cancel_attempts": [
+              0,
+              1
+            ],
+            "limit": "All attempts retained. Explicit stop may issue one no-op cancellation in a fresh inactive room."
+          }
+        },
+        "no_stale_completed_navigation": {
+          "status": "passed",
+          "detail": "Tool-done stale flags, separate from attempts."
+        },
+        "cancellation_outcome_grounded": {
+          "status": "passed",
+          "detail": {
+            "successful_cancel_rows": [],
+            "limit": "With zero cancel attempts, inactive state follows from fresh-room initial state and no navigation writes; no direct final snapshot is claimed."
+          }
+        }
+      }
+    },
+    {
+      "case": "one_noop_cancel",
+      "expected_pass": true,
+      "checks": {
+        "effect_count": {
+          "status": "passed",
+          "detail": {
+            "expected": 0,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "passed",
+          "detail": {
+            "observed_attempt_counts": {
+              "cancel_navigation": 1
+            },
+            "allowed_cancel_attempts": [
+              0,
+              1
+            ],
+            "limit": "All attempts retained. Explicit stop may issue one no-op cancellation in a fresh inactive room."
+          }
+        },
+        "no_stale_completed_navigation": {
+          "status": "passed",
+          "detail": "Tool-done stale flags, separate from attempts."
+        },
+        "cancellation_outcome_grounded": {
+          "status": "passed",
+          "detail": {
+            "successful_cancel_rows": [
+              {
+                "type": "tool_done",
+                "ts": 1,
+                "data": {
+                  "tool": "cancel_navigation",
+                  "result": {
+                    "status": "success",
+                    "route_active": false,
+                    "navigation_version": 0,
+                    "cancelled": null
+                  }
+                }
+              }
+            ],
+            "limit": "With zero cancel attempts, inactive state follows from fresh-room initial state and no navigation writes; no direct final snapshot is claimed."
+          }
+        }
+      }
+    },
+    {
+      "case": "two_cancels",
+      "expected_pass": false,
+      "checks": {
+        "effect_count": {
+          "status": "passed",
+          "detail": {
+            "expected": 0,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": {
+            "observed_attempt_counts": {
+              "cancel_navigation": 2
+            },
+            "allowed_cancel_attempts": [
+              0,
+              1
+            ],
+            "limit": "All attempts retained. Explicit stop may issue one no-op cancellation in a fresh inactive room."
+          }
+        },
+        "no_stale_completed_navigation": {
+          "status": "passed",
+          "detail": "Tool-done stale flags, separate from attempts."
+        },
+        "cancellation_outcome_grounded": {
+          "status": "passed",
+          "detail": {
+            "successful_cancel_rows": [
+              {
+                "type": "tool_done",
+                "ts": 1,
+                "data": {
+                  "tool": "cancel_navigation",
+                  "result": {
+                    "status": "success",
+                    "route_active": false,
+                    "navigation_version": 0,
+                    "cancelled": null
+                  }
+                }
+              },
+              {
+                "type": "tool_done",
+                "ts": 1,
+                "data": {
+                  "tool": "cancel_navigation",
+                  "result": {
+                    "status": "success",
+                    "route_active": false,
+                    "navigation_version": 0,
+                    "cancelled": null
+                  }
+                }
+              }
+            ],
+            "limit": "With zero cancel attempts, inactive state follows from fresh-room initial state and no navigation writes; no direct final snapshot is claimed."
+          }
+        }
+      }
+    },
+    {
+      "case": "forbidden_start",
+      "expected_pass": false,
+      "checks": {
+        "effect_count": {
+          "status": "passed",
+          "detail": {
+            "expected": 0,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": {
+            "observed_attempt_counts": {
+              "start_navigation": 1
+            },
+            "allowed_cancel_attempts": [
+              0,
+              1
+            ],
+            "limit": "All attempts retained. Explicit stop may issue one no-op cancellation in a fresh inactive room."
+          }
+        },
+        "no_stale_completed_navigation": {
+          "status": "passed",
+          "detail": "Tool-done stale flags, separate from attempts."
+        },
+        "cancellation_outcome_grounded": {
+          "status": "passed",
+          "detail": {
+            "successful_cancel_rows": [],
+            "limit": "With zero cancel attempts, inactive state follows from fresh-room initial state and no navigation writes; no direct final snapshot is claimed."
+          }
+        }
+      }
+    }
+  ],
+  "package_provenance_fixtures": [
+    {
+      "arm": "baseline",
+      "case": "valid",
+      "expected_status": "passed",
+      "observed": {
+        "status": "passed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "missing_manifest",
+      "expected_status": "unmeasured",
+      "observed": {
+        "status": "unmeasured",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "reason": "Missing worker manifest, selection or run freeze"
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "missing_selection",
+      "expected_status": "unmeasured",
+      "observed": {
+        "status": "unmeasured",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "reason": "Missing worker manifest, selection or run freeze"
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "wrong_package",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": false,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "wrong_loaded_hash",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": false
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": false
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "empty_loaded_inventory",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": false
+          },
+          "loaded_module_matches": {},
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "incomplete_manifest",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": false,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "baseline",
+      "case": "unfrozen_manifest_source",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": false,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "valid",
+      "expected_status": "passed",
+      "observed": {
+        "status": "passed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "missing_manifest",
+      "expected_status": "unmeasured",
+      "observed": {
+        "status": "unmeasured",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "reason": "Missing worker manifest, selection or run freeze"
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "missing_selection",
+      "expected_status": "unmeasured",
+      "observed": {
+        "status": "unmeasured",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "reason": "Missing worker manifest, selection or run freeze"
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "wrong_package",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": false,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "wrong_loaded_hash",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": false
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": false
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "empty_loaded_inventory",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": false
+          },
+          "loaded_module_matches": {},
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "incomplete_manifest",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": false,
+            "all_manifest_sources_frozen": true,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    },
+    {
+      "arm": "candidate",
+      "case": "unfrozen_manifest_source",
+      "expected_status": "failed",
+      "observed": {
+        "status": "failed",
+        "detail": {
+          "selected_package": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex",
+          "checks": {
+            "selected_policy": true,
+            "selected_package": true,
+            "complete_manifest_agent_inventory": true,
+            "all_manifest_sources_frozen": false,
+            "loaded_agent_modules_match": true
+          },
+          "loaded_module_matches": {
+            "agent": true,
+            "agent.main": true
+          },
+          "limit": "Import/source provenance only; inference and final worker cleanup are checked separately."
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Missing rows retain declared denominators but have no fabricated per-criterion pass.",
+    "Lightweight synthetic provenance fixtures test source checks, not startup or loaded models.",
+    "Intentional recorder-root versus baseline-package differences remain in source_identity.capture_agent_vs_worker and do not constitute failure."
+  ]
+}

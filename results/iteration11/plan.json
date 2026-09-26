@@ -1,0 +1,17 @@
+{
+  "declared_at_utc": "2026-09-26T06:56:48.536289+00:00",
+  "previous_turn_classification": "progress: retained speech improvement and new RTC evidence changes next action",
+  "hypothesis": "Serial file open/write/flush/close off the room event loop preserves trace order and content without exposing audio processing to synchronous filesystem stalls. This does not establish that trace I/O caused missing recognition.",
+  "change": "Owned per-room writer, observable errors, FIFO flush/close and bounded shutdown wait; no recognition, interruption, tool or model policy changes.",
+  "baseline_evidence": "results/iteration10/supplementary-log-review.json:113ms mkdir and436ms trace flush watchdog samples",
+  "verification": [
+    "Fault barriers for file operations plus order/snapshot/failure/close cancellation/independent-room regressions",
+    "Controlled100ms I/O-delay comparison of current synchronous sink versus candidate; retain every row",
+    "Repeat four existing audio conversations with identical inputs/settings after source freeze; retain failures and full speech review"
+  ],
+  "limits": [
+    "Async trace acknowledgement is no longer immediate persistence. Clean writer drain proves accepted lines flushed, not fsync/power-loss durability.",
+    "Native file calls may outlive a bounded async close wait; must report incomplete cleanup rather than claim cancelled I/O.",
+    "No causal attribution of previous missing correction without additional stage evidence."
+  ]
+}

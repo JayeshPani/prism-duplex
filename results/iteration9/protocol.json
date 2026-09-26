@@ -1,0 +1,115 @@
+{
+  "declared_at_utc": "2026-09-26T05:54:17.220916+00:00",
+  "purpose": "Verify spelled-out navigation arrival estimates and original-request summary routing with actual RTC navigation/correction; retain all effects, content, timing, traces and cleanup.",
+  "hypotheses": [
+    "Successful direct replies use spelled-out estimates while preserving destination/replacement/duration facts.",
+    "Corrections still interrupt earlier result speech, complete the office result, and clean up their rooms."
+  ],
+  "run_order": [
+    "baseline",
+    "correction",
+    "correction",
+    "baseline"
+  ],
+  "inputs": {
+    "navigate": {
+      "source": "results/iteration4/audio-assets/navigate.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54"
+    },
+    "correct": {
+      "source": "results/iteration4/audio-assets/correct.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3"
+    },
+    "silence": {
+      "source": "results/iteration5/audio-assets/silence.wav",
+      "sha256": "0b9e427fb429f33f0f9a2ddd2c7389c7aba96c3a9411ba203367ac9c06779b32"
+    },
+    "noise": {
+      "source": "results/iteration5/audio-assets/noise.wav",
+      "sha256": "a877c571fd70999adc21961bcc2669dff42454d64eba1c6868339c26386c2f1d"
+    }
+  },
+  "expected": {
+    "baseline": {
+      "destinations": [
+        "P_AIRPORT"
+      ],
+      "attempts": 3,
+      "final_input": "Navigate to the airport.",
+      "result_facts": [
+        "airport navigation started",
+        "estimated arrival in 88 minutes"
+      ]
+    },
+    "correction": {
+      "destinations": [
+        "P_AIRPORT",
+        "P_OFFICE"
+      ],
+      "attempts": 6,
+      "final_input": "Actually, go to the office instead.",
+      "result_facts": [
+        "office navigation",
+        "previous airport replaced",
+        "estimated arrival in 29 minutes"
+      ],
+      "original_result": "interrupted during observed substantive PCM"
+    },
+    "silence": {
+      "destinations": [
+        "P_AIRPORT"
+      ],
+      "attempts": 3,
+      "post_probe_calls": 0,
+      "post_probe_final_input": [],
+      "original_result": "finished"
+    },
+    "noise": {
+      "destinations": [
+        "P_AIRPORT"
+      ],
+      "attempts": 3,
+      "post_probe_calls": 0,
+      "post_probe_final_input": [],
+      "original_result": "finished"
+    }
+  },
+  "protocol_limits": {
+    "capture_ready_seconds": 45,
+    "response_seconds": 60,
+    "probe_observation_seconds": 12,
+    "trial_process_deadline_seconds": 150,
+    "agent_departure_observation_seconds": 10,
+    "worker_sigterm_grace_seconds": 20,
+    "worker_sdk_drain_seconds": 3600
+  },
+  "method": [
+    "Reuse exact existing WAVs and local model/driver settings; one shared stack, four serial fresh rooms, no exclusions. Previous iteration8 RTC is historical context, not a controlled latency comparison.",
+    "No source or configuration changes during a live suite; retain failed captures and all tool/error/runtime logs.",
+    "After each client exits, inspect only its owned room for agent presence for up to10seconds; do not delete the room to create apparent job cleanup.",
+    "Send worker SIGTERM after all trials and departure checks. Keep original20second outer grace and record any escalation separately from capture success.",
+    "Keep all raw trace equality failures, classifying initial-event omission and any events emitted after client disconnect separately.",
+    "Review full received audio through pinned local ASR after timed capture and owned-stack cleanup. This is an ASR proxy, not human listening."
+  ],
+  "limitations": [
+    "Four serial repeated synthetic development captures validate integration, not a controlled RTC latency improvement, general accuracy, microphone/echo behavior or capacity.",
+    "No injected slow logger in these live cases; ordinary compute_route delay remains. Controlled loop fault injection is separate iteration6 evidence.",
+    "Capture completion, tool effects, full trace equality, received content, caller cleanup, room-job departure and process exit are separate checks.",
+    "Input/frame/data transport timestamps do not establish physical audible timing. Default ICE/STUN may use network services although all model inference is local.",
+    "Existing recorder may omit the initial listening event; its receiver shutdown does not prove every transmitted frame arrived.",
+    "These pure navigation/correction captures do not test a resolver that drops an extra information request; that boundary has separate scripted integration tests."
+  ],
+  "baseline": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "source_sha256": {
+      "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+      "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+      "agent/coordinator/coordinator.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+      "scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+      "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11",
+      "agent/coordinator/responder.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731"
+    }
+  }
+}

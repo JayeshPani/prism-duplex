@@ -1,0 +1,41 @@
+{
+  "frozen_at_utc": "2026-09-26T07:11:42.662345+00:00",
+  "timing": "Review method file frozen after RTC launch but before any received-audio ASR; all four cases, whole streams and expected facts were already declared in suite protocol and iteration11 plan. Preparation error preserved separately.",
+  "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+  "suite_protocol_sha256": "cad4a9e67376042b4f858839ec05291eae64e18dd622f7450fb81d41f5904d61",
+  "declared_trials": [
+    {
+      "id": "rtc-waypoint-1",
+      "case": "waypoint"
+    },
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline"
+    },
+    {
+      "id": "rtc-waypoint-2",
+      "case": "waypoint"
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction"
+    }
+  ],
+  "scope": "All four declared whole received PCM streams, in original order; failures/unavailable rows remain in the denominator.",
+  "method": "Pinned production LocalSTT through offline cached Parakeet on local-mac; resample entire mono PCM16 24 kHz to16 kHz with existing helper. No trimming, silence removal, retries or capture-success selection.",
+  "review": {
+    "waypoint": "First MG Road navigation result is intentionally interrupted; final Blue Tokai Indiranagar addition retains MG Road destination, estimate13minutes and0extra. Retain all incorrect entity/number spellings; do not normalize13and30.",
+    "baseline": "Airport start estimatedarrival88minutes.",
+    "correction": "Office replacement ofairport estimatedarrival29minutes.",
+    "score": "Verbatim whole-stream ASR plus reviewed facts, not human listening or held-out accuracy."
+  },
+  "limitations": [
+    "Production ASR proxy cannot distinguish pronunciation from recognition errors; no human listening.",
+    "Whole-stream text does not establish word timestamps or physical playback.",
+    "Four repeated synthetic development captures share warm models and a fixed order.",
+    "Review is performed only after timed suite and owned model services have stopped. Its timings are separate from conversation latency."
+  ],
+  "declared_at_utc": "2026-09-26T07:11:42.662345+00:00",
+  "suite_root": "results/iteration11",
+  "note": "No clipping, retries, capture-success selection or new content criteria. Existing iteration10 whole-stream method reused."
+}

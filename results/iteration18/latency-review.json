@@ -1,0 +1,3733 @@
+{
+  "created_at_utc": "2026-09-26T11:38:17.087263+00:00",
+  "status": "completed",
+  "scope": "Post-analysis method written after both timed arms and whole-stream ASR; not predeclared or a new experiment.",
+  "method": {
+    "input_end": "Scheduled publication start plus recorded WAV activity_end_sample/rate; threshold speech proxy, not VAD or microphone endpoint.",
+    "anchor": "Last declared spoken input; non-speech probes keep initial spoken-command anchor. All mutation attempts retained, including attempts before the final spoken input.",
+    "dispatch": "Physical call logger timestamp_start is dispatch intention before backend entry, not backend start or effect completion; mapped with this input's same-host unix/monotonic offset.",
+    "substantive_reply": "Require one non-ack handle at latest observed intent after anchor start; no assumption that one WAV equals one finalized turn.",
+    "speech_gate": "Use the independent saved speech review verbatim; all frozen effect criteria must pass. No automatic speech re-grading.",
+    "percentiles": "Nearest rank sorted valid values[ceil(n*p)-1], milliseconds; all declared null rows retained. p95 is effectively the maximum in these tiny groups."
+  },
+  "per_case": [
+    {
+      "key": "baseline/native_silence",
+      "arm": "baseline",
+      "case_id": "native_silence",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139461.67839225,
+            "drained_monotonic": 139463.110730333,
+            "scheduled_end_monotonic": 139463.10772558334,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139461.67839225,
+          "end_monotonic": 139463.110730333,
+          "activity_onset_monotonic": 139461.71839225,
+          "activity_end_monotonic": 139463.01839225,
+          "start_unix": 1790421147.030121
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421148.3701212,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_cecff075cf5a",
+          "queued_at": 139479.030731583,
+          "state": "finished",
+          "first_loud_at": 139479.934844708,
+          "preceding_quiet_seconds": 13.259909625019645,
+          "last_loud_at": 139484.575522166,
+          "ended_at": 139484.610343958,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_d4459bdced8d",
+          "queued_at": 139465.455930375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139466.812681916,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139479.934844708,
+        "frame_line": 912,
+        "speech_id": "speech_cecff075cf5a",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421164.374851,
+            "attempt_id": "e46cb4a5b7534309b9a2cd6b43749e3c:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421164.379332,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 16004.73,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 1,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1054.666,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1054.67,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 16004.73,
+        "first_ack_queued": 2437.538,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 16916.452,
+        "observed_final_reply_finished": 21591.952,
+        "fulfilled_final_reply_finished": 21591.952
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/native_voiced_stop",
+      "arm": "baseline",
+      "case_id": "native_voiced_stop",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        },
+        "capture": {
+          "label": "probe",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav",
+          "file": "probe.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139523.6903085,
+            "drained_monotonic": 139525.081062875,
+            "scheduled_end_monotonic": 139525.07697516665,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 139523.6903085,
+          "end_monotonic": 139525.081062875,
+          "activity_onset_monotonic": 139523.7303085,
+          "activity_end_monotonic": 139524.9503085,
+          "start_unix": 1790421209.0421965
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_anchor_end_unix": 1790421210.3021965,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_8321af91c9af",
+          "queued_at": 139529.616926583,
+          "state": "finished",
+          "first_loud_at": 139530.490253625,
+          "preceding_quiet_seconds": 1.598243124986766,
+          "last_loud_at": 139533.290436625,
+          "ended_at": 139533.364505916,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_9892d7b92ba7",
+          "queued_at": 139527.377447833,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139528.99519775,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139530.490253625,
+        "frame_line": 828,
+        "speech_id": "speech_8321af91c9af",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421208.160449,
+            "attempt_id": "aac052a7601044b68566d9c6cdb417ca:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421208.1618009,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": -2141.747,
+          "after_final_spoken_input_started": false
+        },
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790421214.961938,
+            "attempt_id": "27e5c951d0984ff5a25c05b65d04913b:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421214.964963,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 4659.741,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 2,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 958.112,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 958.117,
+          "no_hold_reason": "Native condition has no injected hold"
+        },
+        {
+          "call_id": 3,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1052.304,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1052.308,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 4659.741,
+        "first_ack_queued": 2427.139,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 5539.945,
+        "observed_final_reply_finished": 8414.197,
+        "fulfilled_final_reply_finished": 8414.197
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/native_breath_proxy",
+      "arm": "baseline",
+      "case_id": "native_breath_proxy",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139558.092879333,
+            "drained_monotonic": 139559.526423291,
+            "scheduled_end_monotonic": 139559.52221266634,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139558.092879333,
+          "end_monotonic": 139559.526423291,
+          "activity_onset_monotonic": 139558.13287933302,
+          "activity_end_monotonic": 139559.432879333,
+          "start_unix": 1790421243.4448555
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421244.7848556,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_778ed22796b5",
+          "queued_at": 139567.916067583,
+          "state": "finished",
+          "first_loud_at": 139568.934853625,
+          "preceding_quiet_seconds": 5.500382583995815,
+          "last_loud_at": 139573.573794583,
+          "ended_at": 139573.582376458,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_babbc3230f90",
+          "queued_at": 139562.159134541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139563.54580075,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139568.934853625,
+        "frame_line": 541,
+        "speech_id": "speech_778ed22796b5",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421252.852561,
+            "attempt_id": "62effb5e5b7b43d0b0eff6b16a07a5e0:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421253.215039,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 8067.705,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 4,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1347.559,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1347.566,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 8067.705,
+        "first_ack_queued": 2726.255,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 9501.974,
+        "observed_final_reply_finished": 14149.497,
+        "fulfilled_final_reply_finished": 14149.497
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/native_noise_burst",
+      "arm": "baseline",
+      "case_id": "native_noise_burst",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "failed",
+      "capture_completed": "failed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160
+        },
+        "times": {
+          "start_monotonic": null,
+          "end_monotonic": null,
+          "activity_onset_monotonic": null,
+          "activity_end_monotonic": null,
+          "start_unix": null
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "recognition_delivery_durations": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": "No published spoken input"
+    },
+    {
+      "key": "baseline/delivery_delay5s_noise_burst",
+      "arm": "baseline",
+      "case_id": "delivery_delay5s_noise_burst",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139651.681146166,
+            "drained_monotonic": 139653.114670208,
+            "scheduled_end_monotonic": 139653.11047949933,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139651.681146166,
+          "end_monotonic": 139653.114670208,
+          "activity_onset_monotonic": 139651.721146166,
+          "activity_end_monotonic": 139653.021146166,
+          "start_unix": 1790421337.0333612
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421338.373361,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_6bc8a1962212",
+          "queued_at": 139675.11926625,
+          "state": "finished",
+          "first_loud_at": 139676.163082958,
+          "preceding_quiet_seconds": 3.6592974579834845,
+          "last_loud_at": 139680.704070125,
+          "ended_at": 139680.749441208,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b25e741cded7",
+          "queued_at": 139669.487813708,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139672.538454083,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139676.163082958,
+        "frame_line": 1223,
+        "speech_id": "speech_6bc8a1962212",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421360.468246,
+            "attempt_id": "a6fd92932d084b048e58fbf4a493ea6f:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421360.469344,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 22094.885,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 5,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 10071.043,
+          "observed_injected_hold_ms": 5000.485,
+          "entry_to_delivery_return_ms": 15071.569,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 22094.885,
+        "first_ack_queued": 16466.668,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 23141.937,
+        "observed_final_reply_finished": 27728.295,
+        "fulfilled_final_reply_finished": 27728.295
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/delivery_delay5s_voiced_stop",
+      "arm": "baseline",
+      "case_id": "delivery_delay5s_voiced_stop",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        },
+        "capture": {
+          "label": "probe",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav",
+          "file": "probe.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139724.985310125,
+            "drained_monotonic": 139726.375404166,
+            "scheduled_end_monotonic": 139726.37197679165,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 139724.985310125,
+          "end_monotonic": 139726.375404166,
+          "activity_onset_monotonic": 139725.025310125,
+          "activity_end_monotonic": 139726.245310125,
+          "start_unix": 1790421410.3377132
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_anchor_end_unix": 1790421411.5977132,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_87381ad17cd1",
+          "queued_at": 139734.717674125,
+          "state": "finished",
+          "first_loud_at": 139735.584549083,
+          "preceding_quiet_seconds": 0.8371940829965752,
+          "last_loud_at": 139738.365992291,
+          "ended_at": 139738.469687458,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_a307ab85687c",
+          "queued_at": 139733.775717916,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 139734.705602791,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139735.584549083,
+        "frame_line": 1268,
+        "speech_id": "speech_87381ad17cd1",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421409.589792,
+            "attempt_id": "d9db0c92c5144b2fa19f7ac0d8d7b129:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421409.590991,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": -2007.921,
+          "after_final_spoken_input_started": false
+        },
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790421420.056415,
+            "attempt_id": "31edb25059ca40d48a7a34450a8ce7b5:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421420.065254,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 8458.702,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 6,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1125.415,
+          "observed_injected_hold_ms": 5000.208,
+          "entry_to_delivery_return_ms": 6125.633,
+          "no_hold_reason": null
+        },
+        {
+          "call_id": 7,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1128.508,
+          "observed_injected_hold_ms": 5002.144,
+          "entry_to_delivery_return_ms": 6130.675,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 8458.702,
+        "first_ack_queued": 7530.408,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 9339.239,
+        "observed_final_reply_finished": 12224.377,
+        "fulfilled_final_reply_finished": 12224.377
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/delivery_delay5s_silence",
+      "arm": "baseline",
+      "case_id": "delivery_delay5s_silence",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139759.310639708,
+            "drained_monotonic": 139760.743607041,
+            "scheduled_end_monotonic": 139760.73997304135,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139759.310639708,
+          "end_monotonic": 139760.743607041,
+          "activity_onset_monotonic": 139759.35063970802,
+          "activity_end_monotonic": 139760.650639708,
+          "start_unix": 1790421444.663131
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421446.0031312,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_ba48c9c198ab",
+          "queued_at": 139773.164781916,
+          "state": "finished",
+          "first_loud_at": 139774.016581125,
+          "preceding_quiet_seconds": 4.700275292008882,
+          "last_loud_at": 139778.656385208,
+          "ended_at": 139778.683323458,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c7f157a406c7",
+          "queued_at": 139768.02807175,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139769.455903291,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139774.016581125,
+        "frame_line": 734,
+        "speech_id": "speech_ba48c9c198ab",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421458.513569,
+            "attempt_id": "372e2573712b4b15a3c2d0021037a2de:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421458.514775,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 12510.438,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 8,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1005.811,
+          "observed_injected_hold_ms": 5000.812,
+          "entry_to_delivery_return_ms": 6006.644,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 12510.438,
+        "first_ack_queued": 7377.432,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 13365.941,
+        "observed_final_reply_finished": 18032.684,
+        "fulfilled_final_reply_finished": 18032.684
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/delivery_delay5s_breath_proxy",
+      "arm": "baseline",
+      "case_id": "delivery_delay5s_breath_proxy",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139807.931917291,
+            "drained_monotonic": 139809.36485975,
+            "scheduled_end_monotonic": 139809.36125062432,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139807.931917291,
+          "end_monotonic": 139809.36485975,
+          "activity_onset_monotonic": 139807.971917291,
+          "activity_end_monotonic": 139809.271917291,
+          "start_unix": 1790421493.2845323
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421494.6245325,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_2da016f31698",
+          "queued_at": 139821.85001675,
+          "state": "finished",
+          "first_loud_at": 139822.648689833,
+          "preceding_quiet_seconds": 4.560545667016413,
+          "last_loud_at": 139827.288063541,
+          "ended_at": 139827.330788166,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c57ebbcebd52",
+          "queued_at": 139816.676678541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139818.210950708,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139822.648689833,
+        "frame_line": 735,
+        "speech_id": "speech_2da016f31698",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421507.197409,
+            "attempt_id": "c1fbb70054664b7faeb2f83b96cda263:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421507.1991198,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 12572.876,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 9,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1024.178,
+          "observed_injected_hold_ms": 5002.143,
+          "entry_to_delivery_return_ms": 6026.377,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 12572.876,
+        "first_ack_queued": 7404.761,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 13376.773,
+        "observed_final_reply_finished": 18058.871,
+        "fulfilled_final_reply_finished": 18058.871
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/clear_hospital",
+      "arm": "candidate",
+      "case_id": "clear_hospital",
+      "condition_group": "native_language",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_command.wav",
+          "text": "Please navigate to Manipal Hospital, Old Airport Road.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/hospital_command.wav",
+          "file": "initial.wav",
+          "sha256": "e8654518ac0d7af87e1ef255659a81bd57db312730a0a741cb9f9aade5929e08",
+          "sample_rate": 24000,
+          "samples": 78336,
+          "duration_seconds": 3.264,
+          "activity_start_sample": 2400,
+          "activity_end_sample": 75840,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139919.892506416,
+            "drained_monotonic": 139923.159568125,
+            "scheduled_end_monotonic": 139923.156506416,
+            "published_samples": 78336
+          }
+        },
+        "times": {
+          "start_monotonic": 139919.892506416,
+          "end_monotonic": 139923.159568125,
+          "activity_onset_monotonic": 139919.99250641602,
+          "activity_end_monotonic": 139923.05250641602,
+          "start_unix": 1790421605.2454083
+        },
+        "expected_asset_sha256": "e8654518ac0d7af87e1ef255659a81bd57db312730a0a741cb9f9aade5929e08"
+      },
+      "input_anchor_end_unix": 1790421608.4054084,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_ea0b73273205",
+          "queued_at": 139939.685942625,
+          "state": "finished",
+          "first_loud_at": 139940.796613833,
+          "preceding_quiet_seconds": 13.801407457998721,
+          "last_loud_at": 139946.435825541,
+          "ended_at": 139946.492734125,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_d1de3656eacc",
+          "queued_at": 139925.808639791,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139927.139814625,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139940.796613833,
+        "frame_line": 1044,
+        "speech_id": "speech_ea0b73273205",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421625.028914,
+            "attempt_id": "14f9eaf5614e42629324d41c65a2ad72:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421625.031075,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 16623.506,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 1,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1350.245,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1350.249,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 16623.506,
+        "first_ack_queued": 2756.133,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 17744.107,
+        "observed_final_reply_finished": 23440.228,
+        "fulfilled_final_reply_finished": 23440.228
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/native_silence",
+      "arm": "candidate",
+      "case_id": "native_silence",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139950.547604375,
+            "drained_monotonic": 139951.984321791,
+            "scheduled_end_monotonic": 139951.97693770833,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 139950.547604375,
+          "end_monotonic": 139951.984321791,
+          "activity_onset_monotonic": 139950.587604375,
+          "activity_end_monotonic": 139951.887604375,
+          "start_unix": 1790421635.9005852
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421637.2405853,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_e5e26bd81cd6",
+          "queued_at": 139960.029942125,
+          "state": "finished",
+          "first_loud_at": 139960.8167165,
+          "preceding_quiet_seconds": 4.920383167016553,
+          "last_loud_at": 139965.438285583,
+          "ended_at": 139965.489229083,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b517dfc086dd",
+          "queued_at": 139954.5976655,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 139956.02699375,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 139960.8167165,
+        "frame_line": 512,
+        "speech_id": "speech_e5e26bd81cd6",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421645.3745332,
+            "attempt_id": "de8aa849d60c49c79d8d7f258f8b09db:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421645.376874,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 8133.948,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 2,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1370.784,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1370.79,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 8133.948,
+        "first_ack_queued": 2710.061,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 8929.112,
+        "observed_final_reply_finished": 13601.625,
+        "fulfilled_final_reply_finished": 13601.625
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/pause_metro_250",
+      "arm": "candidate",
+      "case_id": "pause_metro_250",
+      "condition_group": "native_language",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "pause_metro_250.wav",
+          "segments": [
+            "Please take me to",
+            "MG Road Metro Station."
+          ],
+          "inserted_silence_ms": 250,
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/pause_metro_250.wav",
+          "file": "initial.wav",
+          "sha256": "235b58851916bc6c3d9bfdb9a0da9869c08a22d4ff3b9cb918040e29c83abf44",
+          "sample_rate": 24000,
+          "samples": 71536,
+          "duration_seconds": 2.9806666666666666,
+          "activity_start_sample": 480,
+          "activity_end_sample": 68640,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139994.705578583,
+            "drained_monotonic": 139997.692203916,
+            "scheduled_end_monotonic": 139997.68624524967,
+            "published_samples": 71536
+          }
+        },
+        "times": {
+          "start_monotonic": 139994.705578583,
+          "end_monotonic": 139997.692203916,
+          "activity_onset_monotonic": 139994.725578583,
+          "activity_end_monotonic": 139997.565578583,
+          "start_unix": 1790421680.0586722
+        },
+        "expected_asset_sha256": "235b58851916bc6c3d9bfdb9a0da9869c08a22d4ff3b9cb918040e29c83abf44"
+      },
+      "input_anchor_end_unix": 1790421682.9186723,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_99d19fafaf65",
+          "queued_at": 140006.858319833,
+          "state": "finished",
+          "first_loud_at": 140007.856531833,
+          "preceding_quiet_seconds": 5.258649333001813,
+          "last_loud_at": 140013.197891333,
+          "ended_at": 140013.259316708,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_3dc5a0d84e3c",
+          "queued_at": 140001.273070291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140002.73297675,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140007.856531833,
+        "frame_line": 657,
+        "speech_id": "speech_99d19fafaf65",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421692.200089,
+            "attempt_id": "d7be22c38bbb46b1a99779e4e9494b64:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421692.203456,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 9281.417,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 3,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 2344.934,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 2344.936,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 9281.417,
+        "first_ack_queued": 3707.492,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 10290.953,
+        "observed_final_reply_finished": 15693.738,
+        "fulfilled_final_reply_finished": 15693.738
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/native_voiced_stop",
+      "arm": "candidate",
+      "case_id": "native_voiced_stop",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        },
+        "capture": {
+          "label": "probe",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav",
+          "file": "probe.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 140027.510663583,
+            "drained_monotonic": 140028.899256416,
+            "scheduled_end_monotonic": 140028.89733024966,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 140027.510663583,
+          "end_monotonic": 140028.899256416,
+          "activity_onset_monotonic": 140027.550663583,
+          "activity_end_monotonic": 140028.770663583,
+          "start_unix": 1790421712.8638408
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_anchor_end_unix": 1790421714.1238408,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_724386897175",
+          "queued_at": 140034.043617875,
+          "state": "finished",
+          "first_loud_at": 140034.86970275,
+          "preceding_quiet_seconds": 1.6799737089895643,
+          "last_loud_at": 140037.66961125,
+          "ended_at": 140037.743197958,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_448a17ee4de9",
+          "queued_at": 140031.708720708,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140033.309793416,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140034.86970275,
+        "frame_line": 881,
+        "speech_id": "speech_724386897175",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421711.939693,
+            "attempt_id": "b22c35b488ea42019bc2f4979434310e:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421711.941706,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": -2184.148,
+          "after_final_spoken_input_started": false
+        },
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790421719.385268,
+            "attempt_id": "13b663dc527a4544bed875914158165f:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421719.3880918,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 5261.427,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 4,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1420.183,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1420.186,
+          "no_hold_reason": "Native condition has no injected hold"
+        },
+        {
+          "call_id": 5,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1555.062,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1555.069,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 5261.427,
+        "first_ack_queued": 2938.057,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 6099.039,
+        "observed_final_reply_finished": 8972.534,
+        "fulfilled_final_reply_finished": 8972.534
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/disfluent_self_repair_hospital",
+      "arm": "candidate",
+      "case_id": "disfluent_self_repair_hospital",
+      "condition_group": "native_language",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "self_repair_hospital.wav",
+          "text": "Take me to Cubbon Park, um, no, I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/self_repair_hospital.wav",
+          "file": "initial.wav",
+          "sha256": "832e7abfb0a6bf7f306c74ee0a3b217b461923b2e039237063f95e6ca75340e7",
+          "sample_rate": 24000,
+          "samples": 112640,
+          "duration_seconds": 4.693333333333333,
+          "activity_start_sample": 480,
+          "activity_end_sample": 110400,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140062.013416416,
+            "drained_monotonic": 140066.709631416,
+            "scheduled_end_monotonic": 140066.70674974934,
+            "published_samples": 112640
+          }
+        },
+        "times": {
+          "start_monotonic": 140062.013416416,
+          "end_monotonic": 140066.709631416,
+          "activity_onset_monotonic": 140062.033416416,
+          "activity_end_monotonic": 140066.61341641602,
+          "start_unix": 1790421747.3666823
+        },
+        "expected_asset_sha256": "832e7abfb0a6bf7f306c74ee0a3b217b461923b2e039237063f95e6ca75340e7"
+      },
+      "input_anchor_end_unix": 1790421751.9666822,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation has started to Manipal Hospital, Old Airport Road. The route is active and will take approximately 5 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_92536aecf019",
+          "queued_at": 140081.733480958,
+          "state": "finished",
+          "first_loud_at": 140082.9276815,
+          "preceding_quiet_seconds": 10.080938125000102,
+          "last_loud_at": 140089.568173583,
+          "ended_at": 140089.609921416,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_968a99e4e008",
+          "queued_at": 140071.271737,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140072.9823325,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140082.9276815,
+        "frame_line": 1045,
+        "speech_id": "speech_92536aecf019",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421763.296445,
+            "attempt_id": "2420ec55b9ea49c295bf6645afc61887:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421763.2990289,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 11329.763,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 6,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 3293.677,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 3293.678,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 11329.763,
+        "first_ack_queued": 4658.321,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 16314.265,
+        "observed_final_reply_finished": 22996.505,
+        "fulfilled_final_reply_finished": 22996.505
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/native_breath_proxy",
+      "arm": "candidate",
+      "case_id": "native_breath_proxy",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140093.915933333,
+            "drained_monotonic": 140095.347663458,
+            "scheduled_end_monotonic": 140095.34526666632,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 140093.915933333,
+          "end_monotonic": 140095.347663458,
+          "activity_onset_monotonic": 140093.955933333,
+          "activity_end_monotonic": 140095.25593333298,
+          "start_unix": 1790421779.2692811
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421780.609281,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_71c62d1aa784",
+          "queued_at": 140112.553331,
+          "state": "finished",
+          "first_loud_at": 140113.557725791,
+          "preceding_quiet_seconds": 4.499396125000203,
+          "last_loud_at": 140118.197853833,
+          "ended_at": 140118.24103575,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_d7e13c222eff",
+          "queued_at": 140106.982171583,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140109.18736025,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140113.557725791,
+        "frame_line": 981,
+        "speech_id": "speech_71c62d1aa784",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421797.9029691,
+            "attempt_id": "7f29dad93f9948068e07ea2a33ebeefb:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421797.9040608,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 17293.688,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 7,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 10333.902,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 10333.908,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 17293.688,
+        "first_ack_queued": 11726.238,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 18301.792,
+        "observed_final_reply_finished": 22985.102,
+        "fulfilled_final_reply_finished": 22985.102
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/pause_metro_1200",
+      "arm": "candidate",
+      "case_id": "pause_metro_1200",
+      "condition_group": "native_language",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "pause_metro_1200.wav",
+          "segments": [
+            "Please take me to",
+            "MG Road Metro Station."
+          ],
+          "inserted_silence_ms": 1200,
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/pause_metro_1200.wav",
+          "file": "initial.wav",
+          "sha256": "b07994917ba3a4a00465e75f16a58621391b992c0bebbadd8b848c1b8db3d5e0",
+          "sample_rate": 24000,
+          "samples": 94336,
+          "duration_seconds": 3.9306666666666668,
+          "activity_start_sample": 480,
+          "activity_end_sample": 91680,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140147.63805375,
+            "drained_monotonic": 140151.572894,
+            "scheduled_end_monotonic": 140151.56872041666,
+            "published_samples": 94336
+          }
+        },
+        "times": {
+          "start_monotonic": 140147.63805375,
+          "end_monotonic": 140151.572894,
+          "activity_onset_monotonic": 140147.65805375,
+          "activity_end_monotonic": 140151.45805375002,
+          "start_unix": 1790421832.991539
+        },
+        "expected_asset_sha256": "b07994917ba3a4a00465e75f16a58621391b992c0bebbadd8b848c1b8db3d5e0"
+      },
+      "input_anchor_end_unix": 1790421836.8115392,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_633e23849741",
+          "queued_at": 140170.312387791,
+          "state": "finished",
+          "first_loud_at": 140171.356880791,
+          "preceding_quiet_seconds": 5.679905582976062,
+          "last_loud_at": 140176.69601325,
+          "ended_at": 140176.7516865,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_76e1f8e84d3c",
+          "queued_at": 140162.367008375,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 140163.353459833,
+          "error": null
+        },
+        {
+          "text": "One moment.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_fbc7f0c3cd9f",
+          "queued_at": 140164.434695416,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140165.798336083,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140171.356880791,
+        "frame_line": 1185,
+        "speech_id": "speech_633e23849741",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421855.658911,
+            "attempt_id": "723dc0d9a8bd48b7b8118aa07d92df87:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421855.660867,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 18847.372,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 8,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 12410.538,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 12410.546,
+          "no_hold_reason": "Native condition has no injected hold"
+        },
+        {
+          "call_id": 9,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1664.896,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1664.909,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 18847.372,
+        "first_ack_queued": 10908.955,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 19898.827,
+        "observed_final_reply_finished": 25293.633,
+        "fulfilled_final_reply_finished": 25293.633
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/native_noise_burst",
+      "arm": "candidate",
+      "case_id": "native_noise_burst",
+      "condition_group": "native_probes",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140180.907990375,
+            "drained_monotonic": 140182.341856416,
+            "scheduled_end_monotonic": 140182.33732370834,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 140180.907990375,
+          "end_monotonic": 140182.341856416,
+          "activity_onset_monotonic": 140180.94799037502,
+          "activity_end_monotonic": 140182.247990375,
+          "start_unix": 1790421866.2615607
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421867.6015606,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_d6a9e5b1f82b",
+          "queued_at": 140190.440614541,
+          "state": "finished",
+          "first_loud_at": 140191.291209458,
+          "preceding_quiet_seconds": 4.839179917005822,
+          "last_loud_at": 140195.931605,
+          "ended_at": 140195.976342916,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_dd888e22e648",
+          "queued_at": 140185.254471208,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140186.590843541,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140191.291209458,
+        "frame_line": 518,
+        "speech_id": "speech_d6a9e5b1f82b",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421875.789741,
+            "attempt_id": "ded29a40a1b24a118bc3cb77be81d99e:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421875.79097,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 8188.18,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 10,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1636.896,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1636.899,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 8188.18,
+        "first_ack_queued": 3006.481,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 9043.219,
+        "observed_final_reply_finished": 13728.353,
+        "fulfilled_final_reply_finished": 13728.353
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/ambiguous_road_then_hospital",
+      "arm": "candidate",
+      "case_id": "ambiguous_road_then_hospital",
+      "condition_group": "native_language",
+      "declared_delivery_hold_seconds": 0,
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_clarifier.wav",
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/hospital_clarifier.wav",
+          "file": "followup_1.wav",
+          "sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc",
+          "sample_rate": 24000,
+          "samples": 58880,
+          "duration_seconds": 2.453333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 56640,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 140238.595045833,
+            "drained_monotonic": 140241.054538583,
+            "scheduled_end_monotonic": 140241.04837916634,
+            "published_samples": 58880
+          }
+        },
+        "times": {
+          "start_monotonic": 140238.595045833,
+          "end_monotonic": 140241.054538583,
+          "activity_onset_monotonic": 140238.635045833,
+          "activity_end_monotonic": 140240.955045833,
+          "start_unix": 1790421923.9487636
+        },
+        "expected_asset_sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc"
+      },
+      "input_anchor_end_unix": 1790421926.3087637,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_eec2b218c6b7",
+          "queued_at": 140248.353093791,
+          "state": "finished",
+          "first_loud_at": 140249.514533583,
+          "preceding_quiet_seconds": 4.099728082976071,
+          "last_loud_at": 140254.013970583,
+          "ended_at": 140254.07666325,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_5e1e250d3f0b",
+          "queued_at": 140243.9260835,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140245.512384125,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140249.514533583,
+        "frame_line": 1212,
+        "speech_id": "speech_eec2b218c6b7",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 11,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1365.921,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1365.924,
+          "no_hold_reason": "Native condition has no injected hold"
+        },
+        {
+          "call_id": 12,
+          "status": "returned",
+          "requested_hold_seconds": 0,
+          "entry_to_original_engine_return_ms": 1553.713,
+          "observed_injected_hold_ms": null,
+          "entry_to_delivery_return_ms": 1553.716,
+          "no_hold_reason": "Native condition has no injected hold"
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2971.038,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 8559.488,
+        "observed_final_reply_finished": 13121.617,
+        "fulfilled_final_reply_finished": null
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/delivery_delay5s_noise_burst",
+      "arm": "candidate",
+      "case_id": "delivery_delay5s_noise_burst",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140258.027267375,
+            "drained_monotonic": 140259.461014958,
+            "scheduled_end_monotonic": 140259.45660070833,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 140258.027267375,
+          "end_monotonic": 140259.461014958,
+          "activity_onset_monotonic": 140258.067267375,
+          "activity_end_monotonic": 140259.367267375,
+          "start_unix": 1790421943.3810353
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790421944.7210352,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_1ce973ee73b4",
+          "queued_at": 140272.6668355,
+          "state": "finished",
+          "first_loud_at": 140273.511801708,
+          "preceding_quiet_seconds": 5.2001754170050845,
+          "last_loud_at": 140278.15162575,
+          "ended_at": 140278.191406125,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c8d2f423a394",
+          "queued_at": 140267.116167208,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140268.459894875,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140273.511801708,
+        "frame_line": 773,
+        "speech_id": "speech_1ce973ee73b4",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421958.012017,
+            "attempt_id": "51dc1a61e41a40d1846ab1359ae44160:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421958.015629,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 13290.982,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 13,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1370.759,
+          "observed_injected_hold_ms": 5002.059,
+          "entry_to_delivery_return_ms": 6372.838,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 13290.982,
+        "first_ack_queued": 7748.9,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 14144.534,
+        "observed_final_reply_finished": 18824.139,
+        "fulfilled_final_reply_finished": 18824.139
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/delivery_delay5s_voiced_stop",
+      "arm": "candidate",
+      "case_id": "delivery_delay5s_voiced_stop",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "stop_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "first_fresh_current_result_pcm_with_existing_quiet_and_recency_guards"
+        },
+        "capture": {
+          "label": "probe",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav",
+          "file": "probe.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 140323.839846916,
+            "drained_monotonic": 140325.227400833,
+            "scheduled_end_monotonic": 140325.22651358266,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 140323.839846916,
+          "end_monotonic": 140325.227400833,
+          "activity_onset_monotonic": 140323.879846916,
+          "activity_end_monotonic": 140325.099846916,
+          "start_unix": 1790422009.1937826
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_anchor_end_unix": 1790422010.4537826,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_387d68588939",
+          "queued_at": 140335.328363583,
+          "state": "finished",
+          "first_loud_at": 140336.239600166,
+          "preceding_quiet_seconds": 1.6798362910049036,
+          "last_loud_at": 140339.019646416,
+          "ended_at": 140339.115062541,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_4cedd1fc6d80",
+          "queued_at": 140333.1064245,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140334.686003,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140336.239600166,
+        "frame_line": 1441,
+        "speech_id": "speech_387d68588939",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790422008.2777228,
+            "attempt_id": "13a17124718b4958b505433f96843928:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790422008.278992,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": -2176.06,
+          "after_final_spoken_input_started": false
+        },
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790422020.676199,
+            "attempt_id": "aff80e1072f5499b901b14302b7cedd1:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790422020.678922,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 10222.416,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 14,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 2396.001,
+          "observed_injected_hold_ms": 5000.715,
+          "entry_to_delivery_return_ms": 7396.741,
+          "no_hold_reason": null
+        },
+        {
+          "call_id": 15,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1623.446,
+          "observed_injected_hold_ms": 5001.96,
+          "entry_to_delivery_return_ms": 6625.418,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 10222.416,
+        "first_ack_queued": 8006.578,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 11139.753,
+        "observed_final_reply_finished": 14015.216,
+        "fulfilled_final_reply_finished": 14015.216
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/delivery_delay5s_silence",
+      "arm": "candidate",
+      "case_id": "delivery_delay5s_silence",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140358.301011833,
+            "drained_monotonic": 140359.73356625,
+            "scheduled_end_monotonic": 140359.73034516635,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 140358.301011833,
+          "end_monotonic": 140359.73356625,
+          "activity_onset_monotonic": 140358.34101183302,
+          "activity_end_monotonic": 140359.641011833,
+          "start_unix": 1790422043.6550362
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790422044.9950361,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_37fe802b72a0",
+          "queued_at": 140373.042441791,
+          "state": "finished",
+          "first_loud_at": 140373.96311525,
+          "preceding_quiet_seconds": 4.561306749994401,
+          "last_loud_at": 140378.602633458,
+          "ended_at": 140378.658429875,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_f9287c9bea32",
+          "queued_at": 140367.889386291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140369.538689291,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140373.96311525,
+        "frame_line": 782,
+        "speech_id": "speech_37fe802b72a0",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790422058.390423,
+            "attempt_id": "2a46667f4087478fbabbd11d4bb7ef3a:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790422058.3924422,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 13395.387,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 16,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1858.362,
+          "observed_injected_hold_ms": 5001.744,
+          "entry_to_delivery_return_ms": 6860.125,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 13395.387,
+        "first_ack_queued": 8248.374,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 14322.103,
+        "observed_final_reply_finished": 19017.418,
+        "fulfilled_final_reply_finished": 19017.418
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/delivery_delay5s_breath_proxy",
+      "arm": "candidate",
+      "case_id": "delivery_delay5s_breath_proxy",
+      "condition_group": "injected_delay_probes",
+      "declared_delivery_hold_seconds": 5,
+      "capture_status": "completed_probe_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "whitefield_command.wav",
+          "text": "Navigate to Whitefield.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+          "file": "initial.wav",
+          "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "sample_rate": 24000,
+          "samples": 34304,
+          "duration_seconds": 1.4293333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 32160,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 140407.795260208,
+            "drained_monotonic": 140409.226533833,
+            "scheduled_end_monotonic": 140409.22459354132,
+            "published_samples": 34304
+          }
+        },
+        "times": {
+          "start_monotonic": 140407.795260208,
+          "end_monotonic": 140409.226533833,
+          "activity_onset_monotonic": 140407.835260208,
+          "activity_end_monotonic": 140409.135260208,
+          "start_unix": 1790422093.1494112
+        },
+        "expected_asset_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041"
+      },
+      "input_anchor_end_unix": 1790422094.489411,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_cccddaf9f4a5",
+          "queued_at": 140422.624504333,
+          "state": "finished",
+          "first_loud_at": 140423.574704666,
+          "preceding_quiet_seconds": 4.482030875020428,
+          "last_loud_at": 140428.213895958,
+          "ended_at": 140428.275732,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_ae7627b883ae",
+          "queued_at": 140417.344443833,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 140419.248886416,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame explicitly tagged to this handle; no assignment from untagged audio"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 140423.574704666,
+        "frame_line": 788,
+        "speech_id": "speech_cccddaf9f4a5",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790422107.974354,
+            "attempt_id": "abbc9edab22c4e1581c3fdf0ac163337:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790422107.975683,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 13484.943,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "recognition_delivery_durations": [
+        {
+          "call_id": 17,
+          "status": "returned",
+          "requested_hold_seconds": 5,
+          "entry_to_original_engine_return_ms": 1823.21,
+          "observed_injected_hold_ms": 5000.907,
+          "entry_to_delivery_return_ms": 6824.137,
+          "no_hold_reason": null
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 13484.943,
+        "first_ack_queued": 8209.184,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 14439.444,
+        "observed_final_reply_finished": 19140.472,
+        "fulfilled_final_reply_finished": 19140.472
+      },
+      "fulfillment_limit": "Backend and spoken facts gate completion only; this is not an interruption, trace-identity or whole-scenario pass",
+      "missing_timing_reason": null
+    }
+  ],
+  "groups": {
+    "baseline/all": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 8,
+        "measured_cases": 7,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          16004.73,
+          4659.741,
+          8067.705,
+          null,
+          22094.885,
+          8458.702,
+          12510.438,
+          12572.876
+        ],
+        "p50_ms": 12510.438,
+        "p95_ms": 22094.885
+      },
+      "first_ack_queued": {
+        "declared_cases": 8,
+        "measured_cases": 7,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          2437.538,
+          2427.139,
+          2726.255,
+          null,
+          16466.668,
+          7530.408,
+          7377.432,
+          7404.761
+        ],
+        "p50_ms": 7377.432,
+        "p95_ms": 16466.668
+      },
+      "first_ack_pcm": {
+        "declared_cases": 8,
+        "measured_cases": 0,
+        "null_cases": 8,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 8,
+        "measured_cases": 7,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          16916.452,
+          5539.945,
+          9501.974,
+          null,
+          23141.937,
+          9339.239,
+          13365.941,
+          13376.773
+        ],
+        "p50_ms": 13365.941,
+        "p95_ms": 23141.937
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 8,
+        "measured_cases": 7,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          21591.952,
+          8414.197,
+          14149.497,
+          null,
+          27728.295,
+          12224.377,
+          18032.684,
+          18058.871
+        ],
+        "p50_ms": 18032.684,
+        "p95_ms": 27728.295
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 8,
+        "measured_cases": 7,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst",
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          21591.952,
+          8414.197,
+          14149.497,
+          null,
+          27728.295,
+          12224.377,
+          18032.684,
+          18058.871
+        ],
+        "p50_ms": 18032.684,
+        "p95_ms": 27728.295
+      }
+    },
+    "baseline/native_probes": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          16004.73,
+          4659.741,
+          8067.705,
+          null
+        ],
+        "p50_ms": 8067.705,
+        "p95_ms": 16004.73
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          2437.538,
+          2427.139,
+          2726.255,
+          null
+        ],
+        "p50_ms": 2437.538,
+        "p95_ms": 2726.255
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          16916.452,
+          5539.945,
+          9501.974,
+          null
+        ],
+        "p50_ms": 9501.974,
+        "p95_ms": 16916.452
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          21591.952,
+          8414.197,
+          14149.497,
+          null
+        ],
+        "p50_ms": 14149.497,
+        "p95_ms": 21591.952
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/native_silence",
+          "baseline/native_voiced_stop",
+          "baseline/native_breath_proxy",
+          "baseline/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          21591.952,
+          8414.197,
+          14149.497,
+          null
+        ],
+        "p50_ms": 14149.497,
+        "p95_ms": 21591.952
+      }
+    },
+    "baseline/injected_delay_probes": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          22094.885,
+          8458.702,
+          12510.438,
+          12572.876
+        ],
+        "p50_ms": 12510.438,
+        "p95_ms": 22094.885
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          16466.668,
+          7530.408,
+          7377.432,
+          7404.761
+        ],
+        "p50_ms": 7404.761,
+        "p95_ms": 16466.668
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          23141.937,
+          9339.239,
+          13365.941,
+          13376.773
+        ],
+        "p50_ms": 13365.941,
+        "p95_ms": 23141.937
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          27728.295,
+          12224.377,
+          18032.684,
+          18058.871
+        ],
+        "p50_ms": 18032.684,
+        "p95_ms": 27728.295
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/delivery_delay5s_noise_burst",
+          "baseline/delivery_delay5s_voiced_stop",
+          "baseline/delivery_delay5s_silence",
+          "baseline/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          27728.295,
+          12224.377,
+          18032.684,
+          18058.871
+        ],
+        "p50_ms": 18032.684,
+        "p95_ms": 27728.295
+      }
+    },
+    "candidate/all": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 13,
+        "measured_cases": 12,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          16623.506,
+          8133.948,
+          9281.417,
+          5261.427,
+          11329.763,
+          17293.688,
+          18847.372,
+          8188.18,
+          null,
+          13290.982,
+          10222.416,
+          13395.387,
+          13484.943
+        ],
+        "p50_ms": 11329.763,
+        "p95_ms": 18847.372
+      },
+      "first_ack_queued": {
+        "declared_cases": 13,
+        "measured_cases": 13,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          2756.133,
+          2710.061,
+          3707.492,
+          2938.057,
+          4658.321,
+          11726.238,
+          10908.955,
+          3006.481,
+          2971.038,
+          7748.9,
+          8006.578,
+          8248.374,
+          8209.184
+        ],
+        "p50_ms": 4658.321,
+        "p95_ms": 11726.238
+      },
+      "first_ack_pcm": {
+        "declared_cases": 13,
+        "measured_cases": 0,
+        "null_cases": 13,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 13,
+        "measured_cases": 13,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          17744.107,
+          8929.112,
+          10290.953,
+          6099.039,
+          16314.265,
+          18301.792,
+          19898.827,
+          9043.219,
+          8559.488,
+          14144.534,
+          11139.753,
+          14322.103,
+          14439.444
+        ],
+        "p50_ms": 14144.534,
+        "p95_ms": 19898.827
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 13,
+        "measured_cases": 13,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          23440.228,
+          13601.625,
+          15693.738,
+          8972.534,
+          22996.505,
+          22985.102,
+          25293.633,
+          13728.353,
+          13121.617,
+          18824.139,
+          14015.216,
+          19017.418,
+          19140.472
+        ],
+        "p50_ms": 18824.139,
+        "p95_ms": 25293.633
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 13,
+        "measured_cases": 12,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/native_silence",
+          "candidate/pause_metro_250",
+          "candidate/native_voiced_stop",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/native_breath_proxy",
+          "candidate/pause_metro_1200",
+          "candidate/native_noise_burst",
+          "candidate/ambiguous_road_then_hospital",
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          23440.228,
+          13601.625,
+          15693.738,
+          8972.534,
+          22996.505,
+          22985.102,
+          25293.633,
+          13728.353,
+          null,
+          18824.139,
+          14015.216,
+          19017.418,
+          19140.472
+        ],
+        "p50_ms": 18824.139,
+        "p95_ms": 25293.633
+      }
+    },
+    "candidate/native_probes": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          8133.948,
+          5261.427,
+          17293.688,
+          8188.18
+        ],
+        "p50_ms": 8133.948,
+        "p95_ms": 17293.688
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          2710.061,
+          2938.057,
+          11726.238,
+          3006.481
+        ],
+        "p50_ms": 2938.057,
+        "p95_ms": 11726.238
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          8929.112,
+          6099.039,
+          18301.792,
+          9043.219
+        ],
+        "p50_ms": 8929.112,
+        "p95_ms": 18301.792
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          13601.625,
+          8972.534,
+          22985.102,
+          13728.353
+        ],
+        "p50_ms": 13601.625,
+        "p95_ms": 22985.102
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/native_silence",
+          "candidate/native_voiced_stop",
+          "candidate/native_breath_proxy",
+          "candidate/native_noise_burst"
+        ],
+        "values_ms_in_order": [
+          13601.625,
+          8972.534,
+          22985.102,
+          13728.353
+        ],
+        "p50_ms": 13601.625,
+        "p95_ms": 22985.102
+      }
+    },
+    "candidate/injected_delay_probes": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          13290.982,
+          10222.416,
+          13395.387,
+          13484.943
+        ],
+        "p50_ms": 13290.982,
+        "p95_ms": 13484.943
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          7748.9,
+          8006.578,
+          8248.374,
+          8209.184
+        ],
+        "p50_ms": 8006.578,
+        "p95_ms": 8248.374
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          14144.534,
+          11139.753,
+          14322.103,
+          14439.444
+        ],
+        "p50_ms": 14144.534,
+        "p95_ms": 14439.444
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          18824.139,
+          14015.216,
+          19017.418,
+          19140.472
+        ],
+        "p50_ms": 18824.139,
+        "p95_ms": 19140.472
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/delivery_delay5s_noise_burst",
+          "candidate/delivery_delay5s_voiced_stop",
+          "candidate/delivery_delay5s_silence",
+          "candidate/delivery_delay5s_breath_proxy"
+        ],
+        "values_ms_in_order": [
+          18824.139,
+          14015.216,
+          19017.418,
+          19140.472
+        ],
+        "p50_ms": 18824.139,
+        "p95_ms": 19140.472
+      }
+    },
+    "candidate/native_language": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 5,
+        "measured_cases": 4,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          16623.506,
+          9281.417,
+          11329.763,
+          18847.372,
+          null
+        ],
+        "p50_ms": 11329.763,
+        "p95_ms": 18847.372
+      },
+      "first_ack_queued": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          2756.133,
+          3707.492,
+          4658.321,
+          10908.955,
+          2971.038
+        ],
+        "p50_ms": 3707.492,
+        "p95_ms": 10908.955
+      },
+      "first_ack_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 0,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          17744.107,
+          10290.953,
+          16314.265,
+          19898.827,
+          8559.488
+        ],
+        "p50_ms": 16314.265,
+        "p95_ms": 19898.827
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          23440.228,
+          15693.738,
+          22996.505,
+          25293.633,
+          13121.617
+        ],
+        "p50_ms": 22996.505,
+        "p95_ms": 25293.633
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 4,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/clear_hospital",
+          "candidate/pause_metro_250",
+          "candidate/disfluent_self_repair_hospital",
+          "candidate/pause_metro_1200",
+          "candidate/ambiguous_road_then_hospital"
+        ],
+        "values_ms_in_order": [
+          23440.228,
+          15693.738,
+          22996.505,
+          25293.633,
+          null
+        ],
+        "p50_ms": 22996.505,
+        "p95_ms": 25293.633
+      }
+    }
+  },
+  "summary": {
+    "declared_cases": 21,
+    "backend_passed": 19,
+    "speech_passed": 19,
+    "fulfilled_finish_measured": 19
+  },
+  "source_sha256": {
+    "results/iteration18/review_latency.py": "5b3428b41799ca990ea4ade5d64740d69c92a9952c1eafa8f8766363d0659ea0",
+    "results/iteration18/acoustic-audit.json": "fd485ed66d268f1f8525380973ae8205238c71fdcdcb08359ca608ec8b22eba7",
+    "results/iteration18/protocol.json": "edb71293c6a95c6a2349290b441426675f3c37df170568c97acdd00799b3de10",
+    "results/iteration18/speech-fact-review.json": "03316ecb4bb0309c84ecd3d524f63b7f459e06ba53abcba362ec4c23697e6d75",
+    "results/iteration18-baseline/rtc-native_silence-1/frames.jsonl": "dbbedd02985135a073dc61662872f5b0dadc46c8fdc7ca2b4b6cc378dc9df1dc",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1/frames.jsonl": "d35c1e12d29e0c3b444eb546f33f3157ca1d7a33b78ffb6a191bcb9fd714c655",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1/frames.jsonl": "67667175b55852ba1118d749a78003181744d67c90ca1dc6fd457619117e2a78",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/frames.jsonl": "08cb0d4db79be2dcc5aa05fdd940f0101656480aecf04edc5ee17b4663ade7d3",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1/frames.jsonl": "986a20353357b9fab78d3ccdf2d450120e9394d978514d95ec22ccd545e1b049",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1/frames.jsonl": "6fffafa1bd1eec20c1c03e118cd64f8a4df2f0c96c6e2505fcdf5d101cdc4bec",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1/frames.jsonl": "05c239eddeb0d8ca76eee52dbc0f062a031971a98594f494fb0eafa9cf578d00",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1/frames.jsonl": "ba58e82734097468b9c63303e0ea732fbcb8aa3beb217468d0e9b95f9a368790",
+    "results/iteration18-candidate/rtc-clear_hospital-1/frames.jsonl": "709befea21b4a04a88d0a55eff7528a3a9f2e877c8183d9a5be9bb1bbb30acea",
+    "results/iteration18-candidate/rtc-native_silence-1/frames.jsonl": "5c0b1c697f1e3b56b229ce53c4739460b01019de10ece83c74a57ff2e5994bff",
+    "results/iteration18-candidate/rtc-pause_metro_250-1/frames.jsonl": "13b19bd7580041ba5ae99903c9c5f2b3780c72c57a9c7879a60d74295c2ac3e5",
+    "results/iteration18-candidate/rtc-native_voiced_stop-1/frames.jsonl": "f27b6d52620de05c1a735c028047dfcf4567806737f1f3ef3bbd2a926c4ce52f",
+    "results/iteration18-candidate/rtc-disfluent_self_repair_hospital-1/frames.jsonl": "3079d65bf2d3deec42b03a29d4ababfcd07e4544837a050bd568e210b7a1f206",
+    "results/iteration18-candidate/rtc-native_breath_proxy-1/frames.jsonl": "7a79479bfa55b971863fdd32717ca098e1c855f4c2a74554d883090312739f60",
+    "results/iteration18-candidate/rtc-pause_metro_1200-1/frames.jsonl": "6e9e2c83bd87aee742c390ebcf4d0500679d06edc016c5fdbebf6a88efd913ef",
+    "results/iteration18-candidate/rtc-native_noise_burst-1/frames.jsonl": "a116708a3ff6de41707213cffe9abbd38bb38f4928fc88f1d79ec181eee9e6b0",
+    "results/iteration18-candidate/rtc-ambiguous_road_then_hospital-1/frames.jsonl": "d76d0818a0e83549fbc3001035a3124fcd84c2569a8bfc5a55adaaccf930057f",
+    "results/iteration18-candidate/rtc-delivery_delay5s_noise_burst-1/frames.jsonl": "36c0feb46d5265471356d1f7438773e42cf1436b80400e28153be6479e29af87",
+    "results/iteration18-candidate/rtc-delivery_delay5s_voiced_stop-1/frames.jsonl": "88c8c067b1222854111b9f2992b9ec40f98bf12259373cdd724e1f44847ed7c5",
+    "results/iteration18-candidate/rtc-delivery_delay5s_silence-1/frames.jsonl": "9452250b0617ce9114c29c78393aae7e5d72bfb1bb026791046bfebf84cc2362",
+    "results/iteration18-candidate/rtc-delivery_delay5s_breath_proxy-1/frames.jsonl": "1705dec9be657b70d70a24517715dcc7c3c9e43cb0fd391678df267b7ec0c2bb"
+  },
+  "evidence_issues": [],
+  "limits": [
+    "Descriptive small-n development timings, fixed arm order/shared host; no population accuracy, causal benefit or latency optimization claim.",
+    "No subtraction of the injected five-second hold: native engine and actual hold durations are displayed separately, and pause cases may contain multiple recognition calls.",
+    "Ack queue/finish are not ack PCM. Default recorder has no ack-specific frame tags, so unavailable ack PCM remains null.",
+    "PCM tags are heuristic client receipts; finished means received SpeechHandle completion event, not physical audibility or intelligibility.",
+    "The failed baseline readiness case and the finished but unfulfilled candidate ambiguity reply stay in the full denominator.",
+    "Backend/spoken-fact completion remains separate from old-reply interruption correctness and trusted trace completeness."
+  ]
+}

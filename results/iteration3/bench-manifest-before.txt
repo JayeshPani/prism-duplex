@@ -1,0 +1,151 @@
+......F......FF.FF.FF.                                                   [100%]
+=================================== FAILURES ===================================
+_ test_declared_required_arguments_cover_pinned_backend_signature[search_apartments] _
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x1077a95d0>)
+name = 'search_apartments'
+
+    @pytest.mark.parametrize("name", [tool[0] for tool in bench_tools._TOOLS])
+    def test_declared_required_arguments_cover_pinned_backend_signature(manifest, name):
+        schema, registry = manifest
+        parameters = inspect.signature(registry.FUNCTIONS[name]).parameters.values()
+        required = {p.name for p in parameters
+                    if p.default is inspect.Parameter.empty
+                    and p.kind not in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD)}
+>       assert required <= set(schema.tools[name].required)
+E       AssertionError: assert {'bedrooms', ..., 'max_price'} <= {'city'}
+E         
+E         Extra items in the left set:
+E         'max_price'
+E         'bedrooms'
+
+tests/unit/test_bench_manifest_contract.py:31: AssertionError
+________ test_resolver_rejects_under_specified_apartment_plan[bedrooms] ________
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x1077ab850>)
+missing = 'bedrooms'
+
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    def test_resolver_rejects_under_specified_apartment_plan(manifest, missing):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+>       with pytest.raises(ValueError, match="missing required detail"):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_bench_manifest_contract.py:39: Failed
+_______ test_resolver_rejects_under_specified_apartment_plan[max_price] ________
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x10597dd10>)
+missing = 'max_price'
+
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    def test_resolver_rejects_under_specified_apartment_plan(manifest, missing):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+>       with pytest.raises(ValueError, match="missing required detail"):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_bench_manifest_contract.py:39: Failed
+_ test_missing_apartment_details_reject_whole_plan_before_write[False-bedrooms] _
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x107906c10>)
+missing = 'bedrooms', search_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    @pytest.mark.parametrize("search_first", [False, True])
+    async def test_missing_apartment_details_reject_whole_plan_before_write(manifest, missing, search_first):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+        calls = [PlannedCall("save", "update_search_filter", {"filter_name": "pets_allowed", "value": True}),
+                 PlannedCall("search", "search_apartments", args)]
+        if search_first:
+            calls.reverse()
+        bus, ledger = EventBus(), Ledger()
+        execution = await Executor(schema, ledger, bus).run(calls)
+>       assert execution.validation_error
+E       AssertionError: assert None
+E        +  where None = Execution(calls=[PlannedCall(id='save', tool='update_search_filter', args={'filter_name': 'pets_allowed', 'value': Tru...7842363f9f694588bc2162df918a4d24', operation_id='db9414eaf07c4eecbb4d2225ccb0cbaa', stale=False, validation_error=None).validation_error
+
+tests/unit/test_bench_manifest_contract.py:58: AssertionError
+_ test_missing_apartment_details_reject_whole_plan_before_write[False-max_price] _
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x1079024d0>)
+missing = 'max_price', search_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    @pytest.mark.parametrize("search_first", [False, True])
+    async def test_missing_apartment_details_reject_whole_plan_before_write(manifest, missing, search_first):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+        calls = [PlannedCall("save", "update_search_filter", {"filter_name": "pets_allowed", "value": True}),
+                 PlannedCall("search", "search_apartments", args)]
+        if search_first:
+            calls.reverse()
+        bus, ledger = EventBus(), Ledger()
+        execution = await Executor(schema, ledger, bus).run(calls)
+>       assert execution.validation_error
+E       AssertionError: assert None
+E        +  where None = Execution(calls=[PlannedCall(id='save', tool='update_search_filter', args={'filter_name': 'pets_allowed', 'value': Tru...f100675ed6534a139f3a773c6e792c3d', operation_id='9edc804324004fe5ba48b40574641966', stale=False, validation_error=None).validation_error
+
+tests/unit/test_bench_manifest_contract.py:58: AssertionError
+_ test_missing_apartment_details_reject_whole_plan_before_write[True-bedrooms] _
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x107940390>)
+missing = 'bedrooms', search_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    @pytest.mark.parametrize("search_first", [False, True])
+    async def test_missing_apartment_details_reject_whole_plan_before_write(manifest, missing, search_first):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+        calls = [PlannedCall("save", "update_search_filter", {"filter_name": "pets_allowed", "value": True}),
+                 PlannedCall("search", "search_apartments", args)]
+        if search_first:
+            calls.reverse()
+        bus, ledger = EventBus(), Ledger()
+        execution = await Executor(schema, ledger, bus).run(calls)
+>       assert execution.validation_error
+E       AssertionError: assert None
+E        +  where None = Execution(calls=[PlannedCall(id='search', tool='search_apartments', args={'city': 'Salem', 'max_price': 1800}), Planne...c9ac83f983b949ac9e71027d976ac9e1', operation_id='f92df4922c6e415e8f420bb25fce20eb', stale=False, validation_error=None).validation_error
+
+tests/unit/test_bench_manifest_contract.py:58: AssertionError
+_ test_missing_apartment_details_reject_whole_plan_before_write[True-max_price] _
+
+manifest = (Manifest(name='bench', tools={'search_flights': ToolSpec(name='search_flights', description='Search available flights...ty, cart_total}', resets=(), cache_context=None)}, domain_notes=''), <mock_apis.MockAPIRegistry object at 0x107905590>)
+missing = 'max_price', search_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("missing", ["city", "bedrooms", "max_price"])
+    @pytest.mark.parametrize("search_first", [False, True])
+    async def test_missing_apartment_details_reject_whole_plan_before_write(manifest, missing, search_first):
+        schema, _ = manifest
+        args = {"city": "Salem", "bedrooms": 2, "max_price": 1800}
+        del args[missing]
+        calls = [PlannedCall("save", "update_search_filter", {"filter_name": "pets_allowed", "value": True}),
+                 PlannedCall("search", "search_apartments", args)]
+        if search_first:
+            calls.reverse()
+        bus, ledger = EventBus(), Ledger()
+        execution = await Executor(schema, ledger, bus).run(calls)
+>       assert execution.validation_error
+E       AssertionError: assert None
+E        +  where None = Execution(calls=[PlannedCall(id='search', tool='search_apartments', args={'city': 'Salem', 'bedrooms': 2}), PlannedCal...d5b8b844ab174ef585188aa48635c17d', operation_id='0a2906d5539240e0bbbfe97d38d1cf98', stale=False, validation_error=None).validation_error
+
+tests/unit/test_bench_manifest_contract.py:58: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_bench_manifest_contract.py::test_declared_required_arguments_cover_pinned_backend_signature[search_apartments]
+FAILED tests/unit/test_bench_manifest_contract.py::test_resolver_rejects_under_specified_apartment_plan[bedrooms]
+FAILED tests/unit/test_bench_manifest_contract.py::test_resolver_rejects_under_specified_apartment_plan[max_price]
+FAILED tests/unit/test_bench_manifest_contract.py::test_missing_apartment_details_reject_whole_plan_before_write[False-bedrooms]
+FAILED tests/unit/test_bench_manifest_contract.py::test_missing_apartment_details_reject_whole_plan_before_write[False-max_price]
+FAILED tests/unit/test_bench_manifest_contract.py::test_missing_apartment_details_reject_whole_plan_before_write[True-bedrooms]
+FAILED tests/unit/test_bench_manifest_contract.py::test_missing_apartment_details_reject_whole_plan_before_write[True-max_price]
+7 failed, 15 passed in 0.48s

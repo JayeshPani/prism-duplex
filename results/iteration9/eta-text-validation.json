@@ -1,0 +1,62 @@
+{
+  "scope": "Untimed model-free generation check; airport/office use real simulated tools with zero route delay, stop cases replay frozen iteration8 executions. No speech, planner, RTC or performance claim.",
+  "source_sha256": {
+    "agent/coordinator/responder.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890",
+    "results/iteration9/responder-before.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731"
+  },
+  "all_four_pairs_match_declaration": true,
+  "rows": [
+    {
+      "id": "airport_start",
+      "request": "Navigate to the airport.",
+      "actual": {
+        "A": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+        "B": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes."
+      },
+      "matches_declared_texts": true,
+      "word_counts": {
+        "A": 10,
+        "B": 12
+      }
+    },
+    {
+      "id": "office_replacement",
+      "request": "Actually, go to the office instead.",
+      "actual": {
+        "A": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+        "B": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes."
+      },
+      "matches_declared_texts": true,
+      "word_counts": {
+        "A": 14,
+        "B": 16
+      }
+    },
+    {
+      "id": "add_stop",
+      "request": "Add the nearest coffee stop to the route.",
+      "actual": {
+        "A": "Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.",
+        "B": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station: 13 minutes, 0 extra minutes."
+      },
+      "matches_declared_texts": true,
+      "word_counts": {
+        "A": 18,
+        "B": 19
+      }
+    },
+    {
+      "id": "repeat_stop",
+      "request": "Add Blue Tokai, Indiranagar as a stop again.",
+      "actual": {
+        "A": "The stop at Blue Tokai, Indiranagar is already on your route. ETA to Office (Manyata Tech Park): 31 minutes.",
+        "B": "The stop at Blue Tokai, Indiranagar is already on your route. Estimated time to Office (Manyata Tech Park): 31 minutes."
+      },
+      "matches_declared_texts": true,
+      "word_counts": {
+        "A": 19,
+        "B": 20
+      }
+    }
+  ]
+}

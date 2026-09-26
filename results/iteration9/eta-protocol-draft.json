@@ -1,0 +1,110 @@
+{
+  "declared_at_utc": "2026-09-26T05:52:45.555977+00:00",
+  "hypothesis": "Spelling out the arrival estimate avoids the observed ETA-to-Ida recognition ambiguity while preserving destination, minutes and action outcome.",
+  "scope": "Four previously observed development result texts, sixteen Kokoro-to-Parakeet render/transcribe trials in ABBA order. No planner/tool/RTC effect or latency claim.",
+  "arm_order": [
+    "A",
+    "B",
+    "B",
+    "A"
+  ],
+  "declared_trials": 16,
+  "cases": [
+    {
+      "id": "airport_start",
+      "texts": {
+        "A": "Navigation to Kempegowda International Airport has started. ETA: 88 minutes.",
+        "B": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes."
+      },
+      "expected_minutes": 88,
+      "expected_candidate_label": "estimated arrival",
+      "source": "results/iteration8/rtc-baseline-1/report.json",
+      "source_sha256": "f74780ab07d9ae4892efd91fcdbd4a98db37135046c566bd3d1b2daf6c7d40c2",
+      "source_selector": {
+        "kind": "result",
+        "intent_version": 1
+      },
+      "word_counts": {
+        "A": 10,
+        "B": 12
+      }
+    },
+    {
+      "id": "office_replacement",
+      "texts": {
+        "A": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. ETA: 29 minutes.",
+        "B": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes."
+      },
+      "expected_minutes": 29,
+      "expected_candidate_label": "estimated arrival",
+      "source": "results/iteration8/rtc-correction-1/report.json",
+      "source_sha256": "77e51c5411ae50533a0abad2e8054877285f50049518c163583c8d35a54852c5",
+      "source_selector": {
+        "kind": "result",
+        "intent_version": 2
+      },
+      "word_counts": {
+        "A": 14,
+        "B": 16
+      }
+    },
+    {
+      "id": "add_stop",
+      "texts": {
+        "A": "Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.",
+        "B": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station: 13 minutes, 0 extra minutes."
+      },
+      "expected_minutes": 13,
+      "expected_candidate_label": "estimated time",
+      "source": "results/iteration8/summary-comparison.json",
+      "source_sha256": "490d02a3acb3629b62f2bb4efbf39062e88ff49ad1d547d4291be0ab451473bc",
+      "source_selector": {
+        "block": 2,
+        "case": "add_stop"
+      },
+      "word_counts": {
+        "A": 18,
+        "B": 19
+      }
+    },
+    {
+      "id": "repeat_stop",
+      "texts": {
+        "A": "The stop at Blue Tokai, Indiranagar is already on your route. ETA to Office (Manyata Tech Park): 31 minutes.",
+        "B": "The stop at Blue Tokai, Indiranagar is already on your route. Estimated time to Office (Manyata Tech Park): 31 minutes."
+      },
+      "expected_minutes": 31,
+      "expected_candidate_label": "estimated time",
+      "source": "results/iteration8/summary-comparison.json",
+      "source_sha256": "490d02a3acb3629b62f2bb4efbf39062e88ff49ad1d547d4291be0ab451473bc",
+      "source_selector": {
+        "block": 2,
+        "case": "repeat_stop"
+      },
+      "word_counts": {
+        "A": 19,
+        "B": 20
+      }
+    }
+  ],
+  "configuration": {
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "review": "Keep all verbatim outputs; review destination/stop/replacement/no-op, duration and estimate wording for each declared text. Do not convert proper-name or number spelling differences into missing facts automatically. No human intelligibility score.",
+  "limits": [
+    "Previously observed development cases, selected to investigate a known acronym issue; not held-out evaluation.",
+    "One synthetic voice and production ASR cannot separate pronunciation from recognition error.",
+    "ABBA order shares loaded speech models; first cold inference retained; timings descriptive, no population estimates.",
+    "No LLM or RTC services during offline comparison; no trimming, retries or transcript-conditioned selection.",
+    "Candidate adds one or two spoken words and can change thirty-word fallback coverage. Test existing grounded-summary boundaries separately."
+  ]
+}

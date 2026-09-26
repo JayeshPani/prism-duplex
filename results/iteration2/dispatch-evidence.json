@@ -1,0 +1,36 @@
+{
+  "hypothesis": "Writing a durable dispatch intention before backend entry prevents a one-shot FDB collection from omitting running or crashed tool attempts.",
+  "baseline": {
+    "backend_entered": true,
+    "backend_still_running": true,
+    "visible_telemetry_rows": 0,
+    "evidence": "dispatch-before.txt"
+  },
+  "revised": {
+    "backend_entered": true,
+    "backend_still_running": true,
+    "visible_telemetry_rows": 1,
+    "finalized_rows": 1
+  },
+  "validation": {
+    "command": ".venv/bin/python -m pytest tests/unit/test_dispatch_telemetry.py tests/unit/test_executor_reliability.py -q",
+    "tests_passed": 45,
+    "new_dispatch_cases": 14,
+    "evidence": "dispatch-after.txt",
+    "upstream_collection": "AST-extracted unmodified collection block from bench/Full-Duplex-Bench/v3/run_tool_benchmark.py",
+    "submodule_revision": "3e799c45a045256f47d5f1c9cda90157e2d2ec9e"
+  },
+  "source_sha256": {
+    "agent/coordinator/executor.py": "7e6c9544c29dfbe1922d566c68f9b3ebd392787a057eece989c758fd3c3c498f",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "tests/unit/test_dispatch_telemetry.py": "212e3dec31da6265f5925c039519badbdf806a709fe36fedf5f989deb5eebe79"
+  },
+  "limitations": [
+    "A crash between intention persistence and backend entry can leave a record for an action not entered; this is not exactly-executed or exactly-once evidence.",
+    "Unfinished records omit timestamp_end and use status unconfirmed. Final end timestamps mark executor observation end, not confirmed backend effects.",
+    "Upstream scores function and args without using confirmation status; a passing tool-call score does not prove successful effects.",
+    "The atomic compatibility snapshot rewrites retained history under a cooperative cross-process lock; it costs O(history), measured separately in dispatch-io-cost.json.",
+    "Process-exit persistence is tested. Power-loss durability and noncooperating external writers are not validated.",
+    "If start persistence fails, dispatch is prevented and an explicit tool_log_error is emitted. Completion persistence failure leaves unconfirmed intention while preserving the actual backend outcome."
+  ]
+}

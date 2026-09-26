@@ -1,0 +1,437 @@
+{
+  "created_at_utc": "2026-09-26T10:41:59.595297+00:00",
+  "status": "source_boundary_confirmed_with_model_free_component_reproduction",
+  "scope": "Installed livekit-agents1.8.3/RTC1.1.18 and current application source. No production/SDK/config edits, network, models or RTC services. Iteration17 frozen artifacts preserved.",
+  "finding": "With non-streaming/no-interim LocalSTT, VAD can pause a result at0.5s accumulated speech, but default2s post-EOS false-interruption timeout can resume it before recognition returns. Pending recognition does not create an EOT task because EOU returns early without text. This timer distinguishes pending EOT from no EOT, not pending recognition from confirmed empty recognition.",
+  "effective_boundaries": {
+    "silero_min_speech_s": 0.05,
+    "silero_min_silence_s": 0.45,
+    "sdk_interruption_min_duration_s": 0.5,
+    "sdk_interruption_min_words": 0,
+    "sdk_false_timeout_s": 2.0,
+    "sdk_resume_false_interruption": true,
+    "endpoint_min_s": 0.4,
+    "endpoint_max_s": 3.0,
+    "coordinator_floor_reopen_ms": 1200,
+    "transcription_timeout": null,
+    "timing_note": "Thresholds are algorithm parameters, not guaranteed receipt/physical delays. False timer begins in EOS callback, not directly at physical speech end; stall/dispatch affects actual firing."
+  },
+  "lifecycle": [
+    "VAD SOS emits user speaking; coordinator pauses plan floor only. SDK can preserve/pause speech when current generation has not begun playing.",
+    "Ongoing VAD speech >=0.5s invokes interruption unless AEC warmup/other guards apply. With pause support old handle remains un-interrupted; SDK marks agent listening.",
+    "VAD EOS emits user listening and arms2s resume. Coordinator separately reopens plan floor after1.2s; it has no pending-STT hold in frozen17.",
+    "EOU early-return leaves no live EOT decision if no transcript. The timer therefore resumes the old output and emits agent_false_interruption(resumed=true), although local recognition may be running.",
+    "Nonempty final later calls SDK interruption/pause cancellation and completed-turn delivery; Coordinator irreversibly cancels on that finalized new intent. If old handle already finished, interrupt is idempotent/no-op.",
+    "Empty adapter result produces no final event, so current default resume intentionally recovers from noise. An application needs explicit local recognition settlement to distinguish empty/error from pending."
+  ],
+  "reproduction": {
+    "script": "results/iteration18/reproduce_false_resume.py",
+    "report": "results/iteration18/false-resume-reproduction.json",
+    "output": "results/iteration18/false-resume-reproduction-output.txt",
+    "invocation": ".venv/bin/python results/iteration18/reproduce_false_resume.py",
+    "cases": [
+      {
+        "label": "pending_nonempty",
+        "status": "passed",
+        "after_timeout": {
+          "paused": false,
+          "handle_interrupted": false,
+          "recognition_pending": true,
+          "sdk_false_interruption_pending": false
+        },
+        "final_handle_interrupted": true
+      },
+      {
+        "label": "pending_empty",
+        "status": "passed",
+        "after_timeout": {
+          "paused": false,
+          "handle_interrupted": false,
+          "recognition_pending": true,
+          "sdk_false_interruption_pending": false
+        },
+        "final_handle_interrupted": false
+      },
+      {
+        "label": "open_eot_control",
+        "status": "passed",
+        "after_timeout": {
+          "paused": true,
+          "handle_interrupted": false,
+          "recognition_pending": true,
+          "sdk_false_interruption_pending": true
+        },
+        "final_handle_interrupted": false
+      }
+    ],
+    "boundary": "Actual installed SDK interruption/EOU methods, real default2s timers, real SpeechHandle/EventEmitter, dummy session/output/state and synthetic pending recognition Future. No model, VAD inference, native audio, RTC, networking or full generation cleanup.",
+    "not_tested": "Real generation cleanup, native PCM forwarding, complete AgentSession, actual LocalSTT inference and application hold integration are not exercised by this reproduction."
+  },
+  "public_integration_assessment": {
+    "credible_minimum": "Keep default noise-resume policy, add explicit per-room LocalSTT recognition start/settlement identity, and a small app-owned pending-recognition hold through public session.current_speech and session.output.audio. On synchronous agent_false_interruption(resumed=true), if the captured same unfinished speech has a corresponding pending recognition, immediately re-pause that sink. No private SDK state writes or dependency patches.",
+    "callback_order": "The SDK calls output.resume then synchronously emits agent_false_interruption before clearing its paused record. A synchronous callback can re-pause before another loop task forwards audio; this narrow order is supported by installed source, not a transport proof. Scheduling an async re-pause introduces a gap and is insufficient.",
+    "nonempty_settlement": "Target the captured handle, interrupt it before any application resume, and await/observe completed generation cleanup before releasing the hold. Deliver the original final event normally and preserve Coordinator version semantics. Calling session.interrupt broadly can also cancel queued/new speech; narrow SpeechHandle ownership is preferable if tested.",
+    "empty_or_error_settlement": "Resume only the hold owned for this still-current, same sink/unfinished handle, when no newer user speech/recognition is pending. Preserve recognition errors as errors; empty/noise must not cancel the old handle.",
+    "ownership_and_shutdown": "Tokenize per recognition/handle; settle exactly once on success/empty/error/cancellation, ignore stale callbacks and never resume a replaced handle or closed session. Multiple segments require pending-set tracking. If recognition hangs, a bounded visible hold policy is required; do not silently claim native cancellation or indefinite pause.",
+    "unproven_risks": [
+      "SDK clears its own paused record after false event, so app must own later resolution; SDK activity state can say speaking while app sink stays paused.",
+      "A final SDK callback may resume after clearing its own pause; complete integration must test that app gating cannot be bypassed while recognition is pending.",
+      "Waiting for handle completion while its output is held requires actual scheduler/clear_buffer test to exclude deadlock; the dummy reproduction does not establish this.",
+      "SDK RoomIO pause can discard queued native audio; false-resume transcript continuity is not guaranteed by public pause alone.",
+      "Do not release after error/empty if a newer recognition/VAD segment still owns the floor. Retranscription should not be mistaken for a new microphone recognition."
+    ]
+  },
+  "configuration_alternatives": [
+    {
+      "option": "false_interruption_timeout increased",
+      "effect": "Finite extra wait, but a later final can still exceed it; noise gap gets longer. Not a pending-recognition guarantee."
+    },
+    {
+      "option": "resume_false_interruption=False or false_interruption_timeout=None",
+      "effect": "Disables pause path; VAD irreversibly interrupts instead. Noise can destroy a valid reply. None is not indefinite pause."
+    },
+    {
+      "option": "min_words>0",
+      "effect": "Without partial STT this can delay initial VAD pause until final text. It does not solve pending recognition and can worsen barge-in."
+    },
+    {
+      "option": "lower min_duration or endpointing delay",
+      "effect": "Changes false-positive/segmentation behavior, not timer ownership. No recommendation without separate evidence."
+    },
+    {
+      "option": "transcription_timeout",
+      "effect": "Public diagnostic event only. Useful bounded observability; does not itself hold output, cancel native work or recover text."
+    }
+  ],
+  "next_model_free_checks": [
+    "Use actual AgentActivity scheduling with a fake periodic PCM audio iterable and public pause-capable dummy sink; hold fake nonstreaming STT with asyncio.Event. Assert no forwarded old frames after synchronous false-event re-pause while pending.",
+    "Release nonempty: captured old handle interrupted, buffer cleared/generation done before hold release; final callback and replacement speech proceed once, no stale PCM, no deadlock.",
+    "Release empty/error: same handle resumes once, no cancellation; preserve error event. Also test recognition completing before2s and noise with no recognition.",
+    "Two overlapping recognition tokens, new VAD SOS, changed current_speech/sink, already-finished handle, repeated false events, cancellation and shutdown must not resume a stale generation or leak a hold.",
+    "Retain exact generated PCM sequence/forwarded frame timing and public state events. Public pause/handle receipts are not physical playback; actual RTC validation follows only after component boundaries pass."
+  ],
+  "historical_boundary": "Iteration17 B1 had3/6 interruption checks and long finals after old handle finish;17 did not record agent_false_interruption or SDK pause/resume. The default mechanism is consistent with those observations but does not prove it caused any particular failed trial. AEC overlap was separately0; that does not identify recognition cause.",
+  "source_refs": [
+    {
+      "path": "agent/config.py",
+      "lines": [
+        71,
+        75
+      ],
+      "sha256": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+      "supports": "Explicit local VAD turn/interruption mode with resume enabled, min endpointing0.4/max3.0; omitted interruption options inherit SDK defaults."
+    },
+    {
+      "path": "agent/main.py",
+      "lines": [
+        54,
+        55
+      ],
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+      "supports": "Silero detection min speech0.05s and min silence0.45s, distinct from0.5s interruption threshold."
+    },
+    {
+      "path": "agent/main.py",
+      "lines": [
+        82,
+        92
+      ],
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+      "supports": "Only completed user turns reach Coordinator and suppress SDK model reply."
+    },
+    {
+      "path": "agent/main.py",
+      "lines": [
+        110,
+        130
+      ],
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+      "supports": "Session creation and public say SpeechHandle; cancelled coordinator speech interrupts that handle."
+    },
+    {
+      "path": "agent/main.py",
+      "lines": [
+        158,
+        173
+      ],
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+      "supports": "User states gate coordinator; only interim transcript events forwarded here; no false-interruption event recorded in frozen17 source."
+    },
+    {
+      "path": "agent/coordinator/coordinator.py",
+      "lines": [
+        84,
+        135
+      ],
+      "sha256": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+      "supports": "VAD speaking clears plan floor without cancelling speech; listening schedules1200ms floor reopen; nonempty finalized intent increments version and cancels speech/stale calls."
+    },
+    {
+      "path": "agent/pipeline/local_stt.py",
+      "lines": [
+        101,
+        106
+      ],
+      "sha256": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+      "supports": "Non-streaming/no-interim LocalSTT capabilities."
+    },
+    {
+      "path": "agent/pipeline/local_stt.py",
+      "lines": [
+        141,
+        162
+      ],
+      "sha256": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+      "supports": "LocalSTT produces final only after engine transcribe returns; empty results are possible."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/turn.py",
+      "lines": [
+        150,
+        198
+      ],
+      "sha256": "a91d395fecc9238e15f1ed36cea2faca0fcd5f5b2ab6447d25afd6f75136210d",
+      "supports": "Public interruption options/defaults: enabled true,min_duration0.5,min_words0,resume true,false timeout2s."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent.py",
+      "lines": [
+        503,
+        527
+      ],
+      "sha256": "c9150b97a14bf2a7c1fa442ddac1396ecb181898caccf258411c6b64de31b924",
+      "supports": "Default stt_node wraps nonstreaming STT with StreamAdapter and VAD."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/stt/stream_adapter.py",
+      "lines": [
+        125,
+        163
+      ],
+      "sha256": "04c4a730f99ca6efe0d2496aa3ca263c276957966ae5eff6be1ea169500b477f",
+      "supports": "At VAD EOS adapter emits EOS then awaits recognition; empty result omitted, nonempty final emitted afterward; no interim output."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        2310,
+        2375
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "VAD interruption guards/AEC/minwords; pause path records handle and pauses without interrupt; nonpause path irreversibly interrupts."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        2379,
+        2471
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "SOS states/timer cancellation; EOS arms false timeout; VAD inference threshold0.5s."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        2531,
+        2565
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Nonempty final hook queues actual pause cancellation and handle interruption after emitting public transcription."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        4797,
+        4809
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Pause support requires resume true, non-None timeout and pause-capable enabled output. None does not mean infinite hold."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        4864,
+        4926
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Timer resumes sink, synchronously emits false-interruption event then clears pause record; waits only for live EOT task."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        4928,
+        4969
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Pause cancellation interrupts handle, waits for generation if present, clears state and resumes sink."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+      "lines": [
+        1380,
+        1451
+      ],
+      "sha256": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+      "supports": "VAD EOS reaches activity and attempts EOU; new speech cancels prior turn task."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+      "lines": [
+        1499,
+        1508
+      ],
+      "sha256": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+      "supports": "EOU early-return when STT exists but no transcript; pending non-streaming inference is not itself an EOT task."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+      "lines": [
+        1206,
+        1265
+      ],
+      "sha256": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+      "supports": "Nonempty final invokes activity, accumulates transcript and later reruns EOU; empty final returns."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py",
+      "lines": [
+        1940,
+        1973
+      ],
+      "sha256": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+      "supports": "Optional transcription timeout emits diagnostic hook only, does not cancel native recognition or hold/resume output."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+      "lines": [
+        408,
+        414
+      ],
+      "sha256": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+      "supports": "transcription_timeout default None."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+      "lines": [
+        1434,
+        1453
+      ],
+      "sha256": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+      "supports": "Public update_options has endpointing/turn detection but no interruption options."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+      "lines": [
+        788,
+        815
+      ],
+      "sha256": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+      "supports": "Public output/current_speech accessors available."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py",
+      "lines": [
+        1634,
+        1651
+      ],
+      "sha256": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+      "supports": "Public session.interrupt returns completion Future but affects current/queued activity, not just captured handle."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        1889,
+        1946
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Session interruption visits current/background/queued handles and finishes Future after handles done."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py",
+      "lines": [
+        201,
+        226
+      ],
+      "sha256": "627612bcfe739d510302d8ea1869ea7076dfd45348436423282b1f72f7f80b26",
+      "supports": "Public handle.interrupt is idempotent for done/interrupted, targets captured handle."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py",
+      "lines": [
+        257,
+        304
+      ],
+      "sha256": "627612bcfe739d510302d8ea1869ea7076dfd45348436423282b1f72f7f80b26",
+      "supports": "SpeechHandle await/cancel lifecycle;5s fallback timeout is not proof of clean audio drain."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py",
+      "lines": [
+        3275,
+        3303
+      ],
+      "sha256": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+      "supports": "Speech cancellation clears audio buffer before waiting for playout cleanup."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py",
+      "lines": [
+        35,
+        61
+      ],
+      "sha256": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+      "supports": "Room output pause capability,200ms native queue and50ms buffer frame size."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py",
+      "lines": [
+        164,
+        175
+      ],
+      "sha256": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+      "supports": "Public sink pause/resume sets forwarding gate; pause itself does not immediately clear native queue."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py",
+      "lines": [
+        226,
+        277
+      ],
+      "sha256": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+      "supports": "Interrupted playout clears queued audio and reports finished interrupted state."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py",
+      "lines": [
+        279,
+        297
+      ],
+      "sha256": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+      "supports": "Forwarder clears already queued audio at pause boundary; false resume is not guaranteed lossless waveform replay."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/event_emitter.py",
+      "lines": [
+        17,
+        62
+      ],
+      "sha256": "d88d21ab68d9ad393661f7b259282daebed0c68f6739edc61a58d0ec4221fa91",
+      "supports": "Public event callbacks run synchronously; callback exceptions are logged except TypeError re-raised."
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/agents/voice/events.py",
+      "lines": [
+        380,
+        395
+      ],
+      "sha256": "33b47ed32d1bf5b74bcb85df606eaefe81fc07623c974a91ee3dad4ab4ce8053",
+      "supports": "Public agent_false_interruption event exposes resumed flag/time, no speech handle or recognition identity."
+    }
+  ],
+  "evidence_sha256": {
+    "results/iteration18/false-resume-reproduction.json": "27b00e27fb962f822792fb2f0825c4ac98a02aa59b8f76f6d04e27344158f181",
+    "results/iteration18/reproduce_false_resume.py": "480415b34cb6adfbd2908c26209ad7a8f3776cf3df07e930ad12104ec5a60a81",
+    "results/iteration18/false-resume-reproduction-output.txt": "0010a1926eded3b29a5e74ca5a852c926620e07acfe67f2ec828771afdf0465a",
+    "results/iteration17/rtc-audit-review.json": "c240fa692b55cd2a367706e483c3f3b80f792d233c2453b73ea63a734f000193"
+  }
+}

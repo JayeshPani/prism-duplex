@@ -1,0 +1,47 @@
+{
+  "recorded_at_utc": "2026-09-26T09:30:09.816213+00:00",
+  "reviewer": "coordinator_lifecycle independent agent",
+  "verdict": "No concrete blocker found within the narrow redundant-destination-lookup summary change.",
+  "baseline": "results/iteration15/source-snapshot/agent/coordinator/responder.py",
+  "changed_production_files": [
+    "agent/coordinator/responder.py"
+  ],
+  "checks": {
+    "expected_candidate_and_test_hashes": true,
+    "responder_summarize_class_ast_unchanged": true,
+    "only_responder_production_changed_from_iteration15": true
+  },
+  "manual_findings": [
+    "The exception applies only to start_navigation with one successful mutation, complete nonstale outcomes and successful done/reused reads. Every otherwise-unused call must be search_destination; no arbitrary read or second mutation is discarded.",
+    "Each exempt search needs a nonempty literal query, exactly one dictionary place with a nonempty name, and a place_id equal to the confirmed nonempty string destination_id. Missing IDs, multiple results, references and differing destinations keep fallback.",
+    "The original full command still controls eligibility. Additional questions, list/detail requests and unfamiliar wording go to the unchanged model prompt carrying original request, separately labeled repaired interpretation and all outcomes.",
+    "Compute aliases now require their actual result destination_id to match the confirmed destination. An ancestor compute used only as a via-source cannot make its different destination a main-target alias. Search aliases use the same canonical destination test and do not depend on plan list ordering.",
+    "Output wording, facts, replacement clause, ETA and 30-word ceiling remain unchanged. Add/cancel do not receive the new unused-search exception; existing unknown/error/blocked/stale/multiple-write handling remains in place.",
+    "Read new tests for done/reused and reordered plans, multiple redundant searches, unrelated/unsupported results, original detail requests, via-source alias rejection, snapshot guards, other mutation types and error/unknown/blocked boundaries. Existing original-versus-repaired request tests remain unchanged."
+  ],
+  "execution_boundary": "This method only hashes files, parses source ASTs, compares the frozen inventory and reads existing test receipts. It does not run tests, tool backends, inference or services. Manual review used the full responder diff and referenced tests/contracts.",
+  "test_receipts": {
+    "implementer_baseline": "6 failed, 32 passed against exact iteration15 responder",
+    "implementer_candidate": "65 passed in 0.46s (38 new cases plus 27 existing summary cases)",
+    "initial_collection_failure": "redundant-search-before.txt preserves a reserved pytest parameter-name collection error; it is not the behavioral baseline"
+  },
+  "source_sha256": {
+    "results/iteration15/source-snapshot/agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "tests/unit/test_redundant_navigation_search.py": "501d53a8c5455c938ee18625c127cefc3ae0e6ad0ea3b36ca0decbea8af73006",
+    "tests/unit/test_navigation_summaries.py": "76bfae05f332c92223cf2c6548cf02759aba85db935061d468549fc8793f8c1a",
+    "tests/unit/test_summary_request_fidelity.py": "c25a324e0d3116dca6ae1f52ee28848effbcf40e160590412c2b520669ab1e9c",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "results/iteration16/review_responder_change.py": "702b7080fc2fb8408d0dfdb6aabbaf3aa13bf238e21d71393e939ae9aa4b6508",
+    "results/iteration16/redundant-search-before.txt": "e4c1938d82f72e6bdeb82f220009a09c1fedf9985769c4cd1531f1161c29746c",
+    "results/iteration16/redundant-search-before-v2.txt": "d0477253e2314d0259ed214079b4b0fabeb25a546d9a04cc8321847675ccad60",
+    "results/iteration16/redundant-search-after.txt": "916ace006bb6362abb8ec48363be52569aaea7f5c16915c3eb76fd6e30ac0371"
+  },
+  "limitations": [
+    "This is a source review and artifact comparison, not an independently rerun behavioral or live test.",
+    "The exception trusts successful canonical IDs reported by the backend; it does not prove arbitrary backend result integrity or arbitrary natural-language request fidelity.",
+    "Long or unfamiliar requests still use model synthesis, whose factual completeness remains a separate measured outcome. No live improvement or guaranteed speech completion is inferred.",
+    "No production, test, frozen method, raw evidence or Git index was changed by this review."
+  ]
+}

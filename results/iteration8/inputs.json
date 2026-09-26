@@ -1,0 +1,3086 @@
+{
+  "created_at_utc": "2026-09-26T05:12:25.517265+00:00",
+  "cases": [
+    {
+      "id": "start",
+      "request": "Navigate to MG Road Metro Station.",
+      "expected_path": "direct",
+      "setup": null,
+      "execution": {
+        "calls": [
+          {
+            "id": "find",
+            "tool": "search_destination",
+            "args": {
+              "query": "MG Road Metro Station"
+            }
+          },
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "$find.places[0].place_id"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "find": {
+            "id": "find",
+            "tool": "search_destination",
+            "args": {
+              "query": "MG Road Metro Station"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "P_MGROAD",
+                  "name": "MG Road Metro Station",
+                  "category": "metro",
+                  "lat": 12.9756,
+                  "lng": 77.6066
+                }
+              ]
+            },
+            "error": null
+          },
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "P_MGROAD"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "find",
+            "tool": "search_destination",
+            "args": {
+              "query": "MG Road Metro Station"
+            }
+          },
+          "ts": 1790399545.511766
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "$find.places[0].place_id"
+            }
+          },
+          "ts": 1790399545.511772
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.511775
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "find",
+            "tool": "search_destination",
+            "args": {
+              "query": "MG Road Metro Station"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.511876
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "find",
+            "tool": "search_destination",
+            "args": {
+              "query": "MG Road Metro Station"
+            },
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "P_MGROAD",
+                  "name": "MG Road Metro Station",
+                  "category": "metro",
+                  "lat": 12.9756,
+                  "lng": 77.6066
+                }
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5119832
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "P_MGROAD"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.512012
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "P_MGROAD"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.512081
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.5121229
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "ba76a46011c5475ba3703bb72ce80216",
+            "operation_id": "5d9abe8d749a44e48caf66d595e3437f",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.51215
+        }
+      ]
+    },
+    {
+      "id": "replace",
+      "request": "Actually, navigate to Whitefield instead.",
+      "expected_path": "direct",
+      "setup": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Cubbon Park",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "execution": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Whitefield"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Whitefield"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R2",
+              "destination": "Whitefield (ITPL)",
+              "destination_id": "P_WHITEFIELD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 15.9,
+              "eta_min": 40,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9698,
+                  77.75
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Whitefield (ITPL)",
+              "replaced": "Cubbon Park",
+              "already_active": false,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R2",
+              "destination": "Whitefield (ITPL)",
+              "destination_id": "P_WHITEFIELD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 15.9,
+              "eta_min": 40,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9698,
+                  77.75
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            }
+          },
+          "ts": 1790399545.5124018
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.512406
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.512458
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.512511
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.5125408
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "478a7491013b4bed976a9636976661f3",
+            "operation_id": "6719995c3c864e189c4dbb416ec9d966",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Cubbon Park",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.512563
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Whitefield"
+            }
+          },
+          "ts": 1790399545.512634
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.512637
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Whitefield"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.512681
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Whitefield"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R2",
+              "destination": "Whitefield (ITPL)",
+              "destination_id": "P_WHITEFIELD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 15.9,
+              "eta_min": 40,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9698,
+                  77.75
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.512738
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.512767
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "c71a53bc6d7e4ef78b7fc2c7c82e1ff9",
+            "operation_id": "712f7c0e61064685a8d81a32e4b8af49",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Whitefield (ITPL)",
+              "replaced": "Cubbon Park",
+              "already_active": false,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R2",
+              "destination": "Whitefield (ITPL)",
+              "destination_id": "P_WHITEFIELD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 15.9,
+              "eta_min": 40,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9698,
+                  77.75
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.512789
+        }
+      ]
+    },
+    {
+      "id": "via",
+      "request": "Navigate to Manipal Hospital via Blue Tokai, Indiranagar.",
+      "expected_path": "direct",
+      "setup": null,
+      "execution": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road",
+              "via": "Blue Tokai, Indiranagar"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Manipal Hospital, Old Airport Road",
+              "destination_id": "P_HOSP",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 2.4,
+              "eta_min": 6,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9592,
+                  77.6485
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Manipal Hospital, Old Airport Road",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Manipal Hospital, Old Airport Road",
+              "destination_id": "P_HOSP",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 2.4,
+              "eta_min": 6,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9592,
+                  77.6485
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road",
+              "via": "Blue Tokai, Indiranagar"
+            }
+          },
+          "ts": 1790399545.513072
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.513076
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.513115
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Manipal Hospital, Old Airport Road",
+              "destination_id": "P_HOSP",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 2.4,
+              "eta_min": 6,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9592,
+                  77.6485
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.51318
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.513207
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "35e0211f64c9424bab7b62b8b08f6509",
+            "operation_id": "57fb5b99a6e54986927b5456eab609b3",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Manipal Hospital, Old Airport Road",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Manipal Hospital, Old Airport Road",
+              "destination_id": "P_HOSP",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 2.4,
+              "eta_min": 6,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9592,
+                  77.6485
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5132291
+        }
+      ]
+    },
+    {
+      "id": "already_active",
+      "request": "Start the active route again.",
+      "expected_path": "direct",
+      "setup": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Ather Grid charger, Indiranagar"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Ather Grid charger, Indiranagar"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "execution": {
+        "calls": [
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            }
+          }
+        ],
+        "outcomes": {
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": "Office (Manyata Tech Park)",
+              "already_active": true,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Ather Grid charger, Indiranagar"
+            }
+          },
+          "ts": 1790399545.513421
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.513424
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Ather Grid charger, Indiranagar"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.513459
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Ather Grid charger, Indiranagar"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.513522
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.513549
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "1d851897fd6d4df9959a2691f37a0c08",
+            "operation_id": "3e633688ba904dd5a07a89755e6fd288",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.51357
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "feb10b1dd0d14ede8ab29211b45b8bbd",
+            "operation_id": "71b6bfce3aa54dafa5b1a85a8809a0b4",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            }
+          },
+          "ts": 1790399545.513626
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "feb10b1dd0d14ede8ab29211b45b8bbd",
+            "operation_id": "71b6bfce3aa54dafa5b1a85a8809a0b4",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.513657
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "feb10b1dd0d14ede8ab29211b45b8bbd",
+            "operation_id": "71b6bfce3aa54dafa5b1a85a8809a0b4",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": "Office (Manyata Tech Park)",
+              "already_active": true,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Ather Grid charger, Indiranagar"
+              ],
+              "stop_ids": [
+                "C_ATHER_IND"
+              ],
+              "distance_km": 11.8,
+              "eta_min": 29,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9784,
+                  77.6408
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5136719
+        }
+      ]
+    },
+    {
+      "id": "add_stop",
+      "request": "Add the nearest coffee stop to the route.",
+      "expected_path": "direct",
+      "setup": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "execution": {
+        "calls": [
+          {
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            }
+          },
+          {
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "$find.places[0].place_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "find": {
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "K_BLUETOKAI",
+                  "name": "Blue Tokai, Indiranagar",
+                  "detour_min": 0
+                },
+                {
+                  "place_id": "K_TWC_HEB",
+                  "name": "Third Wave Coffee, Hebbal",
+                  "detour_min": 42
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road",
+                  "detour_min": 122
+                }
+              ],
+              "navigation_version": 1,
+              "route_id": "R1"
+            },
+            "error": null
+          },
+          "stop": {
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "K_BLUETOKAI"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": false,
+              "extra_min": 0,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 5.3,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          },
+          "ts": 1790399545.513912
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.5139148
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.513948
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.513995
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.5140212
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "f4a34b8267344eaa9e3dd8d224ac4a0a",
+            "operation_id": "5201a689059f47fa804e3baecccf1c1b",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.51404
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            }
+          },
+          "ts": 1790399545.514101
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "$find.places[0].place_id"
+            }
+          },
+          "ts": 1790399545.5141041
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.5141351
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "K_BLUETOKAI",
+                  "name": "Blue Tokai, Indiranagar",
+                  "detour_min": 0
+                },
+                {
+                  "place_id": "K_TWC_HEB",
+                  "name": "Third Wave Coffee, Hebbal",
+                  "detour_min": 42
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road",
+                  "detour_min": 122
+                }
+              ],
+              "navigation_version": 1,
+              "route_id": "R1"
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.514155
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "K_BLUETOKAI"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.5141718
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "27e98708647149a599839e46f82c73ac",
+            "operation_id": "08e2c80752e54a63abb3c833959308c5",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "K_BLUETOKAI"
+            },
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": false,
+              "extra_min": 0,
+              "navigation_version": 2,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 5.3,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.514237
+        }
+      ]
+    },
+    {
+      "id": "repeat_stop",
+      "request": "Add Blue Tokai, Indiranagar as a stop again.",
+      "expected_path": "direct",
+      "setup": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Blue Tokai, Indiranagar"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "execution": {
+        "calls": [
+          {
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "Blue Tokai, Indiranagar"
+            }
+          }
+        ],
+        "outcomes": {
+          "stop": {
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "Blue Tokai, Indiranagar"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": true,
+              "extra_min": 0,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Blue Tokai, Indiranagar"
+            }
+          },
+          "ts": 1790399545.514519
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.514522
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.5145578
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "office",
+              "via": "Blue Tokai, Indiranagar"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.514616
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.514643
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "c9be0a03cea04bdda26e84f23aeea5ef",
+            "operation_id": "9f1d6d92269c48bda944b779fce5c7b8",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Office (Manyata Tech Park)",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.514664
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "5e4d4cdcd1cb4ba69af48978e3ccbe29",
+            "operation_id": "f6c91ec24b9f45b780d4d65045db9955",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "Blue Tokai, Indiranagar"
+            }
+          },
+          "ts": 1790399545.514721
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "5e4d4cdcd1cb4ba69af48978e3ccbe29",
+            "operation_id": "f6c91ec24b9f45b780d4d65045db9955",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "Blue Tokai, Indiranagar"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.51475
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "5e4d4cdcd1cb4ba69af48978e3ccbe29",
+            "operation_id": "f6c91ec24b9f45b780d4d65045db9955",
+            "id": "stop",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "Blue Tokai, Indiranagar"
+            },
+            "result": {
+              "status": "success",
+              "added": "Blue Tokai, Indiranagar",
+              "already_present": true,
+              "extra_min": 0,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Office (Manyata Tech Park)",
+              "destination_id": "P_OFFICE",
+              "stops": [
+                "Blue Tokai, Indiranagar"
+              ],
+              "stop_ids": [
+                "K_BLUETOKAI"
+              ],
+              "distance_km": 12.3,
+              "eta_min": 31,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.97,
+                  77.64
+                ],
+                [
+                  13.0475,
+                  77.62
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5147781
+        }
+      ]
+    },
+    {
+      "id": "cancel_active",
+      "request": "Cancel navigation.",
+      "expected_path": "direct",
+      "setup": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "Cubbon Park",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "execution": {
+        "calls": [
+          {
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {}
+          }
+        ],
+        "outcomes": {
+          "cancel": {
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "status": "done",
+            "result": {
+              "status": "success",
+              "cancelled": "Cubbon Park",
+              "navigation_version": 2,
+              "route_active": false,
+              "route_id": null,
+              "destination": null,
+              "destination_id": null,
+              "stops": [],
+              "stop_ids": [],
+              "eta_min": null,
+              "distance_km": null,
+              "polyline": []
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            }
+          },
+          "ts": 1790399545.515018
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.515021
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.515054
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "Cubbon Park"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5150988
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.515125
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "ae4dc23804eb447081f20860b1f294e6",
+            "operation_id": "fc9ec93f494e4b94a7fef76a9be96790",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "Cubbon Park",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "Cubbon Park",
+              "destination_id": "P_CUBBON",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 7.1,
+              "eta_min": 18,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9763,
+                  77.5929
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5151439
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "34b9b03cc2c94362ae0250968346eae1",
+            "operation_id": "00f8a52c9b7e4220b43cd0d742e3b35f",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {}
+          },
+          "ts": 1790399545.515202
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "34b9b03cc2c94362ae0250968346eae1",
+            "operation_id": "00f8a52c9b7e4220b43cd0d742e3b35f",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "state_changing": true
+          },
+          "ts": 1790399545.51523
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "34b9b03cc2c94362ae0250968346eae1",
+            "operation_id": "00f8a52c9b7e4220b43cd0d742e3b35f",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "result": {
+              "status": "success",
+              "cancelled": "Cubbon Park",
+              "navigation_version": 2,
+              "route_active": false,
+              "route_id": null,
+              "destination": null,
+              "destination_id": null,
+              "stops": [],
+              "stop_ids": [],
+              "eta_min": null,
+              "distance_km": null,
+              "polyline": []
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.515242
+        }
+      ]
+    },
+    {
+      "id": "cancel_idle",
+      "request": "Cancel navigation.",
+      "expected_path": "direct",
+      "setup": null,
+      "execution": {
+        "calls": [
+          {
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {}
+          }
+        ],
+        "outcomes": {
+          "cancel": {
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "status": "done",
+            "result": {
+              "status": "success",
+              "cancelled": null,
+              "navigation_version": 0,
+              "route_active": false,
+              "route_id": null,
+              "destination": null,
+              "destination_id": null,
+              "stops": [],
+              "stop_ids": [],
+              "eta_min": null,
+              "distance_km": null,
+              "polyline": []
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "66a8d8a229064856adf731849f7b391a",
+            "operation_id": "51502a8d3d9246c0a3cc48ea896684a0",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {}
+          },
+          "ts": 1790399545.515455
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "66a8d8a229064856adf731849f7b391a",
+            "operation_id": "51502a8d3d9246c0a3cc48ea896684a0",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "state_changing": true
+          },
+          "ts": 1790399545.515486
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "66a8d8a229064856adf731849f7b391a",
+            "operation_id": "51502a8d3d9246c0a3cc48ea896684a0",
+            "id": "cancel",
+            "tool": "cancel_navigation",
+            "args": {},
+            "result": {
+              "status": "success",
+              "cancelled": null,
+              "navigation_version": 0,
+              "route_active": false,
+              "route_id": null,
+              "destination": null,
+              "destination_id": null,
+              "stops": [],
+              "stop_ids": [],
+              "eta_min": null,
+              "distance_km": null,
+              "polyline": []
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.515498
+        }
+      ]
+    },
+    {
+      "id": "route_only",
+      "request": "Compute a route to MG Road Metro Station without starting navigation.",
+      "expected_path": "model",
+      "setup": null,
+      "execution": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          }
+        ],
+        "outcomes": {
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "1d766a8365ef4468bfb7be52a015617c",
+            "operation_id": "d064ca2426c849ecb3a1edbbc84e92df",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          },
+          "ts": 1790399545.515609
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "1d766a8365ef4468bfb7be52a015617c",
+            "operation_id": "d064ca2426c849ecb3a1edbbc84e92df",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.515639
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "1d766a8365ef4468bfb7be52a015617c",
+            "operation_id": "d064ca2426c849ecb3a1edbbc84e92df",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.515682
+        }
+      ]
+    },
+    {
+      "id": "independent_query",
+      "request": "Navigate to MG Road Metro Station and find nearby coffee places.",
+      "expected_path": "model",
+      "setup": null,
+      "execution": {
+        "calls": [
+          {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          },
+          {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          {
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            }
+          }
+        ],
+        "outcomes": {
+          "find": {
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "K_BLUETOKAI",
+                  "name": "Blue Tokai, Indiranagar",
+                  "detour_min": 1
+                },
+                {
+                  "place_id": "K_TWC_HEB",
+                  "name": "Third Wave Coffee, Hebbal",
+                  "detour_min": 31
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road",
+                  "detour_min": 67
+                }
+              ],
+              "navigation_version": 0,
+              "route_id": null
+            },
+            "error": null
+          },
+          "route": {
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          },
+          "start": {
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "status": "done",
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "error": null
+          }
+        },
+        "stale": false
+      },
+      "events": [
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            }
+          },
+          "ts": 1790399545.515799
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "$route.route_id"
+            }
+          },
+          "ts": 1790399545.5158021
+        },
+        {
+          "type": "tool_waiting",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            }
+          },
+          "ts": 1790399545.5158038
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.5158348
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "state_changing": false
+          },
+          "ts": 1790399545.515866
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "find",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            },
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "K_BLUETOKAI",
+                  "name": "Blue Tokai, Indiranagar",
+                  "detour_min": 1
+                },
+                {
+                  "place_id": "K_TWC_HEB",
+                  "name": "Third Wave Coffee, Hebbal",
+                  "detour_min": 31
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road",
+                  "detour_min": 67
+                }
+              ],
+              "navigation_version": 0,
+              "route_id": null
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.5158799
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "route",
+            "tool": "compute_route",
+            "args": {
+              "destination": "MG Road Metro Station"
+            },
+            "result": {
+              "status": "success",
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.515903
+        },
+        {
+          "type": "tool_started",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "state_changing": true
+          },
+          "ts": 1790399545.515929
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "73655cc21b61422bbb9e130ddb210f32",
+            "operation_id": "01b2cddd4c2740138e02c345c211e238",
+            "id": "start",
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "result": {
+              "status": "success",
+              "navigating_to": "MG Road Metro Station",
+              "replaced": null,
+              "already_active": false,
+              "navigation_version": 1,
+              "route_active": true,
+              "route_id": "R1",
+              "destination": "MG Road Metro Station",
+              "destination_id": "P_MGROAD",
+              "stops": [],
+              "stop_ids": [],
+              "distance_km": 5.1,
+              "eta_min": 13,
+              "polyline": [
+                [
+                  12.9719,
+                  77.6412
+                ],
+                [
+                  12.9756,
+                  77.6066
+                ]
+              ]
+            },
+            "stale": false,
+            "duration_ms": 0
+          },
+          "ts": 1790399545.515947
+        }
+      ]
+    }
+  ],
+  "construction": "Scripted real manifest/executor; simulated route delay zero only while constructing inputs. No inference.",
+  "expected": "Preserve successful destination/stop/cancel facts, numeric ETA, replacement identity and no-op status. Preparatory routes must not be called active; independent query results must not be hidden by the direct path.",
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "results/iteration8/prepare_inputs.py": "f4f5de3c104a4a10ffd2b0e789e6cb73f90c3d60912be2dc9a84a3e0cc2af429"
+  }
+}

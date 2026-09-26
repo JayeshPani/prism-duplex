@@ -1,0 +1,30 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421243.4396422}
+{"type": "session_started", "data": {"room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790421243.439935}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790421243.6945002}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790421245.444501}
+{"type": "user_final", "data": {"text": "Navigate to Whitefield.", "merged": "Navigate to Whitefield.", "intent_version": 1}, "ts": 1790421246.801069}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790421247.503763}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790421247.5043461}
+{"type": "speech_handle", "data": {"speech_id": "speech_babbc3230f90", "state": "queued"}, "ts": 1790421247.504856}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790421247.9990919}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421248.894185}
+{"type": "speech_handle", "data": {"speech_id": "speech_babbc3230f90", "state": "finished", "error": null}, "ts": 1790421248.896859}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Navigate to Whitefield.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "Whitefield"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "Whitefield"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to Whitefield."}, "ts": 1790421250.293345}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790421250.2935948}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790421250.293934}
+{"type": "slot_update", "data": {"slot": "query", "value": "Whitefield", "previous": null}, "ts": 1790421250.29399}
+{"type": "tool_waiting", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Whitefield"}}, "ts": 1790421250.294139}
+{"type": "tool_waiting", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, "ts": 1790421250.29423}
+{"type": "tool_waiting", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790421250.294268}
+{"type": "tool_started", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Whitefield"}, "state_changing": false}, "ts": 1790421250.294955}
+{"type": "tool_done", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "Whitefield"}, "result": {"status": "success", "places": [{"place_id": "P_WHITEFIELD", "name": "Whitefield (ITPL)", "category": "area", "lat": 12.9698, "lng": 77.75}]}, "stale": false, "duration_ms": 27}, "ts": 1790421250.322172}
+{"type": "tool_started", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_WHITEFIELD"}, "state_changing": false}, "ts": 1790421250.32368}
+{"type": "tool_done", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_WHITEFIELD"}, "result": {"status": "success", "route_id": "R1", "destination": "Whitefield (ITPL)", "destination_id": "P_WHITEFIELD", "stops": [], "stop_ids": [], "distance_km": 15.9, "eta_min": 40, "polyline": [[12.9719, 77.6412], [12.9698, 77.75]]}, "stale": false, "duration_ms": 2502}, "ts": 1790421252.825887}
+{"type": "tool_started", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "state_changing": true}, "ts": 1790421252.8524868}
+{"type": "tool_done", "data": {"execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "result": {"status": "success", "navigating_to": "Whitefield (ITPL)", "replaced": null, "already_active": false, "navigation_version": 1, "route_active": true, "route_id": "R1", "destination": "Whitefield (ITPL)", "destination_id": "P_WHITEFIELD", "stops": [], "stop_ids": [], "distance_km": 15.9, "eta_min": 40, "polyline": [[12.9719, 77.6412], [12.9698, 77.75]]}, "stale": false, "duration_ms": 362}, "ts": 1790421253.2149062}
+{"type": "agent_say", "data": {"text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.", "intent_version": 1, "kind": "result"}, "ts": 1790421253.266134}
+{"type": "speech_handle", "data": {"speech_id": "speech_778ed22796b5", "state": "queued"}, "ts": 1790421253.266658}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790421254.143767}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421258.932044}
+{"type": "speech_handle", "data": {"speech_id": "speech_778ed22796b5", "state": "finished", "error": null}, "ts": 1790421258.933503}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790421273.933934}

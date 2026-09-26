@@ -1,0 +1,41 @@
+{
+  "frozen_at_utc": "2026-09-26T07:28:41.825251+00:00",
+  "timing": "Frozen before RTC launch and before any received-audio ASR.",
+  "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+  "suite_protocol_sha256": "1b9a04c94ce883430feb59a92517c8a7ebe4cb984e1c9fedd3ae79af6ade4a65",
+  "declared_trials": [
+    {
+      "id": "rtc-waypoint-1",
+      "case": "waypoint"
+    },
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline"
+    },
+    {
+      "id": "rtc-waypoint-2",
+      "case": "waypoint"
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction"
+    }
+  ],
+  "scope": "All four declared whole received PCM streams, in original order; failures/unavailable rows remain in the denominator.",
+  "method": "Pinned production LocalSTT through offline cached Parakeet on local-mac; resample entire mono PCM16 24 kHz to16 kHz with existing helper. No trimming, silence removal, retries or capture-success selection.",
+  "review": {
+    "waypoint": "First MG Road navigation result is intentionally interrupted; final Blue Tokai Indiranagar addition retains MG Road destination, estimate13minutes and0extra. Retain all incorrect entity/number spellings; do not normalize13and30.",
+    "baseline": "Airport start estimatedarrival88minutes.",
+    "correction": "Office replacement ofairport estimatedarrival29minutes.",
+    "score": "Verbatim whole-stream ASR plus reviewed facts, not human listening or held-out accuracy."
+  },
+  "limitations": [
+    "Production ASR proxy cannot distinguish pronunciation from recognition errors; no human listening.",
+    "Whole-stream text does not establish word timestamps or physical playback.",
+    "Four repeated synthetic development captures share warm models and a fixed order.",
+    "Review is performed only after timed suite and owned model services have stopped. Its timings are separate from conversation latency."
+  ],
+  "declared_at_utc": "2026-09-26T07:28:41.825251+00:00",
+  "suite_root": "results/iteration12",
+  "note": "All four full received streams; no clipping, retries or capture-success selection."
+}

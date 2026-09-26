@@ -1,0 +1,1464 @@
+{
+  "status": "completed",
+  "created_at": "2026-09-25T18:53:34.284003+00:00",
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "runtime": {
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "platform": "macOS-15.3.1-arm64-arm-64bit"
+  },
+  "expected_cases": {
+    "named_stop": {
+      "domain": "car",
+      "text": "Add Third Wave Coffee, Hebbal as a stop.",
+      "kind": "named",
+      "target": "K_TWC_HEB",
+      "names": [
+        "Third Wave Coffee, Hebbal",
+        "Third Wave Coffee",
+        "Third Wave"
+      ],
+      "tools": [
+        "add_waypoint"
+      ],
+      "optional_lookup": "search_destination"
+    },
+    "category_no_cap": {
+      "domain": "car",
+      "text": "Find coffee stops along this route.",
+      "kind": "category",
+      "tools": [
+        "find_nearby"
+      ],
+      "args": {
+        "category": "coffee"
+      }
+    },
+    "category_explicit_cap": {
+      "domain": "car",
+      "text": "Find coffee stops along this route with at most twelve minutes of detour.",
+      "kind": "category",
+      "tools": [
+        "find_nearby"
+      ],
+      "args": {
+        "category": "coffee",
+        "max_detour_min": 12
+      }
+    },
+    "product_no_budget": {
+      "domain": "catalog",
+      "text": "Search the catalog for cedar travel pouch.",
+      "kind": "product",
+      "tools": [
+        "search_products"
+      ],
+      "budget": null
+    },
+    "product_explicit_budget": {
+      "domain": "catalog",
+      "text": "Search the catalog for cedar travel pouch under 65 dollars.",
+      "kind": "product",
+      "tools": [
+        "search_products"
+      ],
+      "budget": 65
+    },
+    "search_and_add": {
+      "domain": "catalog",
+      "text": "Search for cedar travel pouch and add two of the first result to my cart.",
+      "kind": "cart",
+      "tools": [
+        "search_products",
+        "add_to_cart"
+      ],
+      "budget": null
+    },
+    "cancel_cart_action": {
+      "domain": "catalog",
+      "text": "Search for cedar travel pouch and add two to my cart. Actually, don't add anything; just search.",
+      "kind": "product",
+      "tools": [
+        "search_products"
+      ],
+      "budget": null
+    },
+    "two_independent_actions": {
+      "domain": "catalog",
+      "text": "Search for cedar travel pouch and track order LM702.",
+      "kind": "search_track",
+      "tools": [
+        "search_products",
+        "track_order"
+      ],
+      "budget": null
+    },
+    "cancel_search_action": {
+      "domain": "catalog",
+      "text": "Search for cedar travel pouch and track order LM702. Actually, cancel the search; just track order LM702.",
+      "kind": "track",
+      "tools": [
+        "track_order"
+      ]
+    }
+  },
+  "case_sha256": "1b2f54d49eff0db0860a75098cf3bd2ce2d23349c654586d5991b5dc7c1481ce",
+  "declared_setup": {
+    "car": "Active Whitefield (P_WHITEFIELD) route from Home, empty stops; truthful history seeded from successful setup",
+    "catalog": "Fresh existing mock registry per case"
+  },
+  "argument_policy": "Schema scalar coercion retained; absent/null optional arguments equivalent; query case/punctuation normalized; independent call order/IDs flexible; dependency reference paths exact",
+  "runner_sha256": "8434a9b0f94b6279b6b3ddba93003ccf655ef89c3de3737de9448400754d4a93",
+  "repository": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "status": "M README.md\n M agent/config.py\n M agent/config.yaml\n M agent/coordinator/coordinator.py\n M agent/coordinator/events.py\n M agent/coordinator/executor.py\n M agent/coordinator/ledger.py\n M agent/coordinator/llm_client.py\n M agent/coordinator/refs.py\n M agent/coordinator/resolver.py\n M agent/coordinator/responder.py\n M agent/main.py\n M agent/pipeline/local_stt.py\n M agent/pipeline/local_tts.py\n M agent/telemetry/fdb_logger.py\n M agent/tools/car_tools.py\n M agent/tools/manifest.py\n M scripts/download_models.sh\n M scripts/fdb_eval.py\n M scripts/fdb_infer.py\n M scripts/run_benchmark.sh\n M tests/synthetic/run_synthetic.py\n M tests/unit/test_coordinator.py\n M tests/unit/test_guards.py\n M web/app/globals.css\n M web/app/page.tsx\n M web/components/CarMap.tsx\n M web/components/Ribbon.tsx\n M web/lib/events.ts\n M web/tsconfig.json\n?? agent/model_assets.py\n?? docs/\n?? requirements/test.txt\n?? results/iteration2/\n?? results/iteration3/\n?? results/reliability/\n?? scripts/cache_policy_experiment.py\n?? scripts/capture_run.py\n?? scripts/local_navigation_experiment.py\n?? scripts/local_overlap_experiment.py\n?? scripts/local_speech_experiment.py\n?? scripts/planner_fidelity_experiment.py\n?? scripts/probe_fdb_contract.py\n?? scripts/reliability_experiment.py\n?? scripts/stt_warmup_experiment.py\n?? tests/unit/test_argument_validation.py\n?? tests/unit/test_cache_policy_experiment.py\n?? tests/unit/test_coordinator_lifecycle.py\n?? tests/unit/test_coordinator_reliability.py\n?? tests/unit/test_dispatch_telemetry.py\n?? tests/unit/test_evaluation_manifest.py\n?? tests/unit/test_executor_reliability.py\n?? tests/unit/test_llm_stream.py\n?? tests/unit/test_model_assets.py\n?? tests/unit/test_navigation_experiment.py\n?? tests/unit/test_navigation_reliability.py\n?? tests/unit/test_overlap_scoring.py\n?? tests/unit/test_place_clarification.py\n?? tests/unit/test_planner_fidelity_experiment.py\n?? tests/unit/test_resolver_validation.py\n?? tests/unit/test_scoring.py\n?? tests/unit/test_session_config.py\n?? tests/unit/test_speech_truthfulness.py\n?? tests/unit/test_synthetic_runner.py\n?? tests/unit/test_tts_paths.py\n?? web/lib/events.test.ts",
+    "tracked_diff_sha256": "6874f0b7c2532f0d0c226f92127cde0b42a10d8db38015c0c3d040b580d5b8f5",
+    "untracked_source_file_sha256": {
+      "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+      "docs/iteration2.md": "9fc34c1f8d4bb2d442e64def21430201adab5c5544a973889448a1d1e7fdbc63",
+      "docs/reliability.md": "1068db2842da70475751073dc41b4beaa17cbd0db68c63701cd7be63188bdec8",
+      "docs/research.md": "d00cea03b336307839c36f02815e5716836f0b4850725ea4b56f3a3d9db7e2c4",
+      "requirements/test.txt": "154b151d706a43a546bd805e1b513f9bddac3cb5d88d443370b1f4c30d497def",
+      "scripts/cache_policy_experiment.py": "d209174c528d602d59e029265d074d2dcb787ec96f3780054571828744154fee",
+      "scripts/capture_run.py": "1b769dc59b648bcd4fb5a406118fe394e6abb8b077a27f061dfa98eaedb36a20",
+      "scripts/local_navigation_experiment.py": "d7e4b6ce9fdfa4280baeb07a77d0e4ad7e3ab88b2ec9dfafdbc952076a3a654d",
+      "scripts/local_overlap_experiment.py": "9e300ee2ccc65d693d4ce8dde90419935af5b83e4e95a34bcfe7cee3f907a409",
+      "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d",
+      "scripts/planner_fidelity_experiment.py": "8434a9b0f94b6279b6b3ddba93003ccf655ef89c3de3737de9448400754d4a93",
+      "scripts/probe_fdb_contract.py": "8052eadb25d8a2141e5c34a9358e91ea93c79c0e6bb94d1fada12582b8627063",
+      "scripts/reliability_experiment.py": "46744d4c02c752ba42d69411a8a995276369f6be45cb96c4ebc5f78adb6dca08",
+      "scripts/stt_warmup_experiment.py": "64a6c52d5b48435d312860e6d7619c9280d45d1e86173ee300f22092eff8b50e",
+      "tests/unit/test_argument_validation.py": "4c10251d47e1b382cc0968fa3519001c006d87c4fea88db0de164b23b4718999",
+      "tests/unit/test_cache_policy_experiment.py": "4ce1d473ae21e4b5193d5272adb654c52928fb826d0123846a67dba79aa63449",
+      "tests/unit/test_coordinator_lifecycle.py": "2e5f3017f26c789b5c3a52d137fe95f0dea5b28ec0c6bd1ee594098b44579915",
+      "tests/unit/test_coordinator_reliability.py": "7a41a7f6f2b37b0987d8f3b3a72edbcd72f6ed748f4e25c3fd304890e53f8446",
+      "tests/unit/test_dispatch_telemetry.py": "212e3dec31da6265f5925c039519badbdf806a709fe36fedf5f989deb5eebe79",
+      "tests/unit/test_evaluation_manifest.py": "17d65cccd7e280b04a5bca3e483c50664fd0f1cbba20c7281cfc65cd36b6efb0",
+      "tests/unit/test_executor_reliability.py": "d929299dbdcbc3def97ee953f36b04169a57edb112d1dbf6c5eafb9243a90a13",
+      "tests/unit/test_llm_stream.py": "d9be152c3f66fdc9d6de505d77b1e0cb1267d963d37ea4a3eaaa5de8ffa49c33",
+      "tests/unit/test_model_assets.py": "dd95a12eaa2fd5da44643ac21c80fff552a3a08ac71b9862535f479b9e8c4446",
+      "tests/unit/test_navigation_experiment.py": "20b3a7a6f5b603695a94c6345f9e012faa0bf3d091737a7d5c6e395905838958",
+      "tests/unit/test_navigation_reliability.py": "ce4ad50fb3add68f12de764d5722ae816ee5dbbc1f09e0b74efcffe07291ca30",
+      "tests/unit/test_overlap_scoring.py": "5e7d5db7ca9625d82aa1ea48a605c3f40ab1a3f60f3360a1a7901d9c650e6d5d",
+      "tests/unit/test_place_clarification.py": "ce9162de81173c2696a2097c64748b3bb53aa6f1019136aa8f66ce876f704b14",
+      "tests/unit/test_planner_fidelity_experiment.py": "960bb62c5830e9c506e185e01d681b3f9bb272723ff31d8127d81a11bc55b147",
+      "tests/unit/test_resolver_validation.py": "416c72c2b5bdf091805916b0212ccb9c521b049912e56f6eeb398d99edc12ac0",
+      "tests/unit/test_scoring.py": "9495eea7a28fcbce08e1c66839a14babbf6e2ea290d12894893bfaec96378edc",
+      "tests/unit/test_session_config.py": "f1b55b4419b4246a7574474982b61f9e79e228c5d9997ba263b06be7b733ba82",
+      "tests/unit/test_speech_truthfulness.py": "fbc2d27f7974cba5fca18e4330345f8a6dde840728973e389397b213750c9895",
+      "tests/unit/test_synthetic_runner.py": "b07da0fd64d67c87e53b3c353603e43b82bba24e09b0b16e92978efd7126ce3e",
+      "tests/unit/test_tts_paths.py": "e2494d5e4668fff53dae574bda64f76e5abd84385a360bb9cf8daca8c5f4dab9",
+      "web/lib/events.test.ts": "53d81ad05d283c244cf3b1ef97776b807dbbcd6b6fadce2021322865e51c679f"
+    }
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "7e6c9544c29dfbe1922d566c68f9b3ebd392787a057eece989c758fd3c3c498f",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "07142677554eea2d3098f0b81158946b042dae112eebd041bbd29cb6e0f7e60c",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "3526360d85ecd663bba39cb64e467b973f39af057218772ebf4dc126bc8738c3",
+    "agent/tools/car_tools.py": "70bffb1ff5e3186a4e2577089b92c45638669a4e5e0a1e690821803c12c73095",
+    "agent/tools/manifest.py": "77b344367cd6f79cc1a386db4fd731b88a7ff068f75621e3d9decdaae38e9b2e",
+    "bench/Full-Duplex-Bench/v3/mock_apis.py": "475cc7e896f0c7d88fdf07f400de0f527c06f70ab452527eb82cf5a25c17292d"
+  },
+  "model_load_receipts": [],
+  "timeout_s": 120.0,
+  "limitations": [
+    "Independent development cases, not held-out data or a benchmark score; no benchmark item data used",
+    "Existing benchmark mock implementations are reused as tools, not benchmark examples or expected answers",
+    "Catalog write outputs are stateless acknowledgments, not persistent cart effects",
+    "Configured local endpoint/loader receipts do not independently attest the model serving each response",
+    "No result speech, audio, live transport, interruption timing, or performance conclusions",
+    "Fixed serial order shares a warm server; model quality claims require broader separate evaluation"
+  ],
+  "runs": [
+    {
+      "case": "named_stop",
+      "attempts": [
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "Whitefield"
+          },
+          "state_changing": false,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "search_destination",
+          "args": {
+            "query": "Third Wave Coffee, Hebbal"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_TWC_HEB",
+                "name": "Third Wave Coffee, Hebbal",
+                "category": "coffee",
+                "lat": 13.04,
+                "lng": 77.595
+              }
+            ]
+          }
+        },
+        {
+          "tool": "add_waypoint",
+          "args": {
+            "place_id": "K_TWC_HEB"
+          },
+          "state_changing": true,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "added": "Third Wave Coffee, Hebbal",
+            "already_present": false,
+            "extra_min": 53,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [
+              "Third Wave Coffee, Hebbal"
+            ],
+            "stop_ids": [
+              "K_TWC_HEB"
+            ],
+            "distance_km": 37.3,
+            "eta_min": 93,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.04,
+                77.595
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "query": "Third Wave Coffee, Hebbal"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Third Wave Coffee, Hebbal"
+            }
+          },
+          {
+            "id": "c2",
+            "tool": "add_waypoint",
+            "args": {
+              "place_id": "$c1.places[0].place_id"
+            }
+          }
+        ],
+        "reply": "Adding Third Wave Coffee, Hebbal as a stop.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_destination",
+              "args": {
+                "query": "Third Wave Coffee, Hebbal"
+              }
+            },
+            {
+              "id": "c2",
+              "tool": "add_waypoint",
+              "args": {
+                "place_id": "$c1.places[0].place_id"
+              }
+            }
+          ],
+          "reply": "Adding Third Wave Coffee, Hebbal as a stop."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_destination",
+          "args": {
+            "query": "Third Wave Coffee, Hebbal"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_TWC_HEB",
+                "name": "Third Wave Coffee, Hebbal",
+                "category": "coffee",
+                "lat": 13.04,
+                "lng": 77.595
+              }
+            ]
+          },
+          "error": null
+        },
+        "c2": {
+          "id": "c2",
+          "tool": "add_waypoint",
+          "args": {
+            "place_id": "K_TWC_HEB"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "added": "Third Wave Coffee, Hebbal",
+            "already_present": false,
+            "extra_min": 53,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [
+              "Third Wave Coffee, Hebbal"
+            ],
+            "stop_ids": [
+              "K_TWC_HEB"
+            ],
+            "distance_km": 37.3,
+            "eta_min": 93,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.04,
+                77.595
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "category_no_cap",
+      "attempts": [
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "Whitefield"
+          },
+          "state_changing": false,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "find_nearby",
+          "args": {
+            "category": "coffee"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_BLUETOKAI",
+                "name": "Blue Tokai, Indiranagar",
+                "detour_min": 1
+              },
+              {
+                "place_id": "K_TWC_HEB",
+                "name": "Third Wave Coffee, Hebbal",
+                "detour_min": 53
+              },
+              {
+                "place_id": "K_SBUX_AIR",
+                "name": "Starbucks, Airport Road",
+                "detour_min": 102
+              }
+            ],
+            "navigation_version": 1,
+            "route_id": "R1"
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "category": "coffee"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee"
+            }
+          }
+        ],
+        "reply": "Finding coffee stops along the route.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "find_nearby",
+              "args": {
+                "category": "coffee"
+              }
+            }
+          ],
+          "reply": "Finding coffee stops along the route."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "find_nearby",
+          "args": {
+            "category": "coffee"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_BLUETOKAI",
+                "name": "Blue Tokai, Indiranagar",
+                "detour_min": 1
+              },
+              {
+                "place_id": "K_TWC_HEB",
+                "name": "Third Wave Coffee, Hebbal",
+                "detour_min": 53
+              },
+              {
+                "place_id": "K_SBUX_AIR",
+                "name": "Starbucks, Airport Road",
+                "detour_min": 102
+              }
+            ],
+            "navigation_version": 1,
+            "route_id": "R1"
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "category_explicit_cap",
+      "attempts": [
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "Whitefield"
+          },
+          "state_changing": false,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "phase": "setup",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          }
+        },
+        {
+          "tool": "find_nearby",
+          "args": {
+            "category": "coffee",
+            "max_detour_min": 12
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_BLUETOKAI",
+                "name": "Blue Tokai, Indiranagar",
+                "detour_min": 1
+              }
+            ],
+            "navigation_version": 1,
+            "route_id": "R1"
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "category": "coffee",
+          "max_detour_min": 12
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "find_nearby",
+            "args": {
+              "category": "coffee",
+              "max_detour_min": 12
+            }
+          }
+        ],
+        "reply": "Finding coffee stops along the route with a maximum 12-minute detour.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "find_nearby",
+              "args": {
+                "category": "coffee",
+                "max_detour_min": 12
+              }
+            }
+          ],
+          "reply": "Finding coffee stops along the route with a maximum 12-minute detour."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "find_nearby",
+          "args": {
+            "category": "coffee",
+            "max_detour_min": 12
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "K_BLUETOKAI",
+                "name": "Blue Tokai, Indiranagar",
+                "detour_min": 1
+              }
+            ],
+            "navigation_version": 1,
+            "route_id": "R1"
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "product_no_budget",
+      "attempts": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "query": "cedar travel pouch"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_products",
+            "args": {
+              "query": "cedar travel pouch"
+            }
+          }
+        ],
+        "reply": "Searching the catalog for cedar travel pouch.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_products",
+              "args": {
+                "query": "cedar travel pouch"
+              }
+            }
+          ],
+          "reply": "Searching the catalog for cedar travel pouch."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "product_explicit_budget",
+      "attempts": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch",
+            "max_price": 65
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 55
+              }
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "query": "cedar travel pouch",
+          "max_price": 65
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_products",
+            "args": {
+              "query": "cedar travel pouch",
+              "max_price": 65
+            }
+          }
+        ],
+        "reply": "Searching the catalog for cedar travel pouch under 65 dollars.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_products",
+              "args": {
+                "query": "cedar travel pouch",
+                "max_price": 65
+              }
+            }
+          ],
+          "reply": "Searching the catalog for cedar travel pouch under 65 dollars."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch",
+            "max_price": 65
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 55
+              }
+            ]
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "search_and_add",
+      "attempts": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          }
+        },
+        {
+          "tool": "add_to_cart",
+          "args": {
+            "product_id": "PROD1",
+            "quantity": 2
+          },
+          "state_changing": true,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "product_id": "PROD1",
+            "quantity": 2,
+            "cart_total": 199.98
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "query": "cedar travel pouch",
+          "quantity": 2
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_products",
+            "args": {
+              "query": "cedar travel pouch"
+            }
+          },
+          {
+            "id": "c2",
+            "tool": "add_to_cart",
+            "args": {
+              "product_id": "$c1.products[0].product_id",
+              "quantity": 2
+            }
+          }
+        ],
+        "reply": "Searching for cedar travel pouch and adding two of the first result to your cart.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_products",
+              "args": {
+                "query": "cedar travel pouch"
+              }
+            },
+            {
+              "id": "c2",
+              "tool": "add_to_cart",
+              "args": {
+                "product_id": "$c1.products[0].product_id",
+                "quantity": 2
+              }
+            }
+          ],
+          "reply": "Searching for cedar travel pouch and adding two of the first result to your cart."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          },
+          "error": null
+        },
+        "c2": {
+          "id": "c2",
+          "tool": "add_to_cart",
+          "args": {
+            "product_id": "PROD1",
+            "quantity": 2
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "product_id": "PROD1",
+            "quantity": 2,
+            "cart_total": 199.98
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "cancel_cart_action",
+      "attempts": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [
+          {
+            "slot": "action",
+            "from": "add two to my cart",
+            "to": "just search"
+          }
+        ],
+        "slots": {
+          "query": "cedar travel pouch"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_products",
+            "args": {
+              "query": "cedar travel pouch"
+            }
+          }
+        ],
+        "reply": "Searching for cedar travel pouch.",
+        "raw": {
+          "complete": true,
+          "corrections": [
+            {
+              "slot": "action",
+              "from": "add two to my cart",
+              "to": "just search"
+            }
+          ],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_products",
+              "args": {
+                "query": "cedar travel pouch"
+              }
+            }
+          ],
+          "reply": "Searching for cedar travel pouch."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "two_independent_actions",
+      "attempts": [
+        {
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          }
+        },
+        {
+          "tool": "track_order",
+          "args": {
+            "order_id": "LM702"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "order_id": "LM702",
+            "shipping_status": "Out for delivery"
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [],
+        "slots": {
+          "query": "cedar travel pouch",
+          "order_id": "LM702"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "search_products",
+            "args": {
+              "query": "cedar travel pouch"
+            }
+          },
+          {
+            "id": "c2",
+            "tool": "track_order",
+            "args": {
+              "order_id": "LM702"
+            }
+          }
+        ],
+        "reply": "Searching for cedar travel pouch and tracking order LM702.",
+        "raw": {
+          "complete": true,
+          "corrections": [],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_products",
+              "args": {
+                "query": "cedar travel pouch"
+              }
+            },
+            {
+              "id": "c2",
+              "tool": "track_order",
+              "args": {
+                "order_id": "LM702"
+              }
+            }
+          ],
+          "reply": "Searching for cedar travel pouch and tracking order LM702."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "search_products",
+          "args": {
+            "query": "cedar travel pouch"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "products": [
+              {
+                "product_id": "PROD1",
+                "name": "cedar travel pouch Premium",
+                "price": 99.99
+              }
+            ]
+          },
+          "error": null
+        },
+        "c2": {
+          "id": "c2",
+          "tool": "track_order",
+          "args": {
+            "order_id": "LM702"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "order_id": "LM702",
+            "shipping_status": "Out for delivery"
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    },
+    {
+      "case": "cancel_search_action",
+      "attempts": [
+        {
+          "tool": "track_order",
+          "args": {
+            "order_id": "LM702"
+          },
+          "state_changing": false,
+          "phase": "evaluation",
+          "status": "success",
+          "result": {
+            "status": "success",
+            "order_id": "LM702",
+            "shipping_status": "Out for delivery"
+          }
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "plan": {
+        "complete": true,
+        "repaired": "",
+        "corrections": [
+          {
+            "slot": "action",
+            "from": "Search for cedar travel pouch",
+            "to": "track order LM702"
+          }
+        ],
+        "slots": {
+          "order_id": "LM702"
+        },
+        "calls": [
+          {
+            "id": "c1",
+            "tool": "track_order",
+            "args": {
+              "order_id": "LM702"
+            }
+          }
+        ],
+        "reply": "Tracking order LM702.",
+        "raw": {
+          "complete": true,
+          "corrections": [
+            {
+              "slot": "action",
+              "from": "Search for cedar travel pouch",
+              "to": "track order LM702"
+            }
+          ],
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "track_order",
+              "args": {
+                "order_id": "LM702"
+              }
+            }
+          ],
+          "reply": "Tracking order LM702."
+        }
+      },
+      "outcomes": {
+        "c1": {
+          "id": "c1",
+          "tool": "track_order",
+          "args": {
+            "order_id": "LM702"
+          },
+          "status": "done",
+          "result": {
+            "status": "success",
+            "order_id": "LM702",
+            "shipping_status": "Out for delivery"
+          },
+          "error": null
+        }
+      },
+      "checks": {
+        "complete": true,
+        "requested_tools_only": true,
+        "arguments_grounded": true,
+        "dependencies_correct": true,
+        "execution_succeeded": true,
+        "observed_mock_effects": true
+      },
+      "plan_fidelity_passed": true,
+      "mock_execution_passed": true
+    }
+  ],
+  "summary": {
+    "cases": 9,
+    "passed": 9,
+    "plan_fidelity_passed": 9,
+    "mock_execution_passed": 9
+  }
+}

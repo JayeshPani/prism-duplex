@@ -1,0 +1,370 @@
+{
+  "created_at_utc": "2026-09-26T07:51:22.894305+00:00",
+  "scope": "Independent recomputation of every recorded STT boundary and stage; all declared captures retained.",
+  "source_sha256": {
+    "local-stack-run1/stt-diagnostics/report.json": "d9b5e6a033a4ee323ecdb2037efe93ad5a1792e22f16a8f872d41ee8b2d5490d",
+    "stt-stage-analysis.json": "ec0b7ca97ebd88dbe91b30910c87e4263c810f73e71af6bb14334b22db447090",
+    "run-report.json": "9c2d1715eae6917abc4bcc1dbda82fd1f2bde365101bcba0d3ea25b30dc774eb",
+    "local-stack-run1/stt-diagnostics-exit.json": "c2077a2e0f64dc91031ade45050865d7933bde32f2e50a798c562a5aba888eb1",
+    "rtc-waypoint-1/report.json": "44181c6e11e478cf33cb8eb44ac6dbee4a1e066f305ea92a266e1a3e52736242",
+    "rtc-waypoint-1/events.jsonl": "90200b0237e4eec6125f1b4a298a0d28d6418368528750f5e9d39b717d99b1e4",
+    "rtc-baseline-1/report.json": "d7507793d0410612559d2faa3422b8115c1ea6a3d401fd5c4508d9f43997d604",
+    "rtc-baseline-1/events.jsonl": "47a7b4beb329a27362520e80e13dd93a2f1ef001b0fe2ecc910b25d095888208",
+    "rtc-waypoint-2/report.json": "fa11d8322592b7a9cf2b6642778b452a37e5f9ce4e0d1d3fcb7485dbf91f463e",
+    "rtc-waypoint-2/events.jsonl": "51cde3d9e22a85cbfc1db357cb71bbdaa70a3190e08e35d006760180c14d5737",
+    "rtc-correction-1/report.json": "4f9f54a02c94c2591870d7fac377de26b8141e3d0ec64d6c9d1905bef1d5ea76",
+    "rtc-correction-1/events.jsonl": "7733d4e7ccc99106df441e481996572e9f8e3ade71b12ec7e6d38444f5d9c586",
+    "audit_stt_stages.py": "2cad40762151eaa1ef3b3b6aeaea5e07f022fdfa189688b8f8cc0893c49ef4f5"
+  },
+  "all_checks_pass": true,
+  "counts": {
+    "declared_captures": 4,
+    "completed_captures": 3,
+    "failed_before_input": 1,
+    "recognition_calls": 6,
+    "warmup_calls": 1,
+    "local_stt_requests": 14,
+    "transcribe_since_without_inference": 6,
+    "verified_stages": 70,
+    "verified_pcm_files": 14
+  },
+  "capture_mapping": [
+    {
+      "trial": "rtc-waypoint-1",
+      "room": "car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+      "capture_status": "completed_observation",
+      "published_utterances": 2,
+      "recognition_calls": 2,
+      "turns": [
+        {
+          "call_id": "stt-call-002",
+          "intent_version": 1,
+          "input_label": "initial",
+          "text": "Navigate to MG Road Metro Station."
+        },
+        {
+          "call_id": "stt-call-003",
+          "intent_version": 2,
+          "input_label": "correction",
+          "text": "Add the nearest coffee as a stop."
+        }
+      ]
+    },
+    {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+      "capture_status": "failed",
+      "published_utterances": 0,
+      "recognition_calls": 0,
+      "turns": []
+    },
+    {
+      "trial": "rtc-waypoint-2",
+      "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+      "capture_status": "completed_observation",
+      "published_utterances": 2,
+      "recognition_calls": 2,
+      "turns": [
+        {
+          "call_id": "stt-call-004",
+          "intent_version": 1,
+          "input_label": "initial",
+          "text": "Navigate to MG Road Metro Station."
+        },
+        {
+          "call_id": "stt-call-005",
+          "intent_version": 2,
+          "input_label": "correction",
+          "text": "Add the nearest coffee as a stop."
+        }
+      ]
+    },
+    {
+      "trial": "rtc-correction-1",
+      "room": "car-audio-a16a076ce247495b8ca4de06cfadabf7",
+      "capture_status": "completed_observation",
+      "published_utterances": 2,
+      "recognition_calls": 2,
+      "turns": [
+        {
+          "call_id": "stt-call-006",
+          "intent_version": 1,
+          "input_label": "initial",
+          "text": "Navigate to the airport."
+        },
+        {
+          "call_id": "stt-call-007",
+          "intent_version": 2,
+          "input_label": "correction",
+          "text": "Actually, go to the office instead."
+        }
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "call_id": "stt-call-001",
+      "request_id": "stt-request-002",
+      "room": null,
+      "call_type": "warmup",
+      "text": "",
+      "milliseconds": {
+        "api_entry_to_submit": 0.015208,
+        "submit_to_worker_entry": 0.025875,
+        "worker_entry_to_native_completion": 1440.638292,
+        "native_completion_to_caller_return": 2.486583,
+        "api_entry_to_caller_return": 1443.165958
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.002375,
+        "tempfile_create": 0.272375,
+        "wave_open": 0.031667,
+        "wave_writeframes": 0.054125,
+        "wave_close": 0.051083,
+        "model_transcribe": 1434.160417,
+        "parakeet_load_audio": 91.275541,
+        "parakeet_get_logmel": 1.739458,
+        "parakeet_generate": 1340.483875,
+        "tempfile_unlink": 5.489917
+      },
+      "pcm_bytes": 32000,
+      "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39"
+    },
+    {
+      "call_id": "stt-call-002",
+      "request_id": "stt-request-003",
+      "room": "car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+      "call_type": "_recognize_impl",
+      "text": "Navigate to MG Road Metro Station.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.025667,
+        "submit_to_worker_entry": 0.081125,
+        "worker_entry_to_native_completion": 906.678833,
+        "native_completion_to_caller_return": 0.121667,
+        "api_entry_to_caller_return": 906.907292
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.010875,
+        "tempfile_create": 0.341792,
+        "wave_open": 0.096792,
+        "wave_writeframes": 0.127292,
+        "wave_close": 0.237833,
+        "model_transcribe": 905.57025,
+        "parakeet_load_audio": 87.596834,
+        "parakeet_get_logmel": 2.413625,
+        "parakeet_generate": 815.45375,
+        "tempfile_unlink": 0.128084
+      },
+      "pcm_bytes": 90112,
+      "pcm_sha256": "0a00f841372185da88fe2dc149c1b72c2f4c28926fccc81007a8745bb24cd3b7"
+    },
+    {
+      "call_id": "stt-call-003",
+      "request_id": "stt-request-005",
+      "room": "car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+      "call_type": "_recognize_impl",
+      "text": "Add the nearest coffee as a stop.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.041792,
+        "submit_to_worker_entry": 0.126417,
+        "worker_entry_to_native_completion": 925.954416,
+        "native_completion_to_caller_return": 0.132667,
+        "api_entry_to_caller_return": 926.255292
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.022,
+        "tempfile_create": 0.476708,
+        "wave_open": 0.286708,
+        "wave_writeframes": 0.169459,
+        "wave_close": 0.562167,
+        "model_transcribe": 924.0365,
+        "parakeet_load_audio": 83.69375,
+        "parakeet_get_logmel": 0.274417,
+        "parakeet_generate": 839.845958,
+        "tempfile_unlink": 0.145541
+      },
+      "pcm_bytes": 82560,
+      "pcm_sha256": "2275f0d459b70de4be75fc5558a337a403438ae09d57c2711890271ac15d8618"
+    },
+    {
+      "call_id": "stt-call-004",
+      "request_id": "stt-request-007",
+      "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+      "call_type": "_recognize_impl",
+      "text": "Navigate to MG Road Metro Station.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.264208,
+        "submit_to_worker_entry": 0.091833,
+        "worker_entry_to_native_completion": 6852.235875,
+        "native_completion_to_caller_return": 0.112709,
+        "api_entry_to_caller_return": 6852.704625
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.283708,
+        "tempfile_create": 0.316417,
+        "wave_open": 0.376166,
+        "wave_writeframes": 0.255625,
+        "wave_close": 0.210208,
+        "model_transcribe": 6848.894459,
+        "parakeet_load_audio": 73.091792,
+        "parakeet_get_logmel": 2.568125,
+        "parakeet_generate": 6772.920041,
+        "tempfile_unlink": 0.918375
+      },
+      "pcm_bytes": 91136,
+      "pcm_sha256": "154d9eea03918756fe547dd2eef33aee1a1415aa14231d0c63a822e351a40095"
+    },
+    {
+      "call_id": "stt-call-005",
+      "request_id": "stt-request-009",
+      "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+      "call_type": "_recognize_impl",
+      "text": "Add the nearest coffee as a stop.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.033584,
+        "submit_to_worker_entry": 0.077625,
+        "worker_entry_to_native_completion": 1280.9725,
+        "native_completion_to_caller_return": 0.135833,
+        "api_entry_to_caller_return": 1281.219542
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.017416,
+        "tempfile_create": 0.210333,
+        "wave_open": 0.04575,
+        "wave_writeframes": 0.170625,
+        "wave_close": 0.251625,
+        "model_transcribe": 1279.936709,
+        "parakeet_load_audio": 88.659416,
+        "parakeet_get_logmel": 1.282667,
+        "parakeet_generate": 1189.634333,
+        "tempfile_unlink": 0.176541
+      },
+      "pcm_bytes": 81536,
+      "pcm_sha256": "06004673196164dfbcb0931d5a3b425a6b5486aeedc8fe0158b37eab549abfc8"
+    },
+    {
+      "call_id": "stt-call-006",
+      "request_id": "stt-request-011",
+      "room": "car-audio-a16a076ce247495b8ca4de06cfadabf7",
+      "call_type": "_recognize_impl",
+      "text": "Navigate to the airport.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.068125,
+        "submit_to_worker_entry": 0.119208,
+        "worker_entry_to_native_completion": 1243.426542,
+        "native_completion_to_caller_return": 0.142542,
+        "api_entry_to_caller_return": 1243.756417
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.018584,
+        "tempfile_create": 0.2885,
+        "wave_open": 0.228417,
+        "wave_writeframes": 0.190167,
+        "wave_close": 0.177209,
+        "model_transcribe": 1242.037625,
+        "parakeet_load_audio": 75.534375,
+        "parakeet_get_logmel": 1.669083,
+        "parakeet_generate": 1164.455583,
+        "tempfile_unlink": 0.176125
+      },
+      "pcm_bytes": 61440,
+      "pcm_sha256": "aee74ee62d1943a5514eb9faa981d3ea2b0179bd6ea72b8274908d528afbae6f"
+    },
+    {
+      "call_id": "stt-call-007",
+      "request_id": "stt-request-013",
+      "room": "car-audio-a16a076ce247495b8ca4de06cfadabf7",
+      "call_type": "_recognize_impl",
+      "text": "Actually, go to the office instead.",
+      "milliseconds": {
+        "api_entry_to_submit": 0.045959,
+        "submit_to_worker_entry": 0.117958,
+        "worker_entry_to_native_completion": 1426.649417,
+        "native_completion_to_caller_return": 0.121375,
+        "api_entry_to_caller_return": 1426.934709
+      },
+      "stage_milliseconds": {
+        "engine_load_check": 0.018709,
+        "tempfile_create": 2.681959,
+        "wave_open": 0.054625,
+        "wave_writeframes": 0.082042,
+        "wave_close": 3.087417,
+        "model_transcribe": 1420.354791,
+        "parakeet_load_audio": 333.741875,
+        "parakeet_get_logmel": 4.907917,
+        "parakeet_generate": 1078.706791,
+        "tempfile_unlink": 0.1515
+      },
+      "pcm_bytes": 103040,
+      "pcm_sha256": "299b17e6a05059ca00e2ae149140e6414ba74a354e973a956bbb4a7fcf06e07d"
+    }
+  ],
+  "verified_pcm_sha256": {
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-submitted_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-written_wav_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-submitted_pcm.pcm": "0a00f841372185da88fe2dc149c1b72c2f4c28926fccc81007a8745bb24cd3b7",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-written_wav_pcm.pcm": "0a00f841372185da88fe2dc149c1b72c2f4c28926fccc81007a8745bb24cd3b7",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-submitted_pcm.pcm": "2275f0d459b70de4be75fc5558a337a403438ae09d57c2711890271ac15d8618",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-written_wav_pcm.pcm": "2275f0d459b70de4be75fc5558a337a403438ae09d57c2711890271ac15d8618",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-submitted_pcm.pcm": "154d9eea03918756fe547dd2eef33aee1a1415aa14231d0c63a822e351a40095",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-written_wav_pcm.pcm": "154d9eea03918756fe547dd2eef33aee1a1415aa14231d0c63a822e351a40095",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-submitted_pcm.pcm": "06004673196164dfbcb0931d5a3b425a6b5486aeedc8fe0158b37eab549abfc8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-written_wav_pcm.pcm": "06004673196164dfbcb0931d5a3b425a6b5486aeedc8fe0158b37eab549abfc8",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-submitted_pcm.pcm": "aee74ee62d1943a5514eb9faa981d3ea2b0179bd6ea72b8274908d528afbae6f",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-written_wav_pcm.pcm": "aee74ee62d1943a5514eb9faa981d3ea2b0179bd6ea72b8274908d528afbae6f",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-submitted_pcm.pcm": "299b17e6a05059ca00e2ae149140e6414ba74a354e973a956bbb4a7fcf06e07d",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-written_wav_pcm.pcm": "299b17e6a05059ca00e2ae149140e6414ba74a354e973a956bbb4a7fcf06e07d"
+  },
+  "source_current_and_before_after_match": true,
+  "diagnostic_health": {
+    "dropped_calls": 0,
+    "dropped_requests": 0,
+    "observation_error_count": 0,
+    "pending_native_call_ids": [],
+    "retained_pcm_bytes": 1083648,
+    "observation_hooks": 247,
+    "observation_total_ns": 3143498,
+    "observation_max_ns": 546042
+  },
+  "load_request_seconds": 1.140164084,
+  "distinct_engine_identities": 1,
+  "distinct_native_worker_threads": 1,
+  "slowest_recognition_call": {
+    "call_id": "stt-call-004",
+    "request_id": "stt-request-007",
+    "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+    "call_type": "_recognize_impl",
+    "text": "Navigate to MG Road Metro Station.",
+    "milliseconds": {
+      "api_entry_to_submit": 0.264208,
+      "submit_to_worker_entry": 0.091833,
+      "worker_entry_to_native_completion": 6852.235875,
+      "native_completion_to_caller_return": 0.112709,
+      "api_entry_to_caller_return": 6852.704625
+    },
+    "stage_milliseconds": {
+      "engine_load_check": 0.283708,
+      "tempfile_create": 0.316417,
+      "wave_open": 0.376166,
+      "wave_writeframes": 0.255625,
+      "wave_close": 0.210208,
+      "model_transcribe": 6848.894459,
+      "parakeet_load_audio": 73.091792,
+      "parakeet_get_logmel": 2.568125,
+      "parakeet_generate": 6772.920041,
+      "tempfile_unlink": 0.918375
+    },
+    "pcm_bytes": 91136,
+    "pcm_sha256": "154d9eea03918756fe547dd2eef33aee1a1415aa14231d0c63a822e351a40095"
+  },
+  "limits": [
+    "Passing audit checks mean artifact consistency, not four successful conversations. Baseline readiness failed before input and remains in the four-case denominator.",
+    "Call-to-turn mapping uses room, chronological order and exact transcript agreement; native records have no coordinator operation ID.",
+    "All seven submitted PCM hashes differ. Repeated source WAVs do not imply identical endpointed 16 kHz engine input.",
+    "Warmup is separate; initial model load has only its outer LocalSTT load request duration, not nested native stage attribution.",
+    "247 measured observer helper invocations total 3.143498 ms, maximum 0.546042 ms. These exclude some wrapper, clock and context propagation overhead and are not a bound on total observer impact.",
+    "Nested stage durations must not be added twice. Host-call wall time with unchanged lazy evaluation is not exclusive accelerator compute time.",
+    "The slowest observation is dominated by generation host wall time, not submission-to-worker delay. This does not explain any earlier uninstrumented 13-second observation or establish a root cause or performance improvement.",
+    "Model weights were not re-read during this audit; source files and retained PCM were hashed, and existing frozen receipts remain the model provenance evidence."
+  ]
+}

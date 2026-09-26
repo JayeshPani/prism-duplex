@@ -1,0 +1,280 @@
+{
+  "reviewed_at_utc": "2026-09-25T19:45:41.915085+00:00",
+  "review_type": "Qualitative fact inspection of retained whole-stream ASR transcripts; not a benchmark or human listening score",
+  "source_sha256": {
+    "report.json": "d03d323c3b5fc8cae16b678c0afb2d9938ec34f3596d5b4a7cc623d67059c498",
+    "protocol.json": "95484aad0ac498cd7e4eac60eb0bbb59b95d9bf8b2c2e6bbc6ed75540a4beb60",
+    "local-stack-run1/worker.log": "4bec26a3bcade2deaf18fc5a50f1201014a375b2d6a9dd077e79669022007fba"
+  },
+  "summary": {
+    "streams_completed": 10,
+    "baseline_observation": "All five whole-stream transcripts contain acknowledgement, airport navigation started, and 88-minute ETA.",
+    "correction_observation": "All five contain acknowledgement, deliberately interrupted old Navigation to fragment, correction acknowledgement, navigation to the office/Tech Park, and previous airport destination replaced.",
+    "proper_name_deviations": {
+      "Kempegowda": {
+        "recognized_as": "Kempegauda",
+        "trials": 10
+      },
+      "Manyata": {
+        "recognized_as": "Maniata",
+        "trials": 5
+      }
+    },
+    "unexpected_content": "No additional route action or contrary destination is present in these ASR outputs; this does not establish physical audibility or rule out unrecognized speech.",
+    "phonemizer_warnings": 15,
+    "phonemizer_interpretation": "The live worker logged one words-count mismatch warning during each baseline trial and two during each correction trial, within nonoverlapping trial windows. All expected complete-result fact phrases were recognized despite these warnings. Proper-name spellings differ consistently. The warning text alone neither identifies omitted words nor establishes the cause of those differences.",
+    "input_duration_range_seconds": [
+      20.14,
+      35.42
+    ],
+    "all_resampled_durations_match_input": true,
+    "inputs_unchanged": true,
+    "source_unchanged": true
+  },
+  "trials": [
+    {
+      "id": "rtc-baseline-run1",
+      "transcript": "One moment Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "received_duration_seconds": 30.28,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:31:35.311801+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "airport navigation started",
+        "88 minutes"
+      ],
+      "partial_old_result": null,
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-correction-run1",
+      "transcript": "One moment. Navigation to Ok, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "received_duration_seconds": 35.12,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:32:49.950203+00:00"
+        },
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:33:05.556544+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "office / Tech Park navigation started",
+        "previous airport replaced"
+      ],
+      "partial_old_result": "Navigation to",
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-baseline-repeat2",
+      "transcript": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "received_duration_seconds": 20.54,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:36:38.883346+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "airport navigation started",
+        "88 minutes"
+      ],
+      "partial_old_result": null,
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-correction-repeat2",
+      "transcript": "One moment. Navigation to Ok, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "received_duration_seconds": 35.36,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:36:57.796240+00:00"
+        },
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:37:13.549191+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "office / Tech Park navigation started",
+        "previous airport replaced"
+      ],
+      "partial_old_result": "Navigation to",
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-baseline-repeat3",
+      "transcript": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "received_duration_seconds": 20.32,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:37:36.384547+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "airport navigation started",
+        "88 minutes"
+      ],
+      "partial_old_result": null,
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-correction-repeat3",
+      "transcript": "One moment. Navigation to OK, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "received_duration_seconds": 35.32,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:37:55.333194+00:00"
+        },
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:38:11.084490+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "office / Tech Park navigation started",
+        "previous airport replaced"
+      ],
+      "partial_old_result": "Navigation to",
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-baseline-repeat4",
+      "transcript": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "received_duration_seconds": 20.24,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:38:33.812611+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "airport navigation started",
+        "88 minutes"
+      ],
+      "partial_old_result": null,
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-correction-repeat4",
+      "transcript": "One moment. Navigation to Ok, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "received_duration_seconds": 35.42,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:38:52.737266+00:00"
+        },
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:39:08.645193+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "office / Tech Park navigation started",
+        "previous airport replaced"
+      ],
+      "partial_old_result": "Navigation to",
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-baseline-repeat5",
+      "transcript": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "received_duration_seconds": 20.14,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:39:31.270420+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "airport navigation started",
+        "88 minutes"
+      ],
+      "partial_old_result": null,
+      "name_spellings_exact": false
+    },
+    {
+      "id": "rtc-correction-repeat5",
+      "transcript": "One moment. Navigation to Ok, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "received_duration_seconds": 35.18,
+      "phonemizer_warnings_in_trial_window": [
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:39:50.178591+00:00"
+        },
+        {
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 44724,
+          "timestamp": "2026-09-25T19:40:05.784781+00:00"
+        }
+      ],
+      "observed_complete_result_facts": [
+        "office / Tech Park navigation started",
+        "previous airport replaced"
+      ],
+      "partial_old_result": "Navigation to",
+      "name_spellings_exact": false
+    }
+  ],
+  "limitations": [
+    "No human listener reviewed these recordings; recognition is an intelligibility proxy.",
+    "The production ASR model is reused, so ASR spelling errors and TTS pronunciation errors cannot be separated.",
+    "Warnings lack room/speech identifiers; association is by timestamp inside sequential, nonoverlapping trial windows, not a TTS request ID.",
+    "The interrupted old result is intentionally partial. Its absent airport completion and ETA are not complete-result failures.",
+    "Whole-stream transcripts do not establish the time of each spoken word, absence of PCM after a cancellation, or physical speaker playout.",
+    "Concatenated capture samples retain silence present in received frames but do not reconstruct gaps where frames were not delivered.",
+    "No clips were excluded, trimmed, retried, or selected according to recognized content."
+  ]
+}

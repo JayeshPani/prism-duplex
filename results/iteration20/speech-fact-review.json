@@ -1,0 +1,261 @@
+{
+  "created_at_utc": "2026-09-26T13:28:40.291800+00:00",
+  "status": "manual_transcript_review_complete",
+  "scope": "Manual semantic review of complete received-stream ASR against declared facts and physical tool evidence; no human listening or physical audibility claim. Every declared case retained.",
+  "cases": [
+    {
+      "arm": "baseline",
+      "case": "ambiguous_then_hospital_distance",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment Which place do you mean? Manipal Hospital, Old Airport Road, or Starbucks Airport Road? Okay, one The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+      "asr_status": "completed",
+      "required_facts": [
+        "hospital driving distance is 2.2 kilometres from the current car position",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": true,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": false,
+      "notes": "Correct named-place clarification, then explicitly says the distance is not provided; no route read or requested 2.2km answer."
+    },
+    {
+      "arm": "baseline",
+      "case": "airport_distance",
+      "review_status": "unmeasured_missing_capture",
+      "received_transcript": null,
+      "asr_status": "unavailable_capture",
+      "required_facts": [
+        "airport driving distance is 35.4 kilometres from the current car position",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "No captured conversation. Preserve the parser failure or unlaunched baseline row as unmeasured; do not infer a response."
+    },
+    {
+      "arm": "baseline",
+      "case": "office_drive_time",
+      "review_status": "unmeasured_missing_capture",
+      "received_transcript": null,
+      "asr_status": "unavailable_capture",
+      "required_facts": [
+        "estimated driving time to the office is twenty-nine minutes",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "No captured conversation. Preserve the parser failure or unlaunched baseline row as unmeasured; do not infer a response."
+    },
+    {
+      "arm": "baseline",
+      "case": "active_airport_then_hospital_distance",
+      "review_status": "unmeasured_missing_capture",
+      "received_transcript": null,
+      "asr_status": "unavailable_capture",
+      "required_facts": [
+        "hospital driving distance is 2.2 kilometres",
+        "do not claim the active airport navigation changed to hospital or stopped"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "No captured conversation. Preserve the parser failure or unlaunched baseline row as unmeasured; do not infer a response."
+    },
+    {
+      "arm": "baseline",
+      "case": "ambiguous_distance",
+      "review_status": "unmeasured_missing_capture",
+      "received_transcript": null,
+      "asr_status": "unavailable_capture",
+      "required_facts": [
+        "ask which named place on Airport Road the user means",
+        "do not invent a distance or activate navigation"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "No captured conversation. Preserve the parser failure or unlaunched baseline row as unmeasured; do not infer a response."
+    },
+    {
+      "arm": "baseline",
+      "case": "explicit_hospital_navigation",
+      "review_status": "unmeasured_missing_capture",
+      "received_transcript": null,
+      "asr_status": "unavailable_capture",
+      "required_facts": [
+        "hospital navigation started",
+        "five-minute estimate"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "No captured conversation. Preserve the parser failure or unlaunched baseline row as unmeasured; do not infer a response."
+    },
+    {
+      "arm": "candidate",
+      "case": "ambiguous_then_hospital_distance",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment. Which place do you mean? Manipal Hospital, Old Airport Road, or Starbucks Airport Road? Okay, one sec. The distance to Manipal Hospital, Old Airport Road, is 2.2 km, with an estimated travel time of five minutes.",
+      "asr_status": "completed",
+      "required_facts": [
+        "hospital driving distance is 2.2 kilometres from the current car position",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": true,
+      "final_required_facts_pass": true,
+      "backend_expected_effect_sequence_pass": true,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": true,
+      "notes": "Received transcript states 2.2km and five minutes, matching the successful current hospital route read; no navigation activation claim."
+    },
+    {
+      "arm": "candidate",
+      "case": "airport_distance",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment. The distance to Kempegauda International Airport is 35, 4 kilometers. The estimated travel time is 88 minutes.",
+      "asr_status": "completed",
+      "required_facts": [
+        "airport driving distance is 35.4 kilometres from the current car position",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": true,
+      "backend_expected_effect_sequence_pass": true,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": true,
+      "notes": "Received transcript renders the returned 35.4km as \"35, 4 kilometers\" and retains the 88-minute estimate. Decimal punctuation and Kempegauda spelling are ASR variants preserved here; generated reply and backend return use 35.4. This is transcript-level review, not human listening."
+    },
+    {
+      "arm": "candidate",
+      "case": "office_drive_time",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment. Sorry, could you say that again?",
+      "asr_status": "completed",
+      "required_facts": [
+        "estimated driving time to the office is twenty-nine minutes",
+        "do not claim navigation started"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": false,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": false,
+      "notes": "Recognized whole question is correct, but both planned compute calls use unsupported \"the office\". Both rejected before dispatch; received reply asks the user to repeat and supplies no 29-minute answer."
+    },
+    {
+      "arm": "candidate",
+      "case": "active_airport_then_hospital_distance",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment. Navigation to Kempegauda International Airport has started. Estimated arrival in 88 minutes. Okay, one sec. The distance to Manipal Hospital, Old Airport Road, is 2.2 km, with an estimated travel time of five minutes.",
+      "asr_status": "completed",
+      "required_facts": [
+        "hospital driving distance is 2.2 kilometres",
+        "do not claim the active airport navigation changed to hospital or stopped"
+      ],
+      "initial_required_facts_pass": true,
+      "final_required_facts_pass": true,
+      "backend_expected_effect_sequence_pass": true,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": true,
+      "notes": "Initial received reply starts airport navigation with 88 minutes; final reply states hospital distance 2.2km and five minutes without claiming a navigation change. Returned prior airport state and no mutation after query support preservation; no direct final state read."
+    },
+    {
+      "arm": "candidate",
+      "case": "ambiguous_distance",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "",
+      "asr_status": "completed",
+      "required_facts": [
+        "ask which named place on Airport Road the user means",
+        "do not invent a distance or activate navigation"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": false,
+      "backend_expected_effect_sequence_pass": true,
+      "all_declared_inputs_published": false,
+      "capture_completed": false,
+      "fulfilled_final_case": false,
+      "notes": "Capture times out awaiting trusted session readiness. Source is prepared but never published, received ASR is empty, and no recognized request or substantive reply exists; ambiguity behavior is unexercised."
+    },
+    {
+      "arm": "candidate",
+      "case": "explicit_hospital_navigation",
+      "review_status": "reviewed_transcript",
+      "received_transcript": "One moment Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in five minutes.",
+      "asr_status": "completed",
+      "required_facts": [
+        "hospital navigation started",
+        "five-minute estimate"
+      ],
+      "initial_required_facts_pass": null,
+      "final_required_facts_pass": true,
+      "backend_expected_effect_sequence_pass": true,
+      "all_declared_inputs_published": true,
+      "capture_completed": true,
+      "fulfilled_final_case": true,
+      "notes": "Received reply says hospital navigation started with a five-minute estimate, matching the successful fresh compute/start and returned state."
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "declared_cases": 6,
+      "received_transcripts_completed": 1,
+      "final_required_facts_pass": 0,
+      "fulfilled_final_cases": 0,
+      "unmeasured_missing_captures": 5,
+      "initial_required_facts_pass": 1
+    },
+    "candidate": {
+      "declared_cases": 6,
+      "received_transcripts_completed": 6,
+      "final_required_facts_pass": 4,
+      "fulfilled_final_cases": 4,
+      "unmeasured_missing_captures": 0,
+      "initial_required_facts_pass": 2
+    },
+    "all": {
+      "declared_cases": 12,
+      "received_transcripts_completed": 7,
+      "final_required_facts_pass": 4,
+      "fulfilled_final_cases": 4,
+      "unmeasured_missing_captures": 5,
+      "initial_required_facts_pass": 3
+    }
+  },
+  "evidence_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/acoustic-audit.json": "304c3a3bf9484930cb01933acd65e04cbcf8adc29436dafac2e04ecd5797ce59",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-baseline/received-audio-review/report.json": "d6d97361b11995ca125d7faa089ddc3b84702caab25ee3dcf6f2cb7288eddddf",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20-candidate/received-audio-review/report.json": "6fa390973a6fda7c4644316b55a615ea952fab3322219e3476419aee21f2dbd6"
+  },
+  "issues": [],
+  "limits": [
+    "Only one matched baseline/candidate conversation exists.",
+    "A mechanically correct zero-effect sequence can occur without published input; fulfilled cases additionally require input publication, completed capture and correct final speech.",
+    "Decimal punctuation and proper-name ASR variants remain literal.",
+    "Whole-stream empty ASR is a completed transcription, not a successful user interaction."
+  ]
+}

@@ -1,0 +1,66 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_new_transcript_invalidates_old_read_before_next_commit __________
+
+    @pytest.mark.asyncio
+    async def test_new_transcript_invalidates_old_read_before_next_commit():
+        cfg = CoordinatorConfig(hold_read_ms=10, ack_after_ms=10000)
+        coord, bus, logged, said, _ = build(PLANS, delays={"search": .12}, cfg=cfg)
+        coord.on_user_turn("first")
+        await asyncio.sleep(.03)
+        coord.cfg.hold_read_ms = 200
+        coord.on_user_turn("second")
+        await coord.drain()
+        old = [e for e in bus.history if e.type == "tool_done" and e.data.get("args", {}).get("x") == "first"]
+>       assert old == []
+E       AssertionError: assert [Event(type='...55219.153698)] == []
+E         
+E         Left contains one more item: Event(type='tool_done', data={'id': 'c1', 'tool': 'search', 'args': {'x': 'first'}, 'result': {'items': [{'item_id': 'IT1', 'q': 'first'}]}, 'duration_ms': 120}, ts=1790355219.153698)
+E         Use -v to get more diff
+
+tests/unit/test_coordinator_reliability.py:25: AssertionError
+________ test_correction_during_result_generation_suppresses_old_speech ________
+
+    @pytest.mark.asyncio
+    async def test_correction_during_result_generation_suppresses_old_speech():
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        class SlowResponder:
+            async def summarize(self, request, ex):
+                if any(o.args.get("x") == "first" for o in ex.outcomes.values()):
+                    entered.set()
+                    await release.wait()
+                    return "obsolete first result"
+                return "current second result"
+    
+        coord, _, _, said, _ = build(PLANS, cfg=CoordinatorConfig(hold_read_ms=0, ack_after_ms=10000))
+        coord.responder = SlowResponder()
+        coord.on_user_turn("first")
+        await entered.wait()
+        coord.on_user_turn("second")
+        release.set()
+        await coord.drain()
+>       assert "obsolete first result" not in said
+E       AssertionError: assert 'obsolete first result' not in ['obsolete first result', 'current second result']
+
+tests/unit/test_coordinator_reliability.py:48: AssertionError
+___________ test_incomplete_plan_never_guesses_an_action_after_timer ___________
+
+    @pytest.mark.asyncio
+    async def test_incomplete_plan_never_guesses_an_action_after_timer():
+        plans = {"first": {**PLANS["first"], "complete": False, "reply": "Searching first"}}
+        coord, _, logged, said, _ = build(plans, cfg=CoordinatorConfig(hold_incomplete_ms=5, ack_after_ms=10000))
+        coord.on_user_turn("first and")
+        await coord.drain()
+>       assert logged == []
+E       AssertionError: assert [('search', {'x': 'first'})] == []
+E         
+E         Left contains one more item: ('search', {'x': 'first'})
+E         Use -v to get more diff
+
+tests/unit/test_coordinator_reliability.py:58: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_coordinator_reliability.py::test_new_transcript_invalidates_old_read_before_next_commit
+FAILED tests/unit/test_coordinator_reliability.py::test_correction_during_result_generation_suppresses_old_speech
+FAILED tests/unit/test_coordinator_reliability.py::test_incomplete_plan_never_guesses_an_action_after_timer
+3 failed in 0.82s

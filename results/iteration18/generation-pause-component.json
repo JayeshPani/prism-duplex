@@ -1,0 +1,706 @@
+{
+  "started_at_utc": "2026-09-26T10:49:23.778668+00:00",
+  "status": "passed",
+  "packages": {
+    "livekit-agents": "1.8.3",
+    "livekit": "1.1.18"
+  },
+  "source_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/pipeline/recognition_pause.py": "a8ce6c776c3ad2a2586d2f7cacf470f02e5be053174988da85ffdf72ea509f30",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/_output.py": "2ee2b3994f299d95e11791c96cf0216f99f60f5a3082d4622093905e4acfe6fd",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/exercise_generation_pause.py": "f3dade27f7a11dac506cffdfa03896c4ffb14693d04d4e6f738fa93d1dd82acb",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/speech_handle.py": "627612bcfe739d510302d8ea1869ea7076dfd45348436423282b1f72f7f80b26",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/generation.py": "cc602a8cebdd517b450746ae73395a169d63179f963dcdb3f193befd644bb122"
+  },
+  "cases": [
+    {
+      "label": "event_only_control",
+      "status": "passed",
+      "events": [
+        {
+          "event": "fake_audio_source_created",
+          "elapsed_ms": 0.15316600911319256,
+          "queue_size_ms": 200
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2.015291014686227,
+          "state": "listening"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 2.4190410040318966,
+          "tag": 1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 2.452166023431346,
+          "state": "speaking"
+        },
+        {
+          "event": "mock_vad_pause",
+          "elapsed_ms": 3.2744579948484898,
+          "handle_id": "speech_6a326bc453ba"
+        },
+        {
+          "event": "supplied_audio_closed",
+          "elapsed_ms": 3.3299580099992454
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 3.3616250148043036
+        },
+        {
+          "event": "forward_waiter_parked",
+          "elapsed_ms": 4.517332999967039
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 4.56737499916926,
+          "tag": 2
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 4.588666022755206
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 4.605916008586064
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 4.673083021771163,
+          "interrupted": false,
+          "playback_position": 0.1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 5.859083001269028,
+          "state": "listening"
+        },
+        {
+          "event": "handle_done",
+          "elapsed_ms": 5.924583005253226,
+          "interrupted": false,
+          "error": null
+        },
+        {
+          "event": "event_only_leak_observed",
+          "elapsed_ms": 5.930915998760611
+        },
+        {
+          "event": "fake_audio_source_closed",
+          "elapsed_ms": 6.345083005726337
+        }
+      ],
+      "source_frames": [
+        {
+          "tag": 1,
+          "elapsed_ms": 2.4146659998223186,
+          "sha256": "c4f441afd675c673783450853625490e5da374a0312d859ee92bb7afeb70c1e1"
+        },
+        {
+          "tag": 2,
+          "elapsed_ms": 4.5643330086022615,
+          "sha256": "a697a1f669b58b06b7f61b39251a3bb77d869adf31b7cc2d16bf8ff2b2ac7a26"
+        }
+      ],
+      "leaked_while_gate_cleared": true,
+      "cleanup": "completed",
+      "elapsed_seconds": 0.0063708329980727285
+    },
+    {
+      "label": "nonempty",
+      "status": "passed",
+      "events": [
+        {
+          "event": "fake_audio_source_created",
+          "elapsed_ms": 0.07412498234771192,
+          "queue_size_ms": 200
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.6177919858600944,
+          "state": "listening"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 0.9601249767001718,
+          "tag": 1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.989624997600913,
+          "state": "speaking"
+        },
+        {
+          "event": "mock_vad_pause",
+          "elapsed_ms": 1.8882079748436809,
+          "handle_id": "speech_c10c340dbfd8"
+        },
+        {
+          "event": "supplied_audio_closed",
+          "elapsed_ms": 1.9467079837340862
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 2.001499990001321
+        },
+        {
+          "event": "forward_waiter_parked",
+          "elapsed_ms": 3.13874997664243
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 3.1458750017918646,
+          "state": "held",
+          "speech_id": "speech_c10c340dbfd8",
+          "pending_recognitions": 1
+        },
+        {
+          "event": "repeated_resume_blocked",
+          "elapsed_ms": 35.21529198042117
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 35.23387497989461,
+          "state": "interruption_requested",
+          "speech_id": "speech_c10c340dbfd8",
+          "reason": "transcript"
+        },
+        {
+          "event": "mock_recognition_completed",
+          "elapsed_ms": 35.234374983701855,
+          "kind": "nonempty"
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 35.404082998866215
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 35.41945799952373,
+          "interrupted": true,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 35.519791999831796,
+          "state": "listening"
+        },
+        {
+          "event": "handle_done",
+          "elapsed_ms": 35.58120797970332,
+          "interrupted": true,
+          "error": null
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 35.58337499271147,
+          "state": "released",
+          "speech_id": "speech_c10c340dbfd8",
+          "reason": "speech_finished"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 36.01262500160374,
+          "tag": 9
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 36.05108297779225,
+          "state": "speaking"
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 36.06099999160506
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 36.15099997841753,
+          "interrupted": false,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 36.25862498302013,
+          "state": "listening"
+        },
+        {
+          "event": "fake_audio_source_closed",
+          "elapsed_ms": 36.71908300020732
+        }
+      ],
+      "source_frames": [
+        {
+          "tag": 1,
+          "elapsed_ms": 0.9569999820087105,
+          "sha256": "c4f441afd675c673783450853625490e5da374a0312d859ee92bb7afeb70c1e1"
+        },
+        {
+          "tag": 9,
+          "elapsed_ms": 36.00908297812566,
+          "sha256": "21209574037c883685c2695011b99ece92cdc089c329aba10ad164762c80fac0"
+        }
+      ],
+      "old_handle_interrupted": true,
+      "old_handle_done": true,
+      "old_native_tags_after_completion": [
+        1
+      ],
+      "replacement_completed": true,
+      "cleanup": "completed",
+      "elapsed_seconds": 0.03674741697614081
+    },
+    {
+      "label": "empty",
+      "status": "passed",
+      "events": [
+        {
+          "event": "fake_audio_source_created",
+          "elapsed_ms": 0.08108399924822152,
+          "queue_size_ms": 200
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.8681670005898923,
+          "state": "listening"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 1.223500003106892,
+          "tag": 1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 1.253041991731152,
+          "state": "speaking"
+        },
+        {
+          "event": "mock_vad_pause",
+          "elapsed_ms": 2.1346249850466847,
+          "handle_id": "speech_6e7f1f909222"
+        },
+        {
+          "event": "supplied_audio_closed",
+          "elapsed_ms": 2.193166990764439
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 2.245541982119903
+        },
+        {
+          "event": "forward_waiter_parked",
+          "elapsed_ms": 3.3700419880915433
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 3.376084001502022,
+          "state": "held",
+          "speech_id": "speech_6e7f1f909222",
+          "pending_recognitions": 1
+        },
+        {
+          "event": "repeated_resume_blocked",
+          "elapsed_ms": 33.73125000507571
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 33.752291987184435,
+          "state": "released",
+          "speech_id": "speech_6e7f1f909222",
+          "reason": "recognition_empty"
+        },
+        {
+          "event": "mock_recognition_completed",
+          "elapsed_ms": 33.76545899664052,
+          "kind": "empty"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 33.842083998024464,
+          "tag": 2
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 33.972667006310076,
+          "tag": 3
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 33.99266698397696
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 34.0873749810271,
+          "interrupted": false,
+          "playback_position": 0.15000000000000002
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 34.261708991834894,
+          "state": "listening"
+        },
+        {
+          "event": "handle_done",
+          "elapsed_ms": 34.33516700170003,
+          "interrupted": false,
+          "error": null
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 34.857166989240795,
+          "tag": 9
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 34.90758399129845,
+          "state": "speaking"
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 34.919750003609806
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 35.031374980462715,
+          "interrupted": false,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 35.15779200824909,
+          "state": "listening"
+        },
+        {
+          "event": "fake_audio_source_closed",
+          "elapsed_ms": 35.73220898397267
+        }
+      ],
+      "source_frames": [
+        {
+          "tag": 1,
+          "elapsed_ms": 1.2199589982628822,
+          "sha256": "c4f441afd675c673783450853625490e5da374a0312d859ee92bb7afeb70c1e1"
+        },
+        {
+          "tag": 2,
+          "elapsed_ms": 33.83566698175855,
+          "sha256": "a697a1f669b58b06b7f61b39251a3bb77d869adf31b7cc2d16bf8ff2b2ac7a26"
+        },
+        {
+          "tag": 3,
+          "elapsed_ms": 33.969499985687435,
+          "sha256": "0ec42204a9fca150f10582157885e8a4538af69a9df57dab17a71a7e1a753522"
+        },
+        {
+          "tag": 9,
+          "elapsed_ms": 34.85387499677017,
+          "sha256": "21209574037c883685c2695011b99ece92cdc089c329aba10ad164762c80fac0"
+        }
+      ],
+      "old_handle_interrupted": false,
+      "old_handle_done": true,
+      "old_native_tags_after_completion": [
+        1,
+        2,
+        3
+      ],
+      "replacement_completed": true,
+      "cleanup": "completed",
+      "elapsed_seconds": 0.0357645420008339
+    },
+    {
+      "label": "error",
+      "status": "passed",
+      "events": [
+        {
+          "event": "fake_audio_source_created",
+          "elapsed_ms": 0.11016702046617866,
+          "queue_size_ms": 200
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.868709001224488,
+          "state": "listening"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 1.3002500054426491,
+          "tag": 1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 1.33816699963063,
+          "state": "speaking"
+        },
+        {
+          "event": "mock_vad_pause",
+          "elapsed_ms": 2.1444169979076833,
+          "handle_id": "speech_34203e6f7fda"
+        },
+        {
+          "event": "supplied_audio_closed",
+          "elapsed_ms": 2.215875021647662
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 2.282041998114437
+        },
+        {
+          "event": "forward_waiter_parked",
+          "elapsed_ms": 3.3776250202208757
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 3.3866250014398247,
+          "state": "held",
+          "speech_id": "speech_34203e6f7fda",
+          "pending_recognitions": 1
+        },
+        {
+          "event": "repeated_resume_blocked",
+          "elapsed_ms": 35.44750000583008
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 35.458708996884525,
+          "state": "interruption_requested",
+          "speech_id": "speech_34203e6f7fda",
+          "reason": "failed"
+        },
+        {
+          "event": "mock_recognition_completed",
+          "elapsed_ms": 35.4593750089407,
+          "kind": "error"
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 35.65683402121067
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 35.67408400704153,
+          "interrupted": true,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 35.77308400417678,
+          "state": "listening"
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 35.84150000824593,
+          "state": "released",
+          "speech_id": "speech_34203e6f7fda",
+          "reason": "speech_finished"
+        },
+        {
+          "event": "handle_done",
+          "elapsed_ms": 35.85000001476146,
+          "interrupted": true,
+          "error": null
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 36.36479200213216,
+          "tag": 9
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 36.41529200831428,
+          "state": "speaking"
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 36.42795901396312
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 36.721334006870165,
+          "interrupted": false,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 36.86504199868068,
+          "state": "listening"
+        },
+        {
+          "event": "fake_audio_source_closed",
+          "elapsed_ms": 37.426166993100196
+        }
+      ],
+      "source_frames": [
+        {
+          "tag": 1,
+          "elapsed_ms": 1.296458998695016,
+          "sha256": "c4f441afd675c673783450853625490e5da374a0312d859ee92bb7afeb70c1e1"
+        },
+        {
+          "tag": 9,
+          "elapsed_ms": 36.36066699982621,
+          "sha256": "21209574037c883685c2695011b99ece92cdc089c329aba10ad164762c80fac0"
+        }
+      ],
+      "old_handle_interrupted": true,
+      "old_handle_done": true,
+      "old_native_tags_after_completion": [
+        1
+      ],
+      "replacement_completed": true,
+      "cleanup": "completed",
+      "elapsed_seconds": 0.03746024999418296
+    },
+    {
+      "label": "timeout",
+      "status": "passed",
+      "events": [
+        {
+          "event": "fake_audio_source_created",
+          "elapsed_ms": 0.09620899800211191,
+          "queue_size_ms": 200
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 0.8188339998014271,
+          "state": "listening"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 1.26508399262093,
+          "tag": 1
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 1.3017090095672756,
+          "state": "speaking"
+        },
+        {
+          "event": "mock_vad_pause",
+          "elapsed_ms": 2.100500016240403,
+          "handle_id": "speech_d2bd9cf3d0d8"
+        },
+        {
+          "event": "supplied_audio_closed",
+          "elapsed_ms": 2.1745839912910014
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 2.2402920003514737
+        },
+        {
+          "event": "forward_waiter_parked",
+          "elapsed_ms": 3.3361669920850545
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 3.3437090169172734,
+          "state": "held",
+          "speech_id": "speech_d2bd9cf3d0d8",
+          "pending_recognitions": 1
+        },
+        {
+          "event": "repeated_resume_blocked",
+          "elapsed_ms": 35.391584009630606
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 153.66512499167584,
+          "state": "interruption_requested",
+          "speech_id": "speech_d2bd9cf3d0d8",
+          "reason": "recognition_wait_timeout"
+        },
+        {
+          "event": "native_boundary_clear",
+          "elapsed_ms": 154.32324999710545
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 154.46883399272338,
+          "interrupted": true,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 155.10279199224897,
+          "state": "listening"
+        },
+        {
+          "event": "handle_done",
+          "elapsed_ms": 155.4149590083398,
+          "interrupted": true,
+          "error": null
+        },
+        {
+          "event": "recognition_pause",
+          "elapsed_ms": 155.4297920083627,
+          "state": "released",
+          "speech_id": "speech_d2bd9cf3d0d8",
+          "reason": "speech_finished"
+        },
+        {
+          "event": "native_boundary_capture",
+          "elapsed_ms": 157.20695900381543,
+          "tag": 9
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 157.34587499173358,
+          "state": "speaking"
+        },
+        {
+          "event": "native_boundary_playout",
+          "elapsed_ms": 157.38262500963174
+        },
+        {
+          "event": "playback_finished",
+          "elapsed_ms": 157.60683399275877,
+          "interrupted": false,
+          "playback_position": 0.05
+        },
+        {
+          "event": "agent_state",
+          "elapsed_ms": 157.92591701028869,
+          "state": "listening"
+        },
+        {
+          "event": "fake_audio_source_closed",
+          "elapsed_ms": 159.29754200624302
+        }
+      ],
+      "source_frames": [
+        {
+          "tag": 1,
+          "elapsed_ms": 1.2612089922185987,
+          "sha256": "c4f441afd675c673783450853625490e5da374a0312d859ee92bb7afeb70c1e1"
+        },
+        {
+          "tag": 9,
+          "elapsed_ms": 157.18104201368988,
+          "sha256": "21209574037c883685c2695011b99ece92cdc089c329aba10ad164762c80fac0"
+        }
+      ],
+      "old_handle_interrupted": true,
+      "old_handle_done": true,
+      "old_native_tags_after_completion": [
+        1
+      ],
+      "replacement_completed": true,
+      "cleanup": "completed",
+      "elapsed_seconds": 0.1593355840013828
+    }
+  ],
+  "scope": "Actual public AgentSession.start/say/audio and SDK generation/SpeechHandle completion; installed private RoomIO forwarding/playout methods unchanged. Fake native AudioSource and subscription setup, injected pause/resume and recognition outcomes. No models, VAD inference, STT, network, RTC service, native audio playback or physical audible-latency claim.",
+  "limits": [
+    "Fake AudioSource has zero queued duration; native buffering, partial device playback and real RTC transport are not exercised.",
+    "No live VAD/false-interruption timer is used here; the previous default-timer reproduction covers that separate boundary.",
+    "This harness never marks SpeechHandle done manually; actual SDK generation/scheduling owns completion.",
+    "Small deterministic component cases do not establish behavior under all concurrent room/recognition/session transitions."
+  ],
+  "finished_at_utc": "2026-09-26T10:49:24.056535+00:00",
+  "sources_unchanged": true
+}

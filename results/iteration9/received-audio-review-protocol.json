@@ -1,0 +1,40 @@
+{
+  "frozen_at_utc": "2026-09-26T05:54:17.221268+00:00",
+  "timing": "Method frozen before RTC launch and before any new received-audio ASR; expected facts are declared in the suite protocol.",
+  "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+  "suite_protocol_sha256": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+  "declared_trials": [
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline"
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction"
+    },
+    {
+      "id": "rtc-correction-2",
+      "case": "correction"
+    },
+    {
+      "id": "rtc-baseline-2",
+      "case": "baseline"
+    }
+  ],
+  "scope": "All four declared whole received PCM streams, in original order; failures/unavailable rows remain in the denominator.",
+  "method": "Pinned production LocalSTT through offline cached Parakeet on local-mac; resample entire mono PCM16 24 kHz to16 kHz with existing helper. No trimming, silence removal, retries or capture-success selection.",
+  "review": {
+    "baseline_and_probes": "Airport navigation started and spelled-out estimated arrival in 88 minutes; retain wording/proper-name/number deviations. No probes declared.",
+    "correction": "Old airport result interrupted, office navigation replaces airport and spelled-out estimated arrival in29 minutes; retain every contradiction/omission.",
+    "score": "Verbatim ASR plus qualitative fact review only, not held-out accuracy or independent intelligibility."
+  },
+  "limitations": [
+    "Production ASR proxy cannot distinguish pronunciation from recognition errors; no human listening.",
+    "Whole-stream text does not establish word timestamps or physical playback.",
+    "Four repeated synthetic development captures share warm models and a fixed order.",
+    "Review is performed only after timed suite and owned model services have stopped. Its timings are separate from conversation latency."
+  ],
+  "declared_at_utc": "2026-09-26T05:54:17.221268+00:00",
+  "suite_root": "results/iteration9",
+  "note": "All four declared captures will be reviewed after the RTC stack exits; dynamic names/order follow this suite protocol."
+}

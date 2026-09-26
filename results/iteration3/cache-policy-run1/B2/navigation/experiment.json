@@ -1,0 +1,1602 @@
+{
+  "kind": "real_local_llm_text_development",
+  "status": "completed",
+  "created_at": "2026-09-25T19:21:18.614300+00:00",
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "repository": {
+    "commit": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "status": "M README.md\n M agent/config.py\n M agent/config.yaml\n M agent/coordinator/coordinator.py\n M agent/coordinator/events.py\n M agent/coordinator/executor.py\n M agent/coordinator/ledger.py\n M agent/coordinator/llm_client.py\n M agent/coordinator/refs.py\n M agent/coordinator/resolver.py\n M agent/coordinator/responder.py\n M agent/main.py\n M agent/pipeline/local_stt.py\n M agent/pipeline/local_tts.py\n M agent/telemetry/fdb_logger.py\n M agent/tools/bench_tools.py\n M agent/tools/car_tools.py\n M agent/tools/manifest.py\n M scripts/download_models.sh\n M scripts/fdb_eval.py\n M scripts/fdb_infer.py\n M scripts/run_benchmark.sh\n M tests/synthetic/run_synthetic.py\n M tests/unit/test_coordinator.py\n M tests/unit/test_guards.py\n M web/app/globals.css\n M web/app/page.tsx\n M web/components/CarMap.tsx\n M web/components/Ribbon.tsx\n M web/lib/events.ts\n M web/tsconfig.json\n?? agent/model_assets.py\n?? docs/\n?? requirements/test.txt\n?? results/iteration2/\n?? results/iteration3/\n?? results/iteration4/\n?? results/reliability/\n?? scripts/cache_policy_experiment.py\n?? scripts/capture_run.py\n?? scripts/local_navigation_experiment.py\n?? scripts/local_overlap_experiment.py\n?? scripts/local_speech_experiment.py\n?? scripts/planner_fidelity_experiment.py\n?? scripts/probe_fdb_contract.py\n?? scripts/reliability_experiment.py\n?? scripts/stt_warmup_experiment.py\n?? tests/unit/test_argument_validation.py\n?? tests/unit/test_bench_manifest_contract.py\n?? tests/unit/test_cache_policy_experiment.py\n?? tests/unit/test_coordinator_lifecycle.py\n?? tests/unit/test_coordinator_reliability.py\n?? tests/unit/test_dispatch_telemetry.py\n?? tests/unit/test_evaluation_manifest.py\n?? tests/unit/test_executor_reliability.py\n?? tests/unit/test_llm_stream.py\n?? tests/unit/test_model_assets.py\n?? tests/unit/test_navigation_experiment.py\n?? tests/unit/test_navigation_reliability.py\n?? tests/unit/test_overlap_scoring.py\n?? tests/unit/test_place_clarification.py\n?? tests/unit/test_planner_fidelity_experiment.py\n?? tests/unit/test_resolver_validation.py\n?? tests/unit/test_scoring.py\n?? tests/unit/test_session_config.py\n?? tests/unit/test_speech_truthfulness.py\n?? tests/unit/test_synthetic_runner.py\n?? tests/unit/test_tts_paths.py\n?? web/lib/events.test.ts",
+    "tracked_diff_sha256": "8e2572628306b32439ce4af4df568d0ef9f70b32f192d33076e858cadcfee7da",
+    "untracked_source_file_sha256": {
+      "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+      "docs/iteration2.md": "9fc34c1f8d4bb2d442e64def21430201adab5c5544a973889448a1d1e7fdbc63",
+      "docs/iteration3.md": "a6b502488b0c9fd38c559832028c4f74eddd57f04b0474afd5a654b9e50557fa",
+      "docs/reliability.md": "1068db2842da70475751073dc41b4beaa17cbd0db68c63701cd7be63188bdec8",
+      "docs/research.md": "cfa09e6dd067ecb65d6c3ad0198f932bf887db165ce4d8a93e76185a79941cf2",
+      "requirements/test.txt": "154b151d706a43a546bd805e1b513f9bddac3cb5d88d443370b1f4c30d497def",
+      "scripts/cache_policy_experiment.py": "d209174c528d602d59e029265d074d2dcb787ec96f3780054571828744154fee",
+      "scripts/capture_run.py": "1b769dc59b648bcd4fb5a406118fe394e6abb8b077a27f061dfa98eaedb36a20",
+      "scripts/local_navigation_experiment.py": "d7e4b6ce9fdfa4280baeb07a77d0e4ad7e3ab88b2ec9dfafdbc952076a3a654d",
+      "scripts/local_overlap_experiment.py": "9e300ee2ccc65d693d4ce8dde90419935af5b83e4e95a34bcfe7cee3f907a409",
+      "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d",
+      "scripts/planner_fidelity_experiment.py": "8434a9b0f94b6279b6b3ddba93003ccf655ef89c3de3737de9448400754d4a93",
+      "scripts/probe_fdb_contract.py": "8052eadb25d8a2141e5c34a9358e91ea93c79c0e6bb94d1fada12582b8627063",
+      "scripts/reliability_experiment.py": "46744d4c02c752ba42d69411a8a995276369f6be45cb96c4ebc5f78adb6dca08",
+      "scripts/stt_warmup_experiment.py": "64a6c52d5b48435d312860e6d7619c9280d45d1e86173ee300f22092eff8b50e",
+      "tests/unit/test_argument_validation.py": "9e5e2a80f7a7084e1c3e787c0d20fe8daf9cc4387170d6138b52b53a8ed0a16d",
+      "tests/unit/test_bench_manifest_contract.py": "ad8b11c6a044382be1e23e24bc30c8f6856991c84b47bd62f108864dfa67ec80",
+      "tests/unit/test_cache_policy_experiment.py": "4ce1d473ae21e4b5193d5272adb654c52928fb826d0123846a67dba79aa63449",
+      "tests/unit/test_coordinator_lifecycle.py": "2e5f3017f26c789b5c3a52d137fe95f0dea5b28ec0c6bd1ee594098b44579915",
+      "tests/unit/test_coordinator_reliability.py": "7a41a7f6f2b37b0987d8f3b3a72edbcd72f6ed748f4e25c3fd304890e53f8446",
+      "tests/unit/test_dispatch_telemetry.py": "212e3dec31da6265f5925c039519badbdf806a709fe36fedf5f989deb5eebe79",
+      "tests/unit/test_evaluation_manifest.py": "17d65cccd7e280b04a5bca3e483c50664fd0f1cbba20c7281cfc65cd36b6efb0",
+      "tests/unit/test_executor_reliability.py": "bcf980da2cd2c10536d5f81d1c67b5d2db75afbba16fdb64dba3cee25726d391",
+      "tests/unit/test_llm_stream.py": "d9be152c3f66fdc9d6de505d77b1e0cb1267d963d37ea4a3eaaa5de8ffa49c33",
+      "tests/unit/test_model_assets.py": "dd95a12eaa2fd5da44643ac21c80fff552a3a08ac71b9862535f479b9e8c4446",
+      "tests/unit/test_navigation_experiment.py": "20b3a7a6f5b603695a94c6345f9e012faa0bf3d091737a7d5c6e395905838958",
+      "tests/unit/test_navigation_reliability.py": "804116817e9c12009f6105ab011dbb9680b1dd652675022b93e2ea5ce7aee749",
+      "tests/unit/test_overlap_scoring.py": "5e7d5db7ca9625d82aa1ea48a605c3f40ab1a3f60f3360a1a7901d9c650e6d5d",
+      "tests/unit/test_place_clarification.py": "ce9162de81173c2696a2097c64748b3bb53aa6f1019136aa8f66ce876f704b14",
+      "tests/unit/test_planner_fidelity_experiment.py": "960bb62c5830e9c506e185e01d681b3f9bb272723ff31d8127d81a11bc55b147",
+      "tests/unit/test_resolver_validation.py": "416c72c2b5bdf091805916b0212ccb9c521b049912e56f6eeb398d99edc12ac0",
+      "tests/unit/test_scoring.py": "9495eea7a28fcbce08e1c66839a14babbf6e2ea290d12894893bfaec96378edc",
+      "tests/unit/test_session_config.py": "f1b55b4419b4246a7574474982b61f9e79e228c5d9997ba263b06be7b733ba82",
+      "tests/unit/test_speech_truthfulness.py": "fbc2d27f7974cba5fca18e4330345f8a6dde840728973e389397b213750c9895",
+      "tests/unit/test_synthetic_runner.py": "b07da0fd64d67c87e53b3c353603e43b82bba24e09b0b16e92978efd7126ce3e",
+      "tests/unit/test_tts_paths.py": "e2494d5e4668fff53dae574bda64f76e5abd84385a360bb9cf8daca8c5f4dab9",
+      "web/lib/events.test.ts": "53d81ad05d283c244cf3b1ef97776b807dbbcd6b6fadce2021322865e51c679f"
+    }
+  },
+  "runner_sha256": "d7e4b6ce9fdfa4280baeb07a77d0e4ad7e3ab88b2ec9dfafdbc952076a3a654d",
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "dec83a0ae501008370d3f4714808a9dff04bacd56a175bb7296369e467c67f30",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979"
+  },
+  "hardware": {
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "cpu_count": 10,
+    "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+    "memory_bytes": "17179869184"
+  },
+  "python_packages": {
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.3",
+    "PyJWT": "2.15.0",
+    "PyYAML": "6.0.3",
+    "Pygments": "2.21.0",
+    "aiofiles": "25.1.0",
+    "aiohappyeyeballs": "2.7.1",
+    "aiohttp": "3.14.3",
+    "aiosignal": "1.4.0",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "audioread": "3.1.0",
+    "av": "18.1.0",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.1",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "coloredlogs": "15.0.1",
+    "dacite": "1.9.2",
+    "decorator": "5.3.1",
+    "distro": "1.9.0",
+    "dlinfo": "2.0.0",
+    "docstring_parser": "0.18.0",
+    "espeakng-loader": "0.2.4",
+    "eval_type_backport": "0.4.0",
+    "ffmpeg-python": "0.2.0",
+    "filelock": "4.0.3",
+    "flatbuffers": "25.12.19",
+    "frozenlist": "1.8.0",
+    "fsspec": "2026.9.0",
+    "future": "1.0.0",
+    "googleapis-common-protos": "1.75.4",
+    "grpcio": "1.84.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface_hub": "1.33.0",
+    "humanfriendly": "10.0",
+    "idna": "3.20",
+    "iniconfig": "2.3.0",
+    "jiter": "0.17.0",
+    "joblib": "1.6.0",
+    "json_repair": "0.60.1",
+    "kokoro-onnx": "0.6.1",
+    "lazy-loader": "0.6",
+    "librosa": "0.11.0",
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3",
+    "livekit-api": "1.2.1",
+    "livekit-blingfire": "1.1.0",
+    "livekit-local-inference": "0.2.7",
+    "livekit-plugins-openai": "1.8.3",
+    "livekit-plugins-silero": "1.8.3",
+    "livekit-protocol": "1.1.27",
+    "llvmlite": "0.49.0",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3",
+    "mlx-metal": "0.32.2",
+    "mpmath": "1.3.0",
+    "msgpack": "1.2.2",
+    "multidict": "6.9.1",
+    "narwhals": "2.26.0",
+    "nest-asyncio": "1.6.0",
+    "numba": "0.67.0",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.23.2",
+    "openai": "2.54.0",
+    "opentelemetry-api": "1.44.0",
+    "opentelemetry-exporter-otlp": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-common": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-grpc": "1.44.0",
+    "opentelemetry-exporter-otlp-proto-http": "1.44.0",
+    "opentelemetry-proto": "1.44.0",
+    "opentelemetry-sdk": "1.44.0",
+    "opentelemetry-semantic-conventions": "0.65b0",
+    "packaging": "26.3",
+    "parakeet-mlx": "0.5.2",
+    "phonemizer": "3.4.0",
+    "pillow": "12.3.0",
+    "platformdirs": "4.11.13",
+    "pluggy": "1.6.0",
+    "pooch": "1.9.0",
+    "prometheus_client": "0.26.0",
+    "propcache": "0.5.4",
+    "protobuf": "7.36.2",
+    "psutil": "7.2.2",
+    "pycparser": "3.0",
+    "pydantic": "2.13.5",
+    "pydantic_core": "2.46.5",
+    "pydub": "0.25.1",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "python-dotenv": "1.2.3",
+    "regex": "2026.9.10",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "safetensors": "0.8.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.17.1",
+    "sentencepiece": "0.2.2",
+    "shellingham": "1.5.4",
+    "sniffio": "1.3.1",
+    "sounddevice": "0.5.6",
+    "soundfile": "0.14.0",
+    "soxr": "1.1.0",
+    "sympy": "1.14.0",
+    "threadpoolctl": "3.7.0",
+    "tokenizers": "0.23.2",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "typer": "0.27.2",
+    "types-protobuf": "7.35.1.20260906",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "watchfiles": "1.3.0",
+    "yarl": "1.25.1"
+  },
+  "model_load_receipts": [],
+  "expected_cases": {
+    "correction_before_commit": {
+      "turns": [
+        "Navigate to the airport.",
+        "Actually, go to the office instead."
+      ],
+      "expected_effects": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ]
+      ],
+      "final": "P_OFFICE",
+      "correction_trigger": "synchronously on the first plan_ready event, before commitment"
+    },
+    "return_to_destination": {
+      "turns": [
+        "Navigate to the airport.",
+        "Navigate to the office.",
+        "Navigate to the airport again."
+      ],
+      "expected_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ],
+      "final": "P_AIRPORT"
+    },
+    "waypoint_and_cancel": {
+      "turns": [
+        "Navigate to the office.",
+        "Add Blue Tokai in Indiranagar as a stop.",
+        "Cancel navigation."
+      ],
+      "expected_effects": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "add_waypoint",
+          "P_OFFICE",
+          [
+            "K_BLUETOKAI"
+          ]
+        ],
+        [
+          "cancel_navigation",
+          null,
+          []
+        ]
+      ],
+      "final": null
+    },
+    "ambiguous_then_explicit": {
+      "turns": [
+        "Navigate to Airport Road.",
+        "I mean Starbucks, Airport Road. Navigate there."
+      ],
+      "expected_effects": [
+        [
+          "start_navigation",
+          "K_SBUX_AIR",
+          []
+        ]
+      ],
+      "final": "K_SBUX_AIR",
+      "first_turn": "no write attempts; response asks for clarification before explicit place name"
+    }
+  },
+  "case_timeout_s": 180,
+  "route_compute_s": 2.5,
+  "timing_origin": "final text submitted to coordinator, not speech end; no audio produced",
+  "coordinator": {
+    "hold_read_ms": 350,
+    "hold_state_ms": 700,
+    "hold_incomplete_ms": 1800,
+    "ack_after_ms": 700,
+    "resume_grace_ms": 1200,
+    "ack_phrases": [
+      "One moment.",
+      "Okay, one sec.",
+      "Sure, let me check."
+    ],
+    "speak_results": true
+  },
+  "limitations": [
+    "Independent development data, not held-out or Full-Duplex-Bench.",
+    "Loopback config/loader receipts do not independently attest server inference provenance.",
+    "No speech recognition, microphone, TTS, echo, or acoustic latency measurement.",
+    "Clarification text check is a heuristic; raw responses require semantic review.",
+    "Malformed model outputs are observed as errors; none are deliberately injected."
+  ],
+  "runs": [
+    {
+      "case": "return_to_destination",
+      "repeat": 1,
+      "trace": "return_to_destination-1.jsonl",
+      "error": null,
+      "attempts": [
+        {
+          "tool": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 11774.643249998917,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "P_AIRPORT",
+                "name": "Kempegowda International Airport",
+                "category": "airport",
+                "lat": 13.1989,
+                "lng": 77.7068
+              }
+            ]
+          },
+          "completion_ms": 11774.823542000377
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 11774.992125006975,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 14275.313167003333
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 14276.236042001983,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 14276.308792002965
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "office"
+          },
+          "state_changing": false,
+          "turn": 2,
+          "dispatch_ms": 4095.875333994627,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6598.304749990348
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6599.757666990627,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6599.93924999435
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "airport"
+          },
+          "state_changing": false,
+          "turn": 3,
+          "dispatch_ms": 5059.884709000471,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7562.267749992316
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7563.684541994007,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7563.919124993845
+        }
+      ],
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 14276.236042001983,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 14276.308792002965
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6599.757666990627,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6599.93924999435
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7563.684541994007,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7563.919124993845
+        }
+      ],
+      "replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "final_text_to_delivery_ms": 902.6256250072038
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "final_text_to_delivery_ms": 17684.92066700128
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "final_text_to_delivery_ms": 703.3676249993732
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "final_text_to_delivery_ms": 9118.951875003404
+        },
+        {
+          "turn": 3,
+          "kind": "ack",
+          "text": "Sure, let me check.",
+          "final_text_to_delivery_ms": 704.1168339928845
+        },
+        {
+          "turn": 3,
+          "kind": "result",
+          "text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "final_text_to_delivery_ms": 9954.8443340027
+        }
+      ],
+      "runtime_errors": [],
+      "turns_submitted": 3,
+      "final_destination": "P_AIRPORT",
+      "checks": {
+        "effect_sequence": true,
+        "final_destination": true,
+        "no_planner_or_background_error": true,
+        "finished": true,
+        "required_turns_have_response_text": true
+      },
+      "success": true,
+      "observed_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ]
+    },
+    {
+      "case": "return_to_destination",
+      "repeat": 2,
+      "trace": "return_to_destination-2.jsonl",
+      "error": null,
+      "attempts": [
+        {
+          "tool": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 3374.448583999765,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "P_AIRPORT",
+                "name": "Kempegowda International Airport",
+                "category": "airport",
+                "lat": 13.1989,
+                "lng": 77.7068
+              }
+            ]
+          },
+          "completion_ms": 3374.508958993829
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 3374.768208988826,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5877.1992919937475
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 5879.119541990804,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5879.253583989339
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "office"
+          },
+          "state_changing": false,
+          "turn": 2,
+          "dispatch_ms": 4105.747374997009,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6608.094249997521
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6608.355042000767,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6608.395207993453
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "airport"
+          },
+          "state_changing": false,
+          "turn": 3,
+          "dispatch_ms": 5080.129000009038,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7582.332000005408
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7582.731250004144,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7582.768457999919
+        }
+      ],
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 5879.119541990804,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5879.253583989339
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6608.355042000767,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6608.395207993453
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7582.731250004144,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7582.768457999919
+        }
+      ],
+      "replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "final_text_to_delivery_ms": 703.2851669937372
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "final_text_to_delivery_ms": 8581.777333994978
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "final_text_to_delivery_ms": 705.5481249990407
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "final_text_to_delivery_ms": 9078.570457990281
+        },
+        {
+          "turn": 3,
+          "kind": "ack",
+          "text": "Sure, let me check.",
+          "final_text_to_delivery_ms": 703.867000003811
+        },
+        {
+          "turn": 3,
+          "kind": "result",
+          "text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "final_text_to_delivery_ms": 9958.215708000353
+        }
+      ],
+      "runtime_errors": [],
+      "turns_submitted": 3,
+      "final_destination": "P_AIRPORT",
+      "checks": {
+        "effect_sequence": true,
+        "final_destination": true,
+        "no_planner_or_background_error": true,
+        "finished": true,
+        "required_turns_have_response_text": true
+      },
+      "success": true,
+      "observed_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ]
+    },
+    {
+      "case": "return_to_destination",
+      "repeat": 3,
+      "trace": "return_to_destination-3.jsonl",
+      "error": null,
+      "attempts": [
+        {
+          "tool": "search_destination",
+          "args": {
+            "query": "airport"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 3387.4110000033397,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "P_AIRPORT",
+                "name": "Kempegowda International Airport",
+                "category": "airport",
+                "lat": 13.1989,
+                "lng": 77.7068
+              }
+            ]
+          },
+          "completion_ms": 3387.448541005142
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "P_AIRPORT"
+          },
+          "state_changing": false,
+          "turn": 1,
+          "dispatch_ms": 3387.595541003975,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5889.870915998472
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 5891.204208004638,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5891.364791008527
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "office"
+          },
+          "state_changing": false,
+          "turn": 2,
+          "dispatch_ms": 4121.57625000691,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6623.830125012319
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6624.197666998953,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6624.2342090117745
+        },
+        {
+          "tool": "compute_route",
+          "args": {
+            "destination": "airport"
+          },
+          "state_changing": false,
+          "turn": 3,
+          "dispatch_ms": 5046.095040990622,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7547.627915992052
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7547.9264999885345,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7547.952457985957
+        }
+      ],
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "state_changing": true,
+          "turn": 1,
+          "dispatch_ms": 5891.204208004638,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 5891.364791008527
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R2"
+          },
+          "state_changing": true,
+          "turn": 2,
+          "dispatch_ms": 6624.197666998953,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Office (Manyata Tech Park)",
+            "replaced": "Kempegowda International Airport",
+            "already_active": false,
+            "navigation_version": 2,
+            "route_active": true,
+            "route_id": "R2",
+            "destination": "Office (Manyata Tech Park)",
+            "destination_id": "P_OFFICE",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 11.8,
+            "eta_min": 29,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.0475,
+                77.62
+              ]
+            ]
+          },
+          "completion_ms": 6624.2342090117745
+        },
+        {
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R3"
+          },
+          "state_changing": true,
+          "turn": 3,
+          "dispatch_ms": 7547.9264999885345,
+          "status": "success",
+          "result": {
+            "status": "success",
+            "navigating_to": "Kempegowda International Airport",
+            "replaced": "Office (Manyata Tech Park)",
+            "already_active": false,
+            "navigation_version": 3,
+            "route_active": true,
+            "route_id": "R3",
+            "destination": "Kempegowda International Airport",
+            "destination_id": "P_AIRPORT",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 35.4,
+            "eta_min": 88,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                13.1989,
+                77.7068
+              ]
+            ]
+          },
+          "completion_ms": 7547.952457985957
+        }
+      ],
+      "replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "final_text_to_delivery_ms": 703.1612080027116
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "final_text_to_delivery_ms": 8550.466083004721
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "final_text_to_delivery_ms": 703.8232090126257
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "final_text_to_delivery_ms": 9100.96395900473
+        },
+        {
+          "turn": 3,
+          "kind": "ack",
+          "text": "Sure, let me check.",
+          "final_text_to_delivery_ms": 704.2156659881584
+        },
+        {
+          "turn": 3,
+          "kind": "result",
+          "text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "final_text_to_delivery_ms": 9910.77433299506
+        }
+      ],
+      "runtime_errors": [],
+      "turns_submitted": 3,
+      "final_destination": "P_AIRPORT",
+      "checks": {
+        "effect_sequence": true,
+        "final_destination": true,
+        "no_planner_or_background_error": true,
+        "finished": true,
+        "required_turns_have_response_text": true
+      },
+      "success": true,
+      "observed_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "runs": 3,
+    "passed": 3,
+    "backend_attempts": 21,
+    "backend_effects": 9,
+    "runtime_errors": 0,
+    "timeouts": 0,
+    "backend_errors": 0,
+    "final_text_to_first_response": {
+      "n": 9,
+      "p50_ms": 9118.952,
+      "p95_ms": 17684.921
+    },
+    "final_text_to_ack": {
+      "n": 9,
+      "p50_ms": 703.867,
+      "p95_ms": 902.626
+    },
+    "final_text_to_dispatch": {
+      "n": 21,
+      "p50_ms": 5879.12,
+      "p95_ms": 11774.992
+    },
+    "final_text_to_effect": {
+      "n": 9,
+      "p50_ms": 6624.234,
+      "p95_ms": 14276.309
+    }
+  }
+}

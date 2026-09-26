@@ -1,0 +1,168 @@
+{
+  "kind": "independent deterministic development tests; no audio or model inference",
+  "before": {
+    "tests": 67,
+    "passed": 49,
+    "failed": 18,
+    "artifact": "place-clarification-before.txt"
+  },
+  "after": {
+    "same_cases_passed": 67,
+    "additional_explicit_clarification_followup_case_passed": 1,
+    "artifact": "place-clarification-after.txt"
+  },
+  "related_regression_run": "place-clarification-related-tests.txt",
+  "source_sha256": {
+    "agent/tools/car_tools.py": "5ad189f7d431d8fe1ed696f2888a38d1fbef7c6c947b1d1180449ac5d7e5be28",
+    "agent/coordinator/responder.py": "5d83e69bfe61ef393e1a7ad6b4b975188c00775b8de896ac600d3d81ea94212d",
+    "tests/unit/test_place_clarification.py": "5a6cab8ae96981aafc0bcfd5331f1ee9439ce5640461957ca9a9aa114d988fa3"
+  },
+  "accepted_lookup_rule": "normalized exact IDs/names/aliases, or a unique contiguous whole-word partial name/category of at least 3 characters; small explicit navigation-command prefix removal",
+  "uncertain_lookup_rule": "error with query, place role, candidate names/IDs; candidates never exposed as selected places; fuzzy similarity only suggests",
+  "limitations": [
+    "Not geocoding or ASR-confidence calibration",
+    "No measurement of real conversational unnecessary clarification",
+    "Clarification completion tested with explicit known place name, not a model-generated yes/first-one followup"
+  ],
+  "sample_error_results_and_speech": [
+    {
+      "query": "Airport Road",
+      "result": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "Airport Road",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'Airport Road'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_HOSP",
+            "name": "Manipal Hospital, Old Airport Road"
+          },
+          {
+            "place_id": "K_SBUX_AIR",
+            "name": "Starbucks, Airport Road"
+          }
+        ]
+      },
+      "navigation_status": "skipped",
+      "speech": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?"
+    },
+    {
+      "query": "Tech Park",
+      "result": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "Tech Park",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'Tech Park'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_OFFICE",
+            "name": "Office (Manyata Tech Park)"
+          },
+          {
+            "place_id": "P_SRIB",
+            "name": "Samsung R&D Institute, Bagmane Tech Park"
+          }
+        ]
+      },
+      "navigation_status": "skipped",
+      "speech": "Which place do you mean: Office (Manyata Tech Park) or Samsung R&D Institute, Bagmane Tech Park?"
+    },
+    {
+      "query": "coffee",
+      "result": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "coffee",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'coffee'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "K_TWC_HEB",
+            "name": "Third Wave Coffee, Hebbal"
+          },
+          {
+            "place_id": "K_BLUETOKAI",
+            "name": "Blue Tokai, Indiranagar"
+          },
+          {
+            "place_id": "K_SBUX_AIR",
+            "name": "Starbucks, Airport Road"
+          }
+        ]
+      },
+      "navigation_status": "skipped",
+      "speech": "Which place do you mean? Please say its full name, such as Third Wave Coffee, Hebbal."
+    },
+    {
+      "query": "Cubbon Prak",
+      "result": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "Cubbon Prak",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'Cubbon Prak'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_CUBBON",
+            "name": "Cubbon Park"
+          }
+        ]
+      },
+      "navigation_status": "skipped",
+      "speech": "I couldn't find that place. Please say its full name, such as Cubbon Park."
+    },
+    {
+      "query": "airport hotel",
+      "result": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "airport hotel",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'airport hotel'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_AIRPORT",
+            "name": "Kempegowda International Airport"
+          }
+        ]
+      },
+      "navigation_status": "skipped",
+      "speech": "I couldn't find that place. Please say its full name, such as Kempegowda International Airport."
+    },
+    {
+      "query": "Columbia Asia Hospital",
+      "result": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "Columbia Asia Hospital",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'Columbia Asia Hospital'; ask for the place name",
+        "candidates": []
+      },
+      "navigation_status": "skipped",
+      "speech": "I couldn't find that place on this map. Please say its name again."
+    },
+    {
+      "query": "NONEXISTENT_ZZZ_1289",
+      "result": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "NONEXISTENT_ZZZ_1289",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'NONEXISTENT_ZZZ_1289'; ask for the place name",
+        "candidates": []
+      },
+      "navigation_status": "skipped",
+      "speech": "I couldn't find that place on this map. Please say its name again."
+    }
+  ]
+}

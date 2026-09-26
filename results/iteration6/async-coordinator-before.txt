@@ -1,0 +1,41 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_coordinator_logger_only_shutdown_does_not_claim_unknown_backend_effect __
+
+log_path = PosixPath('/private/var/folders/sq/2zws50s91yx9n4lw560zl9mc0000gn/T/pytest-of-rithikmeedinti/pytest-44/test_coordinator_logger_only_s0/attempts.jsonl')
+
+    @pytest.mark.asyncio
+    async def test_coordinator_logger_only_shutdown_does_not_claim_unknown_backend_effect(log_path):
+        logger = HeldLogger("finished")
+    
+        async def act():
+            return {"status": "success"}
+    
+        async def speak(_text):
+            raise AssertionError("shutdown must not start speech")
+    
+        engine = executor(act, logger)
+        coord = Coordinator(None, engine, engine.ledger, engine.bus, speak)
+        task = asyncio.create_task(engine.run([PlannedCall("write", "act", {})]))
+        try:
+>           await witness_responsive_loop(logger)
+
+tests/unit/test_async_dispatch_telemetry.py:329: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+logger = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x1111a6910>
+
+    async def witness_responsive_loop(logger):
+        await asyncio.wait_for(logger.entered.wait(), 2)
+        await asyncio.sleep(0)
+>       assert not logger.guard_released.is_set(), "logger blocked the loop until the safety guard released it"
+E       AssertionError: logger blocked the loop until the safety guard released it
+E       assert not True
+E        +  where True = is_set()
+E        +    where is_set = <threading.Event at 0x1111a6110: set>.is_set
+E        +      where <threading.Event at 0x1111a6110: set> = <tests.unit.test_async_dispatch_telemetry.HeldLogger object at 0x1111a6910>.guard_released
+
+tests/unit/test_async_dispatch_telemetry.py:83: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_async_dispatch_telemetry.py::test_coordinator_logger_only_shutdown_does_not_claim_unknown_backend_effect
+1 failed, 11 deselected in 1.47s

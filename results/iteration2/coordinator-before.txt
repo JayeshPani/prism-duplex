@@ -1,0 +1,261 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+________ test_speech_failures_are_reported_and_next_turn_recovers[True] ________
+
+complete = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("complete", [True, False])
+    async def test_speech_failures_are_reported_and_next_turn_recovers(complete):
+        coord, bus, _, _, _ = build({"first": {"complete": complete, "calls": [], "reply": "first"}}, cfg=config())
+        spoken = []
+    
+        async def speak(text):
+            if not spoken:
+                spoken.append(text)
+                raise RuntimeError("TTS disconnected")
+            spoken.append(text)
+    
+        coord.speak_fn = speak
+        coord.on_user_turn("first")
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+>       assert len(failures) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/unit/test_coordinator_lifecycle.py:33: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    asyncio:base_events.py:1785 Task exception was never retrieved
+future: <Task finished name='Task-5' coro=<Coordinator._say.<locals>.deliver() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py:236> exception=RuntimeError('TTS disconnected')>
+Traceback (most recent call last):
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py", line 244, in deliver
+    await self.speak_fn(text)
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/unit/test_coordinator_lifecycle.py", line 26, in speak
+    raise RuntimeError("TTS disconnected")
+RuntimeError: TTS disconnected
+_______ test_speech_failures_are_reported_and_next_turn_recovers[False] ________
+
+complete = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("complete", [True, False])
+    async def test_speech_failures_are_reported_and_next_turn_recovers(complete):
+        coord, bus, _, _, _ = build({"first": {"complete": complete, "calls": [], "reply": "first"}}, cfg=config())
+        spoken = []
+    
+        async def speak(text):
+            if not spoken:
+                spoken.append(text)
+                raise RuntimeError("TTS disconnected")
+            spoken.append(text)
+    
+        coord.speak_fn = speak
+        coord.on_user_turn("first")
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+>       assert len(failures) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/unit/test_coordinator_lifecycle.py:33: AssertionError
+_________________ test_result_generation_failure_is_observable _________________
+
+    @pytest.mark.asyncio
+    async def test_result_generation_failure_is_observable():
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "search", "args": {"x": "first"}}], "reply": ""}}
+        coord, bus, logged, said, _ = build(plans, cfg=config())
+    
+        class BrokenResponder:
+            async def summarize(self, request, execution):
+                raise RuntimeError("result model unavailable")
+    
+        coord.responder = BrokenResponder()
+        coord.on_user_turn("first")
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+>       assert len(failures) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/unit/test_coordinator_lifecycle.py:56: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    asyncio:base_events.py:1785 Task exception was never retrieved
+future: <Task finished name='Task-17' coro=<Coordinator._commit() done, defined at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py:194> exception=RuntimeError('result model unavailable')>
+Traceback (most recent call last):
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py", line 213, in _commit
+    summary = await self.responder.summarize(res.repaired or utterance, ex)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/tests/unit/test_coordinator_lifecycle.py", line 50, in summarize
+    raise RuntimeError("result model unavailable")
+RuntimeError: result model unavailable
+____________ test_closed_session_ignores_vad_and_partial_callbacks _____________
+
+    @pytest.mark.asyncio
+    async def test_closed_session_ignores_vad_and_partial_callbacks():
+        coord, bus, _, _, _ = build({}, cfg=config())
+        await coord.aclose()
+        events = list(bus.history)
+        coord.on_user_speaking()
+        coord.on_user_listening()
+        coord.on_user_partial("late audio")
+>       assert coord._reopen_task is None
+E       AssertionError: assert <Task pending name='Task-22' coro=<Coordinator.on_user_listening.<locals>.reopen() running at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py:101>> is None
+E        +  where <Task pending name='Task-22' coro=<Coordinator.on_user_listening.<locals>.reopen() running at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/coordinator.py:101>> = <agent.coordinator.coordinator.Coordinator object at 0x10782cb90>._reopen_task
+
+tests/unit/test_coordinator_lifecycle.py:72: AssertionError
+__________ test_correction_from_speech_event_prevents_stale_delivery ___________
+
+    @pytest.mark.asyncio
+    async def test_correction_from_speech_event_prevents_stale_delivery():
+        plans = {word: {"complete": True, "calls": [], "reply": word} for word in ("first", "second")}
+        coord, bus, _, said, _ = build(plans, cfg=config())
+    
+        def correct(event):
+            if event.type == E.AGENT_SAY and event.data["text"] == "first":
+                coord.on_user_turn("second")
+    
+        bus.subscribe(correct)
+        coord.on_user_turn("first")
+        await coord.drain()
+>       assert said == ["second"]
+E       AssertionError: assert ['first', 'second'] == ['second']
+E         
+E         At index 0 diff: 'first' != 'second'
+E         Left contains one more item: 'second'
+E         Use -v to get more diff
+
+tests/unit/test_coordinator_lifecycle.py:88: AssertionError
+___ test_shutdown_is_bounded_when_owned_work_resists_cancellation[resolver] ____
+
+phase = 'resolver'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["resolver", "speech", "responder"])
+    async def test_shutdown_is_bounded_when_owned_work_resists_cancellation(phase):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "search", "args": {"x": "first"}}], "reply": "first"}}
+        coord, bus, _, _, _ = build(plans, cfg=config())
+    
+        async def stubborn(*args):
+            entered.set()
+            while not release.is_set():
+                try:
+                    await release.wait()
+                except asyncio.CancelledError:
+                    pass
+            return ""
+    
+        if phase == "resolver":
+            coord.resolver.resolve = stubborn
+        elif phase == "speech":
+            coord.speak_fn = stubborn
+        else:
+            class SlowResponder:
+                summarize = staticmethod(stubborn)
+            coord.responder = SlowResponder()
+    
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        close = asyncio.create_task(coord.aclose(timeout=.01))
+        try:
+            await asyncio.sleep(.08)
+>           assert close.done(), "shutdown ignored its deadline"
+E           AssertionError: shutdown ignored its deadline
+E           assert False
+E            +  where False = <built-in method done of _asyncio.Task object at 0x107769300>()
+E            +    where <built-in method done of _asyncio.Task object at 0x107769300> = <Task pending name='Task-40' coro=<Coordinator.aclose() running at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-...84194b9/prism-duplex/agent/coordinator/coordinator.py:280> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>>.done
+
+tests/unit/test_coordinator_lifecycle.py:122: AssertionError
+____ test_shutdown_is_bounded_when_owned_work_resists_cancellation[speech] _____
+
+phase = 'speech'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["resolver", "speech", "responder"])
+    async def test_shutdown_is_bounded_when_owned_work_resists_cancellation(phase):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "search", "args": {"x": "first"}}], "reply": "first"}}
+        coord, bus, _, _, _ = build(plans, cfg=config())
+    
+        async def stubborn(*args):
+            entered.set()
+            while not release.is_set():
+                try:
+                    await release.wait()
+                except asyncio.CancelledError:
+                    pass
+            return ""
+    
+        if phase == "resolver":
+            coord.resolver.resolve = stubborn
+        elif phase == "speech":
+            coord.speak_fn = stubborn
+        else:
+            class SlowResponder:
+                summarize = staticmethod(stubborn)
+            coord.responder = SlowResponder()
+    
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        close = asyncio.create_task(coord.aclose(timeout=.01))
+        try:
+            await asyncio.sleep(.08)
+>           assert close.done(), "shutdown ignored its deadline"
+E           AssertionError: shutdown ignored its deadline
+E           assert False
+E            +  where False = <built-in method done of _asyncio.Task object at 0x10776a680>()
+E            +    where <built-in method done of _asyncio.Task object at 0x10776a680> = <Task pending name='Task-50' coro=<Coordinator.aclose() running at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-...84194b9/prism-duplex/agent/coordinator/coordinator.py:280> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>>.done
+
+tests/unit/test_coordinator_lifecycle.py:122: AssertionError
+___ test_shutdown_is_bounded_when_owned_work_resists_cancellation[responder] ___
+
+phase = 'responder'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("phase", ["resolver", "speech", "responder"])
+    async def test_shutdown_is_bounded_when_owned_work_resists_cancellation(phase):
+        entered, release = asyncio.Event(), asyncio.Event()
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "search", "args": {"x": "first"}}], "reply": "first"}}
+        coord, bus, _, _, _ = build(plans, cfg=config())
+    
+        async def stubborn(*args):
+            entered.set()
+            while not release.is_set():
+                try:
+                    await release.wait()
+                except asyncio.CancelledError:
+                    pass
+            return ""
+    
+        if phase == "resolver":
+            coord.resolver.resolve = stubborn
+        elif phase == "speech":
+            coord.speak_fn = stubborn
+        else:
+            class SlowResponder:
+                summarize = staticmethod(stubborn)
+            coord.responder = SlowResponder()
+    
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        close = asyncio.create_task(coord.aclose(timeout=.01))
+        try:
+            await asyncio.sleep(.08)
+>           assert close.done(), "shutdown ignored its deadline"
+E           AssertionError: shutdown ignored its deadline
+E           assert False
+E            +  where False = <built-in method done of _asyncio.Task object at 0x10776a980>()
+E            +    where <built-in method done of _asyncio.Task object at 0x10776a980> = <Task pending name='Task-60' coro=<Coordinator.aclose() running at /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-...84194b9/prism-duplex/agent/coordinator/coordinator.py:280> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>>.done
+
+tests/unit/test_coordinator_lifecycle.py:122: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_coordinator_lifecycle.py::test_speech_failures_are_reported_and_next_turn_recovers[True]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_speech_failures_are_reported_and_next_turn_recovers[False]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_result_generation_failure_is_observable
+FAILED tests/unit/test_coordinator_lifecycle.py::test_closed_session_ignores_vad_and_partial_callbacks
+FAILED tests/unit/test_coordinator_lifecycle.py::test_correction_from_speech_event_prevents_stale_delivery
+FAILED tests/unit/test_coordinator_lifecycle.py::test_shutdown_is_bounded_when_owned_work_resists_cancellation[resolver]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_shutdown_is_bounded_when_owned_work_resists_cancellation[speech]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_shutdown_is_bounded_when_owned_work_resists_cancellation[responder]
+8 failed in 0.70s

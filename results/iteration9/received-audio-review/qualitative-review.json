@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-09-26T06:05:27.195062+00:00",
+  "source_report_sha256": "0b4ed5b5b77ed10436aed99128cd48d2ff0415f15ad9a15c0bfa5d8f4a5de189",
+  "method": "Read all four verbatim whole-stream ASR transcripts against declared speech and successful effects. No trimming or retries.",
+  "declared": 4,
+  "reviewed": 4,
+  "trials": [
+    {
+      "id": "rtc-baseline-1",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. Estimated arrival in 88 minutes.",
+      "expected_duration_minutes": 88,
+      "duration_fact_retained_in_asr": true,
+      "estimated_arrival_label_retained_in_asr": true,
+      "destination_replacement_facts_retained_in_asr": true,
+      "proper_names_exact": false,
+      "proper_name_deviation": "Kempegowda \u2192 Kempegauda",
+      "old_result": "Complete airport start and arrival estimate."
+    },
+    {
+      "id": "rtc-correction-1",
+      "transcript_verbatim": "One moment. Navigation to OK one sec. Now navigating to office, Maniata Tech Park, replacing Kempegauda International Airport. Estimated arrival in 29 minutes.",
+      "expected_duration_minutes": 29,
+      "duration_fact_retained_in_asr": true,
+      "estimated_arrival_label_retained_in_asr": true,
+      "destination_replacement_facts_retained_in_asr": true,
+      "proper_names_exact": false,
+      "proper_name_deviation": "Kempegowda \u2192 Kempegauda; Manyata \u2192 Maniata",
+      "old_result": "Airport result interrupted after Navigation to; complete corrected office result follows."
+    },
+    {
+      "id": "rtc-correction-2",
+      "transcript_verbatim": "One moment Navigation to Okay, one sec Now navigating to office Maniata Tech Park, replacing Kempegauda International Airport Estimated arrival in twenty-nine minutes.",
+      "expected_duration_minutes": 29,
+      "duration_fact_retained_in_asr": true,
+      "estimated_arrival_label_retained_in_asr": true,
+      "destination_replacement_facts_retained_in_asr": true,
+      "proper_names_exact": false,
+      "proper_name_deviation": "Kempegowda \u2192 Kempegauda; Manyata \u2192 Maniata",
+      "old_result": "Airport result interrupted after Navigation to; complete corrected office result follows."
+    },
+    {
+      "id": "rtc-baseline-2",
+      "transcript_verbatim": "One moment Navigation to Kempegauda International Airport has started. Estimated arrival in 88 minutes.",
+      "expected_duration_minutes": 88,
+      "duration_fact_retained_in_asr": true,
+      "estimated_arrival_label_retained_in_asr": true,
+      "destination_replacement_facts_retained_in_asr": true,
+      "proper_names_exact": false,
+      "proper_name_deviation": "Kempegowda \u2192 Kempegauda",
+      "old_result": "Complete airport start and arrival estimate."
+    }
+  ],
+  "limits": [
+    "ASR proxy, not human listening or independent intelligibility.",
+    "All four retain estimated-arrival wording and declared minutes, with proper-name differences.",
+    "These airport/office cases do not exercise the offline added-stop13\u219230 error.",
+    "Concatenated received PCM is not physical speaker playback or word-to-event alignment."
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "created_at_utc": "2026-09-26T11:13:40.930583+00:00",
+  "status": "reviewed_no_open_concrete_blocker",
+  "scope": "Bounded static method/experimental-harness review; only this review artifact written. No models, services, tests, renders, ASR or model-weight reads performed by reviewer.",
+  "method": "Read reviewed methods; standard-library AST parsing, JSON/hash checks and independent simulated-coordinate calculation. Static judgments are not runtime fault-injection tests.",
+  "checks": {
+    "baseline_run_order_matches": true,
+    "baseline_global_protocol_hash_matches": true,
+    "baseline_ASR_protocol_hash_matches": true,
+    "candidate_run_order_matches": true,
+    "candidate_global_protocol_hash_matches": true,
+    "candidate_ASR_protocol_hash_matches": true,
+    "denominators_exact": true,
+    "ASR_method_hash_current": true,
+    "tested_receipt_successful": true,
+    "tested_log_hash_matches": true,
+    "all_79_tested_paths_still_match": true,
+    "all_14_iteration18_python_methods_parse": true,
+    "independent_numeric_expectations_match": true,
+    "same_model_command_both_arms": true,
+    "historical_launcher_and_transport_config_hashes_match": true
+  },
+  "declared_totals": {
+    "baseline": {
+      "captures": 8,
+      "input_publications": 16,
+      "expected_mutations": 10,
+      "final_replies": 8,
+      "intentional_stop_interruptions": 2,
+      "non_speech_controls": 6
+    },
+    "candidate": {
+      "captures": 13,
+      "input_publications": 22,
+      "expected_mutations": 15,
+      "final_replies": 13,
+      "intentional_stop_interruptions": 2,
+      "non_speech_controls": 6
+    },
+    "combined": {
+      "captures": 21,
+      "input_publications": 38,
+      "expected_mutations": 25,
+      "final_replies": 21,
+      "intentional_stop_interruptions": 4,
+      "non_speech_controls": 12
+    }
+  },
+  "independently_derived_navigation_expectations": [
+    {
+      "id": "P_MGROAD",
+      "distance_km": 5.1,
+      "eta_min": 13
+    },
+    {
+      "id": "P_HOSP",
+      "distance_km": 2.2,
+      "eta_min": 5
+    },
+    {
+      "id": "P_WHITEFIELD",
+      "distance_km": 15.9,
+      "eta_min": 40
+    }
+  ],
+  "static_review": [
+    {
+      "area": "Input recipes",
+      "finding": "No blocker: eight first TTS stems, untrimmed pause assembly, fixed seeded noise and zero silence match protocol. No preparation ASR/VAD selection. Artificial breath and single-sample activity bounds are explicit."
+    },
+    {
+      "area": "Controlled worker",
+      "finding": "No blocker: same-room binding is immutable; task/engine ContextVar guards exclude unrelated work; original engine precedes the cancellable five-second delivery hold; warmup/whole-span retranscription excluded. Baseline transparent public chain preserves SDK bookkeeping. This controls delivery delay, not native inference speed."
+    },
+    {
+      "area": "Lifecycle",
+      "finding": "No blocker in reviewed bounded paths: launch ownership, finite deadlines, condition/departure sequencing, final source check and failure-preserving cleanup match scope. Forced native/process termination remains explicitly observable, not a clean-exit claim."
+    },
+    {
+      "area": "Provenance",
+      "finding": "No blocker: preflight snapshots methods, tested sources and eleven runtime sources; model references retained. Post checks terminal phase/census/PID state before weight reads. Full weight verification is parent-owned and was not executed by reviewer."
+    },
+    {
+      "area": "Claims",
+      "finding": "No blocker: memory samples cover system and owned stack processes/descendants, excluding recorder. RSS is not allocation causality. User state, pause/resume, SpeechHandle interruption and threshold PCM receipt remain separate; no-VAD controls do not prove recovery."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "issue": "Final runner freeze failure could still complete",
+      "resolution": "Final errors/mismatches are retained and fail terminal success."
+    },
+    {
+      "issue": "Room condition could advance while prior room remained",
+      "resolution": "Unverified agent departure aborts before next condition write."
+    },
+    {
+      "issue": "Stale candidate-only totals and preparation wording",
+      "resolution": "Combined and per-arm totals and no-preparation-ASR/VAD scope now match recipes."
+    },
+    {
+      "issue": "Incorrect worker launcher path",
+      "resolution": "Runner invokes controlled_worker.py."
+    },
+    {
+      "issue": "Supervisor grace shorter than bounded runner cleanup",
+      "resolution": "150 seconds now exceeds active-driver plus three-service cleanup budget of 100 seconds plus monitor join."
+    },
+    {
+      "issue": "ASR interruption or validation failure promoted to completed",
+      "resolution": "BaseException persists error; success requires complete rows, all three hash checks and clean pool shutdown."
+    },
+    {
+      "issue": "Unresolved phase/PIDs did not prevent weight reads",
+      "resolution": "Post-verifier now raises before weights on prerequisite/source/snapshot failures."
+    },
+    {
+      "issue": "Snapshot inventory not authenticated/cross-checked",
+      "resolution": "Snapshot-manifest hash and exact source/hash census, unique paths and bytes verified."
+    },
+    {
+      "issue": "Critical runtime/tested freeze gaps",
+      "resolution": "Explicit eleven-file runtime set adds agent_session/generation/synchronizer; tested hashes rechecked while snapshots are written."
+    },
+    {
+      "issue": "Input cleanup exception could leave completed status",
+      "resolution": "Pool failure marks failed with finished receipt; post requires finished clean generation and zero child exit."
+    }
+  ],
+  "open_findings": [],
+  "reviewed_sha256": {
+    "results/iteration18/protocol.json": "edb71293c6a95c6a2349290b441426675f3c37df170568c97acdd00799b3de10",
+    "results/iteration18/common.py": "2533fdaf7159555fbad521c0c345a16a3a18f006fd8854c217efb21f460b7a99",
+    "results/iteration18/make_inputs.py": "c5b2396aab5fe37e4946d7acd6574aff1cf1a631e947d30080ba066c3169aee4",
+    "results/iteration18/run_suite.py": "bdd8506a56febe099025d43dade667f38b13ff0e72de1433fbde0e7b8a5d72f0",
+    "results/iteration18/preflight.py": "609076fc63ff649826a7a0e5f84ca7585c370c6b270beae4cfcea7874044b030",
+    "results/iteration18/supervise.py": "17c837df192eae5abc623ced9f274d71e098118bae2a167beebefb4b19cf33e0",
+    "results/iteration18/verify_after_inference.py": "e35d04c819950b6de2d8887a81b6c6afe23aa14a769429adb1b6a795e03939a6",
+    "results/iteration18/review_received_audio.py": "663bb0b40f95d3bd4edaad4047546449cee158818c8092673a766be37eeb1bb0",
+    "results/iteration18/received-audio-review-protocol.json": "0de1db98e442edd28fe0d92a1336d469d537f122a599e8fa1c275942c27bfb01",
+    "results/iteration18/controlled_worker.py": "ef823901fe86f4edfb04221843a4dd243ff63b2c7b0da77b76b42fb826b39b34",
+    "results/iteration18/test_controlled_worker.py": "437abc637f1db722d116941896977618165ab075d6ac1c19b3cd230a615c4879",
+    "results/iteration18/controlled-worker-validation.json": "e454b1f3134c082b57ec42b84fbb060d36039a765e41e1481b2a56940a802c63",
+    "results/iteration18/controlled-worker-tests.txt": "8aac72934b077956617556fa14f095d612a0fdb2ef09b3fef8d14582ccd1008b",
+    "results/iteration18/tested-source-v2.json": "b4ce0f94cbc789a1222a151f4b35a76bcda552fab180777f1c8de751f2ead7ac",
+    "results/iteration18/full-tests-v2.txt": "d5fe7c3c50fd90300200f3194d1736c101948c5cde666c5e383f7bba85a10ae2",
+    "results/iteration18/pause-candidate-review.json": "322cb07ec85c5f7460c8677266508f1112ba7d07a558d2580e339337d038675b",
+    "results/iteration18-baseline/plan.json": "7e4ed7c564cc48fb3ba74fbc7ef96cf08d0c5293c4549f7e5e2ac16d475dda2a",
+    "results/iteration18-baseline/protocol.json": "ae6a27c6b3f57b277736dbe2a12c0394aabda471a8f78c26c1f0cab10ab4b504",
+    "results/iteration18-candidate/plan.json": "0aeb46772929d49facc21bd96c3db924fd962521e16e8e1d400376b6dc16b65e",
+    "results/iteration18-candidate/protocol.json": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "scripts/local_livekit_audio_experiment.py": "62822a111b1a50515d169254b3172f4207568e0e87dcd41adba13775eb7ee1f7",
+    "results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+    "results/iteration12/stt_diagnostics.py": "0c8d95630149d0babd5b760b32742015e713fda1b0c18d4568f32b590646f0c2"
+  },
+  "activity_at_receipt": {
+    "audio_assets_directory_exists": true,
+    "limit": "Parent input preparation began while the final receipt was being written. This receipt must not be represented as predating first rendering; source review and resolved findings preceded receipt completion."
+  },
+  "limits": [
+    "This is readiness review, not either-arm success. Missing/unrun/failed captures, extra effects, false transcripts, trace failures and cleanup failures stay in their denominators.",
+    "Grace covers the declared cleanup waits, but abrupt supervisor SIGKILL or blocked filesystem operations can leave separate child groups or missing buffered diagnostics. Inspect actual owned-PID and escalation receipts before later inference.",
+    "Fixed arm order, shared host/cache state and one sample per condition do not establish population accuracy or causal latency benefit.",
+    "Synthetic TTS and shaped noise do not represent human breath, physical audibility or microphone echo; received ASR is a proxy, not human listening.",
+    "Existing parent/agent test receipts were source/log checked; reviewer did not rerun them. Post-inference validation is evidence integrity, not a claim that retained failed conversational trials passed."
+  ]
+}

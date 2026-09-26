@@ -1,0 +1,29 @@
+...F.....                                                                [100%]
+=================================== FAILURES ===================================
+___________ test_split_uncommitted_clarification_keeps_context_once ____________
+
+build = <function build.<locals>.make at 0x1067d9120>
+
+    async def test_split_uncommitted_clarification_keeps_context_once(build):
+        coord, model, bus, _, _ = build([
+            plan("Airport Road", search=True),
+            {"complete": False, "calls": [], "reply": "Please finish the name."},
+            lookup(DESTINATION), plan(DESTINATION, search=True), lookup("Office")])
+        coord.cfg.speak_results = False
+        try:
+            coord.on_user_turn(ORIGINAL)
+            await coord.drain()
+            coord.on_user_turn("I mean Manipal")
+            await coord.drain()
+            assert not starts(bus)
+            coord.on_user_turn("Hospital, Old Airport Road.")
+            await coord.drain()
+>           assert continuation_for(bus, 3) == {"original_request": ORIGINAL,
+                                               "request": f"Navigate to {DESTINATION}."}
+E                                              AssertionError: assert None == {'original_request': 'Navigate to Airport Road.', 'request': 'Navigate to Manipal Hospital, Old Airport Road.'}
+E                                               +  where None = continuation_for(<agent.coordinator.events.EventBus object at 0x1067cf690>, 3)
+
+tests/unit/test_navigation_clarification_lifecycle.py:86: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_clarification_lifecycle.py::test_split_uncommitted_clarification_keeps_context_once
+1 failed, 8 passed in 0.39s

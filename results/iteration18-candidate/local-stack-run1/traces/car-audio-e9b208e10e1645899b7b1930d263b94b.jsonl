@@ -1,0 +1,29 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421680.055882}
+{"type": "session_started", "data": {"room": "car-audio-e9b208e10e1645899b7b1930d263b94b", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790421680.0562189}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790421680.357908}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790421683.5634508}
+{"type": "user_final", "data": {"text": "Please take me to MG Road Metro Station.", "merged": "Please take me to MG Road Metro Station.", "intent_version": 1}, "ts": 1790421685.91976}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790421686.622498}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790421686.6230888}
+{"type": "speech_handle", "data": {"speech_id": "speech_3dc5a0d84e3c", "state": "queued"}, "ts": 1790421686.6249442}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790421687.187819}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421688.083083}
+{"type": "speech_handle", "data": {"speech_id": "speech_3dc5a0d84e3c", "state": "finished", "error": null}, "ts": 1790421688.084268}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Please take me to MG Road Metro Station.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "MG Road Metro Station"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to MG Road Metro Station."}, "ts": 1790421689.685538}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790421689.685683}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790421689.685954}
+{"type": "slot_update", "data": {"slot": "query", "value": "MG Road Metro Station", "previous": null}, "ts": 1790421689.686028}
+{"type": "tool_waiting", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}}, "ts": 1790421689.686123}
+{"type": "tool_waiting", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, "ts": 1790421689.686164}
+{"type": "tool_waiting", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790421689.6861959}
+{"type": "tool_started", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}, "state_changing": false}, "ts": 1790421689.68672}
+{"type": "tool_done", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}, "result": {"status": "success", "places": [{"place_id": "P_MGROAD", "name": "MG Road Metro Station", "category": "metro", "lat": 12.9756, "lng": 77.6066}]}, "stale": false, "duration_ms": 3}, "ts": 1790421689.6901472}
+{"type": "tool_started", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "MG Road Metro Station"}, "state_changing": false}, "ts": 1790421689.691367}
+{"type": "tool_done", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "MG Road Metro Station"}, "result": {"status": "success", "route_id": "R1", "destination": "MG Road Metro Station", "destination_id": "P_MGROAD", "stops": [], "stop_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "stale": false, "duration_ms": 2503}, "ts": 1790421692.194644}
+{"type": "tool_started", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "state_changing": true}, "ts": 1790421692.199769}
+{"type": "tool_done", "data": {"execution_id": "d7be22c38bbb46b1a99779e4e9494b64", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "result": {"status": "success", "navigating_to": "MG Road Metro Station", "replaced": null, "already_active": false, "navigation_version": 1, "route_active": true, "route_id": "R1", "destination": "MG Road Metro Station", "destination_id": "P_MGROAD", "stops": [], "stop_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "stale": false, "duration_ms": 3}, "ts": 1790421692.20318}
+{"type": "agent_say", "data": {"text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.", "intent_version": 1, "kind": "result"}, "ts": 1790421692.208807}
+{"type": "speech_handle", "data": {"speech_id": "speech_99d19fafaf65", "state": "queued"}, "ts": 1790421692.209253}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790421693.093771}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790421698.6080809}
+{"type": "speech_handle", "data": {"speech_id": "speech_99d19fafaf65", "state": "finished", "error": null}, "ts": 1790421698.611326}

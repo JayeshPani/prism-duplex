@@ -1,0 +1,174 @@
+{
+  "declared_at_utc": "2026-09-26T07:07:58.524586+00:00",
+  "purpose": "Observe the trace-offload candidate on the same four development cases and directly record STT silence substitution at the installed SDK AEC boundary, without changing audio/recognition/interruption algorithms or settings.",
+  "hypotheses": [
+    "Off-loop trace persistence keeps complete FIFO event evidence while removing synchronous trace filesystem work from callbacks; observed live warnings and all failures remain visible.",
+    "The installed SDK can substitute silence for STT during first-speaking AEC warmup while session VAD receives real input; record actual per-room substitution intervals and state instead of inferring this from missing transcripts.",
+    "The unchanged waypoint, baseline and correction expectations remain checks rather than assumed outcomes; preserve all missing transcripts, effects, interrupted/finished handles, deadline failures and cleanup/server job distinctions."
+  ],
+  "run_order": [
+    "waypoint",
+    "baseline",
+    "waypoint",
+    "correction"
+  ],
+  "inputs": {
+    "navigate": {
+      "source": "results/iteration4/audio-assets/navigate.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "copied_from": "results/iteration10/audio-assets/navigate.wav"
+    },
+    "correct": {
+      "source": "results/iteration4/audio-assets/correct.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+      "copied_from": "results/iteration10/audio-assets/correct.wav"
+    },
+    "navigate-mgroad": {
+      "source": "results/iteration10/waypoint-input-generation/navigate-mgroad.wav",
+      "sha256": "ba22be867628dd209a283086e5d2c91b912a80fa3efe39e5037d3eb19aedb85d",
+      "copied_from": "results/iteration10/audio-assets/navigate-mgroad.wav"
+    },
+    "add-coffee": {
+      "source": "results/iteration10/waypoint-input-generation/add-coffee.wav",
+      "sha256": "804ada77efbafa179eb48405107c18aef9b474a1a17bf1e7c9434c9ea748b22c",
+      "copied_from": "results/iteration10/audio-assets/add-coffee.wav"
+    }
+  },
+  "expected": {
+    "waypoint": {
+      "initial_audio": "navigate-mgroad.wav",
+      "followup_audio": "add-coffee.wav",
+      "initial_input": "Navigate to MG Road Metro Station.",
+      "final_input": "Add the nearest coffee as a stop.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation",
+        "find_nearby",
+        "add_waypoint"
+      ],
+      "attempts": 5,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_MGROAD",
+          "stop_ids": [],
+          "eta_min": 13
+        },
+        {
+          "tool": "add_waypoint",
+          "destination_id": "P_MGROAD",
+          "stop_ids": [
+            "K_BLUETOKAI"
+          ],
+          "eta_min": 13,
+          "extra_min": 0
+        }
+      ],
+      "result_facts": [
+        "MG Road destination unchanged",
+        "Blue Tokai Indiranagar added",
+        "estimated time is 13 minutes",
+        "0 extra minutes"
+      ],
+      "original_result": "interrupted during observed substantive PCM"
+    },
+    "baseline": {
+      "initial_audio": "navigate.wav",
+      "initial_input": "Navigate to the airport.",
+      "final_input": "Navigate to the airport.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation"
+      ],
+      "attempts": 3,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_AIRPORT",
+          "stop_ids": [],
+          "eta_min": 88
+        }
+      ],
+      "result_facts": [
+        "airport navigation started",
+        "estimated arrival in 88 minutes"
+      ]
+    },
+    "correction": {
+      "initial_audio": "navigate.wav",
+      "followup_audio": "correct.wav",
+      "initial_input": "Navigate to the airport.",
+      "final_input": "Actually, go to the office instead.",
+      "attempt_sequence": [
+        "search_destination",
+        "compute_route",
+        "start_navigation",
+        "search_destination",
+        "compute_route",
+        "start_navigation"
+      ],
+      "attempts": 6,
+      "effects": [
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_AIRPORT",
+          "stop_ids": [],
+          "eta_min": 88
+        },
+        {
+          "tool": "start_navigation",
+          "destination_id": "P_OFFICE",
+          "stop_ids": [],
+          "eta_min": 29
+        }
+      ],
+      "result_facts": [
+        "office navigation",
+        "previous airport replaced",
+        "estimated arrival in 29 minutes"
+      ],
+      "original_result": "interrupted during observed substantive PCM"
+    }
+  },
+  "protocol_limits": {
+    "capture_ready_seconds": 45,
+    "response_seconds": 60,
+    "probe_observation_seconds": 12,
+    "trial_process_deadline_seconds": 150,
+    "agent_departure_observation_seconds": 10,
+    "worker_sigterm_grace_seconds": 20,
+    "worker_sdk_drain_seconds": 3600
+  },
+  "method": [
+    "Four serial fresh rooms, one shared local stack, fixed waypoint/baseline/waypoint/correction order; no retries or exclusions.",
+    "Copy all four WAV inputs byte-for-byte from iteration10/audio-assets, preserving their original generation provenance and SHA256 values. No new synthesis or transcription before this declaration.",
+    "Existing driver correction label denotes the second input clip. Waypoint clips use that same observed-result PCM trigger for a stop-addition request, not a destination correction.",
+    "No source or configuration changes during a live suite; retain failed captures and all tool/error/runtime logs.",
+    "After each client exits, inspect only its owned room for agent presence for up to10seconds; do not delete the room to create apparent job cleanup.",
+    "Send worker SIGTERM after all trials and departure checks. Keep original20second outer grace and record any escalation separately from capture success.",
+    "Keep all raw trace equality failures, classifying initial-event omission and any events emitted after client disconnect separately.",
+    "Review full received audio through pinned local ASR after timed capture and owned-stack cleanup. This is an ASR proxy, not human listening.",
+    "Iteration11 instrumented_worker.py wraps the original AudioRecognition._push_audio unchanged and buffers counters, contiguous substituted-input intervals and AEC state in memory. It writes aec-discard-diagnostics.json only when the existing launcher returns/exits; no live diagnostic file writes. Missing report after forced death is unavailable evidence, not zero substitutions."
+  ],
+  "limitations": [
+    "Development cases chosen to exercise an observed duration failure, not held-out evaluation.",
+    "No controlled RTC before/after comparison or population latency claim.",
+    "Exact declared tool sequence is checked separately from semantic effects; preserve valid alternatives and every extra/failed/stale attempt.",
+    "No injected slow logger in these live cases; ordinary compute_route delay remains. Controlled loop fault injection is separate iteration6 evidence.",
+    "Capture completion, tool effects, full trace equality, received content, caller cleanup, room-job departure and process exit are separate checks.",
+    "Input/frame/data transport timestamps do not establish physical audible timing. Default ICE/STUN may use network services although all model inference is local.",
+    "Existing recorder may omit the initial listening event; its receiver shutdown does not prove every transmitted frame arrived.",
+    "Instrumentation adds per-frame clock, state-read, counter and observer-lock overhead; this candidate-only instrumented suite is not a causal historical before/after trace-latency comparison.",
+    "Only the first frame of each substituted interval receives a zero-PCM check; counts and AEC-active state span all substituted calls. Contiguity means consecutive calls, not guaranteed continuous audio time. Recorder sample timing and observer callback timing are different boundaries."
+  ],
+  "instrumentation": {
+    "worker": "results/iteration11/instrumented_worker.py",
+    "report": "results/iteration11/local-stack-run1/aec-discard-diagnostics.json",
+    "algorithm_or_setting_overrides": false,
+    "shutdown_only_report": true,
+    "missing_report_interpretation": "unavailable, never zero substitutions",
+    "source_freeze": "Root will add current source hashes before launch; copied iteration10 source hashes intentionally excluded."
+  }
+}

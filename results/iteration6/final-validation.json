@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-09-26T04:39:07.978530+00:00",
+  "implementation": "retained",
+  "tests": {
+    "initial_cases": 12,
+    "initial_failures": 10,
+    "first_candidate_full_passes": 503,
+    "additional_cache_failures": 2,
+    "final_focused_passes": 71,
+    "final_full_passes": 505
+  },
+  "measured_trials": {
+    "baseline": 10,
+    "superseded_candidate": 10,
+    "final": 10,
+    "all_effects_and_rows_retained": true,
+    "actual_python_versions": [
+      "3.11.13"
+    ]
+  },
+  "source_sha256": {
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/coordinator.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "tests/unit/test_async_dispatch_telemetry.py": "92ec2f52fd333b5cee704bad81d10302fe00962f2d9aaf6c6c71a8a6ae1a8469"
+  },
+  "evidence_sha256": {
+    "results/iteration6/protocol.json": "608431fbfe9cb0549c4239dbc576a8496b6683eb6dcc793cdefd823408443dd9",
+    "results/iteration6/protocol-clarifications.json": "80c60ec120672ce66fd370d654ca2cf6757cffdea5746fe9363d0b300ee18a74",
+    "results/iteration6/loop-comparison.json": "48d982bec82ce945a89ae6010d9f91871612001561db124ef91d9d5195d22682",
+    "results/iteration6/measure_loop.py": "118a45c922bd266568c17f331c795d15d6cb91e19fbd982c61a769c8fa5b24cd",
+    "results/iteration6/analyze_loop.py": "d6709ea04607d1008bf824ba6c3e7e014d12f42df9b7ddbe6be7dbceff18cac8",
+    "results/iteration6/async-dispatch-before.txt": "737dda52cea9b661cd6df627cb3e113f1cae211c5b777f8be0fc9e693967ca7b",
+    "results/iteration6/async-coordinator-before.txt": "b216447336a5c2bf7b52d672c91d195adadb51d9fb829bfa3678dffb06c03402",
+    "results/iteration6/cache-race-before.txt": "3b3d524794a5c4afb7dc243286c5ec16920901bc7aa8b40f88c53ee19a5b16e6",
+    "results/iteration6/async-dispatch-final.txt": "6894e52c0f9cf5eb237835761f054f661e2dcb6adc7a4ddbddebb2ea615e3b20",
+    "results/iteration6/full-suite.txt": "af093cbdcc51ab716f75f9a1e792d47851ed11c7fc86d5fdcad5ee862147fd38",
+    "results/iteration6/full-suite-final.txt": "53895b85d061bc7d37498e5796840d46ed068b565d69308afc68207bee4c541e",
+    "results/iteration6/production-change.patch": "45c542cc0934baead8f9fda6c0fe71a044d3e84fc399a121e00b543d616031ad"
+  },
+  "docs_sha256": {
+    "README.md": "ab89a105104e81f7a99f0e89591638db89bd2da3ddee99f77eaf296d5b963b50",
+    "docs/iteration6.md": "febe6985fb459c40b6df69016b41ab99a0796f9b4b1863f6065842184131e7a8"
+  },
+  "pr_draft_sha256": "2af68a0e59631f7346f65b06e87f0da1fcff910919468a161a09ef4d71691594",
+  "staged_files": [],
+  "commits_ahead_of_main": [],
+  "limitations": [
+    "No fresh RTC validation after the source change; the earlier 22 captures use the prior frozen executor.",
+    "Native logging threads cannot be forcibly cancelled; worker drain remains separate outstanding work.",
+    "Fixed-order fault injection and background load are not generalized latency/capacity evidence.",
+    "Organizer Theme 05 brief access and user staging for the PR remain unresolved."
+  ]
+}

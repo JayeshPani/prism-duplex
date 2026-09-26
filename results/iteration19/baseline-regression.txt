@@ -1,0 +1,181 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_ test_destination_answer_keeps_pending_navigation_obligation[Airport Road-I mean Manipal Hospital, Old Airport Road.-Manipal Hospital, Old Airport Road-P_HOSP] _
+
+build = <function build.<locals>.make at 0x1064d44a0>
+ambiguous = 'Airport Road'
+answer = 'I mean Manipal Hospital, Old Airport Road.'
+destination = 'Manipal Hospital, Old Airport Road', destination_id = 'P_HOSP'
+
+    @pytest.mark.parametrize("ambiguous,answer,destination,destination_id", [
+        ("Airport Road", "I mean Manipal Hospital, Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Tech Park", "Office (Manyata Tech Park).", "Office (Manyata Tech Park)", "P_OFFICE"),
+        ("Indiranagar", "I mean Blue Tokai, Indiranagar.", "Blue Tokai, Indiranagar", "K_BLUETOKAI"),
+        ("Airport Road", "The hospital.", "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Airport Road", "I mean Manipal Hospital in Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+    ])
+    async def test_destination_answer_keeps_pending_navigation_obligation(build, ambiguous, answer,
+                                                                        destination, destination_id):
+        coordinator, model, bus, logged, spoken = build([
+            plan(ambiguous, search=True), lookup(destination), plan(destination, search=True)])
+        try:
+            coordinator.on_user_turn(f"Please navigate to {ambiguous}.")
+            await coordinator.drain()
+            assert not [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+            assert spoken and "Which place" in spoken[-1]
+            first_attempts = len(logged)
+    
+            coordinator.on_user_turn(answer)
+            await coordinator.drain()
+            starts = [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+>           assert len(starts) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests/unit/test_navigation_clarification.py:74: AssertionError
+_ test_destination_answer_keeps_pending_navigation_obligation[Tech Park-Office (Manyata Tech Park).-Office (Manyata Tech Park)-P_OFFICE] _
+
+build = <function build.<locals>.make at 0x1064d4860>, ambiguous = 'Tech Park'
+answer = 'Office (Manyata Tech Park).'
+destination = 'Office (Manyata Tech Park)', destination_id = 'P_OFFICE'
+
+    @pytest.mark.parametrize("ambiguous,answer,destination,destination_id", [
+        ("Airport Road", "I mean Manipal Hospital, Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Tech Park", "Office (Manyata Tech Park).", "Office (Manyata Tech Park)", "P_OFFICE"),
+        ("Indiranagar", "I mean Blue Tokai, Indiranagar.", "Blue Tokai, Indiranagar", "K_BLUETOKAI"),
+        ("Airport Road", "The hospital.", "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Airport Road", "I mean Manipal Hospital in Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+    ])
+    async def test_destination_answer_keeps_pending_navigation_obligation(build, ambiguous, answer,
+                                                                        destination, destination_id):
+        coordinator, model, bus, logged, spoken = build([
+            plan(ambiguous, search=True), lookup(destination), plan(destination, search=True)])
+        try:
+            coordinator.on_user_turn(f"Please navigate to {ambiguous}.")
+            await coordinator.drain()
+            assert not [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+            assert spoken and "Which place" in spoken[-1]
+            first_attempts = len(logged)
+    
+            coordinator.on_user_turn(answer)
+            await coordinator.drain()
+            starts = [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+>           assert len(starts) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests/unit/test_navigation_clarification.py:74: AssertionError
+_ test_destination_answer_keeps_pending_navigation_obligation[Indiranagar-I mean Blue Tokai, Indiranagar.-Blue Tokai, Indiranagar-K_BLUETOKAI] _
+
+build = <function build.<locals>.make at 0x1064d4900>, ambiguous = 'Indiranagar'
+answer = 'I mean Blue Tokai, Indiranagar.'
+destination = 'Blue Tokai, Indiranagar', destination_id = 'K_BLUETOKAI'
+
+    @pytest.mark.parametrize("ambiguous,answer,destination,destination_id", [
+        ("Airport Road", "I mean Manipal Hospital, Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Tech Park", "Office (Manyata Tech Park).", "Office (Manyata Tech Park)", "P_OFFICE"),
+        ("Indiranagar", "I mean Blue Tokai, Indiranagar.", "Blue Tokai, Indiranagar", "K_BLUETOKAI"),
+        ("Airport Road", "The hospital.", "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Airport Road", "I mean Manipal Hospital in Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+    ])
+    async def test_destination_answer_keeps_pending_navigation_obligation(build, ambiguous, answer,
+                                                                        destination, destination_id):
+        coordinator, model, bus, logged, spoken = build([
+            plan(ambiguous, search=True), lookup(destination), plan(destination, search=True)])
+        try:
+            coordinator.on_user_turn(f"Please navigate to {ambiguous}.")
+            await coordinator.drain()
+            assert not [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+            assert spoken and "Which place" in spoken[-1]
+            first_attempts = len(logged)
+    
+            coordinator.on_user_turn(answer)
+            await coordinator.drain()
+            starts = [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+>           assert len(starts) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests/unit/test_navigation_clarification.py:74: AssertionError
+_ test_destination_answer_keeps_pending_navigation_obligation[Airport Road-The hospital.-Manipal Hospital, Old Airport Road-P_HOSP] _
+
+build = <function build.<locals>.make at 0x1064d54e0>
+ambiguous = 'Airport Road', answer = 'The hospital.'
+destination = 'Manipal Hospital, Old Airport Road', destination_id = 'P_HOSP'
+
+    @pytest.mark.parametrize("ambiguous,answer,destination,destination_id", [
+        ("Airport Road", "I mean Manipal Hospital, Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Tech Park", "Office (Manyata Tech Park).", "Office (Manyata Tech Park)", "P_OFFICE"),
+        ("Indiranagar", "I mean Blue Tokai, Indiranagar.", "Blue Tokai, Indiranagar", "K_BLUETOKAI"),
+        ("Airport Road", "The hospital.", "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Airport Road", "I mean Manipal Hospital in Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+    ])
+    async def test_destination_answer_keeps_pending_navigation_obligation(build, ambiguous, answer,
+                                                                        destination, destination_id):
+        coordinator, model, bus, logged, spoken = build([
+            plan(ambiguous, search=True), lookup(destination), plan(destination, search=True)])
+        try:
+            coordinator.on_user_turn(f"Please navigate to {ambiguous}.")
+            await coordinator.drain()
+            assert not [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+            assert spoken and "Which place" in spoken[-1]
+            first_attempts = len(logged)
+    
+            coordinator.on_user_turn(answer)
+            await coordinator.drain()
+            starts = [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+>           assert len(starts) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests/unit/test_navigation_clarification.py:74: AssertionError
+_ test_destination_answer_keeps_pending_navigation_obligation[Airport Road-I mean Manipal Hospital in Old Airport Road.-Manipal Hospital, Old Airport Road-P_HOSP] _
+
+build = <function build.<locals>.make at 0x106517920>
+ambiguous = 'Airport Road'
+answer = 'I mean Manipal Hospital in Old Airport Road.'
+destination = 'Manipal Hospital, Old Airport Road', destination_id = 'P_HOSP'
+
+    @pytest.mark.parametrize("ambiguous,answer,destination,destination_id", [
+        ("Airport Road", "I mean Manipal Hospital, Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Tech Park", "Office (Manyata Tech Park).", "Office (Manyata Tech Park)", "P_OFFICE"),
+        ("Indiranagar", "I mean Blue Tokai, Indiranagar.", "Blue Tokai, Indiranagar", "K_BLUETOKAI"),
+        ("Airport Road", "The hospital.", "Manipal Hospital, Old Airport Road", "P_HOSP"),
+        ("Airport Road", "I mean Manipal Hospital in Old Airport Road.",
+         "Manipal Hospital, Old Airport Road", "P_HOSP"),
+    ])
+    async def test_destination_answer_keeps_pending_navigation_obligation(build, ambiguous, answer,
+                                                                        destination, destination_id):
+        coordinator, model, bus, logged, spoken = build([
+            plan(ambiguous, search=True), lookup(destination), plan(destination, search=True)])
+        try:
+            coordinator.on_user_turn(f"Please navigate to {ambiguous}.")
+            await coordinator.drain()
+            assert not [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+            assert spoken and "Which place" in spoken[-1]
+            first_attempts = len(logged)
+    
+            coordinator.on_user_turn(answer)
+            await coordinator.drain()
+            starts = [e for e in bus.of_type(E.TOOL_DONE) if e.data['tool'] == 'start_navigation']
+>           assert len(starts) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests/unit/test_navigation_clarification.py:74: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_navigation_clarification.py::test_destination_answer_keeps_pending_navigation_obligation[Airport Road-I mean Manipal Hospital, Old Airport Road.-Manipal Hospital, Old Airport Road-P_HOSP]
+FAILED tests/unit/test_navigation_clarification.py::test_destination_answer_keeps_pending_navigation_obligation[Tech Park-Office (Manyata Tech Park).-Office (Manyata Tech Park)-P_OFFICE]
+FAILED tests/unit/test_navigation_clarification.py::test_destination_answer_keeps_pending_navigation_obligation[Indiranagar-I mean Blue Tokai, Indiranagar.-Blue Tokai, Indiranagar-K_BLUETOKAI]
+FAILED tests/unit/test_navigation_clarification.py::test_destination_answer_keeps_pending_navigation_obligation[Airport Road-The hospital.-Manipal Hospital, Old Airport Road-P_HOSP]
+FAILED tests/unit/test_navigation_clarification.py::test_destination_answer_keeps_pending_navigation_obligation[Airport Road-I mean Manipal Hospital in Old Airport Road.-Manipal Hospital, Old Airport Road-P_HOSP]
+5 failed in 0.45s
