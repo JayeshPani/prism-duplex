@@ -1,0 +1,45 @@
+{
+  "python_tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 99,
+    "failed": 0,
+    "artifact": "final-unit.txt"
+  },
+  "frontend_tests": {
+    "command": "node --experimental-strip-types --test web/lib/events.test.ts",
+    "passed": 6,
+    "failed": 0,
+    "artifact": "frontend-tests.txt"
+  },
+  "production_build": {
+    "command": "npm --prefix web run build",
+    "passed": true,
+    "artifact": "frontend-build.txt"
+  },
+  "syntax_checks": [
+    ".venv/bin/python -m compileall -q agent scripts tests",
+    "bash -n scripts/run_benchmark.sh scripts/download_models.sh",
+    "git diff --check"
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:3012",
+    "loaded": true,
+    "trace_import": true,
+    "airport_final_destination": true,
+    "cancelled_route_markers": 0,
+    "error_overlay": false,
+    "page_errors": [],
+    "screenshots": [
+      "browser-trace.png",
+      "browser-cancel.png"
+    ],
+    "live_room_connection_tested": false
+  },
+  "audio_evaluation": {
+    "attempted_command": "PRISM_PROFILE=local-mac JUDGE=none LIMIT=10 bash scripts/run_benchmark.sh",
+    "stage": "preflight",
+    "result": "missing .env.local / LiveKit credentials",
+    "artifact": "audio-preflight.txt",
+    "model_inference_run": false
+  }
+}

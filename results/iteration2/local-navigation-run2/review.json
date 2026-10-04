@@ -1,0 +1,312 @@
+{
+  "reviewed_at_utc": "2026-09-25T18:32:35.498779+00:00",
+  "review_kind": "Manual source-backed semantic review; no new inference or source changes",
+  "scope": "All delivered text, raw planner replies, 20 backend attempts and 8 effects in all four run2 JSONL traces; comparison with saved run1 traces",
+  "summary": {
+    "harness_cases_passed": 4,
+    "delivered_texts_reviewed": 19,
+    "acknowledgments": 10,
+    "substantive_results_or_clarifications": 9,
+    "observed_false_delivered_statements": 0,
+    "observed_wrong_backend_effects": 0,
+    "observed_stale_backend_attempts": 0,
+    "conclusion": "Observed effects and delivered results are correct, but named-waypoint plan fidelity remains unsound despite the passing scenario."
+  },
+  "findings": [
+    {
+      "severity": "material_remaining_limitation",
+      "topic": "Named waypoint replaced by generic category selection",
+      "observation": "For 'Add Blue Tokai in Indiranagar as a stop', the planner calls find_nearby(category='coffee', max_detour_min=5), then adds places[0]. The five-minute cap was not requested. The lookup happens to return only the intended Blue Tokai in this route context.",
+      "implication": "Actual stop and result speech are correct here; choosing the first nearby category match can select another business or omit the requested place under other route/map conditions. This is an unintended lookup/constraint, not an observed wrong write in this run.",
+      "references": [
+        "waypoint_and_cancel-1.jsonl:40",
+        "waypoint_and_cancel-1.jsonl:49",
+        "waypoint_and_cancel-1.jsonl:50",
+        "waypoint_and_cancel-1.jsonl:55"
+      ],
+      "next_test": "Independent named-stop case whose requested venue is not the first nearby category result, and a request with no detour limit."
+    },
+    {
+      "severity": "evidence_limit",
+      "topic": "Connective normalization not exercised by this model trajectory",
+      "observation": "Run1 dispatched the spoken full name and failed; run2 instead dispatches the canonical ID returned by find_nearby. The separate deterministic place tests exercise connective normalization, but this model run does not.",
+      "references": [
+        "../local-navigation-run1/waypoint_and_cancel-1.jsonl:42",
+        "waypoint_and_cancel-1.jsonl:54"
+      ]
+    },
+    {
+      "severity": "contained_model_defect",
+      "topic": "Raw planner narration still claims premature and stale facts",
+      "observation": "Office turn2 raw reply says navigation has started with ETA 88 minutes, although the office route later computes to 29 minutes. Airport turn3 and cancellation raw replies also claim completion before execution. These fields are suppressed: no matching agent_say/text_delivery event exists, and delivered results follow successful effects.",
+      "references": [
+        "return_to_destination-1.jsonl:40",
+        "return_to_destination-1.jsonl:49",
+        "return_to_destination-1.jsonl:67",
+        "waypoint_and_cancel-1.jsonl:68"
+      ],
+      "comparison": "Run1 delivered premature action-plan narration. Run2 suppression contains this observed defect; the planner itself has not become semantically reliable."
+    },
+    {
+      "severity": "minor_response_quality",
+      "topic": "Unnecessary route identifier read aloud",
+      "observation": "The final airport response includes route ID R3. R3 is genuine and current, but was not requested and adds technical detail for a driver.",
+      "references": [
+        "return_to_destination-1.jsonl:87"
+      ]
+    },
+    {
+      "severity": "remaining_performance_limit",
+      "topic": "Meaningful text remains slow despite quick acknowledgments",
+      "observation": "First substantive response text p50/p95 is 15.111/18.105 seconds over nine observations; acknowledgment p50/p95 is 0.703/0.882 seconds over ten. These are final-text timings, not acoustic speech-end or interruption measurements.",
+      "references": [
+        "experiment.json:summary"
+      ]
+    }
+  ],
+  "comparison_with_run1": [
+    "Return-to-destination now plans and executes compute_route plus start_navigation on turn3; the office-to-airport return succeeds.",
+    "Result summarization now receives the actual user request, including the merged correction, rather than action-plan narration.",
+    "Cancellation and navigation plan narration are not delivered; grounded result text is delivered after tool outcomes.",
+    "Ambiguous Airport Road still produces a grounded two-candidate question before any write; the explicit Starbucks follow-up then navigates correctly.",
+    "Four-case backend result improved from 2/4 to 4/4, but several changes and changed model trajectories prevent single-change causal attribution."
+  ],
+  "per_case_review": [
+    {
+      "case": "correction_before_commit",
+      "requests": [
+        "Navigate to the airport.",
+        "Actually, go to the office instead."
+      ],
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ]
+      ],
+      "final_destination": "P_OFFICE",
+      "delivered_replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "reference": "correction_before_commit-1.jsonl:6",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "One moment.",
+          "reference": "correction_before_commit-1.jsonl:17",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "The navigation has started to the Office (Manyata Tech Park).",
+          "reference": "correction_before_commit-1.jsonl:45",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        }
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "return_to_destination",
+      "requests": [
+        "Navigate to the airport.",
+        "Navigate to the office.",
+        "Navigate to the airport again."
+      ],
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ],
+      "final_destination": "P_AIRPORT",
+      "delivered_replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "reference": "return_to_destination-1.jsonl:6",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "reference": "return_to_destination-1.jsonl:33",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "reference": "return_to_destination-1.jsonl:39",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "reference": "return_to_destination-1.jsonl:60",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        },
+        {
+          "turn": 3,
+          "kind": "ack",
+          "text": "Sure, let me check.",
+          "reference": "return_to_destination-1.jsonl:66",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 3,
+          "kind": "result",
+          "text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "reference": "return_to_destination-1.jsonl:87",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        }
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "waypoint_and_cancel",
+      "requests": [
+        "Navigate to the office.",
+        "Add Blue Tokai in Indiranagar as a stop.",
+        "Cancel navigation."
+      ],
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "add_waypoint",
+          "P_OFFICE",
+          [
+            "K_BLUETOKAI"
+          ]
+        ],
+        [
+          "cancel_navigation",
+          null,
+          []
+        ]
+      ],
+      "final_destination": null,
+      "delivered_replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "reference": "waypoint_and_cancel-1.jsonl:6",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Navigation has started. The route to Office (Manyata Tech Park) is active with an estimated time of arrival of 29 minutes.",
+          "reference": "waypoint_and_cancel-1.jsonl:33",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "reference": "waypoint_and_cancel-1.jsonl:39",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Blue Tokai in Indiranagar has been added as a stop. The route is updated with a detour of 2 minutes and a total estimated time of 31 minutes.",
+          "reference": "waypoint_and_cancel-1.jsonl:61",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        },
+        {
+          "turn": 3,
+          "kind": "ack",
+          "text": "Sure, let me check.",
+          "reference": "waypoint_and_cancel-1.jsonl:67",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 3,
+          "kind": "result",
+          "text": "The navigation cancellation was successful. The active route to Office (Manyata Tech Park) has been removed.",
+          "reference": "waypoint_and_cancel-1.jsonl:81",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        }
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "ambiguous_then_explicit",
+      "requests": [
+        "Navigate to Airport Road.",
+        "I mean Starbucks, Airport Road. Navigate there."
+      ],
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "K_SBUX_AIR",
+          []
+        ]
+      ],
+      "final_destination": "K_SBUX_AIR",
+      "delivered_replies": [
+        {
+          "turn": 1,
+          "kind": "ack",
+          "text": "One moment.",
+          "reference": "ambiguous_then_explicit-1.jsonl:6",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 1,
+          "kind": "result",
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "reference": "ambiguous_then_explicit-1.jsonl:23",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        },
+        {
+          "turn": 2,
+          "kind": "ack",
+          "text": "Okay, one sec.",
+          "reference": "ambiguous_then_explicit-1.jsonl:29",
+          "review": "Non-substantive acknowledgment; no tool-success claim"
+        },
+        {
+          "turn": 2,
+          "kind": "result",
+          "text": "Navigation has started. You are being routed to Starbucks, Airport Road, with an estimated arrival time of 67 minutes.",
+          "reference": "ambiguous_then_explicit-1.jsonl:57",
+          "review": "Grounded in preceding backend result or ambiguity candidates"
+        }
+      ],
+      "stale_backend_attempts": []
+    }
+  ],
+  "limitations": [
+    "One run per development scenario; these cases were already inspected and informed changes. This is not held-out evidence.",
+    "No audio was generated in this navigation harness; text delivery does not establish audible correctness, echo robustness, or barge-in behavior.",
+    "Review concerns deterministic simulated-map effects and selected text traces, not a real vehicle or geocoder.",
+    "Raw model prose can remain wrong even when suppression prevents user exposure. Suppression does not validate tool-plan semantics.",
+    "No source edits, new scenarios, or additional model requests were performed in this review."
+  ]
+}

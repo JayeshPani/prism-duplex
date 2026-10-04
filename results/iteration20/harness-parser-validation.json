@@ -1,0 +1,109 @@
+{
+  "created_at_utc": "2026-09-26T13:20:21.173864+00:00",
+  "status": "passed",
+  "method": "AST-extracted exact controller command-building statements and unchanged recorder local_url/parse_args/main. sys.argv receives each full command. Stub run(args) raises before asyncio/RTC boundary after actual parsing; localhost environment default stub only. No SDK/model import, actual bind, service, inference or capture output. Original four single-input commands reject with code2; all six v2 commands reach async boundary.",
+  "method_setup_note": "Initial main-boundary check omitted asyncio binding in the test namespace and stopped with NameError after parsing; corrected the namespace only, no production or harness change.",
+  "rows": [
+    {
+      "case": "ambiguous_then_hospital_distance",
+      "inputs": 2,
+      "original": {
+        "status": "accepted_before_async",
+        "followups": 1,
+        "followup_trigger": "response-finished",
+        "final_response_kind": "non-ack"
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 1,
+        "followup_trigger": "response-finished",
+        "final_response_kind": "non-ack"
+      }
+    },
+    {
+      "case": "airport_distance",
+      "inputs": 1,
+      "original": {
+        "status": "parser_exit",
+        "exit_code": 2
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 0,
+        "followup_trigger": "result-audio",
+        "final_response_kind": "non-ack"
+      }
+    },
+    {
+      "case": "office_drive_time",
+      "inputs": 1,
+      "original": {
+        "status": "parser_exit",
+        "exit_code": 2
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 0,
+        "followup_trigger": "result-audio",
+        "final_response_kind": "non-ack"
+      }
+    },
+    {
+      "case": "active_airport_then_hospital_distance",
+      "inputs": 2,
+      "original": {
+        "status": "accepted_before_async",
+        "followups": 1,
+        "followup_trigger": "response-finished",
+        "final_response_kind": "non-ack"
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 1,
+        "followup_trigger": "response-finished",
+        "final_response_kind": "non-ack"
+      }
+    },
+    {
+      "case": "ambiguous_distance",
+      "inputs": 1,
+      "original": {
+        "status": "parser_exit",
+        "exit_code": 2
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 0,
+        "followup_trigger": "result-audio",
+        "final_response_kind": "non-ack"
+      }
+    },
+    {
+      "case": "explicit_hospital_navigation",
+      "inputs": 1,
+      "original": {
+        "status": "parser_exit",
+        "exit_code": 2
+      },
+      "v2": {
+        "status": "accepted_before_async",
+        "followups": 0,
+        "followup_trigger": "result-audio",
+        "final_response_kind": "result"
+      }
+    }
+  ],
+  "source_sha256": {
+    "results/iteration20/run_suite.py": "e538dcc7acfdfec78c0cf32e0f0d7ddc2b65539a63df575afc1b6855979c8ce3",
+    "results/iteration20/run_suite_v2.py": "682d0ada11b89cc3d069ebd727bc48d9f9def8cdb59a320b918ab41dee3123f3",
+    "results/iteration20/supervise_v2.py": "6c649fb9c96911c292a88d0ed293d42776741f8dc8de767d826b39779bcc6b2e",
+    "results/iteration20/review_latency.py": "6e5e3a4effe299581def2184f70f490dd35b69dd2887dd8bb3007b92acfa569b",
+    "scripts/local_livekit_audio_experiment.py": "0b1b6417bf43bdebdc02c2cb8b77035d4da601c0722b4ce0f70e33e71086249a",
+    "results/iteration20/protocol.json": "9edbafdc60c47f947049bf0148fb80aa37762d8a90f064147152f813a253f1b8"
+  },
+  "source_unchanged_during_check": true,
+  "limits": [
+    "CLI compatibility and source syntax only, not actual capture completion.",
+    "Original baseline parser failure and frozen methods remain unchanged."
+  ]
+}

@@ -1,0 +1,674 @@
+{
+  "checked_at_utc": "2026-09-26T06:17:19.696443+00:00",
+  "implementation": "retained; larger goal remains active",
+  "production_change_this_iteration": [
+    "agent/coordinator/coordinator.py",
+    "agent/coordinator/responder.py"
+  ],
+  "tests": {
+    "new_request_fidelity_cases": 5,
+    "baseline_failed": 3,
+    "baseline_passed": 2,
+    "first_focused_passed": 39,
+    "first_focused_legacy_api_expectation_failed": 1,
+    "legacy_test_update": "Capture original request plus optional repaired_request rather than expecting repair to replace the original.",
+    "final_focused_passed": 40,
+    "full_passed": 543,
+    "full_runtime_seconds": 5.08,
+    "completed_before_inference": true
+  },
+  "offline_speech": {
+    "summary": {
+      "declared": 16,
+      "attempted": 16,
+      "completed": 16,
+      "failed_or_not_completed": 0,
+      "status_counts": {
+        "completed": 16
+      }
+    },
+    "qualitative_counts": {
+      "A": {
+        "declared_rows": 8,
+        "completed_rows": 8,
+        "declared_estimate_label_preserved": 0,
+        "primary_minutes_fact_preserved": 6,
+        "primary_minutes_fact_failed": 2,
+        "rows_with_proper_name_deviations": 8,
+        "action_relations_present": 8,
+        "replacement_relations": {
+          "present": 2,
+          "applicable": 2
+        },
+        "already_present_noop": {
+          "present": 2,
+          "applicable": 2
+        },
+        "zero_extra_minutes": {
+          "present": 2,
+          "applicable": 2
+        }
+      },
+      "B": {
+        "declared_rows": 8,
+        "completed_rows": 8,
+        "declared_estimate_label_preserved": 8,
+        "primary_minutes_fact_preserved": 6,
+        "primary_minutes_fact_failed": 2,
+        "rows_with_proper_name_deviations": 8,
+        "action_relations_present": 8,
+        "replacement_relations": {
+          "present": 2,
+          "applicable": 2
+        },
+        "already_present_noop": {
+          "present": 2,
+          "applicable": 2
+        },
+        "zero_extra_minutes": {
+          "present": 2,
+          "applicable": 2
+        }
+      }
+    },
+    "all_declared_hashes_match_after": true,
+    "model_inventory_unchanged": true,
+    "source_hashes_match_now": true,
+    "supervision": {
+      "started_at_utc": "2026-09-26T05:59:06.707234+00:00",
+      "command": [
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/measure_eta_speech.py",
+        "--protocol",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/eta-protocol.json",
+        "--out",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/eta-speech"
+      ],
+      "status": "exited",
+      "deadline_seconds": 300,
+      "sigterm_grace_seconds": 20,
+      "pid": 8198,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-26T05:59:43.770748+00:00"
+    },
+    "cleanup": [
+      {
+        "pool": "stt",
+        "status": "completed",
+        "started_at_utc": "2026-09-26T05:59:41.339227+00:00",
+        "seconds": 0.00025466700026299804,
+        "finished_at_utc": "2026-09-26T05:59:41.340202+00:00"
+      },
+      {
+        "pool": "tts",
+        "status": "completed",
+        "started_at_utc": "2026-09-26T05:59:41.341835+00:00",
+        "seconds": 1.4169927453622222e-06,
+        "finished_at_utc": "2026-09-26T05:59:41.342589+00:00"
+      }
+    ],
+    "limit": "Estimate-label improvement only; both arms retain13-to30 recognition errors in two ofeight rows. No human intelligibility claim."
+  },
+  "rtc": {
+    "summary": {
+      "declared_trials": 4,
+      "audited_trials": 4,
+      "shared_attempts": 18,
+      "successful_attempts": 18,
+      "attempt_status_counts": {
+        "done": 18
+      },
+      "attempts_without_end": 0,
+      "observed_effects": 6,
+      "checks": {
+        "agent_departed": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "all_attempts_done": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "all_done_results_successful": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "attempt_count": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "attempt_event_pairs": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "attempt_sequence": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "capture_completed": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "expected_effects": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "frame_integrity": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "frozen_source_receipts": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "full_trace_equality": {
+          "passed": 2,
+          "evaluated": 4
+        },
+        "no_capture_errors": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "no_server_tool_errors": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "no_stale_results": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "old_result_interruption_requested": {
+          "passed": 2,
+          "evaluated": 2
+        },
+        "raw_hashes": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "result_after_effect_1": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "result_after_effect_2": {
+          "passed": 2,
+          "evaluated": 2
+        },
+        "room_cleanup_logged": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "speech_handles_settled": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "transcript_1": {
+          "passed": 4,
+          "evaluated": 4
+        },
+        "transcript_2": {
+          "passed": 2,
+          "evaluated": 2
+        }
+      }
+    },
+    "trace": {
+      "full_equality": {
+        "passed": 2,
+        "evaluated": 4
+      },
+      "missing_classification_counts": {
+        "initial_listening": 2
+      },
+      "failures": [
+        {
+          "name": "rtc-correction-2",
+          "trace": {
+            "server_count": 57,
+            "client_count": 56,
+            "missing": [
+              {
+                "line": 1,
+                "event": {
+                  "type": "agent_state",
+                  "data": {
+                    "state": "listening"
+                  },
+                  "ts": 1790402518.70694
+                },
+                "classification": "initial_listening"
+              }
+            ],
+            "extra": []
+          },
+          "audit_error": null
+        },
+        {
+          "name": "rtc-baseline-2",
+          "trace": {
+            "server_count": 29,
+            "client_count": 28,
+            "missing": [
+              {
+                "line": 1,
+                "event": {
+                  "type": "agent_state",
+                  "data": {
+                    "state": "listening"
+                  },
+                  "ts": 1790402566.1492622
+                },
+                "classification": "initial_listening"
+              }
+            ],
+            "extra": []
+          },
+          "audit_error": null
+        }
+      ],
+      "undeclared_runs": [],
+      "raw_packet_matches_for_missing_events": [
+        {
+          "trial": "rtc-correction-2",
+          "missing_server_line": 1,
+          "raw_packet_matches": [
+            {
+              "line": 2,
+              "participant": null,
+              "topic": "agent-events"
+            }
+          ]
+        },
+        {
+          "trial": "rtc-baseline-2",
+          "missing_server_line": 1,
+          "raw_packet_matches": [
+            {
+              "line": 2,
+              "participant": null,
+              "topic": "agent-events"
+            }
+          ]
+        }
+      ],
+      "raw_packet_note": "Matching raw packets do not change the failed coordinator-event equality checks. The driver requires an identified agent participant before promoting a packet to a coordinator_event."
+    },
+    "execution": {
+      "expected_attempts": 18,
+      "expected_effects": 6,
+      "observed_attempts": 18,
+      "attempt_status_counts": {
+        "done": 18
+      },
+      "observed_effects": 6,
+      "attempts_without_end": 0,
+      "unassigned_attempts": [],
+      "all_expected_effect_checks_passed": true,
+      "all_no_stale_checks_passed": true,
+      "server_error_events": [],
+      "capture_errors": {
+        "rtc-baseline-1": {
+          "receiver_errors": [],
+          "cleanup_errors": []
+        },
+        "rtc-correction-1": {
+          "receiver_errors": [],
+          "cleanup_errors": []
+        },
+        "rtc-correction-2": {
+          "receiver_errors": [],
+          "cleanup_errors": []
+        },
+        "rtc-baseline-2": {
+          "receiver_errors": [],
+          "cleanup_errors": []
+        }
+      }
+    },
+    "sources_and_inputs_unchanged_during_run": true,
+    "source_input_hashes_match_now": true,
+    "all_agents_departed": true,
+    "worker_clean_exit": true,
+    "cleanup": [
+      {
+        "role": "worker",
+        "pid": 8722,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "scripts/local_livekit_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/worker-manifest.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T06:03:06.610104+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 8709,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T06:03:06.738818+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 8708,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration9/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T06:03:06.749487+00:00"
+      }
+    ],
+    "worker_drain_to_exit_seconds": 1.290104,
+    "server_job_status": "All4JS_FAILED at departure; same labeling in8iteration7and4iteration8 jobs. Distinct from successful effects/application cleanup/process exit.",
+    "recognition_outlier": "1.92seconds ofinput recorded as14.195seconds STT processing; cause unresolved."
+  },
+  "received_asr": {
+    "status": "completed",
+    "summary": {
+      "declared": 4,
+      "attempted": 4,
+      "completed": 4,
+      "failed_or_not_completed": 0,
+      "capture_status_counts": {
+        "completed_observation": 4
+      },
+      "review_status_counts": {
+        "completed": 4
+      }
+    },
+    "inputs_unchanged": true,
+    "source_unchanged": true,
+    "suite_unchanged": true,
+    "current_source_hashes_match": true,
+    "all_four_estimate_labels_and_expected_minutes_retained_in_asr": true,
+    "proper_name_deviations_retained": true,
+    "scope": "Airport88/office29cases; does not exercise offline added-stop13error."
+  },
+  "verification": {
+    "syntax_files": 36,
+    "json_files_parsed": 43,
+    "git_diff_check": "passed",
+    "new_python_and_docs_trailing_whitespace": "none",
+    "all_observed_process_pids_absent_now": true,
+    "observed_process_pids_absent_now": {
+      "8198": true,
+      "8708": true,
+      "8709": true,
+      "8722": true,
+      "8790": true,
+      "9155": true,
+      "9311": true,
+      "9405": true,
+      "9445": true,
+      "9993": true
+    },
+    "model_files_after_all_inference": {
+      "checked_at_utc": "2026-09-26T06:13:56.124557+00:00",
+      "files": [
+        {
+          "name": "qwen",
+          "path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/model.safetensors",
+          "bytes": 4607835174,
+          "sha256": "f2d29621aab300336ad645567ff38c42aac755513006ef4e8a579cf7ef5256d8",
+          "matches_prior_reference": true
+        },
+        {
+          "name": "parakeet",
+          "path": "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--parakeet-tdt-0.6b-v2/snapshots/8ae155301e23d820d82aa60d24817c900e69e487/model.safetensors",
+          "bytes": 2471559904,
+          "sha256": "b958c37a6baa6874a279108755c8f2818e27bf647d72d54800a234a421341dfe",
+          "matches_prior_reference": true
+        },
+        {
+          "name": "kokoro",
+          "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/kokoro-v1.0.onnx",
+          "bytes": 325532387,
+          "sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+          "matches_prior_reference": true
+        },
+        {
+          "name": "voices",
+          "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/voices-v1.0.bin",
+          "bytes": 28214398,
+          "sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+          "matches_prior_reference": true
+        }
+      ],
+      "limit": "Observed reference bytes after all inference, not publisher-authenticated hashes."
+    },
+    "independent_code_and_document_review": "No unresolved code/document discrepancy; SDK ordering diagnosis remains a bounded hypothesis."
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890",
+    "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979"
+  },
+  "evidence_sha256": {
+    "results/iteration9/analyze_eta_speech.py": "f5fc784beec002fe5cd2d458b0954a0a0acc4ae769b3afb079a9b670ad5d1b30",
+    "results/iteration9/audio-assets/correct.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+    "results/iteration9/audio-assets/navigate.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "results/iteration9/audio-assets/noise.wav": "a877c571fd70999adc21961bcc2669dff42454d64eba1c6868339c26386c2f1d",
+    "results/iteration9/audio-assets/silence.wav": "0b9e427fb429f33f0f9a2ddd2c7389c7aba96c3a9411ba203367ac9c06779b32",
+    "results/iteration9/audit.json": "a985f24d5ff02ac9385d81c3d09d172b0e96db8648564f65ed7a000839dc16ac",
+    "results/iteration9/audit_live.py": "9ffae7bf7848e5a1f638cf7e475cb9d8591b2d08a6f41dd5c52c8571f6d8b5d6",
+    "results/iteration9/coordinator-before.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a",
+    "results/iteration9/coordinator-candidate.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "results/iteration9/eta-analysis.json": "a28303a1afd2f6f53d88406ed61a6efdd2a69b90fdcd5dc1273d19630e1e01fb",
+    "results/iteration9/eta-protocol-draft.json": "5075627e021ce4b4aa8c646cbbb7612368df7d3d31b76c1ac4c367c10ec45bb3",
+    "results/iteration9/eta-protocol.json": "96906af2f7083d308cccbabbfa99bec532d93e6004f82b5f0f713b6d8a7ef32b",
+    "results/iteration9/eta-speech/model-receipts/agent_stt-8198.json": "28bfc87b6f674c308dbd9778b90eb963f3c32504cd9f38fabf9c4e065a7b58a4",
+    "results/iteration9/eta-speech/protocol.json": "96906af2f7083d308cccbabbfa99bec532d93e6004f82b5f0f713b6d8a7ef32b",
+    "results/iteration9/eta-speech/raw/block-1-A-add_stop-16k.wav": "e5fa1ffba02b93f0ead46cdae9baa48ab9488590120022ed73b6e88dd15fc035",
+    "results/iteration9/eta-speech/raw/block-1-A-add_stop-24k.pcm": "96604ed49b9e9f0a9bfdd748b04fafd0635c42287cf3150acbf96f4b2eb6a789",
+    "results/iteration9/eta-speech/raw/block-1-A-add_stop-24k.wav": "72c07deb88a7a341a776f7756ac3d2fb05b141e1a32cd6dde5dba30c86cb9e34",
+    "results/iteration9/eta-speech/raw/block-1-A-airport_start-16k.wav": "c4be702ec59b5b4aebced7ae02eb82be1379750d1dd7bf231e1f868f068619e4",
+    "results/iteration9/eta-speech/raw/block-1-A-airport_start-24k.pcm": "24fde65633e77636a17b16e12eb6f4bb29b941e0f620ae2cdabc5a9bfa3c6426",
+    "results/iteration9/eta-speech/raw/block-1-A-airport_start-24k.wav": "4c1e10565dbb51924afdda9d1d17ef72022e44198c8a2308ff59a828ad041ece",
+    "results/iteration9/eta-speech/raw/block-1-A-office_replacement-16k.wav": "6d49017345ed29b9ce2c002fb7a2733edcfd7bdedd6903331aac6f87e341db4d",
+    "results/iteration9/eta-speech/raw/block-1-A-office_replacement-24k.pcm": "b31713cec9b3b19c1a9fa78e7f570014d665a9dc8813f3fd2e4c5a1433ad8473",
+    "results/iteration9/eta-speech/raw/block-1-A-office_replacement-24k.wav": "eae1b41b57d3127f46a959d7c22476414f8882935e261b330f33ed18bde7e1c0",
+    "results/iteration9/eta-speech/raw/block-1-A-repeat_stop-16k.wav": "ee6e322c2bbd1f6aa348bc54688db8c5fa231946049e51cd1af5ea813d037281",
+    "results/iteration9/eta-speech/raw/block-1-A-repeat_stop-24k.pcm": "4b8dd8b8e0a3a719f84668871f9bd8d331e7e67abcd31ad83a468549c492a757",
+    "results/iteration9/eta-speech/raw/block-1-A-repeat_stop-24k.wav": "bab94240812be0aba2dfd0bc8537bad7a9a1dcc4c8359265805f31f686354be5",
+    "results/iteration9/eta-speech/raw/block-2-B-add_stop-16k.wav": "696cf1ac85e9209aa166b707d18eb16077516674690010304bfcfea665007674",
+    "results/iteration9/eta-speech/raw/block-2-B-add_stop-24k.pcm": "c253739681f41414d84d37f234f53f8a06a45faeb0981e51370df8d87580ad32",
+    "results/iteration9/eta-speech/raw/block-2-B-add_stop-24k.wav": "d5bb860114a505ec60f56dee665bb8be63d5561e6af0c520a1a3c794607d5cde",
+    "results/iteration9/eta-speech/raw/block-2-B-airport_start-16k.wav": "7b9d00a63680f20fdbe0c03aa37add83b2c7494162d8123cfe3b11988d471432",
+    "results/iteration9/eta-speech/raw/block-2-B-airport_start-24k.pcm": "9d64a8af6e852e6ab97b8e4432b300fd45aa837836c23c6b514048573b9db1c3",
+    "results/iteration9/eta-speech/raw/block-2-B-airport_start-24k.wav": "722c736c7c05c89a72b50e6b121fdc793a56f0359f8d55087c7ac0d83ef496e1",
+    "results/iteration9/eta-speech/raw/block-2-B-office_replacement-16k.wav": "3aa602ff48025c005f0484c7dd570d7a0a75c380f42b7ba587d0d914cde5f253",
+    "results/iteration9/eta-speech/raw/block-2-B-office_replacement-24k.pcm": "9b325ae8b6e8c55b0c3b4ad35a2ec28bebee067fb17034890c93fc5b0db85885",
+    "results/iteration9/eta-speech/raw/block-2-B-office_replacement-24k.wav": "5e47cae49bc4f1bae29fd0a9355d76459d5c345c2ea723f8f71e1807fb558e69",
+    "results/iteration9/eta-speech/raw/block-2-B-repeat_stop-16k.wav": "b0af58591c9aef633aaab56881995c127c661bcfbe4de28e725e9ff95a082a51",
+    "results/iteration9/eta-speech/raw/block-2-B-repeat_stop-24k.pcm": "197f298a898e3fbfd0c51e2142af605e7e62b1b3577e71297ea210098419347b",
+    "results/iteration9/eta-speech/raw/block-2-B-repeat_stop-24k.wav": "7a2b9b862a3667f974fd48ac3d91c1592e2fe9593155b2cdbf38a13f42202056",
+    "results/iteration9/eta-speech/raw/block-3-B-add_stop-16k.wav": "99d9664433ba720722b324a298eca3907f0c47b0b5bcfa8c6c44c77b98ac6700",
+    "results/iteration9/eta-speech/raw/block-3-B-add_stop-24k.pcm": "c253739681f41414d84d37f234f53f8a06a45faeb0981e51370df8d87580ad32",
+    "results/iteration9/eta-speech/raw/block-3-B-add_stop-24k.wav": "d5bb860114a505ec60f56dee665bb8be63d5561e6af0c520a1a3c794607d5cde",
+    "results/iteration9/eta-speech/raw/block-3-B-airport_start-16k.wav": "f8489a643012a88494f68abe486dfdfe0590cc5f8d78aa8ca4d0094382c81b1c",
+    "results/iteration9/eta-speech/raw/block-3-B-airport_start-24k.pcm": "9d64a8af6e852e6ab97b8e4432b300fd45aa837836c23c6b514048573b9db1c3",
+    "results/iteration9/eta-speech/raw/block-3-B-airport_start-24k.wav": "722c736c7c05c89a72b50e6b121fdc793a56f0359f8d55087c7ac0d83ef496e1",
+    "results/iteration9/eta-speech/raw/block-3-B-office_replacement-16k.wav": "c2b09ec787d86aa0153f547bac9575e95a750d611e7b010b7dce0d5b2cfc1bf0",
+    "results/iteration9/eta-speech/raw/block-3-B-office_replacement-24k.pcm": "9b325ae8b6e8c55b0c3b4ad35a2ec28bebee067fb17034890c93fc5b0db85885",
+    "results/iteration9/eta-speech/raw/block-3-B-office_replacement-24k.wav": "5e47cae49bc4f1bae29fd0a9355d76459d5c345c2ea723f8f71e1807fb558e69",
+    "results/iteration9/eta-speech/raw/block-3-B-repeat_stop-16k.wav": "ab81b18ab8e8214d61ad398e971375d75a2727452fa546a1dcd2b3d87d1aa852",
+    "results/iteration9/eta-speech/raw/block-3-B-repeat_stop-24k.pcm": "197f298a898e3fbfd0c51e2142af605e7e62b1b3577e71297ea210098419347b",
+    "results/iteration9/eta-speech/raw/block-3-B-repeat_stop-24k.wav": "7a2b9b862a3667f974fd48ac3d91c1592e2fe9593155b2cdbf38a13f42202056",
+    "results/iteration9/eta-speech/raw/block-4-A-add_stop-16k.wav": "8a971a4d6ca522c0e452ec69a14dfe3f680479510b7e0574b3aa501bd071eb8f",
+    "results/iteration9/eta-speech/raw/block-4-A-add_stop-24k.pcm": "96604ed49b9e9f0a9bfdd748b04fafd0635c42287cf3150acbf96f4b2eb6a789",
+    "results/iteration9/eta-speech/raw/block-4-A-add_stop-24k.wav": "72c07deb88a7a341a776f7756ac3d2fb05b141e1a32cd6dde5dba30c86cb9e34",
+    "results/iteration9/eta-speech/raw/block-4-A-airport_start-16k.wav": "858e3abb20a907830d930e957c39d2864c1ac94719d46a45397dd2a85feb98c0",
+    "results/iteration9/eta-speech/raw/block-4-A-airport_start-24k.pcm": "24fde65633e77636a17b16e12eb6f4bb29b941e0f620ae2cdabc5a9bfa3c6426",
+    "results/iteration9/eta-speech/raw/block-4-A-airport_start-24k.wav": "4c1e10565dbb51924afdda9d1d17ef72022e44198c8a2308ff59a828ad041ece",
+    "results/iteration9/eta-speech/raw/block-4-A-office_replacement-16k.wav": "0a7d7a1a0123763e284626bc14a77d77d5a6da14fe2a433dbbe21d89ed0f0ae7",
+    "results/iteration9/eta-speech/raw/block-4-A-office_replacement-24k.pcm": "b31713cec9b3b19c1a9fa78e7f570014d665a9dc8813f3fd2e4c5a1433ad8473",
+    "results/iteration9/eta-speech/raw/block-4-A-office_replacement-24k.wav": "eae1b41b57d3127f46a959d7c22476414f8882935e261b330f33ed18bde7e1c0",
+    "results/iteration9/eta-speech/raw/block-4-A-repeat_stop-16k.wav": "a9da1779058159da39a4cf52ffda765ed28d2259f56bcf3b1e9c39eb5561e78c",
+    "results/iteration9/eta-speech/raw/block-4-A-repeat_stop-24k.pcm": "4b8dd8b8e0a3a719f84668871f9bd8d331e7e67abcd31ad83a468549c492a757",
+    "results/iteration9/eta-speech/raw/block-4-A-repeat_stop-24k.wav": "bab94240812be0aba2dfd0bc8537bad7a9a1dcc4c8359265805f31f686354be5",
+    "results/iteration9/eta-speech/report.json": "5f2299aaff7109f139fdfe01e7477bc9a29bf3228c74fc8ea388c9a394cd4dc4",
+    "results/iteration9/eta-speech.log": "3b6df91b4e6eafedaf53829d5a520140b7fba70322cd2685304377ed517ff42a",
+    "results/iteration9/eta-supervision.json": "cc3fe4f0045090e963ff854081dbd24c099d3fe8913d5856ee93abc8a36e0b6b",
+    "results/iteration9/eta-text-validation.json": "fae2000609227c11ee89ac5500f2f4e073c97aecec6d86501c9bd54ce366b623",
+    "results/iteration9/full-suite.txt": "ebb0a16a8110dbed86dbb6e3ccec399379b2f7a7679ded271e8150805a988c58",
+    "results/iteration9/job-status-ordering-audit.json": "abd614c302bd11bb84fedb3c261b3a66fbf075e7e8cca75002741037cc1717a8",
+    "results/iteration9/latency-summary.json": "d19e33644a903ec625d6efef988b5e9897e6e9d0cd00c5dd32af6b8b8ebc2467",
+    "results/iteration9/live-preflight.json": "da74bdc481ac2bf3eb8839b2677466dacf3ce4d3fa7467b07392bd810b22924c",
+    "results/iteration9/local-stack-run1/heartbeat.log": "c87aad6a3c00c06738da0cf433e5bf5980a0e1e940b0e4d48767bdc8888c9089",
+    "results/iteration9/local-stack-run1/livekit-exit.json": "bb29d0b4d6e6a1c32197b683dee3508134d7189cb51102460c3f4fb55be857fc",
+    "results/iteration9/local-stack-run1/livekit-launch.json": "23e3f7ca193318ff191418b446a71f4c8fb4819e2cbf6205e79715f7a1df0347",
+    "results/iteration9/local-stack-run1/livekit.log": "40b2e8999256323020ff1d7bdc6dea47471c7c64505312efd61fc922662b1737",
+    "results/iteration9/local-stack-run1/livekit.yaml": "5e533151983ad839d9bb4ba99f4e7e3511e44eb4ca4ea1025a14e915ca2434da",
+    "results/iteration9/local-stack-run1/llm-exit.json": "34c21deb0e883d9ff1b75d5aee84738e57521f29eceff42e7e1c3e899bb6521c",
+    "results/iteration9/local-stack-run1/llm-launch.json": "8d4cf45afe12366755312b1083d51f9f09e68346cd9c69e0a1effe08badc2757",
+    "results/iteration9/local-stack-run1/llm.log": "00b4adcdcd71373de366fd21a3001270334defa1e310311a48956d0f8a85c206",
+    "results/iteration9/local-stack-run1/model-receipts/agent_stt-8722.json": "a1098821311a50653e34d6540f6cf133fd259c086dcae48692f0ca6509fa3358",
+    "results/iteration9/local-stack-run1/tool-calls.jsonl": "d5f868c629bddf8e8914edca28331ec71f372c32c3e72959a945426c07633ea2",
+    "results/iteration9/local-stack-run1/tool-calls.jsonl.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/iteration9/local-stack-run1/traces/car-audio-4c9f99fd17974e1facfdd6fa8d4c3bd0.jsonl": "0c695a3dd249f73dedc61f40db789407d62a4d45accbbb632603b61b48b52259",
+    "results/iteration9/local-stack-run1/traces/car-audio-558b4292ffb34505b8957759082c5139.jsonl": "42857d0017487f7a2d96a8e34d3444fcc588b580a226f9742ac304b6b1612a1b",
+    "results/iteration9/local-stack-run1/traces/car-audio-57c6c9afe702494ea8f25f32b3f31b91.jsonl": "a5f36a286d4b645ea1c1f6a60683c6bea0ef079afdd4ab4dabb59630c35ebee6",
+    "results/iteration9/local-stack-run1/traces/car-audio-fcdfbd38b9214d2f837b09294646d2c4.jsonl": "9abacf071f8af375c5b53263e6567b7afd729819fe3540a4a6c1dc8a8e1039c0",
+    "results/iteration9/local-stack-run1/worker-exit.json": "92d67a650a450350bf26e70555660666ad57a7ef2be26473e4f7a46d6adfcb14",
+    "results/iteration9/local-stack-run1/worker-launch.json": "df19f6f08bae18136a91b3e2edee08e77ddc521cea57ede76a9c8865f319927f",
+    "results/iteration9/local-stack-run1/worker-manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "results/iteration9/local-stack-run1/worker.log": "cc58fc2d9d19c0bd4caa883ef23d5522a7a8240fad55f86069445bca4306b480",
+    "results/iteration9/measure_eta_speech.py": "ba6e34e1b321afac83a4384857be9601e6847953b7c92393f3861dcb8018fd8e",
+    "results/iteration9/memory.jsonl": "03bad562373ad62fba594d84378b35da5eff723f0ccecb4e35523d6b2ca6a11b",
+    "results/iteration9/post-run-model-verification.json": "44a48e7694af0dda749c364aa8774528f367fc42fcebb73d0622a226bfc0e540",
+    "results/iteration9/pre-asr-cleanup.json": "74dcd2df39e8f7e2d19b0c1e0da63a1957abe61b294ff4214df6ab89eabc3c6c",
+    "results/iteration9/process-cleanup-verification.json": "dd73b6dfd96c109a0b8e71f9c65231e12efec2abd812ebd04a31321d4166be63",
+    "results/iteration9/production-change.patch": "070d424aea60e30dc95d481845b9a842bdf01bf466a11c7f37a52e0a9491943d",
+    "results/iteration9/protocol.json": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+    "results/iteration9/received-audio-review/model-receipts/agent_stt-9993.json": "4618423d89b37404596af29bbd2605cc4b69e04ccedf01d5ec61d35dbbb18be8",
+    "results/iteration9/received-audio-review/protocol.json": "5cf61318a4294a282529bec879e9ec378c9ad3b956c8261961d0c6c41b19518f",
+    "results/iteration9/received-audio-review/qualitative-review.json": "7fb589d8395c38b21a0c5c40a41b15808ea143625c8be456b1d33a0cda004c28",
+    "results/iteration9/received-audio-review/report.json": "0b4ed5b5b77ed10436aed99128cd48d2ff0415f15ad9a15c0bfa5d8f4a5de189",
+    "results/iteration9/received-audio-review/resampled/rtc-baseline-1.wav": "c9876e16356c9e268d11f43bdfb14e6ca87f68718382c00efcd7b7d05be620ed",
+    "results/iteration9/received-audio-review/resampled/rtc-baseline-2.wav": "d717688abaf1da10ea4c95eded374e0b4217c8a5d93c456bd8be12306d9d19fd",
+    "results/iteration9/received-audio-review/resampled/rtc-correction-1.wav": "b6ba5b2d704c9e5f0a170737d6a6f8343ab04eecfae9b96041447fbadf4381d6",
+    "results/iteration9/received-audio-review/resampled/rtc-correction-2.wav": "71c5cfd6d0dc72ecf83c9bdab27dcfb04d8b999be46f34f6a147a3c6a7f197a4",
+    "results/iteration9/received-audio-review-protocol.json": "a898cfbc171db76fd78af13e9900168491789dfe6088cd84a7d6f0632ce0a405",
+    "results/iteration9/received-audio-review.log": "d50a4a38cb41c53e558234a132ebe5bdfb8811764d803b5f0b6df95c17b22808",
+    "results/iteration9/request-fidelity-after.txt": "c3a9a73b3ed3fa91c3825003624deccce385c9109f02edbd2e017528f5c1c173",
+    "results/iteration9/request-fidelity-before.txt": "bb4e3ec097afba69ec03a1eb8bf6bc81401c98791cb1c0d055c48af6d2bd3001",
+    "results/iteration9/request-fidelity-final.txt": "d27b72b6b8ba0374193e7469bfc014a0bb9784af3b1faef03d9710ef6f614831",
+    "results/iteration9/responder-before.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731",
+    "results/iteration9/responder-candidate.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890",
+    "results/iteration9/review_received_audio.py": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+    "results/iteration9/rtc-baseline-1/events.jsonl": "9359672274d7fa3168b17e82f64d8a9e90e5ea16ee61c9e249c264530ad18dc5",
+    "results/iteration9/rtc-baseline-1/frames.jsonl": "ad0843a1cb40b497a0b60e1f238873939706382ede077d0953c17021bf126080",
+    "results/iteration9/rtc-baseline-1/initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "results/iteration9/rtc-baseline-1/protocol.json": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+    "results/iteration9/rtc-baseline-1/received-1.pcm": "4bf898753b08af01dab0f0e6feff8dc8705d4942db8162f0232c467e11c4bc8e",
+    "results/iteration9/rtc-baseline-1/report.json": "7642a6f758b45bb637b9646a7274aa1ff222d63992389c1e5bebda04362fd414",
+    "results/iteration9/rtc-baseline-1/worker_manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "results/iteration9/rtc-baseline-1.log": "692bcae41bc8bf6bbff69776c069d4ad67751a6ad85f951c953f54a3de6269d3",
+    "results/iteration9/rtc-baseline-2/events.jsonl": "585e3704a4c57d36620ed5f2b031e1d9cc18971103283f752ee85dc455043f07",
+    "results/iteration9/rtc-baseline-2/frames.jsonl": "653025719659c502899df01de7f8f29f4e9cd808d0a4c0c8e164f4d980d711ef",
+    "results/iteration9/rtc-baseline-2/initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "results/iteration9/rtc-baseline-2/protocol.json": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+    "results/iteration9/rtc-baseline-2/received-1.pcm": "068453b8e545565c5259795022f1e4e70fd2744f38119fb02978b0bc244a50ea",
+    "results/iteration9/rtc-baseline-2/report.json": "4c6464cf1094a0aec1ec5e9a3acc6786318c9a8aa251419432103498e694ab29",
+    "results/iteration9/rtc-baseline-2/worker_manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "results/iteration9/rtc-baseline-2.log": "73ad29646d3f301056d8b2897647ce5dc7062e297056d1973c7b11342cd3a61f",
+    "results/iteration9/rtc-correction-1/correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+    "results/iteration9/rtc-correction-1/events.jsonl": "ea5f8a55933c82aa6ab355c09f111d9ff1f0895a689e29196cd9ba7d4c66f3bc",
+    "results/iteration9/rtc-correction-1/frames.jsonl": "98d3a8ba6bafd1ed0875262248d4e7e0fad5793287d5aa34d4cd5fa3c79d1edd",
+    "results/iteration9/rtc-correction-1/initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "results/iteration9/rtc-correction-1/protocol.json": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+    "results/iteration9/rtc-correction-1/received-1.pcm": "968464633c1a99c56669a3e3b7284ca77acdf502d35fa1e925b7cf56a8a407d5",
+    "results/iteration9/rtc-correction-1/report.json": "cb175766f1ec70b1f0231418e5eedad643043b873db04401dede77ce2c54d2fd",
+    "results/iteration9/rtc-correction-1/worker_manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "results/iteration9/rtc-correction-1.log": "0cd7a5bf7cd08e4986af4230a7e38706529e39efb8238e1bd4e96c5a0f86b77a",
+    "results/iteration9/rtc-correction-2/correction.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+    "results/iteration9/rtc-correction-2/events.jsonl": "2edd70ef5f934e870a44bdf17b99ecba663be504c194f786366238feade06150",
+    "results/iteration9/rtc-correction-2/frames.jsonl": "72be650f1db465ecf0ba6a27f398ba8df0bd4191e2f098afeb01d91b70ba6cdc",
+    "results/iteration9/rtc-correction-2/initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "results/iteration9/rtc-correction-2/protocol.json": "2d327b9a51ffbb037189fa06cfa4f406550b8c144d10b1a6198073c52616949b",
+    "results/iteration9/rtc-correction-2/received-1.pcm": "bf58df14741f194a968cfd154c7af9245a0aa603ac58d703974d4edf18f727b0",
+    "results/iteration9/rtc-correction-2/report.json": "c73fb2563debecd1f8d170d57950bd69fe328d30a1b17ad9c876c94a02d61488",
+    "results/iteration9/rtc-correction-2/worker_manifest.json": "f00ab5c0e6b80fbdf84051743da8489e9e3dff7052072f28def77d823af5d046",
+    "results/iteration9/rtc-correction-2.log": "21644739a74020ba70081cc5fad72b19e5f09903375bf9c8865ba383d6778b3d",
+    "results/iteration9/rtc-supervisor.log": "2d450beff48e3b46e2c4033c7ff06621b8d87770b98aaec45ae967dd5fe8afc0",
+    "results/iteration9/run-report.json": "6992dd607b245200b6076acbbeefaeadc953454fa0302a35ab5360c148e45d77",
+    "results/iteration9/run_eta_supervised.py": "8fc8c98f788fdcde3885cd3d55b209adc0645c40a4e078379cfa26296ccf1465",
+    "results/iteration9/run_suite.py": "490146aedc81adc80d4b51de855d0d5f1e5549a0061e39ce6290bf97b3feedbd",
+    "results/iteration9/summarize_latency.py": "7f5670fca0b0d5c8070e6f065686dedf5d0b714f725b87cca37f1111c5886228",
+    "results/iteration9/supplementary-log-review.json": "963f903b730392f7a476a7fdcdb6bcf46afc999fe6a660629cbb0826d9a4f662"
+  },
+  "docs_sha256": {
+    "README.md": "1de4c9cfecf6646c0c1b13ada24d768c314a442662c1a09ca903da5d017ed0a4",
+    "docs/iteration8.md": "956e5529548bdaf3cabb46fa7a3422db6ebea1c348f129bfea3434da641084e5",
+    "docs/iteration9.md": "fe337ae738407b848d905cd0562baa8b502ea26721ef8fb8664c0e7c90edfefe"
+  },
+  "pr_draft_sha256": "689e51d380555316b36df4150fce5c6dfb676fb8669700561502cb81106d1ed6",
+  "git": {
+    "branch": "reliability-navigation",
+    "head": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "origin_main": "1550f91d50c73f65a9c139bca044717130f9cc13",
+    "staged_files": [],
+    "commits_ahead": [],
+    "github_branch_prs_verified_this_checkpoint": [],
+    "status": "Description prepared; no staged files or ahead commits. Developer instructions reserve staging to the user; no PR opened."
+  },
+  "limits": [
+    "Known development data and fixed serial order; no held-out accuracy or population latency claim.",
+    "ASR proxy cannot distinguish pronunciation from recognition. Candidate adds0.619\u20130.960seconds ofspeech.",
+    "Prompt preservation does not prove accurate model answers; planner omissions and upstream ASR remain possible.",
+    "Two full trace checks fail; matching raw packets without participant identity are retained rather than relabeled successful.",
+    "Server JS_FAILED labels and40scopedwarnings retained; no harmless-label or bounded-native-shutdown claim.",
+    "Memory pressure and slow recognition are observed without causal attribution or capacity measurement.",
+    "Organizer Theme05 verification, microphone/echo, physicalplayback, concurrentliverooms and fresh adaptedFDB remain unfinished."
+  ]
+}

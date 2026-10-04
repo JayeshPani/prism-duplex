@@ -1,0 +1,76 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411720.270505}
+{"type": "session_started", "data": {"room": "car-audio-20aaa0c51a4f471491dbbf80153bb77c", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790411720.270595}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790411720.570202}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790411722.218634}
+{"type": "user_final", "data": {"text": "Navigate to the airport.", "merged": "Navigate to the airport.", "intent_version": 1}, "ts": 1790411723.211307}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790411723.913954}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790411723.915502}
+{"type": "speech_handle", "data": {"speech_id": "speech_52c62c574e3c", "state": "queued"}, "ts": 1790411723.9165251}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411724.413005}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411725.308306}
+{"type": "speech_handle", "data": {"speech_id": "speech_52c62c574e3c", "state": "finished", "error": null}, "ts": 1790411725.310308}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Navigate to the airport.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "airport"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "airport"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to the airport."}, "ts": 1790411726.529446}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790411726.5297332}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790411726.530456}
+{"type": "slot_update", "data": {"slot": "query", "value": "airport", "previous": null}, "ts": 1790411726.53058}
+{"type": "tool_waiting", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "airport"}}, "ts": 1790411726.530747}
+{"type": "tool_waiting", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, "ts": 1790411726.530827}
+{"type": "tool_waiting", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790411726.530895}
+{"type": "tool_started", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "airport"}, "state_changing": false}, "ts": 1790411726.5314612}
+{"type": "tool_done", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "airport"}, "result": {"status": "success", "places": [{"place_id": "P_AIRPORT", "name": "Kempegowda International Airport", "category": "airport", "lat": 13.1989, "lng": 77.7068}]}, "stale": false, "duration_ms": 4}, "ts": 1790411726.535404}
+{"type": "tool_started", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_AIRPORT"}, "state_changing": false}, "ts": 1790411726.537228}
+{"type": "tool_done", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_AIRPORT"}, "result": {"status": "success", "route_id": "R1", "destination": "Kempegowda International Airport", "destination_id": "P_AIRPORT", "stops": [], "stop_ids": [], "distance_km": 35.4, "eta_min": 88, "polyline": [[12.9719, 77.6412], [13.1989, 77.7068]]}, "stale": false, "duration_ms": 2503}, "ts": 1790411729.040229}
+{"type": "tool_started", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "state_changing": true}, "ts": 1790411729.041745}
+{"type": "tool_done", "data": {"execution_id": "e3fc2d3cc0c742d9b34a7b643cc0d7fd", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "result": {"status": "success", "navigating_to": "Kempegowda International Airport", "replaced": null, "already_active": false, "navigation_version": 1, "route_active": true, "route_id": "R1", "destination": "Kempegowda International Airport", "destination_id": "P_AIRPORT", "stops": [], "stop_ids": [], "distance_km": 35.4, "eta_min": 88, "polyline": [[12.9719, 77.6412], [13.1989, 77.7068]]}, "stale": false, "duration_ms": 1}, "ts": 1790411729.042648}
+{"type": "agent_say", "data": {"text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.", "intent_version": 1, "kind": "result"}, "ts": 1790411729.0437791}
+{"type": "speech_handle", "data": {"speech_id": "speech_34c1f6165745", "state": "queued"}, "ts": 1790411729.044024}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411729.890008}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790411730.27039}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411730.7198348}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790411732.4750972}
+{"type": "speech_handle", "data": {"speech_id": "speech_34c1f6165745", "state": "interruption_requested", "error": null}, "ts": 1790411733.582552}
+{"type": "user_final", "data": {"text": "Actually, go to the office instead.", "merged": "Actually, go to the office instead.", "intent_version": 2}, "ts": 1790411733.5829382}
+{"type": "ack", "data": {"text": "Okay, one sec."}, "ts": 1790411734.287313}
+{"type": "agent_say", "data": {"text": "Okay, one sec.", "intent_version": 2, "kind": "ack"}, "ts": 1790411734.287942}
+{"type": "speech_handle", "data": {"speech_id": "speech_bc2699181cde", "state": "queued"}, "ts": 1790411734.288764}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411734.765385}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411735.853157}
+{"type": "speech_handle", "data": {"speech_id": "speech_bc2699181cde", "state": "finished", "error": null}, "ts": 1790411735.854186}
+{"type": "plan_ready", "data": {"intent_version": 2, "utterance": "Actually, go to the office instead.", "repaired": "", "complete": true, "corrections": [{"slot": "destination", "from": "airport", "to": "office"}], "slots": {"destination": "office"}, "calls": [{"id": "c1", "tool": "compute_route", "args": {"destination": "office"}}, {"id": "c2", "tool": "start_navigation", "args": {"route_id": "$c1.route_id"}}], "reply": "Navigation to the office has started. Estimated arrival in 88 minutes."}, "ts": 1790411737.1319911}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790411737.132127}
+{"type": "gate_committed", "data": {"intent_version": 2, "calls": ["compute_route", "start_navigation"]}, "ts": 1790411737.1324348}
+{"type": "slot_update", "data": {"slot": "destination", "value": "office", "previous": null}, "ts": 1790411737.132478}
+{"type": "slot_update", "data": {"slot": "destination", "value": "office", "previous": "airport", "correction": true}, "ts": 1790411737.132509}
+{"type": "tool_waiting", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c1", "tool": "compute_route", "args": {"destination": "office"}}, "ts": 1790411737.1325881}
+{"type": "tool_waiting", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c2", "tool": "start_navigation", "args": {"route_id": "$c1.route_id"}}, "ts": 1790411737.132627}
+{"type": "tool_started", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c1", "tool": "compute_route", "args": {"destination": "office"}, "state_changing": false}, "ts": 1790411737.1332722}
+{"type": "tool_done", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c1", "tool": "compute_route", "args": {"destination": "office"}, "result": {"status": "success", "route_id": "R2", "destination": "Office (Manyata Tech Park)", "destination_id": "P_OFFICE", "stops": [], "stop_ids": [], "distance_km": 11.8, "eta_min": 29, "polyline": [[12.9719, 77.6412], [13.0475, 77.62]]}, "stale": false, "duration_ms": 2503}, "ts": 1790411739.6359239}
+{"type": "tool_started", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c2", "tool": "start_navigation", "args": {"route_id": "R2"}, "state_changing": true}, "ts": 1790411739.639067}
+{"type": "tool_done", "data": {"execution_id": "474171389ef149e99d162ca05e86328f", "operation_id": "turn-2", "id": "c2", "tool": "start_navigation", "args": {"route_id": "R2"}, "result": {"status": "success", "navigating_to": "Office (Manyata Tech Park)", "replaced": "Kempegowda International Airport", "already_active": false, "navigation_version": 2, "route_active": true, "route_id": "R2", "destination": "Office (Manyata Tech Park)", "destination_id": "P_OFFICE", "stops": [], "stop_ids": [], "distance_km": 11.8, "eta_min": 29, "polyline": [[12.9719, 77.6412], [13.0475, 77.62]]}, "stale": false, "duration_ms": 2}, "ts": 1790411739.641578}
+{"type": "agent_say", "data": {"text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.", "intent_version": 2, "kind": "result"}, "ts": 1790411739.645296}
+{"type": "speech_handle", "data": {"speech_id": "speech_a5cac445ddab", "state": "queued"}, "ts": 1790411739.645793}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411740.909219}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790411741.220659}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411741.669046}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790411742.970326}
+{"type": "speech_handle", "data": {"speech_id": "speech_a5cac445ddab", "state": "interruption_requested", "error": null}, "ts": 1790411743.961301}
+{"type": "user_final", "data": {"text": "Navigate to the airport.", "merged": "Navigate to the airport.", "intent_version": 3}, "ts": 1790411743.964693}
+{"type": "ack", "data": {"text": "Sure, let me check."}, "ts": 1790411744.676307}
+{"type": "agent_say", "data": {"text": "Sure, let me check.", "intent_version": 3, "kind": "ack"}, "ts": 1790411744.676725}
+{"type": "speech_handle", "data": {"speech_id": "speech_5e2ebbbfd7e6", "state": "queued"}, "ts": 1790411744.677153}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411745.208885}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411746.33843}
+{"type": "speech_handle", "data": {"speech_id": "speech_5e2ebbbfd7e6", "state": "finished", "error": null}, "ts": 1790411746.3402188}
+{"type": "plan_ready", "data": {"intent_version": 3, "utterance": "Navigate to the airport.", "repaired": "", "complete": true, "corrections": [{"slot": "destination", "from": "airport", "to": "airport"}], "slots": {"destination": "airport"}, "calls": [{"id": "c1", "tool": "compute_route", "args": {"destination": "airport"}}], "reply": "Computing route to airport."}, "ts": 1790411748.588064}
+{"type": "gate_open", "data": {"hold_ms": 350, "remaining_ms": 0, "state_changing": false, "complete": true}, "ts": 1790411748.5882518}
+{"type": "gate_committed", "data": {"intent_version": 3, "calls": ["compute_route"]}, "ts": 1790411748.588774}
+{"type": "slot_update", "data": {"slot": "destination", "value": "airport", "previous": "office"}, "ts": 1790411748.5888588}
+{"type": "slot_update", "data": {"slot": "destination", "value": "airport", "previous": "airport", "correction": true}, "ts": 1790411748.588908}
+{"type": "tool_waiting", "data": {"execution_id": "34bfeb8f709b4bf39905e97732080a5a", "operation_id": "turn-3", "id": "c1", "tool": "compute_route", "args": {"destination": "airport"}}, "ts": 1790411748.589112}
+{"type": "tool_started", "data": {"execution_id": "34bfeb8f709b4bf39905e97732080a5a", "operation_id": "turn-3", "id": "c1", "tool": "compute_route", "args": {"destination": "airport"}, "state_changing": false}, "ts": 1790411748.589679}
+{"type": "tool_done", "data": {"execution_id": "34bfeb8f709b4bf39905e97732080a5a", "operation_id": "turn-3", "id": "c1", "tool": "compute_route", "args": {"destination": "airport"}, "result": {"status": "success", "route_id": "R3", "destination": "Kempegowda International Airport", "destination_id": "P_AIRPORT", "stops": [], "stop_ids": [], "distance_km": 35.4, "eta_min": 88, "polyline": [[12.9719, 77.6412], [13.1989, 77.7068]]}, "stale": false, "duration_ms": 2504}, "ts": 1790411751.094131}
+{"type": "agent_say", "data": {"text": "The route to Kempegowda International Airport has been successfully computed with route ID R3.", "intent_version": 3, "kind": "result"}, "ts": 1790411753.352499}
+{"type": "speech_handle", "data": {"speech_id": "speech_2d3e22277ee4", "state": "queued"}, "ts": 1790411753.353031}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790411754.765721}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790411760.5463629}
+{"type": "speech_handle", "data": {"speech_id": "speech_2d3e22277ee4", "state": "finished", "error": null}, "ts": 1790411760.5472589}

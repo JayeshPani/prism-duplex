@@ -1,0 +1,162 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_ test_result_generation_failure_is_observable_without_changing_tool_outcome[False-False] _
+
+real_responder = False, superseded = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("real_responder", [False, True])
+    @pytest.mark.parametrize("superseded", [False, True])
+    async def test_result_generation_failure_is_observable_without_changing_tool_outcome(real_responder, superseded):
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": ""},
+                 "second": {"complete": True, "calls": [], "reply": "second"}}
+        coord, bus, logged, said, _ = build(plans, cfg=config())
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        async def fail(*args):
+            entered.set()
+            await release.wait()
+            raise RuntimeError("result model unavailable")
+    
+        class BrokenLLM:
+            complete = staticmethod(fail)
+    
+        class BrokenResponder:
+            summarize = staticmethod(fail)
+    
+        coord.responder = Responder(BrokenLLM()) if real_responder else BrokenResponder()
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        if superseded:
+            coord.on_user_turn("second")
+        release.set()
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+        assert len(failures) == 1
+>       assert failures[0].data["tool"] == "responder"
+E       AssertionError: assert 'coordinator' == 'responder'
+E         
+E         - responder
+E         + coordinator
+
+tests/unit/test_coordinator_lifecycle.py:76: AssertionError
+_ test_result_generation_failure_is_observable_without_changing_tool_outcome[False-True] _
+
+real_responder = True, superseded = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("real_responder", [False, True])
+    @pytest.mark.parametrize("superseded", [False, True])
+    async def test_result_generation_failure_is_observable_without_changing_tool_outcome(real_responder, superseded):
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": ""},
+                 "second": {"complete": True, "calls": [], "reply": "second"}}
+        coord, bus, logged, said, _ = build(plans, cfg=config())
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        async def fail(*args):
+            entered.set()
+            await release.wait()
+            raise RuntimeError("result model unavailable")
+    
+        class BrokenLLM:
+            complete = staticmethod(fail)
+    
+        class BrokenResponder:
+            summarize = staticmethod(fail)
+    
+        coord.responder = Responder(BrokenLLM()) if real_responder else BrokenResponder()
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        if superseded:
+            coord.on_user_turn("second")
+        release.set()
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+>       assert len(failures) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/unit/test_coordinator_lifecycle.py:75: AssertionError
+_ test_result_generation_failure_is_observable_without_changing_tool_outcome[True-False] _
+
+real_responder = False, superseded = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("real_responder", [False, True])
+    @pytest.mark.parametrize("superseded", [False, True])
+    async def test_result_generation_failure_is_observable_without_changing_tool_outcome(real_responder, superseded):
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": ""},
+                 "second": {"complete": True, "calls": [], "reply": "second"}}
+        coord, bus, logged, said, _ = build(plans, cfg=config())
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        async def fail(*args):
+            entered.set()
+            await release.wait()
+            raise RuntimeError("result model unavailable")
+    
+        class BrokenLLM:
+            complete = staticmethod(fail)
+    
+        class BrokenResponder:
+            summarize = staticmethod(fail)
+    
+        coord.responder = Responder(BrokenLLM()) if real_responder else BrokenResponder()
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        if superseded:
+            coord.on_user_turn("second")
+        release.set()
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+        assert len(failures) == 1
+>       assert failures[0].data["tool"] == "responder"
+E       AssertionError: assert 'coordinator' == 'responder'
+E         
+E         - responder
+E         + coordinator
+
+tests/unit/test_coordinator_lifecycle.py:76: AssertionError
+_ test_result_generation_failure_is_observable_without_changing_tool_outcome[True-True] _
+
+real_responder = True, superseded = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("real_responder", [False, True])
+    @pytest.mark.parametrize("superseded", [False, True])
+    async def test_result_generation_failure_is_observable_without_changing_tool_outcome(real_responder, superseded):
+        plans = {"first": {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}], "reply": ""},
+                 "second": {"complete": True, "calls": [], "reply": "second"}}
+        coord, bus, logged, said, _ = build(plans, cfg=config())
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        async def fail(*args):
+            entered.set()
+            await release.wait()
+            raise RuntimeError("result model unavailable")
+    
+        class BrokenLLM:
+            complete = staticmethod(fail)
+    
+        class BrokenResponder:
+            summarize = staticmethod(fail)
+    
+        coord.responder = Responder(BrokenLLM()) if real_responder else BrokenResponder()
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        if superseded:
+            coord.on_user_turn("second")
+        release.set()
+        await coord.drain()
+        failures = bus.of_type(E.TOOL_ERROR)
+>       assert len(failures) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/unit/test_coordinator_lifecycle.py:75: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_coordinator_lifecycle.py::test_result_generation_failure_is_observable_without_changing_tool_outcome[False-False]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_result_generation_failure_is_observable_without_changing_tool_outcome[False-True]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_result_generation_failure_is_observable_without_changing_tool_outcome[True-False]
+FAILED tests/unit/test_coordinator_lifecycle.py::test_result_generation_failure_is_observable_without_changing_tool_outcome[True-True]
+4 failed, 8 deselected in 0.40s

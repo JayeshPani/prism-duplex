@@ -1,0 +1,117 @@
+{"source_sha256": {"agent/coordinator/coordinator.py": "d8ddc084bafc9a79f91aeda1d25732ca4060c12b219b4d51376bff0c000aa92a", "agent/coordinator/responder.py": "fc576ef8a0899b1d4859beaac0709766cd39f2b9e678060bbf31254c5e142731", "tests/unit/test_summary_request_fidelity.py": "c25a324e0d3116dca6ae1f52ee28848effbcf40e160590412c2b520669ab1e9c"}}
+FFF..                                                                    [100%]
+=================================== FAILURES ===================================
+_ test_repaired_distance_request_retains_original_and_corrected_context[Navigate to MG Road Metro Station.] _
+
+conversation = <function conversation.<locals>.make at 0x1085ac7c0>
+repaired = 'Navigate to MG Road Metro Station.'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [
+        "Navigate to MG Road Metro Station.",
+        "Summarize the route to MG Road Metro Station.",
+    ])
+    async def test_repaired_distance_request_retains_original_and_corrected_context(conversation, repaired):
+        original = ("Navigate to Cubbon Park, actually MG Road Metro Station instead, "
+                    "and tell me the route distance in kilometers.")
+        room = conversation(repaired, route_calls())
+        room.coord.on_user_turn(original)
+        await room.coord.drain(timeout=1)
+        action = [e.data for e in room.bus.of_type(E.TOOL_DONE) if e.data["tool"] == "start_navigation"]
+        assert len(action) == 1 and action[0]["result"]["destination_id"] == "P_MGROAD"
+>       outcomes = summary_payload(room, original, repaired)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_summary_request_fidelity.py:100: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+room = namespace(coord=<agent.coordinator.coordinator.Coordinator object at 0x1085b3c90>, engine=<agent.coordinator.executor....delity.RecordingLLM object at 0x1085b3b90>, said=['Navigation to MG Road Metro Station has started. ETA: 13 minutes.'])
+original = 'Navigate to Cubbon Park, actually MG Road Metro Station instead, and tell me the route distance in kilometers.'
+repaired = 'Navigate to MG Road Metro Station.'
+
+    def summary_payload(room, original, repaired):
+>       assert len(room.llm.requests) == 1, "repair must not bypass synthesis of requested details"
+E       AssertionError: repair must not bypass synthesis of requested details
+E       assert 0 == 1
+E        +  where 0 = len([])
+E        +    where [] = <tests.unit.test_summary_request_fidelity.RecordingLLM object at 0x1085b3b90>.requests
+E        +      where <tests.unit.test_summary_request_fidelity.RecordingLLM object at 0x1085b3b90> = namespace(coord=<agent.coordinator.coordinator.Coordinator object at 0x1085b3c90>, engine=<agent.coordinator.executor....delity.RecordingLLM object at 0x1085b3b90>, said=['Navigation to MG Road Metro Station has started. ETA: 13 minutes.']).llm
+
+tests/unit/test_summary_request_fidelity.py:76: AssertionError
+_ test_repaired_distance_request_retains_original_and_corrected_context[Summarize the route to MG Road Metro Station.] _
+
+conversation = <function conversation.<locals>.make at 0x1085ad3a0>
+repaired = 'Summarize the route to MG Road Metro Station.'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [
+        "Navigate to MG Road Metro Station.",
+        "Summarize the route to MG Road Metro Station.",
+    ])
+    async def test_repaired_distance_request_retains_original_and_corrected_context(conversation, repaired):
+        original = ("Navigate to Cubbon Park, actually MG Road Metro Station instead, "
+                    "and tell me the route distance in kilometers.")
+        room = conversation(repaired, route_calls())
+        room.coord.on_user_turn(original)
+        await room.coord.drain(timeout=1)
+        action = [e.data for e in room.bus.of_type(E.TOOL_DONE) if e.data["tool"] == "start_navigation"]
+        assert len(action) == 1 and action[0]["result"]["destination_id"] == "P_MGROAD"
+>       outcomes = summary_payload(room, original, repaired)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_summary_request_fidelity.py:100: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+room = namespace(coord=<agent.coordinator.coordinator.Coordinator object at 0x108648590>, engine=<agent.coordinator.executor....request_fidelity.RecordingLLM object at 0x108648410>, said=['The requested result details reached summary synthesis.'])
+original = 'Navigate to Cubbon Park, actually MG Road Metro Station instead, and tell me the route distance in kilometers.'
+repaired = 'Summarize the route to MG Road Metro Station.'
+
+    def summary_payload(room, original, repaired):
+        assert len(room.llm.requests) == 1, "repair must not bypass synthesis of requested details"
+        payload = room.llm.requests[0][1]
+>       assert original in payload, "fallback lost the original requested details"
+E       AssertionError: fallback lost the original requested details
+E       assert 'Navigate to Cubbon Park, actually MG Road Metro Station instead, and tell me the route distance in kilometers.' in 'User request: Summarize the route to MG Road Metro Station.\nResults: [{"tool": "search_destination", "args": {"query...op_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "error": null}]'
+
+tests/unit/test_summary_request_fidelity.py:78: AssertionError
+___ test_repaired_list_request_keeps_all_places_needed_for_requested_answer ____
+
+conversation = <function conversation.<locals>.make at 0x1085cac00>
+
+    @pytest.mark.asyncio
+    async def test_repaired_list_request_keeps_all_places_needed_for_requested_answer(conversation):
+        original = "List all nearby coffee places and add the nearest one as a stop."
+        repaired = "Add the nearest coffee stop to the route."
+        room = conversation(repaired, [
+            PlannedCall("nearby", "find_nearby", {"category": "coffee"}),
+            PlannedCall("stop", "add_waypoint", {"place_id": "$nearby.places[0].place_id"}),
+        ])
+        await room.engine.run(route_calls(), operation_id="setup")
+        room.coord.on_user_turn(original)
+        await room.coord.drain(timeout=1)
+        actions = [e.data for e in room.bus.of_type(E.TOOL_DONE) if e.data["tool"] == "add_waypoint"]
+        assert len(actions) == 1 and actions[0]["result"]["already_present"] is False
+>       outcomes = summary_payload(room, original, repaired)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_summary_request_fidelity.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+room = namespace(coord=<agent.coordinator.coordinator.Coordinator object at 0x10860e010>, engine=<agent.coordinator.executor....860e1d0>, said=['Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.'])
+original = 'List all nearby coffee places and add the nearest one as a stop.'
+repaired = 'Add the nearest coffee stop to the route.'
+
+    def summary_payload(room, original, repaired):
+>       assert len(room.llm.requests) == 1, "repair must not bypass synthesis of requested details"
+E       AssertionError: repair must not bypass synthesis of requested details
+E       assert 0 == 1
+E        +  where 0 = len([])
+E        +    where [] = <tests.unit.test_summary_request_fidelity.RecordingLLM object at 0x10860e1d0>.requests
+E        +      where <tests.unit.test_summary_request_fidelity.RecordingLLM object at 0x10860e1d0> = namespace(coord=<agent.coordinator.coordinator.Coordinator object at 0x10860e010>, engine=<agent.coordinator.executor....860e1d0>, said=['Added Blue Tokai, Indiranagar as a stop. ETA to MG Road Metro Station: 13 minutes, 0 extra minutes.']).llm
+
+tests/unit/test_summary_request_fidelity.py:76: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_summary_request_fidelity.py::test_repaired_distance_request_retains_original_and_corrected_context[Navigate to MG Road Metro Station.]
+FAILED tests/unit/test_summary_request_fidelity.py::test_repaired_distance_request_retains_original_and_corrected_context[Summarize the route to MG Road Metro Station.]
+FAILED tests/unit/test_summary_request_fidelity.py::test_repaired_list_request_keeps_all_places_needed_for_requested_answer
+3 failed, 2 passed in 0.41s

@@ -1,0 +1,2732 @@
+{
+  "created_at_utc": "2026-09-26T13:28:59.541770+00:00",
+  "status": "completed",
+  "scope": "Analysis method written after runtime preflight while the baseline arm was running, without reading moving outputs; not part of evaluated frozen runtime. Executed only after completed acoustic audit and manual speech review.",
+  "method": {
+    "input_end": "Publication start plus WAV threshold activity_end_sample/rate, only when that sample was published; not a microphone/VAD endpoint.",
+    "anchor": "Last declared spoken input even when missing/unpublished; never replace a missing answer with the initial-command anchor.",
+    "dispatch": "Logger timestamp_start records dispatch intention before backend entry, mapped with this input's same-host unix/monotonic offset; not actual effect time.",
+    "required_route_read_dispatch": "Earliest completed physical compute_route linked to the audit successful, nonstale, target/metric-matching read after final input begins; failures or unrelated/earlier route reads do not supply this timing. No required read means null. Dispatch intention is not read completion.",
+    "substantive_reply": "Exactly one non-ack handle at latest observed intent queued after anchor start; one WAV may produce multiple finalized turns.",
+    "speech_gate": "Existing manual final facts plus all audited effect criteria and a finished error-free final handle; no automatic speech re-grading. Capture/trace/mechanism criteria stay separate.",
+    "percentiles": "Nearest rank sorted non-null milliseconds[ceil(n*p)-1]; all declared rows/nulls retained; p95 is the maximum at these small group sizes."
+  },
+  "per_case": [
+    {
+      "key": "baseline/ambiguous_then_hospital_distance",
+      "arm": "baseline",
+      "case_id": "ambiguous_then_hospital_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "required_read_grounded": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "compute_route",
+              "destination_id": "P_HOSP",
+              "distance_km": 2.2
+            },
+            "matching_events": [],
+            "limit": "Successful nonstale result with matching completed physical attempt identity; all other rows remain retained."
+          }
+        },
+        "required_read_after_final_input": {
+          "status": "failed",
+          "detail": {
+            "final_input_start_unix": 1790428516.4922097,
+            "current_read_events": [],
+            "limit": "Physical dispatch intention after the final query begins, in addition to the declared successful target/metric read."
+          }
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/hospital_distance.wav",
+          "file": "followup_1.wav",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "sample_rate": 24000,
+          "samples": 67584,
+          "duration_seconds": 2.816,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 65280,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 146831.121617375,
+            "drained_monotonic": 146833.9392715,
+            "scheduled_end_monotonic": 146833.937617375,
+            "published_samples": 67584
+          }
+        },
+        "times": {
+          "start_monotonic": 146831.121617375,
+          "end_monotonic": 146833.9392715,
+          "activity_onset_monotonic": 146831.181617375,
+          "activity_end_monotonic": 146833.841617375,
+          "start_unix": 1790428516.4922097
+        },
+        "expected_asset_sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790428519.2122097,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_75a879675e14",
+          "queued_at": 146852.258978166,
+          "state": "finished",
+          "first_loud_at": 146853.702080458,
+          "preceding_quiet_seconds": 3.4197686669940595,
+          "last_loud_at": 146858.482434208,
+          "ended_at": 146858.535154458,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_d9633324e455",
+          "queued_at": 146848.248235125,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 146850.22405675,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 146853.702080458,
+        "frame_line": 2252,
+        "speech_id": "speech_75a879675e14",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "No successful current matching physical route read",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 14406.618,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 19860.463,
+        "observed_final_reply_finished": 24693.537,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/airport_distance",
+      "arm": "baseline",
+      "case_id": "airport_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "missing_capture_report",
+      "capture_status": "missing",
+      "capture_completed": "unmeasured",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "airport_distance.wav",
+          "text": "How far is the airport from here?",
+          "trigger": "session_ready"
+        },
+        "capture": null,
+        "times": {}
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Final speech endpoint or input clock mapping unavailable",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "baseline/office_drive_time",
+      "arm": "baseline",
+      "case_id": "office_drive_time",
+      "condition_group": "route_information",
+      "audit_case_status": "unrun",
+      "capture_status": "missing",
+      "capture_completed": "unmeasured",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "office_drive_time.wav",
+          "text": "How long does it take to drive to the office?",
+          "trigger": "session_ready"
+        },
+        "capture": null,
+        "times": {}
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Final speech endpoint or input clock mapping unavailable",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "baseline/active_airport_then_hospital_distance",
+      "arm": "baseline",
+      "case_id": "active_airport_then_hospital_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "unrun",
+      "capture_status": "missing",
+      "capture_completed": "unmeasured",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": null,
+        "times": {}
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Final speech endpoint or input clock mapping unavailable",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "baseline/ambiguous_distance",
+      "arm": "baseline",
+      "case_id": "ambiguous_distance",
+      "condition_group": "ambiguity_boundary",
+      "audit_case_status": "unrun",
+      "capture_status": "missing",
+      "capture_completed": "unmeasured",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "ambiguous_distance.wav",
+          "text": "How far is Airport Road?",
+          "trigger": "session_ready"
+        },
+        "capture": null,
+        "times": {}
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": false,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Not required by this case",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "baseline/explicit_hospital_navigation",
+      "arm": "baseline",
+      "case_id": "explicit_hospital_navigation",
+      "condition_group": "navigation_boundary",
+      "audit_case_status": "unrun",
+      "capture_status": "missing",
+      "capture_completed": "unmeasured",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "navigate_hospital.wav",
+          "text": "Please navigate to the hospital.",
+          "trigger": "session_ready"
+        },
+        "capture": null,
+        "times": {}
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": false,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Not required by this case",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "candidate/ambiguous_then_hospital_distance",
+      "arm": "candidate",
+      "case_id": "ambiguous_then_hospital_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/hospital_distance.wav",
+          "file": "followup_1.wav",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "sample_rate": 24000,
+          "samples": 67584,
+          "duration_seconds": 2.816,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 65280,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 147210.659770666,
+            "drained_monotonic": 147213.4939835,
+            "scheduled_end_monotonic": 147213.475770666,
+            "published_samples": 67584
+          }
+        },
+        "times": {
+          "start_monotonic": 147210.659770666,
+          "end_monotonic": 147213.4939835,
+          "activity_onset_monotonic": 147210.719770666,
+          "activity_end_monotonic": 147213.379770666,
+          "start_unix": 1790428896.0313354
+        },
+        "expected_asset_sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790428898.7513354,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road is 2.2 km, with an estimated travel time of 5 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_4f3b34aa3718",
+          "queued_at": 147225.982644291,
+          "state": "finished",
+          "first_loud_at": 147228.359125708,
+          "preceding_quiet_seconds": 10.600094207999064,
+          "last_loud_at": 147235.478786833,
+          "ended_at": 147235.530680708,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_c624420dcacb",
+          "queued_at": 147216.095126166,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147217.855624041,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 147228.359125708,
+        "frame_line": 1966,
+        "speech_id": "speech_4f3b34aa3718",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [
+        {
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road"
+            },
+            "timestamp_start": 1790428906.240077,
+            "attempt_id": "d26293a25959407ab02ec317b9c817d1:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790428908.74638,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 7488.742
+        }
+      ],
+      "required_route_read_timing_reason": null,
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": 7488.742,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2715.355,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 14979.355,
+        "observed_final_reply_finished": 22150.91,
+        "fulfilled_final_reply_finished": 22150.91
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/airport_distance",
+      "arm": "candidate",
+      "case_id": "airport_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "airport_distance.wav",
+          "text": "How far is the airport from here?",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/airport_distance.wav",
+          "file": "initial.wav",
+          "sha256": "1587e67d2d28906dba5a615b80b8cb55744a1d5174995e58b3116812fdfa5e8d",
+          "sample_rate": 24000,
+          "samples": 41472,
+          "duration_seconds": 1.728,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 38400,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 147239.968163708,
+            "drained_monotonic": 147241.773540666,
+            "scheduled_end_monotonic": 147241.696163708,
+            "published_samples": 41472
+          }
+        },
+        "times": {
+          "start_monotonic": 147239.968163708,
+          "end_monotonic": 147241.773540666,
+          "activity_onset_monotonic": 147240.028163708,
+          "activity_end_monotonic": 147241.568163708,
+          "start_unix": 1790428925.3398032
+        },
+        "expected_asset_sha256": "1587e67d2d28906dba5a615b80b8cb55744a1d5174995e58b3116812fdfa5e8d"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790428926.9398031,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Kempegowda International Airport is 35.4 kilometers. The estimated travel time is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_2896d3fddf85",
+          "queued_at": 147259.322899125,
+          "state": "finished",
+          "first_loud_at": 147260.827840875,
+          "preceding_quiet_seconds": 5.859872166998684,
+          "last_loud_at": 147268.088213416,
+          "ended_at": 147268.151351458,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b3c6c75ea47c",
+          "queued_at": 147253.355912208,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 147254.909647291,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 147260.827840875,
+        "frame_line": 1042,
+        "speech_id": "speech_2896d3fddf85",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [
+        {
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "airport"
+            },
+            "timestamp_start": 1790428940.2801468,
+            "attempt_id": "4fa857b158ec4d6698fb546b68c2cabc:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790428942.800232,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 13340.344
+        }
+      ],
+      "required_route_read_timing_reason": null,
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": 13340.344,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 11787.749,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 19259.677,
+        "observed_final_reply_finished": 26583.188,
+        "fulfilled_final_reply_finished": 26583.188
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/office_drive_time",
+      "arm": "candidate",
+      "case_id": "office_drive_time",
+      "condition_group": "route_information",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "required_read_grounded": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "compute_route",
+              "destination_id": "P_OFFICE",
+              "eta_min": 29
+            },
+            "matching_events": [],
+            "limit": "Successful nonstale result with matching completed physical attempt identity; all other rows remain retained."
+          }
+        },
+        "required_read_after_final_input": {
+          "status": "failed",
+          "detail": {
+            "final_input_start_unix": 1790428957.6438053,
+            "current_read_events": [],
+            "limit": "Physical dispatch intention after the final query begins, in addition to the declared successful target/metric read."
+          }
+        }
+      },
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "office_drive_time.wav",
+          "text": "How long does it take to drive to the office?",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/office_drive_time.wav",
+          "file": "initial.wav",
+          "sha256": "100e545b1a8ff135a54144fb1b16915ba149105fb63f07d9f6d501cc2e77276e",
+          "sample_rate": 24000,
+          "samples": 51200,
+          "duration_seconds": 2.1333333333333333,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 49440,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 147272.272083083,
+            "drained_monotonic": 147274.4088785,
+            "scheduled_end_monotonic": 147274.40541641632,
+            "published_samples": 51200
+          }
+        },
+        "times": {
+          "start_monotonic": 147272.272083083,
+          "end_monotonic": 147274.4088785,
+          "activity_onset_monotonic": 147272.332083083,
+          "activity_end_monotonic": 147274.332083083,
+          "start_unix": 1790428957.6438053
+        },
+        "expected_asset_sha256": "100e545b1a8ff135a54144fb1b16915ba149105fb63f07d9f6d501cc2e77276e"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790428959.7038052,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Sorry, could you say that again?",
+          "intent_version": 1,
+          "kind": "response",
+          "speech_id": "speech_f4d090e52f48",
+          "queued_at": 147287.181944708,
+          "state": "finished",
+          "first_loud_at": 147287.910899958,
+          "preceding_quiet_seconds": 3.4050852920045145,
+          "last_loud_at": 147289.350600833,
+          "ended_at": 147289.388371916,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_5e1f3b60d665",
+          "queued_at": 147282.832207541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147284.631058,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 147287.910899958,
+        "frame_line": 781,
+        "speech_id": "speech_f4d090e52f48",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "No successful current matching physical route read",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 8500.124,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 13578.817,
+        "observed_final_reply_finished": 15056.289,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/active_airport_then_hospital_distance",
+      "arm": "candidate",
+      "case_id": "active_airport_then_hospital_distance",
+      "condition_group": "route_information",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_distance.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/hospital_distance.wav",
+          "file": "followup_1.wav",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "sample_rate": 24000,
+          "samples": 67584,
+          "duration_seconds": 2.816,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 65280,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 147313.754389916,
+            "drained_monotonic": 147316.571521708,
+            "scheduled_end_monotonic": 147316.57038991599,
+            "published_samples": 67584
+          }
+        },
+        "times": {
+          "start_monotonic": 147313.754389916,
+          "end_monotonic": 147316.571521708,
+          "activity_onset_monotonic": 147313.814389916,
+          "activity_end_monotonic": 147316.474389916,
+          "start_unix": 1790428999.1262178
+        },
+        "expected_asset_sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790429001.8462179,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road is 2.2 km, with an estimated travel time of 5 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_d862cafc9451",
+          "queued_at": 147336.052147041,
+          "state": "finished",
+          "first_loud_at": 147338.43369025,
+          "preceding_quiet_seconds": 10.000016292004148,
+          "last_loud_at": 147345.5740735,
+          "ended_at": 147345.622161291,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_e9ba560edbed",
+          "queued_at": 147326.276330875,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147328.544623708,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 147338.43369025,
+        "frame_line": 2250,
+        "speech_id": "speech_d862cafc9451",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790428990.768517,
+            "attempt_id": "bcf35f138c4e43cdb2b18aec641f2149:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790428990.812565,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": -11077.701,
+          "after_final_spoken_input_started": false
+        }
+      ],
+      "required_route_read_applicable": true,
+      "current_matching_required_route_reads": [
+        {
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "Manipal Hospital, Old Airport Road"
+            },
+            "timestamp_start": 1790429014.84285,
+            "attempt_id": "5e51b25a6ef542a5929c15de2072e477:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790429017.354947,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 12996.632
+        }
+      ],
+      "required_route_read_timing_reason": null,
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": 12996.632,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 9801.941,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 21959.3,
+        "observed_final_reply_finished": 29147.771,
+        "fulfilled_final_reply_finished": 29147.771
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/ambiguous_distance",
+      "arm": "candidate",
+      "case_id": "ambiguous_distance",
+      "condition_group": "ambiguity_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "failed",
+      "capture_completed": "failed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "ambiguous_distance.wav",
+          "text": "How far is Airport Road?",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/ambiguous_distance.wav",
+          "file": "initial.wav",
+          "sha256": "91e28fb678d54a3bb7f9054adc8003bc7d84999a09372a83517649e3349badf6",
+          "sample_rate": 24000,
+          "samples": 35840,
+          "duration_seconds": 1.4933333333333334,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 32640
+        },
+        "times": {
+          "start_monotonic": null,
+          "end_monotonic": null,
+          "activity_onset_monotonic": null,
+          "activity_end_monotonic": null,
+          "start_unix": null
+        },
+        "expected_asset_sha256": "91e28fb678d54a3bb7f9054adc8003bc7d84999a09372a83517649e3349badf6"
+      },
+      "input_activity_end_was_published": false,
+      "input_anchor_end_unix": null,
+      "final_observed_intent_version": null,
+      "final_handle_candidates": [],
+      "all_ack_handles_after_anchor_start": [],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": null,
+        "reason": "No unique matching speech handle"
+      },
+      "all_navigation_attempts": [],
+      "required_route_read_applicable": false,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Not required by this case",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": null,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": null,
+        "observed_final_reply_finished": null,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": "Final declared speech endpoint not published/available"
+    },
+    {
+      "key": "candidate/explicit_hospital_navigation",
+      "arm": "candidate",
+      "case_id": "explicit_hospital_navigation",
+      "condition_group": "navigation_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 0,
+      "input_anchor": {
+        "declaration": {
+          "asset": "navigate_hospital.wav",
+          "text": "Please navigate to the hospital.",
+          "trigger": "session_ready"
+        },
+        "capture": {
+          "label": "initial",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration20/audio-assets/navigate_hospital.wav",
+          "file": "initial.wav",
+          "sha256": "d122730a3c16a36b05875d718c6f824724b3a6efecd9b022db2d8aec1e139bc2",
+          "sample_rate": 24000,
+          "samples": 43008,
+          "duration_seconds": 1.792,
+          "activity_start_sample": 2400,
+          "activity_end_sample": 39840,
+          "intent_before_input": null,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 147398.442722875,
+            "drained_monotonic": 147400.2540395,
+            "scheduled_end_monotonic": 147400.234722875,
+            "published_samples": 43008
+          }
+        },
+        "times": {
+          "start_monotonic": 147398.442722875,
+          "end_monotonic": 147400.2540395,
+          "activity_onset_monotonic": 147398.54272287502,
+          "activity_end_monotonic": 147400.10272287502,
+          "start_unix": 1790429083.8147674
+        },
+        "expected_asset_sha256": "d122730a3c16a36b05875d718c6f824724b3a6efecd9b022db2d8aec1e139bc2"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790429085.4747674,
+      "final_observed_intent_version": 1,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_99c8ef6913b4",
+          "queued_at": 147424.278625666,
+          "state": "finished",
+          "first_loud_at": 147425.742202208,
+          "preceding_quiet_seconds": 5.200556249998044,
+          "last_loud_at": 147431.341730666,
+          "ended_at": 147431.394838416,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c551764f0a3f",
+          "queued_at": 147418.086618875,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 147420.63467875,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 147425.742202208,
+        "frame_line": 1364,
+        "speech_id": "speech_99c8ef6913b4",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790429109.6443148,
+            "attempt_id": "1ef01126974b4846b8fed0b167442682:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790429109.645886,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 24169.547,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "required_route_read_applicable": false,
+      "current_matching_required_route_reads": [],
+      "required_route_read_timing_reason": "Not required by this case",
+      "speech_end_to_observation_ms": {
+        "first_required_route_read_dispatch_intention": null,
+        "first_navigation_dispatch_intention": 24169.547,
+        "first_ack_queued": 17983.896,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 25639.479,
+        "observed_final_reply_finished": 31292.116,
+        "fulfilled_final_reply_finished": 31292.116
+      },
+      "missing_timing_reason": null
+    }
+  ],
+  "groups": {
+    "baseline/all": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          14406.618,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 14406.618,
+        "p95_ms": 14406.618
+      },
+      "first_ack_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          19860.463,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 19860.463,
+        "p95_ms": 19860.463
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          24693.537,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 24693.537,
+        "p95_ms": 24693.537
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "baseline/route_information": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 1,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          14406.618,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 14406.618,
+        "p95_ms": 14406.618
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 1,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          19860.463,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 19860.463,
+        "p95_ms": 19860.463
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 1,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          24693.537,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 24693.537,
+        "p95_ms": 24693.537
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "baseline/ambiguity_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "baseline/navigation_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "candidate/all": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 6,
+        "measured_cases": 3,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          7488.742,
+          13340.344,
+          null,
+          12996.632,
+          null,
+          null
+        ],
+        "p50_ms": 12996.632,
+        "p95_ms": 13340.344
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          24169.547
+        ],
+        "p50_ms": 24169.547,
+        "p95_ms": 24169.547
+      },
+      "first_ack_queued": {
+        "declared_cases": 6,
+        "measured_cases": 5,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          2715.355,
+          11787.749,
+          8500.124,
+          9801.941,
+          null,
+          17983.896
+        ],
+        "p50_ms": 9801.941,
+        "p95_ms": 17983.896
+      },
+      "first_ack_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 5,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          14979.355,
+          19259.677,
+          13578.817,
+          21959.3,
+          null,
+          25639.479
+        ],
+        "p50_ms": 19259.677,
+        "p95_ms": 25639.479
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 5,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          22150.91,
+          26583.188,
+          15056.289,
+          29147.771,
+          null,
+          31292.116
+        ],
+        "p50_ms": 26583.188,
+        "p95_ms": 31292.116
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 4,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          22150.91,
+          26583.188,
+          null,
+          29147.771,
+          null,
+          31292.116
+        ],
+        "p50_ms": 26583.188,
+        "p95_ms": 31292.116
+      }
+    },
+    "candidate/route_information": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          7488.742,
+          13340.344,
+          null,
+          12996.632
+        ],
+        "p50_ms": 12996.632,
+        "p95_ms": 13340.344
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          2715.355,
+          11787.749,
+          8500.124,
+          9801.941
+        ],
+        "p50_ms": 8500.124,
+        "p95_ms": 11787.749
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          14979.355,
+          19259.677,
+          13578.817,
+          21959.3
+        ],
+        "p50_ms": 14979.355,
+        "p95_ms": 21959.3
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          22150.91,
+          26583.188,
+          15056.289,
+          29147.771
+        ],
+        "p50_ms": 22150.91,
+        "p95_ms": 29147.771
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 3,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          22150.91,
+          26583.188,
+          null,
+          29147.771
+        ],
+        "p50_ms": 26583.188,
+        "p95_ms": 29147.771
+      }
+    },
+    "candidate/ambiguity_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "candidate/navigation_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          24169.547
+        ],
+        "p50_ms": 24169.547,
+        "p95_ms": 24169.547
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          17983.896
+        ],
+        "p50_ms": 17983.896,
+        "p95_ms": 17983.896
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          25639.479
+        ],
+        "p50_ms": 25639.479,
+        "p95_ms": 25639.479
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          31292.116
+        ],
+        "p50_ms": 31292.116,
+        "p95_ms": 31292.116
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          31292.116
+        ],
+        "p50_ms": 31292.116,
+        "p95_ms": 31292.116
+      }
+    },
+    "all_arms/all": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 12,
+        "measured_cases": 3,
+        "null_cases": 9,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          7488.742,
+          13340.344,
+          null,
+          12996.632,
+          null,
+          null
+        ],
+        "p50_ms": 12996.632,
+        "p95_ms": 13340.344
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 12,
+        "measured_cases": 1,
+        "null_cases": 11,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          24169.547
+        ],
+        "p50_ms": 24169.547,
+        "p95_ms": 24169.547
+      },
+      "first_ack_queued": {
+        "declared_cases": 12,
+        "measured_cases": 6,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          14406.618,
+          null,
+          null,
+          null,
+          null,
+          null,
+          2715.355,
+          11787.749,
+          8500.124,
+          9801.941,
+          null,
+          17983.896
+        ],
+        "p50_ms": 9801.941,
+        "p95_ms": 17983.896
+      },
+      "first_ack_pcm": {
+        "declared_cases": 12,
+        "measured_cases": 0,
+        "null_cases": 12,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 12,
+        "measured_cases": 6,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          19860.463,
+          null,
+          null,
+          null,
+          null,
+          null,
+          14979.355,
+          19259.677,
+          13578.817,
+          21959.3,
+          null,
+          25639.479
+        ],
+        "p50_ms": 19259.677,
+        "p95_ms": 25639.479
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 12,
+        "measured_cases": 6,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          24693.537,
+          null,
+          null,
+          null,
+          null,
+          null,
+          22150.91,
+          26583.188,
+          15056.289,
+          29147.771,
+          null,
+          31292.116
+        ],
+        "p50_ms": 24693.537,
+        "p95_ms": 31292.116
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 12,
+        "measured_cases": 4,
+        "null_cases": 8,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "baseline/ambiguous_distance",
+          "baseline/explicit_hospital_navigation",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance",
+          "candidate/ambiguous_distance",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          22150.91,
+          26583.188,
+          null,
+          29147.771,
+          null,
+          31292.116
+        ],
+        "p50_ms": 26583.188,
+        "p95_ms": 31292.116
+      }
+    },
+    "all_arms/route_information": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 8,
+        "measured_cases": 3,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          7488.742,
+          13340.344,
+          null,
+          12996.632
+        ],
+        "p50_ms": 12996.632,
+        "p95_ms": 13340.344
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 8,
+        "measured_cases": 0,
+        "null_cases": 8,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 8,
+        "measured_cases": 5,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          14406.618,
+          null,
+          null,
+          null,
+          2715.355,
+          11787.749,
+          8500.124,
+          9801.941
+        ],
+        "p50_ms": 9801.941,
+        "p95_ms": 14406.618
+      },
+      "first_ack_pcm": {
+        "declared_cases": 8,
+        "measured_cases": 0,
+        "null_cases": 8,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 8,
+        "measured_cases": 5,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          19860.463,
+          null,
+          null,
+          null,
+          14979.355,
+          19259.677,
+          13578.817,
+          21959.3
+        ],
+        "p50_ms": 19259.677,
+        "p95_ms": 21959.3
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 8,
+        "measured_cases": 5,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          24693.537,
+          null,
+          null,
+          null,
+          22150.91,
+          26583.188,
+          15056.289,
+          29147.771
+        ],
+        "p50_ms": 24693.537,
+        "p95_ms": 29147.771
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 8,
+        "measured_cases": 3,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/ambiguous_then_hospital_distance",
+          "baseline/airport_distance",
+          "baseline/office_drive_time",
+          "baseline/active_airport_then_hospital_distance",
+          "candidate/ambiguous_then_hospital_distance",
+          "candidate/airport_distance",
+          "candidate/office_drive_time",
+          "candidate/active_airport_then_hospital_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          22150.91,
+          26583.188,
+          null,
+          29147.771
+        ],
+        "p50_ms": 26583.188,
+        "p95_ms": 29147.771
+      }
+    },
+    "all_arms/ambiguity_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/ambiguous_distance",
+          "candidate/ambiguous_distance"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "all_arms/navigation_boundary": {
+      "first_required_route_read_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          24169.547
+        ],
+        "p50_ms": 24169.547,
+        "p95_ms": 24169.547
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          17983.896
+        ],
+        "p50_ms": 17983.896,
+        "p95_ms": 17983.896
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          25639.479
+        ],
+        "p50_ms": 25639.479,
+        "p95_ms": 25639.479
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          31292.116
+        ],
+        "p50_ms": 31292.116,
+        "p95_ms": 31292.116
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/explicit_hospital_navigation",
+          "candidate/explicit_hospital_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          31292.116
+        ],
+        "p50_ms": 31292.116,
+        "p95_ms": 31292.116
+      }
+    }
+  },
+  "summary": {
+    "declared_cases": 12,
+    "backend_passed": 5,
+    "speech_passed": 4,
+    "fulfilled_finish_measured": 4
+  },
+  "source_sha256": {
+    "results/iteration20/review_latency.py": "6e5e3a4effe299581def2184f70f490dd35b69dd2887dd8bb3007b92acfa569b",
+    "results/iteration20/acoustic-audit.json": "304c3a3bf9484930cb01933acd65e04cbcf8adc29436dafac2e04ecd5797ce59",
+    "results/iteration20/protocol.json": "9edbafdc60c47f947049bf0148fb80aa37762d8a90f064147152f813a253f1b8",
+    "results/iteration20/speech-fact-review.json": "eb4d04917ae3c84b66c45b5bd9ba5ac359a79713d77757678637d86ca617f6b4",
+    "results/iteration20-baseline/rtc-ambiguous_then_hospital_distance-1/frames.jsonl": "9ebe996fec24eba73a6ef96483a6ab86f25b6f01762ab1b0d3f81a8affbcad77",
+    "results/iteration20-candidate/rtc-ambiguous_then_hospital_distance-1/frames.jsonl": "61880ae48a52eb3304b4961c8b25b5f2b47e462af1382ea295f6a33b34d0c64b",
+    "results/iteration20-candidate/rtc-airport_distance-1/frames.jsonl": "13cc30b9a014d65fcdea8c87ebe4083908fb6386d39b6ea21079dce1b6d929d1",
+    "results/iteration20-candidate/rtc-office_drive_time-1/frames.jsonl": "0e436c68e5493b05a833073f5d5eef7dc63940852354ae0ba0370de55da00a8f",
+    "results/iteration20-candidate/rtc-active_airport_then_hospital_distance-1/frames.jsonl": "7feab55f46de24697003e985257355ea94317fda40f96a3a2e5c1339d196ecbb",
+    "results/iteration20-candidate/rtc-ambiguous_distance-1/frames.jsonl": "c0ce4d0f8bbe7f506f82a08d0e67ae4a478bed0c1898736b90ec1ef736f9cd30",
+    "results/iteration20-candidate/rtc-explicit_hospital_navigation-1/frames.jsonl": "1c1bbba794cee4a7824eb7a1cf78f5aa496251eb79941a9b1f1428c9a8678509"
+  },
+  "evidence_issues": [],
+  "limits": [
+    "Twelve declared fixed-order development cases, including unrun/parser-failed rows; descriptive timings only, not a causal speed benefit, population statistic, or general completion guarantee.",
+    "No injected recognition hold is declared; no hold subtraction or inherited iteration18 probe grouping is used.",
+    "Ack queue is not ack PCM. Missing handle-specific audio tags stay null; untagged PCM is never reassigned to an acknowledgement.",
+    "Received PCM tags and speech-handle completion events are heuristic transport observations, not physical audibility or human intelligibility.",
+    "Observed completion of an incorrect/incomplete reply is retained while fulfilled completion is null. Missing captures remain declared rows.",
+    "Zero-effect route-information or ambiguity replies can fulfill their request. An existing route may remain active while a new route read answers a query; prior navigation dispatch is retained but excluded from final-query dispatch timing.",
+    "Backend/manual final facts do not imply initial clarification, route-information-contract exercise, trusted trace equality, or whole-scenario success."
+  ]
+}

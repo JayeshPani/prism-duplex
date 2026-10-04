@@ -4,8 +4,7 @@ import { useCallback, useMemo, useRef, useState, type ReactNode } from "react";
 import { Room, RoomEvent, Track } from "livekit-client";
 import dynamic from "next/dynamic";
 import Ribbon from "@/components/Ribbon";
-import { buildSpans, buildTurns, type AgentEvent, type Turn } from "@/lib/events";
-import type { NavView } from "@/components/CarMap";
+import { buildSpans, buildTurns, buildNavigation, parseTrace, type AgentEvent, type Turn } from "@/lib/events";
 
 const CarMap = dynamic(() => import("@/components/CarMap"), { ssr: false });
 type Mode = "assistant" | "car";
@@ -35,11 +34,13 @@ export default function Page() {
   const [status, setStatus] = useState<"idle" | "connecting" | "live">("idle");
   const [error, setError] = useState<string | null>(null);
   const [events, setEvents] = useState<AgentEvent[]>([]);
+  const [reviewName, setReviewName] = useState<string | null>(null);
+  const traceInput = useRef<HTMLInputElement | null>(null);
   const [offset, setOffset] = useState(0);
   const room = useRef<Room | null>(null);
 
   const start = useCallback(async () => {
-    setError(null); setEvents([]); setStatus("connecting");
+    setError(null); setEvents([]); setOffset(0); setReviewName(null); setStatus("connecting");
     try {
       const res = await fetch(`/api/token?mode=${mode === "car" ? "car" : "assistant"}`);
       const { url, token, error } = await res.json();
@@ -51,6 +52,8 @@ export default function Page() {
         setOffset((o) => (o === 0 ? ev.ts - Date.now() / 1000 : Math.min(o, ev.ts - Date.now() / 1000)));
         setEvents((prev) => [...prev, ev]);
       });
+      room.current = r;
+      r.on(RoomEvent.TrackUnsubscribed, (track) => track.detach().forEach((el) => el.remove()));
       r.on(RoomEvent.TrackSubscribed, (track) => {
         if (track.kind === Track.Kind.Audio) document.body.appendChild(track.attach());
       });
@@ -60,6 +63,8 @@ export default function Page() {
       room.current = r;
       setStatus("live");
     } catch (e: any) {
+      await room.current?.disconnect();
+      room.current = null;
       setError(`Could not connect: ${e.message ?? e}. Check that the agent worker is running.`);
       setStatus("idle");
     }
@@ -82,19 +87,15 @@ export default function Page() {
     return h;
   }, [events]);
 
-  const nav: NavView | null = useMemo(() => {
-    let v: NavView | null = null;
-    for (const e of events) {
-      if (e.type !== "tool_done" || !e.data.result) continue;
-      const r = e.data.result;
-      if (e.data.tool === "start_navigation" && r.status === "success")
-        v = { polyline: r.polyline, destination: r.navigating_to, eta: r.eta_min, stops: [] };
-      if (e.data.tool === "add_waypoint" && r.status === "success" && v)
-        v = { ...v, polyline: r.polyline, eta: r.eta_min, stops: [...v.stops, r.added] };
-      if (e.data.tool === "cancel_navigation") v = null;
-    }
-    return v;
-  }, [events]);
+  const nav = useMemo(() => buildNavigation(events), [events]);
+
+  const reviewTrace = async (file: File) => {
+    try {
+      const imported = parseTrace(await file.text());
+      setEvents(imported); setReviewName(file.name); setOffset(0); setError(null);
+      setMode(imported.some(e => e.data.tool === "start_navigation") ? "car" : "assistant");
+    } catch (e: any) { setError(`Could not read trace: ${e.message ?? e}`); }
+  };
 
   const live = status === "live";
   return (
@@ -113,6 +114,14 @@ export default function Page() {
           {live ? "End conversation" : "Start talking"}
         </button>
       </header>
+
+      <div className="trace-review">
+        <input ref={traceInput} type="file" accept=".jsonl" hidden onChange={e => {
+          const file = e.target.files?.[0]; if (file) void reviewTrace(file); e.target.value = "";
+        }} />
+        <button disabled={status !== "idle"} onClick={() => traceInput.current?.click()}>Review a saved trace</button>
+        {reviewName && <span>Trace review: {reviewName}. Recorded events; no live audio.</span>}
+      </div>
 
       <div className="main">
         <section className="pane" aria-label="Conversation">
@@ -156,11 +165,11 @@ export default function Page() {
                   )}
                 </div>
                 <div>
-                  <h3>Actions taken (never repeated)</h3>
+                  <h3>Action outcomes</h3>
                   {!snapshot?.committed?.length ? <p className="empty">No changes made yet.</p> : (
                     <ul className="ledger">
                       {snapshot.committed.map((c, i) => (
-                        <li key={i}><code>{c.tool.replace(/_/g, " ")}</code> {Object.values(c.args).join(", ")}</li>
+                        <li key={i}><code>{c.tool.replace(/_/g, " ")}</code> {Object.values(c.args).join(", ")} — {c.status === "unknown" ? "outcome unknown" : "completed"}</li>
                       ))}
                     </ul>
                   )}
@@ -171,7 +180,7 @@ export default function Page() {
         </section>
       </div>
 
-      <Ribbon spans={spans} clockOffset={offset} />
+      <Ribbon spans={spans} clockOffset={offset} reviewEnd={reviewName ? events.reduce((end, e) => Math.max(end, e.ts), 0) + 0.1 : undefined} reviewStart={reviewName ? events.reduce((start, e) => Math.min(start, e.ts), Infinity) : undefined} />
     </main>
   );
 }

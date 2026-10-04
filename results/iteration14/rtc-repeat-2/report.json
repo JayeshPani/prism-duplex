@@ -1,0 +1,297 @@
+{
+  "status": "completed_observation",
+  "started_at": "2026-09-26T08:36:03.889003+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/navigate.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/rtc-repeat-2",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "12",
+    "--followup",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/correct.wav",
+    "--followup",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/navigate.wav"
+  ],
+  "room": "car-audio-ab864624d0374d6a97a7cc7a76ed4722",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/navigate.wav",
+      "file": "initial.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 31680,
+      "intent_before_input": null,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 130079.092510458,
+        "drained_monotonic": 130080.523728916,
+        "scheduled_end_monotonic": 130080.52184379133,
+        "published_samples": 34304
+      }
+    },
+    {
+      "label": "followup_1",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/correct.wav",
+      "file": "followup_1.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+      "sample_rate": 24000,
+      "samples": 46592,
+      "duration_seconds": 1.9413333333333334,
+      "activity_start_sample": 960,
+      "activity_end_sample": 43680,
+      "intent_before_input": 1,
+      "timing": {
+        "label": "followup_1",
+        "started_monotonic": 130089.8171305,
+        "drained_monotonic": 130091.759855,
+        "scheduled_end_monotonic": 130091.75846383334,
+        "published_samples": 46592
+      }
+    },
+    {
+      "label": "followup_2",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/audio-assets/navigate.wav",
+      "file": "followup_2.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 31680,
+      "intent_before_input": 2,
+      "timing": {
+        "label": "followup_2",
+        "started_monotonic": 130103.371335958,
+        "drained_monotonic": 130104.803596208,
+        "scheduled_end_monotonic": 130104.80066929133,
+        "published_samples": 34304
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMQ3wAeCL38N2L",
+      "participant": "agent-AJ_DkQpWEyiodgQ",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means current result handle finished plus observed client quiet tail; it is not a navigation accuracy score.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Delayed data attribution requires the same native sender identity to resolve as AGENT. Coordinator receipts retain original times; attribution-resolution times are recorded separately. Unresolved, blank and non-agent senders remain untrusted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "rtc_identity_adapter": {
+    "sdk_version": "1.1.18",
+    "sdk_room_source_sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    "boundary": "Room._on_room_event synchronous data_received callback",
+    "max_pending_packets": 256,
+    "max_pending_bytes": 1048576,
+    "handler_compatibility": "reviewed_source_match"
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/local-stack-run1/worker-manifest.json",
+    "sha256": "07096927a8d3d74543c0f809d12da4e29e20ec11008c833a7a8a24d1b4b0b212"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration14/protocol.json",
+    "sha256": "d38f24979f0fd1baaeb927bba59986585c59cd90a82818be2e6d6bb9b78f2eeb"
+  },
+  "followup_1_trigger": {
+    "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+    "intent_version": 1,
+    "kind": "result",
+    "speech_id": "speech_c62be409e9f0",
+    "queued_at": 130088.451168583,
+    "state": "queued",
+    "first_loud_at": 130089.816865125,
+    "preceding_quiet_seconds": 5.300224375008838,
+    "last_loud_at": 130089.816865125
+  },
+  "followup_2_trigger": {
+    "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+    "intent_version": 2,
+    "kind": "result",
+    "speech_id": "speech_052266a08dbe",
+    "queued_at": 130101.772537791,
+    "state": "queued",
+    "first_loud_at": 130103.359823708,
+    "preceding_quiet_seconds": 7.6424058330012485,
+    "last_loud_at": 130103.359823708
+  },
+  "cleanup_errors": [],
+  "data_attribution_counts": {
+    "promoted": 85
+  },
+  "finished_at": "2026-09-26T08:36:54.675191+00:00",
+  "event_counts": {
+    "agent_state": 13,
+    "session_started": 1,
+    "user_state": 6,
+    "user_final": 3,
+    "ack": 3,
+    "agent_say": 6,
+    "speech_handle": 12,
+    "plan_ready": 3,
+    "gate_open": 3,
+    "gate_committed": 3,
+    "slot_update": 6,
+    "tool_waiting": 9,
+    "tool_started": 8,
+    "tool_done": 8,
+    "tool_reused": 1
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_cd4308f147c2",
+      "queued_at": 130082.823530083,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 130084.640588041,
+      "error": null
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_c62be409e9f0",
+      "queued_at": 130088.451168583,
+      "state": "interruption_requested",
+      "first_loud_at": 130089.816865125,
+      "preceding_quiet_seconds": 5.300224375008838,
+      "last_loud_at": 130090.516722,
+      "ended_at": 130093.531195833,
+      "error": null
+    },
+    {
+      "text": "Okay, one sec.",
+      "intent_version": 2,
+      "kind": "ack",
+      "speech_id": "speech_87e1aa8c8076",
+      "queued_at": 130094.248359291,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 130095.820081083,
+      "error": null
+    },
+    {
+      "text": "Now navigating to Office (Manyata Tech Park), replacing Kempegowda International Airport. Estimated arrival in 29 minutes.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_052266a08dbe",
+      "queued_at": 130101.772537791,
+      "state": "interruption_requested",
+      "first_loud_at": 130103.359823708,
+      "preceding_quiet_seconds": 7.6424058330012485,
+      "last_loud_at": 130104.038028666,
+      "ended_at": 130106.578164041,
+      "error": null
+    },
+    {
+      "text": "Sure, let me check.",
+      "intent_version": 3,
+      "kind": "ack",
+      "speech_id": "speech_de02bdd86902",
+      "queued_at": 130107.308853666,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 130109.150801666,
+      "error": null
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. The route is active with an estimated time of arrival of 88 minutes.",
+      "intent_version": 3,
+      "kind": "result",
+      "speech_id": "speech_a7519f11d7cc",
+      "queued_at": 130119.584613666,
+      "state": "finished",
+      "first_loud_at": 130120.799063,
+      "preceding_quiet_seconds": 11.862527042001602,
+      "last_loud_at": 130128.276546625,
+      "ended_at": 130128.310126333,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "worker_manifest.json": "07096927a8d3d74543c0f809d12da4e29e20ec11008c833a7a8a24d1b4b0b212",
+    "followup_2.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "followup_1.wav": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+    "events.jsonl": "06c2228ac3e634cd5e847dbe82ab5b50e58f6644d56d5ec48d8a20b36a7734e5",
+    "frames.jsonl": "3aaa570f7b1237572e0c24562ac7aa21251ddf52382ce2d9a96a84b8b73d561c",
+    "protocol.json": "d38f24979f0fd1baaeb927bba59986585c59cd90a82818be2e6d6bb9b78f2eeb",
+    "received-1.pcm": "280f3ea5aa1877bbc7035de675ee0a6d79185b1c0d9dcece89a95d040f6eb677"
+  }
+}

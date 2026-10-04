@@ -1,0 +1,67 @@
+{
+  "created_at": "2026-09-25T19:27:20.019480+00:00",
+  "status": "completed",
+  "protocol_sha256": "72be363f77a36d2f14851ef84c8df814d502179c5cc09c87a4b949b0781d03f1",
+  "declared": {
+    "voice": "af_heart",
+    "speed": 1.1,
+    "phrases": {
+      "navigate": "Navigate to the airport.",
+      "correct": "Actually, go to the office instead."
+    },
+    "generation": "Generate after cache ablation, freeze WAV hashes and source before transport trials. Generated user speech is independent of agent output; no acoustic echo path."
+  },
+  "packages": {
+    "kokoro-onnx": "0.6.1",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.2.6"
+  },
+  "model_assets": {
+    "kokoro-v1.0.onnx": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
+      "expected_sha256": null,
+      "observed_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "reference_sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "reference_origin": "PRISM local-speech-run1 observed bytes, 2026-09-25; not a publisher digest",
+      "matches_reference": true,
+      "source_verified": false,
+      "runtime_loaded": false
+    },
+    "voices-v1.0.bin": {
+      "source_url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin",
+      "expected_sha256": null,
+      "observed_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "reference_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "reference_origin": "PRISM local-speech-run1 observed bytes, 2026-09-25; not a publisher digest",
+      "matches_reference": true,
+      "source_verified": false,
+      "runtime_loaded": false
+    }
+  },
+  "source_sha256": {
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8"
+  },
+  "clips": [
+    {
+      "name": "navigate",
+      "text": "Navigate to the airport.",
+      "path": "results/iteration4/audio-assets/navigate.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "duration_s": 1.4293333333333333,
+      "generation_seconds": 1.9051362090103794
+    },
+    {
+      "name": "correct",
+      "text": "Actually, go to the office instead.",
+      "path": "results/iteration4/audio-assets/correct.wav",
+      "sha256": "bbcf85e10a662a4536245a44dd6ecab590e3908c674222b4e888208089382ea3",
+      "duration_s": 1.9413333333333334,
+      "generation_seconds": 0.5095540000038454
+    }
+  ],
+  "limitations": [
+    "Synthetic development user voice; no human microphone or echo path",
+    "Generation latency is not a transport or conversational metric"
+  ]
+}

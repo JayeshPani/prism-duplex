@@ -1,0 +1,37 @@
+{"source_sha256": {"agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3", "agent/coordinator/responder.py": "2c0a306ae19b11cb2fd7ef6783e79ce797de228551edaa822664e40cad033890", "tests/unit/test_navigation_summaries.py": "76bfae05f332c92223cf2c6548cf02759aba85db935061d468549fc8793f8c1a", "tests/unit/test_speech_truthfulness.py": "fbc2d27f7974cba5fca18e4330345f8a6dde840728973e389397b213750c9895", "tests/unit/test_summary_request_fidelity.py": "c25a324e0d3116dca6ae1f52ee28848effbcf40e160590412c2b520669ab1e9c"}}
+......................................F.                                 [100%]
+=================================== FAILURES ===================================
+_ test_summary_receives_request_instead_of_planner_narration[Buy the first item.] _
+
+repaired = 'Buy the first item.'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("repaired", [None, "", "Buy the first item."])
+    async def test_summary_receives_request_instead_of_planner_narration(repaired):
+        utterance = "Please buy the, uh, first item."
+        plan = {"complete": True, "calls": [{"id": "c1", "tool": "buy", "args": {"x": "first"}}],
+                "reply": "Buying the first item."}
+        if repaired is not None:
+            plan["repaired"] = repaired
+        coord, bus, _, said, _ = build({"first": plan}, cfg=CoordinatorConfig(hold_state_ms=0, ack_after_ms=10000))
+        requests = []
+    
+        class CapturingResponder:
+            async def summarize(self, request, execution):
+                requests.append(request)
+                return "The first item was purchased."
+    
+        coord.responder = CapturingResponder()
+        coord.on_user_turn(utterance)
+        await coord.drain()
+        await coord.aclose()
+>       assert requests == [repaired or utterance]
+E       AssertionError: assert [] == ['Buy the first item.']
+E         
+E         Right contains one more item: 'Buy the first item.'
+E         Use -v to get more diff
+
+tests/unit/test_speech_truthfulness.py:69: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_speech_truthfulness.py::test_summary_receives_request_instead_of_planner_narration[Buy the first item.]
+1 failed, 39 passed in 0.49s

@@ -1,0 +1,137 @@
+{
+  "reviewed_at_utc": "2026-09-26T10:26:30.308615+00:00",
+  "scope": "Read-only source review and independent inspection of the completed verification receipt; no model reads, process launches, verifier reruns or prior-artifact changes.",
+  "issue": {
+    "title": "An interrupt can leave an incomplete verification receipt labelled passed",
+    "severity": "Verification-method correctness; not observed in this execution",
+    "source": "results/iteration17/verify_after_inference.py",
+    "lines": [
+      212,
+      215,
+      218
+    ],
+    "detail": "The outer except Exception does not catch KeyboardInterrupt or SystemExit. If such a BaseException arrives before an issue is appended, finally assigns passed solely from the empty issue list despite incomplete phase inventories. The interrupt propagates, but the saved status can be misleading.",
+    "recommendation": "A future method should require an explicit all-checks-completed flag and record interruptions. The iteration17 finalizer must validate every required phase/count/value instead of trusting status alone.",
+    "executed_method_preserved": true
+  },
+  "observed_execution": {
+    "all_required_phases_complete": true,
+    "verifier_process_exit_code": 0,
+    "exit_code_evidence": "Execution tool returned exit_code 0; separate captured stdout contains the terminal zero-issue summary.",
+    "checks": {
+      "global_originals_before_models": {
+        "count": 150,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "global_snapshots_before_models": {
+        "count": 150,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "global_originals_after_models": {
+        "count": 150,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "global_snapshots_after_models": {
+        "count": 150,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "model_files": {
+        "count": 10,
+        "complete_and_matching": true,
+        "bytes_read": 7433447358
+      },
+      "A2_first/frozen_files_before_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "A2_first/frozen_files_after_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "A2_first/process_observations_before_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "A2_first/process_observations_after_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "B1/frozen_files_before_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "B1/frozen_files_after_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "B1/process_observations_before_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "B1/process_observations_after_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "A2_return/frozen_files_before_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "A2_return/frozen_files_after_models": {
+        "count": 41,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "A2_return/process_observations_before_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "A2_return/process_observations_after_models": {
+        "count": 8,
+        "eight_grounded_pid_observations": true,
+        "all_absent_with_no_error": true
+      },
+      "evidence_recheck": {
+        "count": 22,
+        "complete_and_matching": true,
+        "exact_manifest_inventory": true
+      },
+      "ordering": {
+        "three_arms_declared_order": true,
+        "serial_timed_arms": true,
+        "all_asr_after_all_timed": true,
+        "model_reads_after_all_asr": true,
+        "model_read_finished_before_final_checkpoint": true
+      },
+      "terminal": {
+        "status_passed": true,
+        "no_issues": true,
+        "no_fatal_error": true,
+        "summary_complete": true,
+        "method_exact": true,
+        "model_references_identical": true
+      }
+    },
+    "conclusion": "This observed execution reached all required model, original, snapshot, arm-input, PID, ordering and evidence-recheck phases with complete matching values. The interruption edge case did not affect this completed result. The method and receipt remain unchanged."
+  },
+  "evidence_sha256": {
+    "results/iteration17/verify_after_inference.py": "75ad28d50275f93fc1c0fd2eed0607edbda6aebbe4486bbf4d51053a436f4ed0",
+    "results/iteration17/post-inference-validation.json": "e73e03824572ae6c1581c30f2d6d602f03dfe69603a55f54a82882b954567d9c",
+    "results/iteration17/post-inference-validation-output.txt": "fc07938bc0dc4b8dbfb89cec52b4741f5bea37110fd232d3d260137a559f0685",
+    "results/iteration17/source-snapshot.json": "0124ba205252357ce64512fc05c21839e799e5fcf91c54027820dfc4262ebf3c"
+  },
+  "limitations": "This metadata review verifies recorded completeness and internal consistency, not a second independent model-byte read. It does not repair the interrupted-run weakness or convert benchmark failures into success."
+}

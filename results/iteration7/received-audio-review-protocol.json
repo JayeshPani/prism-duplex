@@ -1,0 +1,53 @@
+{
+  "frozen_at_utc": "2026-09-26T04:51:49.281879+00:00",
+  "timing": "Method frozen while timed capture suite is running, before any received-audio ASR; expected facts were already declared in the suite protocol.",
+  "script_sha256": "b94aa694e5d1d391138b03774717613b3854d3f8e95dfdb0187a6dd6ca058483",
+  "suite_protocol_sha256": "c2fee81a870dcc14edbd3e80083412f00a8b1ab12f707a716878804885cb9065",
+  "declared_trials": [
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline"
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction"
+    },
+    {
+      "id": "rtc-silence-1",
+      "case": "silence"
+    },
+    {
+      "id": "rtc-noise-1",
+      "case": "noise"
+    },
+    {
+      "id": "rtc-correction-2",
+      "case": "correction"
+    },
+    {
+      "id": "rtc-baseline-2",
+      "case": "baseline"
+    },
+    {
+      "id": "rtc-noise-2",
+      "case": "noise"
+    },
+    {
+      "id": "rtc-silence-2",
+      "case": "silence"
+    }
+  ],
+  "scope": "All eight declared whole received PCM streams, in original order, retaining failures/unavailable rows in the denominator.",
+  "method": "Pinned production LocalSTT through offline cached Parakeet on local-mac; resample entire mono PCM16 24 kHz to16 kHz with existing helper. No trimming, silence removal, retries or capture-success selection.",
+  "review": {
+    "baseline_and_probes": "Airport navigation started and 88-minute ETA complete; retain proper-name/number deviations.",
+    "correction": "Old airport result is interrupted, new office result completes and states replacement of the airport. Retain all contradictory or missing text.",
+    "score": "Verbatim ASR plus qualitative fact review only, not held-out accuracy or independent intelligibility."
+  },
+  "limitations": [
+    "Production ASR proxy cannot distinguish pronunciation from recognition errors; no human listening.",
+    "Whole-stream text does not establish word timestamps or physical playback.",
+    "Eight repeated synthetic development captures share warm models and a fixed order.",
+    "Review is performed only after timed suite and owned model services have stopped. Its timings are separate from conversation latency."
+  ]
+}

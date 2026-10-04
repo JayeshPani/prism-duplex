@@ -1,0 +1,367 @@
+{
+  "started_at_utc": "2026-09-26T13:21:05.430185+00:00",
+  "status": "launcher_exited",
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3"
+  },
+  "source_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration11/instrumented_worker.py": "fa80b1d964c05a12d2f76c079ed61cc17c345ac088c11b4a4dfa904ec27eb3a5",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/audio_recognition.py": "480f8b7a5348533e813d41e64f5ae5a519058b52b37d35ec2cb58b50e2fa8efa",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_activity.py": "b8dc447bc511499082b5d56bcf110e1c738b3a651a08c0336d11988eb9b82e7e",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6"
+  },
+  "method": "Original AudioRecognition._push_audio runs unchanged before in-memory observation. No frame modification, model/turn/AEC setting override or live diagnostic file writes.",
+  "limits": [
+    "Instrumentation adds per-frame clock, counter, state-read and observer-lock overhead; timing is not comparable to historical uninstrumented runs as a causal experiment.",
+    "Sample counts are per channel, grouped by rate/channel format. Contiguous means consecutive substituted calls, not continuous wall-clock audio.",
+    "Only each interval's first substituted and original frames are checked for zero PCM. AEC-active state is captured on every substituted call.",
+    "Open intervals end at the last observed frame; worker shutdown does not imply an unsubstituted frame arrived.",
+    "Missing report after SIGKILL or abrupt process death means diagnostics are unavailable, not zero discarded frames.",
+    "No raw speech PCM is retained here; existing recorder artifacts remain the audio evidence."
+  ],
+  "launcher_exception": "SystemExit(0)",
+  "finished_at_utc": "2026-09-26T13:25:19.991856+00:00",
+  "recognition_objects": [
+    {
+      "recognition_index": 1,
+      "room": "car-audio-9bee3ee0e328420195485effb9afd5ae",
+      "identity_error": null,
+      "frames": 961,
+      "samples_by_format": {
+        "24000Hz/1ch": 1200000
+      },
+      "substituted_frames": 18,
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "first_monotonic": 147189.074237208,
+      "first_unix": 1790428874.445746,
+      "intervals": [
+        {
+          "first_monotonic": 147193.523938791,
+          "first_unix": 1790428878.8954592,
+          "first_utc": "2026-09-26T13:21:18.895459+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 147194.373651083,
+          "last_unix": 1790428879.745174,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 147194.423789416,
+          "next_unsubstituted_unix": 1790428879.7953122
+        }
+      ],
+      "last_monotonic": 147236.559045833,
+      "last_unix": 1790428921.930676
+    },
+    {
+      "recognition_index": 2,
+      "room": "car-audio-12e6edfa5a804669a5cdbe308b634466",
+      "identity_error": null,
+      "frames": 595,
+      "samples_by_format": {
+        "24000Hz/1ch": 760800
+      },
+      "substituted_frames": 10,
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 12000
+      },
+      "first_monotonic": 147240.0146965,
+      "first_unix": 1790428925.386336,
+      "intervals": [
+        {
+          "first_monotonic": 147254.413925416,
+          "first_unix": 1790428939.785602,
+          "first_utc": "2026-09-26T13:22:19.785602+00:00",
+          "frames": 10,
+          "samples_by_format": {
+            "24000Hz/1ch": 12000
+          },
+          "aec_active_frames": 10,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 147254.863732833,
+          "last_unix": 1790428940.23541,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 147254.923498791,
+          "next_unsubstituted_unix": 1790428940.295176
+        }
+      ],
+      "last_monotonic": 147269.181613791,
+      "last_unix": 1790428954.553328
+    },
+    {
+      "recognition_index": 3,
+      "room": "car-audio-ab550814f2bf4bbba8d09f2f26d0ee5a",
+      "identity_error": null,
+      "frames": 373,
+      "samples_by_format": {
+        "24000Hz/1ch": 494400
+      },
+      "substituted_frames": 18,
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "first_monotonic": 147272.313542375,
+      "first_unix": 1790428957.6852639,
+      "intervals": [
+        {
+          "first_monotonic": 147283.763605291,
+          "first_unix": 1790428969.135357,
+          "first_utc": "2026-09-26T13:22:49.135357+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 147284.613875125,
+          "last_unix": 1790428969.9856288,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 147284.664537375,
+          "next_unsubstituted_unix": 1790428970.0362911
+        }
+      ],
+      "last_monotonic": 147290.396059125,
+      "last_unix": 1790428975.767827
+    },
+    {
+      "recognition_index": 4,
+      "room": "car-audio-5b667ddd54854ce2aa1d3ccdcca2de5b",
+      "identity_error": null,
+      "frames": 1075,
+      "samples_by_format": {
+        "24000Hz/1ch": 1336800
+      },
+      "substituted_frames": 18,
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "first_monotonic": 147293.474133666,
+      "first_unix": 1790428978.84591,
+      "intervals": [
+        {
+          "first_monotonic": 147300.124389416,
+          "first_unix": 1790428985.4961832,
+          "first_utc": "2026-09-26T13:23:05.496183+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 147300.974118625,
+          "last_unix": 1790428986.3459141,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 147301.023958875,
+          "next_unsubstituted_unix": 1790428986.395755
+        }
+      ],
+      "last_monotonic": 147346.653600125,
+      "last_unix": 1790429032.025512
+    },
+    {
+      "recognition_index": 5,
+      "room": "car-audio-067214d80b164047a0bdaab2cd6a81e3",
+      "identity_error": null,
+      "frames": 897,
+      "samples_by_format": {
+        "24000Hz/1ch": 1123200
+      },
+      "substituted_frames": 0,
+      "substituted_samples_by_format": {},
+      "first_monotonic": 147350.075039125,
+      "first_unix": 1790429035.4469602,
+      "intervals": [],
+      "last_monotonic": 147394.347383291,
+      "last_unix": 1790429079.719418
+    },
+    {
+      "recognition_index": 6,
+      "room": "car-audio-7aa791a949844b70869ccbee509d725c",
+      "identity_error": null,
+      "frames": 690,
+      "samples_by_format": {
+        "24000Hz/1ch": 874800
+      },
+      "substituted_frames": 18,
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "first_monotonic": 147398.483710291,
+      "first_unix": 1790429083.855755,
+      "intervals": [
+        {
+          "first_monotonic": 147419.737269333,
+          "first_unix": 1790429105.109369,
+          "first_utc": "2026-09-26T13:25:05.109369+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 147420.58524975,
+          "last_unix": 1790429105.957352,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 147420.635734166,
+          "next_unsubstituted_unix": 1790429106.0078359
+        }
+      ],
+      "last_monotonic": 147432.42119225,
+      "last_unix": 1790429117.793324
+    }
+  ],
+  "room_totals": {
+    "car-audio-9bee3ee0e328420195485effb9afd5ae": {
+      "frames": 961,
+      "substituted_frames": 18,
+      "samples_by_format": {
+        "24000Hz/1ch": 1200000
+      },
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "recognition_indices": [
+        1
+      ]
+    },
+    "car-audio-12e6edfa5a804669a5cdbe308b634466": {
+      "frames": 595,
+      "substituted_frames": 10,
+      "samples_by_format": {
+        "24000Hz/1ch": 760800
+      },
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 12000
+      },
+      "recognition_indices": [
+        2
+      ]
+    },
+    "car-audio-ab550814f2bf4bbba8d09f2f26d0ee5a": {
+      "frames": 373,
+      "substituted_frames": 18,
+      "samples_by_format": {
+        "24000Hz/1ch": 494400
+      },
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "recognition_indices": [
+        3
+      ]
+    },
+    "car-audio-5b667ddd54854ce2aa1d3ccdcca2de5b": {
+      "frames": 1075,
+      "substituted_frames": 18,
+      "samples_by_format": {
+        "24000Hz/1ch": 1336800
+      },
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "recognition_indices": [
+        4
+      ]
+    },
+    "car-audio-067214d80b164047a0bdaab2cd6a81e3": {
+      "frames": 897,
+      "substituted_frames": 0,
+      "samples_by_format": {
+        "24000Hz/1ch": 1123200
+      },
+      "substituted_samples_by_format": {},
+      "recognition_indices": [
+        5
+      ]
+    },
+    "car-audio-7aa791a949844b70869ccbee509d725c": {
+      "frames": 690,
+      "substituted_frames": 18,
+      "samples_by_format": {
+        "24000Hz/1ch": 874800
+      },
+      "substituted_samples_by_format": {
+        "24000Hz/1ch": 21600
+      },
+      "recognition_indices": [
+        6
+      ]
+    }
+  },
+  "observation_error_count": 0,
+  "observation_errors": [],
+  "observation_total_ns": 64193193,
+  "observation_max_ns": 1755458,
+  "source_hashes_unchanged": true
+}

@@ -31,7 +31,12 @@ if [ -z "${PRISM_PROFILE:-}" ]; then
   elif command -v nvidia-smi >/dev/null; then PRISM_PROFILE=local-cuda
   else die "No Apple Silicon or NVIDIA GPU found; set PRISM_PROFILE explicitly."; fi
 fi
-export PRISM_PROFILE
+case "$PRISM_PROFILE" in
+  local-mac|local-cuda) ;;
+  *) die "Benchmark agent inference must use local-mac or local-cuda; hosted judging is separate." ;;
+esac
+export PRISM_PROFILE JUDGE PROVIDER
+export PRISM_MODEL_RECEIPTS_DIR="$OUT/model_receipts"
 log "profile=$PRISM_PROFILE judge=$JUDGE provider=$PROVIDER output=$OUT"
 
 # ── 1. python env (pinned) ───────────────────────────────────────────────────
@@ -43,6 +48,8 @@ REQ=requirements/mac.txt; [ "$PRISM_PROFILE" = "local-cuda" ] && REQ=requirement
 log "installing $REQ"
 uv pip install -q -r "$REQ"
 git submodule update --init --recursive -q
+python scripts/capture_run.py --validate-local-only
+python scripts/capture_run.py --out "$OUT/run_manifest_setup.json" --results-dir "$DATA_DIR" --provider "$PROVIDER" -- bash scripts/run_benchmark.sh
 
 # ── 2. models + benchmark data ───────────────────────────────────────────────
 bash scripts/download_models.sh "$PRISM_PROFILE"
@@ -57,26 +64,37 @@ fi
 
 # ── 3. start LLM server + agent worker ───────────────────────────────────────
 PIDS=()
-cleanup() { for p in "${PIDS[@]:-}"; do kill "$p" 2>/dev/null || true; done; }
+cleanup() {
+  for p in "${PIDS[@]:-}"; do kill "$p" 2>/dev/null || true; done
+  cp /tmp/agent_tool_calls.log /tmp/agent_heartbeat.log "$OUT/" 2>/dev/null || true
+}
 trap cleanup EXIT
 MODEL="$(python -c 'from agent.config import load_config; print(load_config()["llm"]["model"])')"
+MODEL_PATH="$(python -m agent.model_assets llm --local-files-only --record "$OUT/llm_snapshot_selection.json")"
 BASE="$(python -c 'from agent.config import load_config; print(load_config()["llm"]["base_url"])')"
+if curl -sf "$BASE/models" >/dev/null; then
+  die "LLM endpoint is already occupied; stop its server before running a benchmark with the declared snapshot."
+fi
 if [ "$PRISM_PROFILE" = "local-mac" ]; then
   log "starting mlx_lm.server ($MODEL)"
-  python -m mlx_lm server --model "$MODEL" --port 8081 --prompt-cache-size 8 \
+  python -m mlx_lm server --model "$MODEL_PATH" --port 8081 --prompt-cache-size 2 \
     --chat-template-args '{"enable_thinking": false}' >"$OUT/llm_server.log" 2>&1 & PIDS+=($!)
 elif [ "$PRISM_PROFILE" = "local-cuda" ]; then
   log "starting vLLM ($MODEL)"
-  python -m vllm.entrypoints.openai.api_server --model "$MODEL" --port 8000 --max-model-len 8192 \
+  python -m vllm.entrypoints.openai.api_server --model "$MODEL_PATH" --served-model-name "$MODEL" --port 8000 --max-model-len 8192 \
     --gpu-memory-utilization 0.80 --seed 7 --enable-prefix-caching >"$OUT/llm_server.log" 2>&1 & PIDS+=($!)
 fi
-if [[ "$BASE" == http://127.0.0.1* ]]; then
-  for _ in $(seq 1 180); do curl -sf "$BASE/models" >/dev/null && break; sleep 2; done
-  curl -sf "$BASE/models" >/dev/null || die "LLM server did not come up; see $OUT/llm_server.log"
-fi
+SERVER_PID="${PIDS[0]}"
+for _ in $(seq 1 180); do
+  kill -0 "$SERVER_PID" 2>/dev/null || die "LLM server exited; see $OUT/llm_server.log"
+  curl -sf "$BASE/models" >/dev/null && break
+  sleep 2
+done
+kill -0 "$SERVER_PID" 2>/dev/null || die "LLM server exited; see $OUT/llm_server.log"
+curl -sf "$BASE/models" >/dev/null || die "LLM server did not come up; see $OUT/llm_server.log"
 
-: > /tmp/agent_tool_calls.log     # fresh telemetry for this run
-: > /tmp/agent_heartbeat.log
+# Keep dispatched calls from earlier/failed runs; the upstream runner filters by room.
+touch /tmp/agent_tool_calls.log /tmp/agent_heartbeat.log
 export PRISM_TRACE_DIR="$OUT/traces"
 log "starting agent worker"
 python -m agent.main start >"$OUT/agent.log" 2>&1 & PIDS+=($!)
@@ -84,13 +102,34 @@ for _ in $(seq 1 90); do grep -qi "registered worker" "$OUT/agent.log" && break;
 grep -qi "registered worker" "$OUT/agent.log" || die "agent did not register with LiveKit; see $OUT/agent.log"
 
 # ── 4. inference (benchmark's own client, unmodified) ────────────────────────
-RUN_DIR="$DATA_DIR"
-if [ -n "${LIMIT:-}" ]; then
-  RUN_DIR="$ROOT/bench/data/subset_$LIMIT"; rm -rf "$RUN_DIR"; mkdir -p "$RUN_DIR"
-  for d in $(ls "$DATA_DIR" | sort | head -n "$LIMIT"); do cp -R "$DATA_DIR/$d" "$RUN_DIR/"; done
-fi
+# Give every run its own unchanged inputs and fresh outputs, including failed runs.
+# Do not copy old result files: a partial run must never score a previous run's output.
+RUN_DIR="$OUT/raw/fdb_v3_data_released"
+mkdir -p "$RUN_DIR"
+python - "$DATA_DIR" "$RUN_DIR" "${LIMIT:-}" <<'PY'
+from pathlib import Path
+import shutil
+import sys
+source, target = map(Path, sys.argv[1:3])
+folders = sorted(p for p in source.iterdir() if p.is_dir() and (p / "input.wav").is_file())
+if sys.argv[3]:
+    limit = int(sys.argv[3])
+    if limit <= 0:
+        raise SystemExit("LIMIT must be a positive integer")
+    folders = folders[:limit]
+for folder in folders:
+    dest = target / folder.name
+    dest.mkdir()
+    for name in ("input.wav", "metadata.json"):
+        if (folder / name).is_file():
+            shutil.copy2(folder / name, dest / name)
+if not folders:
+    raise SystemExit("No input.wav recordings found")
+PY
 log "running FDB-v3 inference on $(ls "$RUN_DIR" | wc -l | tr -d ' ') examples"
+python scripts/capture_run.py --out "$OUT/run_manifest_before.json" --results-dir "$RUN_DIR" --provider "$PROVIDER" -- python scripts/fdb_infer.py --provider "$PROVIDER" --root_dir "$RUN_DIR" --force
 python scripts/fdb_infer.py --provider "$PROVIDER" --root_dir "$RUN_DIR" --force 2>&1 | tee "$OUT/inference.log"
+python scripts/capture_run.py --out "$OUT/run_manifest_after.json" --results-dir "$RUN_DIR" --provider "$PROVIDER" -- python scripts/fdb_infer.py --provider "$PROVIDER" --root_dir "$RUN_DIR" --force
 
 # ── 5. evaluation (benchmark's own evaluators) ───────────────────────────────
 log "evaluating (judge=$JUDGE)"

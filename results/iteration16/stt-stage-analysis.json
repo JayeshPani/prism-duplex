@@ -1,0 +1,1289 @@
+{
+  "created_at_utc": "2026-09-26T09:40:00.069572+00:00",
+  "scope": "Every observed engine call, including prewarm, failures and cancellations.",
+  "source_sha256": {
+    "analyze_stt.py": "26d34fa85a010c94ae3efea846239648581c8c244fe3565603f7f82add2a685b",
+    "local-stack-run1/stt-diagnostics/report.json": "56d6dcd6f5846b1cf59d00a52e2fd91eb92e60dd016d6f2e5e42e3119f6de001",
+    "run-report.json": "0576c462d8d73f139161f3801766af54b743725a1a567ffe4e2b4e3718b31c4a"
+  },
+  "calls": [
+    {
+      "call_id": "stt-call-001",
+      "request_id": "stt-request-002",
+      "trial": null,
+      "room": null,
+      "call_type": "warmup",
+      "caller_outcome": {
+        "monotonic_ns": 133697996449083,
+        "unix_ns": 1790415383333425000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": ""
+      },
+      "native_outcome": {
+        "monotonic_ns": 133697991594416,
+        "unix_ns": 1790415383328570000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": ""
+      },
+      "future_outcome": {
+        "monotonic_ns": 133697993961500,
+        "unix_ns": 1790415383330937000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.011667,
+        "submit_to_worker_entry": 0.022708,
+        "worker_entry_to_native_completion": 2341.124,
+        "native_completion_to_caller_return": 4.854667,
+        "api_entry_to_caller_return": 2346.013042
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.002167
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.313167
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.023791
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.0355
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.035208
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 2339.224125
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 105.1705
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 1.101083
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 2232.375958
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.582083
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 32000,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 32000,
+        "file": "pcm/stt-call-001-submitted_pcm.pcm",
+        "sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "duration_seconds": 1.0
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 32000,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 32000,
+        "file": "pcm/stt-call-001-written_wav_pcm.pcm",
+        "sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "duration_seconds": 1.0
+      }
+    },
+    {
+      "call_id": "stt-call-002",
+      "request_id": "stt-request-003",
+      "trial": "rtc-cancel-1",
+      "room": "car-audio-4c5d21944ff1438fbc0499f98c5dda84",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133708840854125,
+        "unix_ns": 1790415394177858000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133708840725125,
+        "unix_ns": 1790415394177729000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133708840751458,
+        "unix_ns": 1790415394177755000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.09775,
+        "submit_to_worker_entry": 0.099833,
+        "worker_entry_to_native_completion": 1141.294084,
+        "native_completion_to_caller_return": 0.129,
+        "api_entry_to_caller_return": 1141.620667
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.026666
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.643333
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.065291
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.315417
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.096875
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1139.750625
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 88.106458
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 1.835209
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1049.665417
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.125875
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-002-submitted_pcm.pcm",
+        "sha256": "1f39acb5b122e26197697bea3fc76bbf559a7282a0244c3fb8c04a3f7871c876",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-002-written_wav_pcm.pcm",
+        "sha256": "1f39acb5b122e26197697bea3fc76bbf559a7282a0244c3fb8c04a3f7871c876",
+        "duration_seconds": 1.92
+      }
+    },
+    {
+      "call_id": "stt-call-003",
+      "request_id": "stt-request-005",
+      "trial": "rtc-cancel-1",
+      "room": "car-audio-4c5d21944ff1438fbc0499f98c5dda84",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133727214280750,
+        "unix_ns": 1790415412551331000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133727214167625,
+        "unix_ns": 1790415412551218000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133727214189791,
+        "unix_ns": 1790415412551240000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.071459,
+        "submit_to_worker_entry": 0.197458,
+        "worker_entry_to_native_completion": 1164.930917,
+        "native_completion_to_caller_return": 0.113125,
+        "api_entry_to_caller_return": 1165.312959
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.030375
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.977667
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.284125
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.549
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.547166
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1162.059542
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 78.811
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.302666
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1082.714667
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.167708
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 65152,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 65152,
+        "file": "pcm/stt-call-003-submitted_pcm.pcm",
+        "sha256": "0a3e623d7b4d9b5da312120b3f00430b4371034cf77957684ba4db11870a3cd1",
+        "duration_seconds": 2.036
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 65152,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 65152,
+        "file": "pcm/stt-call-003-written_wav_pcm.pcm",
+        "sha256": "0a3e623d7b4d9b5da312120b3f00430b4371034cf77957684ba4db11870a3cd1",
+        "duration_seconds": 2.036
+      }
+    },
+    {
+      "call_id": "stt-call-004",
+      "request_id": "stt-request-007",
+      "trial": "rtc-repeat-1",
+      "room": "car-audio-3416bee64e234e8f87ee9139757777af",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133742737707041,
+        "unix_ns": 1790415428074797000,
+        "thread_id": 16474091520,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133742737577500,
+        "unix_ns": 1790415428074668000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133742737606000,
+        "unix_ns": 1790415428074696000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.0325,
+        "submit_to_worker_entry": 0.095708,
+        "worker_entry_to_native_completion": 1219.100584,
+        "native_completion_to_caller_return": 0.129541,
+        "api_entry_to_caller_return": 1219.358333
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.013042
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.203625
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.156792
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.107083
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.193666
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1217.670584
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 70.986583
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.651541
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1145.852166
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.20325
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-004-submitted_pcm.pcm",
+        "sha256": "a1404a077f0b99f5db1f68b854674d2c6ba88274cfe5fb8d5614d5d371aae49a",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-004-written_wav_pcm.pcm",
+        "sha256": "a1404a077f0b99f5db1f68b854674d2c6ba88274cfe5fb8d5614d5d371aae49a",
+        "duration_seconds": 1.92
+      }
+    },
+    {
+      "call_id": "stt-call-005",
+      "request_id": "stt-request-009",
+      "trial": "rtc-repeat-1",
+      "room": "car-audio-3416bee64e234e8f87ee9139757777af",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133753667057125,
+        "unix_ns": 1790415439004176000,
+        "thread_id": 16474091520,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133753666769208,
+        "unix_ns": 1790415439003888000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133753666808333,
+        "unix_ns": 1790415439003927000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.025792,
+        "submit_to_worker_entry": 0.074958,
+        "worker_entry_to_native_completion": 1296.95875,
+        "native_completion_to_caller_return": 0.287917,
+        "api_entry_to_caller_return": 1297.347417
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.010708
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.415667
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.097792
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.09225
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.282916
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1295.526041
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 80.054667
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.398042
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1214.908916
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.142167
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-005-submitted_pcm.pcm",
+        "sha256": "40570e359b65921875f13c27facdfcad937406f0db2277694162f9cc22d7978e",
+        "duration_seconds": 2.772
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-005-written_wav_pcm.pcm",
+        "sha256": "40570e359b65921875f13c27facdfcad937406f0db2277694162f9cc22d7978e",
+        "duration_seconds": 2.772
+      }
+    },
+    {
+      "call_id": "stt-call-006",
+      "request_id": "stt-request-011",
+      "trial": "rtc-repeat-1",
+      "room": "car-audio-3416bee64e234e8f87ee9139757777af",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133764546967750,
+        "unix_ns": 1790415449884114000,
+        "thread_id": 16474091520,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133764546863083,
+        "unix_ns": 1790415449884009000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133764546886291,
+        "unix_ns": 1790415449884033000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.042041,
+        "submit_to_worker_entry": 0.083209,
+        "worker_entry_to_native_completion": 1226.646708,
+        "native_completion_to_caller_return": 0.104667,
+        "api_entry_to_caller_return": 1226.876625
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.0135
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.9085
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.129375
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 2.242708
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.202542
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1222.524917
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 102.566666
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.32075
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1119.228291
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.172958
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 74368,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 74368,
+        "file": "pcm/stt-call-006-submitted_pcm.pcm",
+        "sha256": "1cffdbb77a8db1a21d662788f8e8d4ada28c5e9bce0767854b3dfe90b6c0750f",
+        "duration_seconds": 2.324
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 74368,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 74368,
+        "file": "pcm/stt-call-006-written_wav_pcm.pcm",
+        "sha256": "1cffdbb77a8db1a21d662788f8e8d4ada28c5e9bce0767854b3dfe90b6c0750f",
+        "duration_seconds": 2.324
+      }
+    },
+    {
+      "call_id": "stt-call-007",
+      "request_id": "stt-request-013",
+      "trial": "rtc-repeat-2",
+      "room": "car-audio-89a9de3b83cf4c62b316f5ba5e7eaecf",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133794101478875,
+        "unix_ns": 1790415479438701000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133794101360166,
+        "unix_ns": 1790415479438582000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133794101390416,
+        "unix_ns": 1790415479438612000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.037125,
+        "submit_to_worker_entry": 0.376792,
+        "worker_entry_to_native_completion": 2561.913916,
+        "native_completion_to_caller_return": 0.118709,
+        "api_entry_to_caller_return": 2562.446542
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.014375
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.252958
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.26025
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.263125
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.044167
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 2560.377667
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 78.846792
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 1.798209
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 2479.0705
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.124708
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-007-submitted_pcm.pcm",
+        "sha256": "48b090466661372123442d9aea84238efafa3505b0378f09b6c444056a99bfb1",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-007-written_wav_pcm.pcm",
+        "sha256": "48b090466661372123442d9aea84238efafa3505b0378f09b6c444056a99bfb1",
+        "duration_seconds": 1.92
+      }
+    },
+    {
+      "call_id": "stt-call-008",
+      "request_id": "stt-request-015",
+      "trial": "rtc-repeat-2",
+      "room": "car-audio-89a9de3b83cf4c62b316f5ba5e7eaecf",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133805585690291,
+        "unix_ns": 1790415490922942000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133805585467041,
+        "unix_ns": 1790415490922718000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Actually, go to the office instead."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133805585493750,
+        "unix_ns": 1790415490922745000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.024584,
+        "submit_to_worker_entry": 0.153041,
+        "worker_entry_to_native_completion": 1496.417875,
+        "native_completion_to_caller_return": 0.22325,
+        "api_entry_to_caller_return": 1496.81875
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.044875
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.992167
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.360125
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.349291
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.065042
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1493.558125
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 96.696167
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.40075
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1393.882125
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.1615
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-008-submitted_pcm.pcm",
+        "sha256": "e5021386aa685f787261e8342616c7eb2559526b1bcde175e49db198e83a5b62",
+        "duration_seconds": 2.772
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 88704,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 88704,
+        "file": "pcm/stt-call-008-written_wav_pcm.pcm",
+        "sha256": "e5021386aa685f787261e8342616c7eb2559526b1bcde175e49db198e83a5b62",
+        "duration_seconds": 2.772
+      }
+    },
+    {
+      "call_id": "stt-call-009",
+      "request_id": "stt-request-017",
+      "trial": "rtc-repeat-2",
+      "room": "car-audio-89a9de3b83cf4c62b316f5ba5e7eaecf",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133818426039791,
+        "unix_ns": 1790415503763324000,
+        "thread_id": 6139523072,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133818425932208,
+        "unix_ns": 1790415503763216000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133818425954375,
+        "unix_ns": 1790415503763239000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.0275,
+        "submit_to_worker_entry": 0.084709,
+        "worker_entry_to_native_completion": 1237.462083,
+        "native_completion_to_caller_return": 0.107583,
+        "api_entry_to_caller_return": 1237.681875
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.009458
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.318834
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.271917
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.073458
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.056
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1236.359583
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 72.60625
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.844208
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1162.60675
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.155042
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 75392,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 75392,
+        "file": "pcm/stt-call-009-submitted_pcm.pcm",
+        "sha256": "6cffb97af2f94bdb20d7905e96fd819a39623287f3531df04467e7bf675f4bcf",
+        "duration_seconds": 2.356
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 75392,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 75392,
+        "file": "pcm/stt-call-009-written_wav_pcm.pcm",
+        "sha256": "6cffb97af2f94bdb20d7905e96fd819a39623287f3531df04467e7bf675f4bcf",
+        "duration_seconds": 2.356
+      }
+    },
+    {
+      "call_id": "stt-call-010",
+      "request_id": "stt-request-019",
+      "trial": "rtc-cancel-2",
+      "room": "car-audio-1cc3cf6d6e2b4bbc9d26bc318244af0b",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133844284722791,
+        "unix_ns": 1790415529622073000,
+        "thread_id": 16476237824,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133844284624750,
+        "unix_ns": 1790415529621975000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Navigate to the airport."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133844284642208,
+        "unix_ns": 1790415529621993000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.059917,
+        "submit_to_worker_entry": 0.172833,
+        "worker_entry_to_native_completion": 1243.935584,
+        "native_completion_to_caller_return": 0.098041,
+        "api_entry_to_caller_return": 1244.266375
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.027708
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.69825
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.108542
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.153667
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.127875
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1242.432417
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 68.831625
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.273834
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1173.18575
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.147959
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-010-submitted_pcm.pcm",
+        "sha256": "00de6756c1ec9481a5bcda9f24aa3a994c0a60fae650132e2001b1fff6ce0562",
+        "duration_seconds": 1.92
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 61440,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 61440,
+        "file": "pcm/stt-call-010-written_wav_pcm.pcm",
+        "sha256": "00de6756c1ec9481a5bcda9f24aa3a994c0a60fae650132e2001b1fff6ce0562",
+        "duration_seconds": 1.92
+      }
+    },
+    {
+      "call_id": "stt-call-011",
+      "request_id": "stt-request-021",
+      "trial": "rtc-cancel-2",
+      "room": "car-audio-1cc3cf6d6e2b4bbc9d26bc318244af0b",
+      "call_type": "_recognize_impl",
+      "caller_outcome": {
+        "monotonic_ns": 133854606102083,
+        "unix_ns": 1790415539943479000,
+        "thread_id": 16476237824,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "native_outcome": {
+        "monotonic_ns": 133854605987833,
+        "unix_ns": 1790415539943365000,
+        "thread_id": 6405124096,
+        "status": "returned",
+        "result_text": "Cancel navigation."
+      },
+      "future_outcome": {
+        "monotonic_ns": 133854606011250,
+        "unix_ns": 1790415539943388000,
+        "thread_id": 6405124096,
+        "cancelled": false,
+        "status": "returned",
+        "result_text": null
+      },
+      "milliseconds": {
+        "api_entry_to_submit": 0.030166,
+        "submit_to_worker_entry": 0.075459,
+        "worker_entry_to_native_completion": 1267.220458,
+        "native_completion_to_caller_return": 0.11425,
+        "api_entry_to_caller_return": 1267.440333
+      },
+      "stages": [
+        {
+          "name": "engine_load_check",
+          "status": "returned",
+          "milliseconds": 0.009083
+        },
+        {
+          "name": "tempfile_create",
+          "status": "returned",
+          "milliseconds": 0.449708
+        },
+        {
+          "name": "wave_open",
+          "status": "returned",
+          "milliseconds": 0.104584
+        },
+        {
+          "name": "wave_writeframes",
+          "status": "returned",
+          "milliseconds": 0.104542
+        },
+        {
+          "name": "wave_close",
+          "status": "returned",
+          "milliseconds": 0.1285
+        },
+        {
+          "name": "model_transcribe",
+          "status": "returned",
+          "milliseconds": 1266.016375
+        },
+        {
+          "name": "parakeet_load_audio",
+          "status": "returned",
+          "milliseconds": 69.1745
+        },
+        {
+          "name": "parakeet_get_logmel",
+          "status": "returned",
+          "milliseconds": 0.261375
+        },
+        {
+          "name": "parakeet_generate",
+          "status": "returned",
+          "milliseconds": 1196.021666
+        },
+        {
+          "name": "tempfile_unlink",
+          "status": "returned",
+          "milliseconds": 0.216208
+        }
+      ],
+      "submitted_equals_written_pcm": true,
+      "submitted_pcm": {
+        "requested_bytes": 66176,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 66176,
+        "file": "pcm/stt-call-011-submitted_pcm.pcm",
+        "sha256": "d82ab5b60bec8d298c8e8917bbfaf99c171ae7486799174eedcba79552a99fd7",
+        "duration_seconds": 2.068
+      },
+      "written_wav_pcm": {
+        "requested_bytes": 66176,
+        "sample_rate": 16000,
+        "sample_format": "native int16 mono",
+        "status": "retained",
+        "bytes": 66176,
+        "file": "pcm/stt-call-011-written_wav_pcm.pcm",
+        "sha256": "d82ab5b60bec8d298c8e8917bbfaf99c171ae7486799174eedcba79552a99fd7",
+        "duration_seconds": 2.068
+      }
+    }
+  ],
+  "same_submitted_pcm_groups": [
+    [
+      "stt-call-001"
+    ],
+    [
+      "stt-call-002"
+    ],
+    [
+      "stt-call-003"
+    ],
+    [
+      "stt-call-004"
+    ],
+    [
+      "stt-call-005"
+    ],
+    [
+      "stt-call-006"
+    ],
+    [
+      "stt-call-007"
+    ],
+    [
+      "stt-call-008"
+    ],
+    [
+      "stt-call-009"
+    ],
+    [
+      "stt-call-010"
+    ],
+    [
+      "stt-call-011"
+    ]
+  ],
+  "verified_pcm_sha256": {
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-submitted_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-001-written_wav_pcm.pcm": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-submitted_pcm.pcm": "1f39acb5b122e26197697bea3fc76bbf559a7282a0244c3fb8c04a3f7871c876",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-002-written_wav_pcm.pcm": "1f39acb5b122e26197697bea3fc76bbf559a7282a0244c3fb8c04a3f7871c876",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-submitted_pcm.pcm": "0a3e623d7b4d9b5da312120b3f00430b4371034cf77957684ba4db11870a3cd1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-003-written_wav_pcm.pcm": "0a3e623d7b4d9b5da312120b3f00430b4371034cf77957684ba4db11870a3cd1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-submitted_pcm.pcm": "a1404a077f0b99f5db1f68b854674d2c6ba88274cfe5fb8d5614d5d371aae49a",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-004-written_wav_pcm.pcm": "a1404a077f0b99f5db1f68b854674d2c6ba88274cfe5fb8d5614d5d371aae49a",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-submitted_pcm.pcm": "40570e359b65921875f13c27facdfcad937406f0db2277694162f9cc22d7978e",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-005-written_wav_pcm.pcm": "40570e359b65921875f13c27facdfcad937406f0db2277694162f9cc22d7978e",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-submitted_pcm.pcm": "1cffdbb77a8db1a21d662788f8e8d4ada28c5e9bce0767854b3dfe90b6c0750f",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-006-written_wav_pcm.pcm": "1cffdbb77a8db1a21d662788f8e8d4ada28c5e9bce0767854b3dfe90b6c0750f",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-submitted_pcm.pcm": "48b090466661372123442d9aea84238efafa3505b0378f09b6c444056a99bfb1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-007-written_wav_pcm.pcm": "48b090466661372123442d9aea84238efafa3505b0378f09b6c444056a99bfb1",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-008-submitted_pcm.pcm": "e5021386aa685f787261e8342616c7eb2559526b1bcde175e49db198e83a5b62",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-008-written_wav_pcm.pcm": "e5021386aa685f787261e8342616c7eb2559526b1bcde175e49db198e83a5b62",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-009-submitted_pcm.pcm": "6cffb97af2f94bdb20d7905e96fd819a39623287f3531df04467e7bf675f4bcf",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-009-written_wav_pcm.pcm": "6cffb97af2f94bdb20d7905e96fd819a39623287f3531df04467e7bf675f4bcf",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-010-submitted_pcm.pcm": "00de6756c1ec9481a5bcda9f24aa3a994c0a60fae650132e2001b1fff6ce0562",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-010-written_wav_pcm.pcm": "00de6756c1ec9481a5bcda9f24aa3a994c0a60fae650132e2001b1fff6ce0562",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-011-submitted_pcm.pcm": "d82ab5b60bec8d298c8e8917bbfaf99c171ae7486799174eedcba79552a99fd7",
+    "local-stack-run1/stt-diagnostics/pcm/stt-call-011-written_wav_pcm.pcm": "d82ab5b60bec8d298c8e8917bbfaf99c171ae7486799174eedcba79552a99fd7"
+  },
+  "diagnostic_health": {
+    "source_unchanged": true,
+    "dropped_calls": 0,
+    "dropped_requests": 0,
+    "retained_pcm_bytes": 1472512,
+    "observation_error_count": 0,
+    "observation_errors": [],
+    "pending_native_call_ids": [],
+    "observation_hooks": 387,
+    "observation_total_ns": 4058212,
+    "observation_max_ns": 641042
+  },
+  "limits": [
+    "Submit-to-entry includes instrumentation/dispatch overhead and worker scheduling, not only contention.",
+    "Cancelled callers can return before native completion; negative delivery intervals retain this ordering.",
+    "Stages nest. Do not sum model_transcribe with its load_audio/get_logmel/generate children.",
+    "No accelerator synchronization added; deferred work may be charged to generate. These are host-call wall times, not exclusive GPU/CPU service times.",
+    "Exact normalized PCM equality is a separate check from matching input WAVs or rounded segment duration.",
+    "No causal historical latency improvement or explanation for an earlier uninstrumented call is asserted."
+  ]
+}

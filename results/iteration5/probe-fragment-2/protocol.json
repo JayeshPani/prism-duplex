@@ -1,0 +1,71 @@
+{
+  "declared_at_utc": "2026-09-25T19:53:22.817691+00:00",
+  "hypothesis": "With no new actionable command, a short synthetic probe during substantive result speech should not create another tool effect. Non-speech should not create a finalized user transcript; any pause/resume and speech completion must be measured rather than inferred.",
+  "scope": "Local RTC development controls for non-speech and very short speech; not human microphone, road noise, echo, held-out benchmark or physical playback evidence.",
+  "initial_input": {
+    "source": "results/iteration4/audio-assets/navigate.wav",
+    "text": "Navigate to the airport."
+  },
+  "cases": {
+    "silence": {
+      "waveform": "600 ms PCM zeros",
+      "expected_user_final_after_probe": 0,
+      "expected_effects": [
+        "P_AIRPORT"
+      ],
+      "role": "transport and completion control"
+    },
+    "noise": {
+      "waveform": "600 ms deterministic Gaussian noise, seed 703, rectangular FFT bandpass150\u20133500Hz,10ms onset/offset ramps,global RMS -18dBFS",
+      "expected_user_final_after_probe": 0,
+      "expected_effects": [
+        "P_AIRPORT"
+      ],
+      "role": "synthetic non-speech burst; not a recorded cough or road noise"
+    },
+    "tone": {
+      "waveform": "250 ms 440Hz sine,10ms onset/offset ramps,global RMS -18dBFS",
+      "expected_user_final_after_probe": 0,
+      "expected_effects": [
+        "P_AIRPORT"
+      ],
+      "role": "synthetic non-speech tone"
+    },
+    "fragment": {
+      "waveform": "180ms exact original PCM from60ms to240ms of initial speech; no gain change",
+      "expected_effects": [
+        "P_AIRPORT"
+      ],
+      "role": "truncated voiced fragment, not non-speech; recognition and any clarification are exploratory, no transcript exactness score"
+    }
+  },
+  "generation": "Protocol precedes assets. Freeze every waveform and source hash; all cases remain in live evaluation regardless of offline VAD characterization.",
+  "repetitions": 3,
+  "run_order": [
+    "silence",
+    "noise",
+    "tone",
+    "fragment",
+    "noise",
+    "tone",
+    "fragment",
+    "silence",
+    "tone",
+    "fragment",
+    "silence",
+    "noise"
+  ],
+  "trigger": "Publish probe at first conservatively correlated substantive-result PCM using unchanged trigger boundaries; never acknowledgment-only.",
+  "observation": "Capture a fixed12seconds after the probe input queue drains, even if speech finishes earlier or never resumes. Completion status means observation only; original/current handle states and all PCM determine outcomes. One second of explicitly sent trailing silence is within this12seconds.",
+  "expected_effect_check": "Exactly one successful start_navigation to P_AIRPORT; no extra or contrary navigation write; preserve every shared tool-log row. Initial effect already completed before probe.",
+  "measurement": "Record exact input schedule, all raw received frames/events, user-speaking/agent-state events, finalized transcripts, speech handles and actual PCM content. Report VAD activation separately. If no VAD activation occurred, false-interruption recovery was not exercised.",
+  "limits": [
+    "Three dependent repeats percase, fixed declared interleaving, shared warm model/worker andcache confounds; no statistical generalization.",
+    "Transport timestamps and concatenated PCM do not establish physical speaker timing or exact RTP/text alignment.",
+    "No modelparameter orproduction source tuning based on outcomes during this comparison.",
+    "The fragment is speech and cannot be scored as a non-speech ASR hallucination test.",
+    "No run is excluded or replaced; failures/noncompletion remain visible."
+  ],
+  "stack": "Same pinnedlocalQwen/Parakeet/Kokoro andloopbackLiveKit asiteration4;MLXprompt-cache-size2. No hostedinference/judging.",
+  "review": "OfflineVADcharacterizationbeforetransport, receivedspeech ASRonlyaftertimedcaptures, with fullsilenceretained; nohumanlisteningclaim."
+}

@@ -1,0 +1,168 @@
+{
+  "status": "completed_observation",
+  "started_at": "2026-09-26T06:39:23.717189+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/audio-assets/navigate.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/rtc-baseline-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "12"
+  ],
+  "room": "car-audio-32063eadc7ac42bcacb4ef899e479046",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/audio-assets/navigate.wav",
+      "file": "initial.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 31680,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 123079.099522666,
+        "drained_monotonic": 123080.531121708,
+        "scheduled_end_monotonic": 123080.52885599934,
+        "published_samples": 34304
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMgy5JJuG62wWx",
+      "participant": "agent-AJ_gGukZGda6qa8",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means current result handle finished plus observed client quiet tail; it is not a navigation accuracy score.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/local-stack-run1/worker-manifest.json",
+    "sha256": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration10/protocol.json",
+    "sha256": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429"
+  },
+  "cleanup_errors": [],
+  "finished_at": "2026-09-26T06:39:49.733626+00:00",
+  "event_counts": {
+    "session_started": 1,
+    "user_state": 2,
+    "user_final": 1,
+    "ack": 1,
+    "agent_say": 2,
+    "speech_handle": 4,
+    "agent_state": 4,
+    "plan_ready": 1,
+    "gate_open": 1,
+    "gate_committed": 1,
+    "slot_update": 1,
+    "tool_waiting": 3,
+    "tool_started": 3,
+    "tool_done": 3
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_2ca10e5c4db6",
+      "queued_at": 123090.320916041,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 123092.720335541,
+      "error": null
+    },
+    {
+      "text": "Navigation to Kempegowda International Airport has started. Estimated arrival in 88 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_596a969e083a",
+      "queued_at": 123096.382210208,
+      "state": "finished",
+      "first_loud_at": 123097.662915041,
+      "preceding_quiet_seconds": 5.079956875008065,
+      "last_loud_at": 123103.362583375,
+      "ended_at": 123103.389901125,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "worker_manifest.json": "4b196197d4784e5cef18980ee84eb51971d34f91d02c7a71a6720536fea360c6",
+    "events.jsonl": "631189ac03fca4ae2bcb1711849408f07b5985ecbdf28512c64ee03355c25a0c",
+    "frames.jsonl": "50f3d6da1b737b2d79ed53ff10aeefa547c6541821ea944f99dfbc3264ec0c06",
+    "protocol.json": "24047888b19c9490c78aa09dfbd5a188c5163b031edb9b963e9150be45683429",
+    "received-1.pcm": "67198ed3942c74648a3d61961ea3a96d6caaede96ffd3c68008350067ec19476"
+  }
+}

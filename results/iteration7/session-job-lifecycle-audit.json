@@ -1,0 +1,122 @@
+{
+  "created_at_utc": "2026-09-26T04:51:39.552878+00:00",
+  "scope": "Source/log audit of installed LiveKit Agents 1.8.3 and PRISM room-job lifecycle. No model/service launches.",
+  "source_sha256": {
+    "agent/main.py": "b7d1bd659b095396ce1efefa1a665f6e0ee08411566769d2756adef372c36262",
+    "scripts/local_livekit_worker.py": "d66ad1864daadd492feaf3c3b323c5355448d73ee0a795e61d584083bc2bcbbc",
+    "tests/unit/test_session_job_lifecycle.py": "c2e8fa145d2895f72a99380bf1e067448b5e0313f67f143ae06bd7e65ef3234e",
+    "results/iteration7/main-before.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "results/iteration7/session-job-before.txt": "9c07c8666f91ebd57e1a3ceab556db0390adc0416c18a79dc112e8ba40cf6d78",
+    "results/iteration7/session-job-after.txt": "5dad698d308b41c174a9d16fcb44bdde0ca73d79833de8d72e45157671724636",
+    "results/iteration7/protocol.json": "c2fee81a870dcc14edbd3e80083412f00a8b1ab12f707a716878804885cb9065",
+    "results/iteration5/local-stack-run1/worker.log": "046a3aa1826bc1dab8ae305eb6dde1674f81d85282bb2ccd61ee55591763e7e9",
+    "results/iteration5/local-stack-run1/worker-exit.json": "5a3e5b9538e7fce40b6e4f427728bffbded3517fbb44f978bd46571f015c8833",
+    ".venv/lib/python3.11/site-packages/livekit/agents/worker.py": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e",
+    ".venv/lib/python3.11/site-packages/livekit/agents/cli/cli.py": "8a0d0acf1341b96880df53bc23c9efcf60fe094334dc19ed442e83b22fd8e452",
+    ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py": "44a8d953398d45459740fe91453e14c14e11e322be37107159205d0804371a90",
+    ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+    ".venv/lib/python3.11/site-packages/livekit/agents/job.py": "4010bf83dc66315f05004588dfb57ee824d35112f9bbff5f34c2ebc18975c60b",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/agent_session.py": "3a40d1feb9d773636b943c7c050695a7628c29c1a3612d9869b141e516563ef6",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/room_io.py": "a1b83271c5c68759457da71194dbb47d69bbbe3716b26cf982645030c7184a94",
+    ".venv/lib/python3.11/site-packages/livekit/agents/voice/room_io/types.py": "9571ef1a48ed5af5160acb717d9304b844b3b97528976bc7ca10d2dcb05ddaed"
+  },
+  "iteration5_observed": {
+    "participant_disconnect_session_close_requests": 12,
+    "disconnect_reasons": [
+      "CLIENT_INITIATED"
+    ],
+    "last_disconnect_request_at": "2026-09-25T20:04:04.065607+00:00",
+    "drain_at": "2026-09-25T20:04:04.182141+00:00",
+    "sdk_drain_timeout_seconds": 3600,
+    "worker_exit": {
+      "role": "worker",
+      "pid": 57881,
+      "observed_command": [
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+        "scripts/local_livekit_worker.py",
+        "--manifest",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json"
+      ],
+      "signal": "SIGTERM",
+      "escalation": "SIGKILL",
+      "exit_code": -9,
+      "finished_at": "2026-09-25T20:04:24.495070+00:00"
+    },
+    "drain_to_forced_exit_seconds": 20.312929,
+    "limit": "Termination occurred while drain waited. No blocked per-job stack is available; the log does not establish that every requested session teardown completed. No connection to the earlier telemetry stall is inferred."
+  },
+  "source_chain": [
+    {
+      "source": "voice/room_io/room_io.py:457-489; voice/room_io/types.py:17-21,128-132",
+      "finding": "The linked participant leaving with CLIENT_INITIATED, ROOM_DELETED or USER_REJECTED requests session close. This does not disconnect the agent room. Default delete_room_on_close is false."
+    },
+    {
+      "source": "voice/agent_session.py:1113-1116,1280-1324; voice/room_io/room_io.py:548-559",
+      "finding": "Session.start registers job-shutdown to session-close. Session closure emits close after activity teardown and _started=False, without requesting JobContext shutdown. RoomIO only optionally deletes the room on close."
+    },
+    {
+      "source": "ipc/job_proc_lazy_main.py:289-305,376-409",
+      "finding": "Connected entrypoint return leaves the job awaiting shutdown_fut. Agent room disconnected, ctx.shutdown, entrypoint crash or parent shutdown can resolve it; remote participant departure alone does not."
+    },
+    {
+      "source": "worker.py:970-1005; cli/cli.py:436-443",
+      "finding": "Worker drain stops accepting new work and waits current executor.join; it sends no shutdown request. The production CLI reaches server.aclose after draining or timeout."
+    },
+    {
+      "source": "ipc/job_thread_executor.py:208-238",
+      "finding": "Thread executor aclose sends shutdown, warns on timeouts, but subsequently awaits shutdown/thread completion without a final bound. Shorter drain_timeout does not bound native thread completion."
+    }
+  ],
+  "minimal_change_review": {
+    "candidate": "Before session.start register close -> set closing and call synchronous ctx.shutdown(reason). Keep cleanup in the existing job callback; suppress session_started if close happened during start and log cleanup start/end.",
+    "no_lock_cycle_found": "ctx.shutdown resolves an SDK future and returns. Session emits close under its lock after _started=False. SDK shutdown later awaits session.aclose, proceeds after lock release and finds it closed. SDK suppresses repeat shutdown-future resolution.",
+    "cleanup_sequence": "SDK waits entrypoint completion, closes primary session (60s SDK timeout), runs session reporting, disconnects room, then concurrently awaits shutdown callbacks. Registration order is not a sequencing guarantee.",
+    "drain_decision": "Keep 3600s unchanged for comparison. Deleting the room is broader than ending this agent job. Shorter drain alone hides the missing lifecycle bridge and cannot guarantee thread shutdown.",
+    "limits": [
+      "The handler runs after activity teardown emits close; it does not repair teardown stuck before that event.",
+      "Appropriate for this one-session-per-job entrypoint; intentional session restart within one job requires a different policy.",
+      "Native work, SDK reporting or callbacks can still block. No general bounded worker-exit claim follows."
+    ]
+  },
+  "regression_evidence": {
+    "method": "Whole production entrypoint executed via AST with lightweight SDK fakes and real Coordinator/Executor; no LiveKit/audio/model imports. Fakes mirror inspected closure ordering and lock, without proving SDK runtime behavior.",
+    "before": {
+      "cases": 6,
+      "failed": 5,
+      "passed": 1,
+      "seconds": 0.48
+    },
+    "after_checkpoint": {
+      "passed": 32,
+      "seconds": 0.6,
+      "scope": "Root-run lifecycle, coordinator and asynchronous telemetry focused tests. No duplicate audit test launch."
+    },
+    "assertions": [
+      "Open conversation survives entrypoint return.",
+      "Participant, error and job-shutdown closes request job shutdown and preserve reason; repeat-close is idempotent.",
+      "SDK-modeled cleanup cancels planning/publishing, closes client and trace, rejects late user turns.",
+      "Close during session.start is observed; another room remains live."
+    ]
+  },
+  "live_validation_protocol": {
+    "source": "results/iteration7/protocol.json",
+    "declared_trials": 8,
+    "run_order": [
+      "baseline",
+      "correction",
+      "silence",
+      "noise",
+      "correction",
+      "baseline",
+      "noise",
+      "silence"
+    ],
+    "checks": [
+      "Retain every capture/effect outcome. After recorder exits, observe its owned room for agent departure for up to 10s without deleting room.",
+      "Correlate participant disconnect, per-room cleanup start/end, remaining agent presence and worker/job logs.",
+      "After all trials SIGTERM worker using unchanged 20s outer grace and 3600s SDK drain; preserve exit code and any escalation.",
+      "Report room departure, process exit, content/effects and trace completeness separately."
+    ],
+    "status": "Protocol reviewed; live outcomes not measured or claimed by this audit."
+  }
+}

@@ -1,0 +1,2144 @@
+{
+  "kind": "post_run_cache_policy_review",
+  "created_at": "2026-09-25T19:29:10.555711+00:00",
+  "input_sha256": {
+    "A1/memory.jsonl": "e35a73a821135ea943b4991db52208df7d69867093af9270fdc9d112a05cad03",
+    "A1/navigation/experiment.json": "08229775baf1bce205cde17a350f003d005a438d7e1f39168cda5838b776b4aa",
+    "A1/navigation/return_to_destination-1.jsonl": "4b5a7753b6cb46f7d3cd65856c783039a99c78014c0a7be7156e17e4469cdc69",
+    "A1/navigation/return_to_destination-2.jsonl": "648c0eeb3547ccd57f39831c5e4c3f264fb35b38b2022c8c90c7d49f1ae25950",
+    "A1/navigation/return_to_destination-3.jsonl": "872791af40f3f99cf228669672b9f19ddb454703c364c74b92e00c0efb3bf355",
+    "A1/navigation.log": "811006b1e0ac25d4f7154695782e9882b5055aa9ad5711757be2f0cef2a6a0de",
+    "A1/server.log": "2e8bdd8e8fa583d95403630abaa76a0746146125df1c4428bc3da6f15434036e",
+    "A1_repeat/memory.jsonl": "9ef4180cd4e4336aba14c4a8270623805d217ad001ed9013880e8ad49f0b704c",
+    "A1_repeat/navigation/experiment.json": "0c338ea2aee38e729a14ff197d1e9d3c73d43f2636d42ad3550651ae4582a875",
+    "A1_repeat/navigation/return_to_destination-1.jsonl": "946a36e1bdaa50d8feb128b8432eb4dd30fce0998d8e111cc5545bcd807fb263",
+    "A1_repeat/navigation/return_to_destination-2.jsonl": "c5294174354b731e6966dabec3cde79347985123bb223bb27c0e8ca9810182c2",
+    "A1_repeat/navigation/return_to_destination-3.jsonl": "79c68a810db27575baf08cac63dc73bb60fb1e7c35e4d39dd0f519e3783e437e",
+    "A1_repeat/navigation.log": "811006b1e0ac25d4f7154695782e9882b5055aa9ad5711757be2f0cef2a6a0de",
+    "A1_repeat/server.log": "61012e5d72ac78c4aa86fa0104c0c204b25ecafe68c6f514fd2fe2fb88de684e",
+    "B2/memory.jsonl": "d71e5bff38a8a6aa94cc606a707d9378c06147f6a89346b902a4e3fb49942bf2",
+    "B2/navigation/experiment.json": "12bcb57cb949748b3f125cf120eefc91005e403eba39e2e84a36a1a507139b77",
+    "B2/navigation/return_to_destination-1.jsonl": "5ad580e9a69440d49a7957d274bad774852902be4f8e23145b268c51ffedb9af",
+    "B2/navigation/return_to_destination-2.jsonl": "516a2263ab119ddae88a61330aef9ef0e130fecf4a723a78679f68a286ba6bab",
+    "B2/navigation/return_to_destination-3.jsonl": "ff982d4c0160f76a3837d0bcf4d860e412adb44349e0307dc23e53605e090b7c",
+    "B2/navigation.log": "811006b1e0ac25d4f7154695782e9882b5055aa9ad5711757be2f0cef2a6a0de",
+    "B2/server.log": "2bc3b5579fe070753eb24f328091f4cde330493977498e9fc0406e3ab6140330",
+    "report.json": "b122615ba5ff6e2a054228c09931eb6fa58b0adfc8c1ab16baa5c16dfa3f8e75"
+  },
+  "protocol": "A1 then B2 then A1_repeat: three fresh server processes; only prompt-cache-size changes. Each arm repeats one airport-office-airport development scenario three times, retaining all nine turn observations.",
+  "definitions": {
+    "timing_origin": "Final user text submission, not speech end. Responses are text callbacks; no audio produced. Planner/responder durations are individual client request wall times.",
+    "cold_split": "Only repeat1/turn1 is fresh_server_first_turn. All other eight turns are retained as later turns. Fresh process is not cold OS/filesystem/Metal state.",
+    "percentiles": "Nearest-rank ceil(p*n), matching existing navigation summary. Descriptive small samples, not population estimates.",
+    "prefill": "Server progress totals are tokens remaining after nearest-prefix cache retrieval, not full prompt lengths or directly returned API cached_tokens. Requests alternate planner then responder; all18 per-arm sequences finish their logged prefill.",
+    "memory": "RSS is sampled server-process RSS; system available memory and swap include every process. macOS available is psutil free+inactive estimate. No server MLX peak or simultaneous STT/TTS workload was measured."
+  },
+  "integrity": {
+    "all_arms_terminal": true,
+    "only_launch_argument_changed": "--prompt-cache-size",
+    "model_requests_identical_across_arms": true,
+    "complete_model_outputs_identical_across_arms": true,
+    "all_arms_source_hashes_match_frozen": true,
+    "original_artifacts_preserved": true,
+    "model_weight_verification": "Harness reports full frozen file checks before/after every arm; this post-hoc review did not reread model weights or run inference."
+  },
+  "arms": [
+    {
+      "name": "A1",
+      "cache_entries": 1,
+      "cases_passed": 3,
+      "cases_total": 3,
+      "attempts": 21,
+      "effects": 9,
+      "runtime_errors": 0,
+      "timeouts": 0,
+      "backend_errors": 0,
+      "source_hashes_match_frozen_manifest": true,
+      "frozen_files_verified_after_arm_by_harness": true,
+      "navigation_cleanup": {
+        "pid": 39938,
+        "exit_code": 0,
+        "forced_kill": false
+      },
+      "server_cleanup": {
+        "pid": 39926,
+        "exit_code": -15,
+        "forced_kill": false
+      },
+      "all_turn_summary": {
+        "planner_ms": {
+          "n": 9,
+          "p50_ms": 12087.659,
+          "p95_ms": 13226.156,
+          "min_ms": 11348.938,
+          "max_ms": 13226.156
+        },
+        "responder_ms": {
+          "n": 9,
+          "p50_ms": 3199.03,
+          "p95_ms": 3403.537,
+          "min_ms": 2918.971,
+          "max_ms": 3403.537
+        },
+        "first_dispatch_ms": {
+          "n": 9,
+          "p50_ms": 12088.41,
+          "p95_ms": 13227.588,
+          "min_ms": 11350.275,
+          "max_ms": 13227.588
+        },
+        "effect_complete_ms": {
+          "n": 9,
+          "p50_ms": 14589.308,
+          "p95_ms": 15731.576,
+          "min_ms": 13852.885,
+          "max_ms": 15731.576
+        },
+        "ack_ms": {
+          "n": 9,
+          "p50_ms": 703.691,
+          "p95_ms": 873.812,
+          "min_ms": 703.045,
+          "max_ms": 873.812
+        },
+        "substantive_text_ms": {
+          "n": 9,
+          "p50_ms": 17787.084,
+          "p95_ms": 18699.851,
+          "min_ms": 17229.241,
+          "max_ms": 18699.851
+        }
+      },
+      "later_turn_summary_excluding_only_fresh_server_first_turn": {
+        "planner_ms": {
+          "n": 8,
+          "p50_ms": 12087.659,
+          "p95_ms": 13226.156,
+          "min_ms": 11348.938,
+          "max_ms": 13226.156
+        },
+        "responder_ms": {
+          "n": 8,
+          "p50_ms": 3190.525,
+          "p95_ms": 3403.537,
+          "min_ms": 2918.971,
+          "max_ms": 3403.537
+        },
+        "first_dispatch_ms": {
+          "n": 8,
+          "p50_ms": 12088.41,
+          "p95_ms": 13227.588,
+          "min_ms": 11350.275,
+          "max_ms": 13227.588
+        },
+        "effect_complete_ms": {
+          "n": 8,
+          "p50_ms": 14589.308,
+          "p95_ms": 15731.576,
+          "min_ms": 13852.885,
+          "max_ms": 15731.576
+        },
+        "ack_ms": {
+          "n": 8,
+          "p50_ms": 703.391,
+          "p95_ms": 703.9,
+          "min_ms": 703.045,
+          "max_ms": 703.9
+        },
+        "substantive_text_ms": {
+          "n": 8,
+          "p50_ms": 17787.084,
+          "p95_ms": 18699.851,
+          "min_ms": 17229.241,
+          "max_ms": 18699.851
+        }
+      },
+      "per_turn": [
+        {
+          "repeat": 1,
+          "turn": 1,
+          "fresh_server_first_turn": true,
+          "planner_ms": 11750.632,
+          "responder_ms": 3393.74,
+          "first_dispatch_ms": 11752.167,
+          "effect_complete_ms": 14254.566,
+          "ack_ms": 873.812,
+          "substantive_text_ms": 17648.783,
+          "planner_prefill": {
+            "cache_log_line": 6,
+            "sequences_before_fetch": 0,
+            "logical_cache_GB_rounded": 0.0,
+            "remaining_prompt_tokens": 1765,
+            "progress_start_line": 10,
+            "progress_end_line": 18,
+            "progress_interval_ms": 8426.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 20,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.3,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 24,
+            "progress_end_line": 28,
+            "progress_interval_ms": 2687.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12097.451,
+          "responder_ms": 3207.819,
+          "first_dispatch_ms": 12098.828,
+          "effect_complete_ms": 14600.398,
+          "ack_ms": 703.716,
+          "substantive_text_ms": 17808.758,
+          "planner_prefill": {
+            "cache_log_line": 30,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.3,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 34,
+            "progress_end_line": 43,
+            "progress_interval_ms": 9498.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 45,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.34,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 49,
+            "progress_end_line": 52,
+            "progress_interval_ms": 2246.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13225.462,
+          "responder_ms": 2956.85,
+          "first_dispatch_ms": 13226.485,
+          "effect_complete_ms": 15729.877,
+          "ack_ms": 703.073,
+          "substantive_text_ms": 18688.347,
+          "planner_prefill": {
+            "cache_log_line": 54,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.34,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 58,
+            "progress_end_line": 68,
+            "progress_interval_ms": 10579.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 70,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 74,
+            "progress_end_line": 77,
+            "progress_interval_ms": 2241.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 11351.971,
+          "responder_ms": 3373.735,
+          "first_dispatch_ms": 11353.409,
+          "effect_complete_ms": 13855.033,
+          "ack_ms": 703.9,
+          "substantive_text_ms": 17229.241,
+          "planner_prefill": {
+            "cache_log_line": 79,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 1761,
+            "progress_start_line": 83,
+            "progress_end_line": 91,
+            "progress_interval_ms": 8232.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 93,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 97,
+            "progress_end_line": 101,
+            "progress_interval_ms": 2683.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12087.659,
+          "responder_ms": 3190.525,
+          "first_dispatch_ms": 12088.41,
+          "effect_complete_ms": 14589.308,
+          "ack_ms": 703.691,
+          "substantive_text_ms": 17780.26,
+          "planner_prefill": {
+            "cache_log_line": 103,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 107,
+            "progress_end_line": 116,
+            "progress_interval_ms": 9491.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 118,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 122,
+            "progress_end_line": 125,
+            "progress_interval_ms": 2235.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13226.156,
+          "responder_ms": 2965.626,
+          "first_dispatch_ms": 13227.588,
+          "effect_complete_ms": 15731.576,
+          "ack_ms": 703.852,
+          "substantive_text_ms": 18699.851,
+          "planner_prefill": {
+            "cache_log_line": 127,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 131,
+            "progress_end_line": 141,
+            "progress_interval_ms": 10576.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 143,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 147,
+            "progress_end_line": 150,
+            "progress_interval_ms": 2237.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 11348.938,
+          "responder_ms": 3403.537,
+          "first_dispatch_ms": 11350.275,
+          "effect_complete_ms": 13852.885,
+          "ack_ms": 703.391,
+          "substantive_text_ms": 17256.777,
+          "planner_prefill": {
+            "cache_log_line": 152,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 1761,
+            "progress_start_line": 156,
+            "progress_end_line": 164,
+            "progress_interval_ms": 8226.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 166,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 170,
+            "progress_end_line": 174,
+            "progress_interval_ms": 2687.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12084.665,
+          "responder_ms": 3199.03,
+          "first_dispatch_ms": 12085.35,
+          "effect_complete_ms": 14587.775,
+          "ack_ms": 703.155,
+          "substantive_text_ms": 17787.084,
+          "planner_prefill": {
+            "cache_log_line": 176,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 180,
+            "progress_end_line": 189,
+            "progress_interval_ms": 9479.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 191,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 195,
+            "progress_end_line": 198,
+            "progress_interval_ms": 2236.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13203.389,
+          "responder_ms": 2918.971,
+          "first_dispatch_ms": 13205.604,
+          "effect_complete_ms": 15708.103,
+          "ack_ms": 703.045,
+          "substantive_text_ms": 18627.404,
+          "planner_prefill": {
+            "cache_log_line": 200,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 204,
+            "progress_end_line": 214,
+            "progress_interval_ms": 10569.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 216,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 220,
+            "progress_end_line": 223,
+            "progress_interval_ms": 2238.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        }
+      ],
+      "memory": {
+        "sampling_interval_target_s": 0.5,
+        "samples": 324,
+        "largest_observed_sampling_gap_s": 0.511235,
+        "sampled_server_peak_rss_bytes": 4883841024,
+        "server_rss_error_samples": 0,
+        "available_before_bytes": 8725364736,
+        "sampled_available_min_bytes": 2066186240,
+        "available_after_bytes": 9008103424,
+        "swap_used_before_bytes": 4344184832,
+        "swap_used_peak_bytes": 4344184832,
+        "swap_used_after_bytes": 4327407616,
+        "swap_used_change_bytes": -16777216,
+        "psutil_reported_sin_change_bytes": 2463203328,
+        "psutil_reported_sout_change_bytes": 20152320,
+        "max_logged_logical_cache_GB_rounded": 0.38
+      },
+      "server_log_diagnostics": {
+        "BrokenPipeError": 0,
+        "Traceback": 0,
+        "ERROR": 0
+      }
+    },
+    {
+      "name": "B2",
+      "cache_entries": 2,
+      "cases_passed": 3,
+      "cases_total": 3,
+      "attempts": 21,
+      "effects": 9,
+      "runtime_errors": 0,
+      "timeouts": 0,
+      "backend_errors": 0,
+      "source_hashes_match_frozen_manifest": true,
+      "frozen_files_verified_after_arm_by_harness": true,
+      "navigation_cleanup": {
+        "pid": 41184,
+        "exit_code": 0,
+        "forced_kill": false
+      },
+      "server_cleanup": {
+        "pid": 41176,
+        "exit_code": -15,
+        "forced_kill": false
+      },
+      "all_turn_summary": {
+        "planner_ms": {
+          "n": 9,
+          "p50_ms": 4120.674,
+          "p95_ms": 11773.634,
+          "min_ms": 3373.652,
+          "max_ms": 11773.634
+        },
+        "responder_ms": {
+          "n": 9,
+          "p50_ms": 2475.541,
+          "p95_ms": 3408.075,
+          "min_ms": 2362.213,
+          "max_ms": 3408.075
+        },
+        "first_dispatch_ms": {
+          "n": 9,
+          "p50_ms": 4121.576,
+          "p95_ms": 11774.643,
+          "min_ms": 3374.449,
+          "max_ms": 11774.643
+        },
+        "effect_complete_ms": {
+          "n": 9,
+          "p50_ms": 6624.234,
+          "p95_ms": 14276.309,
+          "min_ms": 5879.254,
+          "max_ms": 14276.309
+        },
+        "ack_ms": {
+          "n": 9,
+          "p50_ms": 703.867,
+          "p95_ms": 902.626,
+          "min_ms": 703.161,
+          "max_ms": 902.626
+        },
+        "substantive_text_ms": {
+          "n": 9,
+          "p50_ms": 9118.952,
+          "p95_ms": 17684.921,
+          "min_ms": 8550.466,
+          "max_ms": 17684.921
+        }
+      },
+      "later_turn_summary_excluding_only_fresh_server_first_turn": {
+        "planner_ms": {
+          "n": 8,
+          "p50_ms": 4104.127,
+          "p95_ms": 5078.829,
+          "min_ms": 3373.652,
+          "max_ms": 5078.829
+        },
+        "responder_ms": {
+          "n": 8,
+          "p50_ms": 2469.484,
+          "p95_ms": 2701.251,
+          "min_ms": 2362.213,
+          "max_ms": 2701.251
+        },
+        "first_dispatch_ms": {
+          "n": 8,
+          "p50_ms": 4105.747,
+          "p95_ms": 5080.129,
+          "min_ms": 3374.449,
+          "max_ms": 5080.129
+        },
+        "effect_complete_ms": {
+          "n": 8,
+          "p50_ms": 6608.395,
+          "p95_ms": 7582.768,
+          "min_ms": 5879.254,
+          "max_ms": 7582.768
+        },
+        "ack_ms": {
+          "n": 8,
+          "p50_ms": 703.823,
+          "p95_ms": 705.548,
+          "min_ms": 703.161,
+          "max_ms": 705.548
+        },
+        "substantive_text_ms": {
+          "n": 8,
+          "p50_ms": 9100.964,
+          "p95_ms": 9958.216,
+          "min_ms": 8550.466,
+          "max_ms": 9958.216
+        }
+      },
+      "per_turn": [
+        {
+          "repeat": 1,
+          "turn": 1,
+          "fresh_server_first_turn": true,
+          "planner_ms": 11773.634,
+          "responder_ms": 3408.075,
+          "first_dispatch_ms": 11774.643,
+          "effect_complete_ms": 14276.309,
+          "ack_ms": 902.626,
+          "substantive_text_ms": 17684.921,
+          "planner_prefill": {
+            "cache_log_line": 6,
+            "sequences_before_fetch": 0,
+            "logical_cache_GB_rounded": 0.0,
+            "remaining_prompt_tokens": 1765,
+            "progress_start_line": 10,
+            "progress_end_line": 18,
+            "progress_interval_ms": 8433.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 20,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.3,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 24,
+            "progress_end_line": 28,
+            "progress_interval_ms": 2693.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 4095.017,
+          "responder_ms": 2517.537,
+          "first_dispatch_ms": 4095.875,
+          "effect_complete_ms": 6599.939,
+          "ack_ms": 703.368,
+          "substantive_text_ms": 9118.952,
+          "planner_prefill": {
+            "cache_log_line": 30,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.6,
+            "remaining_prompt_tokens": 272,
+            "progress_start_line": 34,
+            "progress_end_line": 37,
+            "progress_interval_ms": 1490.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 39,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.64,
+            "remaining_prompt_tokens": 321,
+            "progress_start_line": 43,
+            "progress_end_line": 46,
+            "progress_interval_ms": 1522.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 5058.784,
+          "responder_ms": 2389.255,
+          "first_dispatch_ms": 5059.885,
+          "effect_complete_ms": 7563.919,
+          "ack_ms": 704.117,
+          "substantive_text_ms": 9954.844,
+          "planner_prefill": {
+            "cache_log_line": 48,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.64,
+            "remaining_prompt_tokens": 471,
+            "progress_start_line": 52,
+            "progress_end_line": 55,
+            "progress_interval_ms": 2421.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 57,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 330,
+            "progress_start_line": 61,
+            "progress_end_line": 64,
+            "progress_interval_ms": 1682.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 3373.652,
+          "responder_ms": 2701.251,
+          "first_dispatch_ms": 3374.449,
+          "effect_complete_ms": 5879.254,
+          "ack_ms": 703.285,
+          "substantive_text_ms": 8581.777,
+          "planner_prefill": {
+            "cache_log_line": 66,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 27,
+            "progress_start_line": 70,
+            "progress_end_line": 72,
+            "progress_interval_ms": 250.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 74,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 417,
+            "progress_start_line": 78,
+            "progress_end_line": 81,
+            "progress_interval_ms": 1974.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 4104.127,
+          "responder_ms": 2469.484,
+          "first_dispatch_ms": 4105.747,
+          "effect_complete_ms": 6608.395,
+          "ack_ms": 705.548,
+          "substantive_text_ms": 9078.57,
+          "planner_prefill": {
+            "cache_log_line": 83,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 272,
+            "progress_start_line": 87,
+            "progress_end_line": 90,
+            "progress_interval_ms": 1492.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 92,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 321,
+            "progress_start_line": 96,
+            "progress_end_line": 99,
+            "progress_interval_ms": 1515.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 5078.829,
+          "responder_ms": 2374.13,
+          "first_dispatch_ms": 5080.129,
+          "effect_complete_ms": 7582.768,
+          "ack_ms": 703.867,
+          "substantive_text_ms": 9958.216,
+          "planner_prefill": {
+            "cache_log_line": 101,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 471,
+            "progress_start_line": 105,
+            "progress_end_line": 108,
+            "progress_interval_ms": 2423.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 110,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 330,
+            "progress_start_line": 114,
+            "progress_end_line": 117,
+            "progress_interval_ms": 1684.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 3386.662,
+          "responder_ms": 2657.316,
+          "first_dispatch_ms": 3387.411,
+          "effect_complete_ms": 5891.365,
+          "ack_ms": 703.161,
+          "substantive_text_ms": 8550.466,
+          "planner_prefill": {
+            "cache_log_line": 119,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 27,
+            "progress_start_line": 123,
+            "progress_end_line": 125,
+            "progress_interval_ms": 251.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 127,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 417,
+            "progress_start_line": 131,
+            "progress_end_line": 134,
+            "progress_interval_ms": 1950.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 4120.674,
+          "responder_ms": 2475.541,
+          "first_dispatch_ms": 4121.576,
+          "effect_complete_ms": 6624.234,
+          "ack_ms": 703.823,
+          "substantive_text_ms": 9100.964,
+          "planner_prefill": {
+            "cache_log_line": 136,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 272,
+            "progress_start_line": 140,
+            "progress_end_line": 143,
+            "progress_interval_ms": 1494.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 145,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 321,
+            "progress_start_line": 149,
+            "progress_end_line": 152,
+            "progress_interval_ms": 1515.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 5045.246,
+          "responder_ms": 2362.213,
+          "first_dispatch_ms": 5046.095,
+          "effect_complete_ms": 7547.952,
+          "ack_ms": 704.216,
+          "substantive_text_ms": 9910.774,
+          "planner_prefill": {
+            "cache_log_line": 154,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 471,
+            "progress_start_line": 158,
+            "progress_end_line": 161,
+            "progress_interval_ms": 2422.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 163,
+            "sequences_before_fetch": 2,
+            "logical_cache_GB_rounded": 0.68,
+            "remaining_prompt_tokens": 330,
+            "progress_start_line": 167,
+            "progress_end_line": 170,
+            "progress_interval_ms": 1678.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        }
+      ],
+      "memory": {
+        "sampling_interval_target_s": 0.5,
+        "samples": 188,
+        "largest_observed_sampling_gap_s": 0.510995,
+        "sampled_server_peak_rss_bytes": 4888018944,
+        "server_rss_error_samples": 0,
+        "available_before_bytes": 9005252608,
+        "sampled_available_min_bytes": 1837252608,
+        "available_after_bytes": 8669790208,
+        "swap_used_before_bytes": 4327407616,
+        "swap_used_peak_bytes": 4327407616,
+        "swap_used_after_bytes": 4327407616,
+        "swap_used_change_bytes": 0,
+        "psutil_reported_sin_change_bytes": 2428960768,
+        "psutil_reported_sout_change_bytes": 9879552,
+        "max_logged_logical_cache_GB_rounded": 0.68
+      },
+      "server_log_diagnostics": {
+        "BrokenPipeError": 0,
+        "Traceback": 0,
+        "ERROR": 0
+      }
+    },
+    {
+      "name": "A1_repeat",
+      "cache_entries": 1,
+      "cases_passed": 3,
+      "cases_total": 3,
+      "attempts": 21,
+      "effects": 9,
+      "runtime_errors": 0,
+      "timeouts": 0,
+      "backend_errors": 0,
+      "source_hashes_match_frozen_manifest": true,
+      "frozen_files_verified_after_arm_by_harness": true,
+      "navigation_cleanup": {
+        "pid": 41880,
+        "exit_code": 0,
+        "forced_kill": false
+      },
+      "server_cleanup": {
+        "pid": 41868,
+        "exit_code": -15,
+        "forced_kill": false
+      },
+      "all_turn_summary": {
+        "planner_ms": {
+          "n": 9,
+          "p50_ms": 12092.903,
+          "p95_ms": 13214.43,
+          "min_ms": 11329.547,
+          "max_ms": 13214.43
+        },
+        "responder_ms": {
+          "n": 9,
+          "p50_ms": 3194.411,
+          "p95_ms": 3411.413,
+          "min_ms": 2934.472,
+          "max_ms": 3411.413
+        },
+        "first_dispatch_ms": {
+          "n": 9,
+          "p50_ms": 12094.641,
+          "p95_ms": 13215.54,
+          "min_ms": 11330.719,
+          "max_ms": 13215.54
+        },
+        "effect_complete_ms": {
+          "n": 9,
+          "p50_ms": 14596.005,
+          "p95_ms": 15717.973,
+          "min_ms": 13834.859,
+          "max_ms": 15717.973
+        },
+        "ack_ms": {
+          "n": 9,
+          "p50_ms": 703.178,
+          "p95_ms": 907.732,
+          "min_ms": 702.9,
+          "max_ms": 907.732
+        },
+        "substantive_text_ms": {
+          "n": 9,
+          "p50_ms": 17797.595,
+          "p95_ms": 18668.662,
+          "min_ms": 17245.403,
+          "max_ms": 18668.662
+        }
+      },
+      "later_turn_summary_excluding_only_fresh_server_first_turn": {
+        "planner_ms": {
+          "n": 8,
+          "p50_ms": 12092.903,
+          "p95_ms": 13214.43,
+          "min_ms": 11329.547,
+          "max_ms": 13214.43
+        },
+        "responder_ms": {
+          "n": 8,
+          "p50_ms": 3193.155,
+          "p95_ms": 3409.509,
+          "min_ms": 2934.472,
+          "max_ms": 3409.509
+        },
+        "first_dispatch_ms": {
+          "n": 8,
+          "p50_ms": 12094.641,
+          "p95_ms": 13215.54,
+          "min_ms": 11330.719,
+          "max_ms": 13215.54
+        },
+        "effect_complete_ms": {
+          "n": 8,
+          "p50_ms": 14596.005,
+          "p95_ms": 15717.973,
+          "min_ms": 13834.859,
+          "max_ms": 15717.973
+        },
+        "ack_ms": {
+          "n": 8,
+          "p50_ms": 703.033,
+          "p95_ms": 703.96,
+          "min_ms": 702.9,
+          "max_ms": 703.96
+        },
+        "substantive_text_ms": {
+          "n": 8,
+          "p50_ms": 17797.595,
+          "p95_ms": 18668.662,
+          "min_ms": 17245.403,
+          "max_ms": 18668.662
+        }
+      },
+      "per_turn": [
+        {
+          "repeat": 1,
+          "turn": 1,
+          "fresh_server_first_turn": true,
+          "planner_ms": 11783.322,
+          "responder_ms": 3411.413,
+          "first_dispatch_ms": 11784.66,
+          "effect_complete_ms": 14286.26,
+          "ack_ms": 907.732,
+          "substantive_text_ms": 17698.111,
+          "planner_prefill": {
+            "cache_log_line": 6,
+            "sequences_before_fetch": 0,
+            "logical_cache_GB_rounded": 0.0,
+            "remaining_prompt_tokens": 1765,
+            "progress_start_line": 10,
+            "progress_end_line": 18,
+            "progress_interval_ms": 8441.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 20,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.3,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 24,
+            "progress_end_line": 28,
+            "progress_interval_ms": 2692.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12087.196,
+          "responder_ms": 3193.155,
+          "first_dispatch_ms": 12088.589,
+          "effect_complete_ms": 14591.354,
+          "ack_ms": 703.178,
+          "substantive_text_ms": 17784.951,
+          "planner_prefill": {
+            "cache_log_line": 30,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.3,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 34,
+            "progress_end_line": 43,
+            "progress_interval_ms": 9483.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 45,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.34,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 49,
+            "progress_end_line": 52,
+            "progress_interval_ms": 2237.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 1,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13206.15,
+          "responder_ms": 2950.81,
+          "first_dispatch_ms": 13207.062,
+          "effect_complete_ms": 15710.643,
+          "ack_ms": 702.993,
+          "substantive_text_ms": 18663.385,
+          "planner_prefill": {
+            "cache_log_line": 54,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.34,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 58,
+            "progress_end_line": 68,
+            "progress_interval_ms": 10580.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 70,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 74,
+            "progress_end_line": 77,
+            "progress_interval_ms": 2241.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 11379.467,
+          "responder_ms": 3392.37,
+          "first_dispatch_ms": 11380.258,
+          "effect_complete_ms": 13882.787,
+          "ack_ms": 703.96,
+          "substantive_text_ms": 17275.662,
+          "planner_prefill": {
+            "cache_log_line": 79,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 1761,
+            "progress_start_line": 83,
+            "progress_end_line": 91,
+            "progress_interval_ms": 8230.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 93,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 97,
+            "progress_end_line": 101,
+            "progress_interval_ms": 2682.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12107.582,
+          "responder_ms": 3194.411,
+          "first_dispatch_ms": 12108.344,
+          "effect_complete_ms": 14610.322,
+          "ack_ms": 703.016,
+          "substantive_text_ms": 17805.029,
+          "planner_prefill": {
+            "cache_log_line": 103,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 107,
+            "progress_end_line": 116,
+            "progress_interval_ms": 9477.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 118,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 122,
+            "progress_end_line": 125,
+            "progress_interval_ms": 2237.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 2,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13201.355,
+          "responder_ms": 2934.472,
+          "first_dispatch_ms": 13202.58,
+          "effect_complete_ms": 15704.231,
+          "ack_ms": 703.033,
+          "substantive_text_ms": 18639.506,
+          "planner_prefill": {
+            "cache_log_line": 127,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 131,
+            "progress_end_line": 141,
+            "progress_interval_ms": 10574.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 143,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 147,
+            "progress_end_line": 150,
+            "progress_interval_ms": 2236.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 1,
+          "fresh_server_first_turn": false,
+          "planner_ms": 11329.547,
+          "responder_ms": 3409.509,
+          "first_dispatch_ms": 11330.719,
+          "effect_complete_ms": 13834.859,
+          "ack_ms": 702.9,
+          "substantive_text_ms": 17245.403,
+          "planner_prefill": {
+            "cache_log_line": 152,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 1761,
+            "progress_start_line": 156,
+            "progress_end_line": 164,
+            "progress_interval_ms": 8232.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 166,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 551,
+            "progress_start_line": 170,
+            "progress_end_line": 174,
+            "progress_interval_ms": 2690.0
+          },
+          "delivered_result_text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R1",
+            "navigation_version": 1,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "search_destination",
+              "args": {
+                "query": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "P_AIRPORT"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 2,
+          "fresh_server_first_turn": false,
+          "planner_ms": 12092.903,
+          "responder_ms": 3201.168,
+          "first_dispatch_ms": 12094.641,
+          "effect_complete_ms": 14596.005,
+          "ack_ms": 703.449,
+          "substantive_text_ms": 17797.595,
+          "planner_prefill": {
+            "cache_log_line": 176,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2006,
+            "progress_start_line": 180,
+            "progress_end_line": 189,
+            "progress_interval_ms": 9495.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 191,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 454,
+            "progress_start_line": 195,
+            "progress_end_line": 198,
+            "progress_interval_ms": 2232.0
+          },
+          "delivered_result_text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R2"
+            },
+            "destination_id": "P_OFFICE",
+            "route_id": "R2",
+            "navigation_version": 2,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "office"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R2"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        },
+        {
+          "repeat": 3,
+          "turn": 3,
+          "fresh_server_first_turn": false,
+          "planner_ms": 13214.43,
+          "responder_ms": 2950.18,
+          "first_dispatch_ms": 13215.54,
+          "effect_complete_ms": 15717.973,
+          "ack_ms": 703.569,
+          "substantive_text_ms": 18668.662,
+          "planner_prefill": {
+            "cache_log_line": 200,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 2241,
+            "progress_start_line": 204,
+            "progress_end_line": 214,
+            "progress_interval_ms": 10581.0
+          },
+          "responder_prefill": {
+            "cache_log_line": 216,
+            "sequences_before_fetch": 1,
+            "logical_cache_GB_rounded": 0.38,
+            "remaining_prompt_tokens": 463,
+            "progress_start_line": 220,
+            "progress_end_line": 223,
+            "progress_interval_ms": 2238.0
+          },
+          "delivered_result_text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "effect": {
+            "tool": "start_navigation",
+            "args": {
+              "route_id": "R3"
+            },
+            "destination_id": "P_AIRPORT",
+            "route_id": "R3",
+            "navigation_version": 3,
+            "route_active": true,
+            "stop_ids": []
+          },
+          "attempts": [
+            {
+              "tool": "compute_route",
+              "args": {
+                "destination": "airport"
+              },
+              "status": "success"
+            },
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R3"
+              },
+              "status": "success"
+            }
+          ],
+          "factualness_review": "supported_by_this_turn_successful_simulated_tool_results"
+        }
+      ],
+      "memory": {
+        "sampling_interval_target_s": 0.5,
+        "samples": 324,
+        "largest_observed_sampling_gap_s": 0.538621,
+        "sampled_server_peak_rss_bytes": 4885938176,
+        "server_rss_error_samples": 0,
+        "available_before_bytes": 8703950848,
+        "sampled_available_min_bytes": 1928773632,
+        "available_after_bytes": 2990292992,
+        "swap_used_before_bytes": 4327407616,
+        "swap_used_peak_bytes": 4327407616,
+        "swap_used_after_bytes": 4327407616,
+        "swap_used_change_bytes": 0,
+        "psutil_reported_sin_change_bytes": 2693070848,
+        "psutil_reported_sout_change_bytes": 16547840,
+        "max_logged_logical_cache_GB_rounded": 0.38
+      },
+      "server_log_diagnostics": {
+        "BrokenPipeError": 0,
+        "Traceback": 0,
+        "ERROR": 0
+      }
+    }
+  ],
+  "effect_and_response_review": {
+    "cases_passed": 9,
+    "cases_total": 9,
+    "attempts": 63,
+    "successful_simulated_effects": 27,
+    "runtime_errors": 0,
+    "timeouts": 0,
+    "backend_errors": 0,
+    "all_observed_effect_sequences": "Each independent case starts airport, replaces it with office, then legitimately returns to airport; navigation versions1,2,3 and no stops.",
+    "delivered_result_texts_reviewed": 27,
+    "unsupported_delivered_factual_claims_found": 0,
+    "grounding": "Airport replies identify the successful destination and first-turn ETA88min; office replies state active route,11.8km and29min; return replies identify airport and actual routeR3. These match simulated tool results, not verified road conditions. Acknowledgments are scored separately from substantive text.",
+    "event_counts": {
+      "user_final": 27,
+      "ack": 27,
+      "agent_say": 54,
+      "plan_ready": 27,
+      "gate_open": 27,
+      "gate_committed": 27,
+      "slot_update": 27,
+      "tool_waiting": 63,
+      "tool_started": 63,
+      "tool_done": 63
+    }
+  },
+  "mechanism_evidence": {
+    "summary": "First planner prefill1765 tokens in every arm. At repeat1/turn2, A1 and A1_repeat process2006 remaining tokens while B2 processes272. At repeat2/turn1, one-entry arms process1761 while B2 processes27. This aligns with preservation of both planner and responder prefixes; it is stronger evidence than latency alone.",
+    "installed_source_reference": {
+      "path": ".venv/lib/python3.11/site-packages/mlx_lm/server.py",
+      "lines": "965-987",
+      "sha256": "cdfcb4ac848636f9927851a0ec7a951584526530cb7832ba58049e4a9144db8b",
+      "meaning": "fetch_nearest_cache yields rest and stream_generate receives that remainder."
+    }
+  },
+  "comparison": {
+    "all_turn_substantive_p50_ms": {
+      "A1": 17787.084,
+      "B2": 9118.952,
+      "A1_repeat": 17797.595
+    },
+    "B2_p50_reduction_vs_mean_of_two_A_p50_percent": 48.75,
+    "first_fresh_server_response_ms": {
+      "A1": 17648.783,
+      "B2": 17684.921,
+      "A1_repeat": 17698.111
+    },
+    "interpretation": "The two-entry arm reduces later-turn latency for this fixed alternating workload; returning to one entry restores slower timing. No initial-request improvement is observed. This does not establish a general2x conversational speedup."
+  },
+  "recommendation": {
+    "decision": "retain_two_entries_for_subsequent_local_demo_experiments",
+    "reason": "Consistent A/B/A latency separation plus reduced remaining prefill with identical model requests, outputs, effects and factual delivered text justifies a narrowly scoped launch change.",
+    "scope": "Tested pinned Qwen8B MLX seeded sequential server and one repeated text navigation scenario. Monitor memory during the subsequent actual audio/STT/TTS run; do not infer concurrent capacity or a production memory bound.",
+    "byte_budget_limitation": "Installed mlx-lm0.31.3 seeded _serve_single bypasses --prompt-cache-bytes; the unchanged268435456 flag is nominal only. Logged cache reaches0.38GB for A and0.68GB for B. Do not describe either as enforcing256MiB.",
+    "memory_interpretation": "Similar sampled RSS peaks do not prove zero additional memory cost: cache accounting grows, system available RAM varies, and about4.33GB of swap was already occupied. Swap traffic/system load cannot be attributed to cache count from these measurements."
+  },
+  "limitations": [
+    "One B process between two A processes; three cases per arm and27 turns overall reuse the same scenario and server caches. They are not27 independent trials or a broad accuracy evaluation.",
+    "Fixed A/B/A order, background applications, thermal state and shared OS/filesystem/Metal caches remain confounds. No confidence interval or significance claim is justified.",
+    "Server startup/model-list readiness is not inference evidence. First-case text timings exclude launcher startup and may include residual initialization; first turns are preserved separately.",
+    "No live speech, recognition, synthesis, acoustic barge-in, microphone echo, held-out benchmark, or sustained multiroom capacity was measured.",
+    "Substantive text callbacks do not measure first streamed token or audible onset. The simulated route calculation adds about2.5s per turn.",
+    "RSS sampling can miss peaks and does not identify total unified-memory consumption. Available/swap measurements include unrelated system activity; the machine was already using substantial swap."
+  ]
+}

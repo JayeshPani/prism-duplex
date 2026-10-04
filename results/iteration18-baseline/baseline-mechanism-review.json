@@ -1,0 +1,3175 @@
+{
+  "created_at_utc": "2026-09-26T11:24:42.758709+00:00",
+  "status": "completed_baseline_only_read_only_review",
+  "scope": "All eight declared baseline cases; candidate files and received-audio ASR not inspected. Post-run mechanism extraction, not the final frozen 21-case acoustic audit or speech-meaning assessment.",
+  "summary": {
+    "declared_cases": 8,
+    "run_cases": 8,
+    "completed_probe_observations": 7,
+    "failed_captures": 1,
+    "declared_input_publications": 16,
+    "actual_input_publications": 14,
+    "declared_probe_publications": 8,
+    "actual_probe_publications": 7,
+    "expected_effects": 10,
+    "observed_effects": 9,
+    "physical_attempts": 23,
+    "attempt_statuses": {
+      "done": 23
+    },
+    "duplicate_attempt_ids": 0,
+    "stale_tool_done": 0,
+    "sdk_false_interruption_events": 1,
+    "candidate_hold_events": 0,
+    "trusted_trace_equal_cases": 2,
+    "raw_canonical_equal_cases": 8,
+    "server_events": 258,
+    "raw_events": 258,
+    "trusted_events": 251,
+    "missing_native_identity_packets": 7
+  },
+  "interpretation": [
+    "native_noise_burst failed connect_and_session_ready before either input publication. Two received raw packets had empty native identity and were rejected; their canonical bodies match server agent_state/listening and session_started. Matching payload does not authenticate them. Case remains failed with zero effects and no recognition binding.",
+    "Native voiced stop produced a nonempty final and interrupted the original result without a recorded false-resume event. The injected-five-second voiced stop produced one resumed=true callback inside its pending delivery hold, then old result finished before the final stop arrived. This directly observes the baseline timer/delivery ordering for this case; it does not identify why any historical native recognition was slow.",
+    "Five non-speech probes were actually published; none caused post-probe user-speaking or recognition. Their original handles finished, but false-pause/empty-recognition recovery was not exercised. The sixth declared non-speech case never published.",
+    "Every delayed room first recognition, and the delayed voiced-stop followup, received the declared hold. Only five holds occurred because non-speech probes did not cause recognition. Native inference durations and injected hold are kept separate."
+  ],
+  "delay_validation": {
+    "policy": "baseline",
+    "all8_runtime_conditions_match": true,
+    "bindings": 7,
+    "binding_errors": [],
+    "all_observed_bindings_match_exact_case_room_condition_hash": true,
+    "room_recognition_calls": 9,
+    "delayed_calls": 5,
+    "hold_ms": [
+      5000.485292,
+      5000.20775,
+      5002.144125,
+      5000.811958,
+      5002.142959
+    ],
+    "pending_at_all_hold_boundaries": true,
+    "all_calls_returned": true,
+    "sources_unchanged_reported": true,
+    "selection_policy": "baseline"
+  },
+  "cases": [
+    {
+      "case_id": "native_silence",
+      "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139461.67839225,
+            "drained_monotonic": 139463.110730333,
+            "scheduled_end_monotonic": 139463.10772558334,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "a5d9fa95bf992eba6ba6de3604564c557f6a57a97981f96514927b95853f5a44",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139479.934985541,
+            "drained_monotonic": 139480.837133166,
+            "scheduled_end_monotonic": 139480.834985541,
+            "published_samples": 21600
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 1,
+          "case_id": "native_silence",
+          "delay_seconds": 0,
+          "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+          "condition": {
+            "case_id": "native_silence",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "fd98c1fd389f4a16f62f3277b885193d504a3be1f06eee5349c71cdc4f9bd28a",
+          "bound_at": {
+            "monotonic_ns": 139463681906000,
+            "unix_ns": 1790421149033641000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 1,
+            "binding_id": 1,
+            "case_id": "native_silence",
+            "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+            "delay_seconds": 0,
+            "entry": {
+              "monotonic_ns": 139463682794458,
+              "unix_ns": 1790421149034529000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139464737460250,
+              "unix_ns": 1790421150089198000
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139464737464750,
+              "unix_ns": 1790421150089202000
+            }
+          },
+          "stt_call_id": "stt-call-002",
+          "request_id": "stt-request-003",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 1054.484125,
+          "request_wall_ms": 1057.52975,
+          "synthetic_hold_ms": null,
+          "probe_recognition": false
+        }
+      ],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [
+        {
+          "line": 30,
+          "server_ts": 1790421184.960861,
+          "received_monotonic": 139499.6126425,
+          "after_probe_ms": 19677.656958985608,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421150.1002922,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_cecff075cf5a",
+        "queued_at": 139479.030731583,
+        "state": "finished",
+        "first_loud_at": 139479.934844708,
+        "preceding_quiet_seconds": 13.259909625019645,
+        "last_loud_at": 139484.575522166,
+        "ended_at": 139484.610343958,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 4640.536624996457,
+      "old_handle_end_after_probe_ms": 4675.35841697827,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421164.3792288,
+          "execution_id": "e46cb4a5b7534309b9a2cd6b43749e3c",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 4
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421161.867167,
+            "attempt_id": "e46cb4a5b7534309b9a2cd6b43749e3c:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421161.8695638,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421161.8707998,
+            "attempt_id": "e46cb4a5b7534309b9a2cd6b43749e3c:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421164.3731148,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421164.374851,
+            "attempt_id": "e46cb4a5b7534309b9a2cd6b43749e3c:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421164.379332,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 30,
+        "raw_count": 30,
+        "trusted_count": 30,
+        "trusted_exact_sequence_equal": true,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [],
+        "missing_native_identity": [],
+        "decode_errors": [],
+        "attribution_counts": {
+          "promoted": 30
+        }
+      },
+      "aec_frames": 994,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+        "started_at": "2026-09-26T11:13:16.483767+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:13:16.483911+00:00",
+            "elapsed_seconds": 0.0001345000055152923,
+            "participants": [
+              {
+                "identity": "agent-AJ_hSTAViWsbZ3U",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:13:17.009229+00:00",
+            "elapsed_seconds": 0.5254599170002621,
+            "participants": [
+              {
+                "identity": "agent-AJ_hSTAViWsbZ3U",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:13:17.510428+00:00",
+            "elapsed_seconds": 1.0266568750084843,
+            "participants": [
+              {
+                "identity": "agent-AJ_hSTAViWsbZ3U",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:13:18.013549+00:00",
+            "elapsed_seconds": 1.52980883300188,
+            "participants": [
+              {
+                "identity": "agent-AJ_hSTAViWsbZ3U",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:13:18.518750+00:00",
+            "elapsed_seconds": 2.0349927920033224,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:13:18.521200+00:00",
+        "elapsed_seconds": 2.0374283750134055
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2457
+    },
+    {
+      "case_id": "native_voiced_stop",
+      "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139513.914077458,
+            "drained_monotonic": 139515.34664675,
+            "scheduled_end_monotonic": 139515.34341079133,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139523.6903085,
+            "drained_monotonic": 139525.081062875,
+            "scheduled_end_monotonic": 139525.07697516665,
+            "published_samples": 33280
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 2,
+          "case_id": "native_voiced_stop",
+          "delay_seconds": 0,
+          "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+          "condition": {
+            "case_id": "native_voiced_stop",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "60a540676d55e6e0c02a33c739fd87d2497101fa36ecf40c4ef675ecb85072e6",
+          "bound_at": {
+            "monotonic_ns": 139515912977250,
+            "unix_ns": 1790421201264846000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 2,
+            "binding_id": 2,
+            "case_id": "native_voiced_stop",
+            "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+            "delay_seconds": 0,
+            "entry": {
+              "monotonic_ns": 139515914139541,
+              "unix_ns": 1790421201266008000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139516872251833,
+              "unix_ns": 1790421202224122000
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139516872256291,
+              "unix_ns": 1790421202224127000
+            }
+          },
+          "stt_call_id": "stt-call-003",
+          "request_id": "stt-request-005",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 958.081083,
+          "request_wall_ms": 959.653417,
+          "synthetic_hold_ms": null,
+          "probe_recognition": false
+        },
+        {
+          "delivery_call": {
+            "call_id": 3,
+            "binding_id": 2,
+            "case_id": "native_voiced_stop",
+            "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+            "delay_seconds": 0,
+            "entry": {
+              "monotonic_ns": 139525613763958,
+              "unix_ns": 1790421210965657000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139526666068125,
+              "unix_ns": 1790421212017964000
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139526666071958,
+              "unix_ns": 1790421212017967000
+            }
+          },
+          "stt_call_id": "stt-call-004",
+          "request_id": "stt-request-007",
+          "original_text": "Please stop navigation.",
+          "native_engine_api_ms": 1052.278917,
+          "request_wall_ms": 1054.227792,
+          "synthetic_hold_ms": null,
+          "probe_recognition": true
+        }
+      ],
+      "post_probe_recognition_calls": 1,
+      "post_probe_user_states": [
+        {
+          "line": 27,
+          "server_ts": 1790421209.265915,
+          "received_monotonic": 139523.91601825,
+          "after_probe_ms": 225.70974999689497,
+          "state": "speaking"
+        },
+        {
+          "line": 29,
+          "server_ts": 1790421210.964027,
+          "received_monotonic": 139525.613170583,
+          "after_probe_ms": 1922.8620830108412,
+          "state": "listening"
+        },
+        {
+          "line": 49,
+          "server_ts": 1790421233.714331,
+          "received_monotonic": 139548.365422916,
+          "after_probe_ms": 24675.11441599345,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790421212.023606
+        }
+      ],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421202.22653,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        },
+        {
+          "server_line": 32,
+          "ts": 1790421212.023606,
+          "text": "Please stop navigation.",
+          "merged": "Please stop navigation.",
+          "intent_version": 2
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_172dc9c7476e",
+        "queued_at": 139522.812718583,
+        "state": "interruption_requested",
+        "first_loud_at": 139523.690178708,
+        "preceding_quiet_seconds": 4.857038457994349,
+        "last_loud_at": 139524.352836,
+        "ended_at": 139526.67210675,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 662.5275000114925,
+      "old_handle_end_after_probe_ms": 2981.798249995336,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421208.161651,
+          "execution_id": "aac052a7601044b68566d9c6cdb417ca",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 1
+        },
+        {
+          "server_line": 44,
+          "ts": 1790421214.9648519,
+          "execution_id": "27e5c951d0984ff5a25c05b65d04913b",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "cancel_navigation",
+          "args": {},
+          "result": {
+            "status": "success",
+            "cancelled": "Whitefield (ITPL)",
+            "navigation_version": 2,
+            "route_active": false,
+            "route_id": null,
+            "destination": null,
+            "destination_id": null,
+            "stops": [],
+            "stop_ids": [],
+            "eta_min": null,
+            "distance_km": null,
+            "polyline": []
+          },
+          "stale": false,
+          "duration_ms": 3
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421205.648145,
+            "attempt_id": "aac052a7601044b68566d9c6cdb417ca:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421205.653277,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421205.6547918,
+            "attempt_id": "aac052a7601044b68566d9c6cdb417ca:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421208.1586502,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421208.160449,
+            "attempt_id": "aac052a7601044b68566d9c6cdb417ca:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421208.1618009,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790421214.961938,
+            "attempt_id": "27e5c951d0984ff5a25c05b65d04913b:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421214.964963,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 50,
+        "raw_count": 50,
+        "trusted_count": 49,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421199.262926,
+            "type": "agent_state"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421199.262926
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 1,
+          "promoted": 49
+        }
+      },
+      "aec_frames": 834,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+        "started_at": "2026-09-26T11:14:00.503599+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:14:00.504389+00:00",
+            "elapsed_seconds": 0.0007837910088710487,
+            "participants": [
+              {
+                "identity": "agent-AJ_EojpeGp7VsDk",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:01.015917+00:00",
+            "elapsed_seconds": 0.5123132909939159,
+            "participants": [
+              {
+                "identity": "agent-AJ_EojpeGp7VsDk",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:01.518854+00:00",
+            "elapsed_seconds": 1.015267083013896,
+            "participants": [
+              {
+                "identity": "agent-AJ_EojpeGp7VsDk",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:02.022090+00:00",
+            "elapsed_seconds": 1.5184885410126299,
+            "participants": [
+              {
+                "identity": "agent-AJ_EojpeGp7VsDk",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:02.524891+00:00",
+            "elapsed_seconds": 2.0212836659920868,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:14:02.525816+00:00",
+        "elapsed_seconds": 2.022205874993233
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2057
+    },
+    {
+      "case_id": "native_breath_proxy",
+      "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139558.092879333,
+            "drained_monotonic": 139559.526423291,
+            "scheduled_end_monotonic": 139559.52221266634,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "6378210a412c286378963d868adb2f3e7761492856d44ee15f4dd244f3a3e0ae",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139568.935083875,
+            "drained_monotonic": 139569.850123125,
+            "scheduled_end_monotonic": 139569.835083875,
+            "published_samples": 21600
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 3,
+          "case_id": "native_breath_proxy",
+          "delay_seconds": 0,
+          "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+          "condition": {
+            "case_id": "native_breath_proxy",
+            "delay_seconds": 0
+          },
+          "condition_sha256": "b3f7fc961cc51d092d7275a802e7691b7e000fb7974a2465e0c4a917b1ab3583",
+          "bound_at": {
+            "monotonic_ns": 139560095139750,
+            "unix_ns": 1790421245447121000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 4,
+            "binding_id": 3,
+            "case_id": "native_breath_proxy",
+            "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+            "delay_seconds": 0,
+            "entry": {
+              "monotonic_ns": 139560096553125,
+              "unix_ns": 1790421245448534000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139561444112416,
+              "unix_ns": 1790421246796097000
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139561444118958,
+              "unix_ns": 1790421246796103000
+            }
+          },
+          "stt_call_id": "stt-call-005",
+          "request_id": "stt-request-009",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 1347.518666,
+          "request_wall_ms": 1349.606875,
+          "synthetic_hold_ms": null,
+          "probe_recognition": false
+        }
+      ],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [
+        {
+          "line": 30,
+          "server_ts": 1790421273.933934,
+          "received_monotonic": 139588.584464416,
+          "after_probe_ms": 19649.38054099912,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421246.801069,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_778ed22796b5",
+        "queued_at": 139567.916067583,
+        "state": "finished",
+        "first_loud_at": 139568.934853625,
+        "preceding_quiet_seconds": 5.500382583995815,
+        "last_loud_at": 139573.573794583,
+        "ended_at": 139573.582376458,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 4638.710708008148,
+      "old_handle_end_after_probe_ms": 4647.292583016679,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421253.2149062,
+          "execution_id": "62effb5e5b7b43d0b0eff6b16a07a5e0",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 362
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421250.295016,
+            "attempt_id": "62effb5e5b7b43d0b0eff6b16a07a5e0:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421250.32227,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421250.323742,
+            "attempt_id": "62effb5e5b7b43d0b0eff6b16a07a5e0:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421252.826026,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421252.852561,
+            "attempt_id": "62effb5e5b7b43d0b0eff6b16a07a5e0:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421253.215039,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 30,
+        "raw_count": 30,
+        "trusted_count": 30,
+        "trusted_exact_sequence_equal": true,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [],
+        "missing_native_identity": [],
+        "decode_errors": [],
+        "attribution_counts": {
+          "promoted": 30
+        }
+      },
+      "aec_frames": 846,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+        "started_at": "2026-09-26T11:14:45.370612+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:14:45.375002+00:00",
+            "elapsed_seconds": 0.004390125017380342,
+            "participants": [
+              {
+                "identity": "agent-AJ_9DoXcbbXjVqW",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:45.896872+00:00",
+            "elapsed_seconds": 0.526261874998454,
+            "participants": [
+              {
+                "identity": "agent-AJ_9DoXcbbXjVqW",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:46.400218+00:00",
+            "elapsed_seconds": 1.0296066669980064,
+            "participants": [
+              {
+                "identity": "agent-AJ_9DoXcbbXjVqW",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:46.904102+00:00",
+            "elapsed_seconds": 1.5335700839932542,
+            "participants": [
+              {
+                "identity": "agent-AJ_9DoXcbbXjVqW",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:14:47.409532+00:00",
+            "elapsed_seconds": 2.0389198749908246,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:14:47.411185+00:00",
+        "elapsed_seconds": 2.0405684169963934
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2087
+    },
+    {
+      "case_id": "native_noise_burst",
+      "room": "car-audio-9cb9aabb79f54337abb108411b38b34c",
+      "status": "failed",
+      "failed_stage": "connect_and_session_ready",
+      "error": "TimeoutError()",
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": false,
+          "timing": null
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "628c674f8cef9b4dc9fe3f01a72eba095669dc8e328d839ac3493be027e070b5",
+          "published": false,
+          "timing": null
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [],
+      "binding_matches": true,
+      "recognition_calls": [],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [],
+      "post_probe_finals": [],
+      "all_user_finals": [],
+      "original_result_handle": null,
+      "last_old_pcm_after_probe_ms": null,
+      "old_handle_end_after_probe_ms": null,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [],
+      "attempts": [],
+      "trusted_trace": {
+        "server_count": 3,
+        "raw_count": 3,
+        "trusted_count": 1,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421288.482694,
+            "type": "agent_state"
+          },
+          {
+            "data": {
+              "llm": "mlx-community/Qwen3-8B-4bit",
+              "mode": "car",
+              "profile": "local-mac",
+              "room": "car-audio-9cb9aabb79f54337abb108411b38b34c"
+            },
+            "ts": 1790421288.48297,
+            "type": "session_started"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421288.482694
+            },
+            "matches_server_event": true
+          },
+          {
+            "line": 4,
+            "packet_id": 2,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "session_started",
+              "data": {
+                "room": "car-audio-9cb9aabb79f54337abb108411b38b34c",
+                "mode": "car",
+                "profile": "local-mac",
+                "llm": "mlx-community/Qwen3-8B-4bit"
+              },
+              "ts": 1790421288.48297
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 2,
+          "promoted": 1
+        }
+      },
+      "aec_frames": 897,
+      "aec_substituted_frames": 0,
+      "aec_substitution_intervals": 0,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-9cb9aabb79f54337abb108411b38b34c",
+        "started_at": "2026-09-26T11:15:32.839710+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:15:32.840374+00:00",
+            "elapsed_seconds": 0.0006634999881498516,
+            "participants": [
+              {
+                "identity": "agent-AJ_2KGAqu4ALQfx",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:15:33.343575+00:00",
+            "elapsed_seconds": 0.50386937498115,
+            "participants": [
+              {
+                "identity": "agent-AJ_2KGAqu4ALQfx",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:15:33.846232+00:00",
+            "elapsed_seconds": 1.0065468339889776,
+            "participants": [
+              {
+                "identity": "agent-AJ_2KGAqu4ALQfx",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:15:34.351273+00:00",
+            "elapsed_seconds": 1.5115824170061387,
+            "participants": [
+              {
+                "identity": "agent-AJ_2KGAqu4ALQfx",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:15:34.855343+00:00",
+            "elapsed_seconds": 2.015641334000975,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:15:34.858866+00:00",
+        "elapsed_seconds": 2.0191559999948367
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2213
+    },
+    {
+      "case_id": "delivery_delay5s_noise_burst",
+      "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139651.681146166,
+            "drained_monotonic": 139653.114670208,
+            "scheduled_end_monotonic": 139653.11047949933,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "628c674f8cef9b4dc9fe3f01a72eba095669dc8e328d839ac3493be027e070b5",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139676.163217,
+            "drained_monotonic": 139677.064776666,
+            "scheduled_end_monotonic": 139677.063217,
+            "published_samples": 21600
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 4,
+          "case_id": "delivery_delay5s_noise_burst",
+          "delay_seconds": 5,
+          "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+          "condition": {
+            "case_id": "delivery_delay5s_noise_burst",
+            "delay_seconds": 5
+          },
+          "condition_sha256": "6eb27e9b4d10d13c0c8ca2fca77ae7faafa3d06cbf48c69544f03845de4f93d0",
+          "bound_at": {
+            "monotonic_ns": 139653683401708,
+            "unix_ns": 1790421339035623000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 5,
+            "binding_id": 4,
+            "case_id": "delivery_delay5s_noise_burst",
+            "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+            "delay_seconds": 5,
+            "entry": {
+              "monotonic_ns": 139653684506125,
+              "unix_ns": 1790421339036727000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139663755549583,
+              "unix_ns": 1790421349107796000
+            },
+            "hold_start": {
+              "monotonic_ns": 139663755557458,
+              "unix_ns": 1790421349107804000,
+              "pending_recognitions": 1
+            },
+            "hold_end": {
+              "monotonic_ns": 139668756042750,
+              "unix_ns": 1790421354108304000,
+              "pending_recognitions": 1
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139668756075333,
+              "unix_ns": 1790421354108335000
+            }
+          },
+          "stt_call_id": "stt-call-006",
+          "request_id": "stt-request-011",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 10071.000541,
+          "request_wall_ms": 15074.135417,
+          "synthetic_hold_ms": 5000.485292,
+          "probe_recognition": false
+        }
+      ],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [
+        {
+          "line": 31,
+          "server_ts": 1790421381.100993,
+          "received_monotonic": 139695.75175875,
+          "after_probe_ms": 19588.541750010336,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [],
+      "all_user_finals": [
+        {
+          "server_line": 7,
+          "ts": 1790421354.120327,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_6bc8a1962212",
+        "queued_at": 139675.11926625,
+        "state": "finished",
+        "first_loud_at": 139676.163082958,
+        "preceding_quiet_seconds": 3.6592974579834845,
+        "last_loud_at": 139680.704070125,
+        "ended_at": 139680.749441208,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 4540.8531250141095,
+      "old_handle_end_after_probe_ms": 4586.224208003841,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 26,
+          "ts": 1790421360.469234,
+          "execution_id": "a6fd92932d084b048e58fbf4a493ea6f",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 1
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421357.9574342,
+            "attempt_id": "a6fd92932d084b048e58fbf4a493ea6f:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421357.9615302,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421357.963187,
+            "attempt_id": "a6fd92932d084b048e58fbf4a493ea6f:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421360.466475,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421360.468246,
+            "attempt_id": "a6fd92932d084b048e58fbf4a493ea6f:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421360.469344,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 32,
+        "raw_count": 32,
+        "trusted_count": 31,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421335.9332669,
+            "type": "agent_state"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421335.9332669
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 1,
+          "promoted": 31
+        }
+      },
+      "aec_frames": 1118,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+        "started_at": "2026-09-26T11:16:32.569934+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:16:32.572079+00:00",
+            "elapsed_seconds": 0.002143624995369464,
+            "participants": [
+              {
+                "identity": "agent-AJ_sv6MfphXgufd",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:16:33.084691+00:00",
+            "elapsed_seconds": 0.514760332996957,
+            "participants": [
+              {
+                "identity": "agent-AJ_sv6MfphXgufd",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:16:33.587960+00:00",
+            "elapsed_seconds": 1.01806316600414,
+            "participants": [
+              {
+                "identity": "agent-AJ_sv6MfphXgufd",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:16:34.092965+00:00",
+            "elapsed_seconds": 1.5230452080140822,
+            "participants": [
+              {
+                "identity": "agent-AJ_sv6MfphXgufd",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:16:34.597135+00:00",
+            "elapsed_seconds": 2.0272003750142176,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:16:34.598361+00:00",
+        "elapsed_seconds": 2.028418916015653
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2768
+    },
+    {
+      "case_id": "delivery_delay5s_voiced_stop",
+      "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139710.208263416,
+            "drained_monotonic": 139711.640765125,
+            "scheduled_end_monotonic": 139711.63759674932,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139724.985310125,
+            "drained_monotonic": 139726.375404166,
+            "scheduled_end_monotonic": 139726.37197679165,
+            "published_samples": 33280
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 5,
+          "case_id": "delivery_delay5s_voiced_stop",
+          "delay_seconds": 5,
+          "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+          "condition": {
+            "case_id": "delivery_delay5s_voiced_stop",
+            "delay_seconds": 5
+          },
+          "condition_sha256": "9f176eb89577b78916988e7a4f7e7c99b01987052f5e0fe61fa5d12971d34ddf",
+          "bound_at": {
+            "monotonic_ns": 139712216085583,
+            "unix_ns": 1790421397568457000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 6,
+            "binding_id": 5,
+            "case_id": "delivery_delay5s_voiced_stop",
+            "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+            "delay_seconds": 5,
+            "entry": {
+              "monotonic_ns": 139712218385125,
+              "unix_ns": 1790421397570756000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139713343800250,
+              "unix_ns": 1790421398696174000
+            },
+            "hold_start": {
+              "monotonic_ns": 139713343804041,
+              "unix_ns": 1790421398696177000,
+              "pending_recognitions": 1
+            },
+            "hold_end": {
+              "monotonic_ns": 139718344011791,
+              "unix_ns": 1790421403696399000,
+              "pending_recognitions": 1
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139718344018000,
+              "unix_ns": 1790421403696404000
+            }
+          },
+          "stt_call_id": "stt-call-007",
+          "request_id": "stt-request-013",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 1125.373792,
+          "request_wall_ms": 6128.42475,
+          "synthetic_hold_ms": 5000.20775,
+          "probe_recognition": false
+        },
+        {
+          "delivery_call": {
+            "call_id": 7,
+            "binding_id": 5,
+            "case_id": "delivery_delay5s_voiced_stop",
+            "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+            "delay_seconds": 5,
+            "entry": {
+              "monotonic_ns": 139726918084041,
+              "unix_ns": 1790421412270492000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139728046592041,
+              "unix_ns": 1790421413399003000
+            },
+            "hold_start": {
+              "monotonic_ns": 139728046594500,
+              "unix_ns": 1790421413399005000,
+              "pending_recognitions": 1
+            },
+            "hold_end": {
+              "monotonic_ns": 139733048738625,
+              "unix_ns": 1790421418401164000,
+              "pending_recognitions": 1
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139733048759125,
+              "unix_ns": 1790421418401183000
+            }
+          },
+          "stt_call_id": "stt-call-008",
+          "request_id": "stt-request-015",
+          "original_text": "Please stop navigation.",
+          "native_engine_api_ms": 1128.462834,
+          "request_wall_ms": 6134.970583,
+          "synthetic_hold_ms": 5002.144125,
+          "probe_recognition": true
+        }
+      ],
+      "post_probe_recognition_calls": 1,
+      "post_probe_user_states": [
+        {
+          "line": 27,
+          "server_ts": 1790421410.614381,
+          "received_monotonic": 139725.264173,
+          "after_probe_ms": 278.86287501314655,
+          "state": "speaking"
+        },
+        {
+          "line": 29,
+          "server_ts": 1790421412.265847,
+          "received_monotonic": 139726.916867958,
+          "after_probe_ms": 1931.5578330133576,
+          "state": "listening"
+        },
+        {
+          "line": 52,
+          "server_ts": 1790421438.8206248,
+          "received_monotonic": 139753.473173458,
+          "after_probe_ms": 28487.863333022688,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790421418.410832
+        }
+      ],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421403.698603,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        },
+        {
+          "server_line": 35,
+          "ts": 1790421418.410832,
+          "text": "Please stop navigation.",
+          "merged": "Please stop navigation.",
+          "intent_version": 2
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_bb362ec8871d",
+        "queued_at": 139724.241024541,
+        "state": "finished",
+        "first_loud_at": 139724.985176583,
+        "preceding_quiet_seconds": 4.699540083005559,
+        "last_loud_at": 139732.606129916,
+        "ended_at": 139732.670575166,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 7620.819791016402,
+      "old_handle_end_after_probe_ms": 7685.265041014645,
+      "old_finish_before_probe_final_ms": 390.67602157592773,
+      "sdk_false_interruption": [
+        {
+          "server_line": 32,
+          "server_ts": 1790421414.2676458,
+          "resumed": true,
+          "received_monotonic": 139728.917236833,
+          "after_probe_ms": 3931.9267079990823,
+          "after_preceding_user_listening_ms": 2001.7988681793213,
+          "within_delivery_hold_call_ids": [
+            7
+          ],
+          "pending_delivery_call_ids": [
+            7
+          ],
+          "last_old_loud_before_resume": 139725.705000333,
+          "first_old_loud_after_resume": 139728.96623875,
+          "old_loud_frames_after_resume": 129
+        }
+      ],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421409.5908532,
+          "execution_id": "d9db0c92c5144b2fa19f7ac0d8d7b129",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 1
+        },
+        {
+          "server_line": 47,
+          "ts": 1790421420.065105,
+          "execution_id": "31edb25059ca40d48a7a34450a8ce7b5",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "cancel_navigation",
+          "args": {},
+          "result": {
+            "status": "success",
+            "cancelled": "Whitefield (ITPL)",
+            "navigation_version": 2,
+            "route_active": false,
+            "route_id": null,
+            "destination": null,
+            "destination_id": null,
+            "stops": [],
+            "stop_ids": [],
+            "eta_min": null,
+            "distance_km": null,
+            "polyline": []
+          },
+          "stale": false,
+          "duration_ms": 9
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421407.059734,
+            "attempt_id": "d9db0c92c5144b2fa19f7ac0d8d7b129:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421407.07726,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421407.0804532,
+            "attempt_id": "d9db0c92c5144b2fa19f7ac0d8d7b129:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421409.587637,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421409.589792,
+            "attempt_id": "d9db0c92c5144b2fa19f7ac0d8d7b129:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421409.590991,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790421420.056415,
+            "attempt_id": "31edb25059ca40d48a7a34450a8ce7b5:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421420.065254,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 53,
+        "raw_count": 53,
+        "trusted_count": 52,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421395.5571892,
+            "type": "agent_state"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421395.5571892
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 1,
+          "promoted": 52
+        }
+      },
+      "aec_frames": 934,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+        "started_at": "2026-09-26T11:17:21.790830+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:17:21.791522+00:00",
+            "elapsed_seconds": 0.0006905419868417084,
+            "participants": [
+              {
+                "identity": "agent-AJ_eC7QdkLQ889E",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:17:22.296043+00:00",
+            "elapsed_seconds": 0.505247708002571,
+            "participants": [
+              {
+                "identity": "agent-AJ_eC7QdkLQ889E",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:17:22.801143+00:00",
+            "elapsed_seconds": 1.0103488749882672,
+            "participants": [
+              {
+                "identity": "agent-AJ_eC7QdkLQ889E",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:17:23.305273+00:00",
+            "elapsed_seconds": 1.514446000015596,
+            "participants": [
+              {
+                "identity": "agent-AJ_eC7QdkLQ889E",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:17:23.808135+00:00",
+            "elapsed_seconds": 2.017305999994278,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:17:23.809536+00:00",
+        "elapsed_seconds": 2.018701291992329
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2307
+    },
+    {
+      "case_id": "delivery_delay5s_silence",
+      "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139759.310639708,
+            "drained_monotonic": 139760.743607041,
+            "scheduled_end_monotonic": 139760.73997304135,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "a5d9fa95bf992eba6ba6de3604564c557f6a57a97981f96514927b95853f5a44",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139774.016799541,
+            "drained_monotonic": 139774.9183555,
+            "scheduled_end_monotonic": 139774.91679954098,
+            "published_samples": 21600
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 6,
+          "case_id": "delivery_delay5s_silence",
+          "delay_seconds": 5,
+          "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+          "condition": {
+            "case_id": "delivery_delay5s_silence",
+            "delay_seconds": 5
+          },
+          "condition_sha256": "a6bc6e14f4b554545a6fad1fbdbf6251dc168d1bd9923233fb69229358a3c234",
+          "bound_at": {
+            "monotonic_ns": 139761311114958,
+            "unix_ns": 1790421446663612000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 8,
+            "binding_id": 6,
+            "case_id": "delivery_delay5s_silence",
+            "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+            "delay_seconds": 5,
+            "entry": {
+              "monotonic_ns": 139761312451625,
+              "unix_ns": 1790421446664948000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139762318262916,
+              "unix_ns": 1790421447670762000
+            },
+            "hold_start": {
+              "monotonic_ns": 139762318266208,
+              "unix_ns": 1790421447670765000,
+              "pending_recognitions": 1
+            },
+            "hold_end": {
+              "monotonic_ns": 139767319078166,
+              "unix_ns": 1790421452671590000,
+              "pending_recognitions": 1
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139767319096083,
+              "unix_ns": 1790421452671608000
+            }
+          },
+          "stt_call_id": "stt-call-009",
+          "request_id": "stt-request-017",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 1005.786,
+          "request_wall_ms": 6008.636834,
+          "synthetic_hold_ms": 5000.811958,
+          "probe_recognition": false
+        }
+      ],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [
+        {
+          "line": 29,
+          "server_ts": 1790421479.036095,
+          "received_monotonic": 139793.684657333,
+          "after_probe_ms": 19667.857792024733,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421452.6747499,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_ba48c9c198ab",
+        "queued_at": 139773.164781916,
+        "state": "finished",
+        "first_loud_at": 139774.016581125,
+        "preceding_quiet_seconds": 4.700275292008882,
+        "last_loud_at": 139778.656385208,
+        "ended_at": 139778.683323458,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 4639.585667027859,
+      "old_handle_end_after_probe_ms": 4666.523917025188,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421458.514667,
+          "execution_id": "372e2573712b4b15a3c2d0021037a2de",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 1
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421456.0042539,
+            "attempt_id": "372e2573712b4b15a3c2d0021037a2de:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421456.007396,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421456.008975,
+            "attempt_id": "372e2573712b4b15a3c2d0021037a2de:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421458.511363,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421458.513569,
+            "attempt_id": "372e2573712b4b15a3c2d0021037a2de:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421458.514775,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 30,
+        "raw_count": 30,
+        "trusted_count": 29,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421444.65973,
+            "type": "agent_state"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421444.65973
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 1,
+          "promoted": 29
+        }
+      },
+      "aec_frames": 923,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+        "started_at": "2026-09-26T11:18:10.335444+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:18:10.336057+00:00",
+            "elapsed_seconds": 0.0006116660078987479,
+            "participants": [
+              {
+                "identity": "agent-AJ_LB6prsMhYkvn",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:10.841188+00:00",
+            "elapsed_seconds": 0.5057509999896865,
+            "participants": [
+              {
+                "identity": "agent-AJ_LB6prsMhYkvn",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:11.347194+00:00",
+            "elapsed_seconds": 1.0117489580006804,
+            "participants": [
+              {
+                "identity": "agent-AJ_LB6prsMhYkvn",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:11.857967+00:00",
+            "elapsed_seconds": 1.522523291001562,
+            "participants": [
+              {
+                "identity": "agent-AJ_LB6prsMhYkvn",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:12.369840+00:00",
+            "elapsed_seconds": 2.0343947910005227,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:18:12.370700+00:00",
+        "elapsed_seconds": 2.0352503749891184
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2279
+    },
+    {
+      "case_id": "delivery_delay5s_breath_proxy",
+      "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+      "status": "completed_probe_observation",
+      "failed_stage": null,
+      "error": null,
+      "inputs": [
+        {
+          "label": "initial",
+          "prepared_sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+          "published": true,
+          "timing": {
+            "label": "initial",
+            "started_monotonic": 139807.931917291,
+            "drained_monotonic": 139809.36485975,
+            "scheduled_end_monotonic": 139809.36125062432,
+            "published_samples": 34304
+          }
+        },
+        {
+          "label": "probe",
+          "prepared_sha256": "6378210a412c286378963d868adb2f3e7761492856d44ee15f4dd244f3a3e0ae",
+          "published": true,
+          "timing": {
+            "label": "probe",
+            "started_monotonic": 139822.648962583,
+            "drained_monotonic": 139823.550134666,
+            "scheduled_end_monotonic": 139823.548962583,
+            "published_samples": 21600
+          }
+        }
+      ],
+      "condition_matches": true,
+      "bindings": [
+        {
+          "binding_id": 7,
+          "case_id": "delivery_delay5s_breath_proxy",
+          "delay_seconds": 5,
+          "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+          "condition": {
+            "case_id": "delivery_delay5s_breath_proxy",
+            "delay_seconds": 5
+          },
+          "condition_sha256": "e0e96caeab0680cd5e6bf5d8bb8d87413cbc82da10fe4970cd9fa30c9711828b",
+          "bound_at": {
+            "monotonic_ns": 139809933101458,
+            "unix_ns": 1790421495285722000
+          }
+        }
+      ],
+      "binding_matches": true,
+      "recognition_calls": [
+        {
+          "delivery_call": {
+            "call_id": 9,
+            "binding_id": 7,
+            "case_id": "delivery_delay5s_breath_proxy",
+            "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+            "delay_seconds": 5,
+            "entry": {
+              "monotonic_ns": 139809933999958,
+              "unix_ns": 1790421495286620000
+            },
+            "original_engine_return": {
+              "monotonic_ns": 139810958178166,
+              "unix_ns": 1790421496310801000
+            },
+            "hold_start": {
+              "monotonic_ns": 139810958182541,
+              "unix_ns": 1790421496310806000,
+              "pending_recognitions": 1
+            },
+            "hold_end": {
+              "monotonic_ns": 139815960325500,
+              "unix_ns": 1790421501312962000,
+              "pending_recognitions": 1
+            },
+            "status": "returned",
+            "delivery_return": {
+              "monotonic_ns": 139815960377208,
+              "unix_ns": 1790421501313013000
+            }
+          },
+          "stt_call_id": "stt-call-010",
+          "request_id": "stt-request-019",
+          "original_text": "Navigate to Whitefield.",
+          "native_engine_api_ms": 1024.155667,
+          "request_wall_ms": 6028.367625,
+          "synthetic_hold_ms": 5002.142959,
+          "probe_recognition": false
+        }
+      ],
+      "post_probe_recognition_calls": 0,
+      "post_probe_user_states": [
+        {
+          "line": 29,
+          "server_ts": 1790421527.675928,
+          "received_monotonic": 139842.329503333,
+          "after_probe_ms": 19680.54074997781,
+          "state": "away"
+        }
+      ],
+      "post_probe_finals": [],
+      "all_user_finals": [
+        {
+          "server_line": 5,
+          "ts": 1790421501.318294,
+          "text": "Navigate to Whitefield.",
+          "merged": "Navigate to Whitefield.",
+          "intent_version": 1
+        }
+      ],
+      "original_result_handle": {
+        "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_2da016f31698",
+        "queued_at": 139821.85001675,
+        "state": "finished",
+        "first_loud_at": 139822.648689833,
+        "preceding_quiet_seconds": 4.560545667016413,
+        "last_loud_at": 139827.288063541,
+        "ended_at": 139827.330788166,
+        "error": null
+      },
+      "last_old_pcm_after_probe_ms": 4639.100957982009,
+      "old_handle_end_after_probe_ms": 4681.825582985766,
+      "old_finish_before_probe_final_ms": null,
+      "sdk_false_interruption": [],
+      "candidate_hold_event_count": 0,
+      "effects": [
+        {
+          "server_line": 24,
+          "ts": 1790421507.198965,
+          "execution_id": "c1fbb70054664b7faeb2f83b96cda263",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "args": {
+            "route_id": "R1"
+          },
+          "result": {
+            "status": "success",
+            "navigating_to": "Whitefield (ITPL)",
+            "replaced": null,
+            "already_active": false,
+            "navigation_version": 1,
+            "route_active": true,
+            "route_id": "R1",
+            "destination": "Whitefield (ITPL)",
+            "destination_id": "P_WHITEFIELD",
+            "stops": [],
+            "stop_ids": [],
+            "distance_km": 15.9,
+            "eta_min": 40,
+            "polyline": [
+              [
+                12.9719,
+                77.6412
+              ],
+              [
+                12.9698,
+                77.75
+              ]
+            ]
+          },
+          "stale": false,
+          "duration_ms": 2
+        }
+      ],
+      "attempts": [
+        {
+          "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+          "call": {
+            "function": "search_destination",
+            "args": {
+              "query": "Whitefield"
+            },
+            "timestamp_start": 1790421504.6865091,
+            "attempt_id": "c1fbb70054664b7faeb2f83b96cda263:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421504.691094,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+          "call": {
+            "function": "compute_route",
+            "args": {
+              "destination": "P_WHITEFIELD"
+            },
+            "timestamp_start": 1790421504.692462,
+            "attempt_id": "c1fbb70054664b7faeb2f83b96cda263:c2",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421507.1952581,
+            "end_evidence": "executor_observation_ended"
+          }
+        },
+        {
+          "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790421507.197409,
+            "attempt_id": "c1fbb70054664b7faeb2f83b96cda263:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790421507.1991198,
+            "end_evidence": "executor_observation_ended"
+          }
+        }
+      ],
+      "trusted_trace": {
+        "server_count": 30,
+        "raw_count": 30,
+        "trusted_count": 29,
+        "trusted_exact_sequence_equal": false,
+        "raw_canonical_exact_sequence_equal": true,
+        "missing_trusted_events": [
+          {
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790421493.282285,
+            "type": "agent_state"
+          }
+        ],
+        "missing_native_identity": [
+          {
+            "line": 2,
+            "packet_id": 1,
+            "public_participant": null,
+            "native_identity": "",
+            "canonical_event": {
+              "type": "agent_state",
+              "data": {
+                "state": "listening"
+              },
+              "ts": 1790421493.282285
+            },
+            "matches_server_event": true
+          }
+        ],
+        "decode_errors": [],
+        "attribution_counts": {
+          "rejected_missing_identity": 1,
+          "promoted": 29
+        }
+      },
+      "aec_frames": 923,
+      "aec_substituted_frames": 18,
+      "aec_substitution_intervals": 1,
+      "aec_probe_overlapping_intervals": [],
+      "room_departure": {
+        "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+        "started_at": "2026-09-26T11:18:58.975526+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T11:18:58.978221+00:00",
+            "elapsed_seconds": 0.0026940829993691295,
+            "participants": [
+              {
+                "identity": "agent-AJ_higiELS3XWvR",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:59.484188+00:00",
+            "elapsed_seconds": 0.5086960420012474,
+            "participants": [
+              {
+                "identity": "agent-AJ_higiELS3XWvR",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:18:59.988969+00:00",
+            "elapsed_seconds": 1.0134579169971403,
+            "participants": [
+              {
+                "identity": "agent-AJ_higiELS3XWvR",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:19:00.493269+00:00",
+            "elapsed_seconds": 1.5177579169976525,
+            "participants": [
+              {
+                "identity": "agent-AJ_higiELS3XWvR",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T11:19:00.997449+00:00",
+            "elapsed_seconds": 2.0220158330048434,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T11:19:01.003284+00:00",
+        "elapsed_seconds": 2.027760124998167
+      },
+      "capture_cleanup_errors": [],
+      "receiver_errors": [],
+      "frame_count": 2280
+    }
+  ],
+  "diagnostics": {
+    "stt_call_count": 10,
+    "stt_call_types": {
+      "warmup": 1,
+      "_recognize_impl": 9
+    },
+    "stt_request_count": 20,
+    "dropped_calls": 0,
+    "dropped_requests": 0,
+    "stt_observation_errors": 0,
+    "pending_native_calls": [],
+    "aec_observation_errors": 0,
+    "aec_source_hashes_unchanged_reported": true,
+    "aec_probe_overlap_intervals": 0,
+    "aec_identity_errors": []
+  },
+  "warnings": {
+    "worker.log": [
+      {
+        "line": 8,
+        "text": "{\"message\": \"event loop blocked for 222ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client\", \"level\": \"WARNING\", \"name\": \"livekit.agents\", \"duration\": 0.2223, \"threshold\": 0.1, \"gc_time\": 0.0, \"cpu_time\": 0.0006, \"stack\": \"# no sample: the block ended before the watchdog looked\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:12:22.765627+00:00\"}"
+      },
+      {
+        "line": 11,
+        "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+      },
+      {
+        "line": 23,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 12\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:13:18.222311+00:00\"}"
+      },
+      {
+        "line": 36,
+        "text": "{\"message\": \"words count mismatch on 100.0% of the lines (1/1)\", \"level\": \"WARNING\", \"name\": \"phonemizer\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:13:34.973570+00:00\"}"
+      },
+      {
+        "line": 38,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 5135\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:14:02.452253+00:00\"}"
+      },
+      {
+        "line": 53,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 9694\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:14:47.242027+00:00\"}"
+      },
+      {
+        "line": 65,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 14121\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:15:34.790961+00:00\"}"
+      },
+      {
+        "line": 78,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 18343\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:16:34.440099+00:00\"}"
+      },
+      {
+        "line": 91,
+        "text": "{\"message\": \"words count mismatch on 100.0% of the lines (1/1)\", \"level\": \"WARNING\", \"name\": \"phonemizer\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:17:00.071785+00:00\"}"
+      },
+      {
+        "line": 93,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 24078\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:17:23.750130+00:00\"}"
+      },
+      {
+        "line": 106,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 29303\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:18:12.281664+00:00\"}"
+      },
+      {
+        "line": 119,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 34099\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:19:00.920869+00:00\"}"
+      },
+      {
+        "line": 125,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 34099\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:19:01.075264+00:00\"}"
+      },
+      {
+        "line": 126,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 29303\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:19:01.075335+00:00\"}"
+      },
+      {
+        "line": 127,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 18343\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:19:01.075374+00:00\"}"
+      },
+      {
+        "line": 128,
+        "text": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 24078\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 32265, \"timestamp\": \"2026-09-26T11:19:01.075428+00:00\"}"
+      }
+    ],
+    "llm.log": [
+      {
+        "line": 1,
+        "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks."
+      }
+    ],
+    "livekit.log": [
+      {
+        "line": 17,
+        "text": "2026-09-26T16:43:16.197+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-879fb1b8e7eb4fe78100deb069522e9d\", \"roomID\": \"RM_9mbN8zS6pXss\", \"participant\": \"audio-probe-078edc7d85124fe3aefd302e936fd59b\", \"participantID\": \"PA_5nWeJNt3JCzP\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258193eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 18,
+        "text": "2026-09-26T16:43:16.197+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-879fb1b8e7eb4fe78100deb069522e9d\", \"roomID\": \"RM_9mbN8zS6pXss\", \"participant\": \"audio-probe-078edc7d85124fe3aefd302e936fd59b\", \"participantID\": \"PA_5nWeJNt3JCzP\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258193eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 19,
+        "text": "2026-09-26T16:43:16.197+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-879fb1b8e7eb4fe78100deb069522e9d\", \"roomID\": \"RM_9mbN8zS6pXss\", \"participant\": \"audio-probe-078edc7d85124fe3aefd302e936fd59b\", \"participantID\": \"PA_5nWeJNt3JCzP\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258193eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 42,
+        "text": "2026-09-26T16:44:00.438+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"audio-probe-7e7ade36a5b74680b84fb177856bd323\", \"participantID\": \"PA_VVMUFG4X3peE\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x2581936bf508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 43,
+        "text": "2026-09-26T16:44:00.438+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"audio-probe-7e7ade36a5b74680b84fb177856bd323\", \"participantID\": \"PA_VVMUFG4X3peE\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x2581936bf508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 44,
+        "text": "2026-09-26T16:44:00.438+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"audio-probe-7e7ade36a5b74680b84fb177856bd323\", \"participantID\": \"PA_VVMUFG4X3peE\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x2581936bf508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 52,
+        "text": "2026-09-26T16:44:02.453+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"agent-AJ_EojpeGp7VsDk\", \"participantID\": \"PA_fSVmBzRdpST4\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258194826008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 53,
+        "text": "2026-09-26T16:44:02.453+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"agent-AJ_EojpeGp7VsDk\", \"participantID\": \"PA_fSVmBzRdpST4\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258194826008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 54,
+        "text": "2026-09-26T16:44:02.453+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-e0aabef9ccb64901a71df0ed3cd13bcd\", \"roomID\": \"RM_s77abXxKmBXw\", \"participant\": \"agent-AJ_EojpeGp7VsDk\", \"participantID\": \"PA_fSVmBzRdpST4\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258194826008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 71,
+        "text": "2026-09-26T16:44:45.223+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6\", \"roomID\": \"RM_pG7KkYUL5Hgx\", \"participant\": \"audio-probe-5519415194344feaabd45d6eef829ea4\", \"participantID\": \"PA_RCmn2Ah69Vfr\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258194146008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 72,
+        "text": "2026-09-26T16:44:45.223+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6\", \"roomID\": \"RM_pG7KkYUL5Hgx\", \"participant\": \"audio-probe-5519415194344feaabd45d6eef829ea4\", \"participantID\": \"PA_RCmn2Ah69Vfr\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258194146008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 73,
+        "text": "2026-09-26T16:44:45.223+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6\", \"roomID\": \"RM_pG7KkYUL5Hgx\", \"participant\": \"audio-probe-5519415194344feaabd45d6eef829ea4\", \"participantID\": \"PA_RCmn2Ah69Vfr\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258194146008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 97,
+        "text": "2026-09-26T16:45:32.781+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-9cb9aabb79f54337abb108411b38b34c\", \"roomID\": \"RM_prbFiQEcWNTU\", \"participant\": \"audio-probe-d2988c25db8f4845a1f2a505b6ea88be\", \"participantID\": \"PA_EtyaLFm2ZYod\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258194200008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 98,
+        "text": "2026-09-26T16:45:32.781+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-9cb9aabb79f54337abb108411b38b34c\", \"roomID\": \"RM_prbFiQEcWNTU\", \"participant\": \"audio-probe-d2988c25db8f4845a1f2a505b6ea88be\", \"participantID\": \"PA_EtyaLFm2ZYod\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258194200008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 99,
+        "text": "2026-09-26T16:45:32.781+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-9cb9aabb79f54337abb108411b38b34c\", \"roomID\": \"RM_prbFiQEcWNTU\", \"participant\": \"audio-probe-d2988c25db8f4845a1f2a505b6ea88be\", \"participantID\": \"PA_EtyaLFm2ZYod\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258194200008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 123,
+        "text": "2026-09-26T16:46:32.428+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-06152271ac7b4d4f9e07f59471bb4ee3\", \"roomID\": \"RM_cehTjmnaStLv\", \"participant\": \"audio-probe-603ff2159c2b4802b76c061b0b1c7f06\", \"participantID\": \"PA_ugR8ttajVW3S\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258193b22008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 124,
+        "text": "2026-09-26T16:46:32.428+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-06152271ac7b4d4f9e07f59471bb4ee3\", \"roomID\": \"RM_cehTjmnaStLv\", \"participant\": \"audio-probe-603ff2159c2b4802b76c061b0b1c7f06\", \"participantID\": \"PA_ugR8ttajVW3S\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258193b22008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 125,
+        "text": "2026-09-26T16:46:32.428+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-06152271ac7b4d4f9e07f59471bb4ee3\", \"roomID\": \"RM_cehTjmnaStLv\", \"participant\": \"audio-probe-603ff2159c2b4802b76c061b0b1c7f06\", \"participantID\": \"PA_ugR8ttajVW3S\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258193b22008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 149,
+        "text": "2026-09-26T16:47:21.732+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"audio-probe-53ba79d6defa4519bcc0a6243046fbe7\", \"participantID\": \"PA_hZk9yx8U6SYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258194648008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 150,
+        "text": "2026-09-26T16:47:21.732+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"audio-probe-53ba79d6defa4519bcc0a6243046fbe7\", \"participantID\": \"PA_hZk9yx8U6SYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258194648008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 151,
+        "text": "2026-09-26T16:47:21.732+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"audio-probe-53ba79d6defa4519bcc0a6243046fbe7\", \"participantID\": \"PA_hZk9yx8U6SYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258194648008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 158,
+        "text": "2026-09-26T16:47:23.752+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"agent-AJ_eC7QdkLQ889E\", \"participantID\": \"PA_fYee8Le6zh74\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x25819448a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 159,
+        "text": "2026-09-26T16:47:23.752+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"agent-AJ_eC7QdkLQ889E\", \"participantID\": \"PA_fYee8Le6zh74\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x25819448a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 160,
+        "text": "2026-09-26T16:47:23.752+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-fb50c662633d4b858b43268da6716a94\", \"roomID\": \"RM_YRraxFfZWrYu\", \"participant\": \"agent-AJ_eC7QdkLQ889E\", \"participantID\": \"PA_fYee8Le6zh74\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x25819448a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 178,
+        "text": "2026-09-26T16:48:10.273+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"audio-probe-701b9d32c49541fdb6d3c7b0c7b422d3\", \"participantID\": \"PA_4iQVcLKjmP5x\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258194272388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 179,
+        "text": "2026-09-26T16:48:10.273+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"audio-probe-701b9d32c49541fdb6d3c7b0c7b422d3\", \"participantID\": \"PA_4iQVcLKjmP5x\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258194272388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 180,
+        "text": "2026-09-26T16:48:10.273+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"audio-probe-701b9d32c49541fdb6d3c7b0c7b422d3\", \"participantID\": \"PA_4iQVcLKjmP5x\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258194272388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 188,
+        "text": "2026-09-26T16:48:12.282+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"agent-AJ_LB6prsMhYkvn\", \"participantID\": \"PA_qcf67TTTMDW2\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x258193b6f888] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 189,
+        "text": "2026-09-26T16:48:12.282+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"agent-AJ_LB6prsMhYkvn\", \"participantID\": \"PA_qcf67TTTMDW2\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x258193b6f888] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 190,
+        "text": "2026-09-26T16:48:12.282+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-93a85f3bfeea4013abb5fb0e35a17904\", \"roomID\": \"RM_maDLwLcTbs2E\", \"participant\": \"agent-AJ_LB6prsMhYkvn\", \"participantID\": \"PA_qcf67TTTMDW2\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x258193b6f888] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 207,
+        "text": "2026-09-26T16:48:58.908+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-13f1cfb38d964eda80a2b3a5dc4a623e\", \"roomID\": \"RM_GYJ22ULnsFwH\", \"participant\": \"audio-probe-08252a6762244badbb6583ba0da6e971\", \"participantID\": \"PA_8v6k8yWti57N\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x2581943d0008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 208,
+        "text": "2026-09-26T16:48:58.908+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-13f1cfb38d964eda80a2b3a5dc4a623e\", \"roomID\": \"RM_GYJ22ULnsFwH\", \"participant\": \"audio-probe-08252a6762244badbb6583ba0da6e971\", \"participantID\": \"PA_8v6k8yWti57N\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x2581943d0008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      },
+      {
+        "line": 209,
+        "text": "2026-09-26T16:48:58.908+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-13f1cfb38d964eda80a2b3a5dc4a623e\", \"roomID\": \"RM_GYJ22ULnsFwH\", \"participant\": \"audio-probe-08252a6762244badbb6583ba0da6e971\", \"participantID\": \"PA_8v6k8yWti57N\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x2581943d0008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+      }
+    ]
+  },
+  "client_warning_or_traceback_lines": [
+    {
+      "file": "rtc-native_silence-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-native_voiced_stop-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-native_breath_proxy-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-native_noise_burst-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-delivery_delay5s_noise_burst-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-delivery_delay5s_voiced_stop-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-delivery_delay5s_silence-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "file": "rtc-delivery_delay5s_breath_proxy-1.log",
+      "line": 1,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    }
+  ],
+  "error_lines": {
+    "worker.log": [],
+    "llm.log": [],
+    "livekit.log": []
+  },
+  "worker_unparsed_lines": [
+    {
+      "line": 6,
+      "text": "Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]"
+    },
+    {
+      "line": 7,
+      "text": "Fetching 7 files: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 7/7 [00:00<00:00, 3421.53it/s]"
+    },
+    {
+      "line": 11,
+      "text": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+    },
+    {
+      "line": 12,
+      "text": "  return self._jws.encode("
+    }
+  ],
+  "watchdogs": [
+    {
+      "line": 8,
+      "message": "event loop blocked for 222ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+      "level": "WARNING",
+      "name": "livekit.agents",
+      "duration": 0.2223,
+      "threshold": 0.1,
+      "gc_time": 0.0,
+      "cpu_time": 0.0006,
+      "stack": "# no sample: the block ended before the watchdog looked",
+      "pid": 32265,
+      "timestamp": "2026-09-26T11:12:22.765627+00:00"
+    }
+  ],
+  "server_job_end_lines": [
+    {
+      "line": 26,
+      "text": "2026-09-26T16:43:18.223+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_hSTAViWsbZ3U\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 55,
+      "text": "2026-09-26T16:44:02.454+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_EojpeGp7VsDk\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 80,
+      "text": "2026-09-26T16:44:47.245+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_9DoXcbbXjVqW\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 106,
+      "text": "2026-09-26T16:45:34.792+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_2KGAqu4ALQfx\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 132,
+      "text": "2026-09-26T16:46:34.441+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_sv6MfphXgufd\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 161,
+      "text": "2026-09-26T16:47:23.752+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_eC7QdkLQ889E\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 187,
+      "text": "2026-09-26T16:48:12.282+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_LB6prsMhYkvn\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    },
+    {
+      "line": 216,
+      "text": "2026-09-26T16:49:00.922+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_nmbSbw5MJpwy\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_higiELS3XWvR\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+    }
+  ],
+  "cleanup": {
+    "recorded_service_cleanup": [
+      {
+        "role": "worker",
+        "pid": 32265,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/controlled_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/worker-manifest.json",
+          "--policy",
+          "baseline",
+          "--condition-file",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/active-condition.json",
+          "--protocol",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/protocol.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T11:19:02.073310+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 32254,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T11:19:02.207781+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 32253,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T11:19:02.212801+00:00"
+      }
+    ],
+    "all_agents_departed": true,
+    "worker_clean_exit": true,
+    "run_frozen_inputs_unchanged": true,
+    "trace_cleanup": [
+      {
+        "worker_line": 25,
+        "timestamp": "2026-09-26T11:13:18.228118+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-879fb1b8e7eb4fe78100deb069522e9d.jsonl",
+        "complete": true,
+        "accepted": 30,
+        "flushed": 30,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 40,
+        "timestamp": "2026-09-26T11:14:02.455396+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-e0aabef9ccb64901a71df0ed3cd13bcd.jsonl",
+        "complete": true,
+        "accepted": 50,
+        "flushed": 50,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 55,
+        "timestamp": "2026-09-26T11:14:47.248026+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6.jsonl",
+        "complete": true,
+        "accepted": 30,
+        "flushed": 30,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 67,
+        "timestamp": "2026-09-26T11:15:34.793676+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-9cb9aabb79f54337abb108411b38b34c.jsonl",
+        "complete": true,
+        "accepted": 3,
+        "flushed": 3,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 80,
+        "timestamp": "2026-09-26T11:16:34.443149+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-06152271ac7b4d4f9e07f59471bb4ee3.jsonl",
+        "complete": true,
+        "accepted": 32,
+        "flushed": 32,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 95,
+        "timestamp": "2026-09-26T11:17:23.758373+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-fb50c662633d4b858b43268da6716a94.jsonl",
+        "complete": true,
+        "accepted": 53,
+        "flushed": 53,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 108,
+        "timestamp": "2026-09-26T11:18:12.284480+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-93a85f3bfeea4013abb5fb0e35a17904.jsonl",
+        "complete": true,
+        "accepted": 30,
+        "flushed": 30,
+        "rejected": 0,
+        "pending": false
+      },
+      {
+        "worker_line": 121,
+        "timestamp": "2026-09-26T11:19:00.928543+00:00",
+        "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-13f1cfb38d964eda80a2b3a5dc4a623e.jsonl",
+        "complete": true,
+        "accepted": 30,
+        "flushed": 30,
+        "rejected": 0,
+        "pending": false
+      }
+    ],
+    "application_cleanup_started": 8,
+    "application_cleanup_finished": 8,
+    "fresh_pid_check": "Not performed here; root owns service supervision and absence receipts. Server JS_FAILED remains separate from application cleanup and worker exit0."
+  },
+  "memory": {
+    "samples": 789,
+    "scope": "System memory/swap plus owned stack parents and descendants; excludes the separate trial client. RSS is not total allocation.",
+    "first_sample": "2026-09-26T11:12:13.775666+00:00",
+    "last_sample": "2026-09-26T11:19:02.133666+00:00",
+    "minimum_system_available_bytes": 425213952,
+    "swap_first_bytes": 5857476608,
+    "swap_last_bytes": 9247588352,
+    "swap_peak_bytes": 9952624640,
+    "owned_role_peak_combined_rss_bytes": {
+      "worker": 817430528,
+      "llm": 4854988800,
+      "livekit": 54771712
+    },
+    "sample_errors": [
+      {
+        "line": 789,
+        "role": "llm",
+        "value": {
+          "error": "process no longer exists (pid=32254)"
+        }
+      },
+      {
+        "line": 789,
+        "role": "worker",
+        "value": {
+          "error": "process PID not found (pid=32265)"
+        }
+      }
+    ],
+    "causality": "No inference-delay cause or allocation/capacity conclusion follows from these samples."
+  },
+  "limits": [
+    "Old-speech frame labels remain recorder heuristics across RTP/data channels; timestamps measure client frame arrival, not physical audibility.",
+    "SDK resumed=true records its resume decision. The baseline transparent output permits that call, but this receipt does not add a native sink instrumentation event.",
+    "Raw canonical trace equality is delivery evidence, not authentication of empty-identity packets. Trusted equality failures are preserved.",
+    "No candidate outcome, ASR transcript or final spoken-fact completeness is claimed.",
+    "Source/evidence hashing here excludes model weight files and received PCM; frames and recorder input hashes are retained as existing evidence."
+  ],
+  "evidence_sha256": {
+    "results/iteration18-baseline/run-report.json": "ca3c4eaf346baea096325c4d5b9646ba79e64cd3e037001b28e2a81be682ea1c",
+    "results/iteration18-baseline/protocol.json": "ae6a27c6b3f57b277736dbe2a12c0394aabda471a8f78c26c1f0cab10ab4b504",
+    "results/iteration18/protocol.json": "edb71293c6a95c6a2349290b441426675f3c37df170568c97acdd00799b3de10",
+    "results/iteration18-baseline/local-stack-run1/recognition-delivery-diagnostics.json": "fd025f3a3a67da4f42e4b1380eb5f06eb2b4c9600b63841d441ec67c1e5ece2b",
+    "results/iteration18-baseline/local-stack-run1/stt-diagnostics/report.json": "580e9d30d7daffbf5c213cdb5def83cf0c2352b012baefc4ea30432774ea3461",
+    "results/iteration18-baseline/local-stack-run1/aec-discard-diagnostics.json": "0aecf1c89c143b6adf23f62d1398d9f41ee9bc735509e1fd043a119208edcdf6",
+    "results/iteration18-baseline/local-stack-run1/experiment-worker-selection.json": "97cab781308df2c4667babda5668e2415d63853614b790156cb3c8310cdc88b5",
+    "results/iteration18-baseline/local-stack-run1/tool-calls.jsonl": "c91724de6c62ddfa4aac251ac364e7f28cc14c31aace0f887d5164cef98873ef",
+    "results/iteration18-baseline/memory.jsonl": "19327a5762c947969fad48ef2273a59725ff7a4ff1d14d5b09d487b65426d42e",
+    "results/iteration18-baseline/rtc-native_silence-1/report.json": "56e9a15dfb6a54bbec77e19f53e1a46e42cc7e4b4613a461d5f66f22aa6cf3f1",
+    "results/iteration18-baseline/rtc-native_silence-1/events.jsonl": "9f9687085c347d7fbf83f45ed5d80915a1c3705a7fe41daa2d7dcf857eee6cc8",
+    "results/iteration18-baseline/rtc-native_silence-1/frames.jsonl": "dbbedd02985135a073dc61662872f5b0dadc46c8fdc7ca2b4b6cc378dc9df1dc",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-879fb1b8e7eb4fe78100deb069522e9d.jsonl": "d7dbf397f6583d62f9ffc9db4c6cdd64b0a836a27070c0320623e1e032820061",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-native_silence-1.json": "fd98c1fd389f4a16f62f3277b885193d504a3be1f06eee5349c71cdc4f9bd28a",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1/report.json": "4f313696f2de9ce5e5b18c61fcccbe226e849b157f83297637d7eb5279803cbd",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1/events.jsonl": "45de347767300ac8223fca3ece0ec9811a05377b56d1232a4e8691761afc6c0e",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1/frames.jsonl": "d35c1e12d29e0c3b444eb546f33f3157ca1d7a33b78ffb6a191bcb9fd714c655",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-e0aabef9ccb64901a71df0ed3cd13bcd.jsonl": "ac17dee59de2d2b1738cc7552ed2a1abefd87487497bd1b9b15ef2477829da35",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-native_voiced_stop-1.json": "60a540676d55e6e0c02a33c739fd87d2497101fa36ecf40c4ef675ecb85072e6",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1/report.json": "b8f8a17c052be3a961004a67c93272315f1daf7111b72d6aa2fb80fae18a5f80",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1/events.jsonl": "d74aacc650a89c1aed7cff82db54596ab57d3e844c1dace4972a741e4aab8b68",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1/frames.jsonl": "67667175b55852ba1118d749a78003181744d67c90ca1dc6fd457619117e2a78",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6.jsonl": "2f97c214ad3d52ce22a5f959920248ade3ef86b5437498170d1f049d1e253f66",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-native_breath_proxy-1.json": "b3f7fc961cc51d092d7275a802e7691b7e000fb7974a2465e0c4a917b1ab3583",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/report.json": "583bbf5abc972149d499bf6f47b88d097d426b6c8e75d0af2e2b49ae608a16aa",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/events.jsonl": "96d99c07eb2f05fd75e0e9b02c78be464041b95c7ac07aa8986d1f0701fc5ecc",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/frames.jsonl": "08cb0d4db79be2dcc5aa05fdd940f0101656480aecf04edc5ee17b4663ade7d3",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-9cb9aabb79f54337abb108411b38b34c.jsonl": "aec7aa4035b127afc1e47893ae2b45f2e88df56b6c7067fdbe641f22d83ebeb0",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-native_noise_burst-1.json": "a48b0510abc811188db08c4e933208478eb0cc97ac0d3da32f9ad166adb6878d",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1/report.json": "86bd7ef66f869504cb3f79c42c5f9241f07d89297d774ae84550a5e5f09c5c65",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1/events.jsonl": "1f5f908126c14a78b1b716505db17707e52a14433ec9ebcf7dc597ac2514da8b",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1/frames.jsonl": "986a20353357b9fab78d3ccdf2d450120e9394d978514d95ec22ccd545e1b049",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-06152271ac7b4d4f9e07f59471bb4ee3.jsonl": "15342881273f528c8981663d7a6e6b2b96bdb6570f0660297ae38103f0b5e56d",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-delivery_delay5s_noise_burst-1.json": "6eb27e9b4d10d13c0c8ca2fca77ae7faafa3d06cbf48c69544f03845de4f93d0",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1/report.json": "48ecd1f82fb9996e6dce14ae56a68996a18b0c3f45821f8ebeefecfebad439d0",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1/events.jsonl": "b4d987b8503db526129f89c2b22742cab959b0d7a01c619b78b37191891c9f0f",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1/frames.jsonl": "6fffafa1bd1eec20c1c03e118cd64f8a4df2f0c96c6e2505fcdf5d101cdc4bec",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-fb50c662633d4b858b43268da6716a94.jsonl": "2a80a4ebcb9dd14f746439360b2958277689629dfa14e06f686a7152da3515a3",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-delivery_delay5s_voiced_stop-1.json": "9f176eb89577b78916988e7a4f7e7c99b01987052f5e0fe61fa5d12971d34ddf",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1/report.json": "64f4f9264e097fd11b752cc6cf211a85268ea4f40862509e41bb16d5875665b4",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1/events.jsonl": "3118563f7980515782f9ce6b478449b89529c005fe6f06de13e43e1c549bd25c",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1/frames.jsonl": "05c239eddeb0d8ca76eee52dbc0f062a031971a98594f494fb0eafa9cf578d00",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-93a85f3bfeea4013abb5fb0e35a17904.jsonl": "73cd4cda4ae507d40183b4c1c5c149bdc4e816e2164967b2692db654b2904ac4",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-delivery_delay5s_silence-1.json": "a6bc6e14f4b554545a6fad1fbdbf6251dc168d1bd9923233fb69229358a3c234",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1/report.json": "2e10a39eff135a5f838b8da79f3defcaebca3072518fad6ab6ea3c51c6eb8e3b",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1/events.jsonl": "ffac698862a0ae05e682b15456c2a6a8f9086fe31d32c1b32c0f1632db9c9119",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1/frames.jsonl": "ba58e82734097468b9c63303e0ea732fbcb8aa3beb217468d0e9b95f9a368790",
+    "results/iteration18-baseline/local-stack-run1/traces/car-audio-13f1cfb38d964eda80a2b3a5dc4a623e.jsonl": "1abe201085513adca12518c73e9c1bcc9833fedbdd3892a1a94f6b7869332811",
+    "results/iteration18-baseline/local-stack-run1/conditions/rtc-delivery_delay5s_breath_proxy-1.json": "e0e96caeab0680cd5e6bf5d8bb8d87413cbc82da10fe4970cd9fa30c9711828b",
+    "results/iteration18-baseline/local-stack-run1/worker.log": "50804cf7b3f765f22a6f434071b4e51a211d54fc03ec07dc11bf8dc14f8edba6",
+    "results/iteration18-baseline/local-stack-run1/llm.log": "0d0ba589653732284a3e673ba1e525c59b358733f88641032bbd33be668d8144",
+    "results/iteration18-baseline/local-stack-run1/livekit.log": "a5db6ca1e30ce835d0ef17ebb9442b9cf52103ea8b748d6c58d9189e5fbbc7fe",
+    "results/iteration18-baseline/rtc-native_silence-1.log": "2e8710e73c325be29d546f77a1d2f367bfac6cae15445a897bb1522f6e67a89a",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1.log": "1d4cbb6f30412a87da27a0c67a31689ef2cd715d1bf06b9338c11a6b42d63bd9",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1.log": "e42cda5d12eab9863a8d10fee7599cb4720dba90926cace99e3307725b6ed841",
+    "results/iteration18-baseline/rtc-native_noise_burst-1.log": "09e8afe150c82cdfd6a9ef5a5b481e5bfc0b1e77f8bad41f6ac56274afbfd9cf",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1.log": "cc7b65cc995776e299637caf5e1a9c3df74da43471fd792fbd135ed8c8ea1aba",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1.log": "c9fa2213caeff3be14adc25d00c3fe927fdf79c9dc8fdfa781893757b808c3f3",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1.log": "45127d1c9540703b710c42dbcae6eff168066066af750bac8e5d8654abb1a764",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1.log": "9523462a5c29239c076262b028e4245feeaa3300497a86d5ea5603c0be0a28bf",
+    "results/iteration18/review_baseline_mechanism.py": "c327ee30ee6c086c0de5d8fcc0a25207ebb761db439968fe5397c0a3a1db20e8"
+  }
+}

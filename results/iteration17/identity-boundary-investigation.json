@@ -1,0 +1,315 @@
+{
+  "created_at_utc": "2026-09-26T09:53:40.077112+00:00",
+  "scope": "Installed receiver identity boundary and retained iteration16 raw packets only. No production/recorder/SDK edits, model/service launches, network access or new behavioral tests.",
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3",
+    "protobuf": "7.36.2"
+  },
+  "method": "Read installed Python/typing sources and extract FileDescriptorProto directly from the generated module AST byte literal using google.protobuf.descriptor_pb2; no livekit native/client import. Compare retained packet metadata and source-hashed posthoc review. Existing tests were read, not rerun.",
+  "observed_evidence": {
+    "declared_captures": 4,
+    "rejected_missing_identity_packets": 2,
+    "promoted_trace_equal_cases": 2,
+    "raw_decoded_trace_equal_cases": 4,
+    "delayed_nonempty_identity_promotions": 0,
+    "packets": [
+      {
+        "trial": "rtc-repeat-1",
+        "packet_line": 2,
+        "native_identity": "",
+        "public_participant": null,
+        "disposition": "rejected_missing_identity",
+        "payload_matches_server_trace_line": 1,
+        "payload_type": "agent_state",
+        "participant_connected_after_receipt_ms": 1.844833,
+        "session_started_before_ready_before_input": true
+      },
+      {
+        "trial": "rtc-repeat-2",
+        "packet_line": 2,
+        "native_identity": "",
+        "public_participant": null,
+        "disposition": "rejected_missing_identity",
+        "payload_matches_server_trace_line": 1,
+        "payload_type": "agent_state",
+        "participant_connected_after_receipt_ms": 0.373791,
+        "session_started_before_ready_before_input": true
+      }
+    ]
+  },
+  "protobuf_schema": {
+    "syntax": "proto2 default",
+    "messages": {
+      "DataPacketReceived": [
+        {
+          "name": "kind",
+          "number": 1,
+          "type": "TYPE_ENUM",
+          "label": "LABEL_REQUIRED",
+          "message_type": ".livekit.proto.DataPacketKind"
+        },
+        {
+          "name": "participant_identity",
+          "number": 2,
+          "type": "TYPE_STRING",
+          "label": "LABEL_REQUIRED",
+          "message_type": null
+        },
+        {
+          "name": "user",
+          "number": 4,
+          "type": "TYPE_MESSAGE",
+          "label": "LABEL_OPTIONAL",
+          "message_type": ".livekit.proto.UserPacket"
+        },
+        {
+          "name": "sip_dtmf",
+          "number": 5,
+          "type": "TYPE_MESSAGE",
+          "label": "LABEL_OPTIONAL",
+          "message_type": ".livekit.proto.SipDTMF"
+        }
+      ],
+      "UserPacket": [
+        {
+          "name": "data",
+          "number": 1,
+          "type": "TYPE_MESSAGE",
+          "label": "LABEL_REQUIRED",
+          "message_type": ".livekit.proto.OwnedBuffer"
+        },
+        {
+          "name": "topic",
+          "number": 2,
+          "type": "TYPE_STRING",
+          "label": "LABEL_OPTIONAL",
+          "message_type": null
+        }
+      ],
+      "OwnedBuffer": [
+        {
+          "name": "handle",
+          "number": 1,
+          "type": "TYPE_MESSAGE",
+          "label": "LABEL_REQUIRED",
+          "message_type": ".livekit.proto.FfiOwnedHandle"
+        },
+        {
+          "name": "data",
+          "number": 2,
+          "type": "TYPE_MESSAGE",
+          "label": "LABEL_REQUIRED",
+          "message_type": ".livekit.proto.BufferInfo"
+        }
+      ],
+      "BufferInfo": [
+        {
+          "name": "data_ptr",
+          "number": 1,
+          "type": "TYPE_UINT64",
+          "label": "LABEL_REQUIRED",
+          "message_type": null
+        },
+        {
+          "name": "data_len",
+          "number": 2,
+          "type": "TYPE_UINT64",
+          "label": "LABEL_REQUIRED",
+          "message_type": null
+        }
+      ]
+    }
+  },
+  "conclusions": [
+    "The two recorded empty strings were read directly from DataPacketReceived.participant_identity before the Python SDK performed participant lookup. They are not merely a nonempty native identity hidden by a missing public RemoteParticipant.",
+    "The SDK public participant is a dictionary lookup result, so None alone can mean a late/unmapped identity or server-originated data. The native field distinguishes nonempty-but-unresolved from blank-at-this-boundary; it does not identify why native provided blank.",
+    "The installed data packet schema exposes no alternate sender SID, participant handle, source-authentication flag or globally bound event ID. room_handle scopes the receiving room; OwnedBuffer.handle/data_ptr manage payload storage. Neither identifies a sender.",
+    "participant_identity is a proto2 required string but may be empty. The stub explicitly documents empty identity for server SDK data. Current recorder did not retain HasField/IsInitialized or full serialized FFI metadata, so explicit-empty versus absent-required-field/default cannot be reconstructed from these receipts.",
+    "The current rejection is correctly bounded for trusted participant-attributed coordinator events. Buffering helps only when a nonempty native identity can later resolve to that same mapped agent. A later or sole agent, matching payload, topic, timestamp, event sequence or room name cannot safely supply a missing identity.",
+    "All raw bytes remain available, and separate posthoc comparison accounts for both missing promoted events as initial listening payloads. Trusted session_started arrived before readiness/input. Keep both full trusted trace equality failures; do not label these received packets as proven transport loss.",
+    "No safe receiver-only promotion fix is supported by the exposed fields. The observed ordering is compatible with a native/server participant-readiness boundary but does not prove that cause or identify the native/wire location that lost identity."
+  ],
+  "trust_boundary": {
+    "available_when_nonempty": "Native transport identity resolved against the same room participant map and agent kind, under the existing server/SDK trust boundary; not independent end-to-end sender cryptography.",
+    "available_when_blank": "Room ownership, payload bytes/topic/kind and local receipt times; no attributable participant identity.",
+    "not_authentication": [
+      "application JSON fields or payload equality",
+      "topic agent-events",
+      "local recorder packet_id",
+      "later participant_connected proximity",
+      "only one apparent agent in room",
+      "room_handle or native buffer handle"
+    ]
+  },
+  "minimal_future_work": [
+    {
+      "kind": "component regression, not performed",
+      "proposal": "Extend the existing installed-SDK handler fixture with an actual DataPacketReceived protobuf for explicit empty identity and nonempty unresolved identity. Use a dummy buffer/dispose sink, ensure the shim retains the exact native value, preserves raw payload, and blank never promotes after an agent appears. Also test absent field versus explicit empty presence so any future diagnostic records that distinction.",
+      "expected_boundary": "No network/models; verifies Python handling only, not the native origin of blank fields."
+    },
+    {
+      "kind": "opt-in metadata observation in a separate future experiment, not implemented",
+      "proposal": "At the existing pre-handler hook record participant_identity field presence, IsInitialized/missing required field names, packet kind/value type and known participant identities/kinds at receipt, retaining original times and rejection. Do not infer sender or change promotion.",
+      "expected_boundary": "Small metadata-only addition can distinguish serialization absence from explicit blank at the FFI boundary; it cannot recover a sender by itself."
+    },
+    {
+      "kind": "conditional upstream diagnosis, not performed",
+      "proposal": "If origin must be established, run a separate model-free local publisher/receiver join-order reproduction with at least one nonagent sender and server-SDK data as a documented blank-identity control; capture native event ordering/presence without relaxing attribution. Only consider an upstream identity-preservation fix once evidence identifies a trusted sender field before it becomes blank.",
+      "expected_boundary": "No such live reproduction, native-source mapping or server/wire capture was executed in this investigation; current blank packets remain untrusted."
+    }
+  ],
+  "source_references": [
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "line_start": 260,
+      "line_end": 275,
+      "supports": "Shim reads native participant_identity before calling the original synchronous SDK handler, then restores prior state.",
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "line_start": 278,
+      "line_end": 344,
+      "supports": "Attribution records raw bytes and public/native identity; blank native identity is rejected, known nonempty identity waits for exact participant-kind resolution.",
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "line_start": 377,
+      "line_end": 389,
+      "supports": "Recorder uses the reviewed Room source hash and bounded pending packet/byte limits.",
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+    },
+    {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "line_start": 461,
+      "line_end": 471,
+      "supports": "Lookup uses room.remote_participants; participant_connected resolves only that exact identity.",
+      "sha256": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/_ffi_client.py",
+      "line_start": 165,
+      "line_end": 174,
+      "supports": "Native bytes are parsed into FfiEvent; the callback does not check IsInitialized here.",
+      "sha256": "253c74b7c3a754c871c70fa16cc96a8e1c6d714057b94d64e0dc80cc60951720"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "line_start": 136,
+      "line_end": 146,
+      "supports": "Public DataPacket carries payload/kind/participant/topic; None is documented for server SDK sends.",
+      "sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "line_start": 712,
+      "line_end": 734,
+      "supports": "Room loop filters by room_handle and processes the room event; room ownership is not sender identity.",
+      "sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "line_start": 759,
+      "line_end": 768,
+      "supports": "participant_connected creates the room map entry before emitting its callback.",
+      "sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "line_start": 1073,
+      "line_end": 1098,
+      "supports": "User data buffer copied/disposed; public participant comes only from dictionary lookup of native participant_identity.",
+      "sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "line_start": 1233,
+      "line_end": 1252,
+      "supports": "Lookup returns None when identity absent from map; map creation keys on participant.identity.",
+      "sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/event_emitter.py",
+      "line_start": 17,
+      "line_end": 63,
+      "supports": "Callbacks are invoked synchronously, preserving shim lifetime during the recorder callback.",
+      "sha256": "d88d21ab68d9ad393661f7b259282daebed0c68f6739edc61a58d0ec4221fa91"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/participant.py",
+      "line_start": 155,
+      "line_end": 179,
+      "supports": "Participant SID, identity and kind exist on mapped participant objects; no packet-to-SID fallback is provided.",
+      "sha256": "6ea7b427ea3af283c3ff5c047bb345621fe10ca5037389b9e970d8c7b3488cab"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/participant.py",
+      "line_start": 315,
+      "line_end": 359,
+      "supports": "publish_data sends via local participant handle and payload/topic; Python has no explicit sender_identity override.",
+      "sha256": "6ea7b427ea3af283c3ff5c047bb345621fe10ca5037389b9e970d8c7b3488cab"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/_proto/room_pb2.pyi",
+      "line_start": 2307,
+      "line_end": 2323,
+      "supports": "UserPacket contains data and topic, no sender SID or authenticated source flag.",
+      "sha256": "42f8e6dee518dbd1ab7c78b5635721c63bb05592e30b311e3b1d4568e9d6eb59"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/_proto/room_pb2.pyi",
+      "line_start": 2397,
+      "line_end": 2421,
+      "supports": "DataPacketReceived contains kind, participant_identity, user/sip_dtmf. Identity can be empty for server SDK data.",
+      "sha256": "42f8e6dee518dbd1ab7c78b5635721c63bb05592e30b311e3b1d4568e9d6eb59"
+    },
+    {
+      "path": ".venv/lib/python3.11/site-packages/livekit/rtc/_proto/room_pb2.py",
+      "line_start": 25,
+      "line_end": 25,
+      "supports": "Serialized installed descriptor confirms proto2 required string identity; required does not mean nonempty.",
+      "sha256": "deadc91567a6efdc21ef035f1fe4d702e7b22eb522c1cfea4c0b7b2d7c4eb75c"
+    },
+    {
+      "path": "agent/main.py",
+      "line_start": 140,
+      "line_end": 151,
+      "supports": "Application publishes coordinator events from ctx.room.local_participant to agent-events; this code is not a per-packet proof of the missing field cause.",
+      "sha256": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085"
+    },
+    {
+      "path": "tests/unit/test_livekit_audio_experiment.py",
+      "line_start": 320,
+      "line_end": 367,
+      "supports": "Existing fixtures separate nonempty-but-unresolved identity from blank/nonagent/sole-agent spoof cases.",
+      "sha256": "a52b68ef495eb26573ee4647c750c4b20b379e957abf1eb13936be9876a2823e"
+    },
+    {
+      "path": "tests/unit/test_livekit_audio_experiment.py",
+      "line_start": 435,
+      "line_end": 466,
+      "supports": "Existing installed-SDK handler fixture covers a nonempty unresolved identity, buffer copy/disposal and synchronous callback; blank native protobuf case is not this fixture.",
+      "sha256": "a52b68ef495eb26573ee4647c750c4b20b379e957abf1eb13936be9876a2823e"
+    }
+  ],
+  "evidence_sha256": {
+    "results/iteration16/audit.json": "6f11dd0dcc593d9bd1e1ce806c20a2c3b7e844973cf37d6081a279f0e9205834",
+    "results/iteration16/local-stack-run1/traces/car-audio-3416bee64e234e8f87ee9139757777af.jsonl": "0c38e2bc19d1666213d226c9bc3977552bc2295ac77d2c9f3ac88e83c504c6c1",
+    "results/iteration16/local-stack-run1/traces/car-audio-89a9de3b83cf4c62b316f5ba5e7eaecf.jsonl": "c75558eb87e12a2d472dbdabd893d2c0728c00120af105c6ff062374416e6696",
+    "results/iteration16/missing-identity-review.json": "9113e2c6e3e8e745d9b618685ccdab8b4d6f49c2c3aafdc210eb06687be6b68b",
+    "results/iteration16/rtc-repeat-1/events.jsonl": "9f279c3fe3c70cb296cc28267782200d0b03b8c2458ffb1a0628d6f142ac7233",
+    "results/iteration16/rtc-repeat-1/report.json": "efa7edaa9494af8a809499d35ed9e302f276e69ad2cc3acc5339329dd736ecf2",
+    "results/iteration16/rtc-repeat-2/events.jsonl": "5bfbdec78af377ce6f298d65ad0f893a30ae2cd4cce64bc5401c7b8bfbdf7d2a",
+    "results/iteration16/rtc-repeat-2/report.json": "975f159ed05c80469265001d3600ad555f1adbcd182bfffa8bf4838d153a9b9f",
+    "results/iteration16/supplementary-log-review.json": "3e8117e2f204d349a7bd7c8a89ae667857b00f7ccdb6153c601811bf8567944e",
+    "scripts/local_livekit_audio_experiment.py": "74548ddb0049055177973ffdc2998c663a3db849952fdd372220f32d71e1c94e"
+  },
+  "limitations": [
+    "The installed Rust/native implementation and server wire path were not inspected or executed; Python/protobuf source establishes exposed fields, not why they were blank.",
+    "The historical recorder omitted proto presence/kind/native serialized event receipts, so those values cannot be inferred retroactively.",
+    "Existing source-hash guard covers the reviewed Room handler; private SDK compatibility is version/source bounded.",
+    "This investigation makes no change to iteration17 frozen production/configuration/recorder or its cache-comparison criteria."
+  ]
+}

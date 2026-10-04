@@ -1,0 +1,63 @@
+{
+  "declared_at": "2026-09-25T19:20:16.722917+00:00",
+  "objective": "Measure actual local RTC/VAD/STT/planning/tool/TTS behavior before claiming a live voice demonstration.",
+  "model_policy": "Pinned local Qwen, Parakeet and Kokoro; localhost LiveKit transport; no hosted model or judge.",
+  "input_assets": {
+    "voice": "af_heart",
+    "speed": 1.1,
+    "phrases": {
+      "navigate": "Navigate to the airport.",
+      "correct": "Actually, go to the office instead."
+    },
+    "generation": "Generate after cache ablation, freeze WAV hashes and source before transport trials. Generated user speech is independent of agent output; no acoustic echo path."
+  },
+  "cases": [
+    {
+      "id": "navigation_audio_baseline",
+      "input": "navigate",
+      "trigger": "after agent session_started, with audio subscription handler already registered; record track subscription time separately",
+      "expected_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ],
+      "expected_response": "Grounded route result delivered as received audio after observed navigation success."
+    },
+    {
+      "id": "correction_during_result_audio",
+      "input": "navigate",
+      "second_input": "correct",
+      "trigger": "After initial substantive result event AND received non-silent agent PCM, publish correction while result playback is still observed. Acknowledgment alone cannot trigger.",
+      "expected_effects": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ]
+      ],
+      "expected_response": "Old result playback is interrupted, correction is transcribed, office route starts, and final result describes office. Initial airport effect was already completed and is not classified as stale."
+    }
+  ],
+  "measurements": [
+    "Record published input frame schedule and end of generated speech separately from trailing silence.",
+    "Save raw coordinator data events, server traces, all dispatch log entries, worker/server logs and every received audio-frame arrival timestamp and PCM.",
+    "Measure input speech end to finalized transcript, acknowledgment, first substantive received non-silent audio, tool dispatch and effect.",
+    "Report input correction onset and VAD-speaking/finalized-transcript boundaries separately from observed cessation of old received audio.",
+    "Frame-arrival/PCM activity is a transport observation, not physical audible-stop latency. Do not silently concatenate away gaps when presenting a timeline.",
+    "Wait through session readiness and response completion with explicit deadlines; retain failed or truncated trials."
+  ],
+  "limits": [
+    "Development synthetic speech, not held-out FDB or human driving evidence.",
+    "No claim about microphone echo cancellation, road noise, WAN latency or physical loudspeaker playback.",
+    "No extra silence or altered capture applied to official benchmark input.",
+    "False-barge-in and non-speech probes require a separate predeclared follow-up after baseline capture can verify trigger/timing fidelity."
+  ],
+  "decision": "Do not claim full-duplex support from unit or text tests; inspect actual received audio, events and all effects before conclusions."
+}

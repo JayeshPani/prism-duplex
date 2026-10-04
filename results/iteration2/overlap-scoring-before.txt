@@ -1,0 +1,209 @@
+FFFFFFF.FFF.......                                                       [100%]
+=================================== FAILURES ===================================
+_______________ test_malformed_route_arguments_never_pass[args0] _______________
+
+args = {'destination': 'office', 'unexpected': True}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'unexpected': True}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'unexpected': True}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': 'office', 'unexpected': True})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args1] _______________
+
+args = {'destination': ['office']}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': ['office']}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': ['office']}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': ['office']})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args2] _______________
+
+args = {'destination': {'office': ''}}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': {'office': ''}}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': {'office': ''}}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': {'office': ''}})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args3] _______________
+
+args = {'destination': 'office', 'via': []}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': []}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': []}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': 'office', 'via': []})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args4] _______________
+
+args = {'destination': 'office', 'via': {}}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': {}}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': {}}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': 'office', 'via': {}})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args5] _______________
+
+args = {'destination': 'office', 'via': 0}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': 0}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': 0}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': 'office', 'via': 0})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+_______________ test_malformed_route_arguments_never_pass[args6] _______________
+
+args = {'destination': 'office', 'via': False}
+
+    @pytest.mark.parametrize("args", [
+        {"destination": "office", "unexpected": True},
+        {"destination": ["office"]},
+        {"destination": {"office": ""}},
+        {"destination": "office", "via": []},
+        {"destination": "office", "via": {}},
+        {"destination": "office", "via": 0},
+        {"destination": "office", "via": False},
+        {"destination": "office", "via": " "},
+    ])
+    def test_malformed_route_arguments_never_pass(args):
+>       assert not plan_matches(make_plan(args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': False}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='route', tool='compute_route', args={'destination': 'office', 'via': False}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': 'office', 'via': False})
+
+tests/unit/test_overlap_scoring.py:30: AssertionError
+___________ test_malformed_lookup_arguments_never_pass[search_args0] ___________
+
+search_args = {'query': 'office', 'unexpected': True}
+
+    @pytest.mark.parametrize("search_args", [
+        {"query": "office", "unexpected": True},
+        {"query": ["office"]},
+        {"query": {"office": ""}},
+    ])
+    def test_malformed_lookup_arguments_never_pass(search_args):
+>       assert not plan_matches(make_plan({"destination": "$lookup.places[0].place_id"}, search_args=search_args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': 'office', 'unexpected... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': 'office', 'unexpected... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': '$lookup.places[0].place_id'}, search_args={'query': 'office', 'unexpected': True})
+
+tests/unit/test_overlap_scoring.py:39: AssertionError
+___________ test_malformed_lookup_arguments_never_pass[search_args1] ___________
+
+search_args = {'query': ['office']}
+
+    @pytest.mark.parametrize("search_args", [
+        {"query": "office", "unexpected": True},
+        {"query": ["office"]},
+        {"query": {"office": ""}},
+    ])
+    def test_malformed_lookup_arguments_never_pass(search_args):
+>       assert not plan_matches(make_plan({"destination": "$lookup.places[0].place_id"}, search_args=search_args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': ['office']}), namespa... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': ['office']}), namespa... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': '$lookup.places[0].place_id'}, search_args={'query': ['office']})
+
+tests/unit/test_overlap_scoring.py:39: AssertionError
+___________ test_malformed_lookup_arguments_never_pass[search_args2] ___________
+
+search_args = {'query': {'office': ''}}
+
+    @pytest.mark.parametrize("search_args", [
+        {"query": "office", "unexpected": True},
+        {"query": ["office"]},
+        {"query": {"office": ""}},
+    ])
+    def test_malformed_lookup_arguments_never_pass(search_args):
+>       assert not plan_matches(make_plan({"destination": "$lookup.places[0].place_id"}, search_args=search_args))
+E       AssertionError: assert not True
+E        +  where True = plan_matches(namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': {'office': ''}}), nam... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]))
+E        +    where namespace(complete=True, calls=[namespace(id='lookup', tool='search_destination', args={'query': {'office': ''}}), nam... '$lookup.places[0].place_id'}), namespace(id='start', tool='start_navigation', args={'route_id': '$route.route_id'})]) = make_plan({'destination': '$lookup.places[0].place_id'}, search_args={'query': {'office': ''}})
+
+tests/unit/test_overlap_scoring.py:39: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args0]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args1]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args2]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args3]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args4]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args5]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_route_arguments_never_pass[args6]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_lookup_arguments_never_pass[search_args0]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_lookup_arguments_never_pass[search_args1]
+FAILED tests/unit/test_overlap_scoring.py::test_malformed_lookup_arguments_never_pass[search_args2]
+10 failed, 8 passed in 0.03s

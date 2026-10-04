@@ -5,7 +5,7 @@ export type AgentEvent = {
   type: string;
   ts: number; // unix seconds (agent clock)
   data: Record<string, any>;
-  snapshot?: { slots: Record<string, any>; committed: { tool: string; args: any; result: any }[]; pending: string };
+  snapshot?: { slots: Record<string, any>; committed: { tool: string; args: any; result: any; status?: string }[]; pending: string };
 };
 
 export type Turn =
@@ -42,7 +42,7 @@ export function buildTurns(events: AgentEvent[]): Turn[] {
 
 // Spans for the time ribbon.
 export type Span = { lane: "you" | "agent" | "gate" | "tools"; start: number; end: number | null;
-  tone: "neutral" | "held" | "done" | "stale" | "blocked"; label: string };
+  tone: "neutral" | "held" | "done" | "stale" | "blocked" | "error" | "unknown" | "reused"; label: string };
 
 export function buildSpans(events: AgentEvent[]): Span[] {
   const spans: Span[] = [];
@@ -52,6 +52,7 @@ export function buildSpans(events: AgentEvent[]): Span[] {
 
   for (const e of events) {
     const t = e.ts;
+    const callKey = `${e.data.execution_id ?? "legacy"}:${e.data.id}`;
     switch (e.type) {
       case "user_state":
         if (e.data.state === "speaking") { close("you", t); openLane.you = { lane: "you", start: t, end: null, tone: "neutral", label: "speaking" }; spans.push(openLane.you); }
@@ -78,24 +79,73 @@ export function buildSpans(events: AgentEvent[]): Span[] {
         if (s) { s.end = t; s.tone = "done"; s.label = "committed"; openLane.gate = undefined; }
         break;
       }
-      case "tool_started":
-        // call ids restart at c1 each turn; the latest span for an id is the live one
-        tools[e.data.id] = { lane: "tools", start: t, end: null, tone: "neutral", label: e.data.tool };
-        spans.push(tools[e.data.id]);
+      case "tool_waiting":
+        tools[callKey] = { lane: "tools", start: t, end: null, tone: "held", label: `${e.data.tool} waiting` };
+        spans.push(tools[callKey]);
         break;
-      case "tool_done": case "tool_cancelled": case "tool_error": {
-        const s = tools[e.data.id];
+      case "tool_started":
+        if (tools[callKey]?.end === null) tools[callKey].end = t;
+        // The planner restarts call IDs each turn; execution identity disambiguates them.
+        tools[callKey] = { lane: "tools", start: t, end: null, tone: "neutral", label: e.data.tool };
+        spans.push(tools[callKey]);
+        break;
+      case "tool_done": case "tool_cancelled": case "tool_error": case "tool_unknown": {
+        const s = tools[callKey];
         if (s && s.end === null) {
           s.end = t;
-          s.tone = e.type === "tool_done" ? "done" : "stale";
-          if (e.type === "tool_cancelled") s.label = `${e.data.tool} cancelled`;
+          s.tone = e.type === "tool_done" ? "done" : e.type === "tool_error" ? "error" : e.type === "tool_unknown" ? "unknown" : "stale";
+          s.label = `${e.data.tool} ${e.type === "tool_done" ? "succeeded" : e.type === "tool_unknown" ? "outcome unknown" : e.type === "tool_error" ? "failed" : "cancelled"}`;
         }
+        else if (e.type === "tool_error" || e.type === "tool_unknown")
+          spans.push({ lane: "tools", start: t, end: t + 0.35, tone: e.type === "tool_error" ? "error" : "unknown", label: `${e.data.tool}: ${e.data.error ?? "outcome unknown"}` });
         break;
       }
+      case "tool_reused":
+        if (tools[callKey]?.end === null) tools[callKey].end = t;
+        spans.push({ lane: "tools", start: t, end: t + 0.35, tone: "reused", label: `${e.data.tool} reused` });
+        break;
       case "tool_blocked":
+        if (tools[callKey]?.end === null) tools[callKey].end = t;
         spans.push({ lane: "tools", start: t, end: t + 0.35, tone: "blocked", label: `${e.data.tool} blocked: already done` });
         break;
     }
   }
   return spans;
+}
+
+
+export type NavView = { polyline: [number, number][]; destination?: string; eta?: number; stops: string[] };
+
+export function buildNavigation(events: AgentEvent[]): NavView | null {
+  let nav: NavView | null = null;
+  let version = -1;
+  for (const e of events) {
+    if (e.type !== "tool_done" || e.data.result?.status !== "success") continue;
+    if (!["start_navigation", "add_waypoint", "cancel_navigation"].includes(e.data.tool)) continue;
+    const r = e.data.result;
+    if (r.navigation_version != null) {
+      if (r.navigation_version < version) continue;
+      version = r.navigation_version;
+      nav = r.route_active ? { polyline: r.polyline, destination: r.destination,
+        eta: r.eta_min, stops: r.stops ?? [] } : null;
+    } else if (e.data.tool === "cancel_navigation") nav = null;
+    else if (e.data.tool === "start_navigation")
+      nav = { polyline: r.polyline, destination: r.navigating_to, eta: r.eta_min, stops: r.stops ?? [] };
+    else if (nav) {
+      const previous = nav as NavView;
+      nav = { ...previous, polyline: r.polyline, eta: r.eta_min, stops: r.stops ?? [...previous.stops, r.added] };
+    }
+  }
+  return nav;
+}
+
+
+export function parseTrace(text: string): AgentEvent[] {
+  const rows = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+  const rooms = new Set(rows.filter(r => r.kind === "coordinator_event").map(r => r.room));
+  if (rooms.size > 1) throw new Error("Review a trace containing a single room.");
+  const events = rows.flatMap(row => row.kind ? (row.kind === "coordinator_event" ? [row.event] : []) : [row]);
+  if (!events.length || events.some(e => !e || typeof e.type !== "string" || !Number.isFinite(e.ts) || !e.data || typeof e.data !== "object"))
+    throw new Error("Expected coordinator JSONL events with type, ts and data fields.");
+  return events;
 }

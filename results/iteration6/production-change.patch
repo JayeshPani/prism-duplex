@@ -1,0 +1,223 @@
+--- a/agent/coordinator/executor.py
++++ b/agent/coordinator/executor.py
+@@ -24,6 +24,8 @@
+ 
+ 
+ class ToolAttemptLogger(Protocol):
++    """Thread-safe persistence callbacks; the executor offloads and owns their I/O."""
++
+     def started(self, attempt_id: str, function: str, args: dict[str, Any], t_start: float) -> None: ...
+     def finished(self, attempt_id: str, t_end: float, status: str) -> None: ...
+ 
+@@ -72,9 +74,34 @@
+         self._active: dict[str, Execution] = {}
+         self._write_lock = asyncio.Lock()
+         self._closed = False
++        self._log_tasks: set[asyncio.Task] = set()
+ 
+     def _emit(self, ex: Execution, type_: str, **data: Any) -> None:
+         self.bus.emit(type_, execution_id=ex.execution_id, operation_id=ex.operation_id, **data)
++
++    def _save_attempt(self, ex: Execution, c: PlannedCall, callback: Callable,
++                      *args: Any, error_prefix: str,
++                      after: asyncio.Task | None = None) -> asyncio.Task:
++        """Own disk work independently of the cancellable call waiting for it.
++
++        A cancelled intention's completion must follow its surviving start I/O.
++        A failed start may have partially persisted; leave that row unconfirmed.
++        """
++        async def save() -> str | None:
++            if after is not None and await asyncio.shield(after) is not None:
++                return None
++            try:
++                await asyncio.to_thread(callback, *args)
++            except Exception as error:
++                reason = f"{error_prefix}: {error}"
++                self._emit(ex, "tool_log_error", id=c.id, tool=c.tool, error=reason)
++                return reason
++            return None
++
++        task = asyncio.create_task(save())
++        self._log_tasks.add(task)
++        task.add_done_callback(self._log_tasks.discard)
++        return task
+ 
+     def _validate(self, calls: list[PlannedCall]) -> None:
+         ids = [c.id for c in calls]
+@@ -124,7 +151,9 @@
+             try:
+                 for dep in deps_of(c.args):
+                     await done_events[dep].wait()
+-                args = self.manifest.coerce_args(c.tool, resolve_args(c.args, results))
++                # Resolved references may alias a backend-owned container. Freeze
++                # the attempt before waiting on a write lock or disk persistence.
++                args = deepcopy(self.manifest.coerce_args(c.tool, resolve_args(c.args, results)))
+                 spec = self.manifest.tools[c.tool]
+                 if spec.state_changing:
+                     async with self._write_lock:
+@@ -201,36 +230,53 @@
+                            reason="same operation already completed" if status == "blocked" else "prior effect is unconfirmed; not retried")
+                 return
+ 
+-        # No await between this final version check and invoking the tool.
+         # Synchronous event sinks can receive a correction, so emit first.
+-        self._emit(ex, E.TOOL_STARTED, id=c.id, tool=c.tool, args=args, state_changing=spec.state_changing)
++        # The event, logger and backend must not share mutable argument payloads.
++        self._emit(ex, E.TOOL_STARTED, id=c.id, tool=c.tool, args=deepcopy(args), state_changing=spec.state_changing)
+         if not current():
+             raise asyncio.CancelledError
+         key = self.ledger.begin(c.tool, args, ex.operation_id, c.id) if spec.state_changing else None
+-        if spec.state_changing:
++        t0 = time.time()
++        attempt_id = f"{ex.execution_id}:{c.id}"
++        start_log = None
++        try:
++            if self.attempt_logger is not None:
++                start_log = self._save_attempt(
++                    ex, c, self.attempt_logger.started, attempt_id, c.tool, deepcopy(args), t0,
++                    error_prefix="tool dispatch logging failed; action not dispatched")
++                reason = await asyncio.shield(start_log)
++                # Do not run an action whose dispatch evidence could not be saved.
++                # A partially successful logger may retain an unconfirmed intent.
++                if reason is not None:
++                    if key:
++                        self.ledger.abort(key)
++                    ex.outcomes[c.id] = CallOutcome(c.id, c.tool, args, "error", error=reason)
++                    self._emit(ex, E.TOOL_ERROR, id=c.id, tool=c.tool, args=args, error=reason)
++                    return
++            if not spec.state_changing and spec.cache_context is not None:
++                context = deepcopy(spec.cache_context())
++            # Disk I/O yields to corrections and shutdown. No await or event
++            # callback follows this final check before backend entry.
++            if not current():
++                raise asyncio.CancelledError
++        except asyncio.CancelledError:
++            if key:
++                self.ledger.abort(key)
++            ex.outcomes[c.id] = CallOutcome(c.id, c.tool, args, "cancelled")
++            self._emit(ex, E.TOOL_CANCELLED, id=c.id, tool=c.tool, args=args,
++                       reason="stale before backend entry")
++            if start_log is not None:
++                self._save_attempt(
++                    ex, c, self.attempt_logger.finished, attempt_id, time.time(), "cancelled",
++                    error_prefix="tool completion logging failed", after=start_log)
++            raise
++        if key:
+             ex.protected.add(c.id)
+             ex.write_keys[c.id] = key
+-        t0 = time.time()
+-        attempt_id = f"{ex.execution_id}:{c.id}"
+-        if self.attempt_logger is not None:
+-            try:
+-                self.attempt_logger.started(attempt_id, c.tool, args, t0)
+-            except Exception as error:
+-                # Do not run an action whose dispatch evidence could not be saved.
+-                # A partially successful logger may retain an unconfirmed intent.
+-                if key:
+-                    self.ledger.abort(key)
+-                ex.protected.discard(c.id)
+-                ex.write_keys.pop(c.id, None)
+-                reason = f"tool dispatch logging failed; action not dispatched: {error}"
+-                ex.outcomes[c.id] = CallOutcome(c.id, c.tool, args, "error", error=reason)
+-                self._emit(ex, "tool_log_error", id=c.id, tool=c.tool, error=reason)
+-                self._emit(ex, E.TOOL_ERROR, id=c.id, tool=c.tool, args=args, error=reason)
+-                return
+         ex.first_tool_start = ex.first_tool_start or t0
+         try:
+             try:
+-                result = await spec.fn(**args)
++                result = await spec.fn(**deepcopy(args))
+             except asyncio.CancelledError:
+                 status = "unknown" if key else "cancelled"
+                 reason = "write cancelled after dispatch; effect is unconfirmed" if key else "stale read"
+@@ -265,7 +311,7 @@
+                 return
+             if key:
+                 self.ledger.commit(key, c.tool, args, result, c.id)
+-            elif spec.cache_context is not None and current():
++            elif spec.cache_context is not None and current() and context == spec.cache_context():
+                 self.ledger.remember_read(c.tool, args, result, context)
+             results[c.id] = result
+             ex.outcomes[c.id] = CallOutcome(c.id, c.tool, args, "done", result=result)
+@@ -276,17 +322,21 @@
+             ex.last_tool_end = t1
+             ex.protected.discard(c.id)
+             ex.write_keys.pop(c.id, None)
++            finish_log = None
+             if self.attempt_logger is not None:
+-                try:
+-                    outcome = ex.outcomes.get(c.id)
+-                    self.attempt_logger.finished(attempt_id, t1, outcome.status if outcome else "unknown")
+-                except Exception as error:
+-                    self._emit(ex, "tool_log_error", id=c.id, tool=c.tool, error=f"tool completion logging failed: {error}")
++                outcome = ex.outcomes.get(c.id)
++                finish_log = self._save_attempt(
++                    ex, c, self.attempt_logger.finished, attempt_id, t1,
++                    outcome.status if outcome else "unknown", error_prefix="tool completion logging failed")
+             if self.tool_logger is not None:
+                 try:
+                     self.tool_logger(c.tool, args, t0, t1)
+                 except Exception as error:
+                     self._emit(ex, "tool_log_error", id=c.id, tool=c.tool, error=f"tool logging failed: {error}")
++            if finish_log is not None:
++                # Completion persistence is owned after the backend outcome is
++                # fixed. Cancelling this wait cannot change that outcome.
++                await asyncio.shield(finish_log)
+ 
+     def _cancel_execution(self, ex: Execution) -> int:
+         ex.stale = True
+@@ -302,18 +352,22 @@
+         return sum(self._cancel_execution(ex) for ex in self._active.values())
+ 
+     async def aclose(self, timeout: float = 5.0) -> bool:
+-        """Drain protected writes, then cancel. False means a tool resisted cancellation.
++        """Drain writes and logging, then cancel calls. False means work remains.
+ 
+         A coroutine that suppresses cancellation cannot be forcibly stopped by
+         asyncio; the backend must reconcile its effect. At most two timeout
+         windows are awaited, the second allowing cancellation/logging cleanup.
++        Logger tasks are not cancelled: Python cannot stop a running disk thread.
++        This bounds this method, not the process's default thread-pool shutdown.
+         """
+         self._closed = True
+         self.cancel_stale()
+         tasks = {t for ex in self._active.values() for t in ex.tasks.values() if not t.done()}
++        tasks.update(t for t in self._log_tasks if not t.done())
+         if not tasks:
+             return True
+-        _, pending = await asyncio.wait(tasks, timeout=timeout)
++        await asyncio.wait(tasks, timeout=timeout)
++        pending = {t for ex in self._active.values() for t in ex.tasks.values() if not t.done()}
+         for ex in self._active.values():
+             for cid, key in ex.write_keys.items():
+                 if ex.tasks[cid] in pending:
+@@ -324,6 +378,14 @@
+                     self._emit(ex, "tool_unknown", id=cid, tool=call.tool, reason=reason)
+         for task in pending:
+             task.cancel()
++        pending.update(t for t in self._log_tasks if not t.done())
+         if pending:
+-            _, pending = await asyncio.wait(pending, timeout=timeout)
+-        return not pending
++            await asyncio.wait(pending, timeout=timeout)
++        # Cancellation can create a late start->cancelled finalization task.
++        # Recount owned work instead of trusting either earlier snapshot.
++        logging = sum(not t.done() for t in self._log_tasks)
++        if logging:
++            self.bus.emit("tool_log_error", id="shutdown", tool="telemetry",
++                          error="tool logging still pending after shutdown deadline",
++                          pending_tasks=logging)
++        return not logging and not any(not t.done() for ex in self._active.values() for t in ex.tasks.values())
+--- a/agent/coordinator/coordinator.py
++++ b/agent/coordinator/coordinator.py
+@@ -298,8 +298,8 @@
+         self._cancel_speech()
+         settled = await self.executor.aclose(timeout=timeout)
+         if not settled:
+-            self.bus.emit(E.TOOL_UNKNOWN, id="shutdown", tool="session",
+-                          error="backend tasks resisted cancellation; effects require reconciliation")
++            self.bus.emit(E.TOOL_ERROR, id="shutdown", tool="session",
++                          error="executor cleanup deadline exceeded; inspect per-call outcomes and telemetry errors")
+         tasks = [t for t in (*self._gate_tasks, self._reopen_task) if t]
+         tasks += list(self._commit_tasks) + list(self._speech_tasks)
+         for task in tasks:

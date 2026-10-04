@@ -1,0 +1,66 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404793.9270809}
+{"type": "session_started", "data": {"room": "car-audio-5561ee0cae724b0494a81bf2579f1f13", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790404793.927968}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790404794.229755}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790404796.780576}
+{"type": "user_final", "data": {"text": "Navigate to MG Road Metro Station.", "merged": "Navigate to MG Road Metro Station.", "intent_version": 1}, "ts": 1790404808.5189471}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790404809.225039}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790404809.2255151}
+{"type": "speech_handle", "data": {"speech_id": "speech_e6c28c81654d", "state": "queued"}, "ts": 1790404809.2277231}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790404812.828063}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Navigate to MG Road Metro Station.", "repaired": "", "complete": true, "corrections": [], "slots": {"query": "MG Road Metro Station"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to MG Road Metro Station."}, "ts": 1790404812.923191}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790404812.92341}
+{"type": "speech_handle", "data": {"speech_id": "speech_e6c28c81654d", "state": "interruption_requested", "error": null}, "ts": 1790404812.9263492}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790404812.926672}
+{"type": "slot_update", "data": {"slot": "query", "value": "MG Road Metro Station", "previous": null}, "ts": 1790404812.9267688}
+{"type": "tool_waiting", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}}, "ts": 1790404812.926941}
+{"type": "tool_waiting", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].place_id"}}, "ts": 1790404812.927068}
+{"type": "tool_waiting", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790404812.927111}
+{"type": "tool_started", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}, "state_changing": false}, "ts": 1790404812.9314508}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404812.9372602}
+{"type": "tool_done", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "MG Road Metro Station"}, "result": {"status": "success", "places": [{"place_id": "P_MGROAD", "name": "MG Road Metro Station", "category": "metro", "lat": 12.9756, "lng": 77.6066}]}, "stale": false, "duration_ms": 22}, "ts": 1790404812.953999}
+{"type": "tool_started", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_MGROAD"}, "state_changing": false}, "ts": 1790404812.960626}
+{"type": "tool_done", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "P_MGROAD"}, "result": {"status": "success", "route_id": "R1", "destination": "MG Road Metro Station", "destination_id": "P_MGROAD", "stops": [], "stop_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "stale": false, "duration_ms": 2502}, "ts": 1790404815.462354}
+{"type": "tool_started", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "state_changing": true}, "ts": 1790404815.464591}
+{"type": "tool_done", "data": {"execution_id": "bc1623fb165842e68013484a7c79bd15", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "result": {"status": "success", "navigating_to": "MG Road Metro Station", "replaced": null, "already_active": false, "navigation_version": 1, "route_active": true, "route_id": "R1", "destination": "MG Road Metro Station", "destination_id": "P_MGROAD", "stops": [], "stop_ids": [], "distance_km": 5.1, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.9756, 77.6066]]}, "stale": false, "duration_ms": 1}, "ts": 1790404815.465719}
+{"type": "agent_say", "data": {"text": "Navigation to MG Road Metro Station has started. Estimated arrival in 13 minutes.", "intent_version": 1, "kind": "result"}, "ts": 1790404815.467904}
+{"type": "speech_handle", "data": {"speech_id": "speech_56c64d4d14f3", "state": "queued"}, "ts": 1790404815.468288}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790404816.504229}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790404817.0329149}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404817.479566}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790404818.629777}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790404819.229901}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790404820.180415}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790404822.1808991}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404826.50608}
+{"type": "speech_handle", "data": {"speech_id": "speech_56c64d4d14f3", "state": "finished", "error": null}, "ts": 1790404826.5086}
+{"type": "user_final", "data": {"text": "Add the nearest coffee as", "merged": "Add the nearest coffee as", "intent_version": 2}, "ts": 1790404828.62741}
+{"type": "ack", "data": {"text": "Okay, one sec."}, "ts": 1790404829.340854}
+{"type": "agent_say", "data": {"text": "Okay, one sec.", "intent_version": 2, "kind": "ack"}, "ts": 1790404829.34127}
+{"type": "speech_handle", "data": {"speech_id": "speech_139e3a85ab71", "state": "queued"}, "ts": 1790404829.342299}
+{"type": "speech_handle", "data": {"speech_id": "speech_139e3a85ab71", "state": "interruption_requested", "error": null}, "ts": 1790404829.541375}
+{"type": "turn_merged", "data": {"previous": "Add the nearest coffee as", "added": "", "retranscribed": "Add the nearest coffee as a stop."}, "ts": 1790404829.732417}
+{"type": "gate_cancelled", "data": {"reason": "user kept talking; re-planning with the new words"}, "ts": 1790404829.913323}
+{"type": "turn_merged", "data": {"previous": "Add the nearest coffee as", "added": "The stop."}, "ts": 1790404829.913435}
+{"type": "user_final", "data": {"text": "The stop.", "merged": "Add the nearest coffee as The stop.", "intent_version": 3}, "ts": 1790404829.913471}
+{"type": "turn_merged", "data": {"previous": "Add the nearest coffee as The stop.", "added": "", "retranscribed": "Add the nearest coffee as a stop."}, "ts": 1790404830.107799}
+{"type": "ack", "data": {"text": "Okay, one sec."}, "ts": 1790404830.615608}
+{"type": "agent_say", "data": {"text": "Okay, one sec.", "intent_version": 3, "kind": "ack"}, "ts": 1790404830.622655}
+{"type": "speech_handle", "data": {"speech_id": "speech_b0cdb46d7b4e", "state": "queued"}, "ts": 1790404830.630794}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790404831.480353}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404832.565963}
+{"type": "speech_handle", "data": {"speech_id": "speech_b0cdb46d7b4e", "state": "finished", "error": null}, "ts": 1790404832.586184}
+{"type": "plan_ready", "data": {"intent_version": 3, "utterance": "Add the nearest coffee as a stop.", "repaired": "", "complete": true, "corrections": [], "slots": {"category": "coffee"}, "calls": [{"id": "c1", "tool": "find_nearby", "args": {"category": "coffee"}}, {"id": "c2", "tool": "add_waypoint", "args": {"place_id": "$c1.places[0].place_id"}}], "reply": "Adding the nearest coffee stop to your route."}, "ts": 1790404834.8000681}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790404834.800561}
+{"type": "gate_committed", "data": {"intent_version": 3, "calls": ["find_nearby", "add_waypoint"]}, "ts": 1790404834.8009548}
+{"type": "slot_update", "data": {"slot": "category", "value": "coffee", "previous": null}, "ts": 1790404834.801453}
+{"type": "tool_waiting", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c1", "tool": "find_nearby", "args": {"category": "coffee"}}, "ts": 1790404834.802158}
+{"type": "tool_waiting", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c2", "tool": "add_waypoint", "args": {"place_id": "$c1.places[0].place_id"}}, "ts": 1790404834.802288}
+{"type": "tool_started", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c1", "tool": "find_nearby", "args": {"category": "coffee"}, "state_changing": false}, "ts": 1790404834.803081}
+{"type": "tool_done", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c1", "tool": "find_nearby", "args": {"category": "coffee"}, "result": {"status": "success", "places": [{"place_id": "K_BLUETOKAI", "name": "Blue Tokai, Indiranagar", "detour_min": 0}, {"place_id": "K_TWC_HEB", "name": "Third Wave Coffee, Hebbal", "detour_min": 42}, {"place_id": "K_SBUX_AIR", "name": "Starbucks, Airport Road", "detour_min": 122}], "navigation_version": 1, "route_id": "R1"}, "stale": false, "duration_ms": 5}, "ts": 1790404834.808191}
+{"type": "tool_started", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c2", "tool": "add_waypoint", "args": {"place_id": "K_BLUETOKAI"}, "state_changing": true}, "ts": 1790404834.809603}
+{"type": "tool_done", "data": {"execution_id": "06bf84744a784b1e8e9155d410ff4a77", "operation_id": "turn-3", "id": "c2", "tool": "add_waypoint", "args": {"place_id": "K_BLUETOKAI"}, "result": {"status": "success", "added": "Blue Tokai, Indiranagar", "already_present": false, "extra_min": 0, "navigation_version": 2, "route_active": true, "route_id": "R1", "destination": "MG Road Metro Station", "destination_id": "P_MGROAD", "stops": ["Blue Tokai, Indiranagar"], "stop_ids": ["K_BLUETOKAI"], "distance_km": 5.3, "eta_min": 13, "polyline": [[12.9719, 77.6412], [12.97, 77.64], [12.9756, 77.6066]]}, "stale": false, "duration_ms": 2}, "ts": 1790404834.81151}
+{"type": "agent_say", "data": {"text": "Added Blue Tokai, Indiranagar as a stop. Estimated time to MG Road Metro Station is 13 minutes, 0 extra minutes.", "intent_version": 3, "kind": "result"}, "ts": 1790404834.812599}
+{"type": "speech_handle", "data": {"speech_id": "speech_3c2d33743c87", "state": "queued"}, "ts": 1790404834.8130188}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790404835.837776}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790404843.911874}
+{"type": "speech_handle", "data": {"speech_id": "speech_3c2d33743c87", "state": "finished", "error": null}, "ts": 1790404843.914109}

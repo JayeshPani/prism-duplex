@@ -1,0 +1,378 @@
+{
+  "declared_at_utc": "2026-09-26T12:07:54.194902+00:00",
+  "status": "prepared_before_new_render_or_live_outcome_not_yet_frozen",
+  "purpose": "Paired whole-conversation clarification activation and cancel/query boundaries, with unchanged iteration18 recognition-aware output in both arms.",
+  "cases": [
+    {
+      "id": "airport_hospital_replay",
+      "category": [
+        "exposed_failure_replay",
+        "positive_continuation"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "airport_road.wav",
+          "text": "Navigate to Airport Road.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "hospital_answer.wav",
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "result",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place the user means; no navigation activation claim"
+        ],
+        "initial_ambiguity": {
+          "query": "Airport Road",
+          "candidates": [
+            "P_HOSP",
+            "K_SBUX_AIR"
+          ]
+        },
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "P_HOSP",
+            "eta_min": 5,
+            "distance_km": 2.2
+          }
+        ],
+        "final_speech": [
+          "navigation started to Manipal Hospital on Old Airport Road",
+          "five-minute arrival estimate"
+        ],
+        "continuation_required_if_structured_ambiguity": true,
+        "clarifications_after_explicit_clarifier": 0
+      }
+    },
+    {
+      "id": "cancel_pending_navigation",
+      "category": [
+        "cancellation_boundary"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "airport_road.wav",
+          "text": "Navigate to Airport Road.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "cancel_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place the user means; no navigation activation claim"
+        ],
+        "initial_ambiguity": {
+          "query": "Airport Road",
+          "candidates": [
+            "P_HOSP",
+            "K_SBUX_AIR"
+          ]
+        },
+        "effects": [],
+        "final_speech": [
+          "acknowledge stopping/abandoning the pending request or accurately state navigation is not active",
+          "do not claim an active route was cancelled or navigation started"
+        ],
+        "continuation_must_be_absent": true,
+        "allowed_cancel_attempts": [
+          0,
+          1
+        ],
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint"
+        ],
+        "final_state": {
+          "route_active": false,
+          "navigation_version": 0,
+          "destination_id": null,
+          "route_id": null,
+          "stop_ids": []
+        }
+      }
+    },
+    {
+      "id": "hebbal_third_wave",
+      "category": [
+        "new_named_variant",
+        "positive_continuation"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "hebbal.wav",
+          "text": "Please take me to Hebbal.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "third_wave_answer.wav",
+          "text": "Third Wave Coffee, Hebbal.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "result",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place the user means; no navigation activation claim"
+        ],
+        "initial_ambiguity": {
+          "query": "Hebbal",
+          "candidates": [
+            "C_TATA_HEB",
+            "K_TWC_HEB",
+            "F_IOC_HEB"
+          ]
+        },
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "K_TWC_HEB",
+            "eta_min": 31,
+            "distance_km": 12.3
+          }
+        ],
+        "final_speech": [
+          "navigation started to Third Wave Coffee in Hebbal",
+          "thirty-one-minute arrival estimate"
+        ],
+        "continuation_required_if_structured_ambiguity": true,
+        "clarifications_after_explicit_clarifier": 0
+      }
+    },
+    {
+      "id": "distance_query_after_ambiguity",
+      "category": [
+        "query_boundary"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "airport_road.wav",
+          "text": "Navigate to Airport Road.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "distance_query.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "non-ack",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place the user means; no navigation activation claim"
+        ],
+        "initial_ambiguity": {
+          "query": "Airport Road",
+          "candidates": [
+            "P_HOSP",
+            "K_SBUX_AIR"
+          ]
+        },
+        "effects": [],
+        "final_speech": [
+          "answer the hospital distance as 2.2 kilometres grounded in actual returned route",
+          "do not claim navigation started"
+        ],
+        "continuation_must_be_absent": true,
+        "forbidden_attempts": [
+          "start_navigation",
+          "add_waypoint",
+          "cancel_navigation"
+        ],
+        "required_read": {
+          "tool": "compute_route",
+          "destination_id": "P_HOSP",
+          "distance_km": 2.2
+        },
+        "final_state": {
+          "route_active": false,
+          "navigation_version": 0,
+          "destination_id": null,
+          "route_id": null,
+          "stop_ids": []
+        }
+      }
+    },
+    {
+      "id": "indiranagar_ather",
+      "category": [
+        "new_named_variant",
+        "positive_continuation"
+      ],
+      "recognition_delivery_delay_seconds": 0,
+      "inputs": [
+        {
+          "asset": "indiranagar.wav",
+          "text": "Please navigate to Indiranagar.",
+          "trigger": "session_ready"
+        },
+        {
+          "asset": "ather_answer.wav",
+          "text": "I mean Ather Grid charger, Indiranagar.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        }
+      ],
+      "final_response_kind": "result",
+      "expected": {
+        "initial_mutations": 0,
+        "initial_speech": [
+          "ask which named place the user means; no navigation activation claim"
+        ],
+        "initial_ambiguity": {
+          "query": "Indiranagar",
+          "candidates": [
+            "P_HOME",
+            "C_ATHER_IND",
+            "K_BLUETOKAI"
+          ]
+        },
+        "effects": [
+          {
+            "tool": "start_navigation",
+            "destination_id": "C_ATHER_IND",
+            "eta_min": 2,
+            "distance_km": 1.0
+          }
+        ],
+        "final_speech": [
+          "navigation started to Ather Grid charger in Indiranagar",
+          "two-minute arrival estimate"
+        ],
+        "continuation_required_if_structured_ambiguity": true,
+        "clarifications_after_explicit_clarifier": 0
+      }
+    }
+  ],
+  "arms": [
+    {
+      "id": "baseline",
+      "cases": [
+        "airport_hospital_replay",
+        "cancel_pending_navigation",
+        "hebbal_third_wave",
+        "distance_query_after_ambiguity",
+        "indiranagar_ather"
+      ]
+    },
+    {
+      "id": "candidate",
+      "cases": [
+        "airport_hospital_replay",
+        "cancel_pending_navigation",
+        "hebbal_third_wave",
+        "distance_query_after_ambiguity",
+        "indiranagar_ather"
+      ]
+    }
+  ],
+  "configuration": {
+    "profile": "local-mac",
+    "seed": 7,
+    "coordinator": {
+      "hold_read_ms": 350,
+      "hold_state_ms": 700,
+      "hold_incomplete_ms": 1800,
+      "ack_after_ms": 700,
+      "resume_grace_ms": 1200,
+      "speak_results": true
+    },
+    "llm": {
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "revision": "545dc4251c05440727734bcd94334791f6ab0192",
+      "request_model": "default_model",
+      "no_think": false,
+      "json_mode": false,
+      "max_tokens": 500,
+      "allow_unfrozen": false
+    },
+    "stt": {
+      "kind": "parakeet-mlx",
+      "model": "mlx-community/parakeet-tdt-0.6b-v2",
+      "revision": "8ae155301e23d820d82aa60d24817c900e69e487"
+    },
+    "tts": {
+      "kind": "kokoro",
+      "voice": "af_heart",
+      "speed": 1.1
+    }
+  },
+  "cache_entries": 2,
+  "cache_byte_limit": "Requested268435456; installed seeded sequential path does not enforce byte cap; count2 retained.",
+  "model_references_from": "results/iteration18/post-inference-validation.json",
+  "source_audio_creation": {
+    "spoken_stems": {
+      "airport_road": "Navigate to Airport Road.",
+      "hospital_answer": "I mean Manipal Hospital, Old Airport Road.",
+      "cancel_navigation": "Please stop navigation.",
+      "hebbal": "Please take me to Hebbal.",
+      "third_wave_answer": "Third Wave Coffee, Hebbal.",
+      "distance_query": "How far is Manipal Hospital, Old Airport Road?",
+      "indiranagar": "Please navigate to Indiranagar.",
+      "ather_answer": "I mean Ather Grid charger, Indiranagar."
+    },
+    "inference": "Existing local Kokoro82M af_heart speed1.1; each first untrimmed render once, shared across both arms.",
+    "format": "mono PCM16 24000Hz WAV",
+    "preparation_asr": "not_run",
+    "preparation_vad": "not_run"
+  },
+  "selected_scope": {
+    "captures": 10,
+    "input_publications": 20,
+    "distinct_rendered_stems": 8,
+    "expected_navigation_mutations": 6,
+    "expected_final_replies": 10,
+    "initial_clarifications": 10,
+    "zero_effect_boundary_cases": 4,
+    "arm_order": [
+      "baseline",
+      "candidate"
+    ],
+    "case_order": [
+      "airport_hospital_replay",
+      "cancel_pending_navigation",
+      "hebbal_third_wave",
+      "distance_query_after_ambiguity",
+      "indiranagar_ather"
+    ]
+  },
+  "exposure": "Airport Road/hospital and stop wording are exposed development input. Hebbal/Third Wave and Indiranagar/Ather are newly composed combinations using the known map; not held-out or unseen entities. All are freshly rendered once.",
+  "mechanism_criteria": "A valid no-call initial clarification remains a conversational observation but does not exercise the structured-ambiguity continuation hook. Do not inject an error, force tool use, retry or silently omit such a case.",
+  "effect_contract": "For each positive, initial no writes; after answer fresh successful target compute then exactly one start with its route, version1, active true, replaced null, no stops, declared target/ETA. Optional search or valid reused search read allowed; every actual attempt retained. Negative cancellation permits zero or one no-op cancel while fresh-room route remains inactive/version0. Query requires actual successful distance read and zero navigation writes.",
+  "limits": [
+    "One capture per condition and fixed arm order; no causal latency or population claim.",
+    "No injected recognition delay; both arms keep the iteration18 recognition gate, counters and telemetry.",
+    "This does not replace scripted cancellation/stale await/event-sink, unknown-place, context-consumption or concurrent-room regressions.",
+    "All missing/failed captures, tool attempts, model requests/repairs, recognition deviations and unsupported speech remain. Internal single semantic repair is part of the candidate, not an experiment rerun.",
+    "Run whole-stream received ASR only after both timed stacks and owned children terminate; separate manual facts from capture completion."
+  ],
+  "turn_handling": {
+    "turn_detection": "vad",
+    "endpointing": {
+      "min_delay": 0.4,
+      "max_delay": 3.0
+    },
+    "interruption": {
+      "enabled": true,
+      "mode": "vad",
+      "resume_false_interruption": true
+    }
+  }
+}

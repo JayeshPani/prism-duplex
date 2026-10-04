@@ -1,0 +1,27 @@
+{
+  "declared_at": "2026-09-25T18:46:24.060319+00:00",
+  "iteration": "3",
+  "hypothesis": "Explicit optional-argument provenance, full request coverage after correction, and named-place identity guidance reduce unsupported constraints and omissions without removing requested effects.",
+  "baseline_source_sha256": {
+    "agent/coordinator/resolver.py": "e8af104f85c6be1ad077a4323875e711c5480a3329b51df853fc3da2ab3a4863",
+    "agent/tools/car_tools.py": "e2ecf0e4d2762ac33f5f770e12450281b4bf4136804a41b0085b22183abb7141",
+    "agent/tools/manifest.py": "77b344367cd6f79cc1a386db4fd731b88a7ff068f75621e3d9decdaae38e9b2e",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923"
+  },
+  "planned_change": "Small guidance-only edits in resolver system prompt and car domain notes; no post-hoc argument stripping, scoring changes, date normalization, backend rewrite or new JSON output fields.",
+  "procedure": [
+    "Freeze independent planner-fidelity cases and checks before any new inference.",
+    "Run baseline with unchanged production prompt on the pinned local server.",
+    "Apply the guidance-only candidate and rerun identical cases preserving both outputs.",
+    "Run unchanged existing synthetic and navigation regressions if candidate improves fidelity.",
+    "Inspect every model failure and retain or revert based on observed behavior; do not claim a semantic guarantee from prompting."
+  ],
+  "evaluation_limits": [
+    "Failure-informed development cases, not held-out benchmark evaluation.",
+    "Tool mocks and fixed-map state do not prove real backend effects.",
+    "First-server inference and later warmed/cache-influenced calls are preserved; no latency speedup inferred from prompt comparison."
+  ],
+  "separate_cache_hypothesis": "Two sequence-cache entries may preserve alternating planner/responder prefixes where one evicts them. Installed mlx-lm seeded request path bypasses the CLI byte cap; cache-entry ablation must report measured memory without asserting a256MiB limit.",
+  "pr_status": "Still no staged changes; no staging, commit or PR action allowed until user chooses staged files."
+}

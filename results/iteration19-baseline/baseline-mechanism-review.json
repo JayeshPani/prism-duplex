@@ -1,0 +1,2992 @@
+{
+  "created_at_utc": "2026-09-26T12:39:18.374258+00:00",
+  "status": "reviewed_with_preserved_baseline_failures",
+  "scope": "Read-only terminal baseline raw traces, physical calls, capture metadata, worker logs and buffered diagnostics. No candidate outcomes, ASR, models, tests, services or existing artifacts changed.",
+  "summary": {
+    "declared_cases": 5,
+    "completed_captures": 5,
+    "published_inputs": 10,
+    "recognized_final_events": 10,
+    "parsed_accepted_plan_events": 10,
+    "parsed_rejection_events": 0,
+    "physical_attempts": 10,
+    "physical_status_counts": {
+      "error": 7,
+      "done": 3
+    },
+    "actual_navigation_mutations": 0,
+    "expected_navigation_mutations": 3,
+    "initial_place_error_codes": {
+      "place_ambiguous": 3,
+      "place_not_found": 2
+    },
+    "tool_error_events_including_undispatched_dependency_errors": 17,
+    "all_agents_departed": true,
+    "capture_completion_is_not_task_success": true
+  },
+  "cases": [
+    {
+      "case_id": "airport_hospital_replay",
+      "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+      "capture_status": "completed_observation",
+      "capture_exit_code": 0,
+      "published_inputs": [
+        {
+          "label": "initial",
+          "sha256": "0ff22e0be9cb32d33de8662badf6a36b2be6b90a64f8e063d985d3d6cecbc928",
+          "samples": 36352,
+          "published_samples": 36352
+        },
+        {
+          "label": "followup_1",
+          "sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc",
+          "samples": 58880,
+          "published_samples": 58880
+        }
+      ],
+      "recognition_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Airport Road.",
+            "merged": "Navigate to Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790425920.122543
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "I mean Manipal Hospital, Old Airport Road.",
+            "merged": "I mean Manipal Hospital, Old Airport Road.",
+            "intent_version": 2
+          },
+          "ts": 1790425942.3073878
+        }
+      ],
+      "initial_place_outcome": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "Airport Road",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'Airport Road'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_HOSP",
+            "name": "Manipal Hospital, Old Airport Road"
+          },
+          {
+            "place_id": "K_SBUX_AIR",
+            "name": "Starbucks, Airport Road"
+          }
+        ]
+      },
+      "plans": [
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 1,
+            "utterance": "Navigate to Airport Road.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Airport Road"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Airport Road"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to Airport Road."
+          },
+          "ts": 1790425931.845505
+        },
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 2,
+            "utterance": "I mean Manipal Hospital, Old Airport Road.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [
+              {
+                "slot": "query",
+                "from": "Airport Road",
+                "to": "Manipal Hospital, Old Airport Road"
+              }
+            ],
+            "slots": {
+              "query": "Manipal Hospital, Old Airport Road"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Manipal Hospital, Old Airport Road"
+                }
+              }
+            ],
+            "reply": "Searching for Manipal Hospital, Old Airport Road."
+          },
+          "ts": 1790425945.4764428
+        }
+      ],
+      "plan_rejected": [],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790425931.846804,
+          "attempt_id": "e432768de38d4cc385900026f7ac1498:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425931.849455,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "timestamp_start": 1790425945.478195,
+          "attempt_id": "6e2ceac98a214752b65366671f049330:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425945.481921,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "physical_status_counts": {
+        "error": 1,
+        "done": 1
+      },
+      "terminal_tool_events": [
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "e432768de38d4cc385900026f7ac1498",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Airport Road"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_ambiguous",
+              "query": "Airport Road",
+              "place_role": "destination",
+              "places": [],
+              "message": "ambiguous destination 'Airport Road'; ask for the place name",
+              "candidates": [
+                {
+                  "place_id": "P_HOSP",
+                  "name": "Manipal Hospital, Old Airport Road"
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road"
+                }
+              ]
+            },
+            "error": "ambiguous destination 'Airport Road'; ask for the place name"
+          },
+          "ts": 1790425931.849352
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "e432768de38d4cc385900026f7ac1498",
+            "operation_id": "turn-1",
+            "id": "c2",
+            "tool": "compute_route",
+            "error": "unresolved reference $c1.places[0].place_id"
+          },
+          "ts": 1790425931.85049
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "e432768de38d4cc385900026f7ac1498",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "error": "unresolved reference $c2.route_id"
+          },
+          "ts": 1790425931.850621
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "6e2ceac98a214752b65366671f049330",
+            "operation_id": "turn-2",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Manipal Hospital, Old Airport Road"
+            },
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "P_HOSP",
+                  "name": "Manipal Hospital, Old Airport Road",
+                  "category": "hospital",
+                  "lat": 12.9592,
+                  "lng": 77.6485
+                }
+              ]
+            },
+            "stale": false,
+            "duration_ms": 4
+          },
+          "ts": 1790425945.481781
+        }
+      ],
+      "actual_mutations": [],
+      "agent_say_non_ack": [
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+            "intent_version": 1,
+            "kind": "result"
+          },
+          "ts": 1790425931.8510861
+        },
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+            "intent_version": 2,
+            "kind": "result"
+          },
+          "ts": 1790425947.3950038
+        }
+      ],
+      "speech_quality_status": "not_assessed_received_audio_review_pending",
+      "recognition_native_calls": [
+        {
+          "call_id": "stt-call-002",
+          "request_id": "stt-request-003",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144233523788458,
+            "unix_ns": 1790425918887732000,
+            "thread_id": 6159151104
+          },
+          "submitted": {
+            "monotonic_ns": 144233523810916,
+            "unix_ns": 1790425918887754000,
+            "thread_id": 6159151104
+          },
+          "worker_entry": {
+            "monotonic_ns": 144233523896958,
+            "unix_ns": 1790425918887841000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144234750677666,
+            "unix_ns": 1790425920114624000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "caller_return": {
+            "monotonic_ns": 144234750794208,
+            "unix_ns": 1790425920114741000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "submitted_equals_written_pcm": true
+        },
+        {
+          "call_id": "stt-call-003",
+          "request_id": "stt-request-005",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144255925561416,
+            "unix_ns": 1790425941289562000,
+            "thread_id": 6159151104
+          },
+          "submitted": {
+            "monotonic_ns": 144255925601791,
+            "unix_ns": 1790425941289603000,
+            "thread_id": 6159151104
+          },
+          "worker_entry": {
+            "monotonic_ns": 144255926094583,
+            "unix_ns": 1790425941290095000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144256940972833,
+            "unix_ns": 1790425942304976000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "I mean Manipal Hospital, Old Airport Road."
+          },
+          "caller_return": {
+            "monotonic_ns": 144256941132500,
+            "unix_ns": 1790425942305136000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": "I mean Manipal Hospital, Old Airport Road."
+          },
+          "submitted_equals_written_pcm": true
+        }
+      ],
+      "stt_requests": [
+        {
+          "request_id": "stt-request-003",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144233522820208,
+            "unix_ns": 1790425918886764000,
+            "thread_id": 6159151104
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144234751202166,
+            "unix_ns": 1790425920115149000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-004",
+          "call_type": "transcribe_since",
+          "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144234758925333,
+            "unix_ns": 1790425920122872000,
+            "thread_id": 6159151104
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144234758944000,
+            "unix_ns": 1790425920122891000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-005",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144255923535875,
+            "unix_ns": 1790425941287538000,
+            "thread_id": 6159151104
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144256941521000,
+            "unix_ns": 1790425942305525000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-006",
+          "call_type": "transcribe_since",
+          "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144256943725500,
+            "unix_ns": 1790425942307729000,
+            "thread_id": 6159151104
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144256943738000,
+            "unix_ns": 1790425942307741000,
+            "thread_id": 6159151104,
+            "status": "returned",
+            "result_text": null
+          }
+        }
+      ],
+      "aec_room_totals": {
+        "frames": 756,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 954000
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          1
+        ]
+      },
+      "room_departure": {
+        "room": "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+        "started_at": "2026-09-26T12:32:34.387451+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T12:32:34.387589+00:00",
+            "elapsed_seconds": 0.000132125016534701,
+            "participants": [
+              {
+                "identity": "agent-AJ_Uye7ZzmwNFUu",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:32:34.895748+00:00",
+            "elapsed_seconds": 0.5083436669956427,
+            "participants": [
+              {
+                "identity": "agent-AJ_Uye7ZzmwNFUu",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:32:35.401532+00:00",
+            "elapsed_seconds": 1.0140830000163987,
+            "participants": [
+              {
+                "identity": "agent-AJ_Uye7ZzmwNFUu",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:32:35.904557+00:00",
+            "elapsed_seconds": 1.5171032920188736,
+            "participants": [
+              {
+                "identity": "agent-AJ_Uye7ZzmwNFUu",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:32:36.407663+00:00",
+            "elapsed_seconds": 2.0202068329963367,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T12:32:36.408703+00:00",
+        "elapsed_seconds": 2.0212422079930548
+      },
+      "capture_receiver_errors": [],
+      "capture_cleanup_errors": [],
+      "finding": "Both final recognition strings preserve the declared place. Initial structured place_ambiguous search fails safely; clarification plan contains only search_destination. It finds P_HOSP but omits compute_route/start_navigation, so the declared navigation effect is absent."
+    },
+    {
+      "case_id": "cancel_pending_navigation",
+      "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+      "capture_status": "completed_observation",
+      "capture_exit_code": 0,
+      "published_inputs": [
+        {
+          "label": "initial",
+          "sha256": "0ff22e0be9cb32d33de8662badf6a36b2be6b90a64f8e063d985d3d6cecbc928",
+          "samples": 36352,
+          "published_samples": 36352
+        },
+        {
+          "label": "followup_1",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "samples": 33280,
+          "published_samples": 33280
+        }
+      ],
+      "recognition_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Airport Road.",
+            "merged": "Navigate to Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790425960.212172
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please stop navigation.",
+            "merged": "Please stop navigation.",
+            "intent_version": 2
+          },
+          "ts": 1790425973.5346508
+        }
+      ],
+      "initial_place_outcome": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "Airport Road",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'Airport Road'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_HOSP",
+            "name": "Manipal Hospital, Old Airport Road"
+          },
+          {
+            "place_id": "K_SBUX_AIR",
+            "name": "Starbucks, Airport Road"
+          }
+        ]
+      },
+      "plans": [
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 1,
+            "utterance": "Navigate to Airport Road.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Airport Road"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Airport Road"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].name"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to Airport Road."
+          },
+          "ts": 1790425963.831239
+        },
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 2,
+            "utterance": "Please stop navigation.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {},
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "cancel_navigation",
+                "args": {}
+              }
+            ],
+            "reply": "Stopping navigation."
+          },
+          "ts": 1790425975.7835178
+        }
+      ],
+      "plan_rejected": [],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790425963.832821,
+          "attempt_id": "aa0c9e974cac4cdfb50aef2645878ff0:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425963.836843,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "cancel_navigation",
+          "args": {},
+          "timestamp_start": 1790425975.784941,
+          "attempt_id": "eaf608cfc67641ad8aa6a209cf21a2c3:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425975.790529,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "physical_status_counts": {
+        "error": 1,
+        "done": 1
+      },
+      "terminal_tool_events": [
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "aa0c9e974cac4cdfb50aef2645878ff0",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Airport Road"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_ambiguous",
+              "query": "Airport Road",
+              "place_role": "destination",
+              "places": [],
+              "message": "ambiguous destination 'Airport Road'; ask for the place name",
+              "candidates": [
+                {
+                  "place_id": "P_HOSP",
+                  "name": "Manipal Hospital, Old Airport Road"
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road"
+                }
+              ]
+            },
+            "error": "ambiguous destination 'Airport Road'; ask for the place name"
+          },
+          "ts": 1790425963.836752
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "aa0c9e974cac4cdfb50aef2645878ff0",
+            "operation_id": "turn-1",
+            "id": "c2",
+            "tool": "compute_route",
+            "error": "unresolved reference $c1.places[0].name"
+          },
+          "ts": 1790425963.837895
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "aa0c9e974cac4cdfb50aef2645878ff0",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "error": "unresolved reference $c2.route_id"
+          },
+          "ts": 1790425963.838251
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "eaf608cfc67641ad8aa6a209cf21a2c3",
+            "operation_id": "turn-2",
+            "id": "c1",
+            "tool": "cancel_navigation",
+            "args": {},
+            "result": {
+              "status": "success",
+              "cancelled": null,
+              "navigation_version": 0,
+              "route_active": false,
+              "route_id": null,
+              "destination": null,
+              "destination_id": null,
+              "stops": [],
+              "stop_ids": [],
+              "eta_min": null,
+              "distance_km": null,
+              "polyline": []
+            },
+            "stale": false,
+            "duration_ms": 5
+          },
+          "ts": 1790425975.79043
+        }
+      ],
+      "actual_mutations": [],
+      "agent_say_non_ack": [
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+            "intent_version": 1,
+            "kind": "result"
+          },
+          "ts": 1790425963.838888
+        },
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "There is no active navigation to cancel.",
+            "intent_version": 2,
+            "kind": "result"
+          },
+          "ts": 1790425975.792346
+        }
+      ],
+      "speech_quality_status": "not_assessed_received_audio_review_pending",
+      "recognition_native_calls": [
+        {
+          "call_id": "stt-call-004",
+          "request_id": "stt-request-007",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144273943523125,
+            "unix_ns": 1790425959307570000,
+            "thread_id": 15918428160
+          },
+          "submitted": {
+            "monotonic_ns": 144273943550000,
+            "unix_ns": 1790425959307597000,
+            "thread_id": 15918428160
+          },
+          "worker_entry": {
+            "monotonic_ns": 144273943751083,
+            "unix_ns": 1790425959307798000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144274844485375,
+            "unix_ns": 1790425960208535000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "caller_return": {
+            "monotonic_ns": 144274844892833,
+            "unix_ns": 1790425960208942000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "submitted_equals_written_pcm": true
+        },
+        {
+          "call_id": "stt-call-005",
+          "request_id": "stt-request-009",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144287093905750,
+            "unix_ns": 1790425972457986000,
+            "thread_id": 15918428160
+          },
+          "submitted": {
+            "monotonic_ns": 144287094091166,
+            "unix_ns": 1790425972458172000,
+            "thread_id": 15918428160
+          },
+          "worker_entry": {
+            "monotonic_ns": 144287094369791,
+            "unix_ns": 1790425972458450000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144288166376791,
+            "unix_ns": 1790425973530460000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Please stop navigation."
+          },
+          "caller_return": {
+            "monotonic_ns": 144288166489666,
+            "unix_ns": 1790425973530573000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": "Please stop navigation."
+          },
+          "submitted_equals_written_pcm": true
+        }
+      ],
+      "stt_requests": [
+        {
+          "request_id": "stt-request-007",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144273942614333,
+            "unix_ns": 1790425959306661000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144274846201166,
+            "unix_ns": 1790425960210251000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-008",
+          "call_type": "transcribe_since",
+          "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144274848627875,
+            "unix_ns": 1790425960212678000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144274848647333,
+            "unix_ns": 1790425960212697000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-009",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144287092371833,
+            "unix_ns": 1790425972456453000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144288167266583,
+            "unix_ns": 1790425973531350000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-010",
+          "call_type": "transcribe_since",
+          "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144288171103166,
+            "unix_ns": 1790425973535187000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144288171151541,
+            "unix_ns": 1790425973535235000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        }
+      ],
+      "aec_room_totals": {
+        "frames": 460,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 598800
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          2
+        ]
+      },
+      "room_departure": {
+        "room": "car-audio-52e64fcec77447818e8d80e80ac80853",
+        "started_at": "2026-09-26T12:32:59.837491+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T12:32:59.838256+00:00",
+            "elapsed_seconds": 0.0007574170012958348,
+            "participants": [
+              {
+                "identity": "agent-AJ_S7QZvnNbC6Fy",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:00.351410+00:00",
+            "elapsed_seconds": 0.5139150420145597,
+            "participants": [
+              {
+                "identity": "agent-AJ_S7QZvnNbC6Fy",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:00.852446+00:00",
+            "elapsed_seconds": 1.0149485419970006,
+            "participants": [
+              {
+                "identity": "agent-AJ_S7QZvnNbC6Fy",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:01.355548+00:00",
+            "elapsed_seconds": 1.5180487089965027,
+            "participants": [
+              {
+                "identity": "agent-AJ_S7QZvnNbC6Fy",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:01.858453+00:00",
+            "elapsed_seconds": 2.0209561249939725,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T12:33:01.859464+00:00",
+        "elapsed_seconds": 2.0219638340058737
+      },
+      "capture_receiver_errors": [],
+      "capture_cleanup_errors": [],
+      "finding": "Initial structured place_ambiguous search is followed by an explicit stop. Exactly one successful no-op cancel reports route_active false, navigation_version0 and cancelled null; no navigation activation or waypoint attempt occurs."
+    },
+    {
+      "case_id": "hebbal_third_wave",
+      "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+      "capture_status": "completed_observation",
+      "capture_exit_code": 0,
+      "published_inputs": [
+        {
+          "label": "initial",
+          "sha256": "db768a247d03df0ba2e967851fa95b0d93e95082e2694a44d55834ed63c1e7e4",
+          "samples": 30208,
+          "published_samples": 30208
+        },
+        {
+          "label": "followup_1",
+          "sha256": "d02736662d4dfd6dd89f5955309dab38ae8ede2a80fb51f1324115c421accb77",
+          "samples": 35840,
+          "published_samples": 35840
+        }
+      ],
+      "recognition_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please take me to Hebel.",
+            "merged": "Please take me to Hebel.",
+            "intent_version": 1
+          },
+          "ts": 1790425985.647341
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Third wave coffee Hebble",
+            "merged": "Third wave coffee Hebble",
+            "intent_version": 2
+          },
+          "ts": 1790425996.441925
+        }
+      ],
+      "initial_place_outcome": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "Hebel",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'Hebel'; ask for the place name",
+        "candidates": []
+      },
+      "plans": [
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 1,
+            "utterance": "Please take me to Hebel.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Hebel"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Hebel"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].name"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Searching for Hebel and starting navigation."
+          },
+          "ts": 1790425989.4143329
+        },
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 2,
+            "utterance": "Third wave coffee Hebble",
+            "repaired": "",
+            "complete": true,
+            "corrections": [
+              {
+                "slot": "query",
+                "from": "Hebel",
+                "to": "Hebble"
+              }
+            ],
+            "slots": {
+              "query": "Hebble"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Hebble"
+                }
+              }
+            ],
+            "reply": "Searching for Third wave coffee Hebble."
+          },
+          "ts": 1790425999.183705
+        }
+      ],
+      "plan_rejected": [],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Hebel"
+          },
+          "timestamp_start": 1790425989.416162,
+          "attempt_id": "9ec55e5443ce42d2ac12ba7aa87d70b7:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425989.421361,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Hebble"
+          },
+          "timestamp_start": 1790425999.18522,
+          "attempt_id": "3f60fadfc50b48f889569c82c78be199:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790425999.1884952,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "physical_status_counts": {
+        "error": 2
+      },
+      "terminal_tool_events": [
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "9ec55e5443ce42d2ac12ba7aa87d70b7",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Hebel"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_not_found",
+              "query": "Hebel",
+              "place_role": "destination",
+              "places": [],
+              "message": "unknown destination 'Hebel'; ask for the place name",
+              "candidates": []
+            },
+            "error": "unknown destination 'Hebel'; ask for the place name"
+          },
+          "ts": 1790425989.421243
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "9ec55e5443ce42d2ac12ba7aa87d70b7",
+            "operation_id": "turn-1",
+            "id": "c2",
+            "tool": "compute_route",
+            "error": "unresolved reference $c1.places[0].name"
+          },
+          "ts": 1790425989.422773
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "9ec55e5443ce42d2ac12ba7aa87d70b7",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "error": "unresolved reference $c2.route_id"
+          },
+          "ts": 1790425989.422959
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "3f60fadfc50b48f889569c82c78be199",
+            "operation_id": "turn-2",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Hebble"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_not_found",
+              "query": "Hebble",
+              "place_role": "destination",
+              "places": [],
+              "message": "unknown destination 'Hebble'; ask for the place name",
+              "candidates": []
+            },
+            "error": "unknown destination 'Hebble'; ask for the place name"
+          },
+          "ts": 1790425999.188363
+        }
+      ],
+      "actual_mutations": [],
+      "agent_say_non_ack": [
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "I couldn't find that place on this map. Please say its name again.",
+            "intent_version": 1,
+            "kind": "result"
+          },
+          "ts": 1790425989.4233768
+        },
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "I couldn't find that place on this map. Please say its name again.",
+            "intent_version": 2,
+            "kind": "result"
+          },
+          "ts": 1790425999.189728
+        }
+      ],
+      "speech_quality_status": "not_assessed_received_audio_review_pending",
+      "recognition_native_calls": [
+        {
+          "call_id": "stt-call-006",
+          "request_id": "stt-request-011",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144299255041250,
+            "unix_ns": 1790425984619153000,
+            "thread_id": 15888150528
+          },
+          "submitted": {
+            "monotonic_ns": 144299255060166,
+            "unix_ns": 1790425984619172000,
+            "thread_id": 15888150528
+          },
+          "worker_entry": {
+            "monotonic_ns": 144299255171291,
+            "unix_ns": 1790425984619283000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144300280463916,
+            "unix_ns": 1790425985644578000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Please take me to Hebel."
+          },
+          "caller_return": {
+            "monotonic_ns": 144300280612750,
+            "unix_ns": 1790425985644727000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": "Please take me to Hebel."
+          },
+          "submitted_equals_written_pcm": true
+        },
+        {
+          "call_id": "stt-call-007",
+          "request_id": "stt-request-013",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144310010911375,
+            "unix_ns": 1790425995375051000,
+            "thread_id": 15888150528
+          },
+          "submitted": {
+            "monotonic_ns": 144310011009166,
+            "unix_ns": 1790425995375149000,
+            "thread_id": 15888150528
+          },
+          "worker_entry": {
+            "monotonic_ns": 144310011593000,
+            "unix_ns": 1790425995375734000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144311074778625,
+            "unix_ns": 1790425996438921000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Third wave coffee Hebble"
+          },
+          "caller_return": {
+            "monotonic_ns": 144311074867833,
+            "unix_ns": 1790425996439010000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": "Third wave coffee Hebble"
+          },
+          "submitted_equals_written_pcm": true
+        }
+      ],
+      "stt_requests": [
+        {
+          "request_id": "stt-request-011",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144299253766458,
+            "unix_ns": 1790425984617879000,
+            "thread_id": 15888150528
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144300281256958,
+            "unix_ns": 1790425985645372000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-012",
+          "call_type": "transcribe_since",
+          "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144300284003458,
+            "unix_ns": 1790425985648118000,
+            "thread_id": 15888150528
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144300284038750,
+            "unix_ns": 1790425985648153000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-013",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144310007243916,
+            "unix_ns": 1790425995371384000,
+            "thread_id": 15888150528
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144311075388166,
+            "unix_ns": 1790425996439530000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-014",
+          "call_type": "transcribe_since",
+          "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144311078098375,
+            "unix_ns": 1790425996442240000,
+            "thread_id": 15888150528
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144311078121125,
+            "unix_ns": 1790425996442263000,
+            "thread_id": 15888150528,
+            "status": "returned",
+            "result_text": null
+          }
+        }
+      ],
+      "aec_room_totals": {
+        "frames": 432,
+        "substituted_frames": 17,
+        "samples_by_format": {
+          "24000Hz/1ch": 565200
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 20400
+        },
+        "recognition_indices": [
+          3
+        ]
+      },
+      "room_departure": {
+        "room": "car-audio-0625126b70d6402388e9e00338bc1a56",
+        "started_at": "2026-09-26T12:33:24.006966+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T12:33:24.007530+00:00",
+            "elapsed_seconds": 0.0005581659788731486,
+            "participants": [
+              {
+                "identity": "agent-AJ_2v53mpjzKsBv",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:24.511693+00:00",
+            "elapsed_seconds": 0.5047294579853769,
+            "participants": [
+              {
+                "identity": "agent-AJ_2v53mpjzKsBv",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:25.014713+00:00",
+            "elapsed_seconds": 1.0077471249969676,
+            "participants": [
+              {
+                "identity": "agent-AJ_2v53mpjzKsBv",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:25.516001+00:00",
+            "elapsed_seconds": 1.5090583330020308,
+            "participants": [
+              {
+                "identity": "agent-AJ_2v53mpjzKsBv",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:26.018243+00:00",
+            "elapsed_seconds": 2.011270124989096,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T12:33:26.028594+00:00",
+        "elapsed_seconds": 2.0216207499906886
+      },
+      "capture_receiver_errors": [],
+      "capture_cleanup_errors": [],
+      "finding": "Initial Hebbal is recognized as Hebel and followup Hebbal as Hebble. Initial result is place_not_found, not the declared Hebbal ambiguity. Followup planner reduces Third wave coffee Hebble to query Hebble and returns place_not_found; no activation."
+    },
+    {
+      "case_id": "distance_query_after_ambiguity",
+      "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+      "capture_status": "completed_observation",
+      "capture_exit_code": 0,
+      "published_inputs": [
+        {
+          "label": "initial",
+          "sha256": "0ff22e0be9cb32d33de8662badf6a36b2be6b90a64f8e063d985d3d6cecbc928",
+          "samples": 36352,
+          "published_samples": 36352
+        },
+        {
+          "label": "followup_1",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "samples": 67584,
+          "published_samples": 67584
+        }
+      ],
+      "recognition_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Navigate to Airport Road.",
+            "merged": "Navigate to Airport Road.",
+            "intent_version": 1
+          },
+          "ts": 1790426010.544327
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "How far is Manipal Hospital, Old Airport Road?",
+            "merged": "How far is Manipal Hospital, Old Airport Road?",
+            "intent_version": 2
+          },
+          "ts": 1790426025.065547
+        }
+      ],
+      "initial_place_outcome": {
+        "status": "error",
+        "code": "place_ambiguous",
+        "query": "Airport Road",
+        "place_role": "destination",
+        "places": [],
+        "message": "ambiguous destination 'Airport Road'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_HOSP",
+            "name": "Manipal Hospital, Old Airport Road"
+          },
+          {
+            "place_id": "K_SBUX_AIR",
+            "name": "Starbucks, Airport Road"
+          }
+        ]
+      },
+      "plans": [
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 1,
+            "utterance": "Navigate to Airport Road.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Airport Road"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Airport Road"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].name"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to Airport Road."
+          },
+          "ts": 1790426014.088177
+        },
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 2,
+            "utterance": "How far is Manipal Hospital, Old Airport Road?",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Manipal Hospital, Old Airport Road"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Manipal Hospital, Old Airport Road"
+                }
+              }
+            ],
+            "reply": "Searching for Manipal Hospital, Old Airport Road."
+          },
+          "ts": 1790426027.583167
+        }
+      ],
+      "plan_rejected": [],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790426014.090174,
+          "attempt_id": "3f63a6a3082649f78b9c24e65b896980:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426014.094045,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "timestamp_start": 1790426027.5843468,
+          "attempt_id": "168ef089c8654627a2db660b2c51f520:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426027.590935,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "physical_status_counts": {
+        "error": 1,
+        "done": 1
+      },
+      "terminal_tool_events": [
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "3f63a6a3082649f78b9c24e65b896980",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Airport Road"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_ambiguous",
+              "query": "Airport Road",
+              "place_role": "destination",
+              "places": [],
+              "message": "ambiguous destination 'Airport Road'; ask for the place name",
+              "candidates": [
+                {
+                  "place_id": "P_HOSP",
+                  "name": "Manipal Hospital, Old Airport Road"
+                },
+                {
+                  "place_id": "K_SBUX_AIR",
+                  "name": "Starbucks, Airport Road"
+                }
+              ]
+            },
+            "error": "ambiguous destination 'Airport Road'; ask for the place name"
+          },
+          "ts": 1790426014.093909
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "3f63a6a3082649f78b9c24e65b896980",
+            "operation_id": "turn-1",
+            "id": "c2",
+            "tool": "compute_route",
+            "error": "unresolved reference $c1.places[0].name"
+          },
+          "ts": 1790426014.095246
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "3f63a6a3082649f78b9c24e65b896980",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "error": "unresolved reference $c2.route_id"
+          },
+          "ts": 1790426014.0954611
+        },
+        {
+          "type": "tool_done",
+          "data": {
+            "execution_id": "168ef089c8654627a2db660b2c51f520",
+            "operation_id": "turn-2",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Manipal Hospital, Old Airport Road"
+            },
+            "result": {
+              "status": "success",
+              "places": [
+                {
+                  "place_id": "P_HOSP",
+                  "name": "Manipal Hospital, Old Airport Road",
+                  "category": "hospital",
+                  "lat": 12.9592,
+                  "lng": 77.6485
+                }
+              ]
+            },
+            "stale": false,
+            "duration_ms": 6
+          },
+          "ts": 1790426027.590822
+        }
+      ],
+      "actual_mutations": [],
+      "agent_say_non_ack": [
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+            "intent_version": 1,
+            "kind": "result"
+          },
+          "ts": 1790426014.095902
+        },
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+            "intent_version": 2,
+            "kind": "result"
+          },
+          "ts": 1790426029.645243
+        }
+      ],
+      "speech_quality_status": "not_assessed_received_audio_review_pending",
+      "recognition_native_calls": [
+        {
+          "call_id": "stt-call-008",
+          "request_id": "stt-request-015",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144324144368208,
+            "unix_ns": 1790426009508544000,
+            "thread_id": 15918428160
+          },
+          "submitted": {
+            "monotonic_ns": 144324144384791,
+            "unix_ns": 1790426009508560000,
+            "thread_id": 15918428160
+          },
+          "worker_entry": {
+            "monotonic_ns": 144324144472750,
+            "unix_ns": 1790426009508648000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144325177824333,
+            "unix_ns": 1790426010542003000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "caller_return": {
+            "monotonic_ns": 144325177938458,
+            "unix_ns": 1790426010542117000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": "Navigate to Airport Road."
+          },
+          "submitted_equals_written_pcm": true
+        },
+        {
+          "call_id": "stt-call-009",
+          "request_id": "stt-request-017",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144338651892333,
+            "unix_ns": 1790426024016105000,
+            "thread_id": 15918428160
+          },
+          "submitted": {
+            "monotonic_ns": 144338651941500,
+            "unix_ns": 1790426024016154000,
+            "thread_id": 15918428160
+          },
+          "worker_entry": {
+            "monotonic_ns": 144338652084250,
+            "unix_ns": 1790426024016297000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144339698718666,
+            "unix_ns": 1790426025062934000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "How far is Manipal Hospital, Old Airport Road?"
+          },
+          "caller_return": {
+            "monotonic_ns": 144339698819916,
+            "unix_ns": 1790426025063035000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": "How far is Manipal Hospital, Old Airport Road?"
+          },
+          "submitted_equals_written_pcm": true
+        }
+      ],
+      "stt_requests": [
+        {
+          "request_id": "stt-request-015",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144324143440166,
+            "unix_ns": 1790426009507616000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144325178509541,
+            "unix_ns": 1790426010542688000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-016",
+          "call_type": "transcribe_since",
+          "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144325180741958,
+            "unix_ns": 1790426010544920000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144325180756708,
+            "unix_ns": 1790426010544935000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-017",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144338649558833,
+            "unix_ns": 1790426024013772000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144339699293916,
+            "unix_ns": 1790426025063509000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-018",
+          "call_type": "transcribe_since",
+          "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144339701878333,
+            "unix_ns": 1790426025066094000,
+            "thread_id": 15918428160
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144339701894333,
+            "unix_ns": 1790426025066110000,
+            "thread_id": 15918428160,
+            "status": "returned",
+            "result_text": null
+          }
+        }
+      ],
+      "aec_room_totals": {
+        "frames": 598,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 764400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          4
+        ]
+      },
+      "room_departure": {
+        "room": "car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+        "started_at": "2026-09-26T12:33:56.869903+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T12:33:56.870779+00:00",
+            "elapsed_seconds": 0.0008668749942444265,
+            "participants": [
+              {
+                "identity": "agent-AJ_kxPGafDHwMVU",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:57.375812+00:00",
+            "elapsed_seconds": 0.505907415994443,
+            "participants": [
+              {
+                "identity": "agent-AJ_kxPGafDHwMVU",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:57.879143+00:00",
+            "elapsed_seconds": 1.009257666009944,
+            "participants": [
+              {
+                "identity": "agent-AJ_kxPGafDHwMVU",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:58.382861+00:00",
+            "elapsed_seconds": 1.5129546250100248,
+            "participants": [
+              {
+                "identity": "agent-AJ_kxPGafDHwMVU",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:33:58.886242+00:00",
+            "elapsed_seconds": 2.01633166600368,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T12:33:58.887930+00:00",
+        "elapsed_seconds": 2.0180150829837658
+      },
+      "capture_receiver_errors": [],
+      "capture_cleanup_errors": [],
+      "finding": "Both final recognition strings preserve the declared question. Initial structured place_ambiguous search is followed by a hospital lookup only. No compute_route occurs and no grounded 2.2km result is returned. Text summary explicitly says distance is not provided. No navigation mutation occurs."
+    },
+    {
+      "case_id": "indiranagar_ather",
+      "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+      "capture_status": "completed_observation",
+      "capture_exit_code": 0,
+      "published_inputs": [
+        {
+          "label": "initial",
+          "sha256": "99bfa13fb710dc12782dfa9a6f6a588d4bb40d4a108dbf998a59f3b613116203",
+          "samples": 42496,
+          "published_samples": 42496
+        },
+        {
+          "label": "followup_1",
+          "sha256": "2ab0432ac4f80aea41b9c68db5b343ac713015be46907eab1a2811bfccb431c6",
+          "samples": 51712,
+          "published_samples": 51712
+        }
+      ],
+      "recognition_finals": [
+        {
+          "type": "user_final",
+          "data": {
+            "text": "Please navigate to Endure Inagar.",
+            "merged": "Please navigate to Endure Inagar.",
+            "intent_version": 1
+          },
+          "ts": 1790426043.00493
+        },
+        {
+          "type": "user_final",
+          "data": {
+            "text": "I mean other grid charger in Dureniga.",
+            "merged": "I mean other grid charger in Dureniga.",
+            "intent_version": 2
+          },
+          "ts": 1790426055.553699
+        }
+      ],
+      "initial_place_outcome": {
+        "status": "error",
+        "code": "place_not_found",
+        "query": "Endure Inagar",
+        "place_role": "destination",
+        "places": [],
+        "message": "unknown destination 'Endure Inagar'; ask for the place name",
+        "candidates": [
+          {
+            "place_id": "P_HOME",
+            "name": "Home (Indiranagar)"
+          }
+        ]
+      },
+      "plans": [
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 1,
+            "utterance": "Please navigate to Endure Inagar.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [],
+            "slots": {
+              "query": "Endure Inagar"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "Endure Inagar"
+                }
+              },
+              {
+                "id": "c2",
+                "tool": "compute_route",
+                "args": {
+                  "destination": "$c1.places[0].place_id"
+                }
+              },
+              {
+                "id": "c3",
+                "tool": "start_navigation",
+                "args": {
+                  "route_id": "$c2.route_id"
+                }
+              }
+            ],
+            "reply": "Navigating to Endure Inagar."
+          },
+          "ts": 1790426046.764852
+        },
+        {
+          "type": "plan_ready",
+          "data": {
+            "intent_version": 2,
+            "utterance": "I mean other grid charger in Dureniga.",
+            "repaired": "",
+            "complete": true,
+            "corrections": [
+              {
+                "slot": "query",
+                "from": "Endure Inagar",
+                "to": "other grid charger in Dureniga"
+              }
+            ],
+            "slots": {
+              "query": "other grid charger in Dureniga"
+            },
+            "calls": [
+              {
+                "id": "c1",
+                "tool": "search_destination",
+                "args": {
+                  "query": "other grid charger in Dureniga"
+                }
+              }
+            ],
+            "reply": "Searching for other grid charger in Dureniga."
+          },
+          "ts": 1790426058.8536582
+        }
+      ],
+      "plan_rejected": [],
+      "physical_calls": [
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "Endure Inagar"
+          },
+          "timestamp_start": 1790426046.767518,
+          "attempt_id": "c47af74cf5914d01b4e262d4f363f294:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426046.7725859,
+          "end_evidence": "executor_observation_ended"
+        },
+        {
+          "function": "search_destination",
+          "args": {
+            "query": "other grid charger in Dureniga"
+          },
+          "timestamp_start": 1790426058.855946,
+          "attempt_id": "c9ceb9173a394399917402f03ec813bd:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790426058.860857,
+          "end_evidence": "executor_observation_ended"
+        }
+      ],
+      "physical_status_counts": {
+        "error": 2
+      },
+      "terminal_tool_events": [
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "c47af74cf5914d01b4e262d4f363f294",
+            "operation_id": "turn-1",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "Endure Inagar"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_not_found",
+              "query": "Endure Inagar",
+              "place_role": "destination",
+              "places": [],
+              "message": "unknown destination 'Endure Inagar'; ask for the place name",
+              "candidates": [
+                {
+                  "place_id": "P_HOME",
+                  "name": "Home (Indiranagar)"
+                }
+              ]
+            },
+            "error": "unknown destination 'Endure Inagar'; ask for the place name"
+          },
+          "ts": 1790426046.772442
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "c47af74cf5914d01b4e262d4f363f294",
+            "operation_id": "turn-1",
+            "id": "c2",
+            "tool": "compute_route",
+            "error": "unresolved reference $c1.places[0].place_id"
+          },
+          "ts": 1790426046.7739599
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "c47af74cf5914d01b4e262d4f363f294",
+            "operation_id": "turn-1",
+            "id": "c3",
+            "tool": "start_navigation",
+            "error": "unresolved reference $c2.route_id"
+          },
+          "ts": 1790426046.774199
+        },
+        {
+          "type": "tool_error",
+          "data": {
+            "execution_id": "c9ceb9173a394399917402f03ec813bd",
+            "operation_id": "turn-2",
+            "id": "c1",
+            "tool": "search_destination",
+            "args": {
+              "query": "other grid charger in Dureniga"
+            },
+            "result": {
+              "status": "error",
+              "code": "place_not_found",
+              "query": "other grid charger in Dureniga",
+              "place_role": "destination",
+              "places": [],
+              "message": "unknown destination 'other grid charger in Dureniga'; ask for the place name",
+              "candidates": [
+                {
+                  "place_id": "C_ATHER_IND",
+                  "name": "Ather Grid charger, Indiranagar"
+                }
+              ]
+            },
+            "error": "unknown destination 'other grid charger in Dureniga'; ask for the place name"
+          },
+          "ts": 1790426058.860754
+        }
+      ],
+      "actual_mutations": [],
+      "agent_say_non_ack": [
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "I couldn't find that place. Please say its full name, such as Home (Indiranagar).",
+            "intent_version": 1,
+            "kind": "result"
+          },
+          "ts": 1790426046.774775
+        },
+        {
+          "type": "agent_say",
+          "data": {
+            "text": "I couldn't find that place. Please say its full name, such as Ather Grid charger, Indiranagar.",
+            "intent_version": 2,
+            "kind": "result"
+          },
+          "ts": 1790426058.862087
+        }
+      ],
+      "speech_quality_status": "not_assessed_received_audio_review_pending",
+      "recognition_native_calls": [
+        {
+          "call_id": "stt-call-010",
+          "request_id": "stt-request-019",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144356654242500,
+            "unix_ns": 1790426042018501000,
+            "thread_id": 15955849216
+          },
+          "submitted": {
+            "monotonic_ns": 144356654255000,
+            "unix_ns": 1790426042018514000,
+            "thread_id": 15955849216
+          },
+          "worker_entry": {
+            "monotonic_ns": 144356654328625,
+            "unix_ns": 1790426042018587000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144357638586125,
+            "unix_ns": 1790426043002847000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "Please navigate to Endure Inagar."
+          },
+          "caller_return": {
+            "monotonic_ns": 144357638686875,
+            "unix_ns": 1790426043002948000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": "Please navigate to Endure Inagar."
+          },
+          "submitted_equals_written_pcm": true
+        },
+        {
+          "call_id": "stt-call-011",
+          "request_id": "stt-request-021",
+          "call_type": "_recognize_impl",
+          "engine_api": "transcribe",
+          "engine_api_entry": {
+            "monotonic_ns": 144369055461041,
+            "unix_ns": 1790426054419752000,
+            "thread_id": 15955849216
+          },
+          "submitted": {
+            "monotonic_ns": 144369055569333,
+            "unix_ns": 1790426054419860000,
+            "thread_id": 15955849216
+          },
+          "worker_entry": {
+            "monotonic_ns": 144369055703583,
+            "unix_ns": 1790426054419994000,
+            "thread_id": 6177124352
+          },
+          "native_completion": {
+            "monotonic_ns": 144370186513916,
+            "unix_ns": 1790426055550807000,
+            "thread_id": 6177124352,
+            "status": "returned",
+            "result_text": "I mean other grid charger in Dureniga."
+          },
+          "caller_return": {
+            "monotonic_ns": 144370186625625,
+            "unix_ns": 1790426055550919000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": "I mean other grid charger in Dureniga."
+          },
+          "submitted_equals_written_pcm": true
+        }
+      ],
+      "stt_requests": [
+        {
+          "request_id": "stt-request-019",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144356653075583,
+            "unix_ns": 1790426042017334000,
+            "thread_id": 15955849216
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144357639088083,
+            "unix_ns": 1790426043003349000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-020",
+          "call_type": "transcribe_since",
+          "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144357641177041,
+            "unix_ns": 1790426043005438000,
+            "thread_id": 15955849216
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144357641193500,
+            "unix_ns": 1790426043005455000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-021",
+          "call_type": "_recognize_impl",
+          "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144369053343375,
+            "unix_ns": 1790426054417634000,
+            "thread_id": 15955849216
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144370187291291,
+            "unix_ns": 1790426055551585000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": null
+          }
+        },
+        {
+          "request_id": "stt-request-022",
+          "call_type": "transcribe_since",
+          "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+          "identity_error": null,
+          "entry": {
+            "monotonic_ns": 144370190000000,
+            "unix_ns": 1790426055554293000,
+            "thread_id": 15955849216
+          },
+          "stages": [],
+          "return": {
+            "monotonic_ns": 144370190014041,
+            "unix_ns": 1790426055554307000,
+            "thread_id": 15955849216,
+            "status": "returned",
+            "result_text": null
+          }
+        }
+      ],
+      "aec_room_totals": {
+        "frames": 528,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 680400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          5
+        ]
+      },
+      "room_departure": {
+        "room": "car-audio-af3febacdb094e40b47e01fd5111af8b",
+        "started_at": "2026-09-26T12:34:25.642013+00:00",
+        "observations": [
+          {
+            "at": "2026-09-26T12:34:25.643841+00:00",
+            "elapsed_seconds": 0.0018303329998161644,
+            "participants": [
+              {
+                "identity": "agent-AJ_NkzCzaWKuMTJ",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:34:26.158011+00:00",
+            "elapsed_seconds": 0.5159879170241766,
+            "participants": [
+              {
+                "identity": "agent-AJ_NkzCzaWKuMTJ",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:34:26.661031+00:00",
+            "elapsed_seconds": 1.0189958330010995,
+            "participants": [
+              {
+                "identity": "agent-AJ_NkzCzaWKuMTJ",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:34:27.164320+00:00",
+            "elapsed_seconds": 1.5222820000199135,
+            "participants": [
+              {
+                "identity": "agent-AJ_NkzCzaWKuMTJ",
+                "kind": 4
+              }
+            ]
+          },
+          {
+            "at": "2026-09-26T12:34:27.667242+00:00",
+            "elapsed_seconds": 2.0252075000025798,
+            "participants": []
+          }
+        ],
+        "agent_departed": true,
+        "finished_at": "2026-09-26T12:34:27.668434+00:00",
+        "elapsed_seconds": 2.026389958016807
+      },
+      "capture_receiver_errors": [],
+      "capture_cleanup_errors": [],
+      "finding": "Initial Indiranagar is recognized as Endure Inagar; followup becomes I mean other grid charger in Dureniga. Both searches return place_not_found, with suggested candidates retained. No declared ambiguity or activation is observed."
+    }
+  ],
+  "cleanup": {
+    "suite_status": "completed",
+    "finished_at": "2026-09-26T12:34:29.088626+00:00",
+    "service_cleanup_complete": true,
+    "service_rows": [
+      {
+        "role": "worker",
+        "pid": 62741,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/controlled_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/worker-manifest.json",
+          "--policy",
+          "baseline",
+          "--protocol",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/protocol.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T12:34:28.895188+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 62727,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T12:34:29.044340+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 62725,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T12:34:29.054448+00:00"
+      }
+    ],
+    "room_and_trace_cleanup_log_rows": [
+      {
+        "line": 25,
+        "message": "room cleanup started: car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:32:36.142228+00:00"
+      },
+      {
+        "line": 26,
+        "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/traces/car-audio-b9f012f5e5f84d2dae5ae56b77ff3311.jsonl complete=True accepted=49 flushed=49 rejected=0 pending=False",
+        "level": "INFO",
+        "name": "prism.trace",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:32:36.143164+00:00"
+      },
+      {
+        "line": 27,
+        "message": "room cleanup finished: car-audio-b9f012f5e5f84d2dae5ae56b77ff3311",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:32:36.143237+00:00"
+      },
+      {
+        "line": 39,
+        "message": "room cleanup started: car-audio-52e64fcec77447818e8d80e80ac80853",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:01.754656+00:00"
+      },
+      {
+        "line": 40,
+        "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/traces/car-audio-52e64fcec77447818e8d80e80ac80853.jsonl complete=True accepted=47 flushed=47 rejected=0 pending=False",
+        "level": "INFO",
+        "name": "prism.trace",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:01.755414+00:00"
+      },
+      {
+        "line": 41,
+        "message": "room cleanup finished: car-audio-52e64fcec77447818e8d80e80ac80853",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:01.755468+00:00"
+      },
+      {
+        "line": 53,
+        "message": "room cleanup started: car-audio-0625126b70d6402388e9e00338bc1a56",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:25.976347+00:00"
+      },
+      {
+        "line": 54,
+        "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/traces/car-audio-0625126b70d6402388e9e00338bc1a56.jsonl complete=True accepted=49 flushed=49 rejected=0 pending=False",
+        "level": "INFO",
+        "name": "prism.trace",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:25.977946+00:00"
+      },
+      {
+        "line": 55,
+        "message": "room cleanup finished: car-audio-0625126b70d6402388e9e00338bc1a56",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:25.978075+00:00"
+      },
+      {
+        "line": 70,
+        "message": "room cleanup started: car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:58.835416+00:00"
+      },
+      {
+        "line": 71,
+        "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/traces/car-audio-be7b2d773dd04bbeb5645f7716701ab1.jsonl complete=True accepted=48 flushed=48 rejected=0 pending=False",
+        "level": "INFO",
+        "name": "prism.trace",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:58.837929+00:00"
+      },
+      {
+        "line": 72,
+        "message": "room cleanup finished: car-audio-be7b2d773dd04bbeb5645f7716701ab1",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:33:58.838041+00:00"
+      },
+      {
+        "line": 84,
+        "message": "room cleanup started: car-audio-af3febacdb094e40b47e01fd5111af8b",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:34:27.543803+00:00"
+      },
+      {
+        "line": 85,
+        "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19-baseline/local-stack-run1/traces/car-audio-af3febacdb094e40b47e01fd5111af8b.jsonl complete=True accepted=49 flushed=49 rejected=0 pending=False",
+        "level": "INFO",
+        "name": "prism.trace",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:34:27.544535+00:00"
+      },
+      {
+        "line": 86,
+        "message": "room cleanup finished: car-audio-af3febacdb094e40b47e01fd5111af8b",
+        "level": "INFO",
+        "name": "prism",
+        "pid": 62741,
+        "timestamp": "2026-09-26T12:34:27.544595+00:00"
+      }
+    ],
+    "worker_exit": {
+      "started_at_utc": "2026-09-26T12:31:47.435223+00:00",
+      "status": "launcher_exited",
+      "exception": "SystemExit(0)",
+      "finished_at_utc": "2026-09-26T12:34:27.709816+00:00",
+      "diagnostics_saved": true,
+      "diagnostic_error": null,
+      "kokoro_directory_at_exit": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro",
+      "module_provenance_errors": [],
+      "initial_modules_unchanged": true,
+      "policy": "baseline",
+      "agent_package_root": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package"
+    },
+    "diagnostic_exit": {
+      "started_at_utc": "2026-09-26T12:31:47.435223+00:00",
+      "status": "launcher_exited",
+      "exception": "SystemExit(0)",
+      "finished_at_utc": "2026-09-26T12:34:27.709816+00:00",
+      "diagnostics_saved": true,
+      "diagnostic_error": null,
+      "kokoro_directory_at_exit": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro",
+      "module_provenance_errors": [],
+      "initial_modules_unchanged": true
+    },
+    "fresh_pid_absence_check_performed": false,
+    "server_job_status_limit": "JS_FAILED server labels remain separate from completed application cleanup and worker exit0."
+  },
+  "worker_provenance": {
+    "policy": "baseline",
+    "agent_package_root": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package",
+    "loaded_modules": 23,
+    "all_selected_modules_match_run_freeze": true,
+    "manifest_sources_match_run_freeze": true,
+    "kokoro_directory": {
+      "package_default": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/baseline-package/models/kokoro",
+      "selected": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro",
+      "reference_sha256": {
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+        "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/models/kokoro/voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+      }
+    }
+  },
+  "stt_diagnostics": {
+    "native_calls_including_warmup": 11,
+    "request_rows": 22,
+    "call_type_counts": {
+      "warmup": 1,
+      "_recognize_impl": 10
+    },
+    "request_type_counts": {
+      "load": 1,
+      "warmup": 1,
+      "_recognize_impl": 10,
+      "transcribe_since": 10
+    },
+    "dropped_calls": 0,
+    "dropped_requests": 0,
+    "observation_error_count": 0,
+    "pending_native_call_ids": [],
+    "source_unchanged": true
+  },
+  "aec_diagnostics": {
+    "status": "launcher_exited",
+    "observation_error_count": 0,
+    "observation_errors": [],
+    "source_hashes_unchanged": true,
+    "room_totals": {
+      "car-audio-b9f012f5e5f84d2dae5ae56b77ff3311": {
+        "frames": 756,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 954000
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          1
+        ]
+      },
+      "car-audio-52e64fcec77447818e8d80e80ac80853": {
+        "frames": 460,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 598800
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          2
+        ]
+      },
+      "car-audio-0625126b70d6402388e9e00338bc1a56": {
+        "frames": 432,
+        "substituted_frames": 17,
+        "samples_by_format": {
+          "24000Hz/1ch": 565200
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 20400
+        },
+        "recognition_indices": [
+          3
+        ]
+      },
+      "car-audio-be7b2d773dd04bbeb5645f7716701ab1": {
+        "frames": 598,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 764400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          4
+        ]
+      },
+      "car-audio-af3febacdb094e40b47e01fd5111af8b": {
+        "frames": 528,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 680400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          5
+        ]
+      }
+    }
+  },
+  "logs": {
+    "worker.log": {
+      "line_count": 88,
+      "warning_count": 7,
+      "error_count": 0,
+      "unparsed_warning_lines": [
+        {
+          "line": 11,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        }
+      ],
+      "warnings": [
+        {
+          "line": 8,
+          "raw": "{\"message\": \"event loop blocked for 214ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client\", \"level\": \"WARNING\", \"name\": \"livekit.agents\", \"duration\": 0.2142, \"threshold\": 0.1, \"gc_time\": 0.0, \"cpu_time\": 0.0003, \"stack\": \"# no sample: the block ended before the watchdog looked\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:31:53.912124+00:00\"}"
+        },
+        {
+          "line": 24,
+          "raw": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 12\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:32:36.140237+00:00\"}"
+        },
+        {
+          "line": 38,
+          "raw": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 4477\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:33:01.752380+00:00\"}"
+        },
+        {
+          "line": 52,
+          "raw": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 7429\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:33:25.971160+00:00\"}"
+        },
+        {
+          "line": 66,
+          "raw": "{\"message\": \"words count mismatch on 100.0% of the lines (1/1)\", \"level\": \"WARNING\", \"name\": \"phonemizer\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:33:49.649912+00:00\"}"
+        },
+        {
+          "line": 69,
+          "raw": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 10263\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:33:58.831029+00:00\"}"
+        },
+        {
+          "line": 83,
+          "raw": "{\"message\": \"livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 13996\", \"level\": \"WARNING\", \"name\": \"livekit\", \"pid\": 62741, \"timestamp\": \"2026-09-26T12:34:27.542031+00:00\"}"
+        }
+      ],
+      "errors": [],
+      "server_job_end_rows": []
+    },
+    "livekit.log": {
+      "line_count": 150,
+      "warning_count": 24,
+      "error_count": 1,
+      "unparsed_warning_lines": [],
+      "warnings": [
+        {
+          "line": 17,
+          "raw": "2026-09-26T18:02:34.129+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b9f012f5e5f84d2dae5ae56b77ff3311\", \"roomID\": \"RM_NGRuwrqmTnQ9\", \"participant\": \"audio-probe-222b89ff025a49159a973bc5e8c49683\", \"participantID\": \"PA_RawhSRA58sYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be0ea4008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 18,
+          "raw": "2026-09-26T18:02:34.129+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b9f012f5e5f84d2dae5ae56b77ff3311\", \"roomID\": \"RM_NGRuwrqmTnQ9\", \"participant\": \"audio-probe-222b89ff025a49159a973bc5e8c49683\", \"participantID\": \"PA_RawhSRA58sYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be0ea4008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 19,
+          "raw": "2026-09-26T18:02:34.129+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b9f012f5e5f84d2dae5ae56b77ff3311\", \"roomID\": \"RM_NGRuwrqmTnQ9\", \"participant\": \"audio-probe-222b89ff025a49159a973bc5e8c49683\", \"participantID\": \"PA_RawhSRA58sYY\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be0ea4008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 46,
+          "raw": "2026-09-26T18:02:59.741+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"audio-probe-68aca62c0a1e4f5cb23783ec07a5dc71\", \"participantID\": \"PA_hBWKiNDqU4Eo\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be111a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 47,
+          "raw": "2026-09-26T18:02:59.741+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"audio-probe-68aca62c0a1e4f5cb23783ec07a5dc71\", \"participantID\": \"PA_hBWKiNDqU4Eo\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be111a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 48,
+          "raw": "2026-09-26T18:02:59.741+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"audio-probe-68aca62c0a1e4f5cb23783ec07a5dc71\", \"participantID\": \"PA_hBWKiNDqU4Eo\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be111a008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 55,
+          "raw": "2026-09-26T18:03:01.753+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"agent-AJ_S7QZvnNbC6Fy\", \"participantID\": \"PA_ugQa8MyjbMxj\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be1166388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 56,
+          "raw": "2026-09-26T18:03:01.753+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"agent-AJ_S7QZvnNbC6Fy\", \"participantID\": \"PA_ugQa8MyjbMxj\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be1166388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 57,
+          "raw": "2026-09-26T18:03:01.753+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-52e64fcec77447818e8d80e80ac80853\", \"roomID\": \"RM_6iFsiEZ97X9U\", \"participant\": \"agent-AJ_S7QZvnNbC6Fy\", \"participantID\": \"PA_ugQa8MyjbMxj\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be1166388] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 75,
+          "raw": "2026-09-26T18:03:23.951+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-0625126b70d6402388e9e00338bc1a56\", \"roomID\": \"RM_kGigmiJH3j5F\", \"participant\": \"audio-probe-0187274e6c2b4903a4ba6c6a5e67d3a9\", \"participantID\": \"PA_cssPCjoFoKFW\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be0b8d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 76,
+          "raw": "2026-09-26T18:03:23.951+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-0625126b70d6402388e9e00338bc1a56\", \"roomID\": \"RM_kGigmiJH3j5F\", \"participant\": \"audio-probe-0187274e6c2b4903a4ba6c6a5e67d3a9\", \"participantID\": \"PA_cssPCjoFoKFW\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be0b8d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 77,
+          "raw": "2026-09-26T18:03:23.952+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-0625126b70d6402388e9e00338bc1a56\", \"roomID\": \"RM_kGigmiJH3j5F\", \"participant\": \"audio-probe-0187274e6c2b4903a4ba6c6a5e67d3a9\", \"participantID\": \"PA_cssPCjoFoKFW\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be0b8d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 102,
+          "raw": "2026-09-26T18:03:56.822+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"audio-probe-8d2734e2209045d69ef1faa322c4b5d7\", \"participantID\": \"PA_o2iXzxiLYncZ\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be0eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 103,
+          "raw": "2026-09-26T18:03:56.822+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"audio-probe-8d2734e2209045d69ef1faa322c4b5d7\", \"participantID\": \"PA_o2iXzxiLYncZ\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be0eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 104,
+          "raw": "2026-09-26T18:03:56.822+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"audio-probe-8d2734e2209045d69ef1faa322c4b5d7\", \"participantID\": \"PA_o2iXzxiLYncZ\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be0eb6708] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 112,
+          "raw": "2026-09-26T18:03:58.832+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"agent-AJ_kxPGafDHwMVU\", \"participantID\": \"PA_fo3XwCZoB326\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be0c48a88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 113,
+          "raw": "2026-09-26T18:03:58.832+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"agent-AJ_kxPGafDHwMVU\", \"participantID\": \"PA_fo3XwCZoB326\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be0c48a88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 114,
+          "raw": "2026-09-26T18:03:58.832+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-be7b2d773dd04bbeb5645f7716701ab1\", \"roomID\": \"RM_CaQeezFhtaK3\", \"participant\": \"agent-AJ_kxPGafDHwMVU\", \"participantID\": \"PA_fo3XwCZoB326\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be0c48a88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 131,
+          "raw": "2026-09-26T18:04:25.537+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"audio-probe-ea91cc05c6724485809b0b7f689509da\", \"participantID\": \"PA_9Fdi9ESPLDMi\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be1101508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 132,
+          "raw": "2026-09-26T18:04:25.537+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"audio-probe-ea91cc05c6724485809b0b7f689509da\", \"participantID\": \"PA_9Fdi9ESPLDMi\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be1101508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 133,
+          "raw": "2026-09-26T18:04:25.537+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"audio-probe-ea91cc05c6724485809b0b7f689509da\", \"participantID\": \"PA_9Fdi9ESPLDMi\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be1101508] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 140,
+          "raw": "2026-09-26T18:04:27.542+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"agent-AJ_NkzCzaWKuMTJ\", \"participantID\": \"PA_CRjGeh3zfp8o\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x131be0ff2008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 141,
+          "raw": "2026-09-26T18:04:27.542+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"agent-AJ_NkzCzaWKuMTJ\", \"participantID\": \"PA_CRjGeh3zfp8o\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x131be0ff2008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 142,
+          "raw": "2026-09-26T18:04:27.542+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-af3febacdb094e40b47e01fd5111af8b\", \"roomID\": \"RM_wiuS8RZNgn9F\", \"participant\": \"agent-AJ_NkzCzaWKuMTJ\", \"participantID\": \"PA_CRjGeh3zfp8o\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x131be0ff2008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        }
+      ],
+      "errors": [
+        {
+          "line": 26,
+          "raw": "2026-09-26T18:02:36.141+0530\tERROR\tlivekit.pion.udp_mux\tv4@v4.4.0/udp_mux.go:607\tFailed to write packet: io: read/write on closed pipe"
+        }
+      ],
+      "server_job_end_rows": [
+        {
+          "line": 29,
+          "raw": "2026-09-26T18:02:36.142+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_AXK6qugdesbx\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_Uye7ZzmwNFUu\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+        },
+        {
+          "line": 58,
+          "raw": "2026-09-26T18:03:01.754+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_AXK6qugdesbx\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_S7QZvnNbC6Fy\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+        },
+        {
+          "line": 84,
+          "raw": "2026-09-26T18:03:25.972+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_AXK6qugdesbx\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_2v53mpjzKsBv\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+        },
+        {
+          "line": 111,
+          "raw": "2026-09-26T18:03:58.832+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_AXK6qugdesbx\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_kxPGafDHwMVU\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+        },
+        {
+          "line": 143,
+          "raw": "2026-09-26T18:04:27.544+0530\tINFO\tlivekit.agents\tagent/worker.go:556\tjob ended\t{\"workerID\": \"AW_AXK6qugdesbx\", \"agentName\": \"\", \"deployment\": \"\", \"agentID\": \"\", \"version\": \"1.8.3\", \"jobType\": \"JT_ROOM\", \"jobID\": \"AJ_NkzCzaWKuMTJ\", \"status\": \"JS_FAILED\", \"error\": \"agent worker left the room\"}"
+        }
+      ]
+    },
+    "llm.log": {
+      "line_count": 108,
+      "warning_count": 0,
+      "error_count": 0,
+      "unparsed_warning_lines": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks."
+        }
+      ],
+      "warnings": [],
+      "errors": [],
+      "server_job_end_rows": []
+    }
+  },
+  "watchdog": [
+    {
+      "line": 8,
+      "message": "event loop blocked for 214ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+      "level": "WARNING",
+      "name": "livekit.agents",
+      "duration": 0.2142,
+      "threshold": 0.1,
+      "gc_time": 0.0,
+      "cpu_time": 0.0003,
+      "stack": "# no sample: the block ended before the watchdog looked",
+      "pid": 62741,
+      "timestamp": "2026-09-26T12:31:53.912124+00:00"
+    }
+  ],
+  "memory": {
+    "samples": 319,
+    "scope": "System memory/swap plus owned stack parents and descendants; excludes the separate trial client. RSS is not total allocation.",
+    "system_available_min_bytes": 360022016,
+    "system_swap_used_initial_bytes": 5817040896,
+    "system_swap_used_final_bytes": 10103095296,
+    "system_swap_used_max_bytes": 10146217984,
+    "max_summed_rss_bytes_by_role": {
+      "livekit": 56164352,
+      "llm": 4856643584,
+      "worker": 1070202880
+    },
+    "sampling_errors": [
+      {
+        "at_utc": "2026-09-26T12:34:28.810390+00:00",
+        "role": "worker",
+        "error": "process no longer exists (pid=62741)"
+      }
+    ],
+    "causal_attribution": null
+  },
+  "limits": [
+    "No received-audio factual or pronunciation pass is assigned from agent_say text.",
+    "Observed recognition substitutions and omitted plans are separate; no claim that ASR alone explains all failures.",
+    "No baseline-to-candidate causal claim or generalization from these five development cases.",
+    "Diagnostic AEC totals record substitutions, not a causal attribution for recognition errors.",
+    "Raw trace evidence is server-side; this review does not infer authenticated client delivery from it."
+  ],
+  "evidence_sha256": {
+    "results/iteration19-baseline/run-report.json": "8534ebf4e9a3548e8e616eb1fac1630a39f3a30169fa136379e21d1f562d02fe",
+    "results/iteration19-baseline/local-stack-run1/tool-calls.jsonl": "0714b46eab46352b8f20dc67b97a7a2a90a73bd79ae7768b811729a37d8f68ea",
+    "results/iteration19-baseline/local-stack-run1/stt-diagnostics/report.json": "b03d999d188d8957fa5cdfcb7d8ee648c1b1f11ff4285371503bbe7e7d5913ac",
+    "results/iteration19-baseline/local-stack-run1/aec-discard-diagnostics.json": "7ee5c797edaaffe7414f04cf6a06fc4f826114418315afc0148092108c7add1c",
+    "results/iteration19-baseline/local-stack-run1/experiment-worker-selection.json": "990e46bc3aad6ef85a011718a592f21afd44a0fd7023455f8c2babadebddb3ec",
+    "results/iteration19-baseline/local-stack-run1/experiment-worker-exit.json": "567162d44b4b3b44324819a9aa699eee1bd951565afdd46deb4bffffa0883a22",
+    "results/iteration19-baseline/local-stack-run1/stt-diagnostics-exit.json": "2b8736ada70a169580bd70debf56ce73e1d7c4c107b98e40f08eca267bc7f1eb",
+    "results/iteration19-baseline/local-stack-run1/worker-manifest.json": "fa383cdcde61624f8f6445adfe112de7e6c79372b988f827e902eef7825c8515",
+    "results/iteration19-baseline/rtc-airport_hospital_replay-1/report.json": "ab235a653d200c81a2391eb417ad3ac330ad8685d088d783bd96da92f7a7bb0d",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-b9f012f5e5f84d2dae5ae56b77ff3311.jsonl": "c03cefeadf6b9b53ba214d5e3fb9f044943d3955147d4ab77a76b0febed8c185",
+    "results/iteration19-baseline/rtc-cancel_pending_navigation-1/report.json": "d4f07119f716517445cfe093baa2c23741b192a7a118129ef6206ebefb4cd0d9",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-52e64fcec77447818e8d80e80ac80853.jsonl": "206acd502ed33ed0729bf9f6c808c1e9c1158c2b9565f75100c2d462bb0cefe3",
+    "results/iteration19-baseline/rtc-hebbal_third_wave-1/report.json": "4c3482399b88d6f9461bea640b70b8aa58f75cd9a7ffacd0ab5ea786e99b028f",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-0625126b70d6402388e9e00338bc1a56.jsonl": "c27252850dd748041c9d4c05221c7df17e3544755028935ae69cbf29f0bf01c2",
+    "results/iteration19-baseline/rtc-distance_query_after_ambiguity-1/report.json": "830ca4b964ee76f58c1eda79e14801625a52779148c1cb5f39af2b403028c215",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-be7b2d773dd04bbeb5645f7716701ab1.jsonl": "93482bbe5362032b901b60a7efca268999b2ba6d4084ce09773e0297f6a2255f",
+    "results/iteration19-baseline/rtc-indiranagar_ather-1/report.json": "f33e654463b10dbf4c4e281482d3590297d5050ae2fa0d2ce8d02af9038379e8",
+    "results/iteration19-baseline/local-stack-run1/traces/car-audio-af3febacdb094e40b47e01fd5111af8b.jsonl": "09917693fed9c2cfaaa67dfc81f673a188cd779378c69a072a9c080104cec2c2",
+    "results/iteration19-baseline/local-stack-run1/worker.log": "f5c111ed6c78d04092c669421e40cb7ab06f9b68ccf275084ec94c9dc4cde8b0",
+    "results/iteration19-baseline/local-stack-run1/livekit.log": "745dd4ea054b529084a8b9a48296cf32e681798e9553e343e17d5e6348033c46",
+    "results/iteration19-baseline/local-stack-run1/llm.log": "2079527f5733fd166604ed2da6b1fd4b91565ed822aebb444ce2d46d15eea14a",
+    "results/iteration19-baseline/memory.jsonl": "7c141d085ce601932d0c37f402f4459200f8248bcf86eabb2a84a4f85a88f25d"
+  }
+}

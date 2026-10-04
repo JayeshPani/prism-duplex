@@ -1,0 +1,288 @@
+{
+  "reviewed_at_utc": "2026-09-25T19:11:10.802186+00:00",
+  "review_kind": "Manual source-backed semantic review; no inference, source/test edits, or score changes",
+  "scope": "All 18 raw model request/response pairs (10 planner, 8 responder), all coordinator events, 19 delivered texts, 20 backend attempts, and 8 effects across all four traces.",
+  "source_verification": {
+    "reference": "experiment.json:source_sha256 and runner_sha256",
+    "experiment_sha256": "3a14a7251d6c08c99a47be68263a0f3ce70203d86d0da859032470e1e88c2c8e",
+    "runner_matches_frozen_hash": true,
+    "nav_used_files_checked": [
+      "agent/config.py",
+      "agent/coordinator/__init__.py",
+      "agent/coordinator/coordinator.py",
+      "agent/coordinator/events.py",
+      "agent/coordinator/executor.py",
+      "agent/coordinator/ledger.py",
+      "agent/coordinator/llm_client.py",
+      "agent/coordinator/normalize.py",
+      "agent/coordinator/refs.py",
+      "agent/coordinator/resolver.py",
+      "agent/coordinator/responder.py",
+      "agent/tools/car_tools.py",
+      "agent/tools/manifest.py"
+    ],
+    "nav_used_source_differences": [],
+    "all_recorded_agent_source_differences": [
+      "agent/tools/bench_tools.py"
+    ],
+    "trace_sha256": {
+      "ambiguous_then_explicit-1.jsonl": "997977dd2ecdf15de4a1911dec43e1b0a3c83994d48cd4f0caf4a58321fb2eda",
+      "correction_before_commit-1.jsonl": "5639e50cf1802f0d9d5a79381c1f3438abbee88a77fbc0443f8f0df5d9e7dd2c",
+      "return_to_destination-1.jsonl": "331eaefe04ebcc20875127af42a2c32f696646bf6b1b7179b78e665c54977108",
+      "waypoint_and_cancel-1.jsonl": "9f2bc142d27f24bab16a5b3fc0a178411e8f5c311dae838c7aef3e117fec393a"
+    },
+    "interpretation": "Comparison is to current files at review time. Later edits, including unrelated benchmark manifest changes, require their own verification; frozen run hashes remain the evaluation provenance."
+  },
+  "summary": {
+    "harness_cases_passed": 4,
+    "delivered_texts_reviewed": 19,
+    "acknowledgments": 10,
+    "substantive_results_or_clarifications": 9,
+    "raw_planner_responses": 10,
+    "raw_responder_responses": 8,
+    "repair_requests_or_incomplete_responses_observed": 0,
+    "observed_false_delivered_statements": 0,
+    "observed_wrong_or_unrequested_backend_effects": 0,
+    "observed_stale_backend_attempts": 0,
+    "expected_backend_ambiguity_errors": 1,
+    "conclusion": "All observed effects and delivered facts match these development requests. Named-place planning preserves the supplied identity in this run; raw planner narration still contains suppressed false claims."
+  },
+  "findings": [
+    {
+      "severity": "contained_model_defect",
+      "topic": "Raw planner completion and stale ETA claims remain",
+      "observation": "Office turn2 raw reply claims navigation has started with ETA 88 minutes before execution; the actual office ETA is 29. Airport turn3 and cancellation raw replies also claim completion before their tools. These fields have no matching delivery; only post-tool grounded result text is delivered.",
+      "references": [
+        "return_to_destination-1.jsonl:40",
+        "return_to_destination-1.jsonl:49",
+        "return_to_destination-1.jsonl:60",
+        "return_to_destination-1.jsonl:67",
+        "waypoint_and_cancel-1.jsonl:67",
+        "waypoint_and_cancel-1.jsonl:74",
+        "waypoint_and_cancel-1.jsonl:80"
+      ]
+    },
+    {
+      "severity": "minor_response_quality",
+      "topic": "Unnecessary route ID in spoken-result text",
+      "observation": "The final airport response reads route ID R3. It is accurate but unrequested technical detail for the driver.",
+      "references": [
+        "return_to_destination-1.jsonl:87"
+      ]
+    },
+    {
+      "severity": "remaining_performance_limit",
+      "topic": "Substantive text remains slow",
+      "observation": "Final-text submission to first substantive response p50/p95 is 15.669/18.730 seconds (n=9); acknowledgments are 0.703/0.889 seconds (n=10). These are not acoustic speech-end or audible interruption measurements.",
+      "references": [
+        "experiment.json:summary"
+      ]
+    }
+  ],
+  "comparison_with_iteration2_run2": [
+    "Both runs pass four backend-effect scenarios. The new trajectory fixes the earlier coincidental named-stop pass: it searches the supplied Blue Tokai name rather than a coffee category with an invented five-minute cap.",
+    "This run exercises connective normalization through search_destination(query=Blue Tokai in Indiranagar), unlike iteration2 run2, which used a category-returned canonical ID.",
+    "Fresh repeat navigation, correction suppression, grounded clarification, and cancellation remain correct on these same observed cases.",
+    "The four-case run does not exercise the added stop-free re-route cache regression or immutable-argument retry rejection; those are separate deterministic test evidence."
+  ],
+  "per_case_review": [
+    {
+      "case": "correction_before_commit",
+      "review": "Correction occurs synchronously at first plan_ready, before commitment. Only turn2 dispatches; office navigation and the delivered 29-minute estimate match the backend.",
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ]
+      ],
+      "delivered_texts": [
+        {
+          "turn": 1,
+          "text": "One moment.",
+          "reference": "correction_before_commit-1.jsonl:6"
+        },
+        {
+          "turn": 2,
+          "text": "One moment.",
+          "reference": "correction_before_commit-1.jsonl:17"
+        },
+        {
+          "turn": 2,
+          "text": "Navigation has started to the Office (Manyata Tech Park). The route is active and will take approximately 29 minutes.",
+          "reference": "correction_before_commit-1.jsonl:45"
+        }
+      ],
+      "planner_response_references": [
+        "correction_before_commit-1.jsonl:7",
+        "correction_before_commit-1.jsonl:18"
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "return_to_destination",
+      "review": "All three turns contain compute_route then start_navigation; backend routes R1, R2, R3 activate airport, office, airport. Delivered 88/29-minute estimates match their respective outcomes; the last result unnecessarily reads R3.",
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "start_navigation",
+          "P_AIRPORT",
+          []
+        ]
+      ],
+      "delivered_texts": [
+        {
+          "turn": 1,
+          "text": "One moment.",
+          "reference": "return_to_destination-1.jsonl:6"
+        },
+        {
+          "turn": 1,
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "reference": "return_to_destination-1.jsonl:33"
+        },
+        {
+          "turn": 2,
+          "text": "Okay, one sec.",
+          "reference": "return_to_destination-1.jsonl:39"
+        },
+        {
+          "turn": 2,
+          "text": "Navigation to the office has started. The route is active with a distance of 11.8 km and an estimated travel time of 29 minutes.",
+          "reference": "return_to_destination-1.jsonl:60"
+        },
+        {
+          "turn": 3,
+          "text": "Sure, let me check.",
+          "reference": "return_to_destination-1.jsonl:66"
+        },
+        {
+          "turn": 3,
+          "text": "The navigation has started to Kempegowda International Airport. The route is active with route ID R3.",
+          "reference": "return_to_destination-1.jsonl:87"
+        }
+      ],
+      "planner_response_references": [
+        "return_to_destination-1.jsonl:7",
+        "return_to_destination-1.jsonl:40",
+        "return_to_destination-1.jsonl:67"
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "waypoint_and_cancel",
+      "review": "The supplied Blue Tokai in Indiranagar name is searched exactly and resolves to K_BLUETOKAI before add_waypoint. No find_nearby or max_detour_min is planned or executed. The 12.3-km/31-minute result and later route removal are grounded.",
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "P_OFFICE",
+          []
+        ],
+        [
+          "add_waypoint",
+          "P_OFFICE",
+          [
+            "K_BLUETOKAI"
+          ]
+        ],
+        [
+          "cancel_navigation",
+          null,
+          []
+        ]
+      ],
+      "delivered_texts": [
+        {
+          "turn": 1,
+          "text": "One moment.",
+          "reference": "waypoint_and_cancel-1.jsonl:6"
+        },
+        {
+          "turn": 1,
+          "text": "Navigation has started. The route to Office (Manyata Tech Park) is active with an estimated time of arrival of 29 minutes.",
+          "reference": "waypoint_and_cancel-1.jsonl:33"
+        },
+        {
+          "turn": 2,
+          "text": "Okay, one sec.",
+          "reference": "waypoint_and_cancel-1.jsonl:39"
+        },
+        {
+          "turn": 2,
+          "text": "Blue Tokai in Indiranagar has been added as a stop. The route is active with a distance of 12.3 km and an estimated travel time of 31 minutes.",
+          "reference": "waypoint_and_cancel-1.jsonl:60"
+        },
+        {
+          "turn": 3,
+          "text": "Sure, let me check.",
+          "reference": "waypoint_and_cancel-1.jsonl:66"
+        },
+        {
+          "turn": 3,
+          "text": "The navigation cancellation was successful. The active route to Office (Manyata Tech Park) has been removed.",
+          "reference": "waypoint_and_cancel-1.jsonl:80"
+        }
+      ],
+      "planner_response_references": [
+        "waypoint_and_cancel-1.jsonl:7",
+        "waypoint_and_cancel-1.jsonl:40",
+        "waypoint_and_cancel-1.jsonl:67"
+      ],
+      "stale_backend_attempts": []
+    },
+    {
+      "case": "ambiguous_then_explicit",
+      "review": "The first search returns the two actual Airport Road candidates. Dependent route/start calls are skipped; the deterministic clarification names both. The explicit Starbucks follow-up computes and starts K_SBUX_AIR, and the delivered 67-minute estimate matches.",
+      "effect_sequence": [
+        [
+          "start_navigation",
+          "K_SBUX_AIR",
+          []
+        ]
+      ],
+      "delivered_texts": [
+        {
+          "turn": 1,
+          "text": "One moment.",
+          "reference": "ambiguous_then_explicit-1.jsonl:6"
+        },
+        {
+          "turn": 1,
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "reference": "ambiguous_then_explicit-1.jsonl:23"
+        },
+        {
+          "turn": 2,
+          "text": "Okay, one sec.",
+          "reference": "ambiguous_then_explicit-1.jsonl:29"
+        },
+        {
+          "turn": 2,
+          "text": "Navigation has started. You are being routed to Starbucks, Airport Road, with an estimated arrival time of 67 minutes.",
+          "reference": "ambiguous_then_explicit-1.jsonl:57"
+        }
+      ],
+      "planner_response_references": [
+        "ambiguous_then_explicit-1.jsonl:7",
+        "ambiguous_then_explicit-1.jsonl:30"
+      ],
+      "stale_backend_attempts": []
+    }
+  ],
+  "limitations": [
+    "One run per previously inspected development case, with no held-out or generalization claim and no ablation attribution.",
+    "Fixed simulated map and tools only; no live vehicle, geocoder, microphone, STT, TTS, audio transport, road noise, or audible barge-in measurement.",
+    "Raw model claims can remain wrong even when suppression prevents user exposure. This review does not establish correct arbitrary future plans.",
+    "Local request configuration and recorded model receipts are not independent inference-process attestation.",
+    "experiment.json and all raw traces are preserved unchanged; only this review file was created."
+  ]
+}

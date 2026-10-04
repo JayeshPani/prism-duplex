@@ -1,0 +1,31 @@
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790429083.811838}
+{"type": "session_started", "data": {"room": "car-audio-7aa791a949844b70869ccbee509d725c", "mode": "car", "profile": "local-mac", "llm": "mlx-community/Qwen3-8B-4bit"}, "ts": 1790429083.812062}
+{"type": "user_state", "data": {"state": "speaking"}, "ts": 1790429084.107467}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790429086.156388}
+{"type": "user_state", "data": {"state": "away"}, "ts": 1790429101.157727}
+{"type": "user_state", "data": {"state": "listening"}, "ts": 1790429102.737904}
+{"type": "user_final", "data": {"text": "Please navigate to the hospital.", "merged": "Please navigate to the hospital.", "intent_version": 1}, "ts": 1790429102.7446961}
+{"type": "ack", "data": {"text": "One moment."}, "ts": 1790429103.4526489}
+{"type": "agent_say", "data": {"text": "One moment.", "intent_version": 1, "kind": "ack"}, "ts": 1790429103.453204}
+{"type": "speech_handle", "data": {"speech_id": "speech_c551764f0a3f", "state": "queued"}, "ts": 1790429103.4556851}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790429105.09855}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790429105.995222}
+{"type": "speech_handle", "data": {"speech_id": "speech_c551764f0a3f", "state": "finished", "error": null}, "ts": 1790429106.003627}
+{"type": "plan_ready", "data": {"intent_version": 1, "utterance": "Please navigate to the hospital.", "repaired": "", "complete": true, "continuation": null, "corrections": [], "slots": {"query": "hospital"}, "calls": [{"id": "c1", "tool": "search_destination", "args": {"query": "hospital"}}, {"id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, {"id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}], "reply": "Navigating to the hospital."}, "ts": 1790429107.1255932}
+{"type": "gate_open", "data": {"hold_ms": 700, "remaining_ms": 0, "state_changing": true, "complete": true}, "ts": 1790429107.125757}
+{"type": "gate_committed", "data": {"intent_version": 1, "calls": ["search_destination", "compute_route", "start_navigation"]}, "ts": 1790429107.126053}
+{"type": "slot_update", "data": {"slot": "query", "value": "hospital", "previous": null}, "ts": 1790429107.126168}
+{"type": "tool_waiting", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "hospital"}}, "ts": 1790429107.1264799}
+{"type": "tool_waiting", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "$c1.places[0].name"}}, "ts": 1790429107.126592}
+{"type": "tool_waiting", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "$c2.route_id"}}, "ts": 1790429107.126629}
+{"type": "tool_started", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "hospital"}, "state_changing": false}, "ts": 1790429107.12714}
+{"type": "tool_done", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c1", "tool": "search_destination", "args": {"query": "hospital"}, "result": {"status": "success", "places": [{"place_id": "P_HOSP", "name": "Manipal Hospital, Old Airport Road", "category": "hospital", "lat": 12.9592, "lng": 77.6485}]}, "stale": false, "duration_ms": 9}, "ts": 1790429107.13585}
+{"type": "tool_started", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "Manipal Hospital, Old Airport Road"}, "state_changing": false}, "ts": 1790429107.139343}
+{"type": "tool_done", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c2", "tool": "compute_route", "args": {"destination": "Manipal Hospital, Old Airport Road"}, "result": {"status": "success", "route_id": "R1", "destination": "Manipal Hospital, Old Airport Road", "destination_id": "P_HOSP", "stops": [], "stop_ids": [], "distance_km": 2.2, "eta_min": 5, "polyline": [[12.9719, 77.6412], [12.9592, 77.6485]]}, "stale": false, "duration_ms": 2503}, "ts": 1790429109.642921}
+{"type": "tool_started", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "state_changing": true}, "ts": 1790429109.6442409}
+{"type": "tool_done", "data": {"execution_id": "1ef01126974b4846b8fed0b167442682", "operation_id": "turn-1", "id": "c3", "tool": "start_navigation", "args": {"route_id": "R1"}, "result": {"status": "success", "navigating_to": "Manipal Hospital, Old Airport Road", "replaced": null, "already_active": false, "navigation_version": 1, "route_active": true, "route_id": "R1", "destination": "Manipal Hospital, Old Airport Road", "destination_id": "P_HOSP", "stops": [], "stop_ids": [], "distance_km": 2.2, "eta_min": 5, "polyline": [[12.9719, 77.6412], [12.9592, 77.6485]]}, "stale": false, "duration_ms": 1}, "ts": 1790429109.645783}
+{"type": "agent_say", "data": {"text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.", "intent_version": 1, "kind": "result"}, "ts": 1790429109.6487281}
+{"type": "speech_handle", "data": {"speech_id": "speech_99c8ef6913b4", "state": "queued"}, "ts": 1790429109.64915}
+{"type": "agent_state", "data": {"state": "speaking"}, "ts": 1790429110.966048}
+{"type": "agent_state", "data": {"state": "listening"}, "ts": 1790429116.758225}
+{"type": "speech_handle", "data": {"speech_id": "speech_99c8ef6913b4", "state": "finished", "error": null}, "ts": 1790429116.7615092}

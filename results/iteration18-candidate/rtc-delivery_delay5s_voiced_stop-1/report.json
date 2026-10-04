@@ -1,0 +1,1949 @@
+{
+  "status": "completed_probe_observation",
+  "started_at": "2026-09-26T11:26:32.178387+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/rtc-delivery_delay5s_voiced_stop-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "30",
+    "--probe",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav"
+  ],
+  "room": "car-audio-dc06b380fcc145b8b43cb0e1524dec44",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": 30.0,
+    "followup_trigger": "result-audio",
+    "followup_finished_quiet_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/whitefield_command.wav",
+      "file": "initial.wav",
+      "sha256": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 960,
+      "activity_end_sample": 32160,
+      "intent_before_input": null,
+      "timing": {
+        "label": "initial",
+        "started_monotonic": 140307.405619083,
+        "drained_monotonic": 140308.838958166,
+        "scheduled_end_monotonic": 140308.83495241633,
+        "published_samples": 34304
+      }
+    },
+    {
+      "label": "probe",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/audio-assets/stop_navigation.wav",
+      "file": "probe.wav",
+      "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+      "sample_rate": 24000,
+      "samples": 33280,
+      "duration_seconds": 1.3866666666666667,
+      "activity_start_sample": 960,
+      "activity_end_sample": 30240,
+      "intent_before_input": 1,
+      "timing": {
+        "label": "probe",
+        "started_monotonic": 140323.839846916,
+        "drained_monotonic": 140325.227400833,
+        "scheduled_end_monotonic": 140325.22651358266,
+        "published_samples": 33280
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMwHnjRuB8qcP9",
+      "participant": "agent-AJ_2XCoFPH3spNk",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Probe completion means only that the fixed observation window was captured; unfinished speech, recognition and interruptions remain outcomes, not a quality pass.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Delayed data attribution requires the same native sender identity to resolve as AGENT. Coordinator receipts retain original times; attribution-resolution times are recorded separately. Unresolved, blank and non-agent senders remain untrusted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "rtc_identity_adapter": {
+    "sdk_version": "1.1.18",
+    "sdk_room_source_sha256": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    "boundary": "Room._on_room_event synchronous data_received callback",
+    "max_pending_packets": 256,
+    "max_pending_bytes": 1048576,
+    "handler_compatibility": "reviewed_source_match"
+  },
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "agent/coordinator/events.py": "795b085d636c7820e6a8701774a1514c6b48dc4bcd267e35eeab7c3968c0d059",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "agent/main.py": "802aa897ca82b60929ba3866c0c595fd430073949b94eef044fdbbee4a57f2f1",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "2515f2a29a8b4e26fa3ca98d5269bd998a2977e175e340d7f7537b3ed1f4e6e4",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/pipeline/recognition_pause.py": "60a27a331e36738d26c66b36d725e9ca4f78963eeb109e67dea325f983c6d5cb",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "62822a111b1a50515d169254b3172f4207568e0e87dcd41adba13775eb7ee1f7"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/worker-manifest.json",
+    "sha256": "3d06046bf0f43019b6464d732ec45065fab07688210d99f9eef76345f9d761dc"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/protocol.json",
+    "sha256": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c"
+  },
+  "probe_trigger": {
+    "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+    "intent_version": 1,
+    "kind": "result",
+    "speech_id": "speech_812e143e84e9",
+    "queued_at": 140322.92759125,
+    "state": "queued",
+    "first_loud_at": 140323.839695041,
+    "preceding_quiet_seconds": 4.280022375023691,
+    "last_loud_at": 140323.839695041
+  },
+  "probe_observation": {
+    "started_monotonic": 140325.227400833,
+    "deadline_monotonic": 140355.227400833,
+    "observed_end_monotonic": 140355.229445375,
+    "trailing_silence_clipped_at_deadline": false,
+    "original_handle": {
+      "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_812e143e84e9",
+      "queued_at": 140322.92759125,
+      "state": "interruption_requested",
+      "first_loud_at": 140323.839695041,
+      "preceding_quiet_seconds": 4.280022375023691,
+      "last_loud_at": 140324.498968708,
+      "ended_at": 140332.400155833,
+      "error": null
+    },
+    "current_intent_version": 2,
+    "current_result_handles": [
+      {
+        "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+        "intent_version": 2,
+        "kind": "result",
+        "speech_id": "speech_387d68588939",
+        "queued_at": 140335.328363583,
+        "state": "finished",
+        "first_loud_at": 140336.239600166,
+        "preceding_quiet_seconds": 1.6798362910049036,
+        "last_loud_at": 140339.019646416,
+        "ended_at": 140339.115062541,
+        "error": null
+      }
+    ],
+    "original_result_finished": false,
+    "current_result_finished": true,
+    "events_since_probe_start": [
+      {
+        "type": "user_state",
+        "data": {
+          "state": "speaking"
+        },
+        "ts": 1790422009.4135199,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790422009.861761,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "user_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790422011.115564,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "speaking"
+        },
+        "ts": 1790422013.116997,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "recognition_pause",
+        "data": {
+          "state": "held",
+          "speech_id": "speech_812e143e84e9",
+          "pending_recognitions": 1
+        },
+        "ts": 1790422013.1172988,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_false_interruption",
+        "data": {
+          "resumed": true
+        },
+        "ts": 1790422013.11769,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "recognition_pause",
+        "data": {
+          "state": "interruption_requested",
+          "speech_id": "speech_812e143e84e9",
+          "reason": "transcript"
+        },
+        "ts": 1790422017.7475042,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790422017.751041,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "recognition_pause",
+        "data": {
+          "state": "released",
+          "speech_id": "speech_812e143e84e9",
+          "reason": "speech_finished"
+        },
+        "ts": 1790422017.751787,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_812e143e84e9",
+          "state": "interruption_requested",
+          "error": null
+        },
+        "ts": 1790422017.753063,
+        "snapshot": {
+          "intent_version": 1,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "user_final",
+        "data": {
+          "text": "Please stop navigation.",
+          "merged": "Please stop navigation.",
+          "intent_version": 2
+        },
+        "ts": 1790422017.753243,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "ack",
+        "data": {
+          "text": "Okay, one sec."
+        },
+        "ts": 1790422018.4568698,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "agent_say",
+        "data": {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack"
+        },
+        "ts": 1790422018.457097,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_4cedd1fc6d80",
+          "state": "queued"
+        },
+        "ts": 1790422018.457373,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "speaking"
+        },
+        "ts": 1790422018.94459,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790422020.031754,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_4cedd1fc6d80",
+          "state": "finished",
+          "error": null
+        },
+        "ts": 1790422020.0329752,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "plan_ready",
+        "data": {
+          "intent_version": 2,
+          "utterance": "Please stop navigation.",
+          "repaired": "",
+          "complete": true,
+          "corrections": [],
+          "slots": {},
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "cancel_navigation",
+              "args": {}
+            }
+          ],
+          "reply": "Navigation has been stopped."
+        },
+        "ts": 1790422020.675222,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "gate_open",
+        "data": {
+          "hold_ms": 700,
+          "remaining_ms": 0,
+          "state_changing": true,
+          "complete": true
+        },
+        "ts": 1790422020.6753511,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": "Please stop navigation."
+        }
+      },
+      {
+        "type": "gate_committed",
+        "data": {
+          "intent_version": 2,
+          "calls": [
+            "cancel_navigation"
+          ]
+        },
+        "ts": 1790422020.675679,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "tool_waiting",
+        "data": {
+          "execution_id": "aff80e1072f5499b901b14302b7cedd1",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "cancel_navigation",
+          "args": {}
+        },
+        "ts": 1790422020.675786,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "tool_started",
+        "data": {
+          "execution_id": "aff80e1072f5499b901b14302b7cedd1",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "cancel_navigation",
+          "args": {},
+          "state_changing": true
+        },
+        "ts": 1790422020.676138,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "tool_done",
+        "data": {
+          "execution_id": "aff80e1072f5499b901b14302b7cedd1",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "cancel_navigation",
+          "args": {},
+          "result": {
+            "status": "success",
+            "cancelled": "Whitefield (ITPL)",
+            "navigation_version": 2,
+            "route_active": false,
+            "route_id": null,
+            "destination": null,
+            "destination_id": null,
+            "stops": [],
+            "stop_ids": [],
+            "eta_min": null,
+            "distance_km": null,
+            "polyline": []
+          },
+          "stale": false,
+          "duration_ms": 3
+        },
+        "ts": 1790422020.678828,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_say",
+        "data": {
+          "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+          "intent_version": 2,
+          "kind": "result"
+        },
+        "ts": 1790422020.680845,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_387d68588939",
+          "state": "queued"
+        },
+        "ts": 1790422020.681004,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "speaking"
+        },
+        "ts": 1790422021.480099,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "agent_state",
+        "data": {
+          "state": "listening"
+        },
+        "ts": 1790422024.46653,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "speech_handle",
+        "data": {
+          "speech_id": "speech_387d68588939",
+          "state": "finished",
+          "error": null
+        },
+        "ts": 1790422024.4680169,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      },
+      {
+        "type": "user_state",
+        "data": {
+          "state": "away"
+        },
+        "ts": 1790422039.467426,
+        "snapshot": {
+          "intent_version": 2,
+          "slots": {
+            "query": "Whitefield"
+          },
+          "committed": [
+            {
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "R1"
+              },
+              "result": {
+                "status": "success",
+                "navigating_to": "Whitefield (ITPL)",
+                "replaced": null,
+                "already_active": false,
+                "navigation_version": 1,
+                "route_active": true,
+                "route_id": "R1",
+                "destination": "Whitefield (ITPL)",
+                "destination_id": "P_WHITEFIELD",
+                "stops": [],
+                "stop_ids": [],
+                "distance_km": 15.9,
+                "eta_min": 40,
+                "polyline": [
+                  [
+                    12.9719,
+                    77.6412
+                  ],
+                  [
+                    12.9698,
+                    77.75
+                  ]
+                ]
+              },
+              "status": "done",
+              "operation_id": "turn-1",
+              "error": null
+            },
+            {
+              "tool": "cancel_navigation",
+              "args": {},
+              "result": {
+                "status": "success",
+                "cancelled": "Whitefield (ITPL)",
+                "navigation_version": 2,
+                "route_active": false,
+                "route_id": null,
+                "destination": null,
+                "destination_id": null,
+                "stops": [],
+                "stop_ids": [],
+                "eta_min": null,
+                "distance_km": null,
+                "polyline": []
+              },
+              "status": "done",
+              "operation_id": "turn-2",
+              "error": null
+            }
+          ],
+          "pending": ""
+        }
+      }
+    ]
+  },
+  "cleanup_errors": [],
+  "data_attribution_counts": {
+    "rejected_missing_identity": 1,
+    "promoted": 55
+  },
+  "finished_at": "2026-09-26T11:27:20.590410+00:00",
+  "event_counts": {
+    "session_started": 1,
+    "user_state": 5,
+    "user_final": 2,
+    "ack": 2,
+    "agent_say": 4,
+    "speech_handle": 8,
+    "agent_state": 10,
+    "plan_ready": 2,
+    "gate_open": 2,
+    "gate_committed": 2,
+    "slot_update": 1,
+    "tool_waiting": 4,
+    "tool_started": 4,
+    "tool_done": 4,
+    "recognition_pause": 3,
+    "agent_false_interruption": 1
+  },
+  "speech_handles": [
+    {
+      "text": "One moment.",
+      "intent_version": 1,
+      "kind": "ack",
+      "speech_id": "speech_7095afb68593",
+      "queued_at": 140317.528610541,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 140319.723681166,
+      "error": null
+    },
+    {
+      "text": "Navigation to Whitefield (ITPL) has started. Estimated arrival in 40 minutes.",
+      "intent_version": 1,
+      "kind": "result",
+      "speech_id": "speech_812e143e84e9",
+      "queued_at": 140322.92759125,
+      "state": "interruption_requested",
+      "first_loud_at": 140323.839695041,
+      "preceding_quiet_seconds": 4.280022375023691,
+      "last_loud_at": 140324.498968708,
+      "ended_at": 140332.400155833,
+      "error": null
+    },
+    {
+      "text": "Okay, one sec.",
+      "intent_version": 2,
+      "kind": "ack",
+      "speech_id": "speech_4cedd1fc6d80",
+      "queued_at": 140333.1064245,
+      "state": "finished",
+      "first_loud_at": null,
+      "ended_at": 140334.686003,
+      "error": null
+    },
+    {
+      "text": "Navigation to Whitefield (ITPL) has been cancelled.",
+      "intent_version": 2,
+      "kind": "result",
+      "speech_id": "speech_387d68588939",
+      "queued_at": 140335.328363583,
+      "state": "finished",
+      "first_loud_at": 140336.239600166,
+      "preceding_quiet_seconds": 1.6798362910049036,
+      "last_loud_at": 140339.019646416,
+      "ended_at": 140339.115062541,
+      "error": null
+    }
+  ],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "8fd34a904324f80f200ae160f378d4965d17d28534b3d3a2f1db2b8bac694041",
+    "worker_manifest.json": "3d06046bf0f43019b6464d732ec45065fab07688210d99f9eef76345f9d761dc",
+    "events.jsonl": "c619215c88a0232a1556a463a10538c1e9f5c1a6479477b2091a6dfde1e98d53",
+    "frames.jsonl": "88c8c067b1222854111b9f2992b9ec40f98bf12259373cdd724e1f44847ed7c5",
+    "protocol.json": "f3a12f643a4b933e26e77257d29db7d4a1fa7bc540a394d5b039de86b0ef997c",
+    "probe.wav": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+    "received-1.pcm": "7a1d25b0ce86ad87bf16a6ee98e88a837ce7d9b113a2e0f5c6098dcc2f9df5aa"
+  }
+}

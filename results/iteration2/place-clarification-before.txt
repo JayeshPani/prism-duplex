@@ -1,0 +1,432 @@
+.................................................FFFFFFFFFFFFFFFFFF      [100%]
+=================================== FAILURES ===================================
+_ test_unknown_qualified_places_never_replace_active_destination[airport hotel] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'airport hotel'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_unknown_qualified_places_never_replace_active_destination[Columbia Asia Hospital] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Columbia Asia Hospital'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_unknown_qualified_places_never_replace_active_destination[Blue Tokai Koramangala] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Blue Tokai Koramangala'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_unknown_qualified_places_never_replace_active_destination[Dabolim International Airport] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Dabolim International Airport'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_unknown_qualified_places_never_replace_active_destination[my office in Whitefield] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'my office in Whitefield'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_unknown_qualified_places_never_replace_active_destination[Cubbon Park Annex] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Cubbon Park Annex'
+
+    @pytest.mark.parametrize("query", [
+        "airport hotel", "Columbia Asia Hospital", "Blue Tokai Koramangala",
+        "Dabolim International Airport", "my office in Whitefield", "Cubbon Park Annex",
+    ])
+    async def test_unknown_qualified_places_never_replace_active_destination(car, query):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        result = await car.get("compute_route").fn(destination=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:49: AssertionError
+_ test_ambiguous_search_reports_candidates_without_selecting_one[Airport Road-candidate_ids0] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Airport Road', candidate_ids = {'K_SBUX_AIR', 'P_HOSP'}
+
+    @pytest.mark.parametrize("query,candidate_ids", [
+        ("Airport Road", {"P_HOSP", "K_SBUX_AIR"}),
+        ("Tech Park", {"P_OFFICE", "P_SRIB"}),
+        ("petrol pump", {"F_IOC_HEB", "F_HP_KR"}),
+        ("Indiranagar", {"P_HOME", "C_ATHER_IND", "K_BLUETOKAI"}),
+        ("coffee", {"K_TWC_HEB", "K_BLUETOKAI", "K_SBUX_AIR"}),
+    ])
+    async def test_ambiguous_search_reports_candidates_without_selecting_one(car, query, candidate_ids):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:66: AssertionError
+_ test_ambiguous_search_reports_candidates_without_selecting_one[Tech Park-candidate_ids1] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Tech Park', candidate_ids = {'P_OFFICE', 'P_SRIB'}
+
+    @pytest.mark.parametrize("query,candidate_ids", [
+        ("Airport Road", {"P_HOSP", "K_SBUX_AIR"}),
+        ("Tech Park", {"P_OFFICE", "P_SRIB"}),
+        ("petrol pump", {"F_IOC_HEB", "F_HP_KR"}),
+        ("Indiranagar", {"P_HOME", "C_ATHER_IND", "K_BLUETOKAI"}),
+        ("coffee", {"K_TWC_HEB", "K_BLUETOKAI", "K_SBUX_AIR"}),
+    ])
+    async def test_ambiguous_search_reports_candidates_without_selecting_one(car, query, candidate_ids):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:66: AssertionError
+_ test_ambiguous_search_reports_candidates_without_selecting_one[petrol pump-candidate_ids2] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'petrol pump', candidate_ids = {'F_HP_KR', 'F_IOC_HEB'}
+
+    @pytest.mark.parametrize("query,candidate_ids", [
+        ("Airport Road", {"P_HOSP", "K_SBUX_AIR"}),
+        ("Tech Park", {"P_OFFICE", "P_SRIB"}),
+        ("petrol pump", {"F_IOC_HEB", "F_HP_KR"}),
+        ("Indiranagar", {"P_HOME", "C_ATHER_IND", "K_BLUETOKAI"}),
+        ("coffee", {"K_TWC_HEB", "K_BLUETOKAI", "K_SBUX_AIR"}),
+    ])
+    async def test_ambiguous_search_reports_candidates_without_selecting_one(car, query, candidate_ids):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:66: AssertionError
+_ test_ambiguous_search_reports_candidates_without_selecting_one[Indiranagar-candidate_ids3] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Indiranagar', candidate_ids = {'C_ATHER_IND', 'K_BLUETOKAI', 'P_HOME'}
+
+    @pytest.mark.parametrize("query,candidate_ids", [
+        ("Airport Road", {"P_HOSP", "K_SBUX_AIR"}),
+        ("Tech Park", {"P_OFFICE", "P_SRIB"}),
+        ("petrol pump", {"F_IOC_HEB", "F_HP_KR"}),
+        ("Indiranagar", {"P_HOME", "C_ATHER_IND", "K_BLUETOKAI"}),
+        ("coffee", {"K_TWC_HEB", "K_BLUETOKAI", "K_SBUX_AIR"}),
+    ])
+    async def test_ambiguous_search_reports_candidates_without_selecting_one(car, query, candidate_ids):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:66: AssertionError
+_ test_ambiguous_search_reports_candidates_without_selecting_one[coffee-candidate_ids4] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'coffee', candidate_ids = {'K_BLUETOKAI', 'K_SBUX_AIR', 'K_TWC_HEB'}
+
+    @pytest.mark.parametrize("query,candidate_ids", [
+        ("Airport Road", {"P_HOSP", "K_SBUX_AIR"}),
+        ("Tech Park", {"P_OFFICE", "P_SRIB"}),
+        ("petrol pump", {"F_IOC_HEB", "F_HP_KR"}),
+        ("Indiranagar", {"P_HOME", "C_ATHER_IND", "K_BLUETOKAI"}),
+        ("coffee", {"K_TWC_HEB", "K_BLUETOKAI", "K_SBUX_AIR"}),
+    ])
+    async def test_ambiguous_search_reports_candidates_without_selecting_one(car, query, candidate_ids):
+        result = await car.get("search_destination").fn(query=query)
+>       assert result["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:66: AssertionError
+___ test_uncertain_waypoint_or_via_preserves_route_and_version[Airport Road] ___
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+stop = 'Airport Road'
+
+    @pytest.mark.parametrize("stop", ["Airport Road", "airport hotel"])
+    async def test_uncertain_waypoint_or_via_preserves_route_and_version(car, stop):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        waypoint = await car.get("add_waypoint").fn(place_id=stop)
+>       assert waypoint["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:81: AssertionError
+__ test_uncertain_waypoint_or_via_preserves_route_and_version[airport hotel] ___
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+stop = 'airport hotel'
+
+    @pytest.mark.parametrize("stop", ["Airport Road", "airport hotel"])
+    async def test_uncertain_waypoint_or_via_preserves_route_and_version(car, stop):
+        route = await car.get("compute_route").fn(destination="office")
+        before = await car.get("start_navigation").fn(route_id=route["route_id"])
+        waypoint = await car.get("add_waypoint").fn(place_id=stop)
+>       assert waypoint["status"] == "error"
+E       AssertionError: assert 'success' == 'error'
+E         
+E         - error
+E         + success
+
+tests/unit/test_place_clarification.py:81: AssertionError
+_ test_uncertain_chained_search_does_not_dispatch_navigation[Airport Road-place_ambiguous] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Airport Road', code = 'place_ambiguous'
+
+    @pytest.mark.parametrize("query,code", [
+        ("Airport Road", "place_ambiguous"), ("Cubbon Prak", "place_not_found"),
+    ])
+    async def test_uncertain_chained_search_does_not_dispatch_navigation(car, query, code):
+        logged = []
+        executor = Executor(car, Ledger(), EventBus(), lambda tool, *args: logged.append(tool))
+        result = await executor.run([
+            PlannedCall("search", "search_destination", {"query": query}),
+            PlannedCall("route", "compute_route", {"destination": "$search.places[0].place_id"}),
+            PlannedCall("start", "start_navigation", {"route_id": "$route.route_id"}),
+        ])
+>       assert result.outcomes["search"].status == "error"
+E       AssertionError: assert 'done' == 'error'
+E         
+E         - error
+E         + done
+
+tests/unit/test_place_clarification.py:101: AssertionError
+_ test_uncertain_chained_search_does_not_dispatch_navigation[Cubbon Prak-place_not_found] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Cubbon Prak', code = 'place_not_found'
+
+    @pytest.mark.parametrize("query,code", [
+        ("Airport Road", "place_ambiguous"), ("Cubbon Prak", "place_not_found"),
+    ])
+    async def test_uncertain_chained_search_does_not_dispatch_navigation(car, query, code):
+        logged = []
+        executor = Executor(car, Ledger(), EventBus(), lambda tool, *args: logged.append(tool))
+        result = await executor.run([
+            PlannedCall("search", "search_destination", {"query": query}),
+            PlannedCall("route", "compute_route", {"destination": "$search.places[0].place_id"}),
+            PlannedCall("start", "start_navigation", {"route_id": "$route.route_id"}),
+        ])
+>       assert result.outcomes["search"].status == "error"
+E       AssertionError: assert 'done' == 'error'
+E         
+E         - error
+E         + done
+
+tests/unit/test_place_clarification.py:101: AssertionError
+_ test_clarification_is_short_grounded_and_independent_of_model[Airport Road-Starbucks, Airport Road] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Airport Road', expected_name = 'Starbucks, Airport Road'
+
+    @pytest.mark.parametrize("query,expected_name", [
+        ("Airport Road", "Starbucks, Airport Road"),
+        ("Cubbon Prak", "Cubbon Park"),
+        ("NONEXISTENT_ZZZ_1289", None),
+    ])
+    async def test_clarification_is_short_grounded_and_independent_of_model(car, query, expected_name):
+        class UnavailableLLM:
+            async def complete(self, *args):
+                pytest.fail("Place clarification must not require a model round trip")
+    
+        executor = Executor(car, Ledger(), EventBus(), lambda *args: None)
+        result = await executor.run([PlannedCall("route", "compute_route", {"destination": query})])
+>       text = await Responder(UnavailableLLM()).summarize(f"take me to {query}", result)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_place_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:38: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_place_clarification.test_clarification_is_short_grounded_and_independent_of_model.<locals>.UnavailableLLM object at 0x106101410>
+args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...op_ids": [], "distance_km": 2.2, "eta_min": 5, "polyline": [[12.9719, 77.6412], [12.9592, 77.6485]]}, "error": null}]')
+
+    async def complete(self, *args):
+>       pytest.fail("Place clarification must not require a model round trip")
+E       Failed: Place clarification must not require a model round trip
+
+tests/unit/test_place_clarification.py:116: Failed
+_ test_clarification_is_short_grounded_and_independent_of_model[Cubbon Prak-Cubbon Park] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'Cubbon Prak', expected_name = 'Cubbon Park'
+
+    @pytest.mark.parametrize("query,expected_name", [
+        ("Airport Road", "Starbucks, Airport Road"),
+        ("Cubbon Prak", "Cubbon Park"),
+        ("NONEXISTENT_ZZZ_1289", None),
+    ])
+    async def test_clarification_is_short_grounded_and_independent_of_model(car, query, expected_name):
+        class UnavailableLLM:
+            async def complete(self, *args):
+                pytest.fail("Place clarification must not require a model round trip")
+    
+        executor = Executor(car, Ledger(), EventBus(), lambda *args: None)
+        result = await executor.run([PlannedCall("route", "compute_route", {"destination": query})])
+>       text = await Responder(UnavailableLLM()).summarize(f"take me to {query}", result)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_place_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:38: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_place_clarification.test_clarification_is_short_grounded_and_independent_of_model.<locals>.UnavailableLLM object at 0x1060eaed0>
+args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words...p_ids": [], "distance_km": 7.1, "eta_min": 18, "polyline": [[12.9719, 77.6412], [12.9763, 77.5929]]}, "error": null}]')
+
+    async def complete(self, *args):
+>       pytest.fail("Place clarification must not require a model round trip")
+E       Failed: Place clarification must not require a model round trip
+
+tests/unit/test_place_clarification.py:116: Failed
+_ test_clarification_is_short_grounded_and_independent_of_model[NONEXISTENT_ZZZ_1289-None] _
+
+car = Manifest(name='car', tools={'search_destination': ToolSpec(name='search_destination', description='Find a place by nam...tination replaces the old one (compute_route + start_navigation again). Replies must be short: the driver is driving.')
+query = 'NONEXISTENT_ZZZ_1289', expected_name = None
+
+    @pytest.mark.parametrize("query,expected_name", [
+        ("Airport Road", "Starbucks, Airport Road"),
+        ("Cubbon Prak", "Cubbon Park"),
+        ("NONEXISTENT_ZZZ_1289", None),
+    ])
+    async def test_clarification_is_short_grounded_and_independent_of_model(car, query, expected_name):
+        class UnavailableLLM:
+            async def complete(self, *args):
+                pytest.fail("Place clarification must not require a model round trip")
+    
+        executor = Executor(car, Ledger(), EventBus(), lambda *args: None)
+        result = await executor.run([PlannedCall("route", "compute_route", {"destination": query})])
+>       text = await Responder(UnavailableLLM()).summarize(f"take me to {query}", result)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_place_clarification.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/coordinator/responder.py:38: in summarize
+    text = await self.llm.complete(SYSTEM, user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.unit.test_place_clarification.test_clarification_is_short_grounded_and_independent_of_model.<locals>.UnavailableLLM object at 0x10616f050>
+args = ('You write what a voice assistant says after its tool calls finished. One or two short spoken sentences, max 30 words..."message": "unknown destination \'NONEXISTENT_ZZZ_1289\'"}, "error": "unknown destination \'NONEXISTENT_ZZZ_1289\'"}]')
+
+    async def complete(self, *args):
+>       pytest.fail("Place clarification must not require a model round trip")
+E       Failed: Place clarification must not require a model round trip
+
+tests/unit/test_place_clarification.py:116: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[airport hotel]
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[Columbia Asia Hospital]
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[Blue Tokai Koramangala]
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[Dabolim International Airport]
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[my office in Whitefield]
+FAILED tests/unit/test_place_clarification.py::test_unknown_qualified_places_never_replace_active_destination[Cubbon Park Annex]
+FAILED tests/unit/test_place_clarification.py::test_ambiguous_search_reports_candidates_without_selecting_one[Airport Road-candidate_ids0]
+FAILED tests/unit/test_place_clarification.py::test_ambiguous_search_reports_candidates_without_selecting_one[Tech Park-candidate_ids1]
+FAILED tests/unit/test_place_clarification.py::test_ambiguous_search_reports_candidates_without_selecting_one[petrol pump-candidate_ids2]
+FAILED tests/unit/test_place_clarification.py::test_ambiguous_search_reports_candidates_without_selecting_one[Indiranagar-candidate_ids3]
+FAILED tests/unit/test_place_clarification.py::test_ambiguous_search_reports_candidates_without_selecting_one[coffee-candidate_ids4]
+FAILED tests/unit/test_place_clarification.py::test_uncertain_waypoint_or_via_preserves_route_and_version[Airport Road]
+FAILED tests/unit/test_place_clarification.py::test_uncertain_waypoint_or_via_preserves_route_and_version[airport hotel]
+FAILED tests/unit/test_place_clarification.py::test_uncertain_chained_search_does_not_dispatch_navigation[Airport Road-place_ambiguous]
+FAILED tests/unit/test_place_clarification.py::test_uncertain_chained_search_does_not_dispatch_navigation[Cubbon Prak-place_not_found]
+FAILED tests/unit/test_place_clarification.py::test_clarification_is_short_grounded_and_independent_of_model[Airport Road-Starbucks, Airport Road]
+FAILED tests/unit/test_place_clarification.py::test_clarification_is_short_grounded_and_independent_of_model[Cubbon Prak-Cubbon Park]
+FAILED tests/unit/test_place_clarification.py::test_clarification_is_short_grounded_and_independent_of_model[NONEXISTENT_ZZZ_1289-None]
+18 failed, 49 passed in 0.53s

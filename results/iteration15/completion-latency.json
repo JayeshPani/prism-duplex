@@ -1,0 +1,96 @@
+{
+  "created_at_utc": "2026-09-26T09:13:41.847456+00:00",
+  "scope": "Final-input speech end to result-handle finish, conditioned on the whole declared case's backend effects and all final spoken facts. Failed/missing cases stay null in the full denominator.",
+  "per_case": [
+    {
+      "trial": "rtc-cancel-1",
+      "case": "cancel",
+      "final_intent_version": 2,
+      "semantic_case_passed": true,
+      "all_declared_final_speech_facts": true,
+      "result_handle_finished": true,
+      "observed_finished_reply_ms": 9826.839,
+      "fulfilled_case_reply_finish_ms": 9826.839
+    },
+    {
+      "trial": "rtc-repeat-1",
+      "case": "repeat",
+      "final_intent_version": 3,
+      "semantic_case_passed": true,
+      "all_declared_final_speech_facts": true,
+      "result_handle_finished": true,
+      "observed_finished_reply_ms": 23488.885,
+      "fulfilled_case_reply_finish_ms": 23488.885
+    },
+    {
+      "trial": "rtc-repeat-2",
+      "case": "repeat",
+      "final_intent_version": 3,
+      "semantic_case_passed": true,
+      "all_declared_final_speech_facts": false,
+      "result_handle_finished": true,
+      "observed_finished_reply_ms": 23897.968,
+      "fulfilled_case_reply_finish_ms": null
+    },
+    {
+      "trial": "rtc-cancel-2",
+      "case": "cancel",
+      "final_intent_version": 2,
+      "semantic_case_passed": true,
+      "all_declared_final_speech_facts": true,
+      "result_handle_finished": true,
+      "observed_finished_reply_ms": 9898.959,
+      "fulfilled_case_reply_finish_ms": 9898.959
+    }
+  ],
+  "groups": {
+    "all": {
+      "declared": 4,
+      "n": 3,
+      "values_ms_in_run_order": [
+        9826.839,
+        23488.885,
+        null,
+        9898.959
+      ],
+      "p50_ms": 9898.959,
+      "p95_ms": 23488.885,
+      "failed_or_unmeasured": 1
+    },
+    "cancel": {
+      "declared": 2,
+      "n": 2,
+      "values_ms_in_run_order": [
+        9826.839,
+        9898.959
+      ],
+      "p50_ms": 9826.839,
+      "p95_ms": 9898.959,
+      "failed_or_unmeasured": 0
+    },
+    "repeat": {
+      "declared": 2,
+      "n": 1,
+      "values_ms_in_run_order": [
+        23488.885,
+        null
+      ],
+      "p50_ms": 23488.885,
+      "p95_ms": 23488.885,
+      "failed_or_unmeasured": 1
+    }
+  },
+  "source_sha256": {
+    "protocol.json": "a789255dc41d433a60f7935f2c0c5bb1b98337dcbed48d9d982b1373fe9304d7",
+    "audit.json": "379706faa73c2d8017cb7a4df9a1b788754884fd1ca306f963d532d257809bfe",
+    "latency-summary.json": "b428d98ca5e14db4fb0002d57d1c2a5fa30f883c624bb74392a276c4a24ce268",
+    "received-audio-review/qualitative-review.json": "77fa04149cdf21ad55185d54da9663d2d833bdcd342752774d872f98dc8763e9",
+    "summarize_completion.py": "b9fedb5da5eab71e616d9febe979051b0cce94e4489e98992738e3ff64128e57",
+    "summarize_latency.py": "68516466de446f414284a8d42a0d7bc73898200287b4715e74d737fbecb7e2cb"
+  },
+  "limits": [
+    "This does not establish physical audible completion or human intelligibility.",
+    "An unfulfilled but finished reply remains visible separately from task completion.",
+    "Case-level success requires every declared effect; this statistic starts at the final input, not the first input of the case."
+  ]
+}

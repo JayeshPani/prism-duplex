@@ -1,0 +1,32 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_replaced_resolver_remains_owned_until_it_finishes ____________
+
+    @pytest.mark.asyncio
+    async def test_replaced_resolver_remains_owned_until_it_finishes():
+        coord, bus, logged, said, _ = build({}, cfg=config())
+        entered, release = asyncio.Event(), asyncio.Event()
+        resolve = coord.resolver.resolve
+    
+        async def delayed(utterance, *args):
+            if utterance == "first":
+                entered.set()
+                while not release.is_set():
+                    try:
+                        await release.wait()
+                    except asyncio.CancelledError:
+                        pass
+            return await resolve(utterance, *args)
+    
+        coord.resolver.resolve = delayed
+        coord.on_user_turn("first")
+        await asyncio.wait_for(entered.wait(), 1)
+        coord.on_user_turn("second")
+        try:
+>           with pytest.raises(TimeoutError):
+E           Failed: DID NOT RAISE TimeoutError
+
+tests/unit/test_coordinator_lifecycle.py:154: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_coordinator_lifecycle.py::test_replaced_resolver_remains_owned_until_it_finishes
+1 failed in 0.40s

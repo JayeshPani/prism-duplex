@@ -1,0 +1,115 @@
+{
+  "reviewed_at_utc": "2026-09-26T04:09:47.081264+00:00",
+  "scope": "Read-only source/log audit and proposed next-iteration regression plan. No production changes, fault injection, model inference or new live trials performed.",
+  "source_and_evidence_sha256": {
+    "agent/coordinator/executor.py": "dec83a0ae501008370d3f4714808a9dff04bacd56a175bb7296369e467c67f30",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "tests/unit/test_dispatch_telemetry.py": "212e3dec31da6265f5925c039519badbdf806a709fe36fedf5f989deb5eebe79",
+    "results/iteration5/local-stack-run1/worker.log": "046a3aa1826bc1dab8ae305eb6dde1674f81d85282bb2ccd61ee55591763e7e9",
+    "results/iteration5/local-stack-run1/tool-calls.jsonl": "aafa83c6d4794a5dc1dee89a389e9857bb74af7f8ec917872dcfce31741c1c63",
+    "results/iteration5/local-stack-run1/traces/car-audio-a960cf36b0154d81b28994dc185fcb60.jsonl": "f8a3e4127439eb181cbe85c077074c41af54919bcc107ada76d77fc45deef808",
+    "results/iteration5/probe-silence-3/report.json": "a74409e2e0d886ce2957c74584164ceb7239bff702463ecd9f4b2084a8e1149c"
+  },
+  "observed": {
+    "reference": "results/iteration5/local-stack-run1/worker.log:141",
+    "timestamp": "2026-09-25T20:03:20.835526+00:00",
+    "pid": 57881,
+    "watchdog_block_seconds": 0.6125,
+    "reported_cpu_seconds": 0.004,
+    "sampled_stack": "Executor._call finally -> attempt_logger.finished -> FDBToolLogger.finished -> _update_calls -> os.replace (logger line51).",
+    "precision": "The watchdog reported612.5ms total blocked-loop duration and sampled os.replace81ms into the stall. This is not an isolated measurement that one os.replace call consumed the entire duration.",
+    "trial": "probe-silence-3",
+    "outcome": "The trace and retained attempt rows show search_destination, compute_route and start_navigation all done; original result speech subsequently finished. This stall preceded substantive result speech and the silence probe.",
+    "causal_limit": "Low reported CPU time is consistent with blocking filesystem/lock work, but does not identify storage, swap, filesystem or scheduler cause. No missed barge-in, failed effect, or worker-shutdown failure is causally attributed to this stall."
+  },
+  "current_boundaries": [
+    {
+      "reference": "agent/telemetry/fdb_logger.py:31",
+      "finding": "Every start/final update acquires thread and cross-process sidecar locks, rereads all rows, rewrites the full snapshot, fsyncs it, atomically replaces it and fsyncs the directory. The synchronous API is crash-evidence oriented and its work grows with retained history."
+    },
+    {
+      "reference": "agent/coordinator/executor.py:204",
+      "finding": "TOOL_STARTED emits dispatch intention, then current() is checked. Ledger reservation/protected-write bookkeeping currently precede synchronous started(). Start failure prevents backend entry and aborts the ledger reservation. With no await, a normal loop callback cannot run inside logging today."
+    },
+    {
+      "reference": "agent/coordinator/executor.py:233",
+      "finding": "Backend entry follows start-log success. Writes are serialized; already-entered writes are protected from corrections. Reads are cancellable; resolved references are validated before reaching this boundary."
+    },
+    {
+      "reference": "agent/coordinator/executor.py:274",
+      "finding": "Backend outcome and observation end are recorded before synchronous finished(). Protection/write_keys are removed before completion logging. A completion-log failure emits tool_log_error while preserving the actual outcome and existing unconfirmed row."
+    },
+    {
+      "reference": "agent/coordinator/executor.py:291",
+      "finding": "cancel_stale cancels only unprotected call tasks; aclose marks pending protected writes unknown and has two bounded waits. A naive await inserted before protection moves, or unowned to_thread future, would weaken these guarantees."
+    },
+    {
+      "reference": "agent/main.py:100",
+      "finding": "The live path supplies FDBToolLogger. Heartbeat append and trace flush are also synchronous, but this evidence samples the attempt logger; moving it alone is not a claim that all loop stalls disappear."
+    }
+  ],
+  "smallest_proposed_change": {
+    "scope": "Retain synchronous FDB snapshot/locking implementation and scorer format. Offload only thread-safe logger I/O through an executor-owned helper; ledger, intent decisions and event emission remain on the event loop. Preserve direct synchronous logger API for existing collectors/tests.",
+    "start_sequence": [
+      "Freeze attempt_id (execution_id:call_id), tool, deep-copied argument payload and intention timestamp on the loop. Retain operation/call argument binding; a pre-I/O ledger reservation is permissible but is not a dispatched write.",
+      "Emit dispatch-intention event and retain its synchronous current() check. Submit started() to a tracked worker task and await successful persistence before backend entry. Do not add protected/write_keys until actual dispatch is about to occur.",
+      "If a new intent/cancellation arrives while start I/O waits, abort any undispatched ledger reservation immediately, retain identity binding, mark the call cancelled-before-dispatch, and never enter the backend. Cancelling the await cannot stop an already-running disk thread.",
+      "Own the surviving start future and its exception. After it succeeds, finalize any cancelled intention as cancelled using the same attempt_id; serialize this finalization after start completion. If start fails or partially persists, emit logging error, preserve remaining evidence and dispatch nothing.",
+      "On ordinary start success, perform another current()/closed check. Then set protected/write_keys and invoke the backend without another await or event callback between that final check and entry. Abort/finalize a saved but now-stale intention instead of dispatching it."
+    ],
+    "finish_sequence": [
+      "Snapshot immutable attempt_id, executor observation-end timestamp and final status before offloading finished(). Keep done/error/unknown/cancelled distinctions; logging failure must not rewrite backend success.",
+      "Remove dispatch protection and write_keys as soon as backend observation ends, as today. Track pending finalization separately so shutdown cannot relabel a completed write unknown merely because disk I/O is slow.",
+      "Shield/own finalization work against call/parent cancellation, observe every exception and update the same row exactly once. A queued start must finish before its final row update; existing cross-process locking/atomic replacement remain required.",
+      "Include outstanding logger tasks in bounded shutdown accounting. If disk work outlives the deadline, return/report unresolved telemetry and retain owned futures; do not claim a thread was cancelled or the log drained. Never permit late start completion to dispatch after close."
+    ],
+    "not_proposed": "No fire-and-forget start logging, no post-backend intention write, no shortened durability sequence, no blanket offload of arbitrary event callbacks, no database/append-only migration or new retry policy in this minimal iteration.",
+    "expected_benefit": "Disk stalls and lock waits no longer directly monopolize the agent event loop. Required intention persistence still delays its tool dispatch; disk service time, snapshot growth and throughput are not solved by this move."
+  },
+  "fault_injection_regression_plan": [
+    {
+      "case": "blocked_start_io",
+      "injection": "Hold logger start at a threading.Event barrier before persistence. Use another loop coroutine/event as a deterministic responsiveness witness.",
+      "assert": "Loop witness runs while backend count remains0. On release, backend itself observes exactly one collectable unconfirmed intention before entry; successful completion updates that same identity."
+    },
+    {
+      "case": "correction_during_start_io",
+      "injection": "Freeze a slow start, finalize a newer intent, then release the old disk operation. Repeat for a read and a write.",
+      "assert": "Old backend never enters; no stale ledger pending/unknown effect remains; any persisted old row is finalized cancelled, operation/call binding remains stable, and the new intended action can execute exactly once."
+    },
+    {
+      "case": "correction_after_persistence",
+      "injection": "Schedule a version change at start-future resolution before the post-await version check; retain existing synchronous TOOL_STARTED-sink correction test.",
+      "assert": "No old backend entry after the final check fails. A persisted intention is visible and cancelled rather than silently removed."
+    },
+    {
+      "case": "start_persistence_failure",
+      "injection": "Raise before writing and after atomic replacement but before successful directory-fsync return.",
+      "assert": "No backend effect in either case, explicit tool_log_error, no uncertain backend ledger entry; partial unconfirmed disk evidence remains visible. Retrying a valid intentional operation is not accidentally blocked by an undispatched reservation."
+    },
+    {
+      "case": "completion_io_cancel_race",
+      "injection": "Block finished() after backend success, issue a correction and repeated shutdown cancellation, then release I/O.",
+      "assert": "Done ledger/outcome stays done, no fabricated unknown write, same attempt identity eventually receives done/end timestamp, and all exceptions are observed."
+    },
+    {
+      "case": "final_status_matrix",
+      "injection": "Exercise explicit backend rejection, lost-ack write exception, cancelled read, already-dispatched superseded write, and completion logger failure.",
+      "assert": "Existing error/unknown/cancelled/done outcomes and every attempt remain intact; completion failure leaves an unconfirmed row plus visible logging error without converting successful effects to failures."
+    },
+    {
+      "case": "snapshot_and_concurrency",
+      "injection": "Mutate caller-owned argument containers after submission and interleave rooms with overlapping call IDs plus existing cross-process logger updates.",
+      "assert": "Persisted and dispatched arguments use the frozen attempt payload; exactly one row per unique execution/call attempt, no clobbered rows, and existing unmodified upstream collection still works."
+    },
+    {
+      "case": "bounded_shutdown_with_stuck_io",
+      "injection": "Hold a worker I/O barrier beyond both shutdown windows; release only after aclose reports unresolved work.",
+      "assert": "Event loop remains responsive, aclose returns within its bound and reports incomplete cleanup, late logger success cannot dispatch a closed/stale action, and finalization/error callbacks are retained. Do not claim Python can forcibly stop the disk thread."
+    }
+  ],
+  "acceptance": "Run new fault-injection tests against the baseline first, preserve failures, implement the minimal boundary-safe change, then targeted telemetry/executor/correction tests and the full suite. A separate predeclared slow-disk RTC comparison is needed before claiming improved live interruption latency."
+}

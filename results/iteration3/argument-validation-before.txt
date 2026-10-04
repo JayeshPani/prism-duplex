@@ -1,0 +1,806 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF........F                           [100%]
+=================================== FAILURES ===================================
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[fractional-integer] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047e8710>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'quantity': 1.5}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[fractional-integer-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047d0290>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'quantity': '1.5'}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[boolean-as-integer] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047ba010>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'quantity': True}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[nonnumeric-integer-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047cac50>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'quantity': 'many'}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[boolean-as-number] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047ebfd0>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'amount': True}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[nonfinite-number-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047e9610>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'amount': 'NaN'}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[unknown-boolean-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x104893f90>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'enabled': 'sometimes'}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[arbitrary-number-as-boolean] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047cb0d0>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'enabled': 2}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[array-as-boolean] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047ba150>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'enabled': []}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[array-as-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047e7d10>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'label': ['desk']}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[object-as-string] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047cae10>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'label': {'name': 'desk'}}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[unknown-key] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t.coordinator.events.EventBus object at 0x1047c7010>, Ledger(entries={}, _inflight={}, _call_actions={}, reads={}), [])
+args = {'invented_argument': 'desk'}
+
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    def test_resolver_rejects_known_invalid_literal_plan_before_returning_calls(setup, args):
+        manifest, _, _, _, _ = setup
+        plan = {"calls": [{"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                           {"id": "bad", "tool": "write_options", "args": args}]}
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/unit/test_argument_validation.py:61: Failed
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ons", {"quantity": 1.5}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'quantity': 1.5})])
+args = {'quantity': 1.5}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...ntity': 1.5})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..., {"label": "approved"}]'}, reads={}), [('write_options', {'quantity': 1.5}), ('write_marker', {'label': 'approved'})])
+args = {'quantity': 1.5}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'quantity': 1.5})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ons", {"quantity": 1.5}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'quantity': 1.5})])
+args = {'quantity': '1.5'}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...ntity': 1.5})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..., {"label": "approved"}]'}, reads={}), [('write_options', {'quantity': 1.5}), ('write_marker', {'label': 'approved'})])
+args = {'quantity': '1.5'}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'quantity': 1.5})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-integer-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...options", {"quantity": 1}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'quantity': 1})])
+args = {'quantity': True}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...uantity': 1})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-integer-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...r", {"label": "approved"}]'}, reads={}), [('write_options', {'quantity': 1}), ('write_marker', {'label': 'approved'})])
+args = {'quantity': True}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'quantity': 1})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[nonnumeric-integer-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...{"quantity": "many"}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'quantity': 'many'})])
+args = {'quantity': 'many'}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...ty': 'many'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[nonnumeric-integer-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..."label": "approved"}]'}, reads={}), [('write_options', {'quantity': 'many'}), ('write_marker', {'label': 'approved'})])
+args = {'quantity': 'many'}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'quantity': 'many'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-number-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ite_options", {"amount": 1}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'amount': 1})])
+args = {'amount': True}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...'amount': 1})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-number-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ker", {"label": "approved"}]'}, reads={}), [('write_options', {'amount': 1}), ('write_marker', {'label': 'approved'})])
+args = {'amount': True}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'amount': 1})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[nonfinite-number-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...options", {"amount": NaN}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'amount': nan})])
+args = {'amount': 'NaN'}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...mount': nan})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[nonfinite-number-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...r", {"label": "approved"}]'}, reads={}), [('write_options', {'amount': nan}), ('write_marker', {'label': 'approved'})])
+args = {'amount': 'NaN'}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'amount': nan})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-boolean-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...s", {"enabled": false}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'enabled': False})])
+args = {'enabled': 'sometimes'}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...led': False})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-boolean-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',... {"label": "approved"}]'}, reads={}), [('write_options', {'enabled': False}), ('write_marker', {'label': 'approved'})])
+args = {'enabled': 'sometimes'}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'enabled': False})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[arbitrary-number-as-boolean-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ons", {"enabled": true}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'enabled': True})])
+args = {'enabled': 2}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...bled': True})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[arbitrary-number-as-boolean-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..., {"label": "approved"}]'}, reads={}), [('write_options', {'enabled': True}), ('write_marker', {'label': 'approved'})])
+args = {'enabled': 2}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'enabled': True})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-boolean-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...s", {"enabled": false}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'enabled': False})])
+args = {'enabled': []}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...led': False})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-boolean-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',... {"label": "approved"}]'}, reads={}), [('write_options', {'enabled': False}), ('write_marker', {'label': 'approved'})])
+args = {'enabled': []}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'enabled': False})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...l": "[\\"desk\\"]"}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'label': '["desk"]'})])
+args = {'label': ['desk']}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       assert [('write_mark... '["desk"]'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...label": "approved"}]'}, reads={}), [('write_options', {'label': '["desk"]'}), ('write_marker', {'label': 'approved'})])
+args = {'label': ['desk']}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'label': '["desk"]'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[object-as-string-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..."desk\\"}"}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'label': '{"name": "desk"}'})])
+args = {'label': {'name': 'desk'}}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       assert [('write_mark...": "desk"}'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[object-as-string-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..."approved"}]'}, reads={}), [('write_options', {'label': '{"name": "desk"}'}), ('write_marker', {'label': 'approved'})])
+args = {'label': {'name': 'desk'}}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'label': '{"name": "desk"}'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-key-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...t": "desk"}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'invented_argument': 'desk'})])
+args = {'invented_argument': 'desk'}, bad_first = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_mark...nt': 'desk'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+_ test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-key-True] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',..."approved"}]'}, reads={}), [('write_options', {'invented_argument': 'desk'}), ('write_marker', {'label': 'approved'})])
+args = {'invented_argument': 'desk'}, bad_first = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("bad_first", [False, True])
+    @pytest.mark.parametrize("args", INVALID_ARGUMENTS)
+    async def test_executor_rejects_literal_malformed_sibling_before_any_effect(setup, args, bad_first):
+        _, executor, bus, ledger, effects = setup
+        calls = [PlannedCall("good", "write_marker", {"label": "approved"}),
+                 PlannedCall("bad", "write_options", args)]
+        if bad_first:
+            calls.reverse()
+        execution = await executor.run(calls)
+>       assert effects == []
+E       AssertionError: assert [('write_opti... 'approved'})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_options', {'invented_argument': 'desk'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:75: AssertionError
+__ test_coordinator_does_not_commit_valid_write_beside_invalid_typed_sibling ___
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...s", {"enabled": false}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'enabled': False})])
+
+    @pytest.mark.asyncio
+    async def test_coordinator_does_not_commit_valid_write_beside_invalid_typed_sibling(setup):
+        manifest, executor, bus, ledger, effects = setup
+    
+        class Planner:
+            async def complete_json(self, *_):
+                return {"complete": True, "calls": [
+                    {"id": "good", "tool": "write_marker", "args": {"label": "approved"}},
+                    {"id": "bad", "tool": "write_options", "args": {"enabled": "sometimes"}}],
+                    "reply": "Saving both preferences."}
+    
+        said = []
+    
+        async def speak(text):
+            said.append(text)
+    
+        coordinator = Coordinator(IntentResolver(Planner(), manifest), executor, ledger, bus, speak,
+                                  config=CoordinatorConfig(hold_read_ms=0, hold_state_ms=0, ack_after_ms=10000))
+        try:
+            coordinator.on_user_turn("Save my preferences.")
+            await coordinator.drain()
+        finally:
+            await coordinator.aclose()
+>       assert effects == []
+E       AssertionError: assert [('write_mark...led': False})] == []
+E         
+E         Left contains 2 more items, first extra item: ('write_marker', {'label': 'approved'})
+E         Use -v to get more diff
+
+tests/unit/test_argument_validation.py:105: AssertionError
+_ test_dynamic_reference_is_validated_after_lookup_without_transaction_claim[1.5-False] _
+
+setup = (Manifest(name='independent-argument-validation', tools={'write_marker': ToolSpec(name='write_marker', description='',...ons", {"quantity": 1.5}]'}, reads={}), [('write_marker', {'label': 'approved'}), ('write_options', {'quantity': 1.5})])
+resolved_quantity = 1.5, valid = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("resolved_quantity,valid", [("3", True), (1.5, False)])
+    async def test_dynamic_reference_is_validated_after_lookup_without_transaction_claim(setup, resolved_quantity, valid):
+        manifest, executor, bus, ledger, effects = setup
+    
+        async def lookup():
+            return {"quantity": resolved_quantity}
+    
+        manifest.add(ToolSpec("lookup", "", {}, [], False, lookup))
+        plan = {"calls": [
+            {"id": "independent", "tool": "write_marker", "args": {"label": "approved"}},
+            {"id": "lookup", "tool": "lookup", "args": {}},
+            {"id": "dependent", "tool": "write_options", "args": {"quantity": "$lookup.quantity"}}]}
+        resolution = IntentResolver(None, manifest)._to_resolution(plan)
+        execution = await executor.run(resolution.calls)
+        assert execution.outcomes["independent"].status == "done"
+        assert execution.outcomes["lookup"].status == "done"
+        assert ("write_marker", {"label": "approved"}) in effects
+        if valid:
+            assert execution.outcomes["dependent"].status == "done"
+            assert ("write_options", {"quantity": 3}) in effects
+        else:
+>           assert execution.outcomes["dependent"].status == "error"
+E           AssertionError: assert 'done' == 'error'
+E             
+E             - error
+E             + done
+
+tests/unit/test_argument_validation.py:164: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[fractional-integer]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[fractional-integer-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[boolean-as-integer]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[nonnumeric-integer-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[boolean-as-number]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[nonfinite-number-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[unknown-boolean-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[arbitrary-number-as-boolean]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[array-as-boolean]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[array-as-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[object-as-string]
+FAILED tests/unit/test_argument_validation.py::test_resolver_rejects_known_invalid_literal_plan_before_returning_calls[unknown-key]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[fractional-integer-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-integer-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-integer-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[nonnumeric-integer-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[nonnumeric-integer-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-number-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[boolean-as-number-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[nonfinite-number-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[nonfinite-number-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-boolean-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-boolean-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[arbitrary-number-as-boolean-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[arbitrary-number-as-boolean-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-boolean-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-boolean-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[array-as-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[object-as-string-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[object-as-string-True]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-key-False]
+FAILED tests/unit/test_argument_validation.py::test_executor_rejects_literal_malformed_sibling_before_any_effect[unknown-key-True]
+FAILED tests/unit/test_argument_validation.py::test_coordinator_does_not_commit_valid_write_beside_invalid_typed_sibling
+FAILED tests/unit/test_argument_validation.py::test_dynamic_reference_is_validated_after_lookup_without_transaction_claim[1.5-False]
+38 failed, 8 passed in 0.46s

@@ -1,0 +1,174 @@
+{
+  "created_at_utc": "2026-09-26T12:12:09.683252+00:00",
+  "status": "reviewed_no_open_concrete_blocker",
+  "scope": "Bounded independent static review of the current five iteration19 production modules and two new test files against their saved baseline, plus existing test receipts. No models, services or tests launched; no production/test changes by reviewer.",
+  "reviewed_sha256": {
+    "agent/tools/manifest.py": "3d474ed7d121bc38317ad6ef6abf8c3a41bf4c62e513b784b665ef67de0ecf24",
+    "agent/tools/car_tools.py": "458baa1a8def5325305eb4971c99eec702de2be6f163fc814bfd7442324b3328",
+    "agent/coordinator/resolver.py": "4b5b26a6d6d17a35dec15522cf5d4e0f124acfbb13e7ce022e579d9be5bdec19",
+    "agent/coordinator/coordinator.py": "fbe9e06056f0462befcdc9617b8754809ebe0faa4bee9f84afc472566b3e3863",
+    "agent/coordinator/responder.py": "9830cb062e5aab314c1acd12ad4118831e81b942094ffc6145b02769d1fc2639",
+    "tests/unit/test_navigation_clarification.py": "02867fe4796b8779ee76afc2bc397aa9467a344a3b9fc9fe557a6f629b2b7c97",
+    "tests/unit/test_navigation_clarification_lifecycle.py": "fbbc33e0f5d65ec933ff8b40d3aaba03ffc66aaa3a56775e4099d3706dd96577"
+  },
+  "baseline_sha256": {
+    "agent/tools/manifest.py": "274b84d1f0565c1c565e86cb6f9bbda166161b4ea2aeba5dcc0008421938b3a7",
+    "agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508"
+  },
+  "source_line_ranges": {
+    "agent/tools/manifest.py": {},
+    "agent/tools/car_tools.py": {
+      "_lookup": [
+        66,
+        98
+      ],
+      "_navigation_destination": [
+        101,
+        108
+      ],
+      "_continue_navigation": [
+        111,
+        156
+      ],
+      "_navigation_plan_issue": [
+        159,
+        197
+      ]
+    },
+    "agent/coordinator/resolver.py": {
+      "build_user_prompt": [
+        127,
+        147
+      ],
+      "resolve": [
+        149,
+        155
+      ],
+      "repair": [
+        157,
+        169
+      ],
+      "_checked_resolution": [
+        171,
+        181
+      ]
+    },
+    "agent/coordinator/coordinator.py": {
+      "on_user_turn": [
+        118,
+        146
+      ],
+      "_resolve_and_gate": [
+        154,
+        237
+      ],
+      "_commit": [
+        247,
+        286
+      ],
+      "aclose": [
+        342,
+        364
+      ]
+    },
+    "agent/coordinator/responder.py": {
+      "summarize": [
+        168,
+        203
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "results/iteration19/tested-source-v2.json": "5d8d3be5f8b5c67edf1f0abe0c146b6fb910f989cccbc61870f76637b25ebcb2",
+    "results/iteration19/full-tests-v2.txt": "6769897db7dfe91d1098de8887621fbd28cc5296c4bd61e6fc5bcaf7b1b655a2",
+    "results/iteration19/lifecycle-incomplete-regression.txt": "b4c90c4ee7b1207a2d73f798f9c5d16041ea740ec092a0bca32f644f0e3d4a8c",
+    "results/iteration19/clarification-failure-review.json": "4bf52c6ee241fa8e01924b8e6367a95b0b06aab769922abd378c762a172a021a"
+  },
+  "checks": [
+    {
+      "id": "reviewed_bytes_match_completed_v2_test_receipt",
+      "pass": true,
+      "details": {
+        "agent/tools/manifest.py": true,
+        "agent/tools/car_tools.py": true,
+        "agent/coordinator/resolver.py": true,
+        "agent/coordinator/coordinator.py": true,
+        "agent/coordinator/responder.py": true,
+        "tests/unit/test_navigation_clarification.py": true,
+        "tests/unit/test_navigation_clarification_lifecycle.py": true
+      }
+    },
+    {
+      "id": "root_test_receipt_integrity",
+      "pass": true,
+      "detail": "Existing root-owned v2 run: exit 0; 755 passed in 5.78s; unchanged_during_test true; log hash matches. This reviewer did not run tests."
+    },
+    {
+      "id": "five_production_modules_and_two_new_test_files_parsed",
+      "pass": true,
+      "detail": "AST parsing only, no production imports or execution."
+    },
+    {
+      "id": "original_action_scope",
+      "pass": true,
+      "detail": "Whole positive command parser plus actual fixed-map place_ambiguous source query excludes unsupported unknown/compound, route-preview, question and negation requests from derived continuation."
+    },
+    {
+      "id": "structured_result_grounding",
+      "pass": true,
+      "detail": "Prior execution must be nonstale and valid; matching outcome must be error with result status=error, code=place_ambiguous, destination role and normalized original query. A missing/mismatched result does not ground a continuation."
+    },
+    {
+      "id": "complete_literal_answer_guard",
+      "pass": true,
+      "detail": "Unique _lookup success alone is insufficient. Answer must match full normalized canonical name, canonical ID, existing exact alias, or safe internal in/at connective form; a paused unique partial such as Manipal is rejected. Explicit commands, questions and composite answers do not become literal answers."
+    },
+    {
+      "id": "bounded_plan_contract",
+      "pass": true,
+      "detail": "Recognized continuation explicitly requires complete and nonempty calls, then existing destination-matching compute_route -> exactly one start_navigation dependency contract. No calls are silently added."
+    },
+    {
+      "id": "one_semantic_repair_and_context_fidelity",
+      "pass": true,
+      "detail": "Resolve and one repair retain original history/slots/outcomes, literal latest answer, separate original_request/canonical request context and rejected parsed JSON. Second contract error follows existing failure path. Parser-level network retry count is outside this assertion."
+    },
+    {
+      "id": "per_room_context_consumption",
+      "pass": true,
+      "detail": "Last execution context is consumed on next finalized turn; merged uncommitted answer retains it. Commit clears pending context, and close clears both context fields. Committed cancellation/unrelated request or successful navigation does not leave the old ambiguity available to a later place answer."
+    },
+    {
+      "id": "late_result_and_sync_sink_ownership",
+      "pass": true,
+      "detail": "Current-intent/closed checks prevent late executor results from storing context, late summaries from speaking, and synchronous rejection-event corrections from starting repair or dispatch. Continuation event payloads are deep-copied so subscriber mutation cannot change planning/summary context."
+    },
+    {
+      "id": "responder_result_grounding",
+      "pass": true,
+      "detail": "Unknown/place-error handling retains priority. Canonical continuation enters the existing result/status/stale/ancestry/snapshot/word-limit summary path; model repaired_request is not authorization. Fallback receives full original plus clarification and actual results."
+    },
+    {
+      "id": "tests_cover_observed_and_independent_boundaries",
+      "pass": true,
+      "detail": "37 domain trajectories/checks include five canonical/alias/connective successes, independent Tech Park and Indiranagar cases, actual known replacement outside original candidates, no-call/incomplete/lookup repair, and negative source/answer/outcome guards. Nine lifecycle cases cover context consumption, split answer, late execution/close, old summary, trace mutation and synchronous rejection correction."
+    },
+    {
+      "id": "failed_partial_answer_receipt_preserved",
+      "pass": true,
+      "detail": "lifecycle-incomplete-regression.txt retains 1 failed, 8 passed before the full-name guard; its failing split-answer case passes in the later v2 full suite. Receipt is not overwritten."
+    }
+  ],
+  "open_concrete_findings": [],
+  "explicit_boundaries": [
+    "Returned-error, skipped and cancelled navigation outcomes remain eligible. The hook excludes done/reused/blocked/unknown effects but does not prove that every eligible error happened before backend entry; correctness relies on current car handlers returning errors before mutation. It is not a generic retry policy for arbitrary external writes.",
+    "A complete known replacement destination may be outside the original ambiguity candidates (Road -> Cubbon Park is explicitly covered). This is literal destination correction, not automatic candidate selection.",
+    "Unknown-place strings, compound/qualified requests, model-only no-call clarification without matching tool error, unsupported answer phrasing and incomplete partial answers do not gain this contract. They retain ordinary model planning; no general dialogue-completion guarantee is asserted.",
+    "The hook recognizes the whole merged uncommitted answer when the planner previously marked it incomplete; it does not enforce arbitrary semantic completion for all unsupported fragments.",
+    "The source retains at most one prior execution context per coordinator. It is not durable cross-session task state.",
+    "Passing deterministic fixtures/full tests does not establish live STT/LLM/TTS or acoustic success. The saved iteration18 failure remains a failed development observation; no live iteration19 result was evaluated here."
+  ]
+}

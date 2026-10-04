@@ -1,0 +1,431 @@
+{
+  "created_at_utc": "2026-09-26T12:01:43.406521+00:00",
+  "status": "baseline_failure_reconstructed_design_review_only",
+  "scope": "Saved iteration18 candidate case and frozen evaluated source only. Current iteration19 candidate is changing independently; this report is not its final approval. No inference, tests, production edits, or historical artifact edits.",
+  "room": "car-audio-f09f412d4f94451593b863bfff9ec7a5",
+  "case": "ambiguous_road_then_hospital",
+  "evidence_sha256": {
+    "results/iteration18-candidate/local-stack-run1/traces/car-audio-f09f412d4f94451593b863bfff9ec7a5.jsonl": "768643e461f847b504120a84222fbbf50af89a062a6e47bc7ecec05c06fb25d9",
+    "results/iteration18-candidate/local-stack-run1/tool-calls.jsonl": "548e28ebeda173b3c2aed2ce8e6dcb46100d96a90ad63112ebc0cf276cea37e2",
+    "results/iteration18-candidate/received-audio-review/report.json": "3cd10cd8659f4d2f85797cab85c1528b96b993fe13e1b670d8b48ab08cb1fbba",
+    "results/iteration18-candidate/rtc-ambiguous_road_then_hospital-1/report.json": "e01aff5f15ec1b61ab539e9df943bde9dcb3c2e8740fd8d5ec12ad8e356fa35e",
+    "results/iteration18/speech-fact-review.json": "03316ecb4bb0309c84ecd3d524f63b7f459e06ba53abcba362ec4c23697e6d75",
+    "results/iteration18/protocol.json": "edb71293c6a95c6a2349290b441426675f3c37df170568c97acdd00799b3de10",
+    "results/iteration19/baseline-source/agent/coordinator/coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "results/iteration19/baseline-source/agent/coordinator/resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "results/iteration19/baseline-source/agent/coordinator/responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "results/iteration19/baseline-source/agent/tools/car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac",
+    "results/iteration18/source-snapshot/015-coordinator.py": "7957078fb05b2232a163f508f11efd35de463a0a5852a00cbcffef1d02c4c55f",
+    "results/iteration18/source-snapshot/022-resolver.py": "028d69b16b1e8dad68c83e48f99227110fc4dea9699419568bb890139cbac64a",
+    "results/iteration18/source-snapshot/023-responder.py": "8c28e89d29f897854a9d7c1625e11478e21b4c07a8e751ffb37ff1726f73f508",
+    "results/iteration18/source-snapshot/035-car_tools.py": "fc1d4cdcc00cc674da1b03fc4accc09412f941f09dc683784e6da7f993d333ac"
+  },
+  "baseline_matches_iteration18_source_snapshot": {
+    "agent/coordinator/coordinator.py": true,
+    "agent/coordinator/resolver.py": true,
+    "agent/coordinator/responder.py": true,
+    "agent/tools/car_tools.py": true
+  },
+  "observation": {
+    "capture_status": "completed_observation",
+    "required_effects": [
+      {
+        "tool": "start_navigation",
+        "destination_id": "P_HOSP",
+        "eta_min": 5
+      }
+    ],
+    "physical_attempt_count": 2,
+    "physical_attempts": [
+      {
+        "line": 26,
+        "room": "car-audio-f09f412d4f94451593b863bfff9ec7a5",
+        "call": {
+          "function": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "timestamp_start": 1790421917.573334,
+          "attempt_id": "ef3bb41019674fbb9fd04e344f7df554:c1",
+          "status": "error",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790421917.5783339,
+          "end_evidence": "executor_observation_ended"
+        }
+      },
+      {
+        "line": 27,
+        "room": "car-audio-f09f412d4f94451593b863bfff9ec7a5",
+        "call": {
+          "function": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "timestamp_start": 1790421931.718216,
+          "attempt_id": "10ad60fcc8ff4b32897e96b55e935b72:c1",
+          "status": "done",
+          "dispatch_evidence": "intention_before_backend_entry",
+          "timestamp_end": 1790421931.720694,
+          "end_evidence": "executor_observation_ended"
+        }
+      }
+    ],
+    "observed_navigation_mutations": 0,
+    "contract_rejections": 0,
+    "initial_clarification_correct": true,
+    "final_navigation_and_eta_missing": true,
+    "final_claim_assessment": "The delivered final statement truthfully reports a successful location lookup. It does not falsely claim navigation started; the failure is omission of the still-requested action and its arrival estimate.",
+    "parsed_plan_and_event_evidence": [
+      {
+        "line": 5,
+        "type": "user_final",
+        "data": {
+          "text": "Navigate to Airport Road.",
+          "merged": "Navigate to Airport Road.",
+          "intent_version": 1
+        },
+        "ts": 1790421914.041394
+      },
+      {
+        "line": 12,
+        "type": "plan_ready",
+        "data": {
+          "intent_version": 1,
+          "utterance": "Navigate to Airport Road.",
+          "repaired": "",
+          "complete": true,
+          "corrections": [],
+          "slots": {
+            "query": "Airport Road"
+          },
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_destination",
+              "args": {
+                "query": "Airport Road"
+              }
+            },
+            {
+              "id": "c2",
+              "tool": "compute_route",
+              "args": {
+                "destination": "$c1.places[0].name"
+              }
+            },
+            {
+              "id": "c3",
+              "tool": "start_navigation",
+              "args": {
+                "route_id": "$c2.route_id"
+              }
+            }
+          ],
+          "reply": "Navigating to Airport Road."
+        },
+        "ts": 1790421917.5724359
+      },
+      {
+        "line": 19,
+        "type": "tool_started",
+        "data": {
+          "execution_id": "ef3bb41019674fbb9fd04e344f7df554",
+          "operation_id": "turn-1",
+          "id": "c1",
+          "tool": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "state_changing": false
+        },
+        "ts": 1790421917.573288
+      },
+      {
+        "line": 20,
+        "type": "tool_error",
+        "data": {
+          "execution_id": "ef3bb41019674fbb9fd04e344f7df554",
+          "operation_id": "turn-1",
+          "id": "c1",
+          "tool": "search_destination",
+          "args": {
+            "query": "Airport Road"
+          },
+          "result": {
+            "status": "error",
+            "code": "place_ambiguous",
+            "query": "Airport Road",
+            "place_role": "destination",
+            "places": [],
+            "message": "ambiguous destination 'Airport Road'; ask for the place name",
+            "candidates": [
+              {
+                "place_id": "P_HOSP",
+                "name": "Manipal Hospital, Old Airport Road"
+              },
+              {
+                "place_id": "K_SBUX_AIR",
+                "name": "Starbucks, Airport Road"
+              }
+            ]
+          },
+          "error": "ambiguous destination 'Airport Road'; ask for the place name"
+        },
+        "ts": 1790421917.578225
+      },
+      {
+        "line": 21,
+        "type": "tool_error",
+        "data": {
+          "execution_id": "ef3bb41019674fbb9fd04e344f7df554",
+          "operation_id": "turn-1",
+          "id": "c2",
+          "tool": "compute_route",
+          "error": "unresolved reference $c1.places[0].name"
+        },
+        "ts": 1790421917.579799
+      },
+      {
+        "line": 22,
+        "type": "tool_error",
+        "data": {
+          "execution_id": "ef3bb41019674fbb9fd04e344f7df554",
+          "operation_id": "turn-1",
+          "id": "c3",
+          "tool": "start_navigation",
+          "error": "unresolved reference $c2.route_id"
+        },
+        "ts": 1790421917.579995
+      },
+      {
+        "line": 23,
+        "type": "agent_say",
+        "data": {
+          "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+          "intent_version": 1,
+          "kind": "result"
+        },
+        "ts": 1790421917.580639
+      },
+      {
+        "line": 30,
+        "type": "user_final",
+        "data": {
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "merged": "I mean Manipal Hospital, Old Airport Road.",
+          "intent_version": 2
+        },
+        "ts": 1790421928.5735092
+      },
+      {
+        "line": 37,
+        "type": "plan_ready",
+        "data": {
+          "intent_version": 2,
+          "utterance": "I mean Manipal Hospital, Old Airport Road.",
+          "repaired": "",
+          "complete": true,
+          "corrections": [
+            {
+              "slot": "query",
+              "from": "Airport Road",
+              "to": "Manipal Hospital, Old Airport Road"
+            }
+          ],
+          "slots": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "calls": [
+            {
+              "id": "c1",
+              "tool": "search_destination",
+              "args": {
+                "query": "Manipal Hospital, Old Airport Road"
+              }
+            }
+          ],
+          "reply": "Searching for Manipal Hospital, Old Airport Road."
+        },
+        "ts": 1790421931.71708
+      },
+      {
+        "line": 43,
+        "type": "tool_started",
+        "data": {
+          "execution_id": "10ad60fcc8ff4b32897e96b55e935b72",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "state_changing": false
+        },
+        "ts": 1790421931.718173
+      },
+      {
+        "line": 44,
+        "type": "tool_done",
+        "data": {
+          "execution_id": "10ad60fcc8ff4b32897e96b55e935b72",
+          "operation_id": "turn-2",
+          "id": "c1",
+          "tool": "search_destination",
+          "args": {
+            "query": "Manipal Hospital, Old Airport Road"
+          },
+          "result": {
+            "status": "success",
+            "places": [
+              {
+                "place_id": "P_HOSP",
+                "name": "Manipal Hospital, Old Airport Road",
+                "category": "hospital",
+                "lat": 12.9592,
+                "lng": 77.6485
+              }
+            ]
+          },
+          "stale": false,
+          "duration_ms": 2
+        },
+        "ts": 1790421931.7206159
+      },
+      {
+        "line": 45,
+        "type": "agent_say",
+        "data": {
+          "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+          "intent_version": 2,
+          "kind": "result"
+        },
+        "ts": 1790421933.7046778
+      }
+    ],
+    "declared_result_handles": [
+      {
+        "text": "Which place do you mean: Manipal Hospital, Old Airport Road or Starbucks, Airport Road?",
+        "intent_version": 1,
+        "kind": "result",
+        "speech_id": "speech_418d992a1805",
+        "queued_at": 140232.228173666,
+        "state": "finished",
+        "first_loud_at": 140233.514339958,
+        "preceding_quiet_seconds": 2.89940895800828,
+        "last_loud_at": 140238.354463583,
+        "ended_at": 140238.433837458,
+        "error": null
+      },
+      {
+        "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+        "intent_version": 2,
+        "kind": "result",
+        "speech_id": "speech_eec2b218c6b7",
+        "queued_at": 140248.353093791,
+        "state": "finished",
+        "first_loud_at": 140249.514533583,
+        "preceding_quiet_seconds": 4.099728082976071,
+        "last_loud_at": 140254.013970583,
+        "ended_at": 140254.07666325,
+        "error": null
+      }
+    ],
+    "received_whole_stream_transcript": "One moment. Which place do you mean? Manipul Hospital, Old Airport Road, or Starbucks, Airport Road. Okay, one sec. The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+    "ASR_limit": "Exact transcript is an ASR proxy with initial Manipul/Manipal spelling variation; no human listening or acoustic intelligibility judgment."
+  },
+  "source_mechanism": [
+    {
+      "path": "results/iteration19/baseline-source/agent/coordinator/coordinator.py",
+      "lines": [
+        227,
+        256
+      ],
+      "finding": "Commit clears uncommitted text and advances the audio boundary before running tools; it stores user/assistant history but no structured unresolved action when a destination read returns ambiguity. The second finalized turn is therefore the place answer alone."
+    },
+    {
+      "path": "results/iteration19/baseline-source/agent/coordinator/resolver.py",
+      "lines": [
+        127,
+        167
+      ],
+      "finding": "Prompt construction retains history, slots and action outcomes, but the domain validator receives only the current utterance, complete flag and parsed calls. Literal slots represent planned arguments, not an outstanding navigation obligation."
+    },
+    {
+      "path": "results/iteration19/baseline-source/agent/tools/car_tools.py",
+      "lines": [
+        101,
+        139
+      ],
+      "finding": "The positive whole-command contract intentionally skips ambiguous targets, unfamiliar wording, no-call and incomplete plans. Initial Airport Road is ambiguous; the next I-mean answer has no navigation verb. Both plans therefore pass without a contract rejection."
+    },
+    {
+      "path": "results/iteration19/baseline-source/agent/coordinator/responder.py",
+      "lines": [
+        168,
+        206
+      ],
+      "finding": "The error path correctly asks which candidate was meant. A subsequent successful search result only warrants a location claim; the responder cannot safely invent the missing mutation."
+    }
+  ],
+  "minimal_grounded_change": {
+    "state": "Keep one per-room previous committed request/execution as a candidate clarification source; it is evidence, not automatically active intent. Alternatively store a small equivalent pending-navigation record. Do not recover authorization from slot names, assistant speech, fuzzy suggestions, or arbitrary older history.",
+    "activation_boundary": "For the smallest scope, require a whole positive simple navigation command whose destination is actually ambiguous in the fixed map, plus a matching structured destination-ambiguity result from that execution and no successful, reused, blocked, or unknown navigation write. Exclude stale/invalid executions. Unknown place strings are excluded initially because they may contain extra commands or questions swallowed by a permissive target regex.",
+    "answer_boundary": "Bind only the immediate full literal place answer, optionally a narrow I-mean/actually prefix, resolved uniquely by the actual map. Candidate membership is the most conservative choice; a deliberately supported explicit replacement with another known destination must be documented/tested separately. Never interpret yes, ordinals, ambiguous fragments or negation as a candidate choice.",
+    "context": "Preserve the original request and latest answer verbatim. Add a separately labeled domain-grounded canonical destination/action context to both initial planning and the existing one semantic repair. It is derived context, not a replacement transcript.",
+    "contract": "For positively recognized continuation only, require complete plus the full matching current compute_route -> exactly one start_navigation dependency. Reject lookup-only, no-call, incomplete, wrong-target, stale-route and extra-mutation plans before dispatch; allow at most the already-supported single repair. Never append tools silently.",
+    "summary": "Supply the same grounded continuation to result summarization while retaining original request and answer. Only successful actual mutation results authorize activation/ETA speech; the normal full-request and status guards must remain for compound or information requests.",
+    "lifecycle": "Consume continuation evidence on the next finalized nonempty turn. Explicit new navigation, cancellation, unrelated requests, or close must not leave it available for a later bare name. Keep ordinary pause/partial/empty input distinct from finalized intent. Merged uncommitted speech may retain context only if the whole merged text still passes the literal-answer guard.",
+    "race_safety": "All stored context and continuation results belong to a specific intent/execution. Guard after synchronous event callbacks and every planning/repair await, and before dispatch/speech. Late old results cannot recreate or clear newer context. A cancellation-resistant model result must not dispatch.",
+    "failure_boundary": "The baseline had dependency failures with no writes. A returned error from a navigation handler is not equivalent to proving no backend entry; document whether eligibility excludes entered writes or relies on the current car backend error-before-effect contract. Unknown writes must never become implicit retries.",
+    "scope_limit": "This is a narrow destination-answer obligation, not general multi-turn task completion. Model-issued no-tool questions, unknown-place repair, arbitrary compounds and repeated bare-name corrections beyond the bound turn need separate evidence/design."
+  },
+  "independent_map_variants": {
+    "Tech Park": [
+      {
+        "place_id": "P_OFFICE",
+        "name": "Office (Manyata Tech Park)"
+      },
+      {
+        "place_id": "P_SRIB",
+        "name": "Samsung R&D Institute, Bagmane Tech Park"
+      }
+    ],
+    "Road": [
+      {
+        "place_id": "P_MGROAD",
+        "name": "MG Road Metro Station"
+      },
+      {
+        "place_id": "P_HOSP",
+        "name": "Manipal Hospital, Old Airport Road"
+      },
+      {
+        "place_id": "K_SBUX_AIR",
+        "name": "Starbucks, Airport Road"
+      },
+      {
+        "place_id": "R_MTR",
+        "name": "MTR restaurant, Lalbagh Road"
+      }
+    ]
+  },
+  "regression_scenarios": [
+    "Navigate to Tech Park -> I mean Samsung R&D Institute, Bagmane Tech Park: initial ambiguity has zero effects; answered target gets one fresh route and activation with actual ETA.",
+    "Take me to Road -> MTR restaurant, Lalbagh Road: choose a non-first candidate, never silently pick another road place.",
+    "Accept canonical name/ID and explicitly allowed alias with alternate valid call IDs/order; current route dependency still required.",
+    "Recognized answer followed by lookup-only, no-call, complete=false, wrong target, historical route ID, or extra cancel/start must trigger one repair or safe failure without partial dispatch.",
+    "Preview-route or distance-only original request must never gain a navigation write from its destination answer.",
+    "Navigate to Tech Park and tell me its distance must retain the complete request and must not be collapsed to pure navigation.",
+    "Never mind clears the pending task without canceling an unrelated already-active route; Stop navigation is its own explicit cancellation.",
+    "Navigate to Cubbon Park instead supersedes the old ambiguity; a late original resolution/repair must not override it.",
+    "Which one is closer, yes, the first one, not Office, an unknown name, or an unresolved fragment must not force the old action.",
+    "Correction or close during synchronous rejection/state events and awaiting repair prevents old effects, old speech and context resurrection.",
+    "Unknown/successful prior mutation, mismatched error role/query, stale execution, and separate rooms cannot authorize continuation.",
+    "The observed Airport Road/Hospital case is a reused development regression, not an independent held-out quality sample."
+  ],
+  "limits": [
+    "PLAN_READY records contain parsed model plans. This report does not claim exact raw network prompts or unparsed replies were retained; prompt-context statements are source reconstruction.",
+    "No model hypothesis is assigned causally. The evidence proves an accepted omission and the validator/state boundary that permitted it.",
+    "No timing, quality generalization, or guarantee for the in-progress iteration19 candidate is inferred from this single saved case."
+  ]
+}

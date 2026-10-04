@@ -1,0 +1,2464 @@
+{
+  "created_at_utc": "2026-09-26T11:39:42.085352+00:00",
+  "scope": "Post-run mechanism comparison of all eight matched baseline/candidate probe cases, with five additional candidate language cases retained in candidate-mechanism-review.json. No models, ASR, or physical speaker measurements run here.",
+  "status": "complete_with_failures_preserved",
+  "definitions": {
+    "publication_onset": "Recorder input started_monotonic; includes leading source PCM silence.",
+    "source_activity_onset": "Publication onset plus predeclared activity_start_sample/sample_rate. Silence has no source activity; retain null rather than invent an onset.",
+    "handle_tagged": "Only loud frames carrying the matching heuristic_result_speech_id. This explicit field is still a recorder heuristic, not authenticated frame-to-speech metadata.",
+    "broad_event_order_window": "All loud frames from the old handle queue until the next different speech queue, including untagged frames, matching frozen audit_acoustic.py. Data/RTP ordering is heuristic and may overattribute adjacent transport audio.",
+    "loud": "Received frame RMS at or above recorder threshold_db (-40 dB in these captures).",
+    "timer": "SDK resumed=true is its resume decision; guard held proves interception. Neither directly timestamps native sink resume or device sound."
+  },
+  "matched_cases": [
+    {
+      "case_id": "native_silence",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139479.934985541,
+          "source_activity_onset_monotonic": null,
+          "source_activity_offset_ms": null,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4675.35841697827,
+          "old_handle_end_from_source_activity_ms": null,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1144,
+                "received_monotonic": 139484.575522166,
+                "received_unix": 1790421169.927336,
+                "track_sid": "TR_AMLG2JMM6Wvdmt",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1097280,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -35.16511210623284,
+                "heuristic_result_speech_id": "speech_cecff075cf5a"
+              },
+              "from_publication_onset_ms": 4640.536625,
+              "from_source_activity_onset_ms": null
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1144,
+                "received_monotonic": 139484.575522166,
+                "received_unix": 1790421169.927336,
+                "track_sid": "TR_AMLG2JMM6Wvdmt",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1097280,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -35.16511210623284,
+                "heuristic_result_speech_id": "speech_cecff075cf5a"
+              },
+              "from_publication_onset_ms": 4640.536625,
+              "from_source_activity_onset_ms": null
+            }
+          },
+          "frozen_audit_tail_ms": 4640.537,
+          "frozen_audit_onset": "publication_fallback",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 1,
+                "binding_id": 1,
+                "case_id": "native_silence",
+                "room": "car-audio-879fb1b8e7eb4fe78100deb069522e9d",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 139463682794458,
+                  "unix_ns": 1790421149034529000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139464737460250,
+                  "unix_ns": 1790421150089198000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139464737464750,
+                  "unix_ns": 1790421150089202000
+                }
+              },
+              "stt_call_id": "stt-call-002",
+              "request_id": "stt-request-003",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1054.484125,
+              "request_wall_ms": 1057.52975,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139960.817037708,
+          "source_activity_onset_monotonic": null,
+          "source_activity_offset_ms": null,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4672.191374993417,
+          "old_handle_end_from_source_activity_ms": null,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 743,
+                "received_monotonic": 139965.438285583,
+                "received_unix": 1790421650.791541,
+                "track_sid": "TR_AMSwUyHvhQwkuW",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 712320,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -33.53886221305049,
+                "heuristic_result_speech_id": "speech_e5e26bd81cd6"
+              },
+              "from_publication_onset_ms": 4621.247875,
+              "from_source_activity_onset_ms": null
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 743,
+                "received_monotonic": 139965.438285583,
+                "received_unix": 1790421650.791541,
+                "track_sid": "TR_AMSwUyHvhQwkuW",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 712320,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -33.53886221305049,
+                "heuristic_result_speech_id": "speech_e5e26bd81cd6"
+              },
+              "from_publication_onset_ms": 4621.247875,
+              "from_source_activity_onset_ms": null
+            }
+          },
+          "frozen_audit_tail_ms": 4621.248,
+          "frozen_audit_onset": "publication_fallback",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 2,
+                "binding_id": 2,
+                "case_id": "native_silence",
+                "room": "car-audio-0c5fb0c511b64caeadcd2312fa165dce",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 139952516333916,
+                  "unix_ns": 1790421637869320000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139953887117958,
+                  "unix_ns": 1790421639240107000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139953887123583,
+                  "unix_ns": 1790421639240113000
+                }
+              },
+              "stt_call_id": "stt-call-003",
+              "request_id": "stt-request-005",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1370.755917,
+              "request_wall_ms": 1372.282792,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "native_voiced_stop",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139523.6903085,
+          "source_activity_onset_monotonic": 139523.7303085,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "interruption_requested",
+          "old_handle_end_from_publication_ms": 2981.798249995336,
+          "old_handle_end_from_source_activity_ms": 2941.79825,
+          "interruption_request_from_source_activity_ms": 2941.79825,
+          "next_speech_queue_boundary": 139527.377447833,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 521,
+                "received_monotonic": 139524.352836,
+                "received_unix": 1790421209.7047749,
+                "track_sid": "TR_AMEoptHHjpVHVV",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 499200,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -21.19158448415281,
+                "heuristic_result_speech_id": "speech_172dc9c7476e"
+              },
+              "from_publication_onset_ms": 662.5275,
+              "from_source_activity_onset_ms": 622.5275
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 525,
+                "received_monotonic": 139524.430839166,
+                "received_unix": 1790421209.7828228,
+                "track_sid": "TR_AMEoptHHjpVHVV",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 503040,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -39.39267478499667,
+                "heuristic_result_speech_id": null
+              },
+              "from_publication_onset_ms": 740.530666,
+              "from_source_activity_onset_ms": 700.530666
+            }
+          },
+          "frozen_audit_tail_ms": 700.531,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 1,
+          "post_probe_speaking_events": [
+            {
+              "line": 27,
+              "server_ts": 1790421209.265915,
+              "received_monotonic": 139523.91601825,
+              "after_probe_ms": 225.70974999689497,
+              "state": "speaking"
+            }
+          ],
+          "post_probe_nonempty_finals": [
+            {
+              "type": "user_final",
+              "data": {
+                "text": "Please stop navigation.",
+                "merged": "Please stop navigation.",
+                "intent_version": 2
+              },
+              "ts": 1790421212.023606
+            }
+          ],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 2,
+                "binding_id": 2,
+                "case_id": "native_voiced_stop",
+                "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 139515914139541,
+                  "unix_ns": 1790421201266008000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139516872251833,
+                  "unix_ns": 1790421202224122000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139516872256291,
+                  "unix_ns": 1790421202224127000
+                }
+              },
+              "stt_call_id": "stt-call-003",
+              "request_id": "stt-request-005",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 958.081083,
+              "request_wall_ms": 959.653417,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            },
+            {
+              "delivery_call": {
+                "call_id": 3,
+                "binding_id": 2,
+                "case_id": "native_voiced_stop",
+                "room": "car-audio-e0aabef9ccb64901a71df0ed3cd13bcd",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 139525613763958,
+                  "unix_ns": 1790421210965657000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139526666068125,
+                  "unix_ns": 1790421212017964000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139526666071958,
+                  "unix_ns": 1790421212017967000
+                }
+              },
+              "stt_call_id": "stt-call-004",
+              "request_id": "stt-request-007",
+              "original_text": "Please stop navigation.",
+              "native_engine_api_ms": 1052.278917,
+              "request_wall_ms": 1054.227792,
+              "synthetic_hold_ms": null,
+              "probe_recognition": true
+            }
+          ],
+          "successful_effects": 2,
+          "physical_attempts": 4,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140027.510663583,
+          "source_activity_onset_monotonic": 140027.550663583,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "interruption_requested",
+          "old_handle_end_from_publication_ms": 3490.21512499894,
+          "old_handle_end_from_source_activity_ms": 3450.215125,
+          "interruption_request_from_source_activity_ms": 3450.215125,
+          "next_speech_queue_boundary": 140031.708720708,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 546,
+                "received_monotonic": 140028.16954425,
+                "received_unix": 1790421713.522767,
+                "track_sid": "TR_AMtbYAYP637MXj",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 523200,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -20.943998117231722,
+                "heuristic_result_speech_id": "speech_3ed52a230ae0"
+              },
+              "from_publication_onset_ms": 658.880667,
+              "from_source_activity_onset_ms": 618.880667
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 549,
+                "received_monotonic": 140028.230403875,
+                "received_unix": 1790421713.583634,
+                "track_sid": "TR_AMtbYAYP637MXj",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 526080,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -27.719897006694506,
+                "heuristic_result_speech_id": null
+              },
+              "from_publication_onset_ms": 719.740292,
+              "from_source_activity_onset_ms": 679.740292
+            }
+          },
+          "frozen_audit_tail_ms": 679.74,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 1,
+          "post_probe_speaking_events": [
+            {
+              "line": 28,
+              "server_ts": 1790421713.079436,
+              "received_monotonic": 140027.728053666,
+              "after_probe_ms": 217.39008300937712,
+              "state": "speaking"
+            }
+          ],
+          "post_probe_nonempty_finals": [
+            {
+              "type": "user_final",
+              "data": {
+                "text": "Please stop navigation.",
+                "merged": "Please stop navigation.",
+                "intent_version": 2
+              },
+              "ts": 1790421716.353455
+            }
+          ],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 4,
+                "binding_id": 4,
+                "case_id": "native_voiced_stop",
+                "room": "car-audio-7edc04abde8944afbda641a5f31d897e",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 140019233924250,
+                  "unix_ns": 1790421704587083000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140020654107333,
+                  "unix_ns": 1790421706007267000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140020654110291,
+                  "unix_ns": 1790421706007270000
+                }
+              },
+              "stt_call_id": "stt-call-005",
+              "request_id": "stt-request-009",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1420.132792,
+              "request_wall_ms": 1423.228333,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            },
+            {
+              "delivery_call": {
+                "call_id": 5,
+                "binding_id": 4,
+                "case_id": "native_voiced_stop",
+                "room": "car-audio-7edc04abde8944afbda641a5f31d897e",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 140029436228125,
+                  "unix_ns": 1790421714789411000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140030991290375,
+                  "unix_ns": 1790421716344477000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140030991297208,
+                  "unix_ns": 1790421716344484000
+                }
+              },
+              "stt_call_id": "stt-call-006",
+              "request_id": "stt-request-011",
+              "original_text": "Please stop navigation.",
+              "native_engine_api_ms": 1555.008041,
+              "request_wall_ms": 1561.944542,
+              "synthetic_hold_ms": null,
+              "probe_recognition": true
+            }
+          ],
+          "successful_effects": 2,
+          "physical_attempts": 4,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "native_breath_proxy",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139568.935083875,
+          "source_activity_onset_monotonic": 139568.975083875,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4647.292583016679,
+          "old_handle_end_from_source_activity_ms": 4607.292583,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 773,
+                "received_monotonic": 139573.573794583,
+                "received_unix": 1790421258.9258392,
+                "track_sid": "TR_AMMf3h4rX9Uvhq",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 741120,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -37.365653344972465,
+                "heuristic_result_speech_id": "speech_778ed22796b5"
+              },
+              "from_publication_onset_ms": 4638.710708,
+              "from_source_activity_onset_ms": 4598.710708
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 773,
+                "received_monotonic": 139573.573794583,
+                "received_unix": 1790421258.9258392,
+                "track_sid": "TR_AMMf3h4rX9Uvhq",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 741120,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -37.365653344972465,
+                "heuristic_result_speech_id": "speech_778ed22796b5"
+              },
+              "from_publication_onset_ms": 4638.710708,
+              "from_source_activity_onset_ms": 4598.710708
+            }
+          },
+          "frozen_audit_tail_ms": 4598.711,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 4,
+                "binding_id": 3,
+                "case_id": "native_breath_proxy",
+                "room": "car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 139560096553125,
+                  "unix_ns": 1790421245448534000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139561444112416,
+                  "unix_ns": 1790421246796097000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139561444118958,
+                  "unix_ns": 1790421246796103000
+                }
+              },
+              "stt_call_id": "stt-call-005",
+              "request_id": "stt-request-009",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1347.518666,
+              "request_wall_ms": 1349.606875,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140113.557864333,
+          "source_activity_onset_monotonic": 140113.59786433302,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4683.171416982077,
+          "old_handle_end_from_source_activity_ms": 4643.171417,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1213,
+                "received_monotonic": 140118.197853833,
+                "received_unix": 1790421803.551312,
+                "track_sid": "TR_AMtSSCA3YuHoj5",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1163520,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.22193813490702,
+                "heuristic_result_speech_id": "speech_71c62d1aa784"
+              },
+              "from_publication_onset_ms": 4639.9895,
+              "from_source_activity_onset_ms": 4599.9895
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1213,
+                "received_monotonic": 140118.197853833,
+                "received_unix": 1790421803.551312,
+                "track_sid": "TR_AMtSSCA3YuHoj5",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1163520,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.22193813490702,
+                "heuristic_result_speech_id": "speech_71c62d1aa784"
+              },
+              "from_publication_onset_ms": 4639.9895,
+              "from_source_activity_onset_ms": 4599.9895
+            }
+          },
+          "frozen_audit_tail_ms": 4599.989,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 7,
+                "binding_id": 6,
+                "case_id": "native_breath_proxy",
+                "room": "car-audio-15f682c43e654417831a33bcf0643e66",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 140095919613375,
+                  "unix_ns": 1790421781272966000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140106253515416,
+                  "unix_ns": 1790421791606894000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140106253521250,
+                  "unix_ns": 1790421791606900000
+                }
+              },
+              "stt_call_id": "stt-call-008",
+              "request_id": "stt-request-015",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 10333.866583,
+              "request_wall_ms": 10335.556458,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "native_noise_burst",
+      "arms": {
+        "baseline": {
+          "capture_status": "failed",
+          "failed_stage": "connect_and_session_ready",
+          "probe_published": false,
+          "publication_onset_monotonic": null,
+          "source_activity_onset_monotonic": null,
+          "source_activity_offset_ms": null,
+          "old_handle_state": null,
+          "old_handle_end_from_publication_ms": null,
+          "old_handle_end_from_source_activity_ms": null,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": null,
+              "from_publication_onset_ms": null,
+              "from_source_activity_onset_ms": null
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": null,
+              "from_publication_onset_ms": null,
+              "from_source_activity_onset_ms": null
+            }
+          },
+          "frozen_audit_tail_ms": null,
+          "frozen_audit_onset": "publication_fallback",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [],
+          "successful_effects": 0,
+          "physical_attempts": 0,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 2
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140191.291339416,
+          "source_activity_onset_monotonic": 140191.291339416,
+          "source_activity_offset_ms": 0.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4685.003499995219,
+          "old_handle_end_from_source_activity_ms": 4685.0035,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 750,
+                "received_monotonic": 140195.931605,
+                "received_unix": 1790421881.285443,
+                "track_sid": "TR_AM6zjwSTpvF2cB",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 719040,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.23791582909336,
+                "heuristic_result_speech_id": "speech_d6a9e5b1f82b"
+              },
+              "from_publication_onset_ms": 4640.265584,
+              "from_source_activity_onset_ms": 4640.265584
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 750,
+                "received_monotonic": 140195.931605,
+                "received_unix": 1790421881.285443,
+                "track_sid": "TR_AM6zjwSTpvF2cB",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 719040,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.23791582909336,
+                "heuristic_result_speech_id": "speech_d6a9e5b1f82b"
+              },
+              "from_publication_onset_ms": 4640.265584,
+              "from_source_activity_onset_ms": 4640.265584
+            }
+          },
+          "frozen_audit_tail_ms": 4640.266,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 10,
+                "binding_id": 8,
+                "case_id": "native_noise_burst",
+                "room": "car-audio-1c0b289c0a0a42eab489ce33c2b79cba",
+                "delay_seconds": 0,
+                "entry": {
+                  "monotonic_ns": 140182907880833,
+                  "unix_ns": 1790421868261456000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140184544777166,
+                  "unix_ns": 1790421869898357000
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140184544780166,
+                  "unix_ns": 1790421869898360000
+                }
+              },
+              "stt_call_id": "stt-call-013",
+              "request_id": "stt-request-021",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1636.877792,
+              "request_wall_ms": 1638.187584,
+              "synthetic_hold_ms": null,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "delivery_delay5s_noise_burst",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139676.163217,
+          "source_activity_onset_monotonic": 139676.163217,
+          "source_activity_offset_ms": 0.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4586.224208003841,
+          "old_handle_end_from_source_activity_ms": 4586.224208,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1450,
+                "received_monotonic": 139680.704070125,
+                "received_unix": 1790421366.056406,
+                "track_sid": "TR_AMhpQkKL6vmpJ8",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1391040,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.63703580549705,
+                "heuristic_result_speech_id": "speech_6bc8a1962212"
+              },
+              "from_publication_onset_ms": 4540.853125,
+              "from_source_activity_onset_ms": 4540.853125
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1450,
+                "received_monotonic": 139680.704070125,
+                "received_unix": 1790421366.056406,
+                "track_sid": "TR_AMhpQkKL6vmpJ8",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1391040,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.63703580549705,
+                "heuristic_result_speech_id": "speech_6bc8a1962212"
+              },
+              "from_publication_onset_ms": 4540.853125,
+              "from_source_activity_onset_ms": 4540.853125
+            }
+          },
+          "frozen_audit_tail_ms": 4540.853,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 5,
+                "binding_id": 4,
+                "case_id": "delivery_delay5s_noise_burst",
+                "room": "car-audio-06152271ac7b4d4f9e07f59471bb4ee3",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 139653684506125,
+                  "unix_ns": 1790421339036727000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139663755549583,
+                  "unix_ns": 1790421349107796000
+                },
+                "hold_start": {
+                  "monotonic_ns": 139663755557458,
+                  "unix_ns": 1790421349107804000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 139668756042750,
+                  "unix_ns": 1790421354108304000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139668756075333,
+                  "unix_ns": 1790421354108335000
+                }
+              },
+              "stt_call_id": "stt-call-006",
+              "request_id": "stt-request-011",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 10071.000541,
+              "request_wall_ms": 15074.135417,
+              "synthetic_hold_ms": 5000.485292,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140273.513792,
+          "source_activity_onset_monotonic": 140273.513792,
+          "source_activity_offset_ms": 0.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4677.614124986576,
+          "old_handle_end_from_source_activity_ms": 4677.614125,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1005,
+                "received_monotonic": 140278.15162575,
+                "received_unix": 1790421963.5054872,
+                "track_sid": "TR_AMQ8jbBr27vTvD",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 963840,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -39.67038634227484,
+                "heuristic_result_speech_id": "speech_1ce973ee73b4"
+              },
+              "from_publication_onset_ms": 4637.83375,
+              "from_source_activity_onset_ms": 4637.83375
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1005,
+                "received_monotonic": 140278.15162575,
+                "received_unix": 1790421963.5054872,
+                "track_sid": "TR_AMQ8jbBr27vTvD",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 963840,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -39.67038634227484,
+                "heuristic_result_speech_id": "speech_1ce973ee73b4"
+              },
+              "from_publication_onset_ms": 4637.83375,
+              "from_source_activity_onset_ms": 4637.83375
+            }
+          },
+          "frozen_audit_tail_ms": 4637.834,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 13,
+                "binding_id": 10,
+                "case_id": "delivery_delay5s_noise_burst",
+                "room": "car-audio-51cfa4ed03dc4382b1dfa6b2629f66fc",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 140260028058958,
+                  "unix_ns": 1790421945381832000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140261398817666,
+                  "unix_ns": 1790421946752594000
+                },
+                "hold_start": {
+                  "monotonic_ns": 140261398832166,
+                  "unix_ns": 1790421946752608000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 140266400890708,
+                  "unix_ns": 1790421951754680000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140266400896958,
+                  "unix_ns": 1790421951754686000
+                }
+              },
+              "stt_call_id": "stt-call-016",
+              "request_id": "stt-request-027",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1370.73125,
+              "request_wall_ms": 6375.504167,
+              "synthetic_hold_ms": 5002.058542,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "delivery_delay5s_voiced_stop",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139724.985310125,
+          "source_activity_onset_monotonic": 139725.025310125,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 7685.265041014645,
+          "old_handle_end_from_source_activity_ms": 7645.265041,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": 139733.775717916,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1119,
+                "received_monotonic": 139732.606129916,
+                "received_unix": 1790421417.958633,
+                "track_sid": "TR_AMDL3mjajuRdRA",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1073280,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.50123144383824,
+                "heuristic_result_speech_id": "speech_bb362ec8871d"
+              },
+              "from_publication_onset_ms": 7620.819791,
+              "from_source_activity_onset_ms": 7580.819791
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1119,
+                "received_monotonic": 139732.606129916,
+                "received_unix": 1790421417.958633,
+                "track_sid": "TR_AMDL3mjajuRdRA",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 1073280,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.50123144383824,
+                "heuristic_result_speech_id": "speech_bb362ec8871d"
+              },
+              "from_publication_onset_ms": 7620.819791,
+              "from_source_activity_onset_ms": 7580.819791
+            }
+          },
+          "frozen_audit_tail_ms": 7580.82,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": 390.67602157592773,
+          "post_probe_recognition_calls": 1,
+          "post_probe_speaking_events": [
+            {
+              "line": 27,
+              "server_ts": 1790421410.614381,
+              "received_monotonic": 139725.264173,
+              "after_probe_ms": 278.86287501314655,
+              "state": "speaking"
+            }
+          ],
+          "post_probe_nonempty_finals": [
+            {
+              "type": "user_final",
+              "data": {
+                "text": "Please stop navigation.",
+                "merged": "Please stop navigation.",
+                "intent_version": 2
+              },
+              "ts": 1790421418.410832
+            }
+          ],
+          "sdk_false_interruption": [
+            {
+              "server_line": 32,
+              "server_ts": 1790421414.2676458,
+              "resumed": true,
+              "received_monotonic": 139728.917236833,
+              "after_probe_ms": 3931.9267079990823,
+              "after_preceding_user_listening_ms": 2001.7988681793213,
+              "within_delivery_hold_call_ids": [
+                7
+              ],
+              "pending_delivery_call_ids": [
+                7
+              ],
+              "last_old_loud_before_resume": 139725.705000333,
+              "first_old_loud_after_resume": 139728.96623875,
+              "old_loud_frames_after_resume": 129,
+              "broad_window_loud_frames_after_resume": 129,
+              "first_broad_loud_after_resume": {
+                "line": 937,
+                "received_monotonic": 139728.96623875,
+                "received_unix": 1790421414.3187048,
+                "track_sid": "TR_AMDL3mjajuRdRA",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 898560,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -33.31978261352023,
+                "heuristic_result_speech_id": "speech_bb362ec8871d"
+              }
+            }
+          ],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 6,
+                "binding_id": 5,
+                "case_id": "delivery_delay5s_voiced_stop",
+                "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 139712218385125,
+                  "unix_ns": 1790421397570756000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139713343800250,
+                  "unix_ns": 1790421398696174000
+                },
+                "hold_start": {
+                  "monotonic_ns": 139713343804041,
+                  "unix_ns": 1790421398696177000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 139718344011791,
+                  "unix_ns": 1790421403696399000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139718344018000,
+                  "unix_ns": 1790421403696404000
+                }
+              },
+              "stt_call_id": "stt-call-007",
+              "request_id": "stt-request-013",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1125.373792,
+              "request_wall_ms": 6128.42475,
+              "synthetic_hold_ms": 5000.20775,
+              "probe_recognition": false
+            },
+            {
+              "delivery_call": {
+                "call_id": 7,
+                "binding_id": 5,
+                "case_id": "delivery_delay5s_voiced_stop",
+                "room": "car-audio-fb50c662633d4b858b43268da6716a94",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 139726918084041,
+                  "unix_ns": 1790421412270492000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139728046592041,
+                  "unix_ns": 1790421413399003000
+                },
+                "hold_start": {
+                  "monotonic_ns": 139728046594500,
+                  "unix_ns": 1790421413399005000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 139733048738625,
+                  "unix_ns": 1790421418401164000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139733048759125,
+                  "unix_ns": 1790421418401183000
+                }
+              },
+              "stt_call_id": "stt-call-008",
+              "request_id": "stt-request-015",
+              "original_text": "Please stop navigation.",
+              "native_engine_api_ms": 1128.462834,
+              "request_wall_ms": 6134.970583,
+              "synthetic_hold_ms": 5002.144125,
+              "probe_recognition": true
+            }
+          ],
+          "successful_effects": 2,
+          "physical_attempts": 4,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140323.839846916,
+          "source_activity_onset_monotonic": 140323.879846916,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "interruption_requested",
+          "old_handle_end_from_publication_ms": 8560.308916989015,
+          "old_handle_end_from_source_activity_ms": 8520.308917,
+          "interruption_request_from_source_activity_ms": 8520.308917,
+          "next_speech_queue_boundary": 140333.1064245,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 854,
+                "received_monotonic": 140324.498968708,
+                "received_unix": 1790422009.852968,
+                "track_sid": "TR_AMwHnjRuB8qcP9",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 818880,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -21.44089428191803,
+                "heuristic_result_speech_id": "speech_812e143e84e9"
+              },
+              "from_publication_onset_ms": 659.121792,
+              "from_source_activity_onset_ms": 619.121792
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 858,
+                "received_monotonic": 140324.579289458,
+                "received_unix": 1790422009.933283,
+                "track_sid": "TR_AMwHnjRuB8qcP9",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 822720,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -36.78079202911379,
+                "heuristic_result_speech_id": null
+              },
+              "from_publication_onset_ms": 739.442542,
+              "from_source_activity_onset_ms": 699.442542
+            }
+          },
+          "frozen_audit_tail_ms": 699.443,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 1,
+          "post_probe_speaking_events": [
+            {
+              "line": 27,
+              "server_ts": 1790422009.4135199,
+              "received_monotonic": 140324.061784625,
+              "after_probe_ms": 221.93770899320953,
+              "state": "speaking"
+            }
+          ],
+          "post_probe_nonempty_finals": [
+            {
+              "type": "user_final",
+              "data": {
+                "text": "Please stop navigation.",
+                "merged": "Please stop navigation.",
+                "intent_version": 2
+              },
+              "ts": 1790422017.753243
+            }
+          ],
+          "sdk_false_interruption": [
+            {
+              "server_line": 33,
+              "server_ts": 1790422013.11769,
+              "resumed": true,
+              "received_monotonic": 140327.766054958,
+              "after_probe_ms": 3926.2080419866834,
+              "after_preceding_user_listening_ms": 2002.1259784698486,
+              "within_delivery_hold_call_ids": [
+                15
+              ],
+              "pending_delivery_call_ids": [
+                15
+              ],
+              "last_old_loud_before_resume": 140324.498968708,
+              "first_old_loud_after_resume": null,
+              "old_loud_frames_after_resume": 0,
+              "broad_window_loud_frames_after_resume": 0,
+              "first_broad_loud_after_resume": null
+            }
+          ],
+          "recognition_pause_events": [
+            {
+              "server_line": 32,
+              "ts": 1790422013.1172988,
+              "state": "held",
+              "speech_id": "speech_812e143e84e9",
+              "pending_recognitions": 1
+            },
+            {
+              "server_line": 34,
+              "ts": 1790422017.7475042,
+              "state": "interruption_requested",
+              "speech_id": "speech_812e143e84e9",
+              "reason": "transcript"
+            },
+            {
+              "server_line": 36,
+              "ts": 1790422017.751787,
+              "state": "released",
+              "speech_id": "speech_812e143e84e9",
+              "reason": "speech_finished"
+            }
+          ],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 14,
+                "binding_id": 11,
+                "case_id": "delivery_delay5s_voiced_stop",
+                "room": "car-audio-dc06b380fcc145b8b43cb0e1524dec44",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 140309408929833,
+                  "unix_ns": 1790421994762829000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140311804930625,
+                  "unix_ns": 1790421997158836000
+                },
+                "hold_start": {
+                  "monotonic_ns": 140311804939083,
+                  "unix_ns": 1790421997158844000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 140316805653916,
+                  "unix_ns": 1790422002159573000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140316805670958,
+                  "unix_ns": 1790422002159589000
+                }
+              },
+              "stt_call_id": "stt-call-017",
+              "request_id": "stt-request-029",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 2395.978666,
+              "request_wall_ms": 7400.12475,
+              "synthetic_hold_ms": 5000.714833,
+              "probe_recognition": false
+            },
+            {
+              "delivery_call": {
+                "call_id": 15,
+                "binding_id": 11,
+                "case_id": "delivery_delay5s_voiced_stop",
+                "room": "car-audio-dc06b380fcc145b8b43cb0e1524dec44",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 140325766932958,
+                  "unix_ns": 1790422011120874000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140327390378708,
+                  "unix_ns": 1790422012744324000
+                },
+                "hold_start": {
+                  "monotonic_ns": 140327390383041,
+                  "unix_ns": 1790422012744328000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 140332392343250,
+                  "unix_ns": 1790422017746306000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140332392350541,
+                  "unix_ns": 1790422017746309000
+                }
+              },
+              "stt_call_id": "stt-call-018",
+              "request_id": "stt-request-031",
+              "original_text": "Please stop navigation.",
+              "native_engine_api_ms": 1623.401417,
+              "request_wall_ms": 6629.402125,
+              "synthetic_hold_ms": 5001.960209,
+              "probe_recognition": true
+            }
+          ],
+          "successful_effects": 2,
+          "physical_attempts": 4,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "delivery_delay5s_silence",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139774.016799541,
+          "source_activity_onset_monotonic": null,
+          "source_activity_offset_ms": null,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4666.523917025188,
+          "old_handle_end_from_source_activity_ms": null,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 966,
+                "received_monotonic": 139778.656385208,
+                "received_unix": 1790421464.008959,
+                "track_sid": "TR_AMqNc5NEjaAyeB",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 926400,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -39.60296072221838,
+                "heuristic_result_speech_id": "speech_ba48c9c198ab"
+              },
+              "from_publication_onset_ms": 4639.585667,
+              "from_source_activity_onset_ms": null
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 966,
+                "received_monotonic": 139778.656385208,
+                "received_unix": 1790421464.008959,
+                "track_sid": "TR_AMqNc5NEjaAyeB",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 926400,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -39.60296072221838,
+                "heuristic_result_speech_id": "speech_ba48c9c198ab"
+              },
+              "from_publication_onset_ms": 4639.585667,
+              "from_source_activity_onset_ms": null
+            }
+          },
+          "frozen_audit_tail_ms": 4639.586,
+          "frozen_audit_onset": "publication_fallback",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 8,
+                "binding_id": 6,
+                "case_id": "delivery_delay5s_silence",
+                "room": "car-audio-93a85f3bfeea4013abb5fb0e35a17904",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 139761312451625,
+                  "unix_ns": 1790421446664948000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139762318262916,
+                  "unix_ns": 1790421447670762000
+                },
+                "hold_start": {
+                  "monotonic_ns": 139762318266208,
+                  "unix_ns": 1790421447670765000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 139767319078166,
+                  "unix_ns": 1790421452671590000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139767319096083,
+                  "unix_ns": 1790421452671608000
+                }
+              },
+              "stt_call_id": "stt-call-009",
+              "request_id": "stt-request-017",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1005.786,
+              "request_wall_ms": 6008.636834,
+              "synthetic_hold_ms": 5000.811958,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140373.963433833,
+          "source_activity_onset_monotonic": null,
+          "source_activity_offset_ms": null,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4694.996042002458,
+          "old_handle_end_from_source_activity_ms": null,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1014,
+                "received_monotonic": 140378.602633458,
+                "received_unix": 1790422063.956762,
+                "track_sid": "TR_AMrdWEx97J8bc5",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 972480,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -33.758963603897925,
+                "heuristic_result_speech_id": "speech_37fe802b72a0"
+              },
+              "from_publication_onset_ms": 4639.199625,
+              "from_source_activity_onset_ms": null
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1014,
+                "received_monotonic": 140378.602633458,
+                "received_unix": 1790422063.956762,
+                "track_sid": "TR_AMrdWEx97J8bc5",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 972480,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -33.758963603897925,
+                "heuristic_result_speech_id": "speech_37fe802b72a0"
+              },
+              "from_publication_onset_ms": 4639.199625,
+              "from_source_activity_onset_ms": null
+            }
+          },
+          "frozen_audit_tail_ms": 4639.2,
+          "frozen_audit_onset": "publication_fallback",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 16,
+                "binding_id": 12,
+                "case_id": "delivery_delay5s_silence",
+                "room": "car-audio-f02e33bf40cb44a1b09f997ab02b7880",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 140360319312375,
+                  "unix_ns": 1790422045673342000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140362177674541,
+                  "unix_ns": 1790422047531709000
+                },
+                "hold_start": {
+                  "monotonic_ns": 140362177681708,
+                  "unix_ns": 1790422047531716000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 140367179425833,
+                  "unix_ns": 1790422052533476000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140367179437791,
+                  "unix_ns": 1790422052533485000
+                }
+              },
+              "stt_call_id": "stt-call-019",
+              "request_id": "stt-request-033",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1858.336875,
+              "request_wall_ms": 6862.468583,
+              "synthetic_hold_ms": 5001.744125,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    },
+    {
+      "case_id": "delivery_delay5s_breath_proxy",
+      "arms": {
+        "baseline": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 139822.648962583,
+          "source_activity_onset_monotonic": 139822.68896258302,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4681.825582985766,
+          "old_handle_end_from_source_activity_ms": 4641.825583,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 967,
+                "received_monotonic": 139827.288063541,
+                "received_unix": 1790421512.640803,
+                "track_sid": "TR_AMPhDQvXU8svwx",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 927360,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -35.30314120002652,
+                "heuristic_result_speech_id": "speech_2da016f31698"
+              },
+              "from_publication_onset_ms": 4639.100958,
+              "from_source_activity_onset_ms": 4599.100958
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 967,
+                "received_monotonic": 139827.288063541,
+                "received_unix": 1790421512.640803,
+                "track_sid": "TR_AMPhDQvXU8svwx",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 927360,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -35.30314120002652,
+                "heuristic_result_speech_id": "speech_2da016f31698"
+              },
+              "from_publication_onset_ms": 4639.100958,
+              "from_source_activity_onset_ms": 4599.100958
+            }
+          },
+          "frozen_audit_tail_ms": 4599.101,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 9,
+                "binding_id": 7,
+                "case_id": "delivery_delay5s_breath_proxy",
+                "room": "car-audio-13f1cfb38d964eda80a2b3a5dc4a623e",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 139809933999958,
+                  "unix_ns": 1790421495286620000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 139810958178166,
+                  "unix_ns": 1790421496310801000
+                },
+                "hold_start": {
+                  "monotonic_ns": 139810958182541,
+                  "unix_ns": 1790421496310806000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 139815960325500,
+                  "unix_ns": 1790421501312962000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 139815960377208,
+                  "unix_ns": 1790421501313013000
+                }
+              },
+              "stt_call_id": "stt-call-010",
+              "request_id": "stt-request-019",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1024.155667,
+              "request_wall_ms": 6028.367625,
+              "synthetic_hold_ms": 5002.142959,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": false,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 1
+        },
+        "candidate": {
+          "capture_status": "completed_probe_observation",
+          "failed_stage": null,
+          "probe_published": true,
+          "publication_onset_monotonic": 140423.574860583,
+          "source_activity_onset_monotonic": 140423.614860583,
+          "source_activity_offset_ms": 40.0,
+          "old_handle_state": "finished",
+          "old_handle_end_from_publication_ms": 4700.871417007875,
+          "old_handle_end_from_source_activity_ms": 4660.871417,
+          "interruption_request_from_source_activity_ms": null,
+          "next_speech_queue_boundary": null,
+          "tail_definitions": {
+            "handle_tagged": {
+              "last_loud_frame": {
+                "line": 1020,
+                "received_monotonic": 140428.213895958,
+                "received_unix": 1790422113.568141,
+                "track_sid": "TR_AMdu4pMdNhuBvS",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 978240,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.22605118276578,
+                "heuristic_result_speech_id": "speech_cccddaf9f4a5"
+              },
+              "from_publication_onset_ms": 4639.035375,
+              "from_source_activity_onset_ms": 4599.035375
+            },
+            "broad_event_order_window": {
+              "last_loud_frame": {
+                "line": 1020,
+                "received_monotonic": 140428.213895958,
+                "received_unix": 1790422113.568141,
+                "track_sid": "TR_AMdu4pMdNhuBvS",
+                "pcm_file": "received-1.pcm",
+                "offset_bytes": 978240,
+                "size_bytes": 960,
+                "samples": 480,
+                "rms_db": -34.22605118276578,
+                "heuristic_result_speech_id": "speech_cccddaf9f4a5"
+              },
+              "from_publication_onset_ms": 4639.035375,
+              "from_source_activity_onset_ms": 4599.035375
+            }
+          },
+          "frozen_audit_tail_ms": 4599.035,
+          "frozen_audit_onset": "source_activity",
+          "recomputed_frozen_tail_matches": true,
+          "old_finish_before_probe_final_ms": null,
+          "post_probe_recognition_calls": 0,
+          "post_probe_speaking_events": [],
+          "post_probe_nonempty_finals": [],
+          "sdk_false_interruption": [],
+          "recognition_pause_events": [],
+          "recognition_calls": [
+            {
+              "delivery_call": {
+                "call_id": 17,
+                "binding_id": 13,
+                "case_id": "delivery_delay5s_breath_proxy",
+                "room": "car-audio-7191db3748fd425285f6ddfbfd918465",
+                "delay_seconds": 5,
+                "entry": {
+                  "monotonic_ns": 140409799420541,
+                  "unix_ns": 1790422095153577000
+                },
+                "original_engine_return": {
+                  "monotonic_ns": 140411622630458,
+                  "unix_ns": 1790422096976791000
+                },
+                "hold_start": {
+                  "monotonic_ns": 140411622633833,
+                  "unix_ns": 1790422096976795000,
+                  "pending_recognitions": 1
+                },
+                "hold_end": {
+                  "monotonic_ns": 140416623540458,
+                  "unix_ns": 1790422101977714000,
+                  "pending_recognitions": 1
+                },
+                "status": "returned",
+                "delivery_return": {
+                  "monotonic_ns": 140416623557666,
+                  "unix_ns": 1790422101977731000
+                }
+              },
+              "stt_call_id": "stt-call-020",
+              "request_id": "stt-request-035",
+              "original_text": "Navigate to Whitefield.",
+              "native_engine_api_ms": 1823.185791,
+              "request_wall_ms": 6827.012291,
+              "synthetic_hold_ms": 5000.906625,
+              "probe_recognition": false
+            }
+          ],
+          "successful_effects": 1,
+          "physical_attempts": 3,
+          "trusted_trace_equal": true,
+          "raw_trace_equal": true,
+          "missing_native_identity_packets": 0
+        }
+      },
+      "prepared_input_hashes_match_between_arms": true
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "declared_cases": 8,
+      "run_cases": 8,
+      "completed_probe_observations": 7,
+      "failed_captures": 1,
+      "declared_input_publications": 16,
+      "actual_input_publications": 14,
+      "declared_probe_publications": 8,
+      "actual_probe_publications": 7,
+      "expected_effects": 10,
+      "observed_effects": 9,
+      "physical_attempts": 23,
+      "attempt_statuses": {
+        "done": 23
+      },
+      "duplicate_attempt_ids": 0,
+      "stale_tool_done": 0,
+      "sdk_false_interruption_events": 1,
+      "candidate_hold_events": 0,
+      "trusted_trace_equal_cases": 2,
+      "raw_canonical_equal_cases": 8,
+      "server_events": 258,
+      "raw_events": 258,
+      "trusted_events": 251,
+      "missing_native_identity_packets": 7
+    },
+    "candidate": {
+      "declared_cases": 13,
+      "completed_captures": 13,
+      "run_cases": 13,
+      "completed_probe_observations": 8,
+      "failed_captures": 0,
+      "declared_input_publications": 22,
+      "actual_input_publications": 22,
+      "declared_probe_publications": 8,
+      "actual_probe_publications": 8,
+      "expected_effects": 15,
+      "observed_effects": 14,
+      "physical_attempts": 40,
+      "attempt_statuses": {
+        "done": 39,
+        "error": 1
+      },
+      "duplicate_attempt_ids": 0,
+      "stale_tool_done": 0,
+      "sdk_false_interruption_events": 1,
+      "candidate_hold_events": 3,
+      "trusted_trace_equal_cases": 8,
+      "raw_canonical_equal_cases": 13,
+      "server_events": 463,
+      "raw_events": 463,
+      "trusted_events": 458,
+      "missing_native_identity_packets": 5
+    }
+  },
+  "checks": {
+    "all_16_frozen_pcm_tails_independently_reproduced": true,
+    "all_8_prepared_input_pairs_byte_hash_match": true,
+    "mechanism_review_evidence_hashes": [
+      {
+        "arm": "baseline",
+        "verified_evidence_files": 61,
+        "mismatches": []
+      },
+      {
+        "arm": "candidate",
+        "verified_evidence_files": 91,
+        "mismatches": []
+      }
+    ],
+    "no_acoustic_audit_extraction_issues": true
+  },
+  "bounded_conclusions": [
+    "Native voiced-stop broad-window tails from source activity were 700.531 ms baseline and 679.740 ms candidate. Both old handles requested interruption, with no false-interruption callback or guard hold observed.",
+    "With the controlled five-second delivery hold, broad-window tails from source activity were 7580.820 ms baseline and 699.443 ms candidate. Baseline SDK resumed while recognition remained pending and 129 handle-tagged loud frames subsequently arrived; the original result finished before final stop delivery. Candidate held before that same SDK resume decision, retained the hold through recognition, interrupted on nonempty text, then released on speech_finished; no broad-window loud frames arrived after the SDK resume receipt.",
+    "Publication-onset and handle-tagged-only results differ from the frozen method. They are retained alongside it rather than substituted. In particular, untagged late PCM extends the native baseline tail and both candidate stop tails.",
+    "All six candidate non-speech probes and five published baseline non-speech probes produced no post-probe speaking or recognition. Original handles finished, but false-pause recovery after an empty recognition was not exercised. Baseline native_noise_burst never published either input because session readiness timed out; it remains failed.",
+    "Candidate ordinary language cases are 4/5 backend success: ambiguity clarification returned a unique hospital search but omitted compute/start, producing no navigation effect. The 1200-ms pause case produced two final transcripts, two whole-span recognition calls across the candidate run, and one correct destination effect; this does not assess received speech meaning.",
+    "The study has one fixed-order run per arm and one sample per condition. Native engine times differ and the five-second hold is synthetic. The mechanism is observed here; historical stalls, broad reliability, physical audible timing, memory causation, and generalized multilingual/disfluency quality remain unestablished."
+  ],
+  "cleanup_and_resources": {
+    "baseline": {
+      "cleanup": {
+        "recorded_service_cleanup": [
+          {
+            "role": "worker",
+            "pid": 32265,
+            "observed_command": [
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/controlled_worker.py",
+              "--manifest",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/worker-manifest.json",
+              "--policy",
+              "baseline",
+              "--condition-file",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/active-condition.json",
+              "--protocol",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/protocol.json"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": 0,
+            "finished_at": "2026-09-26T11:19:02.073310+00:00"
+          },
+          {
+            "role": "llm",
+            "pid": 32254,
+            "observed_command": [
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+              "-m",
+              "mlx_lm",
+              "server",
+              "--model",
+              "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+              "--host",
+              "127.0.0.1",
+              "--port",
+              "8081",
+              "--chat-template-args",
+              "{\"enable_thinking\":false}",
+              "--decode-concurrency",
+              "1",
+              "--prompt-concurrency",
+              "1",
+              "--prefill-step-size",
+              "256",
+              "--prompt-cache-size",
+              "2",
+              "--prompt-cache-bytes",
+              "268435456",
+              "--max-tokens",
+              "500"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": -15,
+            "finished_at": "2026-09-26T11:19:02.207781+00:00"
+          },
+          {
+            "role": "livekit",
+            "pid": 32253,
+            "observed_command": [
+              "/opt/homebrew/bin/livekit-server",
+              "--config",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/livekit.yaml"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": 0,
+            "finished_at": "2026-09-26T11:19:02.212801+00:00"
+          }
+        ],
+        "all_agents_departed": true,
+        "worker_clean_exit": true,
+        "run_frozen_inputs_unchanged": true,
+        "trace_cleanup": [
+          {
+            "worker_line": 25,
+            "timestamp": "2026-09-26T11:13:18.228118+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-879fb1b8e7eb4fe78100deb069522e9d.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 40,
+            "timestamp": "2026-09-26T11:14:02.455396+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-e0aabef9ccb64901a71df0ed3cd13bcd.jsonl",
+            "complete": true,
+            "accepted": 50,
+            "flushed": 50,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 55,
+            "timestamp": "2026-09-26T11:14:47.248026+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-8c4cb7c5f0804cd5896fa43a6bb261e6.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 67,
+            "timestamp": "2026-09-26T11:15:34.793676+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-9cb9aabb79f54337abb108411b38b34c.jsonl",
+            "complete": true,
+            "accepted": 3,
+            "flushed": 3,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 80,
+            "timestamp": "2026-09-26T11:16:34.443149+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-06152271ac7b4d4f9e07f59471bb4ee3.jsonl",
+            "complete": true,
+            "accepted": 32,
+            "flushed": 32,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 95,
+            "timestamp": "2026-09-26T11:17:23.758373+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-fb50c662633d4b858b43268da6716a94.jsonl",
+            "complete": true,
+            "accepted": 53,
+            "flushed": 53,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 108,
+            "timestamp": "2026-09-26T11:18:12.284480+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-93a85f3bfeea4013abb5fb0e35a17904.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 121,
+            "timestamp": "2026-09-26T11:19:00.928543+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-baseline/local-stack-run1/traces/car-audio-13f1cfb38d964eda80a2b3a5dc4a623e.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          }
+        ],
+        "application_cleanup_started": 8,
+        "application_cleanup_finished": 8,
+        "fresh_pid_check": "Not performed here; root owns service supervision and absence receipts. Server JS_FAILED remains separate from application cleanup and worker exit0."
+      },
+      "memory": {
+        "samples": 789,
+        "scope": "System memory/swap plus owned stack parents and descendants; excludes the separate trial client. RSS is not total allocation.",
+        "first_sample": "2026-09-26T11:12:13.775666+00:00",
+        "last_sample": "2026-09-26T11:19:02.133666+00:00",
+        "minimum_system_available_bytes": 425213952,
+        "swap_first_bytes": 5857476608,
+        "swap_last_bytes": 9247588352,
+        "swap_peak_bytes": 9952624640,
+        "owned_role_peak_combined_rss_bytes": {
+          "worker": 817430528,
+          "llm": 4854988800,
+          "livekit": 54771712
+        },
+        "sample_errors": [
+          {
+            "line": 789,
+            "role": "llm",
+            "value": {
+              "error": "process no longer exists (pid=32254)"
+            }
+          },
+          {
+            "line": 789,
+            "role": "worker",
+            "value": {
+              "error": "process PID not found (pid=32265)"
+            }
+          }
+        ],
+        "causality": "No inference-delay cause or allocation/capacity conclusion follows from these samples."
+      },
+      "watchdogs": [
+        {
+          "line": 8,
+          "message": "event loop blocked for 222ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.2223,
+          "threshold": 0.1,
+          "gc_time": 0.0,
+          "cpu_time": 0.0006,
+          "stack": "# no sample: the block ended before the watchdog looked",
+          "pid": 32265,
+          "timestamp": "2026-09-26T11:12:22.765627+00:00"
+        }
+      ],
+      "warning_counts": {
+        "worker.log": 16,
+        "llm.log": 1,
+        "livekit.log": 33
+      },
+      "client_warning_count": 8,
+      "error_lines": {
+        "worker.log": [],
+        "llm.log": [],
+        "livekit.log": []
+      },
+      "server_job_end_count": 8
+    },
+    "candidate": {
+      "cleanup": {
+        "recorded_service_cleanup": [
+          {
+            "role": "worker",
+            "pid": 35752,
+            "observed_command": [
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/controlled_worker.py",
+              "--manifest",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/worker-manifest.json",
+              "--policy",
+              "candidate",
+              "--condition-file",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/active-condition.json",
+              "--protocol",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18/protocol.json"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": 0,
+            "finished_at": "2026-09-26T11:29:03.175343+00:00"
+          },
+          {
+            "role": "llm",
+            "pid": 35739,
+            "observed_command": [
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+              "-m",
+              "mlx_lm",
+              "server",
+              "--model",
+              "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+              "--host",
+              "127.0.0.1",
+              "--port",
+              "8081",
+              "--chat-template-args",
+              "{\"enable_thinking\":false}",
+              "--decode-concurrency",
+              "1",
+              "--prompt-concurrency",
+              "1",
+              "--prefill-step-size",
+              "256",
+              "--prompt-cache-size",
+              "2",
+              "--prompt-cache-bytes",
+              "268435456",
+              "--max-tokens",
+              "500"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": -15,
+            "finished_at": "2026-09-26T11:29:03.264534+00:00"
+          },
+          {
+            "role": "livekit",
+            "pid": 35738,
+            "observed_command": [
+              "/opt/homebrew/bin/livekit-server",
+              "--config",
+              "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/livekit.yaml"
+            ],
+            "signal": "SIGTERM",
+            "exit_code": 0,
+            "finished_at": "2026-09-26T11:29:03.269466+00:00"
+          }
+        ],
+        "all_agents_departed": true,
+        "worker_clean_exit": true,
+        "run_frozen_inputs_unchanged": true,
+        "trace_cleanup": [
+          {
+            "worker_line": 25,
+            "timestamp": "2026-09-26T11:20:34.876533+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-a65741534dcb4d62aa2e80dc01a01bee.jsonl",
+            "complete": true,
+            "accepted": 29,
+            "flushed": 29,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 38,
+            "timestamp": "2026-09-26T11:21:19.121216+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-0c5fb0c511b64caeadcd2312fa165dce.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 51,
+            "timestamp": "2026-09-26T11:21:41.658015+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-e9b208e10e1645899b7b1930d263b94b.jsonl",
+            "complete": true,
+            "accepted": 29,
+            "flushed": 29,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 66,
+            "timestamp": "2026-09-26T11:22:26.281091+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-7edc04abde8944afbda641a5f31d897e.jsonl",
+            "complete": true,
+            "accepted": 50,
+            "flushed": 50,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 82,
+            "timestamp": "2026-09-26T11:22:58.007328+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-11eb1cf0cbd04f0580de86058020501d.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 97,
+            "timestamp": "2026-09-26T11:23:51.850201+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-15f682c43e654417831a33bcf0643e66.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 113,
+            "timestamp": "2026-09-26T11:24:25.149979+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-4da9ba7759e343e09911b9ce192db83d.jsonl",
+            "complete": true,
+            "accepted": 40,
+            "flushed": 40,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 126,
+            "timestamp": "2026-09-26T11:25:09.682857+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-1c0b289c0a0a42eab489ce33c2b79cba.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 140,
+            "timestamp": "2026-09-26T11:25:42.466317+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-f09f412d4f94451593b863bfff9ec7a5.jsonl",
+            "complete": true,
+            "accepted": 49,
+            "flushed": 49,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 153,
+            "timestamp": "2026-09-26T11:26:31.783806+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-51cfa4ed03dc4382b1dfa6b2629f66fc.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 168,
+            "timestamp": "2026-09-26T11:27:22.606657+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-dc06b380fcc145b8b43cb0e1524dec44.jsonl",
+            "complete": true,
+            "accepted": 56,
+            "flushed": 56,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 181,
+            "timestamp": "2026-09-26T11:28:12.233672+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-f02e33bf40cb44a1b09f997ab02b7880.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          },
+          {
+            "worker_line": 194,
+            "timestamp": "2026-09-26T11:29:01.879178+00:00",
+            "path": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration18-candidate/local-stack-run1/traces/car-audio-7191db3748fd425285f6ddfbfd918465.jsonl",
+            "complete": true,
+            "accepted": 30,
+            "flushed": 30,
+            "rejected": 0,
+            "pending": false
+          }
+        ],
+        "application_cleanup_started": 13,
+        "application_cleanup_finished": 13,
+        "fresh_pid_check": "Not performed here; root owns service supervision and absence receipts. Server JS_FAILED remains separate from application cleanup and worker exit0."
+      },
+      "memory": {
+        "samples": 1060,
+        "scope": "System memory/swap plus owned stack parents and descendants; excludes the separate trial client. RSS is not total allocation.",
+        "first_sample": "2026-09-26T11:19:53.779374+00:00",
+        "last_sample": "2026-09-26T11:29:03.266311+00:00",
+        "minimum_system_available_bytes": 939327488,
+        "swap_first_bytes": 7823818752,
+        "swap_last_bytes": 10101587968,
+        "swap_peak_bytes": 10831134720,
+        "owned_role_peak_combined_rss_bytes": {
+          "worker": 1345503232,
+          "llm": 4927537152,
+          "livekit": 56360960
+        },
+        "sample_errors": [
+          {
+            "line": 1060,
+            "role": "livekit",
+            "value": {
+              "error": "process no longer exists (pid=35738)"
+            }
+          },
+          {
+            "line": 1060,
+            "role": "llm",
+            "value": {
+              "error": "process PID not found (pid=35739)"
+            }
+          },
+          {
+            "line": 1060,
+            "role": "worker",
+            "value": {
+              "error": "process PID not found (pid=35752)"
+            }
+          }
+        ],
+        "causality": "No inference-delay cause or allocation/capacity conclusion follows from these samples."
+      },
+      "watchdogs": [
+        {
+          "line": 8,
+          "message": "event loop blocked for 249ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.2488,
+          "threshold": 0.1,
+          "gc_time": 0.0,
+          "cpu_time": 0.0003,
+          "stack": "# no sample: the block ended before the watchdog looked",
+          "pid": 35752,
+          "timestamp": "2026-09-26T11:20:02.206854+00:00"
+        },
+        {
+          "line": 75,
+          "message": "event loop blocked for 440ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.44,
+          "threshold": 0.1,
+          "gc_time": 0.0,
+          "cpu_time": 0.0003,
+          "stack": "# no sample: the block ended before the watchdog looked",
+          "pid": 35752,
+          "timestamp": "2026-09-26T11:22:33.517991+00:00"
+        }
+      ],
+      "warning_counts": {
+        "worker.log": 27,
+        "llm.log": 1,
+        "livekit.log": 54
+      },
+      "client_warning_count": 13,
+      "error_lines": {
+        "worker.log": [],
+        "llm.log": [
+          {
+            "line": 86,
+            "text": "Traceback (most recent call last):"
+          }
+        ],
+        "livekit.log": [
+          {
+            "line": 299,
+            "text": "2026-09-26T16:57:22.602+0530\tERROR\tlivekit.pion.udp_mux\tv4@v4.4.0/udp_mux.go:607\tFailed to write packet: io: read/write on closed pipe"
+          }
+        ]
+      },
+      "server_job_end_count": 13
+    }
+  },
+  "provenance_note": "The candidate extractor preparation initially encountered a generator syntax error before creating its method/output; no frozen/raw data was changed. The extraction method and successful receipt were then created and hashed. Previous mechanism receipts are preserved unchanged.",
+  "evidence_sha256": {
+    "results/iteration18-baseline/baseline-mechanism-review.json": "0b00c58278f1ff8ad99b177643b020005e96f32c8ff3414d721927e252c4ac13",
+    "results/iteration18-candidate/candidate-mechanism-review.json": "3d405b010b0f3540bdc2387edef8f7948d0fd1f803a502bb6015486db68cfbc4",
+    "results/iteration18/acoustic-audit.json": "fd485ed66d268f1f8525380973ae8205238c71fdcdcb08359ca608ec8b22eba7",
+    "results/iteration18-baseline/rtc-native_silence-1/frames.jsonl": "dbbedd02985135a073dc61662872f5b0dadc46c8fdc7ca2b4b6cc378dc9df1dc",
+    "results/iteration18-candidate/rtc-native_silence-1/frames.jsonl": "5c0b1c697f1e3b56b229ce53c4739460b01019de10ece83c74a57ff2e5994bff",
+    "results/iteration18-baseline/rtc-native_voiced_stop-1/frames.jsonl": "d35c1e12d29e0c3b444eb546f33f3157ca1d7a33b78ffb6a191bcb9fd714c655",
+    "results/iteration18-candidate/rtc-native_voiced_stop-1/frames.jsonl": "f27b6d52620de05c1a735c028047dfcf4567806737f1f3ef3bbd2a926c4ce52f",
+    "results/iteration18-baseline/rtc-native_breath_proxy-1/frames.jsonl": "67667175b55852ba1118d749a78003181744d67c90ca1dc6fd457619117e2a78",
+    "results/iteration18-candidate/rtc-native_breath_proxy-1/frames.jsonl": "7a79479bfa55b971863fdd32717ca098e1c855f4c2a74554d883090312739f60",
+    "results/iteration18-baseline/rtc-native_noise_burst-1/frames.jsonl": "08cb0d4db79be2dcc5aa05fdd940f0101656480aecf04edc5ee17b4663ade7d3",
+    "results/iteration18-candidate/rtc-native_noise_burst-1/frames.jsonl": "a116708a3ff6de41707213cffe9abbd38bb38f4928fc88f1d79ec181eee9e6b0",
+    "results/iteration18-baseline/rtc-delivery_delay5s_noise_burst-1/frames.jsonl": "986a20353357b9fab78d3ccdf2d450120e9394d978514d95ec22ccd545e1b049",
+    "results/iteration18-candidate/rtc-delivery_delay5s_noise_burst-1/frames.jsonl": "36c0feb46d5265471356d1f7438773e42cf1436b80400e28153be6479e29af87",
+    "results/iteration18-baseline/rtc-delivery_delay5s_voiced_stop-1/frames.jsonl": "6fffafa1bd1eec20c1c03e118cd64f8a4df2f0c96c6e2505fcdf5d101cdc4bec",
+    "results/iteration18-candidate/rtc-delivery_delay5s_voiced_stop-1/frames.jsonl": "88c8c067b1222854111b9f2992b9ec40f98bf12259373cdd724e1f44847ed7c5",
+    "results/iteration18-baseline/rtc-delivery_delay5s_silence-1/frames.jsonl": "05c239eddeb0d8ca76eee52dbc0f062a031971a98594f494fb0eafa9cf578d00",
+    "results/iteration18-candidate/rtc-delivery_delay5s_silence-1/frames.jsonl": "9452250b0617ce9114c29c78393aae7e5d72bfb1bb026791046bfebf84cc2362",
+    "results/iteration18-baseline/rtc-delivery_delay5s_breath_proxy-1/frames.jsonl": "ba58e82734097468b9c63303e0ea732fbcb8aa3beb217468d0e9b95f9a368790",
+    "results/iteration18-candidate/rtc-delivery_delay5s_breath_proxy-1/frames.jsonl": "1705dec9be657b70d70a24517715dcc7c3c9e43cb0fd391678df267b7ec0c2bb",
+    "results/iteration18/compare_mechanisms.py": "68e09b43ecd873f97310ab6ab5e5e0012dd130cfaff70037f62c9776c382ff51"
+  }
+}

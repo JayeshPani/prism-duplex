@@ -1,0 +1,42 @@
+{
+  "audited_at": "2026-09-25T18:48:53.189600+00:00",
+  "package": "mlx-lm",
+  "version": "0.31.3",
+  "source_sha256": {
+    "server.py": "cdfcb4ac848636f9927851a0ec7a951584526530cb7832ba58049e4a9144db8b",
+    "models/cache.py": "819ed95dcbf755652363cfdb15a639890447abb534a06dcefd52c7fff5055750"
+  },
+  "findings": [
+    {
+      "claim": "PRISM sends seed=7; installed server uses sequential serving for seeded requests.",
+      "sources": [
+        "agent/coordinator/llm_client.py:42",
+        "mlx_lm/server.py:685-686"
+      ]
+    },
+    {
+      "claim": "CLI prompt_cache_bytes trim is in batched admission only; run constructs LRUPromptCache with max_size only, leaving default max_bytes=2**63.",
+      "sources": [
+        "mlx_lm/server.py:795-798",
+        "mlx_lm/server.py:1743",
+        "mlx_lm/models/cache.py:1659"
+      ]
+    },
+    {
+      "claim": "Single serving inserts completed sequences as assistant caches; one-entry cache evicts the other system-prompt family during planner/responder alternation.",
+      "sources": [
+        "mlx_lm/server.py:1019-1021",
+        "mlx_lm/models/cache.py:1696-1705"
+      ]
+    },
+    {
+      "claim": "Prefix fetch deep-copies and trims existing allocations; byte footprint is not inferred solely from visible prompt-token length.",
+      "sources": [
+        "mlx_lm/models/cache.py:1674-1692",
+        "mlx_lm/models/cache.py:378-381"
+      ]
+    }
+  ],
+  "observed_evidence": "Iteration2 server logs contain Prompt Cache: 1 sequences, 0.34 GB despite nominal268435456-byte flag.",
+  "consequence": "Earlier recorded launch flags are accurate, but the256MiB value was not an enforced memory bound. Do not treat decode/prompt concurrency flags as parallel seeded generation. Cache-entry experiments need measured RSS/system pressure and preserved outcomes."
+}

@@ -1,0 +1,59 @@
+{
+  "declared_at_utc": "2026-09-26T09:53:39.376705+00:00",
+  "arm_id": "A2_return",
+  "purpose": "Controlled full-stack cache-entry comparison with unchanged production source, models, input audio and request settings.",
+  "cache_entries": 2,
+  "baseline_llm_launch": "results/iteration16/local-stack-run1/llm-launch.json",
+  "baseline_llm_launch_sha256": "15c18594098a98e88af39c2ec6cdfba365645d1bb3a54d57935cbfe177d2df19",
+  "only_changed_launch_option": "--prompt-cache-size, derived from protocol.cache_entries",
+  "inherited_tests": {
+    "source": "results/iteration16/tested-source.json",
+    "log_source": "results/iteration16/full-tests.txt",
+    "original_at_utc": "2026-09-26T09:28:51.149387+00:00",
+    "original_command": [
+      "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "result": "655 passed in 5.42s",
+    "rerun": false,
+    "receipt_sha256": "48a4e09f2065f8307926f73b031c70a7b3d6ee764f672393b22311810416b95f",
+    "log_sha256": "aafce0e6ef5786b599d7b83c9be7e4d8e4b4cf7c5cb1ff3a5e1bf2903c98e8cb",
+    "scope": "Exact inherited production/test receipt. It is not a claim that these newly copied experiment methods were covered by that test run."
+  },
+  "controls": [
+    "Same four cases, order, WAV bytes, expected outcomes, durations and deadlines as iteration16.",
+    "Every method file is byte-identical across the three arms; only arm labels and cache-entry declaration/derived argv differ.",
+    "Retain all outcomes, useful calls, semantic repairs and raw streams. No automatic ASR; all timed arms close first.",
+    "Root owns global comparison plan, provenance freeze, review and approval to execute. Preparation has not launched any preflight, service, model or audit."
+  ],
+  "llm_command": [
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+    "-m",
+    "mlx_lm",
+    "server",
+    "--model",
+    "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8081",
+    "--chat-template-args",
+    "{\"enable_thinking\":false}",
+    "--decode-concurrency",
+    "1",
+    "--prompt-concurrency",
+    "1",
+    "--prefill-step-size",
+    "256",
+    "--prompt-cache-size",
+    "2",
+    "--prompt-cache-bytes",
+    "268435456",
+    "--max-tokens",
+    "500"
+  ],
+  "baseline_livekit_config": "results/iteration16/local-stack-run1/livekit.yaml",
+  "baseline_livekit_config_sha256": "5e533151983ad839d9bb4ba99f4e7e3511e44eb4ca4ea1025a14e915ca2434da"
+}

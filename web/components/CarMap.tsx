@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export type NavView = { polyline: [number, number][]; destination?: string; eta?: number; stops: string[] };
+import type { NavView } from "@/lib/events";
 
 const STYLE: any = {
   version: 8,
@@ -31,9 +31,15 @@ export default function CarMap({ nav }: { nav: NavView | null }) {
 
   useEffect(() => {
     const m = map.current;
-    if (!m || !nav) return;
-    const coords = nav.polyline.map(([lat, lng]) => [lng, lat]);
+    if (!m) return;
+    const coords = (nav?.polyline ?? []).map(([lat, lng]) => [lng, lat]);
     const apply = () => {
+      markers.current.forEach((mk) => mk.remove());
+      markers.current = [];
+      if (coords.length < 2) {
+        (m.getSource("route") as maplibregl.GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features: [] });
+        return;
+      }
       (m.getSource("route") as maplibregl.GeoJSONSource | undefined)?.setData({
         type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: coords },
       } as any);
@@ -50,6 +56,7 @@ export default function CarMap({ nav }: { nav: NavView | null }) {
       m.fitBounds(b, { padding: 60, duration: 600, maxZoom: 13 });
     };
     if (m.isStyleLoaded()) apply(); else m.once("load", apply);
+    return () => { m.off("load", apply); };
   }, [nav]);
 
   return (

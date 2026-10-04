@@ -1,0 +1,205 @@
+{
+  "created_at_utc": "2026-09-26T05:01:26.641261+00:00",
+  "source_report_sha256": "577157cdc2b86d13b004ca581ed77e77d6f5fdfb2c8464174ab709030fd94322",
+  "method": "Manual review of every verbatim whole-stream local ASR transcript against frozen expected facts. No trimming, reruns, normalization or failed-case exclusions.",
+  "declared": 8,
+  "reviewed": 8,
+  "core_facts_present_in_asr": 8,
+  "exact_proper_names": 0,
+  "trials": [
+    {
+      "id": "rtc-baseline-1",
+      "transcript_verbatim": "One moment Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-correction-1",
+      "transcript_verbatim": "One moment. Navigation to Ok one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "expected_destination": "P_OFFICE",
+      "qualitative_observation": "Whole-stream ASR contains the start of the interrupted old result, correction acknowledgment, office navigation started, and replacement of the previous airport destination.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Manyata -> Maniata; Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "interruption_requested"
+        },
+        {
+          "kind": "ack",
+          "intent_version": 2,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 2,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-silence-1",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is eighty-eight minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-noise-1",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is eighty-eight minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-correction-2",
+      "transcript_verbatim": "One moment. Navigation to Ok, one sec. The navigation has started to the office, Maniata Tech Park. The previous destination, Kempegauda International Airport, has been replaced.",
+      "expected_destination": "P_OFFICE",
+      "qualitative_observation": "Whole-stream ASR contains the start of the interrupted old result, correction acknowledgment, office navigation started, and replacement of the previous airport destination.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Manyata -> Maniata; Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "interruption_requested"
+        },
+        {
+          "kind": "ack",
+          "intent_version": 2,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 2,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-baseline-2",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is 88 minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-noise-2",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is eighty-eight minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    },
+    {
+      "id": "rtc-silence-2",
+      "transcript_verbatim": "One moment. Navigation to Kempegauda International Airport has started. The estimated time of arrival is eighty-eight minutes.",
+      "expected_destination": "P_AIRPORT",
+      "qualitative_observation": "Whole-stream ASR contains the acknowledgment, airport navigation started and the complete 88-minute ETA.",
+      "expected_core_facts_present_in_asr": true,
+      "proper_name_exactness": false,
+      "name_difference": "Kempegowda -> Kempegauda",
+      "speech_handle_states": [
+        {
+          "kind": "ack",
+          "intent_version": 1,
+          "state": "finished"
+        },
+        {
+          "kind": "result",
+          "intent_version": 1,
+          "state": "finished"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "ASR is an automatic content proxy, not human listening or an intelligibility score.",
+    "Proper-name renderings differ in every transcript; this cannot isolate TTS pronunciation from ASR recognition.",
+    "Received PCM and completed handles do not prove every transmitted frame was received or physical playback completion.",
+    "The same production recognizer and synthetic input were reused; no independent held-out accuracy claim."
+  ]
+}

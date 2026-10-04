@@ -1,0 +1,159 @@
+{
+  "created_at_utc": "2026-09-26T08:14:39.236547+00:00",
+  "scope": "Manual content review of all four frozen whole-stream local ASR transcripts; no human listening.",
+  "input_sha256": {
+    "review_received_facts.py": "4a7252d243e81fcf23417a56b42f78c70870acedfd4e5bffb6be8626440b7729",
+    "protocol.json": "d46f987cb4c67ed60be0cdb96bd0adade7fcf2e41b63e3535becd751d5deec41",
+    "received-audio-review-protocol.json": "a3e21f2eb8794bd377219de6292ffc04c767c6b3e77674236055a36985486f1d",
+    "received-audio-review/report.json": "7ad5d79a11a4132ca177ab07f04892500ea68ded828f166aebbc7da0c06da8c7",
+    "received-audio-review/protocol.json": "d13af7deab7e95cd0b93da79e4bf922e070d7c98a43a06075968b36611fe30e1"
+  },
+  "raw_and_resampled_sha256": {
+    "rtc-waypoint-1/report.json": "8a640f115364fb8b24f7304845f1bb7f24dde929a681fd7ee9fe04f2c11a6db7",
+    "rtc-waypoint-1/events.jsonl": "1456dc660fa70cf385256869321e96363688e743654e58c3f3889b3942b3d615",
+    "rtc-waypoint-1/frames.jsonl": "8711f31ae2626f5ef1d9cc2fcd45433fc4f22e7dd029ea9a546d7af7b256353e",
+    "rtc-waypoint-1/received-1.pcm": "7e94dafd950373c4ee7d9229d22a4c53135edf5714d8505d286ae2c41406f811",
+    "received-audio-review/resampled/rtc-waypoint-1.wav": "3bde7bc398fdf760d7cf52bdee59f3ef007f32795cd966d8204679a63b3bcd7c",
+    "rtc-baseline-1/report.json": "243a4962e5ba3ab2d2071cb88cd2b3fa0f5745c18b476e02e06dac2ba6ef5809",
+    "rtc-baseline-1/events.jsonl": "78b96f0680801b34d4dd5ff8a5ce03883f11d8ee492f919ebfb73687c9e0fa3f",
+    "rtc-baseline-1/frames.jsonl": "878d3cb2dbbd7c81a96c857035dc6d3ded33300e2cfaddc04229dec055856c4f",
+    "rtc-baseline-1/received-1.pcm": "6a4658e166b1b04761bf2c06c0cec1c86fec796bdf864305f6705c4eb33b0740",
+    "received-audio-review/resampled/rtc-baseline-1.wav": "38e789642639f058d663d619e7ac2d40d0457dfb5650ee1c895b7b3b062986ca",
+    "rtc-waypoint-2/report.json": "b5b59f794d297b522f52e86d45af928b4f205d30f5ae783e65200854471a77d0",
+    "rtc-waypoint-2/events.jsonl": "39ae754af628407a9482b2fcdf1e77bb6b5dc731924f5c17cfa5aced8bc46ce1",
+    "rtc-waypoint-2/frames.jsonl": "9acbceef17df7c978114b4b3da86dd659d11abb97ccca26f73a2ef46fd9cdf02",
+    "rtc-waypoint-2/received-1.pcm": "94745bfbd4492541177e6b46544d17932d475690fee7368044dd08d825270f08",
+    "received-audio-review/resampled/rtc-waypoint-2.wav": "65a0d3234056e1281d3942eb770a6fb8547736240cbac28092aee6fa3ad89734",
+    "rtc-correction-1/report.json": "408c1188168f281ddc8dd1543587c410f4eec313ac73717aed881fbcb3654311",
+    "rtc-correction-1/events.jsonl": "003329fd0ffcf1260e2ca0cefd5dacc557895e61fb461d07ca9ba7a750aec594",
+    "rtc-correction-1/frames.jsonl": "f96bd501a616ecfac715bfc82bed1b6e97d885138255025c2be91b2ab32cbda0",
+    "rtc-correction-1/received-1.pcm": "4d18fa01f7a094951efc60556e87f968c92fc9e22315710d8b26f9dac3724ed9",
+    "received-audio-review/resampled/rtc-correction-1.wav": "65ab7ee70f0ab9e2dfde613789d2bbdd456e836f491fbd5198bdb7a98c52d325"
+  },
+  "trials": [
+    {
+      "id": "rtc-waypoint-1",
+      "case": "waypoint",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment Navigation Okay, one sec Added blue Takeai in Durinegar as a stop. Estimated time to MG Road Metro Station is thirteen minutes, zero extra minutes.",
+        "number_phrase": "thirteen minutes, zero extra minutes",
+        "name_variants": {
+          "Blue Tokai": "blue Takeai",
+          "Indiranagar": "Durinegar"
+        },
+        "original_reply": "Only Navigation remains from the intentionally interrupted first result."
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "expected_final_facts": {
+        "MG Road destination unchanged": true,
+        "Blue Tokai Indiranagar added": true,
+        "estimated time is 13 minutes": true,
+        "0 extra minutes": true
+      },
+      "original_interruption_required": true,
+      "original_result_state": "interruption_requested",
+      "final_result_state": "finished",
+      "received_duration_seconds": 37.4
+    },
+    {
+      "id": "rtc-baseline-1",
+      "case": "baseline",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment Navigation to Kempegauda International Airport has started. Estimated arrival in 88 minutes.",
+        "number_phrase": "88 minutes",
+        "name_variants": {
+          "Kempegowda": "Kempegauda"
+        },
+        "original_reply": "Complete airport start and 88-minute estimate are present."
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "expected_final_facts": {
+        "airport navigation started": true,
+        "estimated arrival in 88 minutes": true
+      },
+      "original_interruption_required": false,
+      "original_result_state": "finished",
+      "final_result_state": "finished",
+      "received_duration_seconds": 16.88
+    },
+    {
+      "id": "rtc-waypoint-2",
+      "case": "waypoint",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment. Navigation. Okay, one sec. Added blue Takeai in Durinegar as a stop. Estimated time to MG Road Metro Station is thirteen minutes, zero extra minutes.",
+        "number_phrase": "thirteen minutes, zero extra minutes",
+        "name_variants": {
+          "Blue Tokai": "blue Takeai",
+          "Indiranagar": "Durinegar"
+        },
+        "original_reply": "Only Navigation remains from the intentionally interrupted first result."
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "expected_final_facts": {
+        "MG Road destination unchanged": true,
+        "Blue Tokai Indiranagar added": true,
+        "estimated time is 13 minutes": true,
+        "0 extra minutes": true
+      },
+      "original_interruption_required": true,
+      "original_result_state": "interruption_requested",
+      "final_result_state": "finished",
+      "received_duration_seconds": 28.84
+    },
+    {
+      "id": "rtc-correction-1",
+      "case": "correction",
+      "asr_status": "completed",
+      "capture_status": "completed_observation",
+      "manual_review": {
+        "transcript": "One moment. Navigation to OK, one sec. Now navigating to office, Maniata Tech Park, replacing Kempegauda International Airport. Estimated arrival in 29 minutes.",
+        "number_phrase": "29 minutes",
+        "name_variants": {
+          "Manyata": "Maniata",
+          "Kempegowda": "Kempegauda"
+        },
+        "original_reply": "Only Navigation to remains from the old result; the final replacement clause separately names the airport."
+      },
+      "core_final_requested_facts_mentioned_with_disclosed_name_variants": true,
+      "expected_final_facts": {
+        "office navigation": true,
+        "previous airport replaced": true,
+        "estimated arrival in 29 minutes": true
+      },
+      "original_interruption_required": true,
+      "original_result_state": "interruption_requested",
+      "final_result_state": "finished",
+      "received_duration_seconds": 32.18
+    }
+  ],
+  "counts": {
+    "declared": 4,
+    "asr_completed": 4,
+    "capture_completed": 4,
+    "core_final_requested_facts_mentioned_with_name_variants": 4,
+    "final_result_handles_finished": 4,
+    "required_original_result_interruptions": 3,
+    "required_original_result_interruptions_observed": 3,
+    "waypoint_final_13_and_zero_extra": 2,
+    "waypoint_denominator": 2,
+    "rows_with_proper_name_deviations": 4,
+    "raw_and_resampled_files_verified": 20
+  },
+  "asr_report_receipts": {
+    "inputs_unchanged": true,
+    "source_unchanged": true,
+    "suite_unchanged": true
+  },
+  "limits": [
+    "Name variants and truncated old replies are retained verbatim, not normalized away.",
+    "The waypoint reply names MG Road but does not literally say unchanged; backend effects are separately audited.",
+    "ASR cannot distinguish pronunciation from recognition error, establish human intelligibility or word/physical playback timing.",
+    "Four reused fixed-order synthetic development cases do not establish causal speedup or universal reliability."
+  ]
+}

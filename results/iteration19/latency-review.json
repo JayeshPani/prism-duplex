@@ -1,0 +1,2858 @@
+{
+  "created_at_utc": "2026-09-26T12:46:26.010331+00:00",
+  "status": "completed",
+  "scope": "Analysis method written after runtime preflight while the baseline arm was running, without reading moving outputs; not part of evaluated frozen runtime. Executed only after completed acoustic audit and manual speech review.",
+  "method": {
+    "input_end": "Publication start plus WAV threshold activity_end_sample/rate, only when that sample was published; not a microphone/VAD endpoint.",
+    "anchor": "Last declared spoken input even when missing/unpublished; never replace a missing answer with the initial-command anchor.",
+    "dispatch": "Logger timestamp_start records dispatch intention before backend entry, mapped with this input's same-host unix/monotonic offset; not actual effect time.",
+    "substantive_reply": "Exactly one non-ack handle at latest observed intent queued after anchor start; one WAV may produce multiple finalized turns.",
+    "speech_gate": "Existing manual final facts plus all audited effect criteria and a finished error-free final handle; no automatic speech re-grading. Capture/trace/mechanism criteria stay separate.",
+    "percentiles": "Nearest rank sorted non-null milliseconds[ceil(n*p)-1]; all declared rows/nulls retained; p95 is the maximum at these small group sizes."
+  },
+  "per_case": [
+    {
+      "key": "baseline/airport_hospital_replay",
+      "arm": "baseline",
+      "case_id": "airport_hospital_replay",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "effect_count": {
+          "status": "failed",
+          "detail": {
+            "expected": 1,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": "Every physical navigation attempt remains counted, including failed/no-op writes."
+        },
+        "effect_1_state": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "start_navigation",
+              "destination_id": "P_HOSP",
+              "eta_min": 5,
+              "distance_km": 2.2
+            },
+            "observed": null
+          }
+        },
+        "effect_1_fresh_compute_dependency": {
+          "status": "failed",
+          "detail": "Expected start effect unavailable"
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_answer.wav",
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/hospital_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc",
+          "sample_rate": 24000,
+          "samples": 58880,
+          "duration_seconds": 2.453333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 56640,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144252.915143291,
+            "drained_monotonic": 144255.371959375,
+            "scheduled_end_monotonic": 144255.36847662434,
+            "published_samples": 58880
+          }
+        },
+        "times": {
+          "start_monotonic": 144252.915143291,
+          "end_monotonic": 144255.371959375,
+          "activity_onset_monotonic": 144252.955143291,
+          "activity_end_monotonic": 144255.275143291,
+          "start_unix": 1790425938.2791367
+        },
+        "expected_asset_sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790425940.6391368,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The voice assistant has successfully located Manipal Hospital, Old Airport Road.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_0b7fa1c2e5f8",
+          "queued_at": 144262.033315916,
+          "state": "finished",
+          "first_loud_at": 144263.17669375,
+          "preceding_quiet_seconds": 4.06165783398319,
+          "last_loud_at": 144267.675026,
+          "ended_at": 144267.748023916,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_b322a2e8ca5a",
+          "queued_at": 144257.65341625,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144259.220407708,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144263.17669375,
+        "frame_line": 1584,
+        "speech_id": "speech_0b7fa1c2e5f8",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2378.273,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 7901.55,
+        "observed_final_reply_finished": 12472.881,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/cancel_pending_navigation",
+      "arm": "baseline",
+      "case_id": "cancel_pending_navigation",
+      "condition_group": "cancellation_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "cancel_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/cancel_navigation.wav",
+          "file": "followup_1.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144285.173387625,
+            "drained_monotonic": 144286.563846166,
+            "scheduled_end_monotonic": 144286.56005429165,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 144285.173387625,
+          "end_monotonic": 144286.563846166,
+          "activity_onset_monotonic": 144285.213387625,
+          "activity_end_monotonic": 144286.433387625,
+          "start_unix": 1790425970.5374637
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790425971.7974637,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "There is no active navigation to cancel.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_5ca2798a8b1b",
+          "queued_at": 144290.433779583,
+          "state": "finished",
+          "first_loud_at": 144291.195070041,
+          "preceding_quiet_seconds": 0.7811882499954663,
+          "last_loud_at": 144293.293557875,
+          "ended_at": 144293.370071333,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_171055d71f25",
+          "queued_at": 144288.87833175,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 144290.421263916,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144291.195070041,
+        "frame_line": 964,
+        "speech_id": "speech_5ca2798a8b1b",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790425975.784941,
+            "attempt_id": "eaf608cfc67641ad8aa6a209cf21a2c3:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790425975.790529,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 3987.477,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 3987.477,
+        "first_ack_queued": 2444.944,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 4761.682,
+        "observed_final_reply_finished": 6936.684,
+        "fulfilled_final_reply_finished": 6936.684
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/hebbal_third_wave",
+      "arm": "baseline",
+      "case_id": "hebbal_third_wave",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "effect_count": {
+          "status": "failed",
+          "detail": {
+            "expected": 1,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": "Every physical navigation attempt remains counted, including failed/no-op writes."
+        },
+        "effect_1_state": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "start_navigation",
+              "destination_id": "K_TWC_HEB",
+              "eta_min": 31,
+              "distance_km": 12.3
+            },
+            "observed": null
+          }
+        },
+        "effect_1_fresh_compute_dependency": {
+          "status": "failed",
+          "detail": "Expected start effect unavailable"
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "third_wave_answer.wav",
+          "text": "Third Wave Coffee, Hebbal.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/third_wave_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "d02736662d4dfd6dd89f5955309dab38ae8ede2a80fb51f1324115c421accb77",
+          "sample_rate": 24000,
+          "samples": 35840,
+          "duration_seconds": 1.4933333333333334,
+          "activity_start_sample": 2400,
+          "activity_end_sample": 32640,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144307.985480041,
+            "drained_monotonic": 144309.480885375,
+            "scheduled_end_monotonic": 144309.47881337436,
+            "published_samples": 35840
+          }
+        },
+        "times": {
+          "start_monotonic": 144307.985480041,
+          "end_monotonic": 144309.480885375,
+          "activity_onset_monotonic": 144308.08548004102,
+          "activity_end_monotonic": 144309.345480041,
+          "start_unix": 1790425993.3496149
+        },
+        "expected_asset_sha256": "d02736662d4dfd6dd89f5955309dab38ae8ede2a80fb51f1324115c421accb77"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790425994.7096148,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "I couldn't find that place on this map. Please say its name again.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_3a1bd6955f39",
+          "queued_at": 144313.826872083,
+          "state": "finished",
+          "first_loud_at": 144314.523056708,
+          "preceding_quiet_seconds": 1.039850708009908,
+          "last_loud_at": 144317.442968916,
+          "ended_at": 144317.573635541,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_d44b66eb1595",
+          "queued_at": 144311.786154416,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144313.602170958,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144314.523056708,
+        "frame_line": 850,
+        "speech_id": "speech_3a1bd6955f39",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2440.674,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 5177.577,
+        "observed_final_reply_finished": 8228.155,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/distance_query_after_ambiguity",
+      "arm": "baseline",
+      "case_id": "distance_query_after_ambiguity",
+      "condition_group": "query_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "required_read_grounded": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "compute_route",
+              "destination_id": "P_HOSP",
+              "distance_km": 2.2
+            },
+            "matching_events": [],
+            "limit": "Successful nonstale result with matching completed physical attempt identity; all other rows remain retained."
+          }
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "distance_query.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/distance_query.wav",
+          "file": "followup_1.wav",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "sample_rate": 24000,
+          "samples": 67584,
+          "duration_seconds": 2.816,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 65280,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144335.256985041,
+            "drained_monotonic": 144338.075069416,
+            "scheduled_end_monotonic": 144338.07298504098,
+            "published_samples": 67584
+          }
+        },
+        "times": {
+          "start_monotonic": 144335.256985041,
+          "end_monotonic": 144338.075069416,
+          "activity_onset_monotonic": 144335.316985041,
+          "activity_end_monotonic": 144337.976985041,
+          "start_unix": 1790426020.6211884
+        },
+        "expected_asset_sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426023.3411884,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_6c6a3b4b5b28",
+          "queued_at": 144344.282954666,
+          "state": "finished",
+          "first_loud_at": 144345.596024958,
+          "preceding_quiet_seconds": 3.381863999995403,
+          "last_loud_at": 144350.37666525,
+          "ended_at": 144350.44282375,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_8895b4eda4d4",
+          "queued_at": 144340.409352666,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 144342.221520625,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144345.596024958,
+        "frame_line": 1174,
+        "speech_id": "speech_6c6a3b4b5b28",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2432.368,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 7619.04,
+        "observed_final_reply_finished": 12465.839,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "baseline/indiranagar_ather",
+      "arm": "baseline",
+      "case_id": "indiranagar_ather",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "effect_count": {
+          "status": "failed",
+          "detail": {
+            "expected": 1,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": "Every physical navigation attempt remains counted, including failed/no-op writes."
+        },
+        "effect_1_state": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "start_navigation",
+              "destination_id": "C_ATHER_IND",
+              "eta_min": 2,
+              "distance_km": 1.0
+            },
+            "observed": null
+          }
+        },
+        "effect_1_fresh_compute_dependency": {
+          "status": "failed",
+          "detail": "Expected start effect unavailable"
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "ather_answer.wav",
+          "text": "I mean Ather Grid charger, Indiranagar.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/ather_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "2ab0432ac4f80aea41b9c68db5b343ac713015be46907eab1a2811bfccb431c6",
+          "sample_rate": 24000,
+          "samples": 51712,
+          "duration_seconds": 2.1546666666666665,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 49440,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144366.3074425,
+            "drained_monotonic": 144368.47159425,
+            "scheduled_end_monotonic": 144368.46210916666,
+            "published_samples": 51712
+          }
+        },
+        "times": {
+          "start_monotonic": 144366.3074425,
+          "end_monotonic": 144368.47159425,
+          "activity_onset_monotonic": 144366.3674425,
+          "activity_end_monotonic": 144368.3674425,
+          "start_unix": 1790426051.671726
+        },
+        "expected_asset_sha256": "2ab0432ac4f80aea41b9c68db5b343ac713015be46907eab1a2811bfccb431c6"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426053.7317262,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "I couldn't find that place. Please say its full name, such as Ather Grid charger, Indiranagar.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_06623ed26f0e",
+          "queued_at": 144373.506695833,
+          "state": "finished",
+          "first_loud_at": 144374.247374666,
+          "preceding_quiet_seconds": 1.8596859580138698,
+          "last_loud_at": 144379.027407625,
+          "ended_at": 144379.155980208,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_e65210b06ef6",
+          "queued_at": 144370.897583083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144372.505771125,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144374.247374666,
+        "frame_line": 996,
+        "speech_id": "speech_06623ed26f0e",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2530.141,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 5879.932,
+        "observed_final_reply_finished": 10788.538,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/airport_hospital_replay",
+      "arm": "candidate",
+      "case_id": "airport_hospital_replay",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "hospital_answer.wav",
+          "text": "I mean Manipal Hospital, Old Airport Road.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/hospital_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc",
+          "sample_rate": 24000,
+          "samples": 58880,
+          "duration_seconds": 2.453333333333333,
+          "activity_start_sample": 960,
+          "activity_end_sample": 56640,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144539.510083958,
+            "drained_monotonic": 144541.98502825,
+            "scheduled_end_monotonic": 144541.96341729135,
+            "published_samples": 58880
+          }
+        },
+        "times": {
+          "start_monotonic": 144539.510083958,
+          "end_monotonic": 144541.98502825,
+          "activity_onset_monotonic": 144539.55008395802,
+          "activity_end_monotonic": 144541.870083958,
+          "start_unix": 1790426224.8748102
+        },
+        "expected_asset_sha256": "042d5b646511cca844566acb35630a761f1f4cb6d6bf97378f3712abea4d4ddc"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426227.2348104,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "Navigation to Manipal Hospital, Old Airport Road has started. Estimated arrival in 5 minutes.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_1911e2dfab6f",
+          "queued_at": 144562.25601475,
+          "state": "finished",
+          "first_loud_at": 144563.408422166,
+          "preceding_quiet_seconds": 6.338972582976567,
+          "last_loud_at": 144569.049248458,
+          "ended_at": 144569.103463666,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_f4b932d8faae",
+          "queued_at": 144555.071795291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144557.181957083,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144563.408422166,
+        "frame_line": 2300,
+        "speech_id": "speech_1911e2dfab6f",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "start_navigation",
+            "args": {
+              "route_id": "R1"
+            },
+            "timestamp_start": 1790426247.6101701,
+            "attempt_id": "d7c542f1ceec4f93b4f8ba87aa6c6e37:c3",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790426247.611934,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 20375.36,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 20375.36,
+        "first_ack_queued": 13201.711,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 21538.338,
+        "observed_final_reply_finished": 27233.38,
+        "fulfilled_final_reply_finished": 27233.38
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/cancel_pending_navigation",
+      "arm": "candidate",
+      "case_id": "cancel_pending_navigation",
+      "condition_group": "cancellation_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": true,
+      "manual_final_speech_passed": true,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {},
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "cancel_navigation.wav",
+          "text": "Please stop navigation.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/cancel_navigation.wav",
+          "file": "followup_1.wav",
+          "sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e",
+          "sample_rate": 24000,
+          "samples": 33280,
+          "duration_seconds": 1.3866666666666667,
+          "activity_start_sample": 960,
+          "activity_end_sample": 30240,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144597.98750825,
+            "drained_monotonic": 144599.381162125,
+            "scheduled_end_monotonic": 144599.37417491665,
+            "published_samples": 33280
+          }
+        },
+        "times": {
+          "start_monotonic": 144597.98750825,
+          "end_monotonic": 144599.381162125,
+          "activity_onset_monotonic": 144598.02750825,
+          "activity_end_monotonic": 144599.24750825,
+          "start_unix": 1790426283.3523846
+        },
+        "expected_asset_sha256": "fe405027918bcd501fc39418acf4d78decedb4491561261abf5a384db09e0c2e"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426284.6123846,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "There is no active navigation to cancel.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_a40c78e75105",
+          "queued_at": 144617.845887666,
+          "state": "finished",
+          "first_loud_at": 144619.205831541,
+          "preceding_quiet_seconds": 21.457220041018445,
+          "last_loud_at": 144621.285426416,
+          "ended_at": 144621.360073166,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_ce835eca955b",
+          "queued_at": 144616.718927416,
+          "state": "interruption_requested",
+          "first_loud_at": null,
+          "ended_at": 144617.824863083,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144619.205831541,
+        "frame_line": 2283,
+        "speech_id": "speech_a40c78e75105",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [
+        {
+          "call": {
+            "function": "cancel_navigation",
+            "args": {},
+            "timestamp_start": 1790426303.1882298,
+            "attempt_id": "289631d3b8814468bcfa9dcddcf4faa5:c1",
+            "status": "done",
+            "dispatch_evidence": "intention_before_backend_entry",
+            "timestamp_end": 1790426303.2043679,
+            "end_evidence": "executor_observation_ended"
+          },
+          "relative_to_final_spoken_end_ms": 18575.845,
+          "after_final_spoken_input_started": true
+        }
+      ],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": 18575.845,
+        "first_ack_queued": 17471.419,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 19958.323,
+        "observed_final_reply_finished": 22112.565,
+        "fulfilled_final_reply_finished": 22112.565
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/hebbal_third_wave",
+      "arm": "candidate",
+      "case_id": "hebbal_third_wave",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "effect_count": {
+          "status": "failed",
+          "detail": {
+            "expected": 1,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": "Every physical navigation attempt remains counted, including failed/no-op writes."
+        },
+        "effect_1_state": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "start_navigation",
+              "destination_id": "K_TWC_HEB",
+              "eta_min": 31,
+              "distance_km": 12.3
+            },
+            "observed": null
+          }
+        },
+        "effect_1_fresh_compute_dependency": {
+          "status": "failed",
+          "detail": "Expected start effect unavailable"
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "third_wave_answer.wav",
+          "text": "Third Wave Coffee, Hebbal.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/third_wave_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "d02736662d4dfd6dd89f5955309dab38ae8ede2a80fb51f1324115c421accb77",
+          "sample_rate": 24000,
+          "samples": 35840,
+          "duration_seconds": 1.4933333333333334,
+          "activity_start_sample": 2400,
+          "activity_end_sample": 32640,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144654.77251925,
+            "drained_monotonic": 144656.269281666,
+            "scheduled_end_monotonic": 144656.26585258334,
+            "published_samples": 35840
+          }
+        },
+        "times": {
+          "start_monotonic": 144654.77251925,
+          "end_monotonic": 144656.269281666,
+          "activity_onset_monotonic": 144654.87251925,
+          "activity_end_monotonic": 144656.13251924998,
+          "start_unix": 1790426340.1375418
+        },
+        "expected_asset_sha256": "d02736662d4dfd6dd89f5955309dab38ae8ede2a80fb51f1324115c421accb77"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426341.4975417,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "I couldn't find that place on this map. Please say its name again.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_b6d425c45512",
+          "queued_at": 144661.743741,
+          "state": "finished",
+          "first_loud_at": 144663.012026083,
+          "preceding_quiet_seconds": 1.819564499979606,
+          "last_loud_at": 144665.931463541,
+          "ended_at": 144666.067777791,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_0006aced52d8",
+          "queued_at": 144659.630968916,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144661.3055745,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144663.012026083,
+        "frame_line": 1869,
+        "speech_id": "speech_b6d425c45512",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 3498.45,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 6879.507,
+        "observed_final_reply_finished": 9935.259,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/distance_query_after_ambiguity",
+      "arm": "candidate",
+      "case_id": "distance_query_after_ambiguity",
+      "condition_group": "query_boundary",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "required_read_grounded": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "compute_route",
+              "destination_id": "P_HOSP",
+              "distance_km": 2.2
+            },
+            "matching_events": [],
+            "limit": "Successful nonstale result with matching completed physical attempt identity; all other rows remain retained."
+          }
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "distance_query.wav",
+          "text": "How far is Manipal Hospital, Old Airport Road?",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/distance_query.wav",
+          "file": "followup_1.wav",
+          "sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175",
+          "sample_rate": 24000,
+          "samples": 67584,
+          "duration_seconds": 2.816,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 65280,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144684.124352625,
+            "drained_monotonic": 144686.943699541,
+            "scheduled_end_monotonic": 144686.94035262498,
+            "published_samples": 67584
+          }
+        },
+        "times": {
+          "start_monotonic": 144684.124352625,
+          "end_monotonic": 144686.943699541,
+          "activity_onset_monotonic": 144684.184352625,
+          "activity_end_monotonic": 144686.844352625,
+          "start_unix": 1790426369.4894497
+        },
+        "expected_asset_sha256": "725f58cf6024e2f5e1f2f3d6d552c74d3ecc650a4cda225fe47d245a3474e175"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426372.2094498,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "The distance to Manipal Hospital, Old Airport Road, is not provided in the results.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_34c7c95227c2",
+          "queued_at": 144693.6393375,
+          "state": "finished",
+          "first_loud_at": 144695.184641166,
+          "preceding_quiet_seconds": 3.9218205000215676,
+          "last_loud_at": 144699.961218458,
+          "ended_at": 144700.044205541,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_2fdfa5e632ad",
+          "queued_at": 144689.759344375,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144691.379984625,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144695.184641166,
+        "frame_line": 1244,
+        "speech_id": "speech_34c7c95227c2",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 2914.992,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 8340.289,
+        "observed_final_reply_finished": 13199.853,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    },
+    {
+      "key": "candidate/indiranagar_ather",
+      "arm": "candidate",
+      "case_id": "indiranagar_ather",
+      "condition_group": "positive_continuation",
+      "audit_case_status": "extracted",
+      "capture_status": "completed_observation",
+      "capture_completed": "passed",
+      "backend_case_passed": false,
+      "manual_final_speech_passed": false,
+      "backend_gate_agreement": true,
+      "failed_or_unmeasured_effect_criteria": {
+        "effect_count": {
+          "status": "failed",
+          "detail": {
+            "expected": 1,
+            "observed": 0
+          }
+        },
+        "no_extra_navigation_attempts": {
+          "status": "failed",
+          "detail": "Every physical navigation attempt remains counted, including failed/no-op writes."
+        },
+        "effect_1_state": {
+          "status": "failed",
+          "detail": {
+            "expected": {
+              "tool": "start_navigation",
+              "destination_id": "C_ATHER_IND",
+              "eta_min": 2,
+              "distance_km": 1.0
+            },
+            "observed": null
+          }
+        },
+        "effect_1_fresh_compute_dependency": {
+          "status": "failed",
+          "detail": "Expected start effect unavailable"
+        }
+      },
+      "input_anchor_index": 1,
+      "input_anchor": {
+        "declaration": {
+          "asset": "ather_answer.wav",
+          "text": "I mean Ather Grid charger, Indiranagar.",
+          "trigger": "fresh_initial_nonack_response_finished_and_150ms_received_quiet"
+        },
+        "capture": {
+          "label": "followup_1",
+          "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration19/audio-assets/ather_answer.wav",
+          "file": "followup_1.wav",
+          "sha256": "2ab0432ac4f80aea41b9c68db5b343ac713015be46907eab1a2811bfccb431c6",
+          "sample_rate": 24000,
+          "samples": 51712,
+          "duration_seconds": 2.1546666666666665,
+          "activity_start_sample": 1440,
+          "activity_end_sample": 49440,
+          "intent_before_input": 1,
+          "timing": {
+            "label": "followup_1",
+            "started_monotonic": 144717.294281958,
+            "drained_monotonic": 144719.453841958,
+            "scheduled_end_monotonic": 144719.44894862466,
+            "published_samples": 51712
+          }
+        },
+        "times": {
+          "start_monotonic": 144717.294281958,
+          "end_monotonic": 144719.453841958,
+          "activity_onset_monotonic": 144717.354281958,
+          "activity_end_monotonic": 144719.354281958,
+          "start_unix": 1790426402.6594636
+        },
+        "expected_asset_sha256": "2ab0432ac4f80aea41b9c68db5b343ac713015be46907eab1a2811bfccb431c6"
+      },
+      "input_activity_end_was_published": true,
+      "input_anchor_end_unix": 1790426404.7194636,
+      "final_observed_intent_version": 2,
+      "final_handle_candidates": [
+        {
+          "text": "I couldn't find that place. Please say its full name, such as Ather Grid charger, Indiranagar.",
+          "intent_version": 2,
+          "kind": "result",
+          "speech_id": "speech_9735eb1d908e",
+          "queued_at": 144725.596020416,
+          "state": "finished",
+          "first_loud_at": 144726.133704208,
+          "preceding_quiet_seconds": 1.7998249170195777,
+          "last_loud_at": 144730.913736541,
+          "ended_at": 144731.005434666,
+          "error": null
+        }
+      ],
+      "all_ack_handles_after_anchor_start": [
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_43105d6dbdbd",
+          "queued_at": 144722.774925583,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 144724.409494916,
+          "error": null
+        }
+      ],
+      "ack_pcm": {
+        "first_monotonic": null,
+        "reason": "No above-threshold frame tagged to this handle; untagged audio is not reassigned"
+      },
+      "final_substantive_pcm": {
+        "first_monotonic": 144726.133704208,
+        "frame_line": 1097,
+        "speech_id": "speech_9735eb1d908e",
+        "report_first_loud_matches": true,
+        "limit": "Recorder event-order attribution, not an audio watermark or physical playback time"
+      },
+      "all_navigation_attempts": [],
+      "speech_end_to_observation_ms": {
+        "first_navigation_dispatch_intention": null,
+        "first_ack_queued": 3420.644,
+        "first_ack_pcm": null,
+        "final_substantive_first_pcm": 6779.422,
+        "observed_final_reply_finished": 11651.153,
+        "fulfilled_final_reply_finished": null
+      },
+      "missing_timing_reason": null
+    }
+  ],
+  "groups": {
+    "baseline/all": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 5,
+        "measured_cases": 1,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          3987.477,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 3987.477,
+        "p95_ms": 3987.477
+      },
+      "first_ack_queued": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          2378.273,
+          2444.944,
+          2440.674,
+          2432.368,
+          2530.141
+        ],
+        "p50_ms": 2440.674,
+        "p95_ms": 2530.141
+      },
+      "first_ack_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 0,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          7901.55,
+          4761.682,
+          5177.577,
+          7619.04,
+          5879.932
+        ],
+        "p50_ms": 5879.932,
+        "p95_ms": 7901.55
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          12472.881,
+          6936.684,
+          8228.155,
+          12465.839,
+          10788.538
+        ],
+        "p50_ms": 10788.538,
+        "p95_ms": 12472.881
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 1,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          6936.684,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 6936.684
+      }
+    },
+    "baseline/positive_continuation": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 3,
+        "measured_cases": 0,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          2378.273,
+          2440.674,
+          2530.141
+        ],
+        "p50_ms": 2440.674,
+        "p95_ms": 2530.141
+      },
+      "first_ack_pcm": {
+        "declared_cases": 3,
+        "measured_cases": 0,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          7901.55,
+          5177.577,
+          5879.932
+        ],
+        "p50_ms": 5879.932,
+        "p95_ms": 7901.55
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          12472.881,
+          8228.155,
+          10788.538
+        ],
+        "p50_ms": 10788.538,
+        "p95_ms": 12472.881
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 3,
+        "measured_cases": 0,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "baseline/cancellation_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          3987.477
+        ],
+        "p50_ms": 3987.477,
+        "p95_ms": 3987.477
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          2444.944
+        ],
+        "p50_ms": 2444.944,
+        "p95_ms": 2444.944
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          4761.682
+        ],
+        "p50_ms": 4761.682,
+        "p95_ms": 4761.682
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          6936.684
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 6936.684
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          6936.684
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 6936.684
+      }
+    },
+    "baseline/query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          2432.368
+        ],
+        "p50_ms": 2432.368,
+        "p95_ms": 2432.368
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          7619.04
+        ],
+        "p50_ms": 7619.04,
+        "p95_ms": 7619.04
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          12465.839
+        ],
+        "p50_ms": 12465.839,
+        "p95_ms": 12465.839
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "baseline/cancellation_or_query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          3987.477,
+          null
+        ],
+        "p50_ms": 3987.477,
+        "p95_ms": 3987.477
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          2444.944,
+          2432.368
+        ],
+        "p50_ms": 2432.368,
+        "p95_ms": 2444.944
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          4761.682,
+          7619.04
+        ],
+        "p50_ms": 4761.682,
+        "p95_ms": 7619.04
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          12465.839
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 12465.839
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          null
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 6936.684
+      }
+    },
+    "candidate/all": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 5,
+        "measured_cases": 2,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          20375.36,
+          18575.845,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 18575.845,
+        "p95_ms": 20375.36
+      },
+      "first_ack_queued": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          13201.711,
+          17471.419,
+          3498.45,
+          2914.992,
+          3420.644
+        ],
+        "p50_ms": 3498.45,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 0,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          21538.338,
+          19958.323,
+          6879.507,
+          8340.289,
+          6779.422
+        ],
+        "p50_ms": 8340.289,
+        "p95_ms": 21538.338
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 5,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          27233.38,
+          22112.565,
+          9935.259,
+          13199.853,
+          11651.153
+        ],
+        "p50_ms": 13199.853,
+        "p95_ms": 27233.38
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 5,
+        "measured_cases": 2,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          27233.38,
+          22112.565,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 22112.565,
+        "p95_ms": 27233.38
+      }
+    },
+    "candidate/positive_continuation": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 3,
+        "measured_cases": 1,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          20375.36,
+          null,
+          null
+        ],
+        "p50_ms": 20375.36,
+        "p95_ms": 20375.36
+      },
+      "first_ack_queued": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          13201.711,
+          3498.45,
+          3420.644
+        ],
+        "p50_ms": 3498.45,
+        "p95_ms": 13201.711
+      },
+      "first_ack_pcm": {
+        "declared_cases": 3,
+        "measured_cases": 0,
+        "null_cases": 3,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          21538.338,
+          6879.507,
+          6779.422
+        ],
+        "p50_ms": 6879.507,
+        "p95_ms": 21538.338
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 3,
+        "measured_cases": 3,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          27233.38,
+          9935.259,
+          11651.153
+        ],
+        "p50_ms": 11651.153,
+        "p95_ms": 27233.38
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 3,
+        "measured_cases": 1,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          27233.38,
+          null,
+          null
+        ],
+        "p50_ms": 27233.38,
+        "p95_ms": 27233.38
+      }
+    },
+    "candidate/cancellation_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          18575.845
+        ],
+        "p50_ms": 18575.845,
+        "p95_ms": 18575.845
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          17471.419
+        ],
+        "p50_ms": 17471.419,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          19958.323
+        ],
+        "p50_ms": 19958.323,
+        "p95_ms": 19958.323
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          22112.565
+        ],
+        "p50_ms": 22112.565,
+        "p95_ms": 22112.565
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          22112.565
+        ],
+        "p50_ms": 22112.565,
+        "p95_ms": 22112.565
+      }
+    },
+    "candidate/query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          2914.992
+        ],
+        "p50_ms": 2914.992,
+        "p95_ms": 2914.992
+      },
+      "first_ack_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          8340.289
+        ],
+        "p50_ms": 8340.289,
+        "p95_ms": 8340.289
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 1,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          13199.853
+        ],
+        "p50_ms": 13199.853,
+        "p95_ms": 13199.853
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 1,
+        "measured_cases": 0,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "candidate/cancellation_or_query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          18575.845,
+          null
+        ],
+        "p50_ms": 18575.845,
+        "p95_ms": 18575.845
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          17471.419,
+          2914.992
+        ],
+        "p50_ms": 2914.992,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          19958.323,
+          8340.289
+        ],
+        "p50_ms": 8340.289,
+        "p95_ms": 19958.323
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          22112.565,
+          13199.853
+        ],
+        "p50_ms": 13199.853,
+        "p95_ms": 22112.565
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 1,
+        "null_cases": 1,
+        "case_keys_in_order": [
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          22112.565,
+          null
+        ],
+        "p50_ms": 22112.565,
+        "p95_ms": 22112.565
+      }
+    },
+    "all_arms/all": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 10,
+        "measured_cases": 3,
+        "null_cases": 7,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          3987.477,
+          null,
+          null,
+          null,
+          20375.36,
+          18575.845,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 18575.845,
+        "p95_ms": 20375.36
+      },
+      "first_ack_queued": {
+        "declared_cases": 10,
+        "measured_cases": 10,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          2378.273,
+          2444.944,
+          2440.674,
+          2432.368,
+          2530.141,
+          13201.711,
+          17471.419,
+          3498.45,
+          2914.992,
+          3420.644
+        ],
+        "p50_ms": 2530.141,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 10,
+        "measured_cases": 0,
+        "null_cases": 10,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 10,
+        "measured_cases": 10,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          7901.55,
+          4761.682,
+          5177.577,
+          7619.04,
+          5879.932,
+          21538.338,
+          19958.323,
+          6879.507,
+          8340.289,
+          6779.422
+        ],
+        "p50_ms": 6879.507,
+        "p95_ms": 21538.338
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 10,
+        "measured_cases": 10,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          12472.881,
+          6936.684,
+          8228.155,
+          12465.839,
+          10788.538,
+          27233.38,
+          22112.565,
+          9935.259,
+          13199.853,
+          11651.153
+        ],
+        "p50_ms": 11651.153,
+        "p95_ms": 27233.38
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 10,
+        "measured_cases": 3,
+        "null_cases": 7,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/cancel_pending_navigation",
+          "baseline/hebbal_third_wave",
+          "baseline/distance_query_after_ambiguity",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/cancel_pending_navigation",
+          "candidate/hebbal_third_wave",
+          "candidate/distance_query_after_ambiguity",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          6936.684,
+          null,
+          null,
+          null,
+          27233.38,
+          22112.565,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": 22112.565,
+        "p95_ms": 27233.38
+      }
+    },
+    "all_arms/positive_continuation": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          20375.36,
+          null,
+          null
+        ],
+        "p50_ms": 20375.36,
+        "p95_ms": 20375.36
+      },
+      "first_ack_queued": {
+        "declared_cases": 6,
+        "measured_cases": 6,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          2378.273,
+          2440.674,
+          2530.141,
+          13201.711,
+          3498.45,
+          3420.644
+        ],
+        "p50_ms": 2530.141,
+        "p95_ms": 13201.711
+      },
+      "first_ack_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 0,
+        "null_cases": 6,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 6,
+        "measured_cases": 6,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          7901.55,
+          5177.577,
+          5879.932,
+          21538.338,
+          6879.507,
+          6779.422
+        ],
+        "p50_ms": 6779.422,
+        "p95_ms": 21538.338
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 6,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          12472.881,
+          8228.155,
+          10788.538,
+          27233.38,
+          9935.259,
+          11651.153
+        ],
+        "p50_ms": 10788.538,
+        "p95_ms": 27233.38
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 6,
+        "measured_cases": 1,
+        "null_cases": 5,
+        "case_keys_in_order": [
+          "baseline/airport_hospital_replay",
+          "baseline/hebbal_third_wave",
+          "baseline/indiranagar_ather",
+          "candidate/airport_hospital_replay",
+          "candidate/hebbal_third_wave",
+          "candidate/indiranagar_ather"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          27233.38,
+          null,
+          null
+        ],
+        "p50_ms": 27233.38,
+        "p95_ms": 27233.38
+      }
+    },
+    "all_arms/cancellation_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          3987.477,
+          18575.845
+        ],
+        "p50_ms": 3987.477,
+        "p95_ms": 18575.845
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          2444.944,
+          17471.419
+        ],
+        "p50_ms": 2444.944,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          4761.682,
+          19958.323
+        ],
+        "p50_ms": 4761.682,
+        "p95_ms": 19958.323
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          22112.565
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 22112.565
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "candidate/cancel_pending_navigation"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          22112.565
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 22112.565
+      }
+    },
+    "all_arms/query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "first_ack_queued": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          2432.368,
+          2914.992
+        ],
+        "p50_ms": 2432.368,
+        "p95_ms": 2914.992
+      },
+      "first_ack_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          7619.04,
+          8340.289
+        ],
+        "p50_ms": 7619.04,
+        "p95_ms": 8340.289
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 2,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          12465.839,
+          13199.853
+        ],
+        "p50_ms": 12465.839,
+        "p95_ms": 13199.853
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 2,
+        "measured_cases": 0,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/distance_query_after_ambiguity",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "all_arms/cancellation_or_query_boundary": {
+      "first_navigation_dispatch_intention": {
+        "declared_cases": 4,
+        "measured_cases": 2,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          3987.477,
+          null,
+          18575.845,
+          null
+        ],
+        "p50_ms": 3987.477,
+        "p95_ms": 18575.845
+      },
+      "first_ack_queued": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          2444.944,
+          2432.368,
+          17471.419,
+          2914.992
+        ],
+        "p50_ms": 2444.944,
+        "p95_ms": 17471.419
+      },
+      "first_ack_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 0,
+        "null_cases": 4,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "p50_ms": null,
+        "p95_ms": null
+      },
+      "final_substantive_first_pcm": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          4761.682,
+          7619.04,
+          19958.323,
+          8340.289
+        ],
+        "p50_ms": 7619.04,
+        "p95_ms": 19958.323
+      },
+      "observed_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 4,
+        "null_cases": 0,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          12465.839,
+          22112.565,
+          13199.853
+        ],
+        "p50_ms": 12465.839,
+        "p95_ms": 22112.565
+      },
+      "fulfilled_final_reply_finished": {
+        "declared_cases": 4,
+        "measured_cases": 2,
+        "null_cases": 2,
+        "case_keys_in_order": [
+          "baseline/cancel_pending_navigation",
+          "baseline/distance_query_after_ambiguity",
+          "candidate/cancel_pending_navigation",
+          "candidate/distance_query_after_ambiguity"
+        ],
+        "values_ms_in_order": [
+          6936.684,
+          null,
+          22112.565,
+          null
+        ],
+        "p50_ms": 6936.684,
+        "p95_ms": 22112.565
+      }
+    }
+  },
+  "summary": {
+    "declared_cases": 10,
+    "backend_passed": 3,
+    "speech_passed": 3,
+    "fulfilled_finish_measured": 3
+  },
+  "source_sha256": {
+    "results/iteration19/review_latency.py": "aa5979678e012399938b1b596c3ae2b8f9844828c67964c15338cd1defee3e5e",
+    "results/iteration19/acoustic-audit.json": "d81b5803c98d48ba9b5b2152647a5f55014955cefe1e5e7ebdfb64cb375e087e",
+    "results/iteration19/protocol.json": "d51c0a489de15c5fce3737ec0892648db27360b365202a525493bb888825d989",
+    "results/iteration19/speech-fact-review.json": "9101b1e3bf8de5dcc534309ea17a6899e089375a41b3a91cd9157a4225703811",
+    "results/iteration19-baseline/rtc-airport_hospital_replay-1/frames.jsonl": "67ae08f77cba0a208b5ac7215c8cfd1ff9074d59eefaab2182ef00c564b95dd7",
+    "results/iteration19-baseline/rtc-cancel_pending_navigation-1/frames.jsonl": "1cc44bcd93be636a23b77d21092714389575deb298042a3bb3bf36f6693236cb",
+    "results/iteration19-baseline/rtc-hebbal_third_wave-1/frames.jsonl": "708f939138afb9e6bba4db3f1c898708269d5a981a55405756992e4d1030ed0d",
+    "results/iteration19-baseline/rtc-distance_query_after_ambiguity-1/frames.jsonl": "be3f1acb1b40e5312d71551fcc077b8fcacd3c1a61ad98b56638dd726a818664",
+    "results/iteration19-baseline/rtc-indiranagar_ather-1/frames.jsonl": "c283e98cae2fdf956b1451d6b420c2b0c659b64df341dae736b2f47f40273e74",
+    "results/iteration19-candidate/rtc-airport_hospital_replay-1/frames.jsonl": "ef9daa48724699998abbd121ab997e0a1d460481bc9ffb193730480350c71fac",
+    "results/iteration19-candidate/rtc-cancel_pending_navigation-1/frames.jsonl": "a9ab4942ae0c8bff21a7373cef4d9b8a321658b6e3e132252f5a4ee2e8b27fe6",
+    "results/iteration19-candidate/rtc-hebbal_third_wave-1/frames.jsonl": "bd75e9fb8a2009bd727172edb53598791584f6c1c975467faa0a75a1b3da5093",
+    "results/iteration19-candidate/rtc-distance_query_after_ambiguity-1/frames.jsonl": "e1504a4323871b89aaa893a821b26961f5cc0eb7581465bbe6eb38f531780525",
+    "results/iteration19-candidate/rtc-indiranagar_ather-1/frames.jsonl": "3539cf91c5bd475a4fd4e524cf4ebb334ca146d76b1b610f82160ede6114446e"
+  },
+  "evidence_issues": [],
+  "limits": [
+    "Ten fixed-order development conversations; descriptive timings only, not a causal speed benefit, population statistic, or general completion guarantee.",
+    "No injected recognition hold is declared; no hold subtraction or inherited iteration18 probe grouping is used.",
+    "Ack queue is not ack PCM. Missing handle-specific audio tags stay null; untagged PCM is never reassigned to an acknowledgement.",
+    "Received PCM tags and speech-handle completion events are heuristic transport observations, not physical audibility or human intelligibility.",
+    "Observed completion of an incorrect/incomplete reply is retained while fulfilled completion is null. Missing captures remain declared rows.",
+    "Zero-effect cancellation/query boundaries can fulfill their request; a no-op cancellation attempt remains visible and is not called a navigation effect.",
+    "Backend/manual final facts do not imply initial clarification, continuation-hook exercise, trusted trace equality, or whole-scenario success."
+  ]
+}

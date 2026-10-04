@@ -1,0 +1,1063 @@
+{
+  "frozen_at_utc": "2026-09-26T04:04:01.446599+00:00",
+  "command": [
+    "results/iteration5/review_received_audio.py",
+    "--suite-root",
+    "results/iteration5",
+    "--out",
+    "results/iteration5/received-audio-review"
+  ],
+  "method": {
+    "frozen_at_utc": "2026-09-26T04:03:52.986177+00:00",
+    "timing": "Review method frozen after timed capture completion but before any received-audio recognition; no reviewed ASR output informed this method.",
+    "script_sha256": "95bec84ecbd81273b5ed0858cbc7e4ecbe73d8328530d3a3d17c9c3fc40e148a",
+    "suite_protocol_sha256": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab",
+    "declared_trials": [
+      {
+        "id": "probe-silence-1",
+        "case": "silence"
+      },
+      {
+        "id": "probe-noise-1",
+        "case": "noise"
+      },
+      {
+        "id": "probe-tone-1",
+        "case": "tone"
+      },
+      {
+        "id": "probe-fragment-1",
+        "case": "fragment"
+      },
+      {
+        "id": "probe-noise-2",
+        "case": "noise"
+      },
+      {
+        "id": "probe-tone-2",
+        "case": "tone"
+      },
+      {
+        "id": "probe-fragment-2",
+        "case": "fragment"
+      },
+      {
+        "id": "probe-silence-2",
+        "case": "silence"
+      },
+      {
+        "id": "probe-tone-3",
+        "case": "tone"
+      },
+      {
+        "id": "probe-fragment-3",
+        "case": "fragment"
+      },
+      {
+        "id": "probe-silence-3",
+        "case": "silence"
+      },
+      {
+        "id": "probe-noise-3",
+        "case": "noise"
+      }
+    ],
+    "scope": "One full received PCM stream for every declared trial, in original protocol order; capture failures and unavailable/inference-failed rows remain in the declared denominator.",
+    "method": "Pinned production LocalSTT.load/transcribe, local-mac Parakeet only, offline cached weights. Resample complete mono PCM16 from24kHz to16kHz using existing LiveKit helper; preserve every sample and captured silence.",
+    "selection": "No clipping, silence removal, output-conditioned retry or capture-success filtering. Hash all finished inputs and source files before importing/loading ASR; preserve full model file hashes. No warmup; first inference retained.",
+    "review": {
+      "expected_initial_result_facts": "Airport navigation has started; estimated arrival time is88minutes. Compare recognition with declared result text while preserving all mismatches.",
+      "non_speech_controls": "Inspect whole-stream recognized content for completed or truncated initial result and unexpected text. Tool/VAD/recognition outcomes are assessed separately from this received-audio proxy.",
+      "fragment": "Speech fragment is exploratory. Inspect any truncated original result and any subsequent acknowledgment/clarification, without treating fragment-triggered user recognition as non-speech hallucination.",
+      "score": "Verbatim ASR output plus qualitative fact observations; no benchmark pass rate or independent intelligibility score."
+    },
+    "limitations": [
+      "Reusing production ASR cannot separate pronunciation errors from recognition errors; no human listening claim.",
+      "Full-stream text cannot identify exact spoken-word timestamps, physical speaker playback or RTP/data alignment.",
+      "Concatenated PCM preserves captured silence but does not insert callback-arrival gaps.",
+      "Twelve dependent development trials, three per waveform, shared warm runtime during captures, same synthetic voice, no physical echo or human microphone.",
+      "ASR timings belong to a separate offline review after service cleanup and are not live conversational latency.",
+      "A fixed12second observation can retain an incomplete result; incompleteness is an outcome, not an exclusion."
+    ]
+  },
+  "method_sha256": "d5be6812f6affb42cfc1b4b9bb45eea8eba9019224ffd4d46c742007dec4bc03",
+  "suite_status": "completed",
+  "suite_sha256": {
+    "protocol.json": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab",
+    "run-report.json": "b5bf1ab4f24b1aefbd821b27975a5898f52ff5d0caf119b434d37f5e5825b75e"
+  },
+  "trial_order": [
+    "probe-silence-1",
+    "probe-noise-1",
+    "probe-tone-1",
+    "probe-fragment-1",
+    "probe-noise-2",
+    "probe-tone-2",
+    "probe-fragment-2",
+    "probe-silence-2",
+    "probe-tone-3",
+    "probe-fragment-3",
+    "probe-silence-3",
+    "probe-noise-3"
+  ],
+  "trials": [
+    {
+      "id": "probe-silence-1",
+      "case": "silence",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "b12fb677b747af27a499c3ba6f68a082e170cecc664542bd4889113f8a775177",
+        "events.jsonl": "2584bfe38aae9729d24b73c19f56c51ab89148c63abc5cd35e04388f8369c4ad",
+        "frames.jsonl": "c9a29d1d7c458dffa9ad3105d62da01572f78e97d65d1b1d3f515e19c53c8ae8",
+        "received-1.pcm": "407ab8e8779a868424f86a4e53175c0c8e20ae8614adbaa8319cd077f20a6902"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-silence-1",
+          "case": "silence",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/silence.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T19:58:50.215674+00:00",
+          "pid": 58120,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T19:59:26.437618+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-f7a952505401473c8d6b1ef64515dab5",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_7a199b973b65",
+          "queued_at": 89380.828941291,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89382.17830275,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_f180e0205848",
+          "queued_at": 89397.774830791,
+          "state": "finished",
+          "first_loud_at": 89398.837860041,
+          "preceding_quiet_seconds": 16.799704958000802,
+          "last_loud_at": 89405.058747416,
+          "ended_at": 89405.114365875,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-noise-1",
+      "case": "noise",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "6b158c09819b21616068be6350c7db7d66f596872437f2ae22de31ff82fc1db6",
+        "events.jsonl": "cf070bcea908ac4f772aa971e240b9d1d5a0a8b56e9cc8a4d3724ea56568b5b9",
+        "frames.jsonl": "d0810aaf7787ef88de2ca9d1f3a3e49fb43b1b5e81861c71876c3ef9da2515fd",
+        "received-1.pcm": "68df85b65b47c4406639bdf059dcac8860bfb04fb0602af7a53c6b7471416756"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-noise-1",
+          "case": "noise",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/noise.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T19:59:26.443411+00:00",
+          "pid": 58346,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T19:59:51.040637+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-d118e2db11f649a086f3ca4d82d64b4b",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_562ab64dc44a",
+          "queued_at": 89416.3215025,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89417.744820708,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_1aa56bd26582",
+          "queued_at": 89422.379103125,
+          "state": "finished",
+          "first_loud_at": 89423.442154958,
+          "preceding_quiet_seconds": 5.819685167007265,
+          "last_loud_at": 89429.686661625,
+          "ended_at": 89429.742199041,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-tone-1",
+      "case": "tone",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "74159154801a3d2821054f34f8452d3c64732a1fd08c5cbd7f155b9c26900f0d",
+        "events.jsonl": "2fe9d7362e68b63fe1693cfc62b5b7544d2d3ee1e4f92ccb66b9b495ad5b79ab",
+        "frames.jsonl": "d43f8f7ea30238cb34e22152f3a2c09fc7ef8a16dd26a079c1be7d78136dc8d9",
+        "received-1.pcm": "d511efa88d1d2d991860706e2acece22a7d7f45adf2380a3edf6d3ec168503fa"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-tone-1",
+          "case": "tone",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/tone.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T19:59:51.047384+00:00",
+          "pid": 58509,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:00:15.081414+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-cf71c5c9088947b2a83dff3eeb7caf33",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b7ee2d747b4b",
+          "queued_at": 89440.898472083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89442.23543525,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_1abeb7206f26",
+          "queued_at": 89446.803666541,
+          "state": "finished",
+          "first_loud_at": 89447.853636666,
+          "preceding_quiet_seconds": 5.757622541001183,
+          "last_loud_at": 89454.096161166,
+          "ended_at": 89454.155792708,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-fragment-1",
+      "case": "fragment",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-1",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "12270a17f2c76d4d198b35b1bdc74f96efff432a1462b1da0ed1f96a5df7bbe2",
+        "events.jsonl": "0a195007357f21292b227e4ee235803e49aee67dcad5cb6b8878e9b18b9a53e4",
+        "frames.jsonl": "aca5950fec1879afdcb76e72cb3ee8a1ecd857fd87b937d0042ff88e93c9c989",
+        "received-1.pcm": "77eb20bb72f4ceb9420072f0804b487f9630c245a1b30df0508a420b63fd9961"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-fragment-1",
+          "case": "fragment",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/fragment.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-1",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:00:15.089018+00:00",
+          "pid": 58654,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:00:38.914584+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-55f843f3fc404d5e8fb0d4131c2cce4f",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_f24de4b3c88b",
+          "queued_at": 89464.898172666,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89466.319672625,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_c1a83b88d139",
+          "queued_at": 89470.809732416,
+          "state": "interruption_requested",
+          "first_loud_at": 89471.77140525,
+          "preceding_quiet_seconds": 5.5796287919947645,
+          "last_loud_at": 89472.369171375,
+          "ended_at": 89474.088561708,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_ed35f524c284",
+          "queued_at": 89474.812903708,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89476.421900833,
+          "error": null
+        },
+        {
+          "text": "Nap? I'm sorry, I didn't catch that.",
+          "intent_version": 2,
+          "kind": "response",
+          "speech_id": "speech_f4f96dc8c649",
+          "queued_at": 89476.778578458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89479.309097333,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-noise-2",
+      "case": "noise",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-2",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "aaa0005657b96fb273d7061d2eb22bf7230cc0ffd757d6f3bebb58d84aaa8f39",
+        "events.jsonl": "d04b9a811252c341ab15032c3014c8ee74014a87a05ec99960a65834e4bd22c8",
+        "frames.jsonl": "716af9fa587223e002b9f114a338614540b182ae9b793d3b582b9555005fce24",
+        "received-1.pcm": "aba06f2fda32d0bd654661b886a64b104de721fd5b216affb488f8b9a24159fd"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-noise-2",
+          "case": "noise",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/noise.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-2",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:00:38.921486+00:00",
+          "pid": 58789,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:01:06.151151+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-9195516e4ba746738647c8db4f6976f3",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_10b3882c3abb",
+          "queued_at": 89488.823959458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89490.196890041,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_57c8aa7af67f",
+          "queued_at": 89497.578995041,
+          "state": "finished",
+          "first_loud_at": 89498.546182791,
+          "preceding_quiet_seconds": 8.481033791002119,
+          "last_loud_at": 89504.786006375,
+          "ended_at": 89504.835652958,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-tone-2",
+      "case": "tone",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-2",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "066e7e55d78c0a696e976a423868bbb6620b0bd0e19afd45677cc47927ebd8b9",
+        "events.jsonl": "7a0837578e011b2c3e5e16886f083be5bf08d5fe1469c2d59149bc5994730452",
+        "frames.jsonl": "ef9c70fd0c9dd61b700b339f4ecb5c0886b7f9d4bbbd03dcd1c65ca417a372af",
+        "received-1.pcm": "aacb0c217340282eedd990ff293656109277ea54108fcd5af9ff845207a84dd8"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-tone-2",
+          "case": "tone",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/tone.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-2",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:01:06.156468+00:00",
+          "pid": 58976,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:01:30.259587+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-93cd2be91aad4b0389ee9761ac02e21c",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c89a0426caf5",
+          "queued_at": 89516.041505458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89517.400953583,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_fd95e234f17e",
+          "queued_at": 89521.995838625,
+          "state": "finished",
+          "first_loud_at": 89523.035947958,
+          "preceding_quiet_seconds": 5.778477916988777,
+          "last_loud_at": 89529.275748083,
+          "ended_at": 89529.319706875,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-fragment-2",
+      "case": "fragment",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-2",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "c07a7d9fb506cf141fc799b8d600689c6179e98a327ab021672096cfde9945af",
+        "events.jsonl": "1c8f21bad2af66275a53d89ae41f5236ab5ac4bfb2eb036c0629c5788a7ebe3e",
+        "frames.jsonl": "99e832453114d55675b9808b1f7d7126a15fca62d742fa227eecd091f050d62a",
+        "received-1.pcm": "2e3e6be7c4760828da48310e8cfecf7609ea8487d39b2521f096c49f8a828937"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-fragment-2",
+          "case": "fragment",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/fragment.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-2",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:01:30.265837+00:00",
+          "pid": 59127,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:01:54.550764+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-cc733171d4e84716bb8aca0f4ed1b204",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b07f4712bf0b",
+          "queued_at": 89540.149113416,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89541.746887125,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_9469434490cd",
+          "queued_at": 89546.121967833,
+          "state": "interruption_requested",
+          "first_loud_at": 89547.401446625,
+          "preceding_quiet_seconds": 5.779866833996493,
+          "last_loud_at": 89548.038876,
+          "ended_at": 89549.514410333,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_0bbe5506addd",
+          "queued_at": 89550.223398458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89551.771835958,
+          "error": null
+        },
+        {
+          "text": "Nap? I'm sorry, I didn't catch that.",
+          "intent_version": 2,
+          "kind": "response",
+          "speech_id": "speech_8710d1b0c0dd",
+          "queued_at": 89552.119882666,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89554.678376,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-silence-2",
+      "case": "silence",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-2",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "0ebecfcdfb1fcee862b85a087c6de649e8356c0cbb705fb99c06bf42e65b0716",
+        "events.jsonl": "b12667f9cb67b57589dd2048e230cffdba824f98bc6e0ce57e5386ccc8261677",
+        "frames.jsonl": "0d878dffa77f60fad67dfdc5831595860d719e890c86e12846e87521fe637ee9",
+        "received-1.pcm": "b54c19b2eb60dc20101eb0cadd31dad6051f106181346e690d8ac4fb37ee30af"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-silence-2",
+          "case": "silence",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/silence.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-2",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:01:54.556855+00:00",
+          "pid": 59278,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:02:22.182684+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-73319e38e728474586f6d1861ee908dd",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_c924dbc7f348",
+          "queued_at": 89564.807544,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89566.248498875,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_2cc9541368e7",
+          "queued_at": 89573.60150075,
+          "state": "finished",
+          "first_loud_at": 89574.595898125,
+          "preceding_quiet_seconds": 8.500051084003644,
+          "last_loud_at": 89580.8358315,
+          "ended_at": 89580.889184833,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-tone-3",
+      "case": "tone",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-3",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "26dff654ea24a4e725fad0025042f2d8f3669b5177b97fcbe589ae685d3aba3d",
+        "events.jsonl": "18dddbf79fdd645bbab346c7c13639c1b9cbb0dafbcd178b8a068e9298792471",
+        "frames.jsonl": "2b2b7d44adb868e149a6aefdc27511297152860250ca531dc3b9849b82bb4954",
+        "received-1.pcm": "ca7ab4aff87c5792fd5f6eb8ca51151a32310d508b610ee5fd551c26bdc2971e"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-tone-3",
+          "case": "tone",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/tone.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-tone-3",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:02:22.188151+00:00",
+          "pid": 59450,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:02:46.095155+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-9a8f9988a6944ad8a493a9706e4dc35c",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_b402ad43ae34",
+          "queued_at": 89592.013914,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89593.364078416,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_3163b4b88117",
+          "queued_at": 89597.911891041,
+          "state": "finished",
+          "first_loud_at": 89598.875956916,
+          "preceding_quiet_seconds": 5.640066082996782,
+          "last_loud_at": 89605.116697291,
+          "ended_at": 89605.16169675,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-fragment-3",
+      "case": "fragment",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-3",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "c33630ae94f2189e48740c390cda6ae9b553823333893f1e8b70a32dd68d813f",
+        "events.jsonl": "81b69cfaa11b194a82bf690b2048bd6e205e708f7c77000fe61092be2a300afc",
+        "frames.jsonl": "95c7fb0be6509f55bc88d1eda11116ee13cf3846f2287f66123c47fdfeed2643",
+        "received-1.pcm": "a91366c283ef12c8e2b4dd7dc874e67d4a568e66546cde9a177dda93349c1b7c"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-fragment-3",
+          "case": "fragment",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/fragment.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-fragment-3",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:02:46.100237+00:00",
+          "pid": 59617,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:03:09.934693+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-0003d13946e544e4ba292619a87b87d2",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_bb6eb77a551b",
+          "queued_at": 89615.90166775,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89617.254933583,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_9f65ad701a28",
+          "queued_at": 89621.800030541,
+          "state": "interruption_requested",
+          "first_loud_at": 89622.78345775,
+          "preceding_quiet_seconds": 5.659974584006704,
+          "last_loud_at": 89623.363378083,
+          "ended_at": 89624.912210708,
+          "error": null
+        },
+        {
+          "text": "Okay, one sec.",
+          "intent_version": 2,
+          "kind": "ack",
+          "speech_id": "speech_b484574246e9",
+          "queued_at": 89625.617467541,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89627.173784,
+          "error": null
+        },
+        {
+          "text": "Navigation is active. Kempegowda International Airport is the destination.",
+          "intent_version": 2,
+          "kind": "response",
+          "speech_id": "speech_044690d04f41",
+          "queued_at": 89627.618057083,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89632.626318541,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-silence-3",
+      "case": "silence",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-3",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "a74409e2e0d886ce2957c74584164ceb7239bff702463ecd9f4b2084a8e1149c",
+        "events.jsonl": "31a604faa0c4342b67f2c1b652ebda256b522c62cd8383f3291e100d0726cc64",
+        "frames.jsonl": "770653f560bf787dd3815e17c79ffc5d14606aa5f917cbfe34a60aac01e59d5e",
+        "received-1.pcm": "c8b3de22b5a361f328b93da6afc2679eb0357df0cba53163d88c47badb13fd30"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-silence-3",
+          "case": "silence",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/silence.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-silence-3",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:03:09.941119+00:00",
+          "pid": 59763,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:03:38.384461+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-a960cf36b0154d81b28994dc185fcb60",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_e204f55a3c33",
+          "queued_at": 89639.83453775,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89641.43481275,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_32bcea3056fd",
+          "queued_at": 89649.440520916,
+          "state": "finished",
+          "first_loud_at": 89650.61556575,
+          "preceding_quiet_seconds": 9.320206042000791,
+          "last_loud_at": 89656.875971333,
+          "ended_at": 89656.903544625,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    },
+    {
+      "id": "probe-noise-3",
+      "case": "noise",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-3",
+      "status": "pending",
+      "attempted": false,
+      "input_sha256": {
+        "report.json": "41d41dbd29de93b337ce6aec1433bd26b16459c5a724f2d565e5a07520a7f35f",
+        "events.jsonl": "cf32e96da4e842d7f210e9aa9b2fda7c83237d2988432bc6afa62cda2eec57bc",
+        "frames.jsonl": "e672fdbc5a60caa6c1c645482c14a5f064eba3c681c6384e47ac03c3958c2d68",
+        "received-1.pcm": "ff2f8af284fb7ba235cbe4a9668d6fbda474d8956813287f0117ecdcd3d712a6"
+      },
+      "suite_run_entries": [
+        {
+          "name": "probe-noise-3",
+          "case": "noise",
+          "command": [
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+            "scripts/local_livekit_audio_experiment.py",
+            "--input",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/navigate.wav",
+            "--probe",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/audio-assets/noise.wav",
+            "--out",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/probe-noise-3",
+            "--worker-manifest",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/local-stack-run1/worker-manifest.json",
+            "--protocol",
+            "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration5/protocol.json",
+            "--ready-timeout",
+            "45",
+            "--response-timeout",
+            "60",
+            "--probe-observation-seconds",
+            "12"
+          ],
+          "started_at": "2026-09-25T20:03:38.447745+00:00",
+          "pid": 60000,
+          "exit_code": 0,
+          "finished_at": "2026-09-25T20:04:04.176139+00:00"
+        }
+      ],
+      "capture_status": "completed_probe_observation",
+      "room": "car-audio-aca8b20bc43547e78e7155cabe0ea69e",
+      "declared_speech": [
+        {
+          "text": "One moment.",
+          "intent_version": 1,
+          "kind": "ack",
+          "speech_id": "speech_04147efd6d22",
+          "queued_at": 89669.653312458,
+          "state": "finished",
+          "first_loud_at": null,
+          "ended_at": 89671.081880125,
+          "error": null
+        },
+        {
+          "text": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "intent_version": 1,
+          "kind": "result",
+          "speech_id": "speech_51539ce6fcce",
+          "queued_at": 89675.600917416,
+          "state": "finished",
+          "first_loud_at": 89676.553583208,
+          "preceding_quiet_seconds": 5.600187333009671,
+          "last_loud_at": 89682.793375,
+          "ended_at": 89682.852192166,
+          "error": null
+        }
+      ],
+      "pcm_file": "received-1.pcm"
+    }
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "14bbb82dcbac77ed5af1cc97d8d2b045b2fa970eb8cee8b3d8c67c73777c853a",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "dec83a0ae501008370d3f4714808a9dff04bacd56a175bb7296369e467c67f30",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "c09f8f85e4e693ddfe3757008e9b87d95693a4a7b6d0d08de6714c6fcae2e610",
+    "agent/main.py": "d3cc670d1a34bfd19c138385c6303e1fcebcdecac6d8ea2614df19e875962787",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "results/iteration5/review_received_audio.py": "95bec84ecbd81273b5ed0858cbc7e4ecbe73d8328530d3a3d17c9c3fc40e148a",
+    "scripts/local_speech_experiment.py": "5846eaebc4d8828c0af84b4e772604292c36f2a18e8c2315d3b42ea6c60b2f8d"
+  }
+}

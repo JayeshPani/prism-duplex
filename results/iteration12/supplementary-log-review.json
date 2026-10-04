@@ -1,0 +1,1530 @@
+{
+  "created_at_utc": "2026-09-26T07:49:46.092009+00:00",
+  "scope": "All four iteration12 RTC attempts, including readiness timeout; supplementary raw-packet, log, trace, AEC and cleanup audit. No inference, source changes or reruns.",
+  "line_convention": "One-based lines in each referenced immutable artifact.",
+  "summary": {
+    "captures_completed": 3,
+    "declared_captures": 4,
+    "expected_attempts": 19,
+    "done_attempts": 16,
+    "expected_effects": 7,
+    "observed_effects": 6,
+    "old_results_interrupted": 3,
+    "eligible_followup_cases": 3,
+    "full_trace_equality": {
+      "passed": 3,
+      "denominator": 4
+    },
+    "raw_decoded_packet_trace_equality": {
+      "passed": 4,
+      "denominator": 4
+    },
+    "trace_writer": {
+      "accepted": 166,
+      "flushed": 166,
+      "rejected": 0,
+      "complete_rooms": 4,
+      "counts_match_raw_traces": true
+    },
+    "diagnostics": {
+      "rooms": 4,
+      "observed_frames": 3016,
+      "substituted_frames": 54,
+      "substituted_audio_seconds": 2.7,
+      "all_substituted_frames_aec_active": true,
+      "first_substituted_frame_zero_all_intervals": true,
+      "followup_activity_overlapping_substitution_intervals": 0,
+      "observation_errors": 0,
+      "identity_errors": 0,
+      "observation_total_ns": 32978299,
+      "observation_mean_ns_per_frame": 10934.449270557028,
+      "observation_max_ns": 319334,
+      "source_hashes_unchanged": true
+    },
+    "warning_rows": 31,
+    "warning_counts_by_log": {
+      "results/iteration12/local-stack-run1/worker.log": 11,
+      "results/iteration12/local-stack-run1/llm.log": 1,
+      "results/iteration12/local-stack-run1/livekit.log": 15,
+      "results/iteration12/rtc-waypoint-1.log": 1,
+      "results/iteration12/rtc-baseline-1.log": 1,
+      "results/iteration12/rtc-waypoint-2.log": 1,
+      "results/iteration12/rtc-correction-1.log": 1
+    },
+    "structured_worker_warning_count": 10,
+    "worker_warning_categories": {
+      "watchdog": 3,
+      "unknown_ffi_handle": 5,
+      "phonemizer": 2,
+      "unparsed_startup_short_key": 1
+    },
+    "runtime_error_level_or_traceback_count": 0,
+    "capture_failures_with_retained_report_traceback": 1,
+    "server_job_statuses": {
+      "JS_FAILED": 4
+    }
+  },
+  "capture_census": [
+    {
+      "trial": "rtc-waypoint-1",
+      "room": "car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "prepared_inputs": 2,
+      "published_inputs": 2,
+      "input_started_events": 4,
+      "accepted_session_started": 1,
+      "raw_session_started_packets": 1,
+      "trace_count": 53,
+      "promoted_event_count": 53,
+      "full_promoted_trace_equality": true,
+      "raw_decoded_trace_equality": true,
+      "received_frame_count": 1858,
+      "frame_integrity": true,
+      "received_pcm_bytes": {
+        "received-1.pcm": 1783680
+      },
+      "frames_above_activity_threshold": 415,
+      "raw_hash_mismatches": [],
+      "receiver_errors": [],
+      "cleanup_errors": [],
+      "published_input_timing": [
+        {
+          "label": "initial",
+          "published_samples": 55296,
+          "expected_samples": 55296,
+          "drain_minus_scheduled_end_ms": 1.178
+        },
+        {
+          "label": "correction",
+          "published_samples": 40960,
+          "expected_samples": 40960,
+          "drain_minus_scheduled_end_ms": 1.984
+        }
+      ]
+    },
+    {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+      "status": "failed",
+      "failed_stage": "connect_and_session_ready",
+      "error": "TimeoutError()",
+      "prepared_inputs": 1,
+      "published_inputs": 0,
+      "input_started_events": 0,
+      "accepted_session_started": 0,
+      "raw_session_started_packets": 1,
+      "trace_count": 3,
+      "promoted_event_count": 1,
+      "full_promoted_trace_equality": false,
+      "raw_decoded_trace_equality": true,
+      "received_frame_count": 2218,
+      "frame_integrity": true,
+      "received_pcm_bytes": {
+        "received-1.pcm": 2129280
+      },
+      "frames_above_activity_threshold": 0,
+      "raw_hash_mismatches": [],
+      "receiver_errors": [],
+      "cleanup_errors": [],
+      "published_input_timing": []
+    },
+    {
+      "trial": "rtc-waypoint-2",
+      "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "prepared_inputs": 2,
+      "published_inputs": 2,
+      "input_started_events": 4,
+      "accepted_session_started": 1,
+      "raw_session_started_packets": 1,
+      "trace_count": 53,
+      "promoted_event_count": 53,
+      "full_promoted_trace_equality": true,
+      "raw_decoded_trace_equality": true,
+      "received_frame_count": 1680,
+      "frame_integrity": true,
+      "received_pcm_bytes": {
+        "received-1.pcm": 1612800
+      },
+      "frames_above_activity_threshold": 416,
+      "raw_hash_mismatches": [],
+      "receiver_errors": [],
+      "cleanup_errors": [],
+      "published_input_timing": [
+        {
+          "label": "initial",
+          "published_samples": 55296,
+          "expected_samples": 55296,
+          "drain_minus_scheduled_end_ms": 15.527
+        },
+        {
+          "label": "correction",
+          "published_samples": 40960,
+          "expected_samples": 40960,
+          "drain_minus_scheduled_end_ms": 2.679
+        }
+      ]
+    },
+    {
+      "trial": "rtc-correction-1",
+      "room": "car-audio-a16a076ce247495b8ca4de06cfadabf7",
+      "status": "completed_observation",
+      "failed_stage": null,
+      "error": null,
+      "prepared_inputs": 2,
+      "published_inputs": 2,
+      "input_started_events": 4,
+      "accepted_session_started": 1,
+      "raw_session_started_packets": 1,
+      "trace_count": 57,
+      "promoted_event_count": 57,
+      "full_promoted_trace_equality": true,
+      "raw_decoded_trace_equality": true,
+      "received_frame_count": 1692,
+      "frame_integrity": true,
+      "received_pcm_bytes": {
+        "received-1.pcm": 1624320
+      },
+      "frames_above_activity_threshold": 418,
+      "raw_hash_mismatches": [],
+      "receiver_errors": [],
+      "cleanup_errors": [],
+      "published_input_timing": [
+        {
+          "label": "initial",
+          "published_samples": 34304,
+          "expected_samples": 34304,
+          "drain_minus_scheduled_end_ms": 2.298
+        },
+        {
+          "label": "correction",
+          "published_samples": 46592,
+          "expected_samples": 46592,
+          "drain_minus_scheduled_end_ms": 420.046
+        }
+      ]
+    }
+  ],
+  "baseline_failure": {
+    "trial": "rtc-baseline-1",
+    "audit_error_retained": "KeyError('timing')",
+    "failed_stage": "connect_and_session_ready",
+    "error": "TimeoutError()",
+    "capture_traceback": "Traceback (most recent call last):\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 371, in run\n    await wait_observation(lambda: state.ready, changed, time.monotonic() + args.ready_timeout, errors)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 190, in wait_observation\n    await asyncio.wait_for(changed.wait(), min(0.1, remaining))\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py\", line 476, in wait_for\n    await waiter\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 360, in run\n    async with asyncio.timeout(args.ready_timeout):\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n",
+    "checks": {
+      "capture_completed": false,
+      "session_ready_accepted": false,
+      "initial_input_published": false,
+      "full_promoted_trace_equality": false,
+      "declared_attempt_count": false,
+      "expected_effects": false,
+      "transcript_1_available": false,
+      "result_after_effect_1_available": false,
+      "speech_handles_settled": false,
+      "raw_hashes": true,
+      "frame_integrity": true,
+      "no_capture_receiver_or_cleanup_errors": true,
+      "server_session_started_exists": true,
+      "raw_session_started_packet_received": true
+    },
+    "explanation": "The prepared initial file has no timing because it was not published. Existing audit_trial indexes timing and therefore retains KeyError rather than individual checks; this supplement restores explicit failed readiness/input/effect checks without modifying audit.json. Initial listening and session_started are present as raw data packets with participant=null. The recorder source lines305-311 logs every packet then only promotes packets whose non-null participant is an agent; these two are not promoted, and readiness times out. No transport-loss claim is supported. Participant metadata absence cause is not established. Root-created audit-v2.json now evaluates all four trials, retains every baseline failed check, and represents unpublished input timing and resulting latency as null; the original audit and KeyError remain unchanged.",
+    "trace_failure": {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+      "server_count": 3,
+      "promoted_event_count": 1,
+      "raw_decoded_packet_count": 3,
+      "full_promoted_trace_equality": false,
+      "raw_decoded_trace_equality": true,
+      "missing_promoted_events": [
+        {
+          "server_line": 1,
+          "event": {
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790408568.6710541
+          },
+          "raw_packet_matches": [
+            {
+              "line": 2,
+              "participant": null,
+              "received_unix": 1790408568.6724129,
+              "received_monotonic": 126883.381347708,
+              "event": {
+                "type": "agent_state",
+                "data": {
+                  "state": "listening"
+                },
+                "ts": 1790408568.6710541
+              }
+            }
+          ]
+        },
+        {
+          "server_line": 2,
+          "event": {
+            "type": "session_started",
+            "data": {
+              "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+              "mode": "car",
+              "profile": "local-mac",
+              "llm": "mlx-community/Qwen3-8B-4bit"
+            },
+            "ts": 1790408568.671387
+          },
+          "raw_packet_matches": [
+            {
+              "line": 3,
+              "participant": null,
+              "received_unix": 1790408568.673255,
+              "received_monotonic": 126883.382189791,
+              "event": {
+                "type": "session_started",
+                "data": {
+                  "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+                  "mode": "car",
+                  "profile": "local-mac",
+                  "llm": "mlx-community/Qwen3-8B-4bit"
+                },
+                "ts": 1790408568.671387
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "driver_reference": {
+      "path": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        305,
+        311,
+        360,
+        371
+      ]
+    },
+    "primary_audit_checks": {
+      "capture_completed": false,
+      "raw_hashes": true,
+      "frozen_source_receipts": true,
+      "full_trace_equality": false,
+      "attempt_sequence": false,
+      "attempt_count": false,
+      "attempt_event_pairs": true,
+      "all_attempts_done": false,
+      "all_done_results_successful": false,
+      "expected_effects": false,
+      "declared_effect_facts": false,
+      "no_stale_results": true,
+      "frame_integrity": true,
+      "no_capture_errors": true,
+      "no_server_tool_errors": true,
+      "agent_departed": true,
+      "room_cleanup_logged": true,
+      "declared_input_count": true,
+      "declared_input_audio": true,
+      "input_published_1": false,
+      "transcript_1": false,
+      "result_after_effect_1": false,
+      "speech_handles_settled": false
+    },
+    "received_pcm_seconds": 44.36
+  },
+  "gate_alignment": [
+    {
+      "trial": "rtc-waypoint-1",
+      "room": "car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+      "counts": {
+        "frames": 754,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 951600
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          1
+        ]
+      },
+      "identity_errors": [],
+      "substituted_intervals": [
+        {
+          "first_monotonic": 126847.878183625,
+          "first_unix": 1790408533.1718788,
+          "first_utc": "2026-09-26T07:42:13.171879+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 126848.728594583,
+          "last_unix": 1790408534.022134,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 126848.778657916,
+          "next_unsubstituted_unix": 1790408534.0721889,
+          "source_audio_seconds": 0.9,
+          "overlaps_scheduled_followup_activity": false,
+          "following_input_onset_minus_next_unsubstituted_ms": 13734.879,
+          "within_initial_ack_handle_interval": true
+        }
+      ],
+      "followup_scheduled_activity_monotonic": [
+        126862.51353654101,
+        126863.993536541
+      ],
+      "old_result_state": "interruption_requested",
+      "interpretation": "Substitution occurred during the initial acknowledgement only, before scheduled followup activity."
+    },
+    {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+      "counts": {
+        "frames": 891,
+        "substituted_frames": 0,
+        "samples_by_format": {
+          "24000Hz/1ch": 1116000
+        },
+        "substituted_samples_by_format": {},
+        "recognition_indices": [
+          2
+        ]
+      },
+      "identity_errors": [],
+      "substituted_intervals": [],
+      "followup_scheduled_activity_monotonic": null,
+      "old_result_state": null,
+      "interpretation": "No substituted frames; baseline input was never published."
+    },
+    {
+      "trial": "rtc-waypoint-2",
+      "room": "car-audio-5a22795a8a8648aba4f209573e0319ee",
+      "counts": {
+        "frames": 683,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 866400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          3
+        ]
+      },
+      "identity_errors": [],
+      "substituted_intervals": [
+        {
+          "first_monotonic": 126942.878063958,
+          "first_unix": 1790408628.1688,
+          "first_utc": "2026-09-26T07:43:48.168800+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 126943.72875675,
+          "last_unix": 1790408629.0194921,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 126943.778256125,
+          "next_unsubstituted_unix": 1790408629.068992,
+          "source_audio_seconds": 0.9,
+          "overlaps_scheduled_followup_activity": false,
+          "following_input_onset_minus_next_unsubstituted_ms": 4607.797,
+          "within_initial_ack_handle_interval": true
+        }
+      ],
+      "followup_scheduled_activity_monotonic": [
+        126948.38605325001,
+        126949.86605325
+      ],
+      "old_result_state": "interruption_requested",
+      "interpretation": "Substitution occurred during the initial acknowledgement only, before scheduled followup activity."
+    },
+    {
+      "trial": "rtc-correction-1",
+      "room": "car-audio-a16a076ce247495b8ca4de06cfadabf7",
+      "counts": {
+        "frames": 688,
+        "substituted_frames": 18,
+        "samples_by_format": {
+          "24000Hz/1ch": 872400
+        },
+        "substituted_samples_by_format": {
+          "24000Hz/1ch": 21600
+        },
+        "recognition_indices": [
+          4
+        ]
+      },
+      "identity_errors": [],
+      "substituted_intervals": [
+        {
+          "first_monotonic": 126975.137767166,
+          "first_unix": 1790408660.428475,
+          "first_utc": "2026-09-26T07:44:20.428475+00:00",
+          "frames": 18,
+          "samples_by_format": {
+            "24000Hz/1ch": 21600
+          },
+          "aec_active_frames": 18,
+          "first_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "first_substituted_frame_all_zero": true,
+          "first_original_frame_all_zero": false,
+          "closed_by": "next_unsubstituted_frame",
+          "last_monotonic": 126975.988980375,
+          "last_unix": 1790408661.279688,
+          "last_aec_state": {
+            "agent_state": "speaking",
+            "remaining": 3.0,
+            "timer_present": true,
+            "active": true
+          },
+          "next_unsubstituted_monotonic": 126976.038745958,
+          "next_unsubstituted_unix": 1790408661.329453,
+          "source_audio_seconds": 0.9,
+          "overlaps_scheduled_followup_activity": false,
+          "following_input_onset_minus_next_unsubstituted_ms": 5218.975,
+          "within_initial_ack_handle_interval": true
+        }
+      ],
+      "followup_scheduled_activity_monotonic": [
+        126981.25772054099,
+        126983.037720541
+      ],
+      "old_result_state": "interruption_requested",
+      "interpretation": "Substitution occurred during the initial acknowledgement only, before scheduled followup activity."
+    }
+  ],
+  "failed_checks": [
+    {
+      "name": "rtc-baseline-1",
+      "checks": [
+        "capture_completed",
+        "full_trace_equality",
+        "attempt_sequence",
+        "attempt_count",
+        "all_attempts_done",
+        "all_done_results_successful",
+        "expected_effects",
+        "declared_effect_facts",
+        "input_published_1",
+        "transcript_1",
+        "result_after_effect_1",
+        "speech_handles_settled"
+      ]
+    }
+  ],
+  "trace_failures": [
+    {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+      "server_count": 3,
+      "promoted_event_count": 1,
+      "raw_decoded_packet_count": 3,
+      "full_promoted_trace_equality": false,
+      "raw_decoded_trace_equality": true,
+      "missing_promoted_events": [
+        {
+          "server_line": 1,
+          "event": {
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790408568.6710541
+          },
+          "raw_packet_matches": [
+            {
+              "line": 2,
+              "participant": null,
+              "received_unix": 1790408568.6724129,
+              "received_monotonic": 126883.381347708,
+              "event": {
+                "type": "agent_state",
+                "data": {
+                  "state": "listening"
+                },
+                "ts": 1790408568.6710541
+              }
+            }
+          ]
+        },
+        {
+          "server_line": 2,
+          "event": {
+            "type": "session_started",
+            "data": {
+              "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+              "mode": "car",
+              "profile": "local-mac",
+              "llm": "mlx-community/Qwen3-8B-4bit"
+            },
+            "ts": 1790408568.671387
+          },
+          "raw_packet_matches": [
+            {
+              "line": 3,
+              "participant": null,
+              "received_unix": 1790408568.673255,
+              "received_monotonic": 126883.382189791,
+              "event": {
+                "type": "session_started",
+                "data": {
+                  "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+                  "mode": "car",
+                  "profile": "local-mac",
+                  "llm": "mlx-community/Qwen3-8B-4bit"
+                },
+                "ts": 1790408568.671387
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "path": "results/iteration12/local-stack-run1/worker.log",
+      "warning_rows": [
+        {
+          "line": 10,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        },
+        {
+          "line": 23,
+          "message": "livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 12",
+          "level": "WARNING",
+          "name": "livekit",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:42:47.432659+00:00"
+        },
+        {
+          "line": 35,
+          "message": "livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 4452",
+          "level": "WARNING",
+          "name": "livekit",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:43:35.079106+00:00"
+        },
+        {
+          "line": 45,
+          "message": "event loop blocked for 105ms at \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 770, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.1051,
+          "threshold": 0.1,
+          "gc_time": 0.0012,
+          "cpu_time": 0.0285,
+          "task": "job_user_entrypoint",
+          "stack": "# loop thread sampled 83ms into the stall\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py\", line 106, in entrypoint\n    llm_client = make_llm(CFG)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.py\", line 47, in make_llm\n    return LLMClient(LLMConfig(seed=cfg[\"seed\"], **llm))\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/llm_client.py\", line 32, in __init__\n    self.client = AsyncOpenAI(base_url=cfg.base_url, api_key=key or \"local\", timeout=cfg.timeout_s)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_client.py\", line 871, in __init__\n    super().__init__(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1576, in __init__\n    self._client = http_client or AsyncHttpxClientWrapper(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1469, in __init__\n    super().__init__(**kwargs)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_client.py\", line 1402, in __init__\n    self._transport = self._init_transport(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_client.py\", line 1445, in _init_transport\n    return AsyncHTTPTransport(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_transports/default.py\", line 297, in __init__\n    ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_config.py\", line 40, in create_ssl_context\n    ctx = ssl.create_default_context(cafile=certifi.where())\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 770, in create_default_context\n    context.load_verify_locations(cafile, capath, cadata)",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:43:36.356830+00:00"
+        },
+        {
+          "line": 52,
+          "message": "livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 8636",
+          "level": "WARNING",
+          "name": "livekit",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:12.088276+00:00"
+        },
+        {
+          "line": 56,
+          "message": "event loop blocked for 119ms at \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 597, in load_default_certs; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.1189,
+          "threshold": 0.1,
+          "gc_time": 0.0,
+          "cpu_time": 0.0251,
+          "task": "job_task",
+          "stack": "# loop thread sampled 85ms into the stall\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 112, in _close_http_ctx\n    await val().close()\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 83, in _new_session\n    ssl=_create_ssl_context(),\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 59, in _create_ssl_context\n    ctx = ssl.create_default_context()\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 775, in create_default_context\n    context.load_default_certs(purpose)\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 597, in load_default_certs\n    self.set_default_verify_paths()",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:12.250400+00:00"
+        },
+        {
+          "line": 63,
+          "message": "event loop blocked for 101ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+          "level": "WARNING",
+          "name": "livekit.agents",
+          "duration": 0.101,
+          "threshold": 0.1,
+          "gc_time": 0.0,
+          "cpu_time": 0.0349,
+          "stack": "# no sample: the block ended before the watchdog looked",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:15.925163+00:00"
+        },
+        {
+          "line": 66,
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:26.426140+00:00"
+        },
+        {
+          "line": 70,
+          "message": "words count mismatch on 100.0% of the lines (1/1)",
+          "level": "WARNING",
+          "name": "phonemizer",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:41.024487+00:00"
+        },
+        {
+          "line": 72,
+          "message": "livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 12738",
+          "level": "WARNING",
+          "name": "livekit",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:51.863925+00:00"
+        },
+        {
+          "line": 78,
+          "message": "livekit_ffi::server:266:livekit_ffi::server - Attempted to drop unknown FFI handle: 4452",
+          "level": "WARNING",
+          "name": "livekit",
+          "pid": 48305,
+          "timestamp": "2026-09-26T07:44:52.109014+00:00"
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/local-stack-run1/llm.log",
+      "warning_rows": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks."
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/local-stack-run1/livekit.log",
+      "warning_rows": [
+        {
+          "line": 15,
+          "raw": "2026-09-26T13:12:45.414+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"audio-probe-1b0a40ae27e44f439c3bdccd83a12410\", \"participantID\": \"PA_p4jU5AdWwheu\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x7f6ee229ca88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 16,
+          "raw": "2026-09-26T13:12:45.414+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"audio-probe-1b0a40ae27e44f439c3bdccd83a12410\", \"participantID\": \"PA_p4jU5AdWwheu\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x7f6ee229ca88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 17,
+          "raw": "2026-09-26T13:12:45.414+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"audio-probe-1b0a40ae27e44f439c3bdccd83a12410\", \"participantID\": \"PA_p4jU5AdWwheu\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x7f6ee229ca88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 26,
+          "raw": "2026-09-26T13:12:47.434+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"agent-AJ_3mSkm97AXrfr\", \"participantID\": \"PA_Cz9tphsFdUif\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x7f6ee1e3d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 27,
+          "raw": "2026-09-26T13:12:47.434+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"agent-AJ_3mSkm97AXrfr\", \"participantID\": \"PA_Cz9tphsFdUif\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x7f6ee1e3d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 28,
+          "raw": "2026-09-26T13:12:47.434+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6\", \"roomID\": \"RM_V9syYkLMf7Xt\", \"participant\": \"agent-AJ_3mSkm97AXrfr\", \"participantID\": \"PA_Cz9tphsFdUif\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x7f6ee1e3d188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 46,
+          "raw": "2026-09-26T13:13:33.069+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-2423903b4eb44a2f8c02090d0ad6a2f3\", \"roomID\": \"RM_tvFn35zfUrsK\", \"participant\": \"audio-probe-a80abd25b907472783d701c9d17a0913\", \"participantID\": \"PA_pKuQE5u5eYBv\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x7f6ee23b7188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 47,
+          "raw": "2026-09-26T13:13:33.069+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-2423903b4eb44a2f8c02090d0ad6a2f3\", \"roomID\": \"RM_tvFn35zfUrsK\", \"participant\": \"audio-probe-a80abd25b907472783d701c9d17a0913\", \"participantID\": \"PA_pKuQE5u5eYBv\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x7f6ee23b7188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 48,
+          "raw": "2026-09-26T13:13:33.069+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-2423903b4eb44a2f8c02090d0ad6a2f3\", \"roomID\": \"RM_tvFn35zfUrsK\", \"participant\": \"audio-probe-a80abd25b907472783d701c9d17a0913\", \"participantID\": \"PA_pKuQE5u5eYBv\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x7f6ee23b7188] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 72,
+          "raw": "2026-09-26T13:14:10.067+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-5a22795a8a8648aba4f209573e0319ee\", \"roomID\": \"RM_t6SEpP5XwEKx\", \"participant\": \"audio-probe-d53da53c353a49b881d51db24b18a151\", \"participantID\": \"PA_x4xVTfik5AMk\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x7f6ee235c008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 73,
+          "raw": "2026-09-26T13:14:10.067+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-5a22795a8a8648aba4f209573e0319ee\", \"roomID\": \"RM_t6SEpP5XwEKx\", \"participant\": \"audio-probe-d53da53c353a49b881d51db24b18a151\", \"participantID\": \"PA_x4xVTfik5AMk\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x7f6ee235c008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 74,
+          "raw": "2026-09-26T13:14:10.067+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-5a22795a8a8648aba4f209573e0319ee\", \"roomID\": \"RM_t6SEpP5XwEKx\", \"participant\": \"audio-probe-d53da53c353a49b881d51db24b18a151\", \"participantID\": \"PA_x4xVTfik5AMk\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x7f6ee235c008] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 98,
+          "raw": "2026-09-26T13:14:49.857+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-a16a076ce247495b8ca4de06cfadabf7\", \"roomID\": \"RM_u2dxgz6BQPeF\", \"participant\": \"audio-probe-f314de3bf98644bbbcb00e376c895b96\", \"participantID\": \"PA_oxuqnYXSG9K8\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_data_track\", \"error\": \"[0x7f6ee2dfea88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 99,
+          "raw": "2026-09-26T13:14:49.857+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-a16a076ce247495b8ca4de06cfadabf7\", \"roomID\": \"RM_u2dxgz6BQPeF\", \"participant\": \"audio-probe-f314de3bf98644bbbcb00e376c895b96\", \"participantID\": \"PA_oxuqnYXSG9K8\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_reliable\", \"error\": \"[0x7f6ee2dfea88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        },
+        {
+          "line": 100,
+          "raw": "2026-09-26T13:14:49.857+0530\tWARN\tlivekit.transport\trtc/transport.go:958\terror reading data channel\t{\"room\": \"car-audio-a16a076ce247495b8ca4de06cfadabf7\", \"roomID\": \"RM_u2dxgz6BQPeF\", \"participant\": \"audio-probe-f314de3bf98644bbbcb00e376c895b96\", \"participantID\": \"PA_oxuqnYXSG9K8\", \"remote\": false, \"transport\": \"PUBLISHER\", \"label\": \"_lossy\", \"error\": \"[0x7f6ee2dfea88] abort chunk, with following errors: (User Initiated Abort: Close called)\"}"
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/rtc-waypoint-1.log",
+      "warning_rows": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/rtc-baseline-1.log",
+      "warning_rows": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/rtc-waypoint-2.log",
+      "warning_rows": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    },
+    {
+      "path": "results/iteration12/rtc-correction-1.log",
+      "warning_rows": [
+        {
+          "line": 1,
+          "raw": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/jwt/api_jwt.py:149: InsecureKeyLengthWarning: The HMAC key is 6 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2."
+        }
+      ],
+      "runtime_error_or_traceback_rows": []
+    }
+  ],
+  "watchdogs": [
+    {
+      "line": 45,
+      "message": "event loop blocked for 105ms at \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 770, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+      "level": "WARNING",
+      "name": "livekit.agents",
+      "duration": 0.1051,
+      "threshold": 0.1,
+      "gc_time": 0.0012,
+      "cpu_time": 0.0285,
+      "task": "job_user_entrypoint",
+      "stack": "# loop thread sampled 83ms into the stall\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/main.py\", line 106, in entrypoint\n    llm_client = make_llm(CFG)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/config.py\", line 47, in make_llm\n    return LLMClient(LLMConfig(seed=cfg[\"seed\"], **llm))\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/agent/coordinator/llm_client.py\", line 32, in __init__\n    self.client = AsyncOpenAI(base_url=cfg.base_url, api_key=key or \"local\", timeout=cfg.timeout_s)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_client.py\", line 871, in __init__\n    super().__init__(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1576, in __init__\n    self._client = http_client or AsyncHttpxClientWrapper(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1469, in __init__\n    super().__init__(**kwargs)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_client.py\", line 1402, in __init__\n    self._transport = self._init_transport(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_client.py\", line 1445, in _init_transport\n    return AsyncHTTPTransport(\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_transports/default.py\", line 297, in __init__\n    ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/httpx/_config.py\", line 40, in create_ssl_context\n    ctx = ssl.create_default_context(cafile=certifi.where())\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 770, in create_default_context\n    context.load_verify_locations(cafile, capath, cadata)",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:43:36.356830+00:00"
+    },
+    {
+      "line": 56,
+      "message": "event loop blocked for 119ms at \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 597, in load_default_certs; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+      "level": "WARNING",
+      "name": "livekit.agents",
+      "duration": 0.1189,
+      "threshold": 0.1,
+      "gc_time": 0.0,
+      "cpu_time": 0.0251,
+      "task": "job_task",
+      "stack": "# loop thread sampled 85ms into the stall\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 112, in _close_http_ctx\n    await val().close()\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 83, in _new_session\n    ssl=_create_ssl_context(),\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/utils/http_context.py\", line 59, in _create_ssl_context\n    ctx = ssl.create_default_context()\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 775, in create_default_context\n    context.load_default_certs(purpose)\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/ssl.py\", line 597, in load_default_certs\n    self.set_default_verify_paths()",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:44:12.250400+00:00"
+    },
+    {
+      "line": 63,
+      "message": "event loop blocked for 101ms; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client",
+      "level": "WARNING",
+      "name": "livekit.agents",
+      "duration": 0.101,
+      "threshold": 0.1,
+      "gc_time": 0.0,
+      "cpu_time": 0.0349,
+      "stack": "# no sample: the block ended before the watchdog looked",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:44:15.925163+00:00"
+    }
+  ],
+  "watchdog_interpretation": "105.1ms sampled in SSL certificate loading during AsyncOpenAI construction for waypoint2 entrypoint; 118.9ms sampled in SDK HTTP-context lazy SSL creation during waypoint2 teardown; 101.0ms near correction startup has no sample. No sampled trace/FDB I/O stall in these rows, and no general stall-elimination or readiness-timeout causation claim.",
+  "stt_worker_logs": [
+    {
+      "line": 20,
+      "message": "stt 2.82s audio in 0.907s: Navigate to MG Road Metro Station.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:42:11.982121+00:00"
+    },
+    {
+      "line": 21,
+      "message": "stt 2.58s audio in 0.926s: Add the nearest coffee as a stop.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:42:30.948604+00:00"
+    },
+    {
+      "line": 47,
+      "message": "stt 2.85s audio in 6.853s: Navigate to MG Road Metro Station.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:43:46.125483+00:00"
+    },
+    {
+      "line": 48,
+      "message": "stt 2.55s audio in 1.281s: Add the nearest coffee as a stop.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:43:57.204862+00:00"
+    },
+    {
+      "line": 65,
+      "message": "stt 1.92s audio in 1.244s: Navigate to the airport.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:44:19.178197+00:00"
+    },
+    {
+      "line": 68,
+      "message": "stt 3.22s audio in 1.427s: Actually, go to the office instead.",
+      "level": "INFO",
+      "name": "prism.stt",
+      "pid": 48305,
+      "timestamp": "2026-09-26T07:44:30.860970+00:00"
+    }
+  ],
+  "server_job_rows": [
+    {
+      "line": 29,
+      "timestamp": "2026-09-26T13:12:47.435+0530",
+      "level": "INFO",
+      "logger": "livekit.agents",
+      "source": "agent/worker.go:556",
+      "message": "job ended",
+      "data": {
+        "workerID": "AW_PBbg7MdTX94F",
+        "agentName": "",
+        "deployment": "",
+        "agentID": "",
+        "version": "1.8.3",
+        "jobType": "JT_ROOM",
+        "jobID": "AJ_3mSkm97AXrfr",
+        "status": "JS_FAILED",
+        "error": "agent worker left the room"
+      }
+    },
+    {
+      "line": 55,
+      "timestamp": "2026-09-26T13:13:35.080+0530",
+      "level": "INFO",
+      "logger": "livekit.agents",
+      "source": "agent/worker.go:556",
+      "message": "job ended",
+      "data": {
+        "workerID": "AW_PBbg7MdTX94F",
+        "agentName": "",
+        "deployment": "",
+        "agentID": "",
+        "version": "1.8.3",
+        "jobType": "JT_ROOM",
+        "jobID": "AJ_MNE3ajj4cExY",
+        "status": "JS_FAILED",
+        "error": "agent worker left the room"
+      }
+    },
+    {
+      "line": 81,
+      "timestamp": "2026-09-26T13:14:12.095+0530",
+      "level": "INFO",
+      "logger": "livekit.agents",
+      "source": "agent/worker.go:556",
+      "message": "job ended",
+      "data": {
+        "workerID": "AW_PBbg7MdTX94F",
+        "agentName": "",
+        "deployment": "",
+        "agentID": "",
+        "version": "1.8.3",
+        "jobType": "JT_ROOM",
+        "jobID": "AJ_FpYSyMEQW4TJ",
+        "status": "JS_FAILED",
+        "error": "agent worker left the room"
+      }
+    },
+    {
+      "line": 107,
+      "timestamp": "2026-09-26T13:14:51.866+0530",
+      "level": "INFO",
+      "logger": "livekit.agents",
+      "source": "agent/worker.go:556",
+      "message": "job ended",
+      "data": {
+        "workerID": "AW_PBbg7MdTX94F",
+        "agentName": "",
+        "deployment": "",
+        "agentID": "",
+        "version": "1.8.3",
+        "jobType": "JT_ROOM",
+        "jobID": "AJ_XwqPhQGgF4nY",
+        "status": "JS_FAILED",
+        "error": "agent worker left the room"
+      }
+    }
+  ],
+  "cleanup": {
+    "rooms": [
+      {
+        "trial": "rtc-waypoint-1",
+        "capture_status": "completed_observation",
+        "exit_code": 0,
+        "agent_departed": true,
+        "departure_observation_seconds": 2.0203632500051754,
+        "room_cleanup_logs": [
+          {
+            "line": 24,
+            "message": "room cleanup started: car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:42:47.436362+00:00"
+          },
+          {
+            "line": 26,
+            "message": "room cleanup finished: car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:42:47.437823+00:00"
+          }
+        ],
+        "cleanup_callback_ms": 1.461,
+        "client_disconnected_callback": {
+          "kind": "disconnected",
+          "received_monotonic": 126880.126578166,
+          "received_unix": 1790408565.4177148,
+          "reason": "1",
+          "expected": true
+        },
+        "cleanup_start_after_client_disconnect_ms": 2018.647,
+        "trace_writer": [
+          {
+            "log": {
+              "line": 25,
+              "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/traces/car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6.jsonl complete=True accepted=53 flushed=53 rejected=0 pending=False",
+              "level": "INFO",
+              "name": "prism.trace",
+              "pid": 48305,
+              "timestamp": "2026-09-26T07:42:47.437491+00:00"
+            },
+            "complete": true,
+            "accepted": 53,
+            "flushed": 53,
+            "rejected": 0,
+            "pending": false,
+            "actual_trace_lines": 53,
+            "counts_equal_trace_lines": true
+          }
+        ],
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      {
+        "trial": "rtc-baseline-1",
+        "capture_status": "failed",
+        "exit_code": 1,
+        "agent_departed": true,
+        "departure_observation_seconds": 2.0184604579990264,
+        "room_cleanup_logs": [
+          {
+            "line": 36,
+            "message": "room cleanup started: car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:43:35.081500+00:00"
+          },
+          {
+            "line": 38,
+            "message": "room cleanup finished: car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:43:35.083482+00:00"
+          }
+        ],
+        "cleanup_callback_ms": 1.982,
+        "client_disconnected_callback": {
+          "kind": "disconnected",
+          "received_monotonic": 126927.78203525,
+          "received_unix": 1790408613.072793,
+          "reason": "1",
+          "expected": true
+        },
+        "cleanup_start_after_client_disconnect_ms": 2008.707,
+        "trace_writer": [
+          {
+            "log": {
+              "line": 37,
+              "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/traces/car-audio-2423903b4eb44a2f8c02090d0ad6a2f3.jsonl complete=True accepted=3 flushed=3 rejected=0 pending=False",
+              "level": "INFO",
+              "name": "prism.trace",
+              "pid": 48305,
+              "timestamp": "2026-09-26T07:43:35.083389+00:00"
+            },
+            "complete": true,
+            "accepted": 3,
+            "flushed": 3,
+            "rejected": 0,
+            "pending": false,
+            "actual_trace_lines": 3,
+            "counts_equal_trace_lines": true
+          }
+        ],
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      {
+        "trial": "rtc-waypoint-2",
+        "capture_status": "completed_observation",
+        "exit_code": 0,
+        "agent_departed": true,
+        "departure_observation_seconds": 2.0617179999971995,
+        "room_cleanup_logs": [
+          {
+            "line": 53,
+            "message": "room cleanup started: car-audio-5a22795a8a8648aba4f209573e0319ee",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:44:12.105729+00:00"
+          },
+          {
+            "line": 55,
+            "message": "room cleanup finished: car-audio-5a22795a8a8648aba4f209573e0319ee",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:44:12.109617+00:00"
+          }
+        ],
+        "cleanup_callback_ms": 3.888,
+        "client_disconnected_callback": null,
+        "cleanup_start_after_client_disconnect_ms": null,
+        "trace_writer": [
+          {
+            "log": {
+              "line": 54,
+              "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/traces/car-audio-5a22795a8a8648aba4f209573e0319ee.jsonl complete=True accepted=53 flushed=53 rejected=0 pending=False",
+              "level": "INFO",
+              "name": "prism.trace",
+              "pid": 48305,
+              "timestamp": "2026-09-26T07:44:12.109506+00:00"
+            },
+            "complete": true,
+            "accepted": 53,
+            "flushed": 53,
+            "rejected": 0,
+            "pending": false,
+            "actual_trace_lines": 53,
+            "counts_equal_trace_lines": true
+          }
+        ],
+        "receiver_errors": [],
+        "cleanup_errors": []
+      },
+      {
+        "trial": "rtc-correction-1",
+        "capture_status": "completed_observation",
+        "exit_code": 0,
+        "agent_departed": true,
+        "departure_observation_seconds": 2.115051124987076,
+        "room_cleanup_logs": [
+          {
+            "line": 73,
+            "message": "room cleanup started: car-audio-a16a076ce247495b8ca4de06cfadabf7",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:44:51.867967+00:00"
+          },
+          {
+            "line": 75,
+            "message": "room cleanup finished: car-audio-a16a076ce247495b8ca4de06cfadabf7",
+            "level": "INFO",
+            "name": "prism",
+            "pid": 48305,
+            "timestamp": "2026-09-26T07:44:51.869718+00:00"
+          }
+        ],
+        "cleanup_callback_ms": 1.751,
+        "client_disconnected_callback": null,
+        "cleanup_start_after_client_disconnect_ms": null,
+        "trace_writer": [
+          {
+            "log": {
+              "line": 74,
+              "message": "trace cleanup: /Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/traces/car-audio-a16a076ce247495b8ca4de06cfadabf7.jsonl complete=True accepted=57 flushed=57 rejected=0 pending=False",
+              "level": "INFO",
+              "name": "prism.trace",
+              "pid": 48305,
+              "timestamp": "2026-09-26T07:44:51.869423+00:00"
+            },
+            "complete": true,
+            "accepted": 57,
+            "flushed": 57,
+            "rejected": 0,
+            "pending": false,
+            "actual_trace_lines": 57,
+            "counts_equal_trace_lines": true
+          }
+        ],
+        "receiver_errors": [],
+        "cleanup_errors": []
+      }
+    ],
+    "services": [
+      {
+        "role": "worker",
+        "pid": 48305,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/instrumented_worker.py",
+          "--manifest",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/worker-manifest.json"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T07:44:53.225821+00:00"
+      },
+      {
+        "role": "llm",
+        "pid": 48300,
+        "observed_command": [
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/bin/python",
+          "-m",
+          "mlx_lm",
+          "server",
+          "--model",
+          "/Users/rithikmeedinti/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "8081",
+          "--chat-template-args",
+          "{\"enable_thinking\":false}",
+          "--decode-concurrency",
+          "1",
+          "--prompt-concurrency",
+          "1",
+          "--prefill-step-size",
+          "256",
+          "--prompt-cache-size",
+          "2",
+          "--prompt-cache-bytes",
+          "268435456",
+          "--max-tokens",
+          "500"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": -15,
+        "finished_at": "2026-09-26T07:44:53.405856+00:00"
+      },
+      {
+        "role": "livekit",
+        "pid": 48299,
+        "observed_command": [
+          "/opt/homebrew/bin/livekit-server",
+          "--config",
+          "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/livekit.yaml"
+        ],
+        "signal": "SIGTERM",
+        "exit_code": 0,
+        "finished_at": "2026-09-26T07:44:53.414842+00:00"
+      }
+    ],
+    "process_absence_receipt": {
+      "checked_at_utc": "2026-09-26T07:45:18.317566+00:00",
+      "observations": [
+        {
+          "pid": 48336,
+          "state": "absent"
+        },
+        {
+          "pid": 48720,
+          "state": "absent"
+        },
+        {
+          "pid": 49102,
+          "state": "absent"
+        },
+        {
+          "pid": 49455,
+          "state": "absent"
+        },
+        {
+          "pid": 48305,
+          "state": "absent"
+        },
+        {
+          "pid": 48300,
+          "state": "absent"
+        },
+        {
+          "pid": 48299,
+          "state": "absent"
+        }
+      ],
+      "suite_status": "completed_with_failed_captures",
+      "all_owned_processes_absent": true
+    },
+    "drain_logs": [
+      {
+        "line": 76,
+        "message": "draining worker",
+        "level": "INFO",
+        "name": "livekit.agents",
+        "id": "AW_PBbg7MdTX94F",
+        "timeout": 3600,
+        "pid": 48305,
+        "timestamp": "2026-09-26T07:44:52.066729+00:00"
+      }
+    ],
+    "status_boundary": "Server JS_FAILED, application cleanup completion and worker exit0 are independent receipts. See job-status-boundary-audit.json; neither server failure nor SDK success alone certifies application cleanup."
+  },
+  "memory": {
+    "scope": "System memory/swap plus owned stack parents and descendants; excludes the separate trial client. RSS is not total allocation.",
+    "samples": 348,
+    "min_system_available_bytes": 325910528,
+    "swap_used_start_bytes": 3843555328,
+    "swap_used_end_bytes": 8918859776,
+    "swap_used_peak_bytes": 9564061696,
+    "sampling_errors": [
+      {
+        "line": 348,
+        "at_utc": "2026-09-26T07:44:53.243574+00:00",
+        "role": "llm",
+        "error": "process no longer exists (pid=48300)"
+      },
+      {
+        "line": 348,
+        "at_utc": "2026-09-26T07:44:53.243574+00:00",
+        "role": "worker",
+        "error": "process PID not found (pid=48305)"
+      }
+    ],
+    "interpretation": "Same-host background memory and swap observations do not attribute model duration, readiness failure or stalls to memory pressure."
+  },
+  "evidence_sha256": {
+    "results/iteration12/audit.json": "f4e1004eeb6b3787df6b7729e7c2b40afdeb9ddf5121ca5c38942ee2a54d12e4",
+    "results/iteration12/audit_live.py": "b73e3a26c345ec6ed8cf986746ab84e83754de27376be393a48ebd213849a5ae",
+    "results/iteration12/local-stack-run1/aec-discard-diagnostics.json": "a99ae410567bd28a704d67f02df1a9d8c66fc132c205885242f2aba0505aeec3",
+    "results/iteration12/local-stack-run1/livekit.log": "274f4ae9e0959a168f755df4f43ac648467386bab8c9bd8c41623fbc082fea96",
+    "results/iteration12/local-stack-run1/llm.log": "980fa1bba0f97f187fd64d857c367eaa3bf4adb4a8b37090add1089e40acb2e3",
+    "results/iteration12/local-stack-run1/tool-calls.jsonl": "bc6f63fcb43ed0ddfeeca7fc5ec9e189f4bf962734b4604d4701740fe761da4f",
+    "results/iteration12/local-stack-run1/traces/car-audio-2423903b4eb44a2f8c02090d0ad6a2f3.jsonl": "b10ef87383d09e60305b306db5e57ae6efd07e353c15f567e524d01019be6edf",
+    "results/iteration12/local-stack-run1/traces/car-audio-5a22795a8a8648aba4f209573e0319ee.jsonl": "06aca62050c48457c1e0b770b740f5ced73c00a746c38bdd5fcf47e14028cb4f",
+    "results/iteration12/local-stack-run1/traces/car-audio-a16a076ce247495b8ca4de06cfadabf7.jsonl": "9bc09c514d6d95f34814a875973f7b09aee4a6ad79a8a89d5b2ee24854eea913",
+    "results/iteration12/local-stack-run1/traces/car-audio-b1b6d5c29eb44f3fb95b99520a85bfb6.jsonl": "0809d87ace53fa6d219780cf008851ace37bcbd27590d0fd4c3a50307ed323db",
+    "results/iteration12/local-stack-run1/worker.log": "60de4966faf49ad513f5f090735c687e598ea7dea7cc9ba5c47ace498ec9462b",
+    "results/iteration12/memory.jsonl": "1f40b2f9ee703cbe90f37210b2fb3d05360100d68535a8ed81b26b57cebb82e1",
+    "results/iteration12/pre-asr-cleanup.json": "ae0a60252ecba0735d88c4e3d89e392ab656a667342d1799ea11bf60d98aa35a",
+    "results/iteration12/protocol.json": "1b9a04c94ce883430feb59a92517c8a7ebe4cb984e1c9fedd3ae79af6ade4a65",
+    "results/iteration12/rtc-baseline-1/events.jsonl": "47a7b4beb329a27362520e80e13dd93a2f1ef001b0fe2ecc910b25d095888208",
+    "results/iteration12/rtc-baseline-1/frames.jsonl": "126e72ce4be0c9e20e52cc5ac73adf1224f295f61cb548df3fdbfb7dbc551ad0",
+    "results/iteration12/rtc-baseline-1/report.json": "d7507793d0410612559d2faa3422b8115c1ea6a3d401fd5c4508d9f43997d604",
+    "results/iteration12/rtc-baseline-1.log": "e7631b4a04091f809877abc9b7c3341daf169c27b0c96c9a60f26c6eac29e91f",
+    "results/iteration12/rtc-correction-1/events.jsonl": "7733d4e7ccc99106df441e481996572e9f8e3ade71b12ec7e6d38444f5d9c586",
+    "results/iteration12/rtc-correction-1/frames.jsonl": "5a0078cf7a5142c947f91e358778b8c82d1929ca7030a80516e1927fd9a508e2",
+    "results/iteration12/rtc-correction-1/report.json": "4f9f54a02c94c2591870d7fac377de26b8141e3d0ec64d6c9d1905bef1d5ea76",
+    "results/iteration12/rtc-correction-1.log": "3aab8353469835e76bc3821fb2f5c7ee5cb98edcb72460bf003eeabf032af0c0",
+    "results/iteration12/rtc-waypoint-1/events.jsonl": "90200b0237e4eec6125f1b4a298a0d28d6418368528750f5e9d39b717d99b1e4",
+    "results/iteration12/rtc-waypoint-1/frames.jsonl": "0ca21abb500e9329798a5e274083b7d7e1d66ecd18101feaf4f4b28c5bf2c1ad",
+    "results/iteration12/rtc-waypoint-1/report.json": "44181c6e11e478cf33cb8eb44ac6dbee4a1e066f305ea92a266e1a3e52736242",
+    "results/iteration12/rtc-waypoint-1.log": "636f81e36a38e37aad0c18d179a42b594d821d16ce400e145d3ed2669f240862",
+    "results/iteration12/rtc-waypoint-2/events.jsonl": "51cde3d9e22a85cbfc1db357cb71bbdaa70a3190e08e35d006760180c14d5737",
+    "results/iteration12/rtc-waypoint-2/frames.jsonl": "639eb2c31f420efe47ff84ee4dac96ca58bd50c5ce4c3f79ecf154cd10175558",
+    "results/iteration12/rtc-waypoint-2/report.json": "fa11d8322592b7a9cf2b6642778b452a37e5f9ce4e0d1d3fcb7485dbf91f463e",
+    "results/iteration12/rtc-waypoint-2.log": "dc3f3c18994740f9b35093225a519861e137fa6bc9a890fc984116887cf9037e",
+    "results/iteration12/run-report.json": "9c2d1715eae6917abc4bcc1dbda82fd1f2bde365101bcba0d3ea25b30dc774eb",
+    "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11",
+    "results/iteration12/audit_live_v2.py": "c08e1f56738db19fda300069cf59992be2b721de7d34ede44417f699c1fb8454",
+    "results/iteration12/audit-v2.json": "731e5b79426a6cc1cb4a1560cacbf7b84788ed0fef88291615b2a4cd8725d0bb"
+  },
+  "limits": [
+    "Four serial development cases sharing a warm stack; failed baseline remains in the denominator. Three completed followup cases are not four successful trials.",
+    "Original audit.json preserves its baseline KeyError; audit-v2.json and this supplement evaluate all four original captures without inventing input timing or speech latency.",
+    "Decoded raw packet equality is a separate posthoc boundary from promoted coordinator events; it does not change the failed readiness outcome or original trace check.",
+    "AEC observer counters show callback substitutions; initial original nonzero PCM does not prove meaningful speech was removed. Followup alignment uses scheduled client input and same-host observer clocks, not physical audio or per-sample sender attribution.",
+    "Three second inputs have differing publish pacing; correction drained420ms after its scheduled end. This remains in original timing receipts and is not corrected in latency metrics.",
+    "Instrumentation adds work; no causal comparison to historical uninstrumented timing. Source hash assertions describe frozen files, not reproducible native binaries.",
+    "FFI and data-channel teardown warnings are preserved, with no evidence here that they caused user audio loss. Unknown FFI handle4452 appears twice; count log rows, not unique handles.",
+    "No production change, model call, live service operation or raw evidence modification in this audit."
+  ],
+  "primary_audit": "results/iteration12/audit-v2.json",
+  "original_audit_failed_checks": [
+    {
+      "name": "rtc-baseline-1",
+      "checks": [
+        "complete_raw_audit"
+      ]
+    }
+  ],
+  "primary_check_denominators": {
+    "agent_departed": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "all_attempts_done": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "all_done_results_successful": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "attempt_count": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "attempt_event_pairs": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "attempt_sequence": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "capture_completed": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "declared_effect_facts": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "declared_input_audio": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "declared_input_count": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "expected_effects": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "frame_integrity": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "frozen_source_receipts": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "full_trace_equality": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "input_published_1": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "input_published_2": {
+      "passed": 3,
+      "evaluated": 3
+    },
+    "no_capture_errors": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "no_server_tool_errors": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "no_stale_results": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "old_result_interruption_requested": {
+      "passed": 3,
+      "evaluated": 3
+    },
+    "raw_hashes": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "result_after_effect_1": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "result_after_effect_2": {
+      "passed": 3,
+      "evaluated": 3
+    },
+    "room_cleanup_logged": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "speech_handles_settled": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "transcript_1": {
+      "passed": 3,
+      "evaluated": 4
+    },
+    "transcript_2": {
+      "passed": 3,
+      "evaluated": 3
+    }
+  }
+}

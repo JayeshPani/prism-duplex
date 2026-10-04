@@ -1,0 +1,123 @@
+{
+  "started_at_utc": "2026-09-26T07:31:47.355813+00:00",
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-agents": "1.8.3"
+  },
+  "source_sha256": {
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/reproduce_job_status_order.py": "f8fe91da61db8ee50e5215befc9a39f6fcf4ce10197b7b98364901f1bb904cdc",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py": "44a8d953398d45459740fe91453e14c14e11e322be37107159205d0804371a90",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/.venv/lib/python3.11/site-packages/livekit/agents/worker.py": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e"
+  },
+  "scope": "Actual installed SDK methods with dummy room, context, channels and resolved thread-join future. No live server, network, model, actual worker thread or Go server execution.",
+  "trials": [
+    {
+      "callback_raises": false,
+      "events": [
+        {
+          "event": "session_aclose",
+          "executor_status": "running"
+        },
+        {
+          "event": "context_session_end",
+          "executor_status": "running"
+        },
+        {
+          "event": "ipc_ShuttingDown",
+          "executor_status": "running"
+        },
+        {
+          "event": "ipc_Exiting",
+          "executor_status": "running"
+        },
+        {
+          "event": "room_disconnect",
+          "executor_status": "running"
+        },
+        {
+          "event": "application_cleanup_started",
+          "executor_status": "running"
+        },
+        {
+          "event": "worker_status_queued",
+          "wire_status": "JS_RUNNING",
+          "executor_status": "running"
+        },
+        {
+          "event": "application_cleanup_finished",
+          "executor_status": "running"
+        },
+        {
+          "event": "parent_ipc_close",
+          "executor_status": "running"
+        },
+        {
+          "event": "worker_status_queued",
+          "wire_status": "JS_SUCCESS",
+          "executor_status": "success"
+        }
+      ],
+      "captured_sdk_errors": [],
+      "assertions": "passed"
+    },
+    {
+      "callback_raises": true,
+      "events": [
+        {
+          "event": "session_aclose",
+          "executor_status": "running"
+        },
+        {
+          "event": "context_session_end",
+          "executor_status": "running"
+        },
+        {
+          "event": "ipc_ShuttingDown",
+          "executor_status": "running"
+        },
+        {
+          "event": "ipc_Exiting",
+          "executor_status": "running"
+        },
+        {
+          "event": "room_disconnect",
+          "executor_status": "running"
+        },
+        {
+          "event": "application_cleanup_started",
+          "executor_status": "running"
+        },
+        {
+          "event": "worker_status_queued",
+          "wire_status": "JS_RUNNING",
+          "executor_status": "running"
+        },
+        {
+          "event": "application_cleanup_raised",
+          "executor_status": "running"
+        },
+        {
+          "event": "parent_ipc_close",
+          "executor_status": "running"
+        },
+        {
+          "event": "worker_status_queued",
+          "wire_status": "JS_SUCCESS",
+          "executor_status": "success"
+        }
+      ],
+      "captured_sdk_errors": [
+        {
+          "message": "error while shutting down the job",
+          "exception": "RuntimeError('deliberate dummy cleanup failure')"
+        }
+      ],
+      "assertions": "passed"
+    }
+  ],
+  "status": "passed",
+  "finished_at_utc": "2026-09-26T07:31:47.359002+00:00",
+  "model_module_prefixes_present": [],
+  "source_hashes_unchanged": true
+}

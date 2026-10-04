@@ -1,0 +1,167 @@
+{
+  "created_at_utc": "2026-09-26T07:54:42.052637+00:00",
+  "scope": "Read-only analysis of the preserved iteration12 baseline readiness failure and installed RTC source; no replay, inference, service launch or promotion of historical anonymous packets.",
+  "capture": {
+    "id": "rtc-baseline-1",
+    "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+    "status": "failed",
+    "failed_stage": "connect_and_session_ready",
+    "error": "TimeoutError()",
+    "ready_timeout_seconds": 45.0,
+    "input_started_events": 0,
+    "promoted_coordinator_event_types": [
+      "user_state"
+    ],
+    "agent_track_identity": "agent-AJ_MNE3ajj4cExY",
+    "session_packet_to_track_subscription_ms": 24.773209006525576,
+    "packages": {
+      "livekit": "1.1.18",
+      "livekit-api": "1.2.1",
+      "livekit-agents": "1.8.3"
+    }
+  },
+  "raw_packet_matches": [
+    {
+      "raw_line": 2,
+      "participant": null,
+      "topic": "agent-events",
+      "received_monotonic": 126883.381347708,
+      "event_type": "agent_state",
+      "server_trace_matching_lines": [
+        1
+      ],
+      "payload_source_ts": 1790408568.6710541,
+      "source_to_receipt_wall_ms": 1.3587474822998047
+    },
+    {
+      "raw_line": 3,
+      "participant": null,
+      "topic": "agent-events",
+      "received_monotonic": 126883.382189791,
+      "event_type": "session_started",
+      "server_trace_matching_lines": [
+        2
+      ],
+      "payload_source_ts": 1790408568.671387,
+      "source_to_receipt_wall_ms": 1.8680095672607422
+    },
+    {
+      "raw_line": 5,
+      "participant": "agent-AJ_MNE3ajj4cExY",
+      "topic": "agent-events",
+      "received_monotonic": 126898.408179541,
+      "event_type": "user_state",
+      "server_trace_matching_lines": [
+        3
+      ],
+      "payload_source_ts": 1790408583.6961741,
+      "source_to_receipt_wall_ms": 2.878904342651367
+    }
+  ],
+  "conclusion": "session_started reached the raw packet callback and matches the server trace, but its public participant was null. The recorder rejected it, leaving Playback.ready false until the readiness deadline. No input was published. This is not absent session_started transport, and does not establish an STT or planner failure.",
+  "source_references": [
+    {
+      "file": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        105,
+        109
+      ],
+      "meaning": "Only session_started sets Playback.ready.",
+      "excerpt": "    def event(self, payload: dict, at: float) -> None:\n        self.events.append(payload)\n        kind, data = payload.get(\"type\"), payload.get(\"data\", {})\n        if kind == \"session_started\":\n            self.ready = True"
+    },
+    {
+      "file": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        305,
+        319
+      ],
+      "meaning": "Raw packet is preserved; promotion requires a resolved participant whose kind is AGENT.",
+      "excerpt": "    @room.on(\"data_received\")\n    def on_data(packet):\n        at = time.monotonic()\n        participant = packet.participant\n        record(\"data_packet\", participant=participant.identity if participant else None, topic=packet.topic,\n               payload_base64=base64.b64encode(packet.data).decode())\n        if packet.topic == \"agent-events\" and participant and participant.kind == rtc.ParticipantKind.PARTICIPANT_KIND_AGENT:\n            try:\n                payload = json.loads(packet.data)\n                record(\"coordinator_event\", event=payload, observed_monotonic=at)\n                state.event(payload, at)\n            except (ValueError, KeyError, TypeError) as error:\n                errors.append(f\"coordinator event could not be interpreted: {error!r}\")\n                record(\"data_error\", error=repr(error))\n            changed.set()"
+    },
+    {
+      "file": "scripts/local_livekit_audio_experiment.py",
+      "lines": [
+        360,
+        374
+      ],
+      "meaning": "Connection, session readiness and input-track subscription precede input publication.",
+      "excerpt": "        async with asyncio.timeout(args.ready_timeout):\n            await room.connect(args.url, token, options=rtc.RoomOptions(auto_subscribe=True))\n            record(\"connected\", room=room.name)\n            for participant in room.remote_participants.values():\n                for publication in participant.track_publications.values():\n                    if publication.track:\n                        on_track(publication.track, publication, participant)\n            source = rtc.AudioSource(clips[0][2], 1, queue_size_ms=100)\n            track = rtc.LocalAudioTrack.create_audio_track(\"prerecorded-input\", source)\n            publication = await room.local_participant.publish_track(\n                track, rtc.TrackPublishOptions(source=rtc.TrackSource.SOURCE_MICROPHONE))\n            await wait_observation(lambda: state.ready, changed, time.monotonic() + args.ready_timeout, errors)\n            await publication.wait_for_subscription()\n            record(\"input_track_subscribed\", sid=publication.sid)\n        record(\"ready\", subscribed_agent_tracks=sorted(subscribed))"
+    },
+    {
+      "file": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "lines": [
+        137,
+        146
+      ],
+      "meaning": "Public DataPacket has participant but no native participant_identity field; documented None also includes server-SDK data.",
+      "excerpt": "@dataclass\nclass DataPacket:\n    data: bytes\n    \"\"\"The payload of the data packet.\"\"\"\n    kind: proto_room.DataPacketKind.ValueType\n    \"\"\"Type of the data packet (e.g., RELIABLE, LOSSY).\"\"\"\n    participant: RemoteParticipant | None\n    \"\"\"Participant who sent the data. None when sent by a server SDK.\"\"\"\n    topic: str | None = None\n    \"\"\"Topic associated with the data packet.\"\"\""
+    },
+    {
+      "file": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "lines": [
+        1073,
+        1098
+      ],
+      "meaning": "Native identity is looked up in the current remote-participant map, then omitted from the emitted DataPacket.",
+      "excerpt": "        elif which == \"data_packet_received\":\n            packet = event.data_packet_received\n            which_val = packet.WhichOneof(\"value\")\n            if which_val == \"user\":\n                owned_buffer_info = packet.user.data\n                buffer_info = owned_buffer_info.data\n                native_data = ctypes.cast(\n                    buffer_info.data_ptr,\n                    ctypes.POINTER(ctypes.c_byte * buffer_info.data_len),\n                ).contents\n\n                data = bytes(native_data)\n                FfiHandle(owned_buffer_info.handle.id).dispose()\n                rparticipant = cast(\n                    RemoteParticipant,\n                    self._retrieve_remote_participant(packet.participant_identity),\n                )\n                self.emit(\n                    \"data_received\",\n                    DataPacket(\n                        data=data,\n                        kind=packet.kind,\n                        participant=rparticipant,\n                        topic=packet.user.topic,\n                    ),\n                )"
+    },
+    {
+      "file": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "lines": [
+        1233,
+        1235
+      ],
+      "meaning": "Unknown identities resolve to None.",
+      "excerpt": "    def _retrieve_remote_participant(self, identity: str) -> Optional[RemoteParticipant]:\n        \"\"\"Retrieve a remote participant by identity\"\"\"\n        return self._remote_participants.get(identity, None)"
+    },
+    {
+      "file": ".venv/lib/python3.11/site-packages/livekit/rtc/room.py",
+      "lines": [
+        759,
+        763
+      ],
+      "meaning": "participant_connected populates the map before emitting the event.",
+      "excerpt": "    def _on_room_event(self, event: proto_room.RoomEvent) -> None:\n        which = event.WhichOneof(\"message\")\n        if which == \"participant_connected\":\n            rparticipant = self._create_remote_participant(event.participant_connected.info)\n            self.emit(\"participant_connected\", rparticipant)"
+    },
+    {
+      "file": ".venv/lib/python3.11/site-packages/livekit/rtc/_proto/room_pb2.pyi",
+      "lines": [
+        2397,
+        2416
+      ],
+      "meaning": "Native DataPacketReceived carries participant_identity; it can be empty for server-SDK packets.",
+      "excerpt": "class DataPacketReceived(google.protobuf.message.Message):\n    DESCRIPTOR: google.protobuf.descriptor.Descriptor\n\n    KIND_FIELD_NUMBER: builtins.int\n    PARTICIPANT_IDENTITY_FIELD_NUMBER: builtins.int\n    USER_FIELD_NUMBER: builtins.int\n    SIP_DTMF_FIELD_NUMBER: builtins.int\n    kind: global___DataPacketKind.ValueType\n    participant_identity: builtins.str\n    \"\"\"Can be empty if the data is sent a server SDK\"\"\"\n    @property\n    def user(self) -> global___UserPacket: ...\n    @property\n    def sip_dtmf(self) -> global___SipDTMF: ...\n    def __init__(\n        self,\n        *,\n        kind: global___DataPacketKind.ValueType | None = ...,\n        participant_identity: builtins.str | None = ...,\n        user: global___UserPacket | None = ...,"
+    }
+  ],
+  "evidence_sha256": {
+    "results/iteration12/rtc-baseline-1/report.json": "d7507793d0410612559d2faa3422b8115c1ea6a3d401fd5c4508d9f43997d604",
+    "results/iteration12/rtc-baseline-1/events.jsonl": "47a7b4beb329a27362520e80e13dd93a2f1ef001b0fe2ecc910b25d095888208",
+    "results/iteration12/local-stack-run1/traces/car-audio-2423903b4eb44a2f8c02090d0ad6a2f3.jsonl": "b10ef87383d09e60305b306db5e57ae6efd07e353c15f567e524d01019be6edf",
+    "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11",
+    ".venv/lib/python3.11/site-packages/livekit/rtc/room.py": "16843ad5a39af41cc5ba491153328d12e253459e7907b460768dd6705d15317e",
+    ".venv/lib/python3.11/site-packages/livekit/rtc/_proto/room_pb2.pyi": "42f8e6dee518dbd1ab7c78b5635721c63bb05592e30b311e3b1d4568e9d6eb59"
+  },
+  "driver_matches_capture_source_receipt": true,
+  "limitations": [
+    "The native participant_identity and participant_connected callback were not recorded. We cannot distinguish an empty native identity from a missing participant-map entry for these two packets.",
+    "A later agent track and matching server payload support event-content correspondence; they do not recover authenticated transport attribution for the anonymous historical packets.",
+    "All three server events appear in raw packets, but only user_state was promoted. Raw content correspondence does not retroactively pass coordinator-event equality or the failed capture.",
+    "The 24.773 ms interval is between client callback receipts. Wall-time source-to-receipt differences are descriptive timestamps, not isolated network latency.",
+    "No frozen experiment or production file was changed by this audit."
+  ],
+  "proposed_fresh_fix": {
+    "boundary": "Recorder-local adapter around the installed Room._on_room_event, delegating original handling unchanged while retaining native transport participant_identity for the synchronous data callback.",
+    "attribution": "Buffer only packets with nonempty unresolved native identity. Promote once that SAME identity resolves in room.remote_participants as PARTICIPANT_KIND_AGENT; never infer attribution from payload, room name or a sole later agent. Empty identity remains untrusted.",
+    "ordering": "Retain raw bytes and original receipt timestamps immediately. Promote each event once, in receipt order for its sender, before later events from that sender; separately record attribution-resolution timing.",
+    "bounds": "Bound pending packet retention and expose expired/unresolved/overflow outcomes; missing attribution must remain explicit.",
+    "version_scope": "Private installed SDK boundary requires focused compatibility checks and a source/version receipt; no SDK package mutation is proposed."
+  },
+  "fresh_test_criteria": [
+    "Data-before-participant for a nonempty native identity promotes after exact AGENT resolution, including initial listening and session_started.",
+    "Empty, unresolved and resolved non-agent identities never set readiness or enter coordinator-event state.",
+    "Multiple identities cannot cross-attribute packets; a payload claiming an agent or matching room is insufficient.",
+    "Each raw packet remains unchanged and is promoted at most once; FIFO/state and event-equality checks retain original timestamps and separate resolution timing.",
+    "Original SDK room-event handler executes once and preserves data-buffer ownership; participant lifecycle events are not suppressed.",
+    "Frozen iteration12 capture remains failed and is never rewritten. Fresh integration runs use a new declared protocol/output directory and retain all failures."
+  ]
+}

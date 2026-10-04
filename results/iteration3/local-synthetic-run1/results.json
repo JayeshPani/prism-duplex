@@ -1,0 +1,7957 @@
+[
+ {
+  "id": "syn_travel_01",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_flights",
+    {
+     "destination": "Lisbon",
+     "date": "June 12"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi there! How can I assist you with your travel plans?",
+   "Okay, one sec."
+  ],
+  "secs": 5.3,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello there, I was hoping you could help me with some travel stuff.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi there! How can I assist you with your travel plans?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "So um, I want flights to Lisbon on the, uh, twelfth of June.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "date",
+      "from": "twelfth of June",
+      "to": "June 12"
+     }
+    ],
+    "slots": {
+     "destination": "Lisbon",
+     "date": "June 12"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_flights",
+      "args": {
+       "destination": "Lisbon",
+       "date": "June 12"
+      }
+     }
+    ],
+    "reply": "Searching flights to Lisbon on June 12th."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello there, I was hoping you could help me with some travel stuff.",
+     "merged": "Hello there, I was hoping you could help me with some travel stuff.",
+     "intent_version": 1
+    },
+    "ts": 1790362965.404879
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362966.2819269
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362966.281986
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello there, I was hoping you could help me with some travel stuff.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi there! How can I assist you with your travel plans?"
+    },
+    "ts": 1790362966.925421
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362966.925434
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362966.9254699
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi there! How can I assist you with your travel plans?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362966.925519
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "So um, I want flights to Lisbon on the, uh, twelfth of June.",
+     "merged": "So um, I want flights to Lisbon on the, uh, twelfth of June.",
+     "intent_version": 2
+    },
+    "ts": 1790362966.925566
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362967.6291242
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362967.629257
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "So um, I want flights to Lisbon on the, uh, twelfth of June.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "date",
+       "from": "twelfth of June",
+       "to": "June 12"
+      }
+     ],
+     "slots": {
+      "destination": "Lisbon",
+      "date": "June 12"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_flights",
+       "args": {
+        "destination": "Lisbon",
+        "date": "June 12"
+       }
+      }
+     ],
+     "reply": "Searching flights to Lisbon on June 12th."
+    },
+    "ts": 1790362970.158515
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362970.158537
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_flights"
+     ]
+    },
+    "ts": 1790362970.158592
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Lisbon",
+     "previous": null
+    },
+    "ts": 1790362970.158606
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "June 12",
+     "previous": null
+    },
+    "ts": 1790362970.158607
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "June 12",
+     "previous": "twelfth of June",
+     "correction": true
+    },
+    "ts": 1790362970.158607
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "733b846ef11141e5bc671f13308450cc",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "date": "June 12"
+     }
+    },
+    "ts": 1790362970.158716
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "733b846ef11141e5bc671f13308450cc",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "date": "June 12"
+     },
+     "state_changing": false
+    },
+    "ts": 1790362970.158832
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "733b846ef11141e5bc671f13308450cc",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "date": "June 12"
+     },
+     "result": {
+      "status": "success",
+      "flights": [
+       {
+        "flight_id": "FL123",
+        "destination": "Lisbon",
+        "date": "June 12",
+        "price": 450.0
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 527
+    },
+    "ts": 1790362970.6856582
+   }
+  ]
+ },
+ {
+  "id": "syn_travel_02",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Toronto', 'date': 'March 5'}}",
+  "calls": [
+   [
+    "search_flights",
+    {
+     "destination": "Toronto",
+     "date": "March 5th"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec.",
+   "Okay, one sec."
+  ],
+  "secs": 5.3,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 3,
+    "utterance": "Find flights to Toronto on March 3rd - no wait, March 5th, sorry.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "date",
+      "from": "March 3rd",
+      "to": "March 5th"
+     }
+    ],
+    "slots": {
+     "destination": "Toronto",
+     "date": "March 5th"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_flights",
+      "args": {
+       "destination": "Toronto",
+       "date": "March 5th"
+      }
+     }
+    ],
+    "reply": "Searching flights to Toronto on March 5th."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi.",
+     "merged": "Hi.",
+     "intent_version": 1
+    },
+    "ts": 1790362970.7082539
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362971.411276
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362971.411308
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790362971.8258402
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362971.825844
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362971.82587
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362971.8259
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Find flights to Toronto on March 3rd -",
+     "merged": "Find flights to Toronto on March 3rd -",
+     "intent_version": 2
+    },
+    "ts": 1790362971.8259158
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362972.528714
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362972.528749
+   },
+   {
+    "type": "user_resumed",
+    "data": {
+     "pending": "Find flights to Toronto on March 3rd -"
+    },
+    "ts": 1790362972.7279758
+   },
+   {
+    "type": "gate_cancelled",
+    "data": {
+     "reason": "user kept talking; re-planning with the new words"
+    },
+    "ts": 1790362972.7279859
+   },
+   {
+    "type": "turn_merged",
+    "data": {
+     "previous": "Find flights to Toronto on March 3rd -",
+     "added": "no wait, March 5th, sorry."
+    },
+    "ts": 1790362972.7279859
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "no wait, March 5th, sorry.",
+     "merged": "Find flights to Toronto on March 3rd - no wait, March 5th, sorry.",
+     "intent_version": 3
+    },
+    "ts": 1790362972.727988
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362973.430063
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 3,
+     "kind": "ack"
+    },
+    "ts": 1790362973.430094
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 3,
+     "utterance": "Find flights to Toronto on March 3rd - no wait, March 5th, sorry.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "date",
+       "from": "March 3rd",
+       "to": "March 5th"
+      }
+     ],
+     "slots": {
+      "destination": "Toronto",
+      "date": "March 5th"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_flights",
+       "args": {
+        "destination": "Toronto",
+        "date": "March 5th"
+       }
+      }
+     ],
+     "reply": "Searching flights to Toronto on March 5th."
+    },
+    "ts": 1790362975.5803368
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362975.5803468
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 3,
+     "calls": [
+      "search_flights"
+     ]
+    },
+    "ts": 1790362975.580393
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Toronto",
+     "previous": null
+    },
+    "ts": 1790362975.580398
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "March 5th",
+     "previous": null
+    },
+    "ts": 1790362975.580402
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "March 5th",
+     "previous": "March 3rd",
+     "correction": true
+    },
+    "ts": 1790362975.580405
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "17d593d3380b4731b665f9341c05ca76",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Toronto",
+      "date": "March 5th"
+     }
+    },
+    "ts": 1790362975.580501
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "17d593d3380b4731b665f9341c05ca76",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Toronto",
+      "date": "March 5th"
+     },
+     "state_changing": false
+    },
+    "ts": 1790362975.5805829
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "17d593d3380b4731b665f9341c05ca76",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Toronto",
+      "date": "March 5th"
+     },
+     "result": {
+      "status": "success",
+      "flights": [
+       {
+        "flight_id": "FL123",
+        "destination": "Toronto",
+        "date": "March 5th",
+        "price": 450.0
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 443
+    },
+    "ts": 1790362976.024075
+   }
+  ]
+ },
+ {
+  "id": "syn_travel_03",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Madrid', 'date': 'July 2'}}",
+  "calls": [
+   [
+    "search_flights",
+    {
+     "destination": "Madrid",
+     "date": "July 2nd"
+    }
+   ],
+   [
+    "book_flight",
+    {
+     "passenger_name": "Priya Nair",
+     "flight_id": "FL123"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Sure, let me know where you're planning to go and when.",
+   "Okay, one sec."
+  ],
+  "secs": 7.4,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey, I need to sort out a trip.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Sure, let me know where you're planning to go and when."
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "destination",
+      "from": "",
+      "to": "Madrid"
+     },
+     {
+      "slot": "date",
+      "from": "",
+      "to": "July 2nd"
+     },
+     {
+      "slot": "passenger_name",
+      "from": "",
+      "to": "Priya Nair"
+     }
+    ],
+    "slots": {
+     "destination": "Madrid",
+     "date": "July 2nd",
+     "passenger_name": "Priya Nair"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_flights",
+      "args": {
+       "destination": "Madrid",
+       "date": "July 2nd"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "book_flight",
+      "args": {
+       "passenger_name": "Priya Nair",
+       "flight_id": "$c1.flights[0].flight_id"
+      }
+     }
+    ],
+    "reply": "Searching for flights to Madrid on July 2nd and booking the first one for Priya Nair."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey, I need to sort out a trip.",
+     "merged": "Hey, I need to sort out a trip.",
+     "intent_version": 1
+    },
+    "ts": 1790362976.0381389
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362976.740745
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362976.740799
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey, I need to sort out a trip.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Sure, let me know where you're planning to go and when."
+    },
+    "ts": 1790362977.295102
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362977.295109
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362977.295151
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Sure, let me know where you're planning to go and when.",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362977.2951932
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair.",
+     "merged": "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair.",
+     "intent_version": 2
+    },
+    "ts": 1790362977.2952168
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362977.998642
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362977.998673
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Look for flights to Madrid, uh, on July 2nd, and then book the first one for, um, Priya Nair.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "destination",
+       "from": "",
+       "to": "Madrid"
+      },
+      {
+       "slot": "date",
+       "from": "",
+       "to": "July 2nd"
+      },
+      {
+       "slot": "passenger_name",
+       "from": "",
+       "to": "Priya Nair"
+      }
+     ],
+     "slots": {
+      "destination": "Madrid",
+      "date": "July 2nd",
+      "passenger_name": "Priya Nair"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_flights",
+       "args": {
+        "destination": "Madrid",
+        "date": "July 2nd"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "book_flight",
+       "args": {
+        "passenger_name": "Priya Nair",
+        "flight_id": "$c1.flights[0].flight_id"
+       }
+      }
+     ],
+     "reply": "Searching for flights to Madrid on July 2nd and booking the first one for Priya Nair."
+    },
+    "ts": 1790362983.060909
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790362983.060916
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_flights",
+      "book_flight"
+     ]
+    },
+    "ts": 1790362983.060948
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Madrid",
+     "previous": null
+    },
+    "ts": 1790362983.06095
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "July 2nd",
+     "previous": null
+    },
+    "ts": 1790362983.060951
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "passenger_name",
+     "value": "Priya Nair",
+     "previous": null
+    },
+    "ts": 1790362983.060952
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Madrid",
+     "previous": "",
+     "correction": true
+    },
+    "ts": 1790362983.0609531
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "July 2nd",
+     "previous": "",
+     "correction": true
+    },
+    "ts": 1790362983.060954
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "passenger_name",
+     "value": "Priya Nair",
+     "previous": "",
+     "correction": true
+    },
+    "ts": 1790362983.060954
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "date": "July 2nd"
+     }
+    },
+    "ts": 1790362983.0610309
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Priya Nair",
+      "flight_id": "$c1.flights[0].flight_id"
+     }
+    },
+    "ts": 1790362983.061036
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "date": "July 2nd"
+     },
+     "state_changing": false
+    },
+    "ts": 1790362983.062452
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "date": "July 2nd"
+     },
+     "result": {
+      "status": "success",
+      "flights": [
+       {
+        "flight_id": "FL123",
+        "destination": "Madrid",
+        "date": "July 2nd",
+        "price": 450.0
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 397
+    },
+    "ts": 1790362983.459178
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Priya Nair",
+      "flight_id": "FL123"
+     },
+     "state_changing": true
+    },
+    "ts": 1790362983.4592772
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "ef23f96a91ce40b0b4c4e9c95b9430f6",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Priya Nair",
+      "flight_id": "FL123"
+     },
+     "result": {
+      "status": "success",
+      "booking_ref": "B789",
+      "passenger": "Priya Nair"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790362983.4593978
+   }
+  ]
+ },
+ {
+  "id": "syn_travel_04",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "update_identity_doc",
+    {
+     "doc_type": "driver_license",
+     "doc_number": "K449012"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.0,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Good morning.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "doc_type": "driver_license",
+     "doc_number": "K449012"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "update_identity_doc",
+      "args": {
+       "doc_type": "driver_license",
+       "doc_number": "K449012"
+      }
+     }
+    ],
+    "reply": "Updating your driver's license number."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Good morning.",
+     "merged": "Good morning.",
+     "intent_version": 1
+    },
+    "ts": 1790362983.471992
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362984.1745222
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362984.174579
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Good morning.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790362984.5856152
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362984.585624
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362984.5857332
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362984.585848
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2.",
+     "merged": "I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2.",
+     "intent_version": 2
+    },
+    "ts": 1790362984.5858848
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362985.289496
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362985.2895281
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "I need to update my, my driver's license number. It's K as in kilo, 4, 4, 9, 0, 1, 2.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "doc_type": "driver_license",
+      "doc_number": "K449012"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "update_identity_doc",
+       "args": {
+        "doc_type": "driver_license",
+        "doc_number": "K449012"
+       }
+      }
+     ],
+     "reply": "Updating your driver's license number."
+    },
+    "ts": 1790362987.448256
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790362987.448264
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "update_identity_doc"
+     ]
+    },
+    "ts": 1790362987.448321
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_type",
+     "value": "driver_license",
+     "previous": null
+    },
+    "ts": 1790362987.4483252
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_number",
+     "value": "K449012",
+     "previous": null
+    },
+    "ts": 1790362987.4483259
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "57d8519757174149a1c60994eb5aada7",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "driver_license",
+      "doc_number": "K449012"
+     }
+    },
+    "ts": 1790362987.448404
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "57d8519757174149a1c60994eb5aada7",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "driver_license",
+      "doc_number": "K449012"
+     },
+     "state_changing": true
+    },
+    "ts": 1790362987.448535
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "57d8519757174149a1c60994eb5aada7",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "driver_license",
+      "doc_number": "K449012"
+     },
+     "result": {
+      "status": "success",
+      "updated_doc": "driver_license",
+      "masked_number": "9012"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790362987.4488041
+   }
+  ]
+ },
+ {
+  "id": "syn_travel_05",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Stockholm', 'date': 'May 9'}}",
+  "calls": [
+   [
+    "search_flights",
+    {
+     "destination": "Stockholm",
+     "date": "May 9th"
+    }
+   ],
+   [
+    "book_flight",
+    {
+     "passenger_name": "Tom Becker",
+     "flight_id": "FL123"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 6.0,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, quick thing.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "destination",
+      "from": "Oslo",
+      "to": "Stockholm"
+     }
+    ],
+    "slots": {
+     "destination": "Stockholm",
+     "date": "May 9th",
+     "passenger_name": "Tom Becker"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_flights",
+      "args": {
+       "destination": "Stockholm",
+       "date": "May 9th"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "book_flight",
+      "args": {
+       "passenger_name": "Tom Becker",
+       "flight_id": "$c1.flights[0].flight_id"
+      }
+     }
+    ],
+    "reply": "Searching flights to Stockholm on May 9th and booking for Tom Becker."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, quick thing.",
+     "merged": "Hi, quick thing.",
+     "intent_version": 1
+    },
+    "ts": 1790362987.4733372
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362988.175977
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362988.1760058
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, quick thing.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790362988.61004
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362988.610046
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362988.610085
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362988.610125
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker.",
+     "merged": "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker.",
+     "intent_version": 2
+    },
+    "ts": 1790362988.6101482
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362989.313517
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362989.313555
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Flights to Oslo on May 9th... actually make it Stockholm, same date, and book it for Tom Becker.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "destination",
+       "from": "Oslo",
+       "to": "Stockholm"
+      }
+     ],
+     "slots": {
+      "destination": "Stockholm",
+      "date": "May 9th",
+      "passenger_name": "Tom Becker"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_flights",
+       "args": {
+        "destination": "Stockholm",
+        "date": "May 9th"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "book_flight",
+       "args": {
+        "passenger_name": "Tom Becker",
+        "flight_id": "$c1.flights[0].flight_id"
+       }
+      }
+     ],
+     "reply": "Searching flights to Stockholm on May 9th and booking for Tom Becker."
+    },
+    "ts": 1790362993.0252879
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790362993.025295
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_flights",
+      "book_flight"
+     ]
+    },
+    "ts": 1790362993.0253282
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Stockholm",
+     "previous": null
+    },
+    "ts": 1790362993.0253298
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "May 9th",
+     "previous": null
+    },
+    "ts": 1790362993.025331
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "passenger_name",
+     "value": "Tom Becker",
+     "previous": null
+    },
+    "ts": 1790362993.025332
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Stockholm",
+     "previous": "Oslo",
+     "correction": true
+    },
+    "ts": 1790362993.0253341
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Stockholm",
+      "date": "May 9th"
+     }
+    },
+    "ts": 1790362993.025418
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Tom Becker",
+      "flight_id": "$c1.flights[0].flight_id"
+     }
+    },
+    "ts": 1790362993.0254238
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Stockholm",
+      "date": "May 9th"
+     },
+     "state_changing": false
+    },
+    "ts": 1790362993.025482
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Stockholm",
+      "date": "May 9th"
+     },
+     "result": {
+      "status": "success",
+      "flights": [
+       {
+        "flight_id": "FL123",
+        "destination": "Stockholm",
+        "date": "May 9th",
+        "price": 450.0
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 487
+    },
+    "ts": 1790362993.512477
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Tom Becker",
+      "flight_id": "FL123"
+     },
+     "state_changing": true
+    },
+    "ts": 1790362993.5127711
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "ceb6a5099cc14543a93078140a8c7d0e",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Tom Becker",
+      "flight_id": "FL123"
+     },
+     "result": {
+      "status": "success",
+      "booking_ref": "B789",
+      "passenger": "Tom Becker"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790362993.5132601
+   }
+  ]
+ },
+ {
+  "id": "syn_travel_06",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "update_identity_doc",
+    {
+     "doc_type": "passport",
+     "doc_number": "P778120"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.9,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "doc_number",
+      "from": "P 7 7 3",
+      "to": "P778120"
+     }
+    ],
+    "slots": {
+     "doc_type": "passport",
+     "doc_number": "P778120"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "update_identity_doc",
+      "args": {
+       "doc_type": "passport",
+       "doc_number": "P778120"
+      }
+     }
+    ],
+    "reply": "Updating your passport document number to P778120."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello.",
+     "merged": "Hello.",
+     "intent_version": 1
+    },
+    "ts": 1790362993.543442
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362994.2457888
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362994.245843
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790362994.666759
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362994.666765
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362994.666804
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362994.6668422
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0.",
+     "merged": "Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0.",
+     "intent_version": 2
+    },
+    "ts": 1790362994.6668632
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790362995.370296
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790362995.370327
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Update my passport to, uh, P 7 7 3... sorry, P 7 7 8 1 2 0.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "doc_number",
+       "from": "P 7 7 3",
+       "to": "P778120"
+      }
+     ],
+     "slots": {
+      "doc_type": "passport",
+      "doc_number": "P778120"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "update_identity_doc",
+       "args": {
+        "doc_type": "passport",
+        "doc_number": "P778120"
+       }
+      }
+     ],
+     "reply": "Updating your passport document number to P778120."
+    },
+    "ts": 1790362998.431867
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790362998.431871
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "update_identity_doc"
+     ]
+    },
+    "ts": 1790362998.431895
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_type",
+     "value": "passport",
+     "previous": null
+    },
+    "ts": 1790362998.4318972
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_number",
+     "value": "P778120",
+     "previous": null
+    },
+    "ts": 1790362998.4318972
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_number",
+     "value": "P778120",
+     "previous": "P 7 7 3",
+     "correction": true
+    },
+    "ts": 1790362998.431898
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "dacb5cce152643c88c0c13163ff9f5db",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "P778120"
+     }
+    },
+    "ts": 1790362998.431944
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "dacb5cce152643c88c0c13163ff9f5db",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "P778120"
+     },
+     "state_changing": true
+    },
+    "ts": 1790362998.4320068
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "dacb5cce152643c88c0c13163ff9f5db",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "P778120"
+     },
+     "result": {
+      "status": "success",
+      "updated_doc": "passport",
+      "masked_number": "8120"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790362998.4321249
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_01",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "get_exchange_rate",
+    {
+     "amount": 250,
+     "from_currency": "EUR",
+     "to_currency": "USD"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Sure, what's your question about money?",
+   "Okay, one sec."
+  ],
+  "secs": 3.7,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, I have a money question.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Sure, what's your question about money?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "How much is, um, two hundred and fifty euros in US dollars?",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "amount": 250,
+     "from_currency": "EUR",
+     "to_currency": "USD"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "get_exchange_rate",
+      "args": {
+       "amount": 250,
+       "from_currency": "EUR",
+       "to_currency": "USD"
+      }
+     }
+    ],
+    "reply": "Converting two hundred and fifty euros to US dollars."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, I have a money question.",
+     "merged": "Hi, I have a money question.",
+     "intent_version": 1
+    },
+    "ts": 1790362998.4454532
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790362999.1468601
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790362999.1468952
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, I have a money question.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Sure, what's your question about money?"
+    },
+    "ts": 1790362999.5893419
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790362999.589349
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790362999.589397
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Sure, what's your question about money?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790362999.5894442
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "How much is, um, two hundred and fifty euros in US dollars?",
+     "merged": "How much is, um, two hundred and fifty euros in US dollars?",
+     "intent_version": 2
+    },
+    "ts": 1790362999.589469
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363000.291467
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363000.291496
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "How much is, um, two hundred and fifty euros in US dollars?",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "amount": 250,
+      "from_currency": "EUR",
+      "to_currency": "USD"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "get_exchange_rate",
+       "args": {
+        "amount": 250,
+        "from_currency": "EUR",
+        "to_currency": "USD"
+       }
+      }
+     ],
+     "reply": "Converting two hundred and fifty euros to US dollars."
+    },
+    "ts": 1790363002.120615
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363002.1206222
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "get_exchange_rate"
+     ]
+    },
+    "ts": 1790363002.1206641
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "amount",
+     "value": 250,
+     "previous": null
+    },
+    "ts": 1790363002.120667
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "from_currency",
+     "value": "EUR",
+     "previous": null
+    },
+    "ts": 1790363002.120668
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "to_currency",
+     "value": "USD",
+     "previous": null
+    },
+    "ts": 1790363002.1206698
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "84301628ae534726b893102de2ed90ba",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 250,
+      "from_currency": "EUR",
+      "to_currency": "USD"
+     }
+    },
+    "ts": 1790363002.120756
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "84301628ae534726b893102de2ed90ba",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 250,
+      "from_currency": "EUR",
+      "to_currency": "USD"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363002.120863
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "84301628ae534726b893102de2ed90ba",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 250,
+      "from_currency": "EUR",
+      "to_currency": "USD"
+     },
+     "result": {
+      "status": "success",
+      "converted_amount": 275.0,
+      "rate": 1.1
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363002.121096
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_02",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "get_exchange_rate",
+    {
+     "amount": 80,
+     "from_currency": "GBP",
+     "to_currency": "CHF"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec.",
+   "Okay, one sec."
+  ],
+  "secs": 5.0,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 3,
+    "utterance": "Convert 80 pounds to yen - wait no, to Swiss francs.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "to_currency",
+      "from": "yen",
+      "to": "Swiss francs"
+     }
+    ],
+    "slots": {
+     "amount": 80,
+     "from_currency": "GBP",
+     "to_currency": "CHF"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "get_exchange_rate",
+      "args": {
+       "amount": 80,
+       "from_currency": "GBP",
+       "to_currency": "CHF"
+      }
+     }
+    ],
+    "reply": "Converting 80 pounds to Swiss francs."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey.",
+     "merged": "Hey.",
+     "intent_version": 1
+    },
+    "ts": 1790363002.1452658
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363002.848004
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363002.8480399
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363003.294687
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363003.294692
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363003.29472
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363003.2947478
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Convert 80 pounds to yen -",
+     "merged": "Convert 80 pounds to yen -",
+     "intent_version": 2
+    },
+    "ts": 1790363003.294764
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363003.997555
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363003.9975839
+   },
+   {
+    "type": "user_resumed",
+    "data": {
+     "pending": "Convert 80 pounds to yen -"
+    },
+    "ts": 1790363004.0958989
+   },
+   {
+    "type": "gate_cancelled",
+    "data": {
+     "reason": "user kept talking; re-planning with the new words"
+    },
+    "ts": 1790363004.095904
+   },
+   {
+    "type": "turn_merged",
+    "data": {
+     "previous": "Convert 80 pounds to yen -",
+     "added": "wait no, to Swiss francs."
+    },
+    "ts": 1790363004.095905
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "wait no, to Swiss francs.",
+     "merged": "Convert 80 pounds to yen - wait no, to Swiss francs.",
+     "intent_version": 3
+    },
+    "ts": 1790363004.095906
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363004.797581
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 3,
+     "kind": "ack"
+    },
+    "ts": 1790363004.797608
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 3,
+     "utterance": "Convert 80 pounds to yen - wait no, to Swiss francs.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "to_currency",
+       "from": "yen",
+       "to": "Swiss francs"
+      }
+     ],
+     "slots": {
+      "amount": 80,
+      "from_currency": "GBP",
+      "to_currency": "CHF"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "get_exchange_rate",
+       "args": {
+        "amount": 80,
+        "from_currency": "GBP",
+        "to_currency": "CHF"
+       }
+      }
+     ],
+     "reply": "Converting 80 pounds to Swiss francs."
+    },
+    "ts": 1790363007.1461818
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363007.1461859
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 3,
+     "calls": [
+      "get_exchange_rate"
+     ]
+    },
+    "ts": 1790363007.146219
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "amount",
+     "value": 80,
+     "previous": null
+    },
+    "ts": 1790363007.1462212
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "from_currency",
+     "value": "GBP",
+     "previous": null
+    },
+    "ts": 1790363007.146222
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "to_currency",
+     "value": "CHF",
+     "previous": null
+    },
+    "ts": 1790363007.146222
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "to_currency",
+     "value": "Swiss francs",
+     "previous": "yen",
+     "correction": true
+    },
+    "ts": 1790363007.146223
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "4134c3af2b58444ea8c3e7520498702d",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 80,
+      "from_currency": "GBP",
+      "to_currency": "CHF"
+     }
+    },
+    "ts": 1790363007.146278
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "4134c3af2b58444ea8c3e7520498702d",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 80,
+      "from_currency": "GBP",
+      "to_currency": "CHF"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363007.1463249
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "4134c3af2b58444ea8c3e7520498702d",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 80,
+      "from_currency": "GBP",
+      "to_currency": "CHF"
+     },
+     "result": {
+      "status": "success",
+      "converted_amount": 72.0,
+      "rate": 0.9
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363007.1464572
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_03",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "get_card_benefits",
+    {
+     "card_type": "titanium"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 3.3,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello there.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "What perks do I get with the, um, the titanium card?",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "card_type": "titanium"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "get_card_benefits",
+      "args": {
+       "card_type": "titanium"
+      }
+     }
+    ],
+    "reply": "Looking up the benefits of the titanium card."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello there.",
+     "merged": "Hello there.",
+     "intent_version": 1
+    },
+    "ts": 1790363007.161535
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363007.864168
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363007.8642051
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello there.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363008.3022861
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363008.30229
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363008.3023171
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363008.302343
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "What perks do I get with the, um, the titanium card?",
+     "merged": "What perks do I get with the, um, the titanium card?",
+     "intent_version": 2
+    },
+    "ts": 1790363008.302357
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363009.004618
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363009.004652
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "What perks do I get with the, um, the titanium card?",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "card_type": "titanium"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "get_card_benefits",
+       "args": {
+        "card_type": "titanium"
+       }
+      }
+     ],
+     "reply": "Looking up the benefits of the titanium card."
+    },
+    "ts": 1790363010.454148
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363010.4541519
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "get_card_benefits"
+     ]
+    },
+    "ts": 1790363010.454179
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "card_type",
+     "value": "titanium",
+     "previous": null
+    },
+    "ts": 1790363010.4541812
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "2c4745322d6a495697d6b7cd9c5c6a7b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "titanium"
+     }
+    },
+    "ts": 1790363010.4542358
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "2c4745322d6a495697d6b7cd9c5c6a7b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "titanium"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363010.45428
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "2c4745322d6a495697d6b7cd9c5c6a7b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "titanium"
+     },
+     "result": {
+      "status": "success",
+      "card_type": "titanium",
+      "benefits": [
+       "2% Cashback",
+       "No Foreign Transaction Fee"
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363010.454407
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_04",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'modify_autopay', 'args': {'bill_type': 'water', 'source_account': 'checking'}}",
+  "calls": [
+   [
+    "modify_autopay",
+    {
+     "bill_type": "water",
+     "source_account": "checking account"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "How can I assist you with your billing today?",
+   "Okay, one sec."
+  ],
+  "secs": 4.3,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, billing stuff today.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "How can I assist you with your billing today?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Set up autopay for my water bill from my savings, uh, no, from my checking account.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "source_account",
+      "from": "savings",
+      "to": "checking account"
+     }
+    ],
+    "slots": {
+     "bill_type": "water",
+     "source_account": "checking account"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "modify_autopay",
+      "args": {
+       "bill_type": "water",
+       "source_account": "checking account"
+      }
+     }
+    ],
+    "reply": "Setting up autopay for your water bill using your checking account."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, billing stuff today.",
+     "merged": "Hi, billing stuff today.",
+     "intent_version": 1
+    },
+    "ts": 1790363010.468504
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363011.170984
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363011.171011
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, billing stuff today.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "How can I assist you with your billing today?"
+    },
+    "ts": 1790363011.643837
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363011.643841
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363011.6438668
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "How can I assist you with your billing today?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363011.6438951
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Set up autopay for my water bill from my savings, uh, no, from my checking account.",
+     "merged": "Set up autopay for my water bill from my savings, uh, no, from my checking account.",
+     "intent_version": 2
+    },
+    "ts": 1790363011.64391
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363012.345669
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363012.345696
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Set up autopay for my water bill from my savings, uh, no, from my checking account.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "source_account",
+       "from": "savings",
+       "to": "checking account"
+      }
+     ],
+     "slots": {
+      "bill_type": "water",
+      "source_account": "checking account"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "modify_autopay",
+       "args": {
+        "bill_type": "water",
+        "source_account": "checking account"
+       }
+      }
+     ],
+     "reply": "Setting up autopay for your water bill using your checking account."
+    },
+    "ts": 1790363014.801533
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363014.8015401
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "modify_autopay"
+     ]
+    },
+    "ts": 1790363014.801568
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bill_type",
+     "value": "water",
+     "previous": null
+    },
+    "ts": 1790363014.801569
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "source_account",
+     "value": "checking account",
+     "previous": null
+    },
+    "ts": 1790363014.80157
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "source_account",
+     "value": "checking account",
+     "previous": "savings",
+     "correction": true
+    },
+    "ts": 1790363014.8015711
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "b8647d2a438f4b2a88e7cd4133c9428e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "water",
+      "source_account": "checking account"
+     }
+    },
+    "ts": 1790363014.801621
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "b8647d2a438f4b2a88e7cd4133c9428e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "water",
+      "source_account": "checking account"
+     },
+     "state_changing": true
+    },
+    "ts": 1790363014.801693
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "b8647d2a438f4b2a88e7cd4133c9428e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "water",
+      "source_account": "checking account"
+     },
+     "result": {
+      "status": "success",
+      "autopay_enabled": true,
+      "bill": "water",
+      "source": "checking account"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363014.802176
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_05",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "get_card_benefits",
+    {
+     "card_type": "silver"
+    }
+   ],
+   [
+    "modify_autopay",
+    {
+     "bill_type": "phone",
+     "source_account": "savings"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.7,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "card_type": "silver",
+     "bill_type": "phone",
+     "source_account": "savings"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "get_card_benefits",
+      "args": {
+       "card_type": "silver"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "modify_autopay",
+      "args": {
+       "bill_type": "phone",
+       "source_account": "savings"
+      }
+     }
+    ],
+    "reply": "Checking the benefits on your silver card and switching your phone bill autopay to the savings account."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi.",
+     "merged": "Hi.",
+     "intent_version": 1
+    },
+    "ts": 1790363014.81535
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363015.5171552
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363015.517181
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363015.967947
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363015.967956
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363015.967988
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363015.968025
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account.",
+     "merged": "Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account.",
+     "intent_version": 2
+    },
+    "ts": 1790363015.968043
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363016.671183
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363016.6712132
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Check the benefits on my silver card, and uh, also switch my phone bill autopay to the savings account.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "card_type": "silver",
+      "bill_type": "phone",
+      "source_account": "savings"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "get_card_benefits",
+       "args": {
+        "card_type": "silver"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "modify_autopay",
+       "args": {
+        "bill_type": "phone",
+        "source_account": "savings"
+       }
+      }
+     ],
+     "reply": "Checking the benefits on your silver card and switching your phone bill autopay to the savings account."
+    },
+    "ts": 1790363019.517648
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363019.517654
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "get_card_benefits",
+      "modify_autopay"
+     ]
+    },
+    "ts": 1790363019.517688
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "card_type",
+     "value": "silver",
+     "previous": null
+    },
+    "ts": 1790363019.5176902
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bill_type",
+     "value": "phone",
+     "previous": null
+    },
+    "ts": 1790363019.517691
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "source_account",
+     "value": "savings",
+     "previous": null
+    },
+    "ts": 1790363019.5176919
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "silver"
+     }
+    },
+    "ts": 1790363019.517761
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "phone",
+      "source_account": "savings"
+     }
+    },
+    "ts": 1790363019.517767
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "silver"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363019.517823
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "phone",
+      "source_account": "savings"
+     },
+     "state_changing": true
+    },
+    "ts": 1790363019.517903
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "silver"
+     },
+     "result": {
+      "status": "success",
+      "card_type": "silver",
+      "benefits": [
+       "2% Cashback",
+       "No Foreign Transaction Fee"
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363019.518286
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "8bc35da63f7743ab9c7ceef59c090d5f",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "modify_autopay",
+     "args": {
+      "bill_type": "phone",
+      "source_account": "savings"
+     },
+     "result": {
+      "status": "success",
+      "autopay_enabled": true,
+      "bill": "phone",
+      "source": "savings"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363019.518307
+   }
+  ]
+ },
+ {
+  "id": "syn_fin_06",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'get_card_benefits', 'args': {'card_type': 'black'}}",
+  "calls": [
+   [
+    "get_exchange_rate",
+    {
+     "amount": 1200,
+     "from_currency": "CAD",
+     "to_currency": "INR"
+    }
+   ],
+   [
+    "get_card_benefits",
+    {
+     "card_type": "black card"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 5.0,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey there.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "amount": 1200,
+     "from_currency": "CAD",
+     "to_currency": "INR",
+     "card_type": "black card"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "get_exchange_rate",
+      "args": {
+       "amount": 1200,
+       "from_currency": "CAD",
+       "to_currency": "INR"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "get_card_benefits",
+      "args": {
+       "card_type": "black card"
+      }
+     }
+    ],
+    "reply": "Converting 1200 Canadian dollars to Indian rupees and checking the benefits of the black card."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey there.",
+     "merged": "Hey there.",
+     "intent_version": 1
+    },
+    "ts": 1790363019.5402849
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363020.241635
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363020.241666
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey there.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363020.677609
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363020.6776152
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363020.677651
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363020.677682
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?",
+     "merged": "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?",
+     "intent_version": 2
+    },
+    "ts": 1790363020.677696
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363021.379924
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363021.379981
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "How much would 1200 Canadian dollars be in, uh, in Indian rupees? And, um, what are the benefits of the black card?",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "amount": 1200,
+      "from_currency": "CAD",
+      "to_currency": "INR",
+      "card_type": "black card"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "get_exchange_rate",
+       "args": {
+        "amount": 1200,
+        "from_currency": "CAD",
+        "to_currency": "INR"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "get_card_benefits",
+       "args": {
+        "card_type": "black card"
+       }
+      }
+     ],
+     "reply": "Converting 1200 Canadian dollars to Indian rupees and checking the benefits of the black card."
+    },
+    "ts": 1790363024.561711
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363024.561724
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "get_exchange_rate",
+      "get_card_benefits"
+     ]
+    },
+    "ts": 1790363024.5618072
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "amount",
+     "value": 1200,
+     "previous": null
+    },
+    "ts": 1790363024.561812
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "from_currency",
+     "value": "CAD",
+     "previous": null
+    },
+    "ts": 1790363024.561814
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "to_currency",
+     "value": "INR",
+     "previous": null
+    },
+    "ts": 1790363024.561815
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "card_type",
+     "value": "black card",
+     "previous": null
+    },
+    "ts": 1790363024.561816
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 1200,
+      "from_currency": "CAD",
+      "to_currency": "INR"
+     }
+    },
+    "ts": 1790363024.5619662
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "black card"
+     }
+    },
+    "ts": 1790363024.56198
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 1200,
+      "from_currency": "CAD",
+      "to_currency": "INR"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363024.5620859
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "black card"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363024.562211
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "get_exchange_rate",
+     "args": {
+      "amount": 1200,
+      "from_currency": "CAD",
+      "to_currency": "INR"
+     },
+     "result": {
+      "status": "success",
+      "converted_amount": 1080.0,
+      "rate": 0.9
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363024.562569
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "be79dcc7204c467eb34c55875ac09109",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "get_card_benefits",
+     "args": {
+      "card_type": "black card"
+     },
+     "result": {
+      "status": "success",
+      "card_type": "black card",
+      "benefits": [
+       "2% Cashback",
+       "No Foreign Transaction Fee"
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363024.562593
+   }
+  ]
+ },
+ {
+  "id": "syn_house_01",
+  "pass": false,
+  "why": "tools expected {'search_apartments': 1} got {'search_apartments': 2}",
+  "calls": [
+   [
+    "search_apartments",
+    {
+     "city": "apartment"
+    }
+   ],
+   [
+    "search_apartments",
+    {
+     "city": "Denver",
+     "bedrooms": 2,
+     "max_price": 2000
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Okay, one sec."
+  ],
+  "secs": 6.1,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, I'm apartment hunting.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "city": "apartment"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_apartments",
+      "args": {
+       "city": "apartment"
+      }
+     }
+    ],
+    "reply": "Searching for apartments in your city."
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Find me a two bedroom in Denver, uh, under 2000 a month.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "city": "Denver",
+     "bedrooms": 2,
+     "max_price": 2000
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_apartments",
+      "args": {
+       "city": "Denver",
+       "bedrooms": 2,
+       "max_price": 2000
+      }
+     }
+    ],
+    "reply": "Searching for two bedroom apartments in Denver under 2000 a month."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, I'm apartment hunting.",
+     "merged": "Hi, I'm apartment hunting.",
+     "intent_version": 1
+    },
+    "ts": 1790363024.587359
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363025.290209
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363025.290251
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, I'm apartment hunting.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "city": "apartment"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_apartments",
+       "args": {
+        "city": "apartment"
+       }
+      }
+     ],
+     "reply": "Searching for apartments in your city."
+    },
+    "ts": 1790363026.432936
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363026.432944
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": [
+      "search_apartments"
+     ]
+    },
+    "ts": 1790363026.4329898
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "city",
+     "value": "apartment",
+     "previous": null
+    },
+    "ts": 1790363026.4329941
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "3560154cfd98469dacc6ed3722e9a978",
+     "operation_id": "turn-1",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "apartment"
+     }
+    },
+    "ts": 1790363026.433064
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "3560154cfd98469dacc6ed3722e9a978",
+     "operation_id": "turn-1",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "apartment"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363026.433216
+   },
+   {
+    "type": "tool_error",
+    "data": {
+     "execution_id": "3560154cfd98469dacc6ed3722e9a978",
+     "operation_id": "turn-1",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "apartment"
+     },
+     "error": "search_apartments() missing 2 required positional arguments: 'bedrooms' and 'max_price'"
+    },
+    "ts": 1790363027.192199
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Find me a two bedroom in Denver, uh, under 2000 a month.",
+     "merged": "Find me a two bedroom in Denver, uh, under 2000 a month.",
+     "intent_version": 2
+    },
+    "ts": 1790363027.192319
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363027.895196
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363027.895227
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Find me a two bedroom in Denver, uh, under 2000 a month.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "city": "Denver",
+      "bedrooms": 2,
+      "max_price": 2000
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_apartments",
+       "args": {
+        "city": "Denver",
+        "bedrooms": 2,
+        "max_price": 2000
+       }
+      }
+     ],
+     "reply": "Searching for two bedroom apartments in Denver under 2000 a month."
+    },
+    "ts": 1790363030.030216
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363030.03022
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_apartments"
+     ]
+    },
+    "ts": 1790363030.030247
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "city",
+     "value": "Denver",
+     "previous": "apartment"
+    },
+    "ts": 1790363030.0302489
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bedrooms",
+     "value": 2,
+     "previous": null
+    },
+    "ts": 1790363030.03025
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 2000,
+     "previous": null
+    },
+    "ts": 1790363030.030251
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "f7a78a6fd2fb444ba042844c9280e5ad",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Denver",
+      "bedrooms": 2,
+      "max_price": 2000
+     }
+    },
+    "ts": 1790363030.030314
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "f7a78a6fd2fb444ba042844c9280e5ad",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Denver",
+      "bedrooms": 2,
+      "max_price": 2000
+     },
+     "state_changing": false
+    },
+    "ts": 1790363030.03037
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "f7a78a6fd2fb444ba042844c9280e5ad",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Denver",
+      "bedrooms": 2,
+      "max_price": 2000
+     },
+     "result": {
+      "status": "success",
+      "city": "Denver",
+      "results": [
+       {
+        "id": "APT1",
+        "price": 1900,
+        "beds": 2
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 613
+    },
+    "ts": 1790363030.643816
+   }
+  ]
+ },
+ {
+  "id": "syn_house_02",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_apartments",
+    {
+     "city": "Austin",
+     "bedrooms": 2,
+     "max_price": 2500
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec.",
+   "Okay, one sec."
+  ],
+  "secs": 5.7,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 3,
+    "utterance": "Search for three bedroom places in Austin under 2500 - actually, make it two bedrooms.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "bedrooms",
+      "from": "three",
+      "to": "two"
+     }
+    ],
+    "slots": {
+     "city": "Austin",
+     "bedrooms": 2,
+     "max_price": 2500
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_apartments",
+      "args": {
+       "city": "Austin",
+       "bedrooms": 2,
+       "max_price": 2500
+      }
+     }
+    ],
+    "reply": "Searching for two bedroom places in Austin under 2500."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello.",
+     "merged": "Hello.",
+     "intent_version": 1
+    },
+    "ts": 1790363030.674612
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363031.377438
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363031.377471
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363031.7992609
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363031.799266
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363031.7992918
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363031.799319
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Search for three bedroom places in Austin under 2500 -",
+     "merged": "Search for three bedroom places in Austin under 2500 -",
+     "intent_version": 2
+    },
+    "ts": 1790363031.799335
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363032.500428
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363032.500457
+   },
+   {
+    "type": "user_resumed",
+    "data": {
+     "pending": "Search for three bedroom places in Austin under 2500 -"
+    },
+    "ts": 1790363032.7004302
+   },
+   {
+    "type": "gate_cancelled",
+    "data": {
+     "reason": "user kept talking; re-planning with the new words"
+    },
+    "ts": 1790363032.7004359
+   },
+   {
+    "type": "turn_merged",
+    "data": {
+     "previous": "Search for three bedroom places in Austin under 2500 -",
+     "added": "actually, make it two bedrooms."
+    },
+    "ts": 1790363032.700437
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "actually, make it two bedrooms.",
+     "merged": "Search for three bedroom places in Austin under 2500 - actually, make it two bedrooms.",
+     "intent_version": 3
+    },
+    "ts": 1790363032.700438
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363033.403361
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 3,
+     "kind": "ack"
+    },
+    "ts": 1790363033.4033978
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 3,
+     "utterance": "Search for three bedroom places in Austin under 2500 - actually, make it two bedrooms.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "bedrooms",
+       "from": "three",
+       "to": "two"
+      }
+     ],
+     "slots": {
+      "city": "Austin",
+      "bedrooms": 2,
+      "max_price": 2500
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_apartments",
+       "args": {
+        "city": "Austin",
+        "bedrooms": 2,
+        "max_price": 2500
+       }
+      }
+     ],
+     "reply": "Searching for two bedroom places in Austin under 2500."
+    },
+    "ts": 1790363035.798313
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363035.79832
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 3,
+     "calls": [
+      "search_apartments"
+     ]
+    },
+    "ts": 1790363035.798364
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "city",
+     "value": "Austin",
+     "previous": null
+    },
+    "ts": 1790363035.798367
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bedrooms",
+     "value": 2,
+     "previous": null
+    },
+    "ts": 1790363035.798369
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 2500,
+     "previous": null
+    },
+    "ts": 1790363035.7983701
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bedrooms",
+     "value": "two",
+     "previous": "three",
+     "correction": true
+    },
+    "ts": 1790363035.798372
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "78d13102d42342f58e3cdf38df0f988b",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Austin",
+      "bedrooms": 2,
+      "max_price": 2500
+     }
+    },
+    "ts": 1790363035.798531
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "78d13102d42342f58e3cdf38df0f988b",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Austin",
+      "bedrooms": 2,
+      "max_price": 2500
+     },
+     "state_changing": false
+    },
+    "ts": 1790363035.7986062
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "78d13102d42342f58e3cdf38df0f988b",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Austin",
+      "bedrooms": 2,
+      "max_price": 2500
+     },
+     "result": {
+      "status": "success",
+      "city": "Austin",
+      "results": [
+       {
+        "id": "APT1",
+        "price": 2400,
+        "beds": 2
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 552
+    },
+    "ts": 1790363036.3505542
+   }
+  ]
+ },
+ {
+  "id": "syn_house_03",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "calculate_commute",
+    {
+     "origin_address": "12 Pine Street",
+     "destination_address": "central library",
+     "mode": "cycling"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.4,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi there.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "How long is the commute from 12 Pine Street to the central library by bike?",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "origin_address": "12 Pine Street",
+     "destination_address": "central library",
+     "mode": "cycling"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "calculate_commute",
+      "args": {
+       "origin_address": "12 Pine Street",
+       "destination_address": "central library",
+       "mode": "cycling"
+      }
+     }
+    ],
+    "reply": "Calculating the commute from 12 Pine Street to the central library by bike."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi there.",
+     "merged": "Hi there.",
+     "intent_version": 1
+    },
+    "ts": 1790363036.364678
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363037.067126
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363037.067172
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi there.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363037.4765341
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363037.4765382
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363037.476564
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363037.476591
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "How long is the commute from 12 Pine Street to the central library by bike?",
+     "merged": "How long is the commute from 12 Pine Street to the central library by bike?",
+     "intent_version": 2
+    },
+    "ts": 1790363037.476604
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363038.179491
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363038.179528
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "How long is the commute from 12 Pine Street to the central library by bike?",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "origin_address": "12 Pine Street",
+      "destination_address": "central library",
+      "mode": "cycling"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "calculate_commute",
+       "args": {
+        "origin_address": "12 Pine Street",
+        "destination_address": "central library",
+        "mode": "cycling"
+       }
+      }
+     ],
+     "reply": "Calculating the commute from 12 Pine Street to the central library by bike."
+    },
+    "ts": 1790363040.2672598
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363040.2672682
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "calculate_commute"
+     ]
+    },
+    "ts": 1790363040.267311
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "origin_address",
+     "value": "12 Pine Street",
+     "previous": null
+    },
+    "ts": 1790363040.267313
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination_address",
+     "value": "central library",
+     "previous": null
+    },
+    "ts": 1790363040.267315
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "mode",
+     "value": "cycling",
+     "previous": null
+    },
+    "ts": 1790363040.267317
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "638bec7a934e4e778cf5dc3dbe34a221",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "12 Pine Street",
+      "destination_address": "central library",
+      "mode": "cycling"
+     }
+    },
+    "ts": 1790363040.267406
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "638bec7a934e4e778cf5dc3dbe34a221",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "12 Pine Street",
+      "destination_address": "central library",
+      "mode": "cycling"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363040.267484
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "638bec7a934e4e778cf5dc3dbe34a221",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "12 Pine Street",
+      "destination_address": "central library",
+      "mode": "cycling"
+     },
+     "result": {
+      "status": "success",
+      "duration_mins": 25,
+      "mode": "cycling"
+     },
+     "stale": false,
+     "duration_ms": 479
+    },
+    "ts": 1790363040.74678
+   }
+  ]
+ },
+ {
+  "id": "syn_house_04",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "update_search_filter",
+    {
+     "filter_name": "max_price",
+     "value": 1750
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.5,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Change my max rent filter to, um, 1800. No sorry, 1750.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [
+     {
+      "slot": "max_price",
+      "from": "1800",
+      "to": "1750"
+     }
+    ],
+    "slots": {
+     "filter_name": "max_price",
+     "value": 1750
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "update_search_filter",
+      "args": {
+       "filter_name": "max_price",
+       "value": 1750
+      }
+     }
+    ],
+    "reply": "Updating your max rent filter to 1750."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey.",
+     "merged": "Hey.",
+     "intent_version": 1
+    },
+    "ts": 1790363040.7685802
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363041.471304
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363041.471333
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363041.9002528
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363041.9002612
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363041.9003048
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363041.9003992
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Change my max rent filter to, um, 1800. No sorry, 1750.",
+     "merged": "Change my max rent filter to, um, 1800. No sorry, 1750.",
+     "intent_version": 2
+    },
+    "ts": 1790363041.90045
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363042.603986
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363042.6040199
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Change my max rent filter to, um, 1800. No sorry, 1750.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [
+      {
+       "slot": "max_price",
+       "from": "1800",
+       "to": "1750"
+      }
+     ],
+     "slots": {
+      "filter_name": "max_price",
+      "value": 1750
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "update_search_filter",
+       "args": {
+        "filter_name": "max_price",
+        "value": 1750
+       }
+      }
+     ],
+     "reply": "Updating your max rent filter to 1750."
+    },
+    "ts": 1790363045.1922948
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363045.192302
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "update_search_filter"
+     ]
+    },
+    "ts": 1790363045.192352
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "filter_name",
+     "value": "max_price",
+     "previous": null
+    },
+    "ts": 1790363045.192356
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "value",
+     "value": 1750,
+     "previous": null
+    },
+    "ts": 1790363045.1923578
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": "1750",
+     "previous": "1800",
+     "correction": true
+    },
+    "ts": 1790363045.19236
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "6e010900659d442fbf7806ceeb475157",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "max_price",
+      "value": 1750
+     }
+    },
+    "ts": 1790363045.192458
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "6e010900659d442fbf7806ceeb475157",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "max_price",
+      "value": 1750
+     },
+     "state_changing": true
+    },
+    "ts": 1790363045.192585
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "6e010900659d442fbf7806ceeb475157",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "max_price",
+      "value": 1750
+     },
+     "result": {
+      "status": "success",
+      "filter_updated": "max_price",
+      "new_value": 1750
+     },
+     "stale": false,
+     "duration_ms": 88
+    },
+    "ts": 1790363045.2804108
+   }
+  ]
+ },
+ {
+  "id": "syn_house_05",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_apartments",
+    {
+     "city": "Portland",
+     "bedrooms": 1,
+     "max_price": 1600
+    }
+   ],
+   [
+    "calculate_commute",
+    {
+     "origin_address": "APT1",
+     "destination_address": "Union Station",
+     "mode": "transit"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Sure! What type of place are you looking for?",
+   "Okay, one sec."
+  ],
+  "secs": 6.8,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, I need help finding a place.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Sure! What type of place are you looking for?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "city": "Portland",
+     "bedrooms": 1,
+     "max_price": 1600,
+     "destination_address": "Union Station",
+     "mode": "transit"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_apartments",
+      "args": {
+       "city": "Portland",
+       "bedrooms": 1,
+       "max_price": 1600
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "calculate_commute",
+      "args": {
+       "origin_address": "$c1.results[0].id",
+       "destination_address": "Union Station",
+       "mode": "transit"
+      }
+     }
+    ],
+    "reply": "Searching for one bedroom apartments in Portland under 1600 and checking the transit commute from the first one to Union Station."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, I need help finding a place.",
+     "merged": "Hi, I need help finding a place.",
+     "intent_version": 1
+    },
+    "ts": 1790363045.305202
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363046.0062668
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363046.006298
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, I need help finding a place.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Sure! What type of place are you looking for?"
+    },
+    "ts": 1790363046.490422
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363046.490429
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363046.4904718
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Sure! What type of place are you looking for?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363046.490516
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station.",
+     "merged": "Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station.",
+     "intent_version": 2
+    },
+    "ts": 1790363046.49054
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363047.19399
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363047.194029
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Look for one bedroom apartments in Portland under 1600, then check the transit commute from the first one to Union Station.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "city": "Portland",
+      "bedrooms": 1,
+      "max_price": 1600,
+      "destination_address": "Union Station",
+      "mode": "transit"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_apartments",
+       "args": {
+        "city": "Portland",
+        "bedrooms": 1,
+        "max_price": 1600
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "calculate_commute",
+       "args": {
+        "origin_address": "$c1.results[0].id",
+        "destination_address": "Union Station",
+        "mode": "transit"
+       }
+      }
+     ],
+     "reply": "Searching for one bedroom apartments in Portland under 1600 and checking the transit commute from the first one to Union Station."
+    },
+    "ts": 1790363051.015716
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363051.015723
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_apartments",
+      "calculate_commute"
+     ]
+    },
+    "ts": 1790363051.015765
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "city",
+     "value": "Portland",
+     "previous": null
+    },
+    "ts": 1790363051.015768
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bedrooms",
+     "value": 1,
+     "previous": null
+    },
+    "ts": 1790363051.0157702
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 1600,
+     "previous": null
+    },
+    "ts": 1790363051.015771
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination_address",
+     "value": "Union Station",
+     "previous": null
+    },
+    "ts": 1790363051.0157719
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "mode",
+     "value": "transit",
+     "previous": null
+    },
+    "ts": 1790363051.015774
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Portland",
+      "bedrooms": 1,
+      "max_price": 1600
+     }
+    },
+    "ts": 1790363051.015918
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "$c1.results[0].id",
+      "destination_address": "Union Station",
+      "mode": "transit"
+     }
+    },
+    "ts": 1790363051.015927
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Portland",
+      "bedrooms": 1,
+      "max_price": 1600
+     },
+     "state_changing": false
+    },
+    "ts": 1790363051.016004
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Portland",
+      "bedrooms": 1,
+      "max_price": 1600
+     },
+     "result": {
+      "status": "success",
+      "city": "Portland",
+      "results": [
+       {
+        "id": "APT1",
+        "price": 1500,
+        "beds": 1
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 720
+    },
+    "ts": 1790363051.736419
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "APT1",
+      "destination_address": "Union Station",
+      "mode": "transit"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363051.7364638
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "5e2efe6b11a446249f5bd479a6184a60",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "calculate_commute",
+     "args": {
+      "origin_address": "APT1",
+      "destination_address": "Union Station",
+      "mode": "transit"
+     },
+     "result": {
+      "status": "success",
+      "duration_mins": 25,
+      "mode": "transit"
+     },
+     "stale": false,
+     "duration_ms": 410
+    },
+    "ts": 1790363052.146027
+   }
+  ]
+ },
+ {
+  "id": "syn_shop_01",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "track_order",
+    {
+     "order_id": "ZQ5518"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 3.7,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Where's my order, um, the number is Z Q 5 5 1 8.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "order_id": "ZQ5518"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "track_order",
+      "args": {
+       "order_id": "ZQ5518"
+      }
+     }
+    ],
+    "reply": "Tracking your order with ID ZQ5518."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi.",
+     "merged": "Hi.",
+     "intent_version": 1
+    },
+    "ts": 1790363052.1753228
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363052.878269
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363052.878309
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363053.316424
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363053.3164291
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363053.3164642
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363053.3164978
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Where's my order, um, the number is Z Q 5 5 1 8.",
+     "merged": "Where's my order, um, the number is Z Q 5 5 1 8.",
+     "intent_version": 2
+    },
+    "ts": 1790363053.316517
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363054.0195992
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363054.0196302
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Where's my order, um, the number is Z Q 5 5 1 8.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "order_id": "ZQ5518"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "track_order",
+       "args": {
+        "order_id": "ZQ5518"
+       }
+      }
+     ],
+     "reply": "Tracking your order with ID ZQ5518."
+    },
+    "ts": 1790363055.92183
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363055.9218402
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "track_order"
+     ]
+    },
+    "ts": 1790363055.921895
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "order_id",
+     "value": "ZQ5518",
+     "previous": null
+    },
+    "ts": 1790363055.921898
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "d4ba9e3db51e455dbe99d69ac4c2921e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "ZQ5518"
+     }
+    },
+    "ts": 1790363055.921993
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "d4ba9e3db51e455dbe99d69ac4c2921e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "ZQ5518"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363055.9220889
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "d4ba9e3db51e455dbe99d69ac4c2921e",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "ZQ5518"
+     },
+     "result": {
+      "status": "success",
+      "order_id": "ZQ5518",
+      "shipping_status": "Out for delivery"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363055.922504
+   }
+  ]
+ },
+ {
+  "id": "syn_shop_02",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_products",
+    {
+     "query": "yoga mat",
+     "max_price": 30
+    }
+   ],
+   [
+    "add_to_cart",
+    {
+     "product_id": "PROD1",
+     "quantity": 2
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.9,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "query": "yoga mat",
+     "max_price": 30,
+     "quantity": 2
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_products",
+      "args": {
+       "query": "yoga mat",
+       "max_price": 30
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "add_to_cart",
+      "args": {
+       "product_id": "$c1.products[0].product_id",
+       "quantity": 2
+      }
+     }
+    ],
+    "reply": "Looking for a yoga mat under 30 dollars and adding two to your cart."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello.",
+     "merged": "Hello.",
+     "intent_version": 1
+    },
+    "ts": 1790363055.9478111
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363056.6506271
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363056.650659
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363057.097825
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363057.097829
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363057.0978591
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363057.097891
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart.",
+     "merged": "Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart.",
+     "intent_version": 2
+    },
+    "ts": 1790363057.0979068
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363057.798926
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363057.798951
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Find me a yoga mat under 30 dollars, and add, uh, two of them to my cart.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "query": "yoga mat",
+      "max_price": 30,
+      "quantity": 2
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_products",
+       "args": {
+        "query": "yoga mat",
+        "max_price": 30
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "add_to_cart",
+       "args": {
+        "product_id": "$c1.products[0].product_id",
+        "quantity": 2
+       }
+      }
+     ],
+     "reply": "Looking for a yoga mat under 30 dollars and adding two to your cart."
+    },
+    "ts": 1790363060.837327
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363060.837331
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_products",
+      "add_to_cart"
+     ]
+    },
+    "ts": 1790363060.8373692
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "query",
+     "value": "yoga mat",
+     "previous": null
+    },
+    "ts": 1790363060.8373718
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 30,
+     "previous": null
+    },
+    "ts": 1790363060.8373718
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "quantity",
+     "value": 2,
+     "previous": null
+    },
+    "ts": 1790363060.837374
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "yoga mat",
+      "max_price": 30
+     }
+    },
+    "ts": 1790363060.83744
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "$c1.products[0].product_id",
+      "quantity": 2
+     }
+    },
+    "ts": 1790363060.83745
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "yoga mat",
+      "max_price": 30
+     },
+     "state_changing": false
+    },
+    "ts": 1790363060.837497
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "yoga mat",
+      "max_price": 30
+     },
+     "result": {
+      "status": "success",
+      "products": [
+       {
+        "product_id": "PROD1",
+        "name": "yoga mat Premium",
+        "price": 20
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363060.8376682
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "PROD1",
+      "quantity": 2
+     },
+     "state_changing": true
+    },
+    "ts": 1790363060.837732
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "70684a842968441fb5263eea5adcecf9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "PROD1",
+      "quantity": 2
+     },
+     "result": {
+      "status": "success",
+      "product_id": "PROD1",
+      "quantity": 2,
+      "cart_total": 199.98
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363060.837873
+   }
+  ]
+ },
+ {
+  "id": "syn_shop_03",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_products",
+    {
+     "query": "coffee grinder"
+    }
+   ],
+   [
+    "add_to_cart",
+    {
+     "product_id": "PROD1",
+     "quantity": 1
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec.",
+   "Okay, one sec."
+  ],
+  "secs": 5.1,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey there.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 3,
+    "utterance": "Search for a, a coffee grinder and put three - no, just one in the cart.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "query": "coffee grinder",
+     "quantity": 1
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_products",
+      "args": {
+       "query": "coffee grinder"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "add_to_cart",
+      "args": {
+       "product_id": "$c1.products[0].product_id",
+       "quantity": 1
+      }
+     }
+    ],
+    "reply": "Searching for a coffee grinder and adding one to your cart."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey there.",
+     "merged": "Hey there.",
+     "intent_version": 1
+    },
+    "ts": 1790363060.851178
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363061.5537422
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363061.553771
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey there.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363061.9998348
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363061.99984
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363061.999883
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363061.999926
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Search for a, a coffee grinder and put three -",
+     "merged": "Search for a, a coffee grinder and put three -",
+     "intent_version": 2
+    },
+    "ts": 1790363061.999941
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363062.7027571
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363062.702788
+   },
+   {
+    "type": "user_resumed",
+    "data": {
+     "pending": "Search for a, a coffee grinder and put three -"
+    },
+    "ts": 1790363062.901751
+   },
+   {
+    "type": "gate_cancelled",
+    "data": {
+     "reason": "user kept talking; re-planning with the new words"
+    },
+    "ts": 1790363062.9017558
+   },
+   {
+    "type": "turn_merged",
+    "data": {
+     "previous": "Search for a, a coffee grinder and put three -",
+     "added": "no, just one in the cart."
+    },
+    "ts": 1790363062.901757
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "no, just one in the cart.",
+     "merged": "Search for a, a coffee grinder and put three - no, just one in the cart.",
+     "intent_version": 3
+    },
+    "ts": 1790363062.901758
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363063.6046941
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 3,
+     "kind": "ack"
+    },
+    "ts": 1790363063.6047318
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 3,
+     "utterance": "Search for a, a coffee grinder and put three - no, just one in the cart.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "query": "coffee grinder",
+      "quantity": 1
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_products",
+       "args": {
+        "query": "coffee grinder"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "add_to_cart",
+       "args": {
+        "product_id": "$c1.products[0].product_id",
+        "quantity": 1
+       }
+      }
+     ],
+     "reply": "Searching for a coffee grinder and adding one to your cart."
+    },
+    "ts": 1790363065.992922
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363065.992928
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 3,
+     "calls": [
+      "search_products",
+      "add_to_cart"
+     ]
+    },
+    "ts": 1790363065.992961
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "query",
+     "value": "coffee grinder",
+     "previous": null
+    },
+    "ts": 1790363065.9929621
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "quantity",
+     "value": 1,
+     "previous": null
+    },
+    "ts": 1790363065.992963
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "coffee grinder"
+     }
+    },
+    "ts": 1790363065.993035
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "$c1.products[0].product_id",
+      "quantity": 1
+     }
+    },
+    "ts": 1790363065.9930408
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "coffee grinder"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363065.9930859
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "coffee grinder"
+     },
+     "result": {
+      "status": "success",
+      "products": [
+       {
+        "product_id": "PROD1",
+        "name": "coffee grinder Premium",
+        "price": 99.99
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363065.993257
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "PROD1",
+      "quantity": 1
+     },
+     "state_changing": true
+    },
+    "ts": 1790363065.99331
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "f606d1a5bc43423c851651b683c3ca53",
+     "operation_id": "turn-3",
+     "id": "c2",
+     "tool": "add_to_cart",
+     "args": {
+      "product_id": "PROD1",
+      "quantity": 1
+     },
+     "result": {
+      "status": "success",
+      "product_id": "PROD1",
+      "quantity": 1,
+      "cart_total": 99.99
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363065.9934359
+   }
+  ]
+ },
+ {
+  "id": "syn_shop_04",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "track_order",
+    {
+     "order_id": "M402"
+    }
+   ],
+   [
+    "search_products",
+    {
+     "query": "wireless earbuds",
+     "max_price": 60
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 4.8,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "order_id": "M402",
+     "query": "wireless earbuds",
+     "max_price": 60
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "track_order",
+      "args": {
+       "order_id": "M402"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "search_products",
+      "args": {
+       "query": "wireless earbuds",
+       "max_price": 60
+      }
+     }
+    ],
+    "reply": "Tracking order M402 and searching for wireless earbuds under 60."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi.",
+     "merged": "Hi.",
+     "intent_version": 1
+    },
+    "ts": 1790363066.0069299
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363066.7094882
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363066.709523
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363067.158489
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363067.158493
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363067.158538
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363067.158576
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60.",
+     "merged": "Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60.",
+     "intent_version": 2
+    },
+    "ts": 1790363067.158595
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363067.861408
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363067.861439
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Track order M 4 0 2 and, uh, also find me some wireless earbuds under 60.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "order_id": "M402",
+      "query": "wireless earbuds",
+      "max_price": 60
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "track_order",
+       "args": {
+        "order_id": "M402"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "search_products",
+       "args": {
+        "query": "wireless earbuds",
+        "max_price": 60
+       }
+      }
+     ],
+     "reply": "Tracking order M402 and searching for wireless earbuds under 60."
+    },
+    "ts": 1790363070.852726
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363070.85273
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "track_order",
+      "search_products"
+     ]
+    },
+    "ts": 1790363070.85276
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "order_id",
+     "value": "M402",
+     "previous": null
+    },
+    "ts": 1790363070.8527622
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "query",
+     "value": "wireless earbuds",
+     "previous": null
+    },
+    "ts": 1790363070.852763
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 60,
+     "previous": null
+    },
+    "ts": 1790363070.852763
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "M402"
+     }
+    },
+    "ts": 1790363070.852839
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "search_products",
+     "args": {
+      "query": "wireless earbuds",
+      "max_price": 60
+     }
+    },
+    "ts": 1790363070.852845
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "M402"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363070.852895
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "search_products",
+     "args": {
+      "query": "wireless earbuds",
+      "max_price": 60
+     },
+     "state_changing": false
+    },
+    "ts": 1790363070.852942
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "track_order",
+     "args": {
+      "order_id": "M402"
+     },
+     "result": {
+      "status": "success",
+      "order_id": "M402",
+      "shipping_status": "Out for delivery"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363070.853057
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "5a221bee282c4085844b57a22d28ef50",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "search_products",
+     "args": {
+      "query": "wireless earbuds",
+      "max_price": 60
+     },
+     "result": {
+      "status": "success",
+      "products": [
+       {
+        "product_id": "PROD1",
+        "name": "wireless earbuds Premium",
+        "price": 50
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363070.8530638
+   }
+  ]
+ },
+ {
+  "id": "syn_shop_05",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "search_products",
+    {
+     "query": "hiking boots",
+     "max_price": 120
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec.",
+   "Okay, one sec."
+  ],
+  "secs": 4.5,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hello, I want to do some shopping.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 3,
+    "utterance": "Um... I want to look for... uh... hiking boots, I think, under a hundred and twenty.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "query": "hiking boots",
+     "max_price": 120
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_products",
+      "args": {
+       "query": "hiking boots",
+       "max_price": 120
+      }
+     }
+    ],
+    "reply": "Looking for hiking boots under a hundred and twenty."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hello, I want to do some shopping.",
+     "merged": "Hello, I want to do some shopping.",
+     "intent_version": 1
+    },
+    "ts": 1790363070.866905
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363071.569587
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363071.569613
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hello, I want to do some shopping.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363072.010819
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363072.010823
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363072.010858
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363072.010893
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Um... I want to look for... uh...",
+     "merged": "Um... I want to look for... uh...",
+     "intent_version": 2
+    },
+    "ts": 1790363072.010907
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363072.713664
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363072.713691
+   },
+   {
+    "type": "user_resumed",
+    "data": {
+     "pending": "Um... I want to look for... uh..."
+    },
+    "ts": 1790363073.212971
+   },
+   {
+    "type": "gate_cancelled",
+    "data": {
+     "reason": "user kept talking; re-planning with the new words"
+    },
+    "ts": 1790363073.212978
+   },
+   {
+    "type": "turn_merged",
+    "data": {
+     "previous": "Um... I want to look for... uh...",
+     "added": "hiking boots, I think, under a hundred and twenty."
+    },
+    "ts": 1790363073.2129788
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "hiking boots, I think, under a hundred and twenty.",
+     "merged": "Um... I want to look for... uh... hiking boots, I think, under a hundred and twenty.",
+     "intent_version": 3
+    },
+    "ts": 1790363073.21298
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363073.914158
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 3,
+     "kind": "ack"
+    },
+    "ts": 1790363073.9141839
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 3,
+     "utterance": "Um... I want to look for... uh... hiking boots, I think, under a hundred and twenty.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "query": "hiking boots",
+      "max_price": 120
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_products",
+       "args": {
+        "query": "hiking boots",
+        "max_price": 120
+       }
+      }
+     ],
+     "reply": "Looking for hiking boots under a hundred and twenty."
+    },
+    "ts": 1790363075.396075
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363075.39608
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 3,
+     "calls": [
+      "search_products"
+     ]
+    },
+    "ts": 1790363075.396107
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "query",
+     "value": "hiking boots",
+     "previous": null
+    },
+    "ts": 1790363075.396109
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 120,
+     "previous": null
+    },
+    "ts": 1790363075.39611
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "d0bca33a97bb4ef4817d90872eaef68e",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "hiking boots",
+      "max_price": 120
+     }
+    },
+    "ts": 1790363075.3961768
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "d0bca33a97bb4ef4817d90872eaef68e",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "hiking boots",
+      "max_price": 120
+     },
+     "state_changing": false
+    },
+    "ts": 1790363075.3962188
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "d0bca33a97bb4ef4817d90872eaef68e",
+     "operation_id": "turn-3",
+     "id": "c1",
+     "tool": "search_products",
+     "args": {
+      "query": "hiking boots",
+      "max_price": 120
+     },
+     "result": {
+      "status": "success",
+      "products": [
+       {
+        "product_id": "PROD1",
+        "name": "hiking boots Premium",
+        "price": 110
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363075.3963468
+   }
+  ]
+ },
+ {
+  "id": "syn_multi_01",
+  "pass": false,
+  "why": "no distinct argument match for {'tool': 'search_flights', 'args': {'destination': 'Dublin', 'date': 'October 4'}}",
+  "calls": [
+   [
+    "update_identity_doc",
+    {
+     "doc_type": "passport",
+     "doc_number": "R330981"
+    }
+   ],
+   [
+    "search_flights",
+    {
+     "destination": "Dublin",
+     "date": "October 4th"
+    }
+   ],
+   [
+    "book_flight",
+    {
+     "passenger_name": "Maya Chen",
+     "flight_id": "FL123"
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 7.1,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hi, a couple of things.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "destination": "Dublin",
+     "date": "October 4th",
+     "passenger_name": "Maya Chen",
+     "doc_type": "passport",
+     "doc_number": "R330981"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_flights",
+      "args": {
+       "destination": "Dublin",
+       "date": "October 4th"
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "book_flight",
+      "args": {
+       "passenger_name": "Maya Chen",
+       "flight_id": "$c1.flights[0].flight_id"
+      }
+     },
+     {
+      "id": "c3",
+      "tool": "update_identity_doc",
+      "args": {
+       "doc_type": "passport",
+       "doc_number": "R330981"
+      }
+     }
+    ],
+    "reply": "Searching for flights to Dublin on October 4th, booking for Maya Chen, and updating your passport number."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hi, a couple of things.",
+     "merged": "Hi, a couple of things.",
+     "intent_version": 1
+    },
+    "ts": 1790363075.409964
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363076.112593
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363076.1126552
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hi, a couple of things.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363076.5790222
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363076.5790248
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363076.579052
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363076.579078
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1.",
+     "merged": "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1.",
+     "intent_version": 2
+    },
+    "ts": 1790363076.579092
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363077.281879
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363077.281906
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Find flights to Dublin on October 4th, book it for Maya Chen, and update my passport number to R 3 3 0 9 8 1.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "destination": "Dublin",
+      "date": "October 4th",
+      "passenger_name": "Maya Chen",
+      "doc_type": "passport",
+      "doc_number": "R330981"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_flights",
+       "args": {
+        "destination": "Dublin",
+        "date": "October 4th"
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "book_flight",
+       "args": {
+        "passenger_name": "Maya Chen",
+        "flight_id": "$c1.flights[0].flight_id"
+       }
+      },
+      {
+       "id": "c3",
+       "tool": "update_identity_doc",
+       "args": {
+        "doc_type": "passport",
+        "doc_number": "R330981"
+       }
+      }
+     ],
+     "reply": "Searching for flights to Dublin on October 4th, booking for Maya Chen, and updating your passport number."
+    },
+    "ts": 1790363081.988508
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363081.988512
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_flights",
+      "book_flight",
+      "update_identity_doc"
+     ]
+    },
+    "ts": 1790363081.988535
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "destination",
+     "value": "Dublin",
+     "previous": null
+    },
+    "ts": 1790363081.988537
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "date",
+     "value": "October 4th",
+     "previous": null
+    },
+    "ts": 1790363081.988537
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "passenger_name",
+     "value": "Maya Chen",
+     "previous": null
+    },
+    "ts": 1790363081.988538
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_type",
+     "value": "passport",
+     "previous": null
+    },
+    "ts": 1790363081.988539
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "doc_number",
+     "value": "R330981",
+     "previous": null
+    },
+    "ts": 1790363081.988539
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "date": "October 4th"
+     }
+    },
+    "ts": 1790363081.9885938
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Maya Chen",
+      "flight_id": "$c1.flights[0].flight_id"
+     }
+    },
+    "ts": 1790363081.988598
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c3",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "R330981"
+     }
+    },
+    "ts": 1790363081.9886
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "date": "October 4th"
+     },
+     "state_changing": false
+    },
+    "ts": 1790363081.9886389
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c3",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "R330981"
+     },
+     "state_changing": true
+    },
+    "ts": 1790363081.9887328
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c3",
+     "tool": "update_identity_doc",
+     "args": {
+      "doc_type": "passport",
+      "doc_number": "R330981"
+     },
+     "result": {
+      "status": "success",
+      "updated_doc": "passport",
+      "masked_number": "0981"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363081.9889421
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "date": "October 4th"
+     },
+     "result": {
+      "status": "success",
+      "flights": [
+       {
+        "flight_id": "FL123",
+        "destination": "Dublin",
+        "date": "October 4th",
+        "price": 450.0
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 530
+    },
+    "ts": 1790363082.518972
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Maya Chen",
+      "flight_id": "FL123"
+     },
+     "state_changing": true
+    },
+    "ts": 1790363082.519028
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "bfb4575d5bbd4982b39fcc621113201b",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "book_flight",
+     "args": {
+      "passenger_name": "Maya Chen",
+      "flight_id": "FL123"
+     },
+     "result": {
+      "status": "success",
+      "booking_ref": "B789",
+      "passenger": "Maya Chen"
+     },
+     "stale": false,
+     "duration_ms": 0
+    },
+    "ts": 1790363082.519125
+   }
+  ]
+ },
+ {
+  "id": "syn_multi_02",
+  "pass": true,
+  "why": "",
+  "calls": [
+   [
+    "update_search_filter",
+    {
+     "filter_name": "neighborhood",
+     "value": "Lincoln Park"
+    }
+   ],
+   [
+    "search_apartments",
+    {
+     "city": "Chicago",
+     "bedrooms": 2,
+     "max_price": 2200,
+     "pets_allowed": true
+    }
+   ]
+  ],
+  "said": [
+   "One moment.",
+   "Hi! What can I help you with?",
+   "Okay, one sec."
+  ],
+  "secs": 6.1,
+  "plans": [
+   {
+    "intent_version": 1,
+    "utterance": "Hey.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {},
+    "calls": [],
+    "reply": "Hi! What can I help you with?"
+   },
+   {
+    "intent_version": 2,
+    "utterance": "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park.",
+    "repaired": "",
+    "complete": true,
+    "corrections": [],
+    "slots": {
+     "city": "Chicago",
+     "bedrooms": 2,
+     "max_price": 2200,
+     "pets_allowed": true,
+     "filter_name": "neighborhood",
+     "value": "Lincoln Park"
+    },
+    "calls": [
+     {
+      "id": "c1",
+      "tool": "search_apartments",
+      "args": {
+       "city": "Chicago",
+       "bedrooms": 2,
+       "max_price": 2200,
+       "pets_allowed": true
+      }
+     },
+     {
+      "id": "c2",
+      "tool": "update_search_filter",
+      "args": {
+       "filter_name": "neighborhood",
+       "value": "Lincoln Park"
+      }
+     }
+    ],
+    "reply": "Searching two bedroom apartments in Chicago under 2200 with pets allowed and setting the neighborhood filter to Lincoln Park."
+   }
+  ],
+  "events": [
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Hey.",
+     "merged": "Hey.",
+     "intent_version": 1
+    },
+    "ts": 1790363082.532226
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "One moment."
+    },
+    "ts": 1790363083.233551
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "One moment.",
+     "intent_version": 1,
+     "kind": "ack"
+    },
+    "ts": 1790363083.2335842
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 1,
+     "utterance": "Hey.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {},
+     "calls": [],
+     "reply": "Hi! What can I help you with?"
+    },
+    "ts": 1790363083.6565828
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 350,
+     "remaining_ms": 0,
+     "state_changing": false,
+     "complete": true
+    },
+    "ts": 1790363083.6565871
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 1,
+     "calls": []
+    },
+    "ts": 1790363083.6566179
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Hi! What can I help you with?",
+     "intent_version": 1,
+     "kind": "response"
+    },
+    "ts": 1790363083.656645
+   },
+   {
+    "type": "user_final",
+    "data": {
+     "text": "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park.",
+     "merged": "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park.",
+     "intent_version": 2
+    },
+    "ts": 1790363083.656655
+   },
+   {
+    "type": "ack",
+    "data": {
+     "text": "Okay, one sec."
+    },
+    "ts": 1790363084.358725
+   },
+   {
+    "type": "agent_say",
+    "data": {
+     "text": "Okay, one sec.",
+     "intent_version": 2,
+     "kind": "ack"
+    },
+    "ts": 1790363084.358763
+   },
+   {
+    "type": "plan_ready",
+    "data": {
+     "intent_version": 2,
+     "utterance": "Search two bedroom apartments in Chicago under 2200 with pets allowed, and set my, uh, neighborhood filter to Lincoln Park.",
+     "repaired": "",
+     "complete": true,
+     "corrections": [],
+     "slots": {
+      "city": "Chicago",
+      "bedrooms": 2,
+      "max_price": 2200,
+      "pets_allowed": true,
+      "filter_name": "neighborhood",
+      "value": "Lincoln Park"
+     },
+     "calls": [
+      {
+       "id": "c1",
+       "tool": "search_apartments",
+       "args": {
+        "city": "Chicago",
+        "bedrooms": 2,
+        "max_price": 2200,
+        "pets_allowed": true
+       }
+      },
+      {
+       "id": "c2",
+       "tool": "update_search_filter",
+       "args": {
+        "filter_name": "neighborhood",
+        "value": "Lincoln Park"
+       }
+      }
+     ],
+     "reply": "Searching two bedroom apartments in Chicago under 2200 with pets allowed and setting the neighborhood filter to Lincoln Park."
+    },
+    "ts": 1790363087.908834
+   },
+   {
+    "type": "gate_open",
+    "data": {
+     "hold_ms": 700,
+     "remaining_ms": 0,
+     "state_changing": true,
+     "complete": true
+    },
+    "ts": 1790363087.908839
+   },
+   {
+    "type": "gate_committed",
+    "data": {
+     "intent_version": 2,
+     "calls": [
+      "search_apartments",
+      "update_search_filter"
+     ]
+    },
+    "ts": 1790363087.908865
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "city",
+     "value": "Chicago",
+     "previous": null
+    },
+    "ts": 1790363087.9088671
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "bedrooms",
+     "value": 2,
+     "previous": null
+    },
+    "ts": 1790363087.908868
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "max_price",
+     "value": 2200,
+     "previous": null
+    },
+    "ts": 1790363087.908868
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "pets_allowed",
+     "value": true,
+     "previous": null
+    },
+    "ts": 1790363087.908868
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "filter_name",
+     "value": "neighborhood",
+     "previous": null
+    },
+    "ts": 1790363087.908869
+   },
+   {
+    "type": "slot_update",
+    "data": {
+     "slot": "value",
+     "value": "Lincoln Park",
+     "previous": null
+    },
+    "ts": 1790363087.908869
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Chicago",
+      "bedrooms": 2,
+      "max_price": 2200,
+      "pets_allowed": true
+     }
+    },
+    "ts": 1790363087.908928
+   },
+   {
+    "type": "tool_waiting",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "neighborhood",
+      "value": "Lincoln Park"
+     }
+    },
+    "ts": 1790363087.9089322
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Chicago",
+      "bedrooms": 2,
+      "max_price": 2200,
+      "pets_allowed": true
+     },
+     "state_changing": false
+    },
+    "ts": 1790363087.9089768
+   },
+   {
+    "type": "tool_started",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "neighborhood",
+      "value": "Lincoln Park"
+     },
+     "state_changing": true
+    },
+    "ts": 1790363087.909036
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c2",
+     "tool": "update_search_filter",
+     "args": {
+      "filter_name": "neighborhood",
+      "value": "Lincoln Park"
+     },
+     "result": {
+      "status": "success",
+      "filter_updated": "neighborhood",
+      "new_value": "Lincoln Park"
+     },
+     "stale": false,
+     "duration_ms": 83
+    },
+    "ts": 1790363087.9918962
+   },
+   {
+    "type": "tool_done",
+    "data": {
+     "execution_id": "0b8c4d8a66f64944a0fb73cb0ca926f9",
+     "operation_id": "turn-2",
+     "id": "c1",
+     "tool": "search_apartments",
+     "args": {
+      "city": "Chicago",
+      "bedrooms": 2,
+      "max_price": 2200,
+      "pets_allowed": true
+     },
+     "result": {
+      "status": "success",
+      "city": "Chicago",
+      "results": [
+       {
+        "id": "APT1",
+        "price": 2100,
+        "beds": 2
+       }
+      ]
+     },
+     "stale": false,
+     "duration_ms": 762
+    },
+    "ts": 1790363088.6712
+   }
+  ]
+ }
+]

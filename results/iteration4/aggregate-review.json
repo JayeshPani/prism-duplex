@@ -1,0 +1,951 @@
+{
+  "kind": "Derived local RTC transport/effect review",
+  "reproduce": "python3 results/iteration4/audit_transport.py",
+  "audit_script_sha256": "2f07c203b3af97ca87bb65b190afe4fe55f0dafaa0cbca7dd70adce648796822",
+  "run_order": [
+    "rtc-baseline-run1",
+    "rtc-correction-run1",
+    "rtc-baseline-repeat2",
+    "rtc-correction-repeat2",
+    "rtc-baseline-repeat3",
+    "rtc-correction-repeat3",
+    "rtc-baseline-repeat4",
+    "rtc-correction-repeat4",
+    "rtc-baseline-repeat5",
+    "rtc-correction-repeat5"
+  ],
+  "excluded_runs": [],
+  "counts": {
+    "runs": 10,
+    "all_checks_pass": 5,
+    "backend_attempts": 45,
+    "navigation_effects": 15,
+    "transcribed_turns": 15,
+    "expected_effect_sequence_pass": 10,
+    "exact_trace_equality_pass": 5,
+    "attempt_event_coverage_pass": 10,
+    "exact_transcript_pass": 15,
+    "grounded_declared_result_pass": 15
+  },
+  "failed_checks": [
+    {
+      "run": "rtc-baseline-repeat2",
+      "checks": [
+        "coordinator_trace_equality"
+      ],
+      "trace_comparison": {
+        "server_event_count": 29,
+        "received_event_count": 28,
+        "missing_server_events": [
+          {
+            "reference": "../local-stack-run1/traces/car-audio-af235e2209224b7cbc0ab43039be128b.jsonl:1",
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790364985.7215538
+          }
+        ],
+        "unexpected_received_events": [],
+        "received_is_exact_server_suffix": true
+      }
+    },
+    {
+      "run": "rtc-correction-repeat2",
+      "checks": [
+        "coordinator_trace_equality"
+      ],
+      "trace_comparison": {
+        "server_event_count": 57,
+        "received_event_count": 56,
+        "missing_server_events": [
+          {
+            "reference": "../local-stack-run1/traces/car-audio-ea7bb96e573d45b5b956071ae929545d.jsonl:1",
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790365007.12783
+          }
+        ],
+        "unexpected_received_events": [],
+        "received_is_exact_server_suffix": true
+      }
+    },
+    {
+      "run": "rtc-correction-repeat3",
+      "checks": [
+        "coordinator_trace_equality"
+      ],
+      "trace_comparison": {
+        "server_event_count": 57,
+        "received_event_count": 56,
+        "missing_server_events": [
+          {
+            "reference": "../local-stack-run1/traces/car-audio-b4bf717d49c146da8561dbfae9187cf4.jsonl:1",
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790365064.702935
+          }
+        ],
+        "unexpected_received_events": [],
+        "received_is_exact_server_suffix": true
+      }
+    },
+    {
+      "run": "rtc-baseline-repeat4",
+      "checks": [
+        "coordinator_trace_equality"
+      ],
+      "trace_comparison": {
+        "server_event_count": 29,
+        "received_event_count": 28,
+        "missing_server_events": [
+          {
+            "reference": "../local-stack-run1/traces/car-audio-d579d7dce9654d82b94c39a589ef5c2b.jsonl:1",
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790365100.944735
+          }
+        ],
+        "unexpected_received_events": [],
+        "received_is_exact_server_suffix": true
+      }
+    },
+    {
+      "run": "rtc-correction-repeat5",
+      "checks": [
+        "coordinator_trace_equality"
+      ],
+      "trace_comparison": {
+        "server_event_count": 57,
+        "received_event_count": 56,
+        "missing_server_events": [
+          {
+            "reference": "../local-stack-run1/traces/car-audio-3ee68574bc634555bb85d3ba077219b3.jsonl:1",
+            "type": "agent_state",
+            "data": {
+              "state": "listening"
+            },
+            "ts": 1790365179.5620968
+          }
+        ],
+        "unexpected_received_events": [],
+        "received_is_exact_server_suffix": true
+      }
+    }
+  ],
+  "percentile_method": "Nearest rank ceil(n*p/100)-1, including pilots; p95 is the maximum for n=5. No confidence or population-generalization claim.",
+  "speech_end_latencies_ms": {
+    "baseline_initial_including_cold_pilot": {
+      "transcript_ms": {
+        "n": 5,
+        "p50_ms": 1654.328,
+        "p95_ms": 1674.836
+      },
+      "ack_text_ms": {
+        "n": 5,
+        "p50_ms": 2369.567,
+        "p95_ms": 2379.292
+      },
+      "result_text_ms": {
+        "n": 5,
+        "p50_ms": 10592.075,
+        "p95_ms": 20605.723
+      },
+      "first_tool_notification_ms": {
+        "n": 5,
+        "p50_ms": 5196.987,
+        "p95_ms": 14573.938
+      },
+      "navigation_dispatch_notification_ms": {
+        "n": 5,
+        "p50_ms": 7703.855,
+        "p95_ms": 17075.494
+      },
+      "navigation_success_notification_ms": {
+        "n": 5,
+        "p50_ms": 7704.084,
+        "p95_ms": 17077.496
+      },
+      "first_ack_pcm_ms": {
+        "n": 5,
+        "p50_ms": 2938.654,
+        "p95_ms": 3245.683
+      },
+      "first_result_pcm_ms": {
+        "n": 5,
+        "p50_ms": 11718.638,
+        "p95_ms": 21684.15
+      },
+      "result_handle_finished_ms": {
+        "n": 5,
+        "p50_ms": 18005.933,
+        "p95_ms": 27963.343
+      }
+    },
+    "correction_initial_including_pilot": {
+      "transcript_ms": {
+        "n": 5,
+        "p50_ms": 1653.829,
+        "p95_ms": 1680.921
+      },
+      "ack_text_ms": {
+        "n": 5,
+        "p50_ms": 2363.581,
+        "p95_ms": 2410.104
+      },
+      "result_text_ms": {
+        "n": 5,
+        "p50_ms": 8394.535,
+        "p95_ms": 8424.716
+      },
+      "first_tool_notification_ms": {
+        "n": 5,
+        "p50_ms": 5018.357,
+        "p95_ms": 5073.291
+      },
+      "navigation_dispatch_notification_ms": {
+        "n": 5,
+        "p50_ms": 7522.73,
+        "p95_ms": 7578.243
+      },
+      "navigation_success_notification_ms": {
+        "n": 5,
+        "p50_ms": 7525.204,
+        "p95_ms": 7578.555
+      },
+      "first_ack_pcm_ms": {
+        "n": 5,
+        "p50_ms": 2926.302,
+        "p95_ms": 2960.39
+      },
+      "first_result_pcm_ms": {
+        "n": 5,
+        "p50_ms": 9396.683,
+        "p95_ms": 9446.199
+      },
+      "result_handle_finished_ms": {
+        "n": 0,
+        "p50_ms": null,
+        "p95_ms": null
+      }
+    },
+    "correction_followup_including_pilot": {
+      "transcript_ms": {
+        "n": 5,
+        "p50_ms": 1649.55,
+        "p95_ms": 1733.167
+      },
+      "ack_text_ms": {
+        "n": 5,
+        "p50_ms": 2356.467,
+        "p95_ms": 2436.991
+      },
+      "result_text_ms": {
+        "n": 5,
+        "p50_ms": 12749.36,
+        "p95_ms": 13009.525
+      },
+      "first_tool_notification_ms": {
+        "n": 5,
+        "p50_ms": 7376.347,
+        "p95_ms": 7561.413
+      },
+      "navigation_dispatch_notification_ms": {
+        "n": 5,
+        "p50_ms": 9882.423,
+        "p95_ms": 10067.018
+      },
+      "navigation_success_notification_ms": {
+        "n": 5,
+        "p50_ms": 9882.792,
+        "p95_ms": 10067.12
+      },
+      "first_ack_pcm_ms": {
+        "n": 5,
+        "p50_ms": 3059.704,
+        "p95_ms": 3339.898
+      },
+      "first_result_pcm_ms": {
+        "n": 5,
+        "p50_ms": 13900.129,
+        "p95_ms": 14059.915
+      },
+      "result_handle_finished_ms": {
+        "n": 5,
+        "p50_ms": 21788.161,
+        "p95_ms": 21957.0
+      }
+    }
+  },
+  "correction_onset_latencies_ms": {
+    "last_old_correlated_pcm_ms": {
+      "n": 5,
+      "p50_ms": 739.891,
+      "p95_ms": 759.874
+    },
+    "next_below_threshold_frame_ms": {
+      "n": 5,
+      "p50_ms": 759.778,
+      "p95_ms": 779.872
+    },
+    "user_speaking_event_ms": {
+      "n": 5,
+      "p50_ms": 209.638,
+      "p95_ms": 249.857
+    },
+    "agent_listening_event_ms": {
+      "n": 5,
+      "p50_ms": 659.512,
+      "p95_ms": 696.521
+    },
+    "coordinator_interruption_requested_ms": {
+      "n": 5,
+      "p50_ms": 3427.975,
+      "p95_ms": 3512.249
+    }
+  },
+  "observations": [
+    {
+      "run": "rtc-baseline-run1",
+      "review": "rtc-baseline-run1/transport-review.json",
+      "checks_pass": true,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 87717.564784,
+          "speech_end_monotonic": 87718.82478400001,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1674.836,
+            "ack_text_ms": 2379.292,
+            "result_text_ms": 20605.723,
+            "first_tool_notification_ms": 14573.938,
+            "navigation_dispatch_notification_ms": 17075.494,
+            "navigation_success_notification_ms": 17077.496,
+            "first_ack_pcm_ms": 3245.683,
+            "first_result_pcm_ms": 21684.15,
+            "result_handle_finished_ms": 27963.343
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:262",
+            "ack_text_ms": "events.jsonl:266",
+            "result_text_ms": "events.jsonl:304",
+            "first_tool_notification_ms": "events.jsonl:290",
+            "navigation_dispatch_notification_ms": "events.jsonl:298",
+            "navigation_success_notification_ms": "events.jsonl:300",
+            "first_ack_pcm_ms": "frames.jsonl:227",
+            "first_result_pcm_ms": "frames.jsonl:1149",
+            "result_handle_finished_ms": "events.jsonl:312"
+          },
+          "max_input_capture_lateness_ms": 4.395
+        }
+      ],
+      "interruption": null
+    },
+    {
+      "run": "rtc-correction-run1",
+      "review": "rtc-correction-run1/transport-review.json",
+      "checks_pass": true,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 87804.55626833299,
+          "speech_end_monotonic": 87805.816268333,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1663.759,
+            "ack_text_ms": 2368.987,
+            "result_text_ms": 8355.403,
+            "first_tool_notification_ms": 5052.442,
+            "navigation_dispatch_notification_ms": 7554.601,
+            "navigation_success_notification_ms": 7554.94,
+            "first_ack_pcm_ms": 2960.39,
+            "first_result_pcm_ms": 9321.545,
+            "result_handle_finished_ms": null
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:262",
+            "ack_text_ms": "events.jsonl:266",
+            "result_text_ms": "events.jsonl:302",
+            "first_tool_notification_ms": "events.jsonl:290",
+            "navigation_dispatch_notification_ms": "events.jsonl:298",
+            "navigation_success_notification_ms": "events.jsonl:300",
+            "first_ack_pcm_ms": "frames.jsonl:213",
+            "first_result_pcm_ms": "frames.jsonl:531",
+            "result_handle_finished_ms": null
+          },
+          "max_input_capture_lateness_ms": 10.056
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 87815.178157875,
+          "speech_end_monotonic": 87816.95815787501,
+          "transcript": "Actually, go to the office instead.",
+          "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+          "metrics": {
+            "transcript_ms": 1568.097,
+            "ack_text_ms": 2273.967,
+            "result_text_ms": 12719.472,
+            "first_tool_notification_ms": 7289.134,
+            "navigation_dispatch_notification_ms": 9801.66,
+            "navigation_success_notification_ms": 9806.956,
+            "first_ack_pcm_ms": 2917.579,
+            "first_result_pcm_ms": 13779.815,
+            "result_handle_finished_ms": 21661.357
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:617",
+            "ack_text_ms": "events.jsonl:621",
+            "result_text_ms": "events.jsonl:659",
+            "first_tool_notification_ms": "events.jsonl:647",
+            "navigation_dispatch_notification_ms": "events.jsonl:655",
+            "navigation_success_notification_ms": "events.jsonl:657",
+            "first_ack_pcm_ms": "frames.jsonl:768",
+            "first_result_pcm_ms": "frames.jsonl:1311",
+            "result_handle_finished_ms": "events.jsonl:667"
+          },
+          "max_input_capture_lateness_ms": 1.97
+        }
+      ],
+      "interruption": {
+        "origin": "correction input threshold speech onset",
+        "metrics": {
+          "last_old_correlated_pcm_ms": 736.622,
+          "next_below_threshold_frame_ms": 757.1,
+          "user_speaking_event_ms": 194.422,
+          "agent_listening_event_ms": 641.088,
+          "coordinator_interruption_requested_ms": 3347.174
+        },
+        "last_old_frame": "frames.jsonl:570",
+        "following_frame": "frames.jsonl:571",
+        "last_old_pcm_after_user_speaking_ms": 542.2,
+        "untagged_tail_after_recorder_last_ms": 99.325,
+        "old_handle_state": "interruption_requested",
+        "next_frame_rms_db": -65.63547706021075,
+        "quiet_before_next_utterance_queue_ms": 3297.318
+      }
+    },
+    {
+      "run": "rtc-baseline-repeat2",
+      "review": "rtc-baseline-repeat2/transport-review.json",
+      "checks_pass": false,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88030.879541041,
+          "speech_end_monotonic": 88032.139541041,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1654.328,
+            "ack_text_ms": 2369.567,
+            "result_text_ms": 10665.56,
+            "first_tool_notification_ms": 5271.116,
+            "navigation_dispatch_notification_ms": 7775.52,
+            "navigation_success_notification_ms": 7778.297,
+            "first_ack_pcm_ms": 2995.113,
+            "first_result_pcm_ms": 11935.476,
+            "result_handle_finished_ms": 18216.082
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:261",
+            "ack_text_ms": "events.jsonl:265",
+            "result_text_ms": "events.jsonl:301",
+            "first_tool_notification_ms": "events.jsonl:289",
+            "navigation_dispatch_notification_ms": "events.jsonl:297",
+            "navigation_success_notification_ms": "events.jsonl:299",
+            "first_ack_pcm_ms": "frames.jsonl:215",
+            "first_result_pcm_ms": "frames.jsonl:662",
+            "result_handle_finished_ms": "events.jsonl:309"
+          },
+          "max_input_capture_lateness_ms": 1.887
+        }
+      ],
+      "interruption": null
+    },
+    {
+      "run": "rtc-correction-repeat2",
+      "review": "rtc-correction-repeat2/transport-review.json",
+      "checks_pass": false,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88052.287339666,
+          "speech_end_monotonic": 88053.54733966601,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1647.523,
+            "ack_text_ms": 2351.155,
+            "result_text_ms": 8394.535,
+            "first_tool_notification_ms": 5073.291,
+            "navigation_dispatch_notification_ms": 7578.243,
+            "navigation_success_notification_ms": 7578.555,
+            "first_ack_pcm_ms": 2926.302,
+            "first_result_pcm_ms": 9446.199,
+            "result_handle_finished_ms": null
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:261",
+            "ack_text_ms": "events.jsonl:265",
+            "result_text_ms": "events.jsonl:301",
+            "first_tool_notification_ms": "events.jsonl:289",
+            "navigation_dispatch_notification_ms": "events.jsonl:297",
+            "navigation_success_notification_ms": "events.jsonl:299",
+            "first_ack_pcm_ms": "frames.jsonl:211",
+            "first_result_pcm_ms": "frames.jsonl:537",
+            "result_handle_finished_ms": null
+          },
+          "max_input_capture_lateness_ms": 2.111
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 88063.033668875,
+          "speech_end_monotonic": 88064.81366887501,
+          "transcript": "Actually, go to the office instead.",
+          "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+          "metrics": {
+            "transcript_ms": 1733.167,
+            "ack_text_ms": 2436.991,
+            "result_text_ms": 12861.486,
+            "first_tool_notification_ms": 7434.248,
+            "navigation_dispatch_notification_ms": 9937.977,
+            "navigation_success_notification_ms": 9938.397,
+            "first_ack_pcm_ms": 3059.814,
+            "first_result_pcm_ms": 13900.129,
+            "result_handle_finished_ms": 21788.161
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:616",
+            "ack_text_ms": "events.jsonl:620",
+            "result_text_ms": "events.jsonl:658",
+            "first_tool_notification_ms": "events.jsonl:646",
+            "navigation_dispatch_notification_ms": "events.jsonl:654",
+            "navigation_success_notification_ms": "events.jsonl:656",
+            "first_ack_pcm_ms": "frames.jsonl:781",
+            "first_result_pcm_ms": "frames.jsonl:1323",
+            "result_handle_finished_ms": "events.jsonl:666"
+          },
+          "max_input_capture_lateness_ms": 1.788
+        }
+      ],
+      "interruption": {
+        "origin": "correction input threshold speech onset",
+        "metrics": {
+          "last_old_correlated_pcm_ms": 739.891,
+          "next_below_threshold_frame_ms": 759.916,
+          "user_speaking_event_ms": 246.892,
+          "agent_listening_event_ms": 694.531,
+          "coordinator_interruption_requested_ms": 3512.249
+        },
+        "last_old_frame": "frames.jsonl:576",
+        "following_frame": "frames.jsonl:577",
+        "last_old_pcm_after_user_speaking_ms": 493.0,
+        "untagged_tail_after_recorder_last_ms": 60.322,
+        "old_handle_state": "interruption_requested",
+        "next_frame_rms_db": -41.436738053387565,
+        "quiet_before_next_utterance_queue_ms": 3457.482
+      }
+    },
+    {
+      "run": "rtc-baseline-repeat3",
+      "review": "rtc-baseline-repeat3/transport-review.json",
+      "checks_pass": true,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88088.594223041,
+          "speech_end_monotonic": 88089.85422304101,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1665.467,
+            "ack_text_ms": 2373.18,
+            "result_text_ms": 10590.88,
+            "first_tool_notification_ms": 5196.987,
+            "navigation_dispatch_notification_ms": 7703.855,
+            "navigation_success_notification_ms": 7704.084,
+            "first_ack_pcm_ms": 2938.654,
+            "first_result_pcm_ms": 11718.638,
+            "result_handle_finished_ms": 18005.933
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:262",
+            "ack_text_ms": "events.jsonl:266",
+            "result_text_ms": "events.jsonl:302",
+            "first_tool_notification_ms": "events.jsonl:290",
+            "navigation_dispatch_notification_ms": "events.jsonl:298",
+            "navigation_success_notification_ms": "events.jsonl:300",
+            "first_ack_pcm_ms": "frames.jsonl:212",
+            "first_result_pcm_ms": "frames.jsonl:651",
+            "result_handle_finished_ms": "events.jsonl:310"
+          },
+          "max_input_capture_lateness_ms": 2.048
+        }
+      ],
+      "interruption": null
+    },
+    {
+      "run": "rtc-correction-repeat3",
+      "review": "rtc-correction-repeat3/transport-review.json",
+      "checks_pass": false,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88109.860969583,
+          "speech_end_monotonic": 88111.120969583,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1646.729,
+            "ack_text_ms": 2352.006,
+            "result_text_ms": 8424.716,
+            "first_tool_notification_ms": 5018.357,
+            "navigation_dispatch_notification_ms": 7521.488,
+            "navigation_success_notification_ms": 7521.954,
+            "first_ack_pcm_ms": 2899.244,
+            "first_result_pcm_ms": 9399.306,
+            "result_handle_finished_ms": null
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:261",
+            "ack_text_ms": "events.jsonl:265",
+            "result_text_ms": "events.jsonl:301",
+            "first_tool_notification_ms": "events.jsonl:289",
+            "navigation_dispatch_notification_ms": "events.jsonl:297",
+            "navigation_success_notification_ms": "events.jsonl:299",
+            "first_ack_pcm_ms": "frames.jsonl:210",
+            "first_result_pcm_ms": "frames.jsonl:535",
+            "result_handle_finished_ms": null
+          },
+          "max_input_capture_lateness_ms": 13.984
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 88120.560560291,
+          "speech_end_monotonic": 88122.340560291,
+          "transcript": "Actually, go to the office instead.",
+          "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+          "metrics": {
+            "transcript_ms": 1641.187,
+            "ack_text_ms": 2349.419,
+            "result_text_ms": 12749.36,
+            "first_tool_notification_ms": 7376.347,
+            "navigation_dispatch_notification_ms": 9882.423,
+            "navigation_success_notification_ms": 9882.792,
+            "first_ack_pcm_ms": 3059.704,
+            "first_result_pcm_ms": 13919.655,
+            "result_handle_finished_ms": 21799.388
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:616",
+            "ack_text_ms": "events.jsonl:620",
+            "result_text_ms": "events.jsonl:658",
+            "first_tool_notification_ms": "events.jsonl:646",
+            "navigation_dispatch_notification_ms": "events.jsonl:654",
+            "navigation_success_notification_ms": "events.jsonl:656",
+            "first_ack_pcm_ms": "frames.jsonl:779",
+            "first_result_pcm_ms": "frames.jsonl:1322",
+            "result_handle_finished_ms": "events.jsonl:666"
+          },
+          "max_input_capture_lateness_ms": 0.525
+        }
+      ],
+      "interruption": {
+        "origin": "correction input threshold speech onset",
+        "metrics": {
+          "last_old_correlated_pcm_ms": 739.651,
+          "next_below_threshold_frame_ms": 759.589,
+          "user_speaking_event_ms": 209.638,
+          "agent_listening_event_ms": 659.512,
+          "coordinator_interruption_requested_ms": 3420.248
+        },
+        "last_old_frame": "frames.jsonl:574",
+        "following_frame": "frames.jsonl:575",
+        "last_old_pcm_after_user_speaking_ms": 530.013,
+        "untagged_tail_after_recorder_last_ms": 80.354,
+        "old_handle_state": "interruption_requested",
+        "next_frame_rms_db": -54.28549315183623,
+        "quiet_before_next_utterance_queue_ms": 3371.869
+      }
+    },
+    {
+      "run": "rtc-baseline-repeat4",
+      "review": "rtc-baseline-repeat4/transport-review.json",
+      "checks_pass": false,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88146.103906541,
+          "speech_end_monotonic": 88147.36390654101,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1624.119,
+            "ack_text_ms": 2332.663,
+            "result_text_ms": 10592.075,
+            "first_tool_notification_ms": 5170.974,
+            "navigation_dispatch_notification_ms": 7676.852,
+            "navigation_success_notification_ms": 7677.291,
+            "first_ack_pcm_ms": 2918.948,
+            "first_result_pcm_ms": 11618.969,
+            "result_handle_finished_ms": 17922.425
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:261",
+            "ack_text_ms": "events.jsonl:265",
+            "result_text_ms": "events.jsonl:301",
+            "first_tool_notification_ms": "events.jsonl:289",
+            "navigation_dispatch_notification_ms": "events.jsonl:297",
+            "navigation_success_notification_ms": "events.jsonl:299",
+            "first_ack_pcm_ms": "frames.jsonl:211",
+            "first_result_pcm_ms": "frames.jsonl:646",
+            "result_handle_finished_ms": "events.jsonl:309"
+          },
+          "max_input_capture_lateness_ms": 2.056
+        }
+      ],
+      "interruption": null
+    },
+    {
+      "run": "rtc-correction-repeat4",
+      "review": "rtc-correction-repeat4/transport-review.json",
+      "checks_pass": true,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88167.326022125,
+          "speech_end_monotonic": 88168.586022125,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1680.921,
+            "ack_text_ms": 2410.104,
+            "result_text_ms": 8361.514,
+            "first_tool_notification_ms": 5015.052,
+            "navigation_dispatch_notification_ms": 7522.73,
+            "navigation_success_notification_ms": 7525.204,
+            "first_ack_pcm_ms": 2946.83,
+            "first_result_pcm_ms": 9346.847,
+            "result_handle_finished_ms": null
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:262",
+            "ack_text_ms": "events.jsonl:266",
+            "result_text_ms": "events.jsonl:302",
+            "first_tool_notification_ms": "events.jsonl:290",
+            "navigation_dispatch_notification_ms": "events.jsonl:298",
+            "navigation_success_notification_ms": "events.jsonl:300",
+            "first_ack_pcm_ms": "frames.jsonl:212",
+            "first_result_pcm_ms": "frames.jsonl:532",
+            "result_handle_finished_ms": null
+          },
+          "max_input_capture_lateness_ms": 2.124
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 88177.97303066599,
+          "speech_end_monotonic": 88179.753030666,
+          "transcript": "Actually, go to the office instead.",
+          "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+          "metrics": {
+            "transcript_ms": 1722.595,
+            "ack_text_ms": 2428.413,
+            "result_text_ms": 13009.525,
+            "first_tool_notification_ms": 7561.413,
+            "navigation_dispatch_notification_ms": 10067.018,
+            "navigation_success_notification_ms": 10067.12,
+            "first_ack_pcm_ms": 3339.898,
+            "first_result_pcm_ms": 14059.915,
+            "result_handle_finished_ms": 21957.0
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:617",
+            "ack_text_ms": "events.jsonl:621",
+            "result_text_ms": "events.jsonl:659",
+            "first_tool_notification_ms": "events.jsonl:647",
+            "navigation_dispatch_notification_ms": "events.jsonl:655",
+            "navigation_success_notification_ms": "events.jsonl:657",
+            "first_ack_pcm_ms": "frames.jsonl:790",
+            "first_result_pcm_ms": "frames.jsonl:1326",
+            "result_handle_finished_ms": "events.jsonl:667"
+          },
+          "max_input_capture_lateness_ms": 18.957
+        }
+      ],
+      "interruption": {
+        "origin": "correction input threshold speech onset",
+        "metrics": {
+          "last_old_correlated_pcm_ms": 759.874,
+          "next_below_threshold_frame_ms": 779.872,
+          "user_speaking_event_ms": 249.857,
+          "agent_listening_event_ms": 696.521,
+          "coordinator_interruption_requested_ms": 3501.662
+        },
+        "last_old_frame": "frames.jsonl:572",
+        "following_frame": "frames.jsonl:573",
+        "last_old_pcm_after_user_speaking_ms": 510.017,
+        "untagged_tail_after_recorder_last_ms": 79.377,
+        "old_handle_state": "interruption_requested",
+        "next_frame_rms_db": -58.70036966230187,
+        "quiet_before_next_utterance_queue_ms": 3428.668
+      }
+    },
+    {
+      "run": "rtc-baseline-repeat5",
+      "review": "rtc-baseline-repeat5/transport-review.json",
+      "checks_pass": true,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88203.64552116599,
+          "speech_end_monotonic": 88204.905521166,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1632.199,
+            "ack_text_ms": 2334.716,
+            "result_text_ms": 10544.744,
+            "first_tool_notification_ms": 5148.835,
+            "navigation_dispatch_notification_ms": 7661.258,
+            "navigation_success_notification_ms": 7666.047,
+            "first_ack_pcm_ms": 2882.843,
+            "first_result_pcm_ms": 11569.356,
+            "result_handle_finished_ms": 17836.056
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:262",
+            "ack_text_ms": "events.jsonl:266",
+            "result_text_ms": "events.jsonl:302",
+            "first_tool_notification_ms": "events.jsonl:290",
+            "navigation_dispatch_notification_ms": "events.jsonl:298",
+            "navigation_success_notification_ms": "events.jsonl:300",
+            "first_ack_pcm_ms": "frames.jsonl:209",
+            "first_result_pcm_ms": "frames.jsonl:643",
+            "result_handle_finished_ms": "events.jsonl:310"
+          },
+          "max_input_capture_lateness_ms": 2.332
+        }
+      ],
+      "interruption": null
+    },
+    {
+      "run": "rtc-correction-repeat5",
+      "review": "rtc-correction-repeat5/transport-review.json",
+      "checks_pass": false,
+      "turns": [
+        {
+          "intent_version": 1,
+          "input": "initial",
+          "speech_onset_monotonic": 88224.721719875,
+          "speech_end_monotonic": 88225.98171987501,
+          "transcript": "Navigate to the airport.",
+          "declared_result": "Navigation to Kempegowda International Airport has started. The estimated time of arrival is 88 minutes.",
+          "metrics": {
+            "transcript_ms": 1653.829,
+            "ack_text_ms": 2363.581,
+            "result_text_ms": 8417.674,
+            "first_tool_notification_ms": 4994.841,
+            "navigation_dispatch_notification_ms": 7498.234,
+            "navigation_success_notification_ms": 7500.097,
+            "first_ack_pcm_ms": 2916.748,
+            "first_result_pcm_ms": 9396.683,
+            "result_handle_finished_ms": null
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:261",
+            "ack_text_ms": "events.jsonl:265",
+            "result_text_ms": "events.jsonl:301",
+            "first_tool_notification_ms": "events.jsonl:289",
+            "navigation_dispatch_notification_ms": "events.jsonl:297",
+            "navigation_success_notification_ms": "events.jsonl:299",
+            "first_ack_pcm_ms": "frames.jsonl:211",
+            "first_result_pcm_ms": "frames.jsonl:535",
+            "result_handle_finished_ms": null
+          },
+          "max_input_capture_lateness_ms": 0.91
+        },
+        {
+          "intent_version": 2,
+          "input": "correction",
+          "speech_onset_monotonic": 88235.418560166,
+          "speech_end_monotonic": 88237.19856016601,
+          "transcript": "Actually, go to the office instead.",
+          "declared_result": "The navigation has started to the Office (Manyata Tech Park). The previous destination, Kempegowda International Airport, has been replaced.",
+          "metrics": {
+            "transcript_ms": 1649.55,
+            "ack_text_ms": 2356.467,
+            "result_text_ms": 12689.168,
+            "first_tool_notification_ms": 7343.673,
+            "navigation_dispatch_notification_ms": 9848.057,
+            "navigation_success_notification_ms": 9849.994,
+            "first_ack_pcm_ms": 2939.783,
+            "first_result_pcm_ms": 13760.916,
+            "result_handle_finished_ms": 21642.766
+          },
+          "references": {
+            "transcript_ms": "events.jsonl:616",
+            "ack_text_ms": "events.jsonl:620",
+            "result_text_ms": "events.jsonl:658",
+            "first_tool_notification_ms": "events.jsonl:646",
+            "navigation_dispatch_notification_ms": "events.jsonl:654",
+            "navigation_success_notification_ms": "events.jsonl:656",
+            "first_ack_pcm_ms": "frames.jsonl:773",
+            "first_result_pcm_ms": "frames.jsonl:1314",
+            "result_handle_finished_ms": "events.jsonl:666"
+          },
+          "max_input_capture_lateness_ms": 1.02
+        }
+      ],
+      "interruption": {
+        "origin": "correction input threshold speech onset",
+        "metrics": {
+          "last_old_correlated_pcm_ms": 740.525,
+          "next_below_threshold_frame_ms": 759.778,
+          "user_speaking_event_ms": 191.759,
+          "agent_listening_event_ms": 640.985,
+          "coordinator_interruption_requested_ms": 3427.975
+        },
+        "last_old_frame": "frames.jsonl:574",
+        "following_frame": "frames.jsonl:575",
+        "last_old_pcm_after_user_speaking_ms": 548.766,
+        "untagged_tail_after_recorder_last_ms": 100.911,
+        "old_handle_state": "interruption_requested",
+        "next_frame_rms_db": -65.913566600977,
+        "quiet_before_next_utterance_queue_ms": 3377.087
+      }
+    }
+  ],
+  "limitations": [
+    "Ten serial synthetic trials: five baseline and five correction, including both pilots. Repeated identical inputs, warmed shared processes, fixed ordering and cache confounds; not held-out, human-driving or independent trial evidence.",
+    "Five captures omit only the initial server agent_state=listening event before session_started. Exact whole-trace equality fails for those trials; all later server events match. Correct tool effects do not erase this capture-completeness limitation.",
+    "Timing subtracts same-client monotonic observations from scheduled threshold speech end/onset. Input boundaries use 20ms frames at RMS >= -40dBFS, not human phoneme annotations. Capture lateness and queueing are separate from the schedule.",
+    "tool_started/dispatch-log starts mark intention before backend entry; tool_done reports simulated backend success. Client receipt adds data delivery delay. Server wall timestamps are not subtracted from client monotonic values.",
+    "Text/intent is matched to speech handles by adjacent event order; PCM has no utterance ID. One output track and nonoverlapping utterance windows support heuristic correlation, not exact text-to-RTP alignment or intelligibility.",
+    "Old-result activity scans ALL threshold-exceeding frames before the next utterance queue, including frames the recorder stopped tagging after agent_state became listening. Last-frame arrival and following quiet-frame arrival are transport observations, not physical audible-stop bounds.",
+    "interruption_requested is the coordinator's later request at finalized text, not confirmed playback cancellation or the time PCM ceased. Earlier cessation is consistent with SDK speech interruption; this capture does not directly identify its internal cause.",
+    "Received speech is assessed separately in received-speech-review; no audio inference occurs in this audit. Declared grounded text and non-silent PCM alone do not establish complete, intelligible speech. Shared worker logs contain phonemizer word-count warnings during result synthesis.",
+    "Exact concatenated WAVs preserve every received sample and existing silence, but insert no callback-arrival gaps. They are not reconstructed playout timelines. No microphone echo, speaker output, road noise or WAN behavior is measured."
+  ]
+}

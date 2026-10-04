@@ -1,0 +1,127 @@
+{
+  "status": "failed",
+  "started_at": "2026-09-26T07:42:48.035809+00:00",
+  "command": [
+    "scripts/local_livekit_audio_experiment.py",
+    "--input",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/audio-assets/navigate.wav",
+    "--out",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/rtc-baseline-1",
+    "--worker-manifest",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/worker-manifest.json",
+    "--protocol",
+    "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/protocol.json",
+    "--ready-timeout",
+    "45",
+    "--response-timeout",
+    "60",
+    "--probe-observation-seconds",
+    "12"
+  ],
+  "room": "car-audio-2423903b4eb44a2f8c02090d0ad6a2f3",
+  "config": {
+    "url": "ws://127.0.0.1:7880",
+    "ready_timeout": 45.0,
+    "response_timeout": 60.0,
+    "probe_observation_seconds": null,
+    "quiet_seconds": 1,
+    "threshold_db": -40,
+    "frame_ms": 20,
+    "capture_rate": 24000,
+    "trailing_silence_max_seconds": 1.0,
+    "result_attribution_quiet_boundary_seconds": 0.15
+  },
+  "packages": {
+    "livekit": "1.1.18",
+    "livekit-api": "1.2.1",
+    "livekit-agents": "1.8.3"
+  },
+  "python": "3.11.13 (main, Jul  8 2025, 20:42:09) [Clang 20.1.4 ]",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "inputs": [
+    {
+      "label": "initial",
+      "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/audio-assets/navigate.wav",
+      "file": "initial.wav",
+      "sha256": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+      "sample_rate": 24000,
+      "samples": 34304,
+      "duration_seconds": 1.4293333333333333,
+      "activity_start_sample": 1440,
+      "activity_end_sample": 31680
+    }
+  ],
+  "tracks": [
+    {
+      "sid": "TR_AMMZThXMADPRJc",
+      "participant": "agent-AJ_MNE3ajj4cExY",
+      "file": "received-1.pcm",
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_bytes": 2
+    }
+  ],
+  "limitations": [
+    "Frame arrival and PCM activity are client transport evidence, not physical audible timing.",
+    "PCM files preserve received frame order; frame JSONL supplies arrival timestamps and gaps. Do not treat concatenated PCM as a wall-clock timeline.",
+    "Speech attribution uses adjacent agent_say/speech_handle event order plus a client quiet boundary. Concurrent/unmatched speech is rejected, but RTP/data cross-channel attribution remains heuristic.",
+    "Completion means current result handle finished plus observed client quiet tail; it is not a navigation accuracy score.",
+    "Synthetic prerecorded input has no microphone/speaker echo path; no FDB input or scoring changes.",
+    "Loopback transport does not imply air-gapped SDK behavior; default ICE/STUN services may be contacted.",
+    "Source hashes describe this checkout; only a provided worker receipt and observed session events describe the separate worker."
+  ],
+  "source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/config.py": "0c4f4fdee581aa2806931da1f1af8b6d7201ed8e294d28a8ce32173addc0bfa8",
+    "agent/coordinator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/coordinator/coordinator.py": "b0d6fc718eb7ed5a8ad891aa98856c2de117dd707cd216c96d0d1f22f579d0d3",
+    "agent/coordinator/events.py": "e6db64b849f5edb500335c13a21379b78f1e72ef1b192dcf3bba3065d7ae4167",
+    "agent/coordinator/executor.py": "220206c121ac447737989c04efe4e436de81fc36e77e117f2b7649a2a3858bae",
+    "agent/coordinator/ledger.py": "d0405e9eef7c82b8315a211bc0006fa0f3992000b5b96d9442a255974026df4f",
+    "agent/coordinator/llm_client.py": "d7f843fe98bd6b32f5b1aff24e73a0dbbf55affbdb7ceb6960a592b1bd8d2b39",
+    "agent/coordinator/normalize.py": "64befe8e1523969c88bcebd78ec2ea397e583e51442e80eb774ceb4784aca2b6",
+    "agent/coordinator/refs.py": "9b5430b21947dc0d83569e6ab7224adcdd7ed47464ddcde0b56b153b7ee47933",
+    "agent/coordinator/resolver.py": "04df4a7fcf6cc6c161b51fb0b067f18b73a8808901b53a6d85b8388eb92f42c5",
+    "agent/coordinator/responder.py": "09cd6a94d0422f4eb9a55106aaa788955e10370347b879476b5fb2f735921f14",
+    "agent/main.py": "0fa84675076a8feb0e370669db9e04b2a41d72af7bb109067dbca180aee94085",
+    "agent/model_assets.py": "e2b191ea7f6bfab96b08c2f491d2fadf2e96a0b45657387a14b5ac729219d5c8",
+    "agent/pipeline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/pipeline/local_stt.py": "796d12a354da950ae748ba004c18fb7186e85d811b68e740641542482bb5420c",
+    "agent/pipeline/local_tts.py": "0e0dcde8e2f6c2c8ea183af3ecb69689d182c7e813058d5e0b3a449b17e6d9d2",
+    "agent/telemetry/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/telemetry/fdb_logger.py": "7cd3d75662953da2e2824d8837e73a7e512b4b12a17fa1ec08199f577eb875af",
+    "agent/telemetry/trace_writer.py": "afe791cf53869beaf8d16bb98e220acc6329f53aa9514081aa84a1260909aafd",
+    "agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/tools/bench_tools.py": "f32af6579ca6ed79d1a2270c98004866badceb4a58cfaf631f7ddb270aa1c7c6",
+    "agent/tools/car_tools.py": "583406a83357047a0d6cf19d2c26a8b6c8274342eac39d40ac1d162dd22fb4c6",
+    "agent/tools/manifest.py": "ed6971b2b29aae4916a1a8d8a45a3638356ee430c6fd1dc3b87a25404277f979",
+    "agent/config.yaml": "bbe7f0c8274b02680ac43d9e8dcc7297fb52c6e8153fd7f8f2fd5de76800b923",
+    "scripts/local_livekit_audio_experiment.py": "0207efe7e07d96d2b4df984192a61397dd5b6ad482d0f8b1aea5b7f623448c11"
+  },
+  "worker_manifest": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/local-stack-run1/worker-manifest.json",
+    "sha256": "a8ffb1e82baee4d528d08c0969255f18ff2f283a344ca2975f4e81197140f66f"
+  },
+  "protocol": {
+    "source": "/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/results/iteration12/protocol.json",
+    "sha256": "1b9a04c94ce883430feb59a92517c8a7ebe4cb984e1c9fedd3ae79af6ade4a65"
+  },
+  "failed_stage": "connect_and_session_ready",
+  "error": "TimeoutError()",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 371, in run\n    await wait_observation(lambda: state.ready, changed, time.monotonic() + args.ready_timeout, errors)\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 190, in wait_observation\n    await asyncio.wait_for(changed.wait(), min(0.1, remaining))\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/tasks.py\", line 476, in wait_for\n    await waiter\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/rithikmeedinti/.codex/.chatgpt-projects/g-p-6ab6993b9c5c819198e46c20f84194b9/prism-duplex/scripts/local_livekit_audio_experiment.py\", line 360, in run\n    async with asyncio.timeout(args.ready_timeout):\n  File \"/Users/rithikmeedinti/.local/share/uv/python/cpython-3.11.13-macos-aarch64-none/lib/python3.11/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n",
+  "cleanup_errors": [],
+  "finished_at": "2026-09-26T07:43:33.073277+00:00",
+  "event_counts": {
+    "user_state": 1
+  },
+  "speech_handles": [],
+  "receiver_errors": [],
+  "artifact_sha256": {
+    "initial.wav": "3a5bea0babe94ed9c0db56349bbabd4cab3693e5e113583a4efe873774a84d54",
+    "worker_manifest.json": "a8ffb1e82baee4d528d08c0969255f18ff2f283a344ca2975f4e81197140f66f",
+    "events.jsonl": "47a7b4beb329a27362520e80e13dd93a2f1ef001b0fe2ecc910b25d095888208",
+    "frames.jsonl": "126e72ce4be0c9e20e52cc5ac73adf1224f295f61cb548df3fdbfb7dbc551ad0",
+    "protocol.json": "1b9a04c94ce883430feb59a92517c8a7ebe4cb984e1c9fedd3ae79af6ade4a65",
+    "received-1.pcm": "c5c459395f4c7dc11d816b4789f0a74e9eb3227355599ba9e9a63f0e8e205793"
+  }
+}

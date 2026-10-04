@@ -1,0 +1,624 @@
+{
+  "created_at_utc": "2026-09-26T07:35:32.009419+00:00",
+  "scope": "Installed SDK, matching tagged server source and two fake-channel trials; no models, live services, production edits or historical artifact modifications.",
+  "conclusion": "Server JS_FAILED is recorded at agent-participant departure, before application shutdown callbacks finish. SDK success reporting follows job-thread completion, leaving a close-order race across separate room and worker signaling. Cleanup success and worker exit0 remain distinct observations. Neither server JS_FAILED nor later SDK JS_SUCCESS alone proves application cleanup: the component trial with a raising cleanup callback still queued SDK JS_SUCCESS.",
+  "versions": {
+    "livekit_agents": "1.8.3",
+    "livekit_python_rtc": "1.1.18",
+    "server_homebrew_version": "1.13.7",
+    "server_source_tag": "v1.13.7",
+    "evidence": "Version-based binary-to-tag correspondence only: the Homebrew receipt reports 1.13.7 and upstream worker.go job-ended line 556 matches actual logs. The installed server binary was not rebuilt or verified against this source snapshot."
+  },
+  "installed_sdk_chain": [
+    {
+      "fact": "JobContext.shutdown resolves the local shutdown future; it does not publish a terminal status.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/job.py",
+          "lines": [
+            871,
+            872
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py",
+          "lines": [
+            299,
+            307
+          ]
+        }
+      ]
+    },
+    {
+      "fact": "_shutdown_job closes the session, sends IPC ShuttingDown/Exiting, disconnects the room, THEN awaits application shutdown callbacks.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py",
+          "lines": [
+            422,
+            506
+          ]
+        }
+      ]
+    },
+    {
+      "fact": "The executor logs Exiting but sets SUCCESS only after thread join and IPC teardown. The pool emits process_closed after proc.join; the worker then schedules a status update.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py",
+          "lines": [
+            280,
+            306
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py",
+          "lines": [
+            329,
+            339
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/ipc/proc_pool.py",
+          "lines": [
+            274,
+            280
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+          "lines": [
+            815,
+            836
+          ]
+        }
+      ]
+    },
+    {
+      "fact": "SUCCESS maps to JS_SUCCESS. _queue_msg only enqueues; a separate websocket task sends, without terminal acknowledgement.",
+      "refs": [
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+          "lines": [
+            1580,
+            1596
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+          "lines": [
+            1116,
+            1126
+          ]
+        },
+        {
+          "path": ".venv/lib/python3.11/site-packages/livekit/agents/worker.py",
+          "lines": [
+            1233,
+            1242
+          ]
+        }
+      ]
+    }
+  ],
+  "server_chain": [
+    {
+      "fact": "Agent participant removal requests AGENT_LEFT_ROOM termination.",
+      "refs": [
+        {
+          "path": "results/iteration12/upstream-source/pkg__rtc__room.go",
+          "lines": [
+            1478,
+            1487
+          ]
+        }
+      ],
+      "url": "https://github.com/livekit/livekit/blob/v1.13.7/pkg/rtc/room.go#L1478"
+    },
+    {
+      "fact": "TerminateJob maps AGENT_LEFT_ROOM to JS_FAILED with the observed error. Terminal updates remove the active job; a later update cannot replace it.",
+      "refs": [
+        {
+          "path": "results/iteration12/upstream-source/pkg__agent__worker.go",
+          "lines": [
+            445,
+            472
+          ]
+        },
+        {
+          "path": "results/iteration12/upstream-source/pkg__agent__worker.go",
+          "lines": [
+            520,
+            559
+          ]
+        }
+      ],
+      "url": "https://github.com/livekit/livekit/blob/v1.13.7/pkg/agent/worker.go#L445"
+    },
+    {
+      "fact": "The service forwards room termination to the owning worker and separately unregisters terminal status updates.",
+      "refs": [
+        {
+          "path": "results/iteration12/upstream-source/pkg__service__agentservice.go",
+          "lines": [
+            467,
+            484
+          ]
+        },
+        {
+          "path": "results/iteration12/upstream-source/pkg__service__agentservice.go",
+          "lines": [
+            569,
+            580
+          ]
+        }
+      ],
+      "url": "https://github.com/livekit/livekit/blob/v1.13.7/pkg/service/agentservice.go#L467"
+    }
+  ],
+  "observed_iteration11_cases": [
+    {
+      "trial": "rtc-waypoint-1",
+      "room": "car-audio-e1127c9410504599bdab000671d7f86a",
+      "job_id": "AJ_8TK7HBBcU6Md",
+      "server_agent_departure": {
+        "line": 25,
+        "timestamp": "2026-09-26T12:40:49.333+0530",
+        "message": "participant closing",
+        "data": {
+          "room": "car-audio-e1127c9410504599bdab000671d7f86a",
+          "roomID": "RM_f7Rq3DhVt3zK",
+          "participant": "agent-AJ_8TK7HBBcU6Md",
+          "participantID": "PA_gFbvWxzdVnxD",
+          "remote": false,
+          "sendLeave": true,
+          "reason": "CLIENT_REQUEST_LEAVE",
+          "isExpectedToResume": false,
+          "clientInfo": {
+            "sdk": "PYTHON",
+            "version": "1.1.18",
+            "protocol": 17,
+            "os": "Mac OS",
+            "osVersion": "15.3.1",
+            "deviceModel": "Mac14,9",
+            "clientProtocol": 2,
+            "capabilities": [
+              "CAP_PACKET_TRAILER",
+              "CAP_COMPRESSION_DEFLATE_RAW"
+            ]
+          },
+          "kind": "AGENT",
+          "country": "",
+          "sessionDuration": "41.011123208s"
+        }
+      },
+      "server_terminal_status": {
+        "line": 26,
+        "timestamp": "2026-09-26T12:40:49.335+0530",
+        "message": "job ended",
+        "data": {
+          "workerID": "AW_teTHir7oGhxm",
+          "agentName": "",
+          "deployment": "",
+          "agentID": "",
+          "version": "1.8.3",
+          "jobType": "JT_ROOM",
+          "jobID": "AJ_8TK7HBBcU6Md",
+          "status": "JS_FAILED",
+          "error": "agent worker left the room"
+        }
+      },
+      "application_cleanup": [
+        {
+          "line": 26,
+          "message": "room cleanup started: car-audio-e1127c9410504599bdab000671d7f86a",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:10:49.336542+00:00"
+        },
+        {
+          "line": 28,
+          "message": "room cleanup finished: car-audio-e1127c9410504599bdab000671d7f86a",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:10:49.338776+00:00"
+        }
+      ],
+      "cleanup_start_after_server_terminal_ms": 1.542,
+      "cleanup_finish_after_server_terminal_ms": 3.776,
+      "agent_departed": true
+    },
+    {
+      "trial": "rtc-baseline-1",
+      "room": "car-audio-90789d0efb274a98bcb78ea2d1b62995",
+      "job_id": "AJ_VTweHnVR6QsB",
+      "server_agent_departure": {
+        "line": 51,
+        "timestamp": "2026-09-26T12:41:15.100+0530",
+        "message": "participant closing",
+        "data": {
+          "room": "car-audio-90789d0efb274a98bcb78ea2d1b62995",
+          "roomID": "RM_5XwWdBAZP2jM",
+          "participant": "agent-AJ_VTweHnVR6QsB",
+          "participantID": "PA_JKkJkTz3Ea79",
+          "remote": false,
+          "sendLeave": true,
+          "reason": "CLIENT_REQUEST_LEAVE",
+          "isExpectedToResume": false,
+          "clientInfo": {
+            "sdk": "PYTHON",
+            "version": "1.1.18",
+            "protocol": 17,
+            "os": "Mac OS",
+            "osVersion": "15.3.1",
+            "deviceModel": "Mac14,9",
+            "clientProtocol": 2,
+            "capabilities": [
+              "CAP_PACKET_TRAILER",
+              "CAP_COMPRESSION_DEFLATE_RAW"
+            ]
+          },
+          "kind": "AGENT",
+          "country": "",
+          "sessionDuration": "24.364420833s"
+        }
+      },
+      "server_terminal_status": {
+        "line": 55,
+        "timestamp": "2026-09-26T12:41:15.102+0530",
+        "message": "job ended",
+        "data": {
+          "workerID": "AW_teTHir7oGhxm",
+          "agentName": "",
+          "deployment": "",
+          "agentID": "",
+          "version": "1.8.3",
+          "jobType": "JT_ROOM",
+          "jobID": "AJ_VTweHnVR6QsB",
+          "status": "JS_FAILED",
+          "error": "agent worker left the room"
+        }
+      },
+      "application_cleanup": [
+        {
+          "line": 40,
+          "message": "room cleanup started: car-audio-90789d0efb274a98bcb78ea2d1b62995",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:11:15.103285+00:00"
+        },
+        {
+          "line": 42,
+          "message": "room cleanup finished: car-audio-90789d0efb274a98bcb78ea2d1b62995",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:11:15.104687+00:00"
+        }
+      ],
+      "cleanup_start_after_server_terminal_ms": 1.285,
+      "cleanup_finish_after_server_terminal_ms": 2.687,
+      "agent_departed": true
+    },
+    {
+      "trial": "rtc-waypoint-2",
+      "room": "car-audio-b4daa3c1de7842269dd22215a92d2467",
+      "job_id": "AJ_SChuYs2phuBv",
+      "server_agent_departure": {
+        "line": 78,
+        "timestamp": "2026-09-26T12:42:08.974+0530",
+        "message": "participant closing",
+        "data": {
+          "room": "car-audio-b4daa3c1de7842269dd22215a92d2467",
+          "roomID": "RM_wgQ4sjBTwkHD",
+          "participant": "agent-AJ_SChuYs2phuBv",
+          "participantID": "PA_mtFeAS9aUrX9",
+          "remote": false,
+          "sendLeave": true,
+          "reason": "CLIENT_REQUEST_LEAVE",
+          "isExpectedToResume": false,
+          "clientInfo": {
+            "sdk": "PYTHON",
+            "version": "1.1.18",
+            "protocol": 17,
+            "os": "Mac OS",
+            "osVersion": "15.3.1",
+            "deviceModel": "Mac14,9",
+            "clientProtocol": 2,
+            "capabilities": [
+              "CAP_PACKET_TRAILER",
+              "CAP_COMPRESSION_DEFLATE_RAW"
+            ]
+          },
+          "kind": "AGENT",
+          "country": "",
+          "sessionDuration": "52.39923875s"
+        }
+      },
+      "server_terminal_status": {
+        "line": 80,
+        "timestamp": "2026-09-26T12:42:08.982+0530",
+        "message": "job ended",
+        "data": {
+          "workerID": "AW_teTHir7oGhxm",
+          "agentName": "",
+          "deployment": "",
+          "agentID": "",
+          "version": "1.8.3",
+          "jobType": "JT_ROOM",
+          "jobID": "AJ_SChuYs2phuBv",
+          "status": "JS_FAILED",
+          "error": "agent worker left the room"
+        }
+      },
+      "application_cleanup": [
+        {
+          "line": 54,
+          "message": "room cleanup started: car-audio-b4daa3c1de7842269dd22215a92d2467",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:12:08.986745+00:00"
+        },
+        {
+          "line": 56,
+          "message": "room cleanup finished: car-audio-b4daa3c1de7842269dd22215a92d2467",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:12:08.987682+00:00"
+        }
+      ],
+      "cleanup_start_after_server_terminal_ms": 4.745,
+      "cleanup_finish_after_server_terminal_ms": 5.682,
+      "agent_departed": true
+    },
+    {
+      "trial": "rtc-correction-1",
+      "room": "car-audio-41bf35a76da84e75b6ae684e2b183961",
+      "job_id": "AJ_bBM8eis7zDg8",
+      "server_agent_departure": {
+        "line": 104,
+        "timestamp": "2026-09-26T12:42:53.442+0530",
+        "message": "participant closing",
+        "data": {
+          "room": "car-audio-41bf35a76da84e75b6ae684e2b183961",
+          "roomID": "RM_cYYPKLV3MH94",
+          "participant": "agent-AJ_bBM8eis7zDg8",
+          "participantID": "PA_6nMGWuoP9RBK",
+          "remote": false,
+          "sendLeave": true,
+          "reason": "CLIENT_REQUEST_LEAVE",
+          "isExpectedToResume": false,
+          "clientInfo": {
+            "sdk": "PYTHON",
+            "version": "1.1.18",
+            "protocol": 17,
+            "os": "Mac OS",
+            "osVersion": "15.3.1",
+            "deviceModel": "Mac14,9",
+            "clientProtocol": 2,
+            "capabilities": [
+              "CAP_PACKET_TRAILER",
+              "CAP_COMPRESSION_DEFLATE_RAW"
+            ]
+          },
+          "kind": "AGENT",
+          "country": "",
+          "sessionDuration": "43.2332855s"
+        }
+      },
+      "server_terminal_status": {
+        "line": 109,
+        "timestamp": "2026-09-26T12:42:53.444+0530",
+        "message": "job ended",
+        "data": {
+          "workerID": "AW_teTHir7oGhxm",
+          "agentName": "",
+          "deployment": "",
+          "agentID": "",
+          "version": "1.8.3",
+          "jobType": "JT_ROOM",
+          "jobID": "AJ_bBM8eis7zDg8",
+          "status": "JS_FAILED",
+          "error": "agent worker left the room"
+        }
+      },
+      "application_cleanup": [
+        {
+          "line": 70,
+          "message": "room cleanup started: car-audio-41bf35a76da84e75b6ae684e2b183961",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:12:53.445357+00:00"
+        },
+        {
+          "line": 72,
+          "message": "room cleanup finished: car-audio-41bf35a76da84e75b6ae684e2b183961",
+          "level": "INFO",
+          "name": "prism",
+          "pid": 36127,
+          "timestamp": "2026-09-26T07:12:53.446203+00:00"
+        }
+      ],
+      "cleanup_start_after_server_terminal_ms": 1.357,
+      "cleanup_finish_after_server_terminal_ms": 2.203,
+      "agent_departed": true
+    }
+  ],
+  "wire_evidence_limit": "Live logs show JS_FAILED before callbacks finish, but do not capture the later per-job SDK SUCCESS message or its arrival. Later-update behavior is source-derived. As room termination runs in a server goroutine, failure is not guaranteed for every possible graceful shutdown ordering.",
+  "component_reproduction": {
+    "script": "results/iteration12/reproduce_job_status_order.py",
+    "report": "results/iteration12/job-status-order-reproduction.json",
+    "stdout": "results/iteration12/job-status-order-reproduction.txt",
+    "status": "passed",
+    "trials": [
+      {
+        "callback_raises": false,
+        "events": [
+          {
+            "event": "session_aclose",
+            "executor_status": "running"
+          },
+          {
+            "event": "context_session_end",
+            "executor_status": "running"
+          },
+          {
+            "event": "ipc_ShuttingDown",
+            "executor_status": "running"
+          },
+          {
+            "event": "ipc_Exiting",
+            "executor_status": "running"
+          },
+          {
+            "event": "room_disconnect",
+            "executor_status": "running"
+          },
+          {
+            "event": "application_cleanup_started",
+            "executor_status": "running"
+          },
+          {
+            "event": "worker_status_queued",
+            "wire_status": "JS_RUNNING",
+            "executor_status": "running"
+          },
+          {
+            "event": "application_cleanup_finished",
+            "executor_status": "running"
+          },
+          {
+            "event": "parent_ipc_close",
+            "executor_status": "running"
+          },
+          {
+            "event": "worker_status_queued",
+            "wire_status": "JS_SUCCESS",
+            "executor_status": "success"
+          }
+        ],
+        "captured_sdk_errors": [],
+        "assertions": "passed"
+      },
+      {
+        "callback_raises": true,
+        "events": [
+          {
+            "event": "session_aclose",
+            "executor_status": "running"
+          },
+          {
+            "event": "context_session_end",
+            "executor_status": "running"
+          },
+          {
+            "event": "ipc_ShuttingDown",
+            "executor_status": "running"
+          },
+          {
+            "event": "ipc_Exiting",
+            "executor_status": "running"
+          },
+          {
+            "event": "room_disconnect",
+            "executor_status": "running"
+          },
+          {
+            "event": "application_cleanup_started",
+            "executor_status": "running"
+          },
+          {
+            "event": "worker_status_queued",
+            "wire_status": "JS_RUNNING",
+            "executor_status": "running"
+          },
+          {
+            "event": "application_cleanup_raised",
+            "executor_status": "running"
+          },
+          {
+            "event": "parent_ipc_close",
+            "executor_status": "running"
+          },
+          {
+            "event": "worker_status_queued",
+            "wire_status": "JS_SUCCESS",
+            "executor_status": "success"
+          }
+        ],
+        "captured_sdk_errors": [
+          {
+            "message": "error while shutting down the job",
+            "exception": "RuntimeError('deliberate dummy cleanup failure')"
+          }
+        ],
+        "assertions": "passed"
+      }
+    ],
+    "method": "Actual installed _JobProc._shutdown_job, ThreadJobExecutor._main_task and AgentServer._update_job_status with dummy channels/session/room, a callback barrier and explicit resolved join future. No actual worker thread, Go execution, socket or model.",
+    "additional_boundary": "Deliberately raising cleanup callback is logged/swallowed by _shutdown_job; subsequent thread completion still maps to SUCCESS. Advancing SUCCESS earlier would not certify application cleanup. The injected error is expected component evidence, not a historical RTC error.",
+    "source_hashes_unchanged": true,
+    "model_module_prefixes_present": []
+  },
+  "recommendation": {
+    "application": "No safe PRISM-only production fix identified. Keep session-close\u2192ctx.shutdown and separate per-call/cleanup/server-status receipts. Prepare an upstream SDK/server issue from this evidence; none posted. Treat application cleanup receipts independently: callback errors are swallowed by this SDK path, so even a later SDK SUCCESS is insufficient evidence of cleanup success. No production fix is proposed until a supported lifecycle boundary is identified.",
+    "coherent_fix_boundary": "Graceful completion needs acknowledged terminal intent/status before participant departure, after the required cleanup outcome is known, while retaining failure for unexpected departure. This needs coordinated SDK/server lifecycle semantics. Enqueueing SUCCESS earlier across a separate websocket does not provide acknowledged ordering.",
+    "avoid": [
+      "Do not mutate executor status or privately send premature SUCCESS while callbacks remain pending.",
+      "Do not relabel historical failures or delete a room/dispatch solely to manufacture success.",
+      "Changing drain_timeout does not change the disconnect\u2192callback\u2192thread-completion order."
+    ],
+    "public_api_boundary": "JobContext.shutdown(reason) has no terminal-status acknowledgement. Public dispatch deletion controls explicit dispatch lifecycle with roomAdmin permission; it is not a demonstrated substitute for reporting autonomous room-job completion. No server API used.",
+    "verification_needed": [
+      "Regression coverage for successful, raising and timed-out callbacks, preserving outcomes.",
+      "An upstream integration test must record queued/sent/received terminal status and room leave by job ID, including delayed websocket delivery and unexpected disconnect. Current component evidence does not claim a live server fix."
+    ]
+  },
+  "source_sha256": {
+    ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_proc_lazy_main.py": "51d60ca8959dd99444499d58016d6da2959ac02483feee7bd0b2e4224663e60d",
+    ".venv/lib/python3.11/site-packages/livekit/agents/ipc/job_thread_executor.py": "44a8d953398d45459740fe91453e14c14e11e322be37107159205d0804371a90",
+    ".venv/lib/python3.11/site-packages/livekit/agents/ipc/proc_pool.py": "1a316c188b22003236d2d17221496afb78f7fb9f61627c3ef28354616829fe4e",
+    ".venv/lib/python3.11/site-packages/livekit/agents/worker.py": "b4461c9747198576d502075ffc48e27b9d014617cf00f8311c8ef428718b3b8e",
+    ".venv/lib/python3.11/site-packages/livekit/agents/job.py": "4010bf83dc66315f05004588dfb57ee824d35112f9bbff5f34c2ebc18975c60b",
+    ".venv/lib/python3.11/site-packages/livekit/api/agent_dispatch_service.py": "12812a06e8772f1a6bd3434ca083a1c956eb77f9d77cb1a71a4829521bf5e89a",
+    "/opt/homebrew/Cellar/livekit/1.13.7/INSTALL_RECEIPT.json": "d318e009a2c1ad544ebcea5c52dbc4543597b2f8a157b07c5fae4206dfa1a7aa"
+  },
+  "upstream_source_receipt": {
+    "fetched_at_utc": "2026-09-26T07:28:38.126836+00:00",
+    "files": [
+      {
+        "url": "https://raw.githubusercontent.com/livekit/livekit/v1.13.7/pkg/agent/worker.go",
+        "path": "results/iteration12/upstream-source/pkg__agent__worker.go",
+        "sha256": "1b0321d1cd52639ba8cea1c2b4bc8b9d208e95c91f43990c52b18299fb9f8856",
+        "bytes": 16312
+      },
+      {
+        "url": "https://raw.githubusercontent.com/livekit/livekit/v1.13.7/pkg/service/agentservice.go",
+        "path": "results/iteration12/upstream-source/pkg__service__agentservice.go",
+        "sha256": "2fc161d250dc60a117dee19c4c5da4809a93ae509031236daae4a9e7c862bc29",
+        "bytes": 15742
+      },
+      {
+        "url": "https://raw.githubusercontent.com/livekit/livekit/v1.13.7/pkg/rtc/room.go",
+        "path": "results/iteration12/upstream-source/pkg__rtc__room.go",
+        "sha256": "2522bacf5564395989e8fd62aea5819f1f649458d052fccaa89dff226aa6a191",
+        "bytes": 73563
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "results/iteration11/run-report.json": "fc24e88c57d85db588dcec7bbdfb6dd2f296b124b9fd0884086862f45d60d608",
+    "results/iteration11/local-stack-run1/worker.log": "c4fcc526e7fdf921116561ccbe121b23762adc12037e25b963e49906fb096e94",
+    "results/iteration11/local-stack-run1/livekit.log": "6ec45d73132f0a083938d22159d40753d0a85be88641c48f6ea87d178e4aae1f",
+    "results/iteration11/supplementary-log-review.json": "43b66a6fb60d0115289045e749ace5322ab30c3a2330d97c7a4b926fdda250c5",
+    "results/iteration12/reproduce_job_status_order.py": "f8fe91da61db8ee50e5215befc9a39f6fcf4ce10197b7b98364901f1bb904cdc",
+    "results/iteration12/job-status-order-reproduction.json": "f3fb9b0b8a0f689a369e56c9f6553b3a05b6186464d276dff50fb7c5f4946130",
+    "results/iteration12/job-status-order-reproduction.txt": "0ff1941b016cf958a2474f45603acb63e1cbe0df76b27506e08bf4cb74fb03d9"
+  }
+}

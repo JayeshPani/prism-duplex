@@ -1,0 +1,73 @@
+{
+  "frozen_at_utc": "2026-09-26T04:03:52.986177+00:00",
+  "timing": "Review method frozen after timed capture completion but before any received-audio recognition; no reviewed ASR output informed this method.",
+  "script_sha256": "95bec84ecbd81273b5ed0858cbc7e4ecbe73d8328530d3a3d17c9c3fc40e148a",
+  "suite_protocol_sha256": "7584d89d1b2f713f99bbdd5bf4dc57555385e66686fad8dcb951b2ea09fe7dab",
+  "declared_trials": [
+    {
+      "id": "probe-silence-1",
+      "case": "silence"
+    },
+    {
+      "id": "probe-noise-1",
+      "case": "noise"
+    },
+    {
+      "id": "probe-tone-1",
+      "case": "tone"
+    },
+    {
+      "id": "probe-fragment-1",
+      "case": "fragment"
+    },
+    {
+      "id": "probe-noise-2",
+      "case": "noise"
+    },
+    {
+      "id": "probe-tone-2",
+      "case": "tone"
+    },
+    {
+      "id": "probe-fragment-2",
+      "case": "fragment"
+    },
+    {
+      "id": "probe-silence-2",
+      "case": "silence"
+    },
+    {
+      "id": "probe-tone-3",
+      "case": "tone"
+    },
+    {
+      "id": "probe-fragment-3",
+      "case": "fragment"
+    },
+    {
+      "id": "probe-silence-3",
+      "case": "silence"
+    },
+    {
+      "id": "probe-noise-3",
+      "case": "noise"
+    }
+  ],
+  "scope": "One full received PCM stream for every declared trial, in original protocol order; capture failures and unavailable/inference-failed rows remain in the declared denominator.",
+  "method": "Pinned production LocalSTT.load/transcribe, local-mac Parakeet only, offline cached weights. Resample complete mono PCM16 from24kHz to16kHz using existing LiveKit helper; preserve every sample and captured silence.",
+  "selection": "No clipping, silence removal, output-conditioned retry or capture-success filtering. Hash all finished inputs and source files before importing/loading ASR; preserve full model file hashes. No warmup; first inference retained.",
+  "review": {
+    "expected_initial_result_facts": "Airport navigation has started; estimated arrival time is88minutes. Compare recognition with declared result text while preserving all mismatches.",
+    "non_speech_controls": "Inspect whole-stream recognized content for completed or truncated initial result and unexpected text. Tool/VAD/recognition outcomes are assessed separately from this received-audio proxy.",
+    "fragment": "Speech fragment is exploratory. Inspect any truncated original result and any subsequent acknowledgment/clarification, without treating fragment-triggered user recognition as non-speech hallucination.",
+    "score": "Verbatim ASR output plus qualitative fact observations; no benchmark pass rate or independent intelligibility score."
+  },
+  "limitations": [
+    "Reusing production ASR cannot separate pronunciation errors from recognition errors; no human listening claim.",
+    "Full-stream text cannot identify exact spoken-word timestamps, physical speaker playback or RTP/data alignment.",
+    "Concatenated PCM preserves captured silence but does not insert callback-arrival gaps.",
+    "Twelve dependent development trials, three per waveform, shared warm runtime during captures, same synthetic voice, no physical echo or human microphone.",
+    "ASR timings belong to a separate offline review after service cleanup and are not live conversational latency.",
+    "A fixed12second observation can retain an incomplete result; incompleteness is an outcome, not an exclusion."
+  ]
+}
